@@ -1,0 +1,159 @@
+<Types>
+	<type name="name1" />
+	...
+	<type name="name_n" />
+</Types>
+<TypeMatrix>
+	<entry>
+		<attacker_type_name>name1</attacker_type_name>
+		<defender_type_name>name2</defender_type_name>
+		<value>0.5</value>
+	</entry>
+	...
+</TypeMatrix>
+
+<GenericMonster>
+	<Stat>Attack</Stat>
+	<Stat>...</Stat>
+	...
+	<Status>Poisoned</Status>
+	<Status>Paralyzed</Status>
+	...
+</GenericMonster>
+
+<Monster>
+	<Name>name</Name>
+	<FullBaseHP>number</FullBaseHP>
+	<CatchRate>number</CatchRate>
+	<Attack>number</Attack>
+	...
+	<Evolution>
+		<Monster>name<Monster>
+		<Level>number</Level>
+	</Evolution>
+</Monster>
+
+<Item>
+	<Name>name</Name>
+	<Mode>battle/wander/both</Mode>
+	<NumberOfRecipients>one/all</NumberOfRecipients>
+	<RecipientOriginalStatus>alive/dead/both</RecipientOriginalStatus>
+	<IncrementalEffects>
+		<"StatName">value</"StatName">
+	</IncrementalEffects>
+	<PercentageEffects>
+		<"StatName">1=100%</"StatName"> [?]
+	</PercentageEffects>
+	<StatusEffect>
+		<oldstatus>name1</oldstatus>
+		<newstatus>name2</newstatus>
+	</StatusEffect>
+</Item>
+
+<World>
+	<Obstacles>
+		<Obstacle>
+			<Name>name</Name>
+			<x>int</x>
+			<y>int</y>
+		</Obstacle>
+		...
+	</Obstacles>
+	<Buildings>
+		<Building>
+			<Name>name</Name>
+			<x>int</x>
+			<y>int</y>
+		</Building>
+		...
+	</Buildings>
+	<NPCs>
+		<NPC>
+			<Name>name</Name>
+			<x>int</x>
+			<y>int</y>
+			<Orientation>left</Orientation>
+			<LineOfSightDistance>int</LineOfSightDistance>
+			<Dialogue>blah blah blah</Dialogue>
+			<Fight>
+				<Monsters>
+					<Monster>
+						<Name>name</Name>
+						<Level>int</Level>
+					</Monster>
+				</Monsters>
+				<Bet>int</Bet>
+				<PostDialogue>yak yak yak</PostDialogue>
+			</Fight>
+		</NPC>
+		...
+	</NPCs>
+	
+	<WildRegions>
+		<WildRegion>
+			<Name>TownXGrass</Name>
+			<Type>Grass</Type>
+			<Points>
+				<Point>
+					<x>int</x>
+					<y>int</y>
+				</Point>
+				...
+			</Points>
+			<Frequency> 0 - 1.0 </Frequency>
+			<Monsters>
+				<Monster>
+					<Name>name</Name>
+					<Level>int</Level>
+					<Chance> 0 - 1.0 </Chance>
+				</Monster>
+				...
+			</Monsters>
+		</WildRegion>
+	</WildRegions>
+	<Item>
+		<Name>item</Name>
+		<x>int</x>
+		<y>int</y>
+	</Item>
+</World>
+
+<Sprites>
+	<Monsters>
+		<Monster>
+			<Name>name</Name>
+			<Image>name</Image>
+		<Monster>
+	</Monsters>
+	<NPCs>
+		<NPC>
+			<Name>name</Name>
+			<UpImage>name</UpImage>
+			<DownImage>name</DownImage>
+			<LeftImage>name</LeftImage>
+			<RightImage>name</RightImage>
+		<NPC>
+	<NPCs>
+	<Items>
+		<Item>
+			<Name>name</Name>
+			<Image>name</Image>
+		</Item>
+	</Items>
+	<Building>
+		<Image>name</Image>
+	</Building>
+	<Wilds>
+		<Wild>
+			<TypeName>name</TypeName>
+			<Image>name</Image>
+		</Wild>
+	</Wilds>
+	<Obstacles>
+		<Obstacle>
+			<Name>name</Name>
+			<Image>name</Image>
+		</Obstacle>
+	</Obstacles>
+</Sprites>
+
