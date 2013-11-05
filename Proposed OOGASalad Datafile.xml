@@ -11,49 +11,87 @@
 	<entry>
 		<attacker_type_name>name1</attacker_type_name>
 		<defender_type_name>name2</defender_type_name>
-		<value>0.5</value>
+		<attack_multiplier>0.5</attack_multiplier>
 	</entry>
 	...
 </TypeMatrix>
 
 <GenericMonster>
-	<Stat>Attack</Stat>
-	<Stat>...</Stat>
-	...
-	<Status>Poisoned</Status>
-	<Status>Paralyzed</Status>
-	...
+	<Statistics>
+		<Statistic>Attack</Statistic>
+		<Statistic>...</Statistic>
+		...	
+	</Statistics>
+	<Statuses>
+		<Status>Poisoned</Status>
+		<Status>Paralyzed</Status>
+		...	
+	</Statuses>
 </GenericMonster>
 
-<Monster>
-	<Name>name</Name>
-	<FullBaseHP>number</FullBaseHP>
-	<CatchRate>number</CatchRate>
-	<Attack>number</Attack>
+<Moves>
+	<Move>
+		<Name>name</Name>
+		<Effects>
+			<StatisticEffect>
+				<Target>self/other</Target>
+				<Statistic>HP, attack, defense, speed, etc.</Statistic>
+				<Power>int</Power>
+			</StatisticEffect>
+			...
+			<StatusEffect>
+				<Target>self/other</Target>
+				<Status>Poisoned, Paralyzed, Asleep, etc.</Status>
+				<Duration>int</Duration>
+			</StatusEffect>
+			...
+		</Effects>
+	</Move>
 	...
-	<Evolution>
-		<Monster>name<Monster>
-		<Level>number</Level>
-	</Evolution>
-</Monster>
+</Moves>
 
-<Item>
-	<Name>name</Name>
-	<Mode>battle/wander/both</Mode>
-	<NumberOfRecipients>one/all</NumberOfRecipients>
-	<RecipientOriginalStatus>alive/dead/both</RecipientOriginalStatus>
-	<IncrementalEffects>
-		<"StatName">value</"StatName">
-	</IncrementalEffects>
-	<PercentageEffects>
-		<"StatName">1=100%</"StatName"> [?]
-	</PercentageEffects>
-	<StatusEffect>
-		<oldstatus>name1</oldstatus>
-		<newstatus>name2</newstatus>
-	</StatusEffect>
-</Item>
+<Monsters>
+	<Monster>
+		<Name>name</Name>
+		<FullBaseHP>number</FullBaseHP>
+		<CatchRate>number</CatchRate>
+		<Attack>number</Attack>
+		...
+		<Moves>
+			<Move>
+				<Name>name</Name>
+				<UnlockLevel>int</UnlockLevel>
+			</Move>
+			...
+		</Moves>
+		<Evolution>
+			<Monster>name<Monster>
+			<Level>number</Level>
+		</Evolution>
+	</Monster>
+	...
+</Monsters>
 
+<Items>
+	<Item>
+		<Name>name</Name>
+		<Mode>battle/wander/both</Mode>
+		<NumberOfRecipients>one/all</NumberOfRecipients>
+		<RecipientOriginalStatus>alive/dead/both</RecipientOriginalStatus>
+		<IncrementalEffects>
+			<"StatName">value</"StatName">
+		</IncrementalEffects>
+		<PercentageEffects>
+			<"StatName">1=100%</"StatName"> [?]
+		</PercentageEffects>
+		<StatusEffect>
+			<oldstatus>name1</oldstatus>
+			<newstatus>name2</newstatus>
+		</StatusEffect>
+	</Item>
+	...
+</Items>
+	
 <World>
 	<Obstacles>
 		<Obstacle>
@@ -89,6 +127,7 @@
 						<Name>name</Name>
 						<Level>int</Level>
 					</Monster>
+					...
 				</Monsters>
 				<Bet>int</Bet>
 				<KeyItem>name</KeyItem>
@@ -97,7 +136,6 @@
 		</NPC>
 		...
 	</NPCs>
-	
 	<WildRegions>
 		<WildRegion>
 			<Name>TownXGrass</Name>
@@ -119,12 +157,16 @@
 				...
 			</Monsters>
 		</WildRegion>
+		...
 	</WildRegions>
-	<Item>
-		<Name>item</Name>
-		<x>int</x>
-		<y>int</y>
-	</Item>
+	<Items>
+		<Item>
+			<Name>item</Name>
+			<x>int</x>
+			<y>int</y>
+		</Item>
+		...
+	</Items>
 </World>
 
 <Sprites>
@@ -133,6 +175,7 @@
 			<Name>name</Name>
 			<Image>name</Image>
 		<Monster>
+		...
 	</Monsters>
 	<NPCs>
 		<NPC>
@@ -142,6 +185,7 @@
 			<LeftImage>name</LeftImage>
 			<RightImage>name</RightImage>
 		<NPC>
+		...
 	<NPCs>
 	<Items>
 		<Item>
