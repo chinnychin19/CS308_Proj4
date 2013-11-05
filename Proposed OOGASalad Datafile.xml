@@ -1,7 +1,11 @@
 <Types>
-	<type name="name1" />
+	<Type>
+		<Name>name1</Name>
+	</Type>
 	...
-	<type name="name_n" />
+	<Type>
+		<Name>name_n</Name>
+	</Type>
 </Types>
 <TypeMatrix>
 	<entry>
@@ -56,6 +60,10 @@
 			<Name>name</Name>
 			<x>int</x>
 			<y>int</y>
+			<KeyItems>
+				<KeyItem>name</KeyItem>
+				...
+			</KeyItems>
 		</Obstacle>
 		...
 	</Obstacles>
@@ -83,6 +91,7 @@
 					</Monster>
 				</Monsters>
 				<Bet>int</Bet>
+				<KeyItem>name</KeyItem>
 				<PostDialogue>yak yak yak</PostDialogue>
 			</Fight>
 		</NPC>
