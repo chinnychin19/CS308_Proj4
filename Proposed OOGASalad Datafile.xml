@@ -29,8 +29,8 @@
 	</Statuses>
 </GenericMonster>
 
-<Moves>
-	<Move>
+<Attacks>
+	<Attack>
 		<Name>name</Name>
 		<Effects>
 			<StatisticEffect>
@@ -46,9 +46,9 @@
 			</StatusEffect>
 			...
 		</Effects>
-	</Move>
+	</Attack>
 	...
-</Moves>
+</Attacks>
 
 <Monsters>
 	<Monster>
