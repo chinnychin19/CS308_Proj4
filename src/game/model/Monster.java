@@ -13,4 +13,5 @@ public abstract class Monster extends AbstractViewableObject {
 	
 	public abstract Stat getStat();
 	
+	
 }

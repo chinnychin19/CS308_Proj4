@@ -5,7 +5,7 @@ import java.util.Collection;
 public abstract class Player extends AbstractViewableObject {
 	Collection<Monster> myParty;
 	Collection<Item> myItem;
-
+	
 	@Override
 	void paint() {
 	}
@@ -18,5 +18,5 @@ public abstract class Player extends AbstractViewableObject {
 
 }
 // view only cares about objects currently on screen
-// model returns currently viewablable objects Collection<AbstractViewableObject> getViewableObjects()
+// model returns currently viewablable objects
 // 

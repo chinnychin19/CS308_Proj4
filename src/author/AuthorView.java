@@ -9,7 +9,6 @@ public abstract class AuthorView extends JFrame{
 	private List<AbstractWizardState> myWizardStates;
 	
 	public abstract void generateXML();
-	
 	public abstract void nextState();
 	public abstract void prevState();
 
