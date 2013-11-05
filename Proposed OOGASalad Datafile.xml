@@ -29,8 +29,8 @@
 	</Statuses>
 </GenericMonster>
 
-<Moves>
-	<Move>
+<Attacks>
+	<Attack>
 		<Name>name</Name>
 		<Effects>
 			<StatisticEffect>
@@ -46,9 +46,9 @@
 			</StatusEffect>
 			...
 		</Effects>
-	</Move>
+	</Attack>
 	...
-</Moves>
+</Attacks>
 
 <Monsters>
 	<Monster>
@@ -57,13 +57,13 @@
 		<CatchRate>number</CatchRate>
 		<Attack>number</Attack>
 		...
-		<Moves>
-			<Move>
+		<Attacks>
+			<Attack>
 				<Name>name</Name>
 				<UnlockLevel>int</UnlockLevel>
-			</Move>
+			</Attack>
 			...
-		</Moves>
+		</Attacks>
 		<Evolution>
 			<Monster>name<Monster>
 			<Level>number</Level>
