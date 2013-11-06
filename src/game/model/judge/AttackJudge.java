@@ -1,6 +1,6 @@
 package game.model.judge;
 
 public abstract class AttackJudge extends AbstractJudge {
-	public abstract void getAttackStatus();
+    public abstract void getAttackStatus ();
 
 }

@@ -1,5 +1,5 @@
 package game.model;
 
-public class Stat extends AbstractModelObject{
+public class Stat extends AbstractModelObject {
 
 }
