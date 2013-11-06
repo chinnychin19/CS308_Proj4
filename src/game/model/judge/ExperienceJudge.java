@@ -1,5 +1,5 @@
 package game.model.judge;
 
-public  abstract class ExperienceJudge extends AbstractJudge {
-	public abstract void getExperienceStatus();
+public abstract class ExperienceJudge extends AbstractJudge {
+    public abstract void getExperienceStatus ();
 }
