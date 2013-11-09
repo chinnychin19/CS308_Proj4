@@ -1,4 +1,5 @@
 package author.model;
+import org.json.simple.JSONObject;
 
 public class AuthorModel {
     public AuthorModel () {
