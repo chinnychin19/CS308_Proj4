@@ -22,12 +22,13 @@
 		<Statistic>...</Statistic>
 		...	
 	</Statistics>
-	<Statuses>
-		<Status>Poisoned</Status>
-		<Status>Paralyzed</Status>
-		...	
-	</Statuses>
 </GenericMonster>
+
+<Statuses>
+	<Status>Poisoned</Status>
+	<Status>Paralyzed</Status>
+		...	
+</Statuses>
 
 <Attacks>
 	<Attack>
