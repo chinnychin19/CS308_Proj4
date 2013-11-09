@@ -29,47 +29,34 @@ public class TestJson {
         JSONObject item = (JSONObject) items.get(0);
 
         String nameValue = (String) item.get("name");
-<<<<<<< HEAD
         assertEquals("item0", nameValue);
-        
-        JSONObject effect = (JSONObject)item.get("effect");
-        String valueValue = (String) effect.get("value");
-        assertEquals("0.4", valueValue);
-    }
-    
-    /**
-     * Read the correct value when 'number' is specified as the effect type.
-     */
-    @Test
-    public void testAttackNumber(){
-        String file = "json/test_json_1.json";
-        JSONObject json = getJSON(file);
-        
-        JSONArray items = (JSONArray)json.get("item");
-        JSONObject firstItem = (JSONObject)items.get(1);
-        
-        JSONObject effect = (JSONObject)firstItem.get("effect");
-        
-        String nameValue = (String) effect.get("type");
-        assertEquals("number", nameValue);
-        
-        String effectValue = (String) effect.get("value");
-        assertEquals("3", effectValue);
-    }
-    
-    
-    
-    private JSONObject getJSON(String filepath){
-=======
-        assertEquals("item1", nameValue);
 
         JSONObject effect = (JSONObject) item.get("effect");
         String valueValue = (String) effect.get("value");
         assertEquals("0.4", valueValue);
     }
 
+    /**
+     * Read the correct value when 'number' is specified as the effect type.
+     */
+    @Test
+    public void testAttackNumber () {
+        String file = "json/test_json_1.json";
+        JSONObject json = getJSON(file);
+
+        JSONArray items = (JSONArray) json.get("item");
+        JSONObject firstItem = (JSONObject) items.get(1);
+
+        JSONObject effect = (JSONObject) firstItem.get("effect");
+
+        String nameValue = (String) effect.get("type");
+        assertEquals("number", nameValue);
+
+        String effectValue = (String) effect.get("value");
+        assertEquals("3", effectValue);
+    }
+
     private JSONObject getJSON (String filepath) {
->>>>>>> austin
         JSONObject json;
         JSONParser parser = new JSONParser();
         try {
