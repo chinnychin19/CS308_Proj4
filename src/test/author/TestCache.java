@@ -43,6 +43,26 @@ public class TestCache {
     }
 
     @Test
+    public void testGetInstance () {
+        AuthoringCache cache = new AuthoringCache();
+        assertFalse(cache.contains("item", "item1"));
+
+        String file = "json/test_json_1.json";
+        JSONObject json = getJSON(file);
+        JSONArray items = (JSONArray) json.get("item");
+        JSONObject item = (JSONObject) items.get(0);
+
+        cache.add("item", item);
+        JSONObject itemCopy = cache.getInstance("item", "item1");
+        itemCopy.put("mode", "bogus");
+        JSONObject itemCopy2 = cache.getInstance("item", "item1");
+        itemCopy.put("mode", "bogus2");
+        JSONObject itemCopy3 = cache.getInstance("item", "item1");
+        assertEquals("wandering", itemCopy3.get("mode").toString());
+
+    }
+
+    @Test
     public void testUpdate () {
         AuthoringCache cache = new AuthoringCache();
         assertFalse(cache.contains("item", "item1"));
@@ -77,5 +97,4 @@ public class TestCache {
             return null;
         }
     }
-
 }
