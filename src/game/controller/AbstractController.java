@@ -1,10 +1,10 @@
 package game.controller;
 
-import game.model.Model;
+import game.model.GameModel;
 import game.view.GameView;
 
 
 public abstract class AbstractController {
-    Model myModel;
+    GameModel myModel;
     GameView myGameView;
 }

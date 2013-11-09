@@ -2,7 +2,7 @@ package game.controller;
 
 import java.util.Collection;
 import game.model.AbstractViewableObject;
-import game.model.Model;
+import game.model.GameModel;
 
 
 public abstract class WorldController extends AbstractController {

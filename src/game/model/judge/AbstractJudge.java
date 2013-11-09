@@ -1,8 +1,8 @@
 package game.model.judge;
 
-import game.model.Model;
+import game.model.GameModel;
 
 
 public class AbstractJudge {
-    Model myModel;
+    GameModel myModel;
 }
