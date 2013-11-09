@@ -22,16 +22,31 @@
 		<Statistic>...</Statistic>
 		...	
 	</Statistics>
-	<Statuses>
-		<Status>Poisoned</Status>
-		<Status>Paralyzed</Status>
-		...	
-	</Statuses>
 </GenericMonster>
+
+<Statuses>
+	<Status>
+		<Name>Poisoned</Name>
+		<MinDuration>time</MinDuration>
+		<MaxDuration>time</MaxDuration>
+		<Effects>
+			<IncrementalEffects>
+				<"StatName">value</"StatName">
+				...
+			</IncrementalEffects>
+			<PercentageEffects>
+				<"StatName">1=100%</"StatName">
+				...
+			</PercentageEffects>
+		<Effects>
+	</Status>
+	...	
+</Statuses>
 
 <Attacks>
 	<Attack>
 		<Name>name</Name>
+		<Accuracy>1=100%</Accuracy>
 		<Effects>
 			<StatisticEffect>
 				<Target>self/other</Target>
@@ -42,7 +57,6 @@
 			<StatusEffect>
 				<Target>self/other</Target>
 				<Status>Poisoned, Paralyzed, Asleep, etc.</Status>
-				<Duration>int</Duration>
 			</StatusEffect>
 			...
 		</Effects>

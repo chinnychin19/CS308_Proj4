@@ -20,4 +20,4 @@ public abstract class Player extends AbstractViewableObject {
 }
 // view only cares about objects currently on screen
 // model returns currently viewablable objects
-// 
+//
