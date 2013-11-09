@@ -27,18 +27,32 @@ public class AuthoringCache {
     }
 
     public void delete (String category, String name) {
-
+        JSONArray cache = (JSONArray) myJSON.get(category);  
+        for (Object object : cache){
+            JSONObject jobject = (JSONObject) object;
+            if(jobject.get("name").equals(name)){
+                cache.remove(object);
+            }
+        }
     }
 
-    public void getInstance (String category, String name) {
-
+    public JSONObject getInstance (String category, String name) {
+        return null;
     }
 
     public boolean contains (String category, String name) {
-        return true;// TODO
+        JSONArray cache = (JSONArray) myJSON.get(category);
+        for (Object object : cache){
+            JSONObject jobject = (JSONObject) object;
+            if(jobject.get("name").equals(name)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void update (String category, JSONObject data) {
-
+        delete(category, (String) data.get("name"));
+        add(category, data);
     }
 }
