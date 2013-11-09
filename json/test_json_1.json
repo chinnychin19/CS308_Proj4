@@ -1,0 +1,7 @@
+{
+  "item" : [ {"name" : "item1", "mode":"wandering",
+            "effect": {"type": "percent", "value": "0.4" },
+            "recipient" : {"consciousness": "alive", "number" : "one"},
+            "statusEffect" {"old" : "dead", "new":"alive"} }
+            ]
+}
