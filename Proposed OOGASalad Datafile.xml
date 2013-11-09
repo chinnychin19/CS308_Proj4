@@ -25,6 +25,11 @@
 </GenericMonster>
 
 <Statuses>
+<<<<<<< HEAD
+	<Status>Poisoned</Status>
+	<Status>Paralyzed</Status>
+		...	
+=======
 	<Status>
 		<Name>Poisoned</Name>
 		<MinDuration>time</MinDuration>
@@ -41,6 +46,7 @@
 		<Effects>
 	</Status>
 	...	
+>>>>>>> backend
 </Statuses>
 
 <Attacks>

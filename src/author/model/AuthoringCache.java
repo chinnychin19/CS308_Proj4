@@ -19,7 +19,7 @@ public class AuthoringCache {
 
     private void initCategories () {
         for (String category : CATEGORIES) {
-            myJSON.put(category, new JSONArray());
+            myJSON.put(category.toLowerCase(), new JSONArray());
         }
     }
 
@@ -29,7 +29,14 @@ public class AuthoringCache {
     }
 
     public void delete (String category, String name) {
-
+        JSONArray cache = (JSONArray) myJSON.get(category);
+        for (int i = 0; i < cache.size(); i++) {
+            JSONObject jobject = (JSONObject) cache.get(i);
+            if (jobject.get("name").equals(name)) {
+                cache.remove(i);
+                break;
+            }
+        }
     }
 
     public JSONObject getInstance (String category, String name) {
@@ -47,10 +54,16 @@ public class AuthoringCache {
     }
 
     public boolean contains (String category, String name) {
-        return true;// TODO
+        JSONArray cache = (JSONArray) myJSON.get(category);
+        for (Object object : cache) {
+            JSONObject jobject = (JSONObject) object;
+            if (jobject.get("name").equals(name)) { return true; }
+        }
+        return false;
     }
 
     public void update (String category, JSONObject data) {
-
+        delete(category, (String) data.get("name"));
+        add(category, data);
     }
 }
