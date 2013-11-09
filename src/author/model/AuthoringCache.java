@@ -19,7 +19,7 @@ public class AuthoringCache {
 
     private void initCategories () {
         for (String category : CATEGORIES) {
-            myJSON.put(category, new JSONArray());
+            myJSON.put(category.toLowerCase(), new JSONArray());
         }
     }
 
