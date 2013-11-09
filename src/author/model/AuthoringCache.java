@@ -1,7 +1,9 @@
 package author.model;
 
+import java.io.StringWriter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 
 public class AuthoringCache {
@@ -27,26 +29,34 @@ public class AuthoringCache {
     }
 
     public void delete (String category, String name) {
-        JSONArray cache = (JSONArray) myJSON.get(category);  
-        for (Object object : cache){
+        JSONArray cache = (JSONArray) myJSON.get(category);
+        for (Object object : cache) {
             JSONObject jobject = (JSONObject) object;
-            if(jobject.get("name").equals(name)){
+            if (jobject.get("name").equals(name)) {
                 cache.remove(object);
             }
         }
     }
 
     public JSONObject getInstance (String category, String name) {
+        JSONArray cache = (JSONArray) myJSON.get(category);
+        for (Object object : cache) {
+            JSONObject jObject = (JSONObject) object;
+            if (jObject.get("name").equals(name)) { return copy(jObject); }
+        }
         return null;
+    }
+
+    private JSONObject copy (JSONObject object) {
+        String asString = JSONValue.toJSONString(object); // get string representation
+        return (JSONObject) JSONValue.parse(asString); // return a new json object with same data
     }
 
     public boolean contains (String category, String name) {
         JSONArray cache = (JSONArray) myJSON.get(category);
-        for (Object object : cache){
+        for (Object object : cache) {
             JSONObject jobject = (JSONObject) object;
-            if(jobject.get("name").equals(name)){
-                return true;
-            }
+            if (jobject.get("name").equals(name)) { return true; }
         }
         return false;
     }
