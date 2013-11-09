@@ -2,6 +2,27 @@
   "item" : [ {"name" : "item1", "mode":"wandering",
             "effect": {"type": "percent", "value": "0.4" },
             "recipient" : {"consciousness": "alive", "number" : "one"},
-            "statusEffect" {"old" : "dead", "new":"alive"} }
+            "statusEffect" {"old" : "dead", "new":"alive"} },
+
+            {"name" : "item2", "mode":"battle",
+            "effect": {"type": "number", "value": "3" },
+            "recipient" : {"consciousness": "alive", "number" : "all"},
+            "statusEffect" {"old" : "alive", "new":"dead"} },
+
+            {"name" : "item3", "mode":"wandering",
+            "effect": {"type": "percent", "value": "0.18" },
+            "recipient" : {"consciousness": "both", "number" : "all"},
+            "statusEffect" {"old" : "both", "new":"alive"} },
+           
+            {"name" : "item4", "mode":"battle",
+            "effect": {"type": "percent", "value": "0.55" },
+            "recipient" : {"consciousness": "alive", "number" : "one"},
+            "statusEffect" {"old" : "alive", "new":"dead"} },
+           
+            {"name" : "item5", "mode":"wandering",
+            "effect": {"type": "number", "value": "7" },
+            "recipient" : {"consciousness": "dead", "number" : "all"},
+            "statusEffect" {"old" : "dead", "new":"alive"} },
+
             ]
 }
