@@ -30,10 +30,11 @@ public class AuthoringCache {
 
     public void delete (String category, String name) {
         JSONArray cache = (JSONArray) myJSON.get(category);
-        for (Object object : cache) {
-            JSONObject jobject = (JSONObject) object;
+        for (int i = 0; i < cache.size(); i++) {
+            JSONObject jobject = (JSONObject) cache.get(i);
             if (jobject.get("name").equals(name)) {
-                cache.remove(object);
+                cache.remove(i);
+                break;
             }
         }
     }
