@@ -14,7 +14,7 @@ public class ImagePicker extends JPanel implements ActionListener {
     private ImageDisplayer myImageDisplayer;
     private JFileChooser myChooser;
     private JButton myOpenButton;
-    private String myFilepath;
+    private File myFile;
     
     public ImagePicker(){
         init();    
@@ -49,14 +49,18 @@ public class ImagePicker extends JPanel implements ActionListener {
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = myChooser.getSelectedFile();
-                myFilepath = file.getPath();
-                myImageDisplayer.setImageAndCaption(myFilepath);
+                myFile = file;
+                myImageDisplayer.setImageAndCaption(myFile);
             }
         }
         
     }
     
+    public File getFile(){
+        return myFile;
+    }
+    
     public String getFilepath(){
-        return myFilepath;
+        return myFile.getPath();
     }
 }
