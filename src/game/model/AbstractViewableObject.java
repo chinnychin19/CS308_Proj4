@@ -1,6 +1,7 @@
 package game.model;
 
-public abstract class AbstractViewableObject extends AbstractModelObject {
+import java.awt.Image;
 
-    abstract void paint ();
+public abstract class AbstractViewableObject extends AbstractModelObject {
+    abstract Image getImage();
 }
