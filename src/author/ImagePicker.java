@@ -1,9 +1,11 @@
 package author;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
@@ -15,6 +17,7 @@ public class ImagePicker extends JPanel implements ActionListener {
     private JFileChooser myChooser;
     private JButton myOpenButton;
     private File myFile;
+
     
     public ImagePicker(){
         init();    
@@ -26,10 +29,14 @@ public class ImagePicker extends JPanel implements ActionListener {
     }
     
     private void init(){
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         myImageDisplayer = new ImageDisplayer();
         createFileChooser();
         this.add(myImageDisplayer);
+        myImageDisplayer.setAlignmentX(CENTER_ALIGNMENT);
         this.add(myOpenButton);
+        myOpenButton.setAlignmentX(CENTER_ALIGNMENT);
+        this.setMinimumSize(new Dimension(ImageDisplayer.MIN_X_SIZE, ImageDisplayer.MIN_Y_SIZE + 100));
     }
 
     private void createFileChooser () {
