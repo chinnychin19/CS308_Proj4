@@ -9,9 +9,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import game.model.GameModel;
+import game.model.Player;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import util.Direction;
 import constants.Constants;
 
 
@@ -22,6 +24,7 @@ public class GameView extends JPanel {
     private CustomKeyListener myKeys;
     private Timer timer;
     private GameModel myModel;
+    private Painter myPainter;
 
     public GameView (String nameOfGame) {
         setFocusable(true);
@@ -30,23 +33,31 @@ public class GameView extends JPanel {
         myBackground = new ImageIcon("images/background/shortGrass.png").getImage();
         myKeys = new CustomKeyListener();
         addKeyListener(myKeys);
-        timer = new Timer(Constants.REFRESH_RATE, new Painter());
+        myPainter = new Painter(myBuffer);
+        timer = new Timer(Constants.REFRESH_RATE, new PaintDelegator());
         myModel = new GameModel(nameOfGame);
         timer.start();
     }
 
-    private class Painter implements ActionListener
+    private class PaintDelegator implements ActionListener
     {
         public void actionPerformed (ActionEvent e)
         {
-            drawBackground();
-            drawFrame();
+            myPainter.drawBackground(myBackground);
+            myPainter.drawFrame();
+            myPainter.drawPlayer(myModel.getPlayer());
 
             // world.drawObstacles(myBuffer);
             // world.drawPlayer(myBuffer);
-            // act();
+            act();
 
             repaint();
+        }
+    }
+
+    public void act () {
+        if (myKeys.keyPressed) {
+            myModel.getPlayer().setDirection(myKeys.myDirection);
         }
     }
 
@@ -60,65 +71,30 @@ public class GameView extends JPanel {
 
     private class CustomKeyListener extends KeyAdapter
     {
-        private boolean LEFT = false, RIGHT = false, UP = false, DOWN = false, START = false;
+        private boolean keyPressed = false;
+        private Direction myDirection;
 
         public void keyPressed (KeyEvent e)
         {
+            keyPressed = true;
             int x = e.getKeyCode();
             if (x == KeyEvent.VK_LEFT) {
-                LEFT = true;
+                myDirection = Direction.LEFT;
             }
             if (x == KeyEvent.VK_UP) {
-                UP = true;
+                myDirection = Direction.UP;
             }
             if (x == KeyEvent.VK_RIGHT) {
-                RIGHT = true;
+                myDirection = Direction.RIGHT;
             }
             if (x == KeyEvent.VK_DOWN) {
-                DOWN = true;
-            }
-
-            if (x == KeyEvent.VK_Q) {
-                START = true;
+                myDirection = Direction.DOWN;
             }
         }
 
         public void keyReleased (KeyEvent e)
         {
-            int x = e.getKeyCode();
-            if (x == KeyEvent.VK_LEFT)
-                LEFT = false;
-            if (x == KeyEvent.VK_UP)
-                UP = false;
-            if (x == KeyEvent.VK_RIGHT)
-                RIGHT = false;
-            if (x == KeyEvent.VK_DOWN)
-                DOWN = false;
-
-            if (x == KeyEvent.VK_Q) {
-                START = false;
-            }
+            keyPressed = false;
         }
     }
-
-    public void drawFrame () {
-        myBuffer.setColor(Constants.BORDER_COLOR);
-        myBuffer.fillRect(0, 0, Constants.WIDTH, Constants.BORDER_THICKNESS);
-        myBuffer.fillRect(0, Constants.HEIGHT - Constants.BORDER_THICKNESS,
-                          Constants.WIDTH, Constants.HEIGHT);
-        myBuffer.fillRect(0, Constants.BORDER_THICKNESS, Constants.BORDER_THICKNESS,
-                          Constants.HEIGHT);
-        myBuffer.fillRect(Constants.WIDTH - Constants.BORDER_THICKNESS, 0,
-                          Constants.WIDTH, Constants.HEIGHT);
-    }
-
-    public void drawBackground () {
-        // draws default background image
-        myBuffer.drawImage(myBackground, 0, 0,
-                           Constants.WIDTH,
-                           Constants.HEIGHT,
-                           null);
-
-    }
-
 }
