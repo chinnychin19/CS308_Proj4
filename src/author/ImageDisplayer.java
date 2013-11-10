@@ -10,6 +10,7 @@ import util.MissingImageException;
 public class ImageDisplayer extends JLabel {
     
     private Icon myIcon;
+    //private String myImageFilepath;
     private String myCaption;
     
     public ImageDisplayer(){
@@ -18,7 +19,12 @@ public class ImageDisplayer extends JLabel {
     
     public ImageDisplayer(String filename){
         init();
-        this.setImage(filename);
+        this.setImageAndCaption(filename);
+    }
+    
+    public ImageDisplayer(File file){
+        init();
+        this.setImageAndCaption(file);
     }
     
     private void init(){
@@ -28,24 +34,31 @@ public class ImageDisplayer extends JLabel {
         this.setVerticalTextPosition(BOTTOM);
     }
     
-    public void setImage(String filename) {
-        myCaption = filename;
+    public void setImageAndCaption(File file){
+        String filepath = file.getPath();
+        setImageAndCaption(filepath);
+    }
+    
+    public void setImageAndCaption(String filepath) {
+        myCaption = filepath;
         try{
-            setIcon(filename);
+            setIcon(filepath);
         } catch (FileNotFoundException e) {
             myIcon = null;
+            //myImageFilepath = "";
             myCaption = "Error: File not found.";
         }
         this.setIcon(myIcon);
         this.setText(myCaption);
     }
     
-    private void setIcon(String filename) throws FileNotFoundException{
-        if (!new File(filename).isFile()){
+    private void setIcon(String filepath) throws FileNotFoundException{
+        if (!new File(filepath).isFile()){
             //System.out.println("is an error");
             throw new FileNotFoundException();
         }    
-        myIcon = new ImageIcon(filename);
+        myIcon = new ImageIcon(filepath);
+        //myImageFilepath = filename;
         //System.out.println("set icon");
         return;
     }
@@ -57,4 +70,8 @@ public class ImageDisplayer extends JLabel {
     public int getImageHeight(){
         return myIcon.getIconHeight();
     }
+    
+//    public String getImageFilepath(){
+//        return myImageFilepath;
+//    }
 }
