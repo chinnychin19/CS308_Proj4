@@ -34,7 +34,7 @@ public class ImagePicker extends JPanel implements ActionListener {
 
     private void createFileChooser () {
         // TODO Auto-generated method stub
-        myChooser = new JFileChooser();
+        myChooser = new JFileChooser("images");
         myChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         myChooser.setFileFilter(new FileNameExtensionFilter("Image files (JPEG, GIF, PNG)", "jpg", "jpeg", "gif", "png"));
         
