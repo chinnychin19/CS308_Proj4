@@ -1,7 +1,6 @@
 package game.model;
 
 import java.io.FileReader;
-import java.lang.reflect.*;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import constants.Constants;
@@ -12,11 +11,10 @@ public class ObjectFactory {
     private JSONObject myDefinitionJSON;
     private JSONObject myWorldJSON;
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public ObjectFactory (String definitionJSON, String worldJSON) throws Exception {
+    public ObjectFactory (String definitionJSONFilepath, String worldJSONFilepath) throws Exception {
 
-        myDefinitionJSON = getJSON(definitionJSON);
-        myWorldJSON = getJSON(worldJSON);
+        myDefinitionJSON = getJSON(definitionJSONFilepath);
+        myWorldJSON = getJSON(worldJSONFilepath);
         for (String c : Constants.WORLD_CATEGORIES) {
             JSONArray objectArray = (JSONArray) myWorldJSON.get("game.model." + c);
             for (Object obj : objectArray) {
