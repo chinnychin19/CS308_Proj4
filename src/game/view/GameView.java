@@ -37,7 +37,7 @@ public class GameView extends JPanel {
         myPainter = new Painter(myBuffer);
         timer = new Timer(Constants.REFRESH_RATE, new PaintDelegator());
         myModel = new GameModel(nameOfGame);
-        myMoveFrames = 0;
+        myMoveFrames = Constants.MOVE_FRAMES;
         timer.start();
     }
 
@@ -45,12 +45,11 @@ public class GameView extends JPanel {
     {
         public void actionPerformed (ActionEvent e)
         {
-            myPainter.drawBackground(myBackground);
+            myPainter.drawBackground(myBackground, myMoveFrames, myModel.getPlayer().getDirection());
             myPainter.drawFrame();
             myPainter.drawPlayer(myModel.getPlayer());
 
-            // world.drawObstacles(myBuffer);
-            // world.drawPlayer(myBuffer);
+            // drawObstacles(myBuffer);
             act();
 
             repaint();
@@ -58,13 +57,13 @@ public class GameView extends JPanel {
     }
 
     public void act () {
-        if (myMoveFrames == 0 && myKeys.keyPressed) {
+        if (myMoveFrames == Constants.MOVE_FRAMES && myKeys.keyPressed) {
             myModel.movePlayer(myKeys.myDirection);
-            myMoveFrames = Constants.MOVE_FRAMES;
+            myMoveFrames = 0;
             print(myModel.getPlayer().getLoc());
         }
-        else if (myMoveFrames > 0) {
-            myMoveFrames--;
+        else if (myMoveFrames < Constants.MOVE_FRAMES) {
+            myMoveFrames++;
         }
     }
 
