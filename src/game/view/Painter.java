@@ -3,7 +3,7 @@ package game.view;
 import game.model.Player;
 import java.awt.Graphics;
 import java.awt.Image;
-import util.Direction;
+import location.Direction;
 import constants.Constants;
 
 
