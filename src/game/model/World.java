@@ -9,9 +9,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import constants.Constants;
-import util.Direction;
-import util.Loc;
-
+import location.Direction;
+import location.Loc;
 
 public class World {
     private HashMap<Loc, AbstractViewableObject> myViewableObjects;

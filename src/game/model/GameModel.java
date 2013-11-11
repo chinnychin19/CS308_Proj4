@@ -1,8 +1,8 @@
 package game.model;
 
 import java.util.Map;
-import util.Direction;
-import util.Loc;
+import location.Direction;
+import location.Loc;
 
 
 public class GameModel {

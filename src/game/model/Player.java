@@ -3,8 +3,8 @@ package game.model;
 import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
-import util.Direction;
-import util.Loc;
+import location.Direction;
+import location.Loc;
 
 public class Player extends AbstractViewableObject {
     private Direction myDirection;

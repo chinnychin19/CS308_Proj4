@@ -13,7 +13,7 @@ import game.model.Player;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import util.Direction;
+import location.Direction;
 import constants.Constants;
 
 

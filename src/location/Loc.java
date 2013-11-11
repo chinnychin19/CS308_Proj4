@@ -1,5 +1,14 @@
-package util;
+package location;
 
+/**
+ * Note: This will probably only help if you hate JGame and decided not to use it.
+ * This is a simple class to represent an x,y coordinate. It also knows how to get an adjacent
+ * location in any Direction (UP, DOWN, LEFT, RIGHT). This is pretty useful if you're trying to move
+ * a player around a grid with arrow keys.
+ * 
+ * @author Chinmay
+ * 
+ */
 public class Loc {
     private int x, y;
 
