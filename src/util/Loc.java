@@ -41,21 +41,35 @@ public class Loc {
         y = b;
     }
 
-    public Loc left () {
+    public Loc adjacentLoc (Direction d) {
+        switch (d) {
+            case UP:
+                return up();
+            case DOWN:
+                return down();
+            case LEFT:
+                return left();
+            case RIGHT:
+                return right();
+        }
+        return null;
+    }
+
+    private Loc left () {
         return new Loc(x - 1, y);
     }
 
-    public Loc right () {
+    private Loc right () {
         return new Loc(x + 1, y);
     }
 
-    //Assumes (0,0) is top left corner
-    public Loc up () {
+    // Assumes (0,0) is top left corner
+    private Loc up () {
         return new Loc(x, y - 1);
     }
 
-    //Assumes (0,0) is top left corner
-    public Loc down () {
+    // Assumes (0,0) is top left corner
+    private Loc down () {
         return new Loc(x, y + 1);
     }
 }
