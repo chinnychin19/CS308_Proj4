@@ -55,10 +55,11 @@ public class World {
                 JSONObject jObj = (JSONObject) obj;
                 int x = (Integer) jObj.get("x");
                 int y = (Integer) jObj.get("y");
+                JSONObject definition = getInstance(viewableCategory, (String)jObj.get("name"));
                 String classPath = "game.model." + viewableCategory;
 //                 TODO: capitalization error possible in classPath?
                 AbstractViewableObject newObject =
-                        (AbstractViewableObject) Reflection.createInstance(classPath, x, y, jObj);
+                        (AbstractViewableObject) Reflection.createInstance(classPath, x, y, definition);
                 addViewableObject(new Loc(x, y), newObject);
             }
         }
