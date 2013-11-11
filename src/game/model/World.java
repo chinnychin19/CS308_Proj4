@@ -18,7 +18,7 @@ public class World {
     private HashMap<Loc, AbstractViewableObject> myViewableObjects;
 
     private Player myPlayer;
-    private JSONObject myDefinitionJSON;
+    private JSONCache myDefinitionCache;
     private JSONObject myWorldJSON;
     private String myNameOfGame;
 
@@ -47,7 +47,7 @@ public class World {
     public void setUpWorld () throws Exception {
         String definitionJSONFilepath = "games/" + myNameOfGame + "/definition.json";
         String worldJSONFilepath = "games/" + myNameOfGame + "/world.json";
-        myDefinitionJSON = new JSONCache(getJSON(definitionJSONFilepath));
+        myDefinitionCache = new JSONCache(getJSON(definitionJSONFilepath));
         myWorldJSON = getJSON(worldJSONFilepath);
         for (String viewableCategory : Constants.VIEWABLE_CATEGORIES) {
             JSONArray objectArray = (JSONArray) myWorldJSON.get(viewableCategory);
@@ -56,7 +56,8 @@ public class World {
                 int x = (Integer) jObj.get("x");
                 int y = (Integer) jObj.get("y");
                 JSONObject definition =
-                        myDefinitionJSON.getInstance(viewableCategory, (String) jObj.get("name"));
+                        myDefinitionCache
+                                .getInstance(viewableCategory, jObj.get("name").toString());
                 String classPath = "game.model." + viewableCategory;
                 // TODO: capitalization error possible in classPath?
                 AbstractViewableObject newObject =
@@ -67,19 +68,19 @@ public class World {
         }
     }
 
-//    public JSONObject getInstance (String category, String name) {
-//        JSONArray definedObjects = (JSONArray) myDefinitionJSON.get(category);
-//        for (Object object : definedObjects) {
-//            JSONObject jObject = (JSONObject) object;
-//            if (jObject.get("name").equals(name)) { return copy(jObject); }
-//        }
-//        return null;
-//    }
-//
-//    private JSONObject copy (JSONObject object) {
-//        String asString = JSONValue.toJSONString(object); // get string representation
-//        return (JSONObject) JSONValue.parse(asString); // return a new json object with same data
-//    }
+    // public JSONObject getInstance (String category, String name) {
+    // JSONArray definedObjects = (JSONArray) myDefinitionJSON.get(category);
+    // for (Object object : definedObjects) {
+    // JSONObject jObject = (JSONObject) object;
+    // if (jObject.get("name").equals(name)) { return copy(jObject); }
+    // }
+    // return null;
+    // }
+    //
+    // private JSONObject copy (JSONObject object) {
+    // String asString = JSONValue.toJSONString(object); // get string representation
+    // return (JSONObject) JSONValue.parse(asString); // return a new json object with same data
+    // }
 
     private JSONObject getJSON (String filepath) {
         JSONObject json;
