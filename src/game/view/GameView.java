@@ -25,6 +25,7 @@ public class GameView extends JPanel {
     private Timer timer;
     private GameModel myModel;
     private Painter myPainter;
+    private int myMoveFrames;
 
     public GameView (String nameOfGame) {
         setFocusable(true);
@@ -36,6 +37,7 @@ public class GameView extends JPanel {
         myPainter = new Painter(myBuffer);
         timer = new Timer(Constants.REFRESH_RATE, new PaintDelegator());
         myModel = new GameModel(nameOfGame);
+        myMoveFrames = 0;
         timer.start();
     }
 
@@ -56,8 +58,13 @@ public class GameView extends JPanel {
     }
 
     public void act () {
-        if (myKeys.keyPressed) {
-            myModel.getPlayer().setDirection(myKeys.myDirection);
+        if (myMoveFrames == 0 && myKeys.keyPressed) {
+            myModel.movePlayer(myKeys.myDirection);
+            myMoveFrames = Constants.MOVE_FRAMES;
+            print(myModel.getPlayer().getLoc());
+        }
+        else if (myMoveFrames > 0) {
+            myMoveFrames--;
         }
     }
 

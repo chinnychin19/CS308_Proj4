@@ -37,13 +37,13 @@ public class Player extends AbstractViewableObject {
         return myLoc;
     }
 
+    public void setLoc (Loc loc) {
+        myLoc = loc;
+    }
+    
     public List<Monster> getParty () {
         return myParty;
     }
-
-    // public abstract void move ();
-    //
-    // public abstract boolean canMove ();
 
     @Override
     public Image getImage () {
@@ -61,6 +61,3 @@ public class Player extends AbstractViewableObject {
     }
 
 }
-// view only cares about objects currently on screen
-// model returns currently viewablable objects
-//
