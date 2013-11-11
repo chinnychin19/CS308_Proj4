@@ -1,0 +1,235 @@
+"types" : [
+			{"name" : "name1"},
+			{"name" : "name2"},
+			{"name" : "name3"}
+]
+
+"typeMatrix" : [
+			{"attacker_type_name" : "name1", "defender_type_name" : "name2", "attack_multiplier" : "0.5"},
+			{"attacker_type_name" : "name1", "defender_type_name" : "name1", "attack_multiplier" : "0.2"},
+			{"attacker_type_name" : "name2", "defender_type_name" : "name3", "attack_multiplier" : "0.3"},
+			{"attacker_type_name" : "name3", "defender_type_name" : "name1", "attack_multiplier" : "0.7"}
+]
+
+"statistics" : [
+			{"statistic" : "attack"},
+			{"statistic" : "speed"},
+			{"statistic" : "defense"}
+]
+
+"statuses" : [
+			{"name" : "poisoned", 
+			 "minDuration" : "4", 
+			 "maxDuration" : "6",
+			 "effects" : ["incrementalEffects" : ["statName" : "12", "statName" : "8"],
+			 			  "percentageEffects"  : ["statName" : "47"]
+			 			 ]
+			},
+			{"name" : "frozen", 
+			 "minDuration" : "1", 
+			 "maxDuration" : "3",
+			 "effects" : ["incrementalEffects" : ["statName" : "5"],
+			 			  "percentageEffects"  : ["statName" : "28", "statName" : "23"]
+			 			 ]
+			},
+			{"name" : "sleep", 
+			 "minDuration" : "2", 
+			 "maxDuration" : "3",
+			 "effects" : ["incrementalEffects" : ["statName" : "16"],
+			 			  "percentageEffects"  : ["statName" : "76"]
+			 			 ]
+			}
+]
+
+<Statuses>
+	<Status>
+		<Name>Poisoned</Name>
+		<MinDuration>time</MinDuration>
+		<MaxDuration>time</MaxDuration>
+		<Effects>
+			<IncrementalEffects>
+				<"StatName">value</"StatName">
+				...
+			</IncrementalEffects>
+			<PercentageEffects>
+				<"StatName">1=100%</"StatName">
+				...
+			</PercentageEffects>
+		<Effects>
+	</Status>
+	...	
+</Statuses>
+
+<Attacks>
+	<Attack>
+		<Name>name</Name>
+		<Accuracy>1=100%</Accuracy>
+		<Effects>
+			<StatisticEffect>
+				<Target>self/other</Target>
+				<Statistic>HP, attack, defense, speed, etc.</Statistic>
+				<Power>int</Power>
+			</StatisticEffect>
+			...
+			<StatusEffect>
+				<Target>self/other</Target>
+				<Status>Poisoned, Paralyzed, Asleep, etc.</Status>
+			</StatusEffect>
+			...
+		</Effects>
+	</Attack>
+	...
+</Attacks>
+
+<Monsters>
+	<Monster>
+		<Name>name</Name>
+		<FullBaseHP>number</FullBaseHP>
+		<CatchRate>number</CatchRate>
+		<Attack>number</Attack>
+		...
+		<Attacks>
+			<Attack>
+				<Name>name</Name>
+				<UnlockLevel>int</UnlockLevel>
+			</Attack>
+			...
+		</Attacks>
+		<Evolution>
+			<Monster>name<Monster>
+			<Level>number</Level>
+		</Evolution>
+	</Monster>
+	...
+</Monsters>
+
+<Items>
+	<Item>
+		<Name>name</Name>
+		<Mode>battle/wander/both</Mode>
+		<NumberOfRecipients>one/all</NumberOfRecipients>
+		<RecipientOriginalStatus>alive/dead/both</RecipientOriginalStatus>
+		<IncrementalEffects>
+			<"StatName">value</"StatName">
+		</IncrementalEffects>
+		<PercentageEffects>
+			<"StatName">1=100%</"StatName"> [?]
+		</PercentageEffects>
+		<StatusEffect>
+			<oldstatus>name1</oldstatus>
+			<newstatus>name2</newstatus>
+		</StatusEffect>
+	</Item>
+	...
+</Items>
+	-------Second File
+<World>
+	<Obstacles>
+		<Obstacle>
+			<Name>name</Name>
+			<x>int</x>
+			<y>int</y>
+			<KeyItems>
+				<KeyItem>name</KeyItem>
+				...
+			</KeyItems>
+		</Obstacle>
+		...
+	</Obstacles>
+	<NPCs>
+		<NPC>
+			<Name>name</Name>
+			<x>int</x>
+			<y>int</y>
+			<Orientation>left</Orientation>
+			<LineOfSightDistance>int</LineOfSightDistance>
+			<Dialogue>blah blah blah</Dialogue>
+			<Fight>
+				<Monsters>
+					<Monster>
+						<Name>name</Name>
+						<Level>int</Level>
+					</Monster>
+					...
+				</Monsters>
+				<Bet>int</Bet>
+				<KeyItem>name</KeyItem>
+				<PostDialogue>yak yak yak</PostDialogue>
+			</Fight>
+		</NPC>
+		...
+	</NPCs>
+	<WildRegions>
+		<WildRegion>
+			<Name>TownXGrass</Name>
+			<Type>Grass</Type>
+			<Points>
+				<Point>
+					<x>int</x>
+					<y>int</y>
+				</Point>
+				...
+			</Points>
+			<Frequency> 0 - 1.0 </Frequency>
+			<Monsters>
+				<Monster>
+					<Name>name</Name>
+					<Level>int</Level>
+					<Chance> 0 - 1.0 </Chance>
+				</Monster>
+				...
+			</Monsters>
+		</WildRegion>
+		...
+	</WildRegions>
+	<Items>
+		<Item>
+			<Name>item</Name>
+			<x>int</x>
+			<y>int</y>
+		</Item>
+		...
+	</Items>
+</World>
+
+<Sprites>
+	<Monsters>
+		<Monster>
+			<Name>name</Name>
+			<Image>name</Image>
+		<Monster>
+		...
+	</Monsters>
+	<NPCs>
+		<NPC>
+			<Name>name</Name>
+			<UpImage>name</UpImage>
+			<DownImage>name</DownImage>
+			<LeftImage>name</LeftImage>
+			<RightImage>name</RightImage>
+		<NPC>
+		...
+	<NPCs>
+	<Items>
+		<Item>
+			<Name>name</Name>
+			<Image>name</Image>
+		</Item>
+	</Items>
+	<Building>
+		<Image>name</Image>
+	</Building>
+	<Wilds>
+		<Wild>
+			<TypeName>name</TypeName>
+			<Image>name</Image>
+		</Wild>
+	</Wilds>
+	<Obstacles>
+		<Obstacle>
+			<Name>name</Name>
+			<Image>name</Image>
+		</Obstacle>
+	</Obstacles>
+</Sprites>
+
