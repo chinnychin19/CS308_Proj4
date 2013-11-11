@@ -1,0 +1,81 @@
+"types" : [
+			{"name" : "name1"},
+			{"name" : "name2"},
+			{"name" : "name3"}
+]
+
+"typeMatrix" : [
+			{"attacker_type_name" : "name1", "defender_type_name" : "name2", "attack_multiplier" : "0.5"},
+			{"attacker_type_name" : "name1", "defender_type_name" : "name1", "attack_multiplier" : "0.2"},
+			{"attacker_type_name" : "name2", "defender_type_name" : "name3", "attack_multiplier" : "0.3"},
+			{"attacker_type_name" : "name3", "defender_type_name" : "name1", "attack_multiplier" : "0.7"}
+]
+
+"statistics" : [
+			{"statistic" : "attack"},
+			{"statistic" : "speed"},
+			{"statistic" : "defense"}
+]
+
+"statuses" : [
+			{"name" : "poisoned", 
+			 "minDuration" : "4", 
+			 "maxDuration" : "6",
+			 "effects" : ["incrementalEffects" : ["statName" : "12", "statName" : "8"],
+			 			  "percentageEffects"  : ["statName" : "47"]
+			 			 ]
+			},
+			{"name" : "frozen", 
+			 "minDuration" : "1", 
+			 "maxDuration" : "3",
+			 "effects" : ["incrementalEffects" : ["statName" : "5"],
+			 			  "percentageEffects"  : ["statName" : "28", "statName" : "23"]
+			 			 ]
+			},
+			{"name" : "sleep", 
+			 "minDuration" : "2", 
+			 "maxDuration" : "3",
+			 "effects" : ["incrementalEffects" : ["statName" : "16"],
+			 			  "percentageEffects"  : ["statName" : "76"]
+			 			 ]
+			}
+]
+
+"attacks" : [
+			{"attack" : ["name" : "vineWhip", "accuracy" : "23", 
+				"effects" : [
+					"statisticEffect" : ["target" : "other", "statistic" : "hp", "power" : "10"],
+					"statusEffect"    : ["targer" : "other", "status" : "paralyzed"]
+				]
+			]},
+			{"attack" : ["name" : "razorLead", "accuracy" : "32", 
+				"effects" : [
+					"statisticEffect" : ["target" : "both", "statistic" : "speed", "power" : "12"],
+					"statusEffect"    : ["targer" : "other", "status" : "paralyzed"]
+				]
+			]},
+			{"attack" : ["name" : "Stars", "accuracy" : "55", 
+				"effects" : [
+					"statisticEffect" : ["target" : "other", "statistic" : "defense", "power" : "29"],
+					"statusEffect"    : ["targer" : "other", "status" : "poisoned"]
+				]			
+			]}
+]
+
+"monsters" : [
+			{"name" : "tyler", "fullBaseHP" : "300", "catchRate" : "3", "attack" : "56", 
+				"attacks" : ["attack" : ["name" : "blah1", "unlockLevel" : "4"], "attack" : ["name" : "blah2", "unlockLevel" : "55"]],
+				"evolution" : ["monster" : "monsterName", "level" : "6"]
+			}
+]
+
+
+"items" : [
+			{
+				"item" : ["name" : "pokeball", "mode" : "both", "numOfRecipients" : "one", "recipientOriginalStatus" : "alive",
+				"incrementalEffects" ["statName" : "thisStat"], "percentageEffects" : ["statName" : "4"], 
+				"statusEffect" : ["oldStatus" : "name1", "newStatus" : "name2"]]
+			}
+]
+
+
