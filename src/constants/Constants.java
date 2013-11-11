@@ -25,6 +25,6 @@ public class Constants {
     { "Type", "TypeMatrix", "Statistic", "Status", "Monster", "Attack", "Item", "NPC", "KeyItem",
      "Obstacle", "WildRegion" };
     
-    public static final String[] WORLD_CATEGORIES =
+    public static final String[] VIEWABLE_CATEGORIES =
         { "NPC", "Obstacle", "WildRegion" };
 }

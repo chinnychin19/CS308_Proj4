@@ -8,9 +8,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
+import reflection.Reflection;
 import constants.Constants;
 import location.Direction;
 import location.Loc;
+
 
 public class World {
     private HashMap<Loc, AbstractViewableObject> myViewableObjects;
@@ -18,8 +20,10 @@ public class World {
     private Player myPlayer;
     private JSONObject myDefinitionJSON;
     private JSONObject myWorldJSON;
+    private String myNameOfGame;
 
-    public World (Player p) {
+    public World (Player p, String nameOfGame) {
+        myNameOfGame = nameOfGame;
         myPlayer = p;
         myViewableObjects = new HashMap<Loc, AbstractViewableObject>();
     }
@@ -40,22 +44,22 @@ public class World {
         }
     }
 
-    public void setUpWorld (String definitionJSONFilepath, String worldJSONFilepath)
-                                                                                    throws Exception {
-
+    public void setUpWorld () throws Exception {
+        String definitionJSONFilepath = "games/" + myNameOfGame + "/definition.json";
+        String worldJSONFilepath = "games/" + myNameOfGame + "/world.json";
         myDefinitionJSON = getJSON(definitionJSONFilepath);
         myWorldJSON = getJSON(worldJSONFilepath);
-        for (String c : Constants.WORLD_CATEGORIES) {
-            JSONArray objectArray = (JSONArray) myWorldJSON.get("game.model." + c);
+        for (String viewableCategory : Constants.VIEWABLE_CATEGORIES) {
+            JSONArray objectArray = (JSONArray) myWorldJSON.get(viewableCategory);
             for (Object obj : objectArray) {
-                JSONObject ob = (JSONObject) obj;
-                Constructor categoryConstructor =
-                        Class.forName(c).getConstructor(int.class, int.class, JSONObject.class);
-                int x = (Integer) ob.get("x");
-                int y = (Integer) ob.get("y");
-                addViewableObject(new Loc(x, y),
-                                  (AbstractViewableObject) categoryConstructor
-                                          .newInstance(x, y, getInstance(c, (String) ob.get("name"))));
+                JSONObject jObj = (JSONObject) obj;
+                int x = (Integer) jObj.get("x");
+                int y = (Integer) jObj.get("y");
+                String classPath = "game.model." + viewableCategory;
+//                 TODO: capitalization error possible in classPath?
+                AbstractViewableObject newObject =
+                        (AbstractViewableObject) Reflection.createInstance(classPath, x, y, jObj);
+                addViewableObject(new Loc(x, y), newObject);
             }
         }
     }

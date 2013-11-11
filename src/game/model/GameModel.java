@@ -13,7 +13,7 @@ public class GameModel {
         // TODO: load the definition.json and world.json and saveState.json files to render the
         // world
         myPlayer = new Player(0, 0);
-        myWorld = new World(myPlayer);
+        myWorld = new World(myPlayer, nameOfGame);
         initWorldForDemoPurposesThisMethodSucks();
     }
 
