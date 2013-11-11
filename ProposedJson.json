@@ -41,67 +41,35 @@
 			}
 ]
 
-<Statuses>
-	<Status>
-		<Name>Poisoned</Name>
-		<MinDuration>time</MinDuration>
-		<MaxDuration>time</MaxDuration>
-		<Effects>
-			<IncrementalEffects>
-				<"StatName">value</"StatName">
-				...
-			</IncrementalEffects>
-			<PercentageEffects>
-				<"StatName">1=100%</"StatName">
-				...
-			</PercentageEffects>
-		<Effects>
-	</Status>
-	...	
-</Statuses>
+"attacks" : [
+			{"attack" : ["name" : "vineWhip", "accuracy" : "23", 
+				"effects" : [
+					"statisticEffect" : ["target" : "other", "statistic" : "hp", "power" : "10"],
+					"statusEffect"    : ["targer" : "other", "status" : "paralyzed"]
+				]
+			]},
+			{"attack" : ["name" : "razorLead", "accuracy" : "32", 
+				"effects" : [
+					"statisticEffect" : ["target" : "both", "statistic" : "speed", "power" : "12"],
+					"statusEffect"    : ["targer" : "other", "status" : "paralyzed"]
+				]
+			]},
+			{"attack" : ["name" : "Stars", "accuracy" : "55", 
+				"effects" : [
+					"statisticEffect" : ["target" : "other", "statistic" : "defense", "power" : "29"],
+					"statusEffect"    : ["targer" : "other", "status" : "poisoned"]
+				]			
+			]}
+]
 
-<Attacks>
-	<Attack>
-		<Name>name</Name>
-		<Accuracy>1=100%</Accuracy>
-		<Effects>
-			<StatisticEffect>
-				<Target>self/other</Target>
-				<Statistic>HP, attack, defense, speed, etc.</Statistic>
-				<Power>int</Power>
-			</StatisticEffect>
-			...
-			<StatusEffect>
-				<Target>self/other</Target>
-				<Status>Poisoned, Paralyzed, Asleep, etc.</Status>
-			</StatusEffect>
-			...
-		</Effects>
-	</Attack>
-	...
-</Attacks>
+"monsters" : [
+			{"name" : "tyler", "fullBaseHP" : "300", "catchRate" : "3", "attack" : "56", 
+				"attacks" : ["attack" : ["name" : "blah1", "unlockLevel" : "4"], "attack" : ["name" : "blah2", "unlockLevel" : "55"]],
+				"evolution" : ["monster" : "monsterName", "level" : "6"]
+			}
+]
 
-<Monsters>
-	<Monster>
-		<Name>name</Name>
-		<FullBaseHP>number</FullBaseHP>
-		<CatchRate>number</CatchRate>
-		<Attack>number</Attack>
-		...
-		<Attacks>
-			<Attack>
-				<Name>name</Name>
-				<UnlockLevel>int</UnlockLevel>
-			</Attack>
-			...
-		</Attacks>
-		<Evolution>
-			<Monster>name<Monster>
-			<Level>number</Level>
-		</Evolution>
-	</Monster>
-	...
-</Monsters>
+
 
 <Items>
 	<Item>
