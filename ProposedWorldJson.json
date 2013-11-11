@@ -1,0 +1,75 @@
+
+"obstacles": [
+			{"obstacle"  : ["name" : "tree1", "x" : "4", "y" : "12", "keyItems" : ["keyItem" : "keyItem1", "keyItem" : "keyItem2"]]},
+			{"obstacle"  : ["name" : "tree2", "x" : "7", "y" : "14", "keyItems" : ["keyItem" : "keyItem2", "keyItem" : "keyItem3"]]},
+			{"obstacle"  : ["name" : "tree3", "x" : "9", "y" : "2", "keyItems" : ["keyItem" : "keyItem1"]]},
+
+
+]
+
+"npcs" : [
+			{"npc" : ["name" : "walker1", "x" : "4", "y", "12", "orientation" : "right", "lineOfSightDistance" : "5", 
+			 "dialogue" : "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit.",
+			 "fight" : ["monsters" : [""], "bet" : "40", "keyItem" : "keyItem3", 
+			 "postDialogue" : "END OF Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit."]
+			 ]}
+]
+
+
+"wildRegions" : [
+			{"wildRegion" : ["name" : "grass1", "type" : "grass", "points" : ["point" : ["x" : "4", "y" : "7"]], "frequency" : "0.6"
+			 "monsters" : ["monster" : ["name" : "monster1", "level" : "14", "chance" : "0.8"]] 
+			]}
+]
+
+"items" : [
+			{"item" : ["name" : "cane", "x" : "5", "y" : "5"]},
+			{"item" : ["name" : "box", "x" : "6", "y" : "2"]},
+			{"item" : ["name" : "pokedex", "x" : "7", "y" : "5"]},
+			{"item" : ["name" : "paper", "x" : "9", "y" : "7"]},
+
+]
+
+
+
+
+<Sprites>
+	<Monsters>
+		<Monster>
+			<Name>name</Name>
+			<Image>name</Image>
+		<Monster>
+		...
+	</Monsters>
+	<NPCs>
+		<NPC>
+			<Name>name</Name>
+			<UpImage>name</UpImage>
+			<DownImage>name</DownImage>
+			<LeftImage>name</LeftImage>
+			<RightImage>name</RightImage>
+		<NPC>
+		...
+	<NPCs>
+	<Items>
+		<Item>
+			<Name>name</Name>
+			<Image>name</Image>
+		</Item>
+	</Items>
+	<Building>
+		<Image>name</Image>
+	</Building>
+	<Wilds>
+		<Wild>
+			<TypeName>name</TypeName>
+			<Image>name</Image>
+		</Wild>
+	</Wilds>
+	<Obstacles>
+		<Obstacle>
+			<Name>name</Name>
+			<Image>name</Image>
+		</Obstacle>
+	</Obstacles>
+</Sprites>
