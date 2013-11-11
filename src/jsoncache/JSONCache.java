@@ -6,7 +6,7 @@ import org.json.simple.JSONValue;
 
 
 /**
- * This class creates an overarching JSON object that stores severals lists of other JSON objects.
+ * This class creates an giant JSON object that stores severals lists of other JSON objects.
  * There may be several different types of JSON objects that it stores, so it keeps track of various
  * categories.
  * Therefore, this giant object basically serves as a cache for different categories of other
@@ -22,7 +22,6 @@ import org.json.simple.JSONValue;
  */
 
 public class JSONCache {
-    String[] myCategories;
     private JSONObject myJSON;
 
     /**
@@ -31,9 +30,19 @@ public class JSONCache {
      * @param categories
      */
     public JSONCache (String[] categories) {
-        myCategories = categories;
         myJSON = new JSONObject();
-        initCategories();
+        initCategories(categories);
+    }
+
+    /**
+     * Accepts a JSON object that already is formatted as a JSONCache object.
+     * This is still useful because it adds functionality for deepcopies of elements through the
+     * getInstance() method.
+     * 
+     * @param cacheObject JSON object that contains JSON Arrays of JSON objects.
+     */
+    public JSONCache (JSONObject cacheObject) {
+        myJSON = cacheObject;
     }
 
     /**
@@ -48,8 +57,8 @@ public class JSONCache {
      * For example, if this cache will hold Weapons, Players, and Items, it will initialize each of
      * those categories at construction to be empty Arrays.
      */
-    private void initCategories () {
-        for (String category : myCategories) {
+    private void initCategories (String[] categories) {
+        for (String category : categories) {
             myJSON.put(category.toLowerCase(), new JSONArray());
         }
     }
@@ -58,7 +67,7 @@ public class JSONCache {
      * Adds a JSON object to the appropriate JSON Array. The object MUST have a field called "name"
      * which stores a unique String.
      * 
-     * @param category Must be a category that appears in myCategories
+     * @param category Must be a category that appears in the original categories.
      * @param data a JSON object representing an instance of that category
      */
     public void add (String category, JSONObject data) {
