@@ -4,13 +4,11 @@ import java.io.StringWriter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import constants.Constants;
 
 
 public class AuthoringCache {
     private JSONObject myJSON;
-    private static final String[] CATEGORIES =
-    { "Type", "TypeMatrix", "Statistic", "Status", "Monster", "Attack", "Item", "NPC", "KeyItem",
-     "Obstacle", "WildRegion" };
 
     public AuthoringCache () {
         myJSON = new JSONObject();
@@ -18,7 +16,7 @@ public class AuthoringCache {
     }
 
     private void initCategories () {
-        for (String category : CATEGORIES) {
+        for (String category : Constants.CATEGORIES) {
             myJSON.put(category.toLowerCase(), new JSONArray());
         }
     }

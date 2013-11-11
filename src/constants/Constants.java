@@ -19,4 +19,11 @@ public class Constants {
 
     public static final int BORDER_THICKNESS = 15;
     public static final Color BORDER_COLOR = Color.black;
+
+    public static final String[] CATEGORIES =
+    { "Type", "TypeMatrix", "Statistic", "Status", "Monster", "Attack", "Item", "NPC", "KeyItem",
+     "Obstacle", "WildRegion" };
+    
+    public static final String[] WORLD_CATEGORIES =
+        { "NPC", "Obstacle", "WildRegion" };
 }

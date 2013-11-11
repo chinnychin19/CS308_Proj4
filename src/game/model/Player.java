@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 import util.Direction;
 import util.Loc;
 
-
 public class Player extends AbstractViewableObject {
     private Direction myDirection;
     private List<Monster> myParty;
