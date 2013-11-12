@@ -2,6 +2,7 @@ package author.panels;
 
 import javax.swing.*;
 import author.listeners.FinishListener;
+import author.wizard.Wizard;
 
 public class FinishPanel extends JPanel {
 
@@ -10,7 +11,7 @@ public class FinishPanel extends JPanel {
     
     public FinishPanel() {
         this.add(FINISH_TEXT);
-        FINISH_BUTTON.addActionListener(new FinishListener());
+        FINISH_BUTTON.addActionListener(new FinishListener((Wizard)this.getParent()));
         this.add(FINISH_BUTTON);
     }
     

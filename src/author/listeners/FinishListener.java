@@ -1,15 +1,25 @@
 package author.listeners;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import author.wizard.PlayerWizard;
+import author.wizard.Wizard;
 
 
 public class FinishListener implements ActionListener {
 
+	Wizard myParentWizard;
+	
+	public FinishListener(Wizard parentWizard) {
+		myParentWizard = parentWizard;
+	}
+	
     @Override
     public void actionPerformed (ActionEvent e) {
-        //Get the items from each card and add it to the authoring cache
+        for (Component c : myParentWizard.getComponents()) {
+        	
+        }
     }
 
 }
