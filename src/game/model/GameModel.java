@@ -9,16 +9,9 @@ public class GameModel {
     private Player myPlayer;
     private World myWorld;
 
-    public GameModel (String nameOfGame) {
-        // TODO: load the definition.json and world.json and saveState.json files to render the
-        // world
-        myPlayer = new Player(0, 0);
-        myWorld = new World(myPlayer, nameOfGame);
-        initWorldForDemoPurposesThisMethodSucks();
-    }
-
-    private void initWorldForDemoPurposesThisMethodSucks () {
-        // myWorld.addViewableObject(new Loc(1,1), new Obstacle());
+    public GameModel (String nameOfGame) throws Exception {
+        myWorld = new World(nameOfGame);
+        myPlayer = myWorld.getPlayer();
     }
 
     public Player getPlayer () {

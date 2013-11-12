@@ -1,3 +1,4 @@
+{
 "types" : [
 			{"name" : "name1"},
 			{"name" : "name2"},
@@ -77,5 +78,4 @@
 				"statusEffect" : ["oldStatus" : "name1", "newStatus" : "name2"]]
 			}
 ]
-
-
+}
