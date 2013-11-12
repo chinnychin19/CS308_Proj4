@@ -49,7 +49,7 @@ public class World {
     }
 
     public void setUpWorld () throws Exception {
-        String definitionJSONFilepath = "games/" + myNameOfGame + "/definition.json"; //CONSTANTS EVERYWHERE - Every string.
+        String definitionJSONFilepath = "games/" + myNameOfGame + "/definition.json"; // CONSTANTS
         String worldJSONFilepath = "games/" + myNameOfGame + "/world.json";
         myDefinitionCache = new JSONCache(getJSON(definitionJSONFilepath));
         myWorldJSON = getJSON(worldJSONFilepath);
@@ -62,7 +62,7 @@ public class World {
                 JSONObject definition =
                         myDefinitionCache
                                 .getInstance(viewableCategory, jObj.get("name").toString());
-                String classPath = "game.model." + viewableCategory; //TODO: Constants > game.model 
+                String classPath = "game.model." + viewableCategory; // TODO: Constants > game.model
                 // TODO: capitalization error possible in classPath?
                 AbstractViewableObject newObject =
                         (AbstractViewableObject) Reflection.createInstance(classPath, x, y,
@@ -71,20 +71,6 @@ public class World {
             }
         }
     }
-
-    // public JSONObject getInstance (String category, String name) {
-    // JSONArray definedObjects = (JSONArray) myDefinitionJSON.get(category);
-    // for (Object object : definedObjects) {
-    // JSONObject jObject = (JSONObject) object;
-    // if (jObject.get("name").equals(name)) { return copy(jObject); }
-    // }
-    // return null;
-    // }
-    //
-    // private JSONObject copy (JSONObject object) {
-    // String asString = JSONValue.toJSONString(object); // get string representation
-    // return (JSONObject) JSONValue.parse(asString); // return a new json object with same data
-    // }
 
     private JSONObject getJSON (String filepath) {
         JSONObject json;
