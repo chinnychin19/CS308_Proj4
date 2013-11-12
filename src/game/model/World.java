@@ -45,7 +45,7 @@ public class World {
     }
 
     public void setUpWorld () throws Exception {
-        String definitionJSONFilepath = "games/" + myNameOfGame + "/definition.json";
+        String definitionJSONFilepath = "games/" + myNameOfGame + "/definition.json"; //CONSTANTS EVERYWHERE - Every string.
         String worldJSONFilepath = "games/" + myNameOfGame + "/world.json";
         myDefinitionCache = new JSONCache(getJSON(definitionJSONFilepath));
         myWorldJSON = getJSON(worldJSONFilepath);
@@ -58,7 +58,7 @@ public class World {
                 JSONObject definition =
                         myDefinitionCache
                                 .getInstance(viewableCategory, jObj.get("name").toString());
-                String classPath = "game.model." + viewableCategory;
+                String classPath = "game.model." + viewableCategory; //TODO: Constants > game.model 
                 // TODO: capitalization error possible in classPath?
                 AbstractViewableObject newObject =
                         (AbstractViewableObject) Reflection.createInstance(classPath, x, y,
