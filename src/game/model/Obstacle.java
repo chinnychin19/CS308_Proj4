@@ -1,5 +1,21 @@
 package game.model;
 
-public abstract class Obstacle extends AbstractViewableObject {
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import org.json.simple.JSONObject;
 
+public class Obstacle extends AbstractViewableObject {
+   private Image myImage;
+    public Obstacle (int x, int y, JSONObject definition) {
+        super(x, y, definition);
+        String imageURL = definition.get("image").toString();
+        myImage = new ImageIcon(imageURL).getImage();
+        //TODO: KeyItems
+    }
+    @Override
+    public Image getImage () {
+        return myImage;
+    }
 }
+
+   

@@ -5,5 +5,11 @@
     "image-down" : "images/players/mainPLayer1/down.png",
     "image-left" : "images/players/mainPLayer1/left.png",
     "image-right" : "images/players/mainPLayer1/right.png",
+  }],
+  "Obstacle" : 
+  [{
+    "name" : "flower",
+    "image" : "images/obstacles/flower.png",
+    "keyItems" : []
   }]
 }

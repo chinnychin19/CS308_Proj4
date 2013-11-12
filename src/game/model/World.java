@@ -70,8 +70,11 @@ public class World {
             JSONArray objectArray = (JSONArray) myWorldJSON.get(viewableCategory);
             for (Object obj : objectArray) {
                 JSONObject jObj = (JSONObject) obj;
-                int x = (Integer) jObj.get("x");
-                int y = (Integer) jObj.get("y");
+                int x = Integer.parseInt(jObj.get("x").toString());
+                int y = Integer.parseInt(jObj.get("y").toString());
+                System.out.println(viewableCategory);
+                System.out.println(jObj.get("name"));
+
                 JSONObject definition =
                         myDefinitionCache
                                 .getInstance(viewableCategory, jObj.get("name").toString());
@@ -93,6 +96,7 @@ public class World {
             return json;
         }
         catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

@@ -1,5 +1,8 @@
 {
   "NPC" : [],
-  "Obstacle" : [],
+  "Obstacle" : [
+  {"name" : "flower",
+   "x":"2", "y" : "2"}
+  ],
   "WildRegion" : []
 }

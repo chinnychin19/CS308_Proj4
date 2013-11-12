@@ -16,7 +16,8 @@ public class Player extends AbstractViewableObject {
     private Image myImageUp, myImageDown, myImageRight, myImageLeft;
     private Loc myLoc;
 
-    public Player (int x, int y, JSONObject definition) {
+    public Player(int x, int y, JSONObject definition) {
+        super(x,y,definition);
         myLoc = new Loc(x, y);
         myDirection = Direction.DOWN;
         String imageUpURL = definition.get("image-up").toString();
