@@ -59,7 +59,7 @@ public class JSONCache {
      */
     private void initCategories (String[] categories) {
         for (String category : categories) {
-            myJSON.put(category.toLowerCase(), new JSONArray());
+            myJSON.put(category, new JSONArray());
         }
     }
 

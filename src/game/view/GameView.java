@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import game.model.GameModel;
 import game.model.Player;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import location.Direction;
@@ -36,7 +37,14 @@ public class GameView extends JPanel {
         addKeyListener(myKeys);
         myPainter = new Painter(myBuffer);
         timer = new Timer(Constants.REFRESH_RATE, new PaintDelegator());
-        myModel = new GameModel(nameOfGame);
+        try {
+            myModel = new GameModel(nameOfGame);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error loading game data.");
+            System.exit(1);
+        }
         myMoveFrames = Constants.MOVE_FRAMES;
         timer.start();
     }

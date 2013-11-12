@@ -22,10 +22,14 @@ public class World {
     private JSONObject myWorldJSON;
     private String myNameOfGame;
 
-    public World (Player p, String nameOfGame) {
+    public World (String nameOfGame) throws Exception {
         myNameOfGame = nameOfGame;
-        myPlayer = p;
         myViewableObjects = new HashMap<Loc, AbstractViewableObject>();
+        setUpWorld();
+    }
+
+    public Player getPlayer () {
+        return null; // TODO: implement
     }
 
     public void addViewableObject (Loc loc, AbstractViewableObject obj) {

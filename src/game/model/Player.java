@@ -3,8 +3,10 @@ package game.model;
 import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
+import org.json.simple.JSONObject;
 import location.Direction;
 import location.Loc;
+
 
 public class Player extends AbstractViewableObject {
     private Direction myDirection;
@@ -14,14 +16,17 @@ public class Player extends AbstractViewableObject {
     private Image myImageUp, myImageDown, myImageRight, myImageLeft;
     private Loc myLoc;
 
-    public Player (int x, int y) {
-        // TODO
+    public Player (int x, int y, JSONObject definition) {
         myLoc = new Loc(x, y);
         myDirection = Direction.DOWN;
-        myImageUp = new ImageIcon("images/players/mainPlayer1/up.png").getImage();
-        myImageLeft = new ImageIcon("images/players/mainPlayer1/left.png").getImage();
-        myImageDown = new ImageIcon("images/players/mainPlayer1/down.png").getImage();
-        myImageRight = new ImageIcon("images/players/mainPlayer1/right.png").getImage();
+        String imageUpURL = definition.get("image-up").toString();
+        String imageDownURL = definition.get("image-down").toString();
+        String imageLeftURL = definition.get("image-left").toString();
+        String imageRightURL = definition.get("image-right").toString();
+        myImageUp = new ImageIcon(imageUpURL).getImage();
+        myImageLeft = new ImageIcon(imageLeftURL).getImage();
+        myImageDown = new ImageIcon(imageDownURL).getImage();
+        myImageRight = new ImageIcon(imageRightURL).getImage();
     }
 
     public Direction getDirection () {
@@ -39,7 +44,7 @@ public class Player extends AbstractViewableObject {
     public void setLoc (Loc loc) {
         myLoc = loc;
     }
-    
+
     public List<Monster> getParty () {
         return myParty;
     }
