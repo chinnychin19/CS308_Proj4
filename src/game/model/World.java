@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 import jsoncache.JSONCache;
+import jsoncache.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -29,7 +30,18 @@ public class World {
     }
 
     public Player getPlayer () {
-        return null; // TODO: implement
+        if(myPlayer==null){
+            JSONObject definition;
+            try {
+                definition = myDefinitionCache.getInstance("Player", "hero");
+                myPlayer = new Player(0, 0, definition); 
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return myPlayer;
+        
     }
 
     public void addViewableObject (Loc loc, AbstractViewableObject obj) {
@@ -49,6 +61,7 @@ public class World {
     }
 
     public void setUpWorld () throws Exception {
+        //TODO: Constants file
         String definitionJSONFilepath = "games/" + myNameOfGame + "/definition.json";
         String worldJSONFilepath = "games/" + myNameOfGame + "/world.json";
         myDefinitionCache = new JSONCache(getJSON(definitionJSONFilepath));
@@ -71,21 +84,7 @@ public class World {
             }
         }
     }
-
-    // public JSONObject getInstance (String category, String name) {
-    // JSONArray definedObjects = (JSONArray) myDefinitionJSON.get(category);
-    // for (Object object : definedObjects) {
-    // JSONObject jObject = (JSONObject) object;
-    // if (jObject.get("name").equals(name)) { return copy(jObject); }
-    // }
-    // return null;
-    // }
-    //
-    // private JSONObject copy (JSONObject object) {
-    // String asString = JSONValue.toJSONString(object); // get string representation
-    // return (JSONObject) JSONValue.parse(asString); // return a new json object with same data
-    // }
-
+    
     private JSONObject getJSON (String filepath) {
         JSONObject json;
         JSONParser parser = new JSONParser();
