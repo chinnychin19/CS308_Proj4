@@ -78,7 +78,7 @@ public class World {
                 JSONObject definition =
                         myDefinitionCache
                                 .getInstance(viewableCategory, jObj.get("name").toString());
-                String classPath = "game.model." + viewableCategory;
+                String classPath = "game.model." + viewableCategory; // TODO: Constants > game.model
                 // TODO: capitalization error possible in classPath?
                 AbstractViewableObject newObject =
                         (AbstractViewableObject) Reflection.createInstance(classPath, x, y,
@@ -87,7 +87,7 @@ public class World {
             }
         }
     }
-    
+
     private JSONObject getJSON (String filepath) {
         JSONObject json;
         JSONParser parser = new JSONParser();
