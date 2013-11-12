@@ -23,7 +23,7 @@ public class Constants {
 
     public static final String[] CATEGORIES =
     { "Type", "TypeMatrix", "Statistic", "Status", "Monster", "Attack", "Item", "NPC", "KeyItem",
-     "Obstacle", "WildRegion" };
+     "Obstacle", "WildRegion", "Player" };
     
     public static final String[] VIEWABLE_CATEGORIES =
         { "NPC", "Obstacle", "WildRegion" };

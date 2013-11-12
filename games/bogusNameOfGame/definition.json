@@ -1,0 +1,9 @@
+{ "Player" : 
+  [{
+    "name" : "hero",
+    "image-up" : "images/players/mainPLayer1/up.png",
+    "image-down" : "images/players/mainPLayer1/down.png",
+    "image-left" : "images/players/mainPLayer1/left.png",
+    "image-right" : "images/players/mainPLayer1/right.png",
+  }]
+}
