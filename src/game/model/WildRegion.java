@@ -4,8 +4,8 @@ import org.json.simple.JSONObject;
 
 public abstract class WildRegion extends AbstractViewableObject {
 
-    public WildRegion (int x, int y, JSONObject definition) {
-        super(x, y, definition);
+    public WildRegion (JSONObject definition, JSONObject objInWord) {
+        super(definition, objInWord);
         // TODO Auto-generated constructor stub
     }
 
