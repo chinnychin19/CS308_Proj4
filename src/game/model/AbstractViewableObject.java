@@ -43,6 +43,6 @@ public abstract class AbstractViewableObject extends AbstractModelObject {
     }
 
     protected void destroy() {
-        
+        myWorld.removeObject(myLoc);
     }
 }

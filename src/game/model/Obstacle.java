@@ -11,16 +11,16 @@ import constants.Constants;
 
 public class Obstacle extends AbstractViewableObject {
     private Image myImage;
-    private Set<String> myRequiredKeyItems;
+    private Set<KeyItem> myRequiredKeyItems;
     public Obstacle (World world, JSONObject definition, JSONObject objInWorld) {
         super(world, definition, objInWorld);
         String imageURL = definition.get(Constants.JSON_IMAGE).toString();
         myImage = new ImageIcon(imageURL).getImage();
-        myRequiredKeyItems = new HashSet<String>();
+        myRequiredKeyItems = new HashSet<KeyItem>();
         Object keyItemArray = objInWorld.get(Constants.JSON_KEYITEMS);
         if (null != keyItemArray) {
             for (Object name : (JSONArray) keyItemArray) {
-                myRequiredKeyItems.add(name.toString());
+                myRequiredKeyItems.add(new KeyItem(name.toString()));
             }            
         }
     }
@@ -29,19 +29,24 @@ public class Obstacle extends AbstractViewableObject {
         return myImage;
     }
     
-    public Set<String> getRequiredKeyItems() {
+    public Set<KeyItem> getRequiredKeyItems() {
         return myRequiredKeyItems;
     }
     
     @Override
     public void doInteraction(Player p) {
-        //TODO: put a delay on this
-        // Immediately check if this requires any key items. If not, then return.
-        // First check if player has all required key items
-        // If not, say what the player needs
-        // If yes, destroy
-        System.out.println(myRequiredKeyItems);
-        //TODO: implement proper behavior
+        //System.out.println(myRequiredKeyItems);
+        if(myRequiredKeyItems.isEmpty()) {
+            return;
+        }
+        for(KeyItem item : myRequiredKeyItems){
+            if(!p.getKeyItems().contains(item)){
+                //TODO: Notify
+                System.out.println("MISSING ITEM: "+item.toString());
+                return;
+            }
+        }
+        destroy();
     }
 }
 

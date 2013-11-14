@@ -1,6 +1,8 @@
 package game.model;
 
 import java.awt.Image;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import javax.swing.ImageIcon;
 import org.json.simple.JSONObject;
@@ -14,7 +16,7 @@ public class Player extends AbstractViewableObject {
     private Direction myDirection;
     private List<Monster> myParty;
     private List<Item> myItems;
-    private List<KeyItem> myKeyItems;
+    private Collection<KeyItem> myKeyItems;
     private Image myImageUp, myImageDown, myImageRight, myImageLeft;
 
     public Player(World world, JSONObject definition, JSONObject objInWorld) {
@@ -28,9 +30,11 @@ public class Player extends AbstractViewableObject {
         myImageLeft = new ImageIcon(imageLeftURL).getImage();
         myImageDown = new ImageIcon(imageDownURL).getImage();
         myImageRight = new ImageIcon(imageRightURL).getImage();
+        myKeyItems = new HashSet<KeyItem>();
+        myKeyItems.add(new KeyItem("razor"));
     }
     
-    public List<KeyItem> getKeyItems() {
+    public Collection<KeyItem> getKeyItems() {
         return myKeyItems;
     }
 
