@@ -21,15 +21,16 @@ public abstract class NPC extends AbstractViewableObject {
     private List<Monster> myParty;
     private List<KeyItem> myKeyItems;
     
-    public NPC (int x, int y, JSONObject myJSON){
-        String imageURL = myJSON.get("image").toString();
+    public NPC (int x, int y, JSONObject definition){
+        super(x, y, definition);
+        String imageURL = definition.get("image").toString();
         myImage = new ImageIcon(imageURL).getImage();
         myLoc = new Loc(x, y);
-        myDirection = (Direction) myJSON.get("orientation");
-        myLineOfSightDistance = (Integer) myJSON.get("lineOfSightDistance");
-        myDialogue = myJSON.get("dialogue").toString();
+        myDirection = (Direction) definition.get("orientation");
+        myLineOfSightDistance = (Integer) definition.get("lineOfSightDistance");
+        myDialogue = definition.get("dialogue").toString();
         
-        myFight = (JSONObject) myJSON.get("fight");
+        myFight = (JSONObject) definition.get("fight");
         if(myFight != null) {
             myJSONCache = new JSONCache(myFight);
             setUpFightable();
@@ -37,8 +38,6 @@ public abstract class NPC extends AbstractViewableObject {
     }
     
     public void setUpFightable(){
-        
-        
     }
     
     public Loc getLoc(){
