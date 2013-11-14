@@ -10,6 +10,6 @@
   [{
     "name" : "flower",
     "image" : "images/obstacles/flower.png",
-    "keyItems" : []
-  }]
+  }],
+  "KeyItem" : [{ "name" : "razor" }]
 }
