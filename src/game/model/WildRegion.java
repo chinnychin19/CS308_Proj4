@@ -14,8 +14,8 @@ public abstract class WildRegion extends AbstractViewableObject {
     private double myFreq;
     private List<Monster> myMonsters;
 	
-    public WildRegion (JSONObject definition, JSONObject objInWord) {
-        super(definition, objInWord);
+    public WildRegion (World world, JSONObject definition, JSONObject objInWord) {
+        super(world, definition, objInWord);
 
         String imageURL = definition.get(Constants.JSON_IMAGE).toString();
         myFreq = Double.parseDouble(definition.get(Constants.JSON_FREQ).toString());

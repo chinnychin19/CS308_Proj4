@@ -83,6 +83,7 @@ public class GameView extends JPanel {
     }
 
     public void act () {
+        // Check for movement
         if (myMoveFrames == Constants.MOVE_FRAMES && myKeys.isArrowKeyPressed) {
             myModel.movePlayer(myKeys.myDirection);
             myMoveFrames = 0;
@@ -91,7 +92,8 @@ public class GameView extends JPanel {
             myMoveFrames++;
         }
         
-        if (myKeys.isInteracting) {
+        // Check for interaction
+        if (myKeys.isInteractionKeyPressed) {
             myModel.doInteraction();
         }
     }
@@ -107,7 +109,7 @@ public class GameView extends JPanel {
     private class CustomKeyListener extends KeyAdapter
     {
         private boolean isArrowKeyPressed = false;
-        private boolean isInteracting = false;
+        private boolean isInteractionKeyPressed = false;
         private Direction myDirection;
 
         public void keyPressed (KeyEvent e)
@@ -130,14 +132,14 @@ public class GameView extends JPanel {
                 myDirection = Direction.DOWN;
             }
             if (x == KeyEvent.VK_Z) {
-                isInteracting = true;
+                isInteractionKeyPressed = true;
             }
         }
 
         public void keyReleased (KeyEvent e)
         {
             isArrowKeyPressed = false;
-            isInteracting = false;
+            isInteractionKeyPressed = false;
         }
     }
 }

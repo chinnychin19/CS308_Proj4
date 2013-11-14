@@ -17,8 +17,8 @@ public class Player extends AbstractViewableObject {
     private List<KeyItem> myKeyItems;
     private Image myImageUp, myImageDown, myImageRight, myImageLeft;
 
-    public Player(JSONObject definition, JSONObject objInWorld) {
-        super(definition, objInWorld);
+    public Player(World world, JSONObject definition, JSONObject objInWorld) {
+        super(world, definition, objInWorld);
         myDirection = Direction.DOWN;
         String imageUpURL = definition.get(Constants.JSON_IMAGE_UP).toString();
         String imageDownURL = definition.get(Constants.JSON_IMAGE_DOWN).toString();
@@ -28,6 +28,10 @@ public class Player extends AbstractViewableObject {
         myImageLeft = new ImageIcon(imageLeftURL).getImage();
         myImageDown = new ImageIcon(imageDownURL).getImage();
         myImageRight = new ImageIcon(imageRightURL).getImage();
+    }
+    
+    public List<KeyItem> getKeyItems() {
+        return myKeyItems;
     }
 
     public Direction getDirection () {

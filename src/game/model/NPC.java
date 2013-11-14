@@ -27,8 +27,8 @@ public abstract class NPC extends AbstractViewableObject {
     private List<Monster> myParty;
     private List<KeyItem> myKeyItems;
     
-    public NPC (JSONObject definition, JSONObject objInWorld){
-        super(definition, objInWorld);   
+    public NPC (World world, JSONObject definition, JSONObject objInWorld){
+        super(world, definition, objInWorld);   
         String imageUpURL = definition.get(Constants.JSON_IMAGE_UP).toString();
         String imageDownURL = definition.get(Constants.JSON_IMAGE_DOWN).toString();
         String imageLeftURL = definition.get(Constants.JSON_IMAGE_LEFT).toString();

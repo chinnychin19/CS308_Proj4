@@ -12,8 +12,8 @@ import constants.Constants;
 public class Obstacle extends AbstractViewableObject {
     private Image myImage;
     private Set<String> myRequiredKeyItems;
-    public Obstacle (JSONObject definition, JSONObject objInWorld) {
-        super(definition, objInWorld);
+    public Obstacle (World world, JSONObject definition, JSONObject objInWorld) {
+        super(world, definition, objInWorld);
         String imageURL = definition.get(Constants.JSON_IMAGE).toString();
         myImage = new ImageIcon(imageURL).getImage();
         myRequiredKeyItems = new HashSet<String>();
@@ -35,7 +35,13 @@ public class Obstacle extends AbstractViewableObject {
     
     @Override
     public void doInteraction(Player p) {
-        System.out.println(myRequiredKeyItems); //TODO: implement proper behavior
+        //TODO: put a delay on this
+        // Immediately check if this requires any key items. If not, then return.
+        // First check if player has all required key items
+        // If not, say what the player needs
+        // If yes, destroy
+        System.out.println(myRequiredKeyItems);
+        //TODO: implement proper behavior
     }
 }
 

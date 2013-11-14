@@ -8,12 +8,18 @@ import constants.Constants;
 
 public abstract class AbstractViewableObject extends AbstractModelObject {
     private Loc myLoc;
+    private World myWorld;
 
-    public AbstractViewableObject (JSONObject definition, JSONObject objInWord) {
+    public AbstractViewableObject (World world, JSONObject definition, JSONObject objInWord) {
         super(definition);
+        myWorld = world;
         int x = Integer.parseInt(objInWord.get(Constants.JSON_X).toString());
         int y = Integer.parseInt(objInWord.get(Constants.JSON_Y).toString());
         myLoc = new Loc(x, y);
+    }
+    
+    public World getWorld() {
+        return myWorld;
     }
 
     public Loc getLoc () {
@@ -36,4 +42,7 @@ public abstract class AbstractViewableObject extends AbstractModelObject {
         // null op by default
     }
 
+    protected void destroy() {
+        
+    }
 }
