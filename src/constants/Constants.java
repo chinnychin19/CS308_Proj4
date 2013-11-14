@@ -41,4 +41,12 @@ public class Constants {
     public static final String JSON_DIALOGUE = "dialogue";
     public static final String JSON_FIGHT = "fight";
     
+    public static final String JSON_FREQ = "frequency";
+    public static final String JSON_MONSTERS = "monsters";
+    
+    public static final String JSON_X = "x";
+    public static final String JSON_Y = "y";
+    public static final String JSON_KEYITEMS = "keyItems";
+    
+    
 }

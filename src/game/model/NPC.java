@@ -18,7 +18,6 @@ import constants.Constants;
 
 public abstract class NPC extends AbstractViewableObject {
 
-    private Loc myLoc;
     private Image myImageUp, myImageDown, myImageRight, myImageLeft;
     private Direction myDirection;
     private String myDialogue;
@@ -42,21 +41,13 @@ public abstract class NPC extends AbstractViewableObject {
         myDirection = (Direction) definition.get(Constants.JSON_ORIENTATION);
         myLineOfSightDistance = Integer.parseInt(definition.get(Constants.JSON_LINE_OF_SIGHT_DISTANCE).toString());
         myDialogue = definition.get(Constants.JSON_DIALOGUE).toString();
-        
+               
         myFight = (JSONObject) definition.get(Constants.JSON_FIGHT);
         if(myFight != null) {
             myJSONCache = new JSONCache(myFight);
             setUpFightable();
         }
-    }
-    
-    /**
-     * Returns the location of the NPC
-     * @return myLoc
-     */
-    public Loc getLoc(){
-        return myLoc;
-    }
+    }   
     
     @Override
     public Image getImage () {
