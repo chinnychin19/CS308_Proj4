@@ -5,22 +5,31 @@ import location.Loc;
 import org.json.simple.JSONObject;
 import constants.Constants;
 
+
 public abstract class AbstractViewableObject extends AbstractModelObject {
     private Loc myLoc;
-    public AbstractViewableObject(int x, int y, JSONObject definition){
+
+    public AbstractViewableObject (JSONObject definition, JSONObject objInWord) {
+        super(definition);
+        int x = Integer.parseInt(objInWord.get("x").toString());
+        int y = Integer.parseInt(objInWord.get("y").toString());
         myLoc = new Loc(x, y);
     }
-    
-    public Loc getLoc(){
+
+    public Loc getLoc () {
         return myLoc;
     }
-    
-    public Loc getTileLocationOnScreen(Player p){
-        int x = Constants.MIDDLE_TILE_HORIZONTAL + (myLoc.getX() - p.getLoc().getX()); 
-        int y = Constants.MIDDLE_TILE_VERTICAL + (myLoc.getY() - p.getLoc().getY()); 
-        return new Loc(x,y);
+
+    public void setLoc (Loc loc) {
+        myLoc = loc;
     }
-    
-    public abstract Image getImage();
-   
+
+    public Loc getTileLocationOnScreen (Player p) {
+        int x = Constants.MIDDLE_TILE_HORIZONTAL + (myLoc.getX() - p.getLoc().getX());
+        int y = Constants.MIDDLE_TILE_VERTICAL + (myLoc.getY() - p.getLoc().getY());
+        return new Loc(x, y);
+    }
+
+    public abstract Image getImage ();
+
 }

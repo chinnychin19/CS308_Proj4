@@ -6,18 +6,9 @@ import org.json.simple.JSONObject;
 
 
 public abstract class Monster extends AbstractViewableObject {
-    public Monster (int x, int y, JSONObject definition) {
-        super(x, y, definition);
+
+    public Monster (JSONObject definition, JSONObject objInWord) {
+        super(definition, objInWord);
         // TODO Auto-generated constructor stub
     }
-
-    private Collection<AbstractAttack> myAttacks;
-    private Stat myStat;
-
-    public Collection<AbstractAttack> getAttacks () {
-        return myAttacks;
-    }
-
-    public abstract Stat getStat ();
-
 }
