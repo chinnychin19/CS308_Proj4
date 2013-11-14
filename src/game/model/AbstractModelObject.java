@@ -1,5 +1,14 @@
 package game.model;
 
+import org.json.simple.JSONObject;
+
 public class AbstractModelObject {
-    GameModel myModel;
+    private String myName;
+    public AbstractModelObject (JSONObject definition) {
+        myName = definition.get("name").toString(); //TODO: constants
+    }
+    
+    public String getName() {
+        return myName;
+    }
 }

@@ -8,6 +8,7 @@ import constants.Constants;
 public abstract class AbstractViewableObject extends AbstractModelObject {
     private Loc myLoc;
     public AbstractViewableObject(int x, int y, JSONObject definition){
+        super(definition);
         myLoc = new Loc(x, y);
     }
     

@@ -2,10 +2,10 @@ package game.model;
 
 import org.json.simple.JSONObject;
 
-public abstract class Item extends AbstractViewableObject {
+public abstract class Item extends AbstractItem {
 
-    public Item (int x, int y, JSONObject definition) {
-        super(x, y, definition);
+    public Item (JSONObject definition) {
+        super(definition);
         // TODO Auto-generated constructor stub
     }
 
