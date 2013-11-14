@@ -24,21 +24,21 @@ public abstract class NPC extends AbstractViewableObject {
     
     public NPC (int x, int y, JSONObject definition){
         super(x, y, definition);   
-        String imageUpURL = definition.get(Constants.IMAGE_UP).toString();
-        String imageDownURL = definition.get(Constants.IMAGE_DOWN).toString();
-        String imageLeftURL = definition.get(Constants.IMAGE_LEFT).toString();
-        String imageRightURL = definition.get(Constants.IMAGE_RIGHT).toString();
+        String imageUpURL = definition.get(Constants.JSON_IMAGE_UP).toString();
+        String imageDownURL = definition.get(Constants.JSON_IMAGE_DOWN).toString();
+        String imageLeftURL = definition.get(Constants.JSON_IMAGE_LEFT).toString();
+        String imageRightURL = definition.get(Constants.JSON_IMAGE_RIGHT).toString();
         myImageUp = new ImageIcon(imageUpURL).getImage();
         myImageLeft = new ImageIcon(imageLeftURL).getImage();
         myImageDown = new ImageIcon(imageDownURL).getImage();
         myImageRight = new ImageIcon(imageRightURL).getImage();
         
         myLoc = new Loc(x, y);
-        myDirection = (Direction) definition.get(Constants.ORIENTATION);
-        myLineOfSightDistance = Integer.parseInt(definition.get(Constants.LINE_OF_SIGHT_DISTANCE).toString());
-        myDialogue = definition.get(Constants.DIALOGUE).toString();
+        myDirection = (Direction) definition.get(Constants.JSON_ORIENTATION);
+        myLineOfSightDistance = Integer.parseInt(definition.get(Constants.JSON_LINE_OF_SIGHT_DISTANCE).toString());
+        myDialogue = definition.get(Constants.JSON_DIALOGUE).toString();
         
-        myFight = (JSONObject) definition.get(Constants.FIGHT);
+        myFight = (JSONObject) definition.get(Constants.JSON_FIGHT);
         if(myFight != null) {
             myJSONCache = new JSONCache(myFight);
             setUpFightable();

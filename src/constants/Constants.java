@@ -29,15 +29,15 @@ public class Constants {
         { "NPC", "Obstacle", "WildRegion" };
     
     
-    //Game.model Constants
-    public static final String IMAGE_UP = "image-up";
-    public static final String IMAGE_DOWN = "image-down";
-    public static final String IMAGE_LEFT = "image-left";
-    public static final String IMAGE_RIGHT = "image-right";
+    //JSON keywords
+    public static final String JSON_IMAGE_UP = "image-up";
+    public static final String JSON_IMAGE_DOWN = "image-down";
+    public static final String JSON_IMAGE_LEFT = "image-left";
+    public static final String JSON_IMAGE_RIGHT = "image-right";
     
-    public static final String ORIENTATION = "orientation";
-    public static final String LINE_OF_SIGHT_DISTANCE = "lineOfSightDistance";
-    public static final String DIALOGUE = "dialogue";
-    public static final String FIGHT = "fight";
+    public static final String JSON_ORIENTATION = "orientation";
+    public static final String JSON_LINE_OF_SIGHT_DISTANCE = "lineOfSightDistance";
+    public static final String JSON_DIALOGUE = "dialogue";
+    public static final String JSON_FIGHT = "fight";
     
 }
