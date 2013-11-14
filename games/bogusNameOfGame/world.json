@@ -1,10 +1,11 @@
 {
+  "Player" : [{"name" : "hero", "x" : "0","y":"0"}],
   "NPC" : [],
   "Obstacle" : [
   {"name" : "flower1",
    "x":"2", "y" : "2"},
   {"name" : "flower2",
-   "x":"2", "y" : "3"}
+   "x":"2", "y" : "3", "keyItems" : ["razor"] }
 ],
   "WildRegion" : []
 }
