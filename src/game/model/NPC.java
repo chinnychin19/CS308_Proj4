@@ -28,8 +28,8 @@ public abstract class NPC extends AbstractViewableObject {
     private List<Monster> myParty;
     private List<KeyItem> myKeyItems;
     
-    public NPC (int x, int y, JSONObject definition){
-        super(x, y, definition);   
+    public NPC (JSONObject definition, JSONObject objInWorld){
+        super(definition, objInWorld);   
         String imageUpURL = definition.get(Constants.JSON_IMAGE_UP).toString();
         String imageDownURL = definition.get(Constants.JSON_IMAGE_DOWN).toString();
         String imageLeftURL = definition.get(Constants.JSON_IMAGE_LEFT).toString();
@@ -39,7 +39,6 @@ public abstract class NPC extends AbstractViewableObject {
         myImageDown = new ImageIcon(imageDownURL).getImage();
         myImageRight = new ImageIcon(imageRightURL).getImage();
         
-        myLoc = new Loc(x, y);
         myDirection = (Direction) definition.get(Constants.JSON_ORIENTATION);
         myLineOfSightDistance = Integer.parseInt(definition.get(Constants.JSON_LINE_OF_SIGHT_DISTANCE).toString());
         myDialogue = definition.get(Constants.JSON_DIALOGUE).toString();
