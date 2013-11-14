@@ -11,8 +11,8 @@ public abstract class AbstractViewableObject extends AbstractModelObject {
 
     public AbstractViewableObject (JSONObject definition, JSONObject objInWord) {
         super(definition);
-        int x = Integer.parseInt(objInWord.get("x").toString());
-        int y = Integer.parseInt(objInWord.get("y").toString());
+        int x = Integer.parseInt(objInWord.get(Constants.JSON_X).toString());
+        int y = Integer.parseInt(objInWord.get(Constants.JSON_Y).toString());
         myLoc = new Loc(x, y);
     }
 

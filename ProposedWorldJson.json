@@ -1,10 +1,8 @@
-
+{
 "obstacles": [
 			{"obstacle"  : ["name" : "tree1", "x" : "4", "y" : "12", "keyItems" : ["keyItem" : "keyItem1", "keyItem" : "keyItem2"]]},
 			{"obstacle"  : ["name" : "tree2", "x" : "7", "y" : "14", "keyItems" : ["keyItem" : "keyItem2", "keyItem" : "keyItem3"]]},
 			{"obstacle"  : ["name" : "tree3", "x" : "9", "y" : "2", "keyItems" : ["keyItem" : "keyItem1"]]},
-
-
 ]
 
 "npcs" : [
@@ -27,49 +25,13 @@
 			{"item" : ["name" : "box", "x" : "6", "y" : "2"]},
 			{"item" : ["name" : "pokedex", "x" : "7", "y" : "5"]},
 			{"item" : ["name" : "paper", "x" : "9", "y" : "7"]},
-
 ]
 
-
-
-
-<Sprites>
-	<Monsters>
-		<Monster>
-			<Name>name</Name>
-			<Image>name</Image>
-		<Monster>
-		...
-	</Monsters>
-	<NPCs>
-		<NPC>
-			<Name>name</Name>
-			<UpImage>name</UpImage>
-			<DownImage>name</DownImage>
-			<LeftImage>name</LeftImage>
-			<RightImage>name</RightImage>
-		<NPC>
-		...
-	<NPCs>
-	<Items>
-		<Item>
-			<Name>name</Name>
-			<Image>name</Image>
-		</Item>
-	</Items>
-	<Building>
-		<Image>name</Image>
-	</Building>
-	<Wilds>
-		<Wild>
-			<TypeName>name</TypeName>
-			<Image>name</Image>
-		</Wild>
-	</Wilds>
-	<Obstacles>
-		<Obstacle>
-			<Name>name</Name>
-			<Image>name</Image>
-		</Obstacle>
-	</Obstacles>
-</Sprites>
+"sprites" : [
+			{"monsters" : ["monster" : ["name" : "name1", "image" : "imageAddress"]]},
+			{"npcs" : ["npc" : ["name" : "nameNPC", "upImage" : "upURLHERE", "downImage" : "downURLHERE", "leftImage" : "leftURLHERE", "rightIage" : "rightURLHERE"]]},
+			{"items" : ["item" : ["name" : "nameItem", "image" : "imageURLHERE"]]},
+			{"wilds" : ["wild" : ["typeName" : "wildregionTYPENAME", "image" : "wildregionURL"]]},
+			{"obstacles" : ["obstacle" : ["name" : "obstacleNAMEHERE", "image" : "imageOBSTACLE_url"]]}
+]
+}

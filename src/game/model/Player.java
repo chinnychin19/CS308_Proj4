@@ -4,6 +4,8 @@ import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
 import org.json.simple.JSONObject;
+
+import constants.Constants;
 import location.Direction;
 import location.Loc;
 
@@ -18,10 +20,10 @@ public class Player extends AbstractViewableObject {
     public Player(JSONObject definition, JSONObject objInWorld) {
         super(definition, objInWorld);
         myDirection = Direction.DOWN;
-        String imageUpURL = definition.get("image-up").toString();
-        String imageDownURL = definition.get("image-down").toString();
-        String imageLeftURL = definition.get("image-left").toString();
-        String imageRightURL = definition.get("image-right").toString();
+        String imageUpURL = definition.get(Constants.JSON_IMAGE_UP).toString();
+        String imageDownURL = definition.get(Constants.JSON_IMAGE_DOWN).toString();
+        String imageLeftURL = definition.get(Constants.JSON_IMAGE_LEFT).toString();
+        String imageRightURL = definition.get(Constants.JSON_IMAGE_RIGHT).toString();
         myImageUp = new ImageIcon(imageUpURL).getImage();
         myImageLeft = new ImageIcon(imageLeftURL).getImage();
         myImageDown = new ImageIcon(imageDownURL).getImage();

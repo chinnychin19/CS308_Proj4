@@ -30,6 +30,7 @@ public class Constants {
     
     
     //JSON keywords
+    public static final String JSON_IMAGE = "image";
     public static final String JSON_IMAGE_UP = "image-up";
     public static final String JSON_IMAGE_DOWN = "image-down";
     public static final String JSON_IMAGE_LEFT = "image-left";
@@ -39,5 +40,13 @@ public class Constants {
     public static final String JSON_LINE_OF_SIGHT_DISTANCE = "lineOfSightDistance";
     public static final String JSON_DIALOGUE = "dialogue";
     public static final String JSON_FIGHT = "fight";
+    
+    public static final String JSON_FREQ = "frequency";
+    public static final String JSON_MONSTERS = "monsters";
+    
+    public static final String JSON_X = "x";
+    public static final String JSON_Y = "y";
+    public static final String JSON_KEYITEMS = "keyItems";
+    
     
 }
