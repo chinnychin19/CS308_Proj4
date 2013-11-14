@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collection;
+import game.model.AbstractViewableObject;
 import game.model.GameModel;
 import game.model.Player;
 import javax.swing.ImageIcon;
@@ -15,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import location.Direction;
+import location.Loc;
 import constants.Constants;
 
 
@@ -54,13 +58,27 @@ public class GameView extends JPanel {
         public void actionPerformed (ActionEvent e)
         {
             myPainter.drawBackground(myBackground, myMoveFrames, myModel.getPlayer().getDirection());
-            myPainter.drawFrame();
             myPainter.drawPlayer(myModel.getPlayer());
-
-            // drawObstacles(myBuffer);
+            myPainter.drawViewableObjectsOnScreen(getViewableObjectsOnScreen(), myModel.getPlayer());
+            myPainter.drawFrame();
             act();
 
             repaint();
+        }
+        
+        private Collection<AbstractViewableObject> getViewableObjectsOnScreen() {
+            Collection<AbstractViewableObject> list = new ArrayList<AbstractViewableObject>();
+            int playerX = myModel.getPlayer().getLoc().getX();
+            int playerY = myModel.getPlayer().getLoc().getY();
+            for (int dx = -Constants.MIDDLE_TILE_HORIZONTAL; dx <= Constants.MIDDLE_TILE_HORIZONTAL; dx++) {
+                for (int dy = -Constants.MIDDLE_TILE_VERTICAL; dy <= Constants.MIDDLE_TILE_VERTICAL; dy++) {
+                    AbstractViewableObject obj = myModel.getViewableObjects().get(new Loc(playerX + dx, playerY + dy));
+                    if (obj != null) {
+                        list.add(obj);
+                    }
+                }
+            }
+            return list;
         }
     }
 

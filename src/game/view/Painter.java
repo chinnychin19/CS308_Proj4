@@ -1,9 +1,13 @@
 package game.view;
 
+import game.model.AbstractViewableObject;
 import game.model.Player;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.Collection;
+import java.util.Map;
 import location.Direction;
+import location.Loc;
 import constants.Constants;
 
 
@@ -63,40 +67,18 @@ public class Painter {
                            null);
 
     }
-    /**
-     * public void drawBackground() {
-     * // draws normal grass (no wild pokemon)
-     * 
-     * int cellW = (int) world.getCellWidth();
-     * int cellH = (int) world.getCellHeight();
-     * int offX = 0;
-     * int offY = 0;
-     * if (moveCounter != Constants.MOVE_FRAMES) { // then we are in the middle
-     * // of a move
-     * moveCounter++;
-     * if (player.getDir().equals(Constants.UP)) {
-     * offY = (int) (moveCounter * world.getCellHeight() / Constants.MOVE_FRAMES);
-     * } else if (player.getDir().equals(Constants.DOWN)) {
-     * offY = -1
-     * (int) (moveCounter * world.getCellHeight() / Constants.MOVE_FRAMES);
-     * } else if (player.getDir().equals(Constants.LEFT)) {
-     * offX = (int) (moveCounter * world.getCellWidth() / Constants.MOVE_FRAMES);
-     * } else if (player.getDir().equals(Constants.RIGHT)) {
-     * offX = -1
-     * (int) (moveCounter * world.getCellWidth() / Constants.MOVE_FRAMES);
-     * } else {
-     * System.out.println("Failed in drawing background animation");
-     * System.exit(0);
-     * }
-     * offX -= cellW;// prevents blurring on edge of frame
-     * offY -= cellH;// prevents blurring on edge of frame
-     * }
-     * myBuffer.drawImage(normalBackground, offX, offY, Constants.WIDTH + 2
-     * cellW, Constants.HEIGHT + 2 * cellH, null);
-     * 
-     * // draws white space
-     * // myBuffer.setColor(Color.white);
-     * // myBuffer.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT);
-     * }
-     */
+
+    public void drawViewableObjectsOnScreen (Collection<AbstractViewableObject> viewableObjects, Player p) {
+        for (AbstractViewableObject obj : viewableObjects){
+            
+            Loc tileLoc = obj.getTileLocationOnScreen(p);
+            myBuffer.drawImage(obj.getImage(),
+                               (int) (tileLoc.getX() * Constants.TILE_WIDTH),
+                               (int) (tileLoc.getY() * Constants.TILE_HEIGHT),
+                               (int) Constants.TILE_WIDTH,
+                               (int) Constants.TILE_HEIGHT,
+                               null);
+
+        }
+    }
 }
