@@ -32,6 +32,11 @@ public class Obstacle extends AbstractViewableObject {
     public Set<String> getRequiredKeyItems() {
         return myRequiredKeyItems;
     }
+    
+    @Override
+    public void doInteraction(Player p) {
+        System.out.println(myRequiredKeyItems); //TODO: implement proper behavior
+    }
 }
 
    

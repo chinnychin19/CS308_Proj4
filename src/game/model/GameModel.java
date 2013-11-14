@@ -25,4 +25,8 @@ public class GameModel {
     public Map<Loc, AbstractViewableObject> getViewableObjects () {
         return myWorld.getViewableObjects();
     }
+
+    public void doInteraction () {
+        myWorld.doInteraction();
+    }
 }

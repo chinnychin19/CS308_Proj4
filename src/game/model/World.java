@@ -27,20 +27,20 @@ public class World {
         setUpWorld();
     }
 
-    public Player getPlayer () {
+    protected Player getPlayer () {
         return myPlayer;
 
     }
 
-    public void addViewableObject (Loc loc, AbstractViewableObject obj) {
+    private void addViewableObject (Loc loc, AbstractViewableObject obj) {
         myViewableObjects.put(loc, obj);
     }
 
-    public Map<Loc, AbstractViewableObject> getViewableObjects () {
+    protected Map<Loc, AbstractViewableObject> getViewableObjects () {
         return myViewableObjects;
     }
 
-    public void movePlayer (Direction d) {
+    protected void movePlayer (Direction d) {
         myPlayer.setDirection(d);
         Loc targetLoc = myPlayer.getLoc().adjacentLoc(d);
         if (!myViewableObjects.containsKey(targetLoc)) {
@@ -48,7 +48,7 @@ public class World {
         }
     }
 
-    public void setUpWorld () throws Exception {
+    protected void setUpWorld () throws Exception {
         // TODO: Constants file
         String definitionJSONFilepath = "games/" + myNameOfGame + "/definition.json";
         String worldJSONFilepath = "games/" + myNameOfGame + "/world.json";
@@ -92,6 +92,13 @@ public class World {
         catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    protected void doInteraction () {
+        Loc locInFrontOfPlayer = myPlayer.getLoc().adjacentLoc(myPlayer.getDirection());
+        if (myViewableObjects.containsKey(locInFrontOfPlayer)) {
+            myViewableObjects.get(locInFrontOfPlayer).doInteraction(myPlayer);
         }
     }
 }

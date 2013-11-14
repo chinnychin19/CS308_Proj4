@@ -31,5 +31,9 @@ public abstract class AbstractViewableObject extends AbstractModelObject {
     }
 
     public abstract Image getImage ();
+    
+    public void doInteraction(Player p) {
+        // null op by default
+    }
 
 }
