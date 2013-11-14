@@ -68,7 +68,9 @@ public class World {
                 // TODO: Constants > game.model
                 // TODO: capitalization error possible in classPath?
                 AbstractViewableObject newViewableObject =
-                        (AbstractViewableObject) Reflection.createInstance(classPath, definition,
+                        (AbstractViewableObject) Reflection.createInstance(classPath,
+                                                                           this,
+                                                                           definition,
                                                                            objInWorld);
                 addViewableObject(newViewableObject.getLoc(), newViewableObject);
                 if (viewableCategory.equals("Player")) {
