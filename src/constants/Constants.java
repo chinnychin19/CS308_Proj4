@@ -27,4 +27,17 @@ public class Constants {
     
     public static final String[] VIEWABLE_CATEGORIES =
         { "NPC", "Obstacle", "WildRegion" };
+    
+    
+    //JSON keywords
+    public static final String JSON_IMAGE_UP = "image-up";
+    public static final String JSON_IMAGE_DOWN = "image-down";
+    public static final String JSON_IMAGE_LEFT = "image-left";
+    public static final String JSON_IMAGE_RIGHT = "image-right";
+    
+    public static final String JSON_ORIENTATION = "orientation";
+    public static final String JSON_LINE_OF_SIGHT_DISTANCE = "lineOfSightDistance";
+    public static final String JSON_DIALOGUE = "dialogue";
+    public static final String JSON_FIGHT = "fight";
+    
 }
