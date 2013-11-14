@@ -9,6 +9,12 @@ import location.Loc;
 import org.json.simple.JSONObject;
 import constants.Constants;
 
+/**
+ * NPC Class that creates a new of a non-player character and initializes all of its variables based on reading in the correct
+ * JSON information.
+ * @author rtoussaint
+ *
+ */
 
 public abstract class NPC extends AbstractViewableObject {
 
@@ -45,8 +51,10 @@ public abstract class NPC extends AbstractViewableObject {
         }
     }
     
-   
-    
+    /**
+     * Returns the location of the NPC
+     * @return myLoc
+     */
     public Loc getLoc(){
         return myLoc;
     }
@@ -66,18 +74,36 @@ public abstract class NPC extends AbstractViewableObject {
         return null;
     }
     
+    /**
+     * Returns the direction that the NPC is facing
+     * @return myDirection
+     */
     public Direction getDirection(){
     	return myDirection;
     }
     
+    /**
+     * Returns the dialogue of the NPC.  This is the speech that is displayed when the main player interacts with it
+     * @return myDialogue
+     */
     public String getDialogue(){
     	return myDialogue;
     }
     
+    /**
+     * Returns the NPC's line of sight distance.  Essentially, how far ahead the NPC can see -- used for detecting when the main
+     * player is within range to interact with
+     * @return myLineOfSightDistance
+     */
     public int getLineOfSightDistance(){
     	return myLineOfSightDistance;
     }
     
+    /**
+     * Returns the NPC's fight.  This may be null if the NPC does not battle the main player.  If it does battle the main player,
+     * then this handles all the information for the NPC to go into battle mode.
+     * @return myFight
+     */
     public JSONObject getFight(){
     	return myFight;
     }
@@ -86,14 +112,19 @@ public abstract class NPC extends AbstractViewableObject {
     	//TODO: Implement Method
     }
     
+    /**
+     * Returns the NPC's key items.  These are items that can be given to the main player as it progresses through the game
+     * @return myKeyItems
+     */
     public List<KeyItem> getKeyItems(){
         return myKeyItems;
     } 
     
+    /**
+     * Returns the NPC's party, containing the monsters that it has
+     * @return myParty
+     */
     public List<Monster> getParty(){
     	return myParty;
-    }
-    
-    
-    
+    } 
 }
