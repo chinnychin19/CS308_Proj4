@@ -30,6 +30,7 @@ public class Constants {
     
     
     //JSON keywords
+    public static final String JSON_IMAGE = "image";
     public static final String JSON_IMAGE_UP = "image-up";
     public static final String JSON_IMAGE_DOWN = "image-down";
     public static final String JSON_IMAGE_LEFT = "image-left";
