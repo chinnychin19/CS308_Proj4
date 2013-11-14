@@ -101,4 +101,8 @@ public class World {
             myViewableObjects.get(locInFrontOfPlayer).doInteraction(myPlayer);
         }
     }
+    
+    protected void removeObject(Loc loc) {
+        myViewableObjects.remove(loc);
+    }
 }
