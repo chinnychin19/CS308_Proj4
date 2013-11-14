@@ -13,11 +13,13 @@ public class Obstacle extends AbstractViewableObject {
     public Obstacle (JSONObject definition, JSONObject objInWorld) {
         super(definition, objInWorld);
         String imageURL = definition.get("image").toString();
-        System.out.println(imageURL);
         myImage = new ImageIcon(imageURL).getImage();
         myRequiredKeyItems = new HashSet<String>();
-        for (Object name : (JSONArray) objInWorld.get("keyItems")) {
-            myRequiredKeyItems.add(name.toString());
+        Object keyItemArray = objInWorld.get("keyItems");
+        if (null != keyItemArray) {
+            for (Object name : (JSONArray) keyItemArray) {
+                myRequiredKeyItems.add(name.toString());
+            }            
         }
     }
     @Override

@@ -26,7 +26,7 @@ public class Constants {
      "Obstacle", "WildRegion", "Player" };
     
     public static final String[] VIEWABLE_CATEGORIES =
-        { "NPC", "Obstacle", "WildRegion" };
+        { "NPC", "Obstacle", "WildRegion", "Player" };
     
     
     //JSON keywords
