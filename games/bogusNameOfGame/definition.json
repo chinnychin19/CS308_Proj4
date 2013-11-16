@@ -6,6 +6,14 @@
     "image-left" : "images/players/mainPLayer1/left.png",
     "image-right" : "images/players/mainPLayer1/right.png",
   }],
+  "Monster" : [{
+    "name" : "tyler", 
+    "maxHP" : "300", 
+    "catchRate" : ".4",
+    "image" : "images/monsters/tyler.png" 
+    "attacks" : ["attack" : ["name" : "vineWhip", "unlockLevel" : "4"], "attack" : ["name" : "razor", "unlockLevel" : "6"]],
+    "evolution" : ["monster" : "hunter", "level" : "6"]   
+    }]
   "Obstacle" : 
   [{
     "name" : "flower",
