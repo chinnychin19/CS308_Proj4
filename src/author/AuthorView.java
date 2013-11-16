@@ -17,14 +17,6 @@ public class AuthorView extends JFrame {
     public static final String TITLE = "Authoring View";
     public static final String LAUNCH_WIZARD = "Launch Wizard";
 
-    /*
-     * public void generateXML ();
-     * 
-     * public void nextState ();
-     * 
-     * public void prevState ();
-     */
-
     public AuthorView () {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,7 +26,6 @@ public class AuthorView extends JFrame {
         JButton launchWizardButton = new JButton(LAUNCH_WIZARD);
         launchWizardButton.addActionListener(new LaunchPlayerWizardListener());
         this.add(launchWizardButton);
-        
 
         pack();
         this.setVisible(true);
