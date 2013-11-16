@@ -67,7 +67,7 @@ public class World {
                 String classPath = "game.model." + viewableCategory; 
                 // TODO: Constants > game.model
                 // TODO: capitalization error possible in classPath?
-                AbstractViewableObject newViewableObject =
+                AbstractViewableObject newViewableObject = 
                         (AbstractViewableObject) Reflection.createInstance(classPath,
                                                                            this,
                                                                            definition,
@@ -81,7 +81,7 @@ public class World {
     }
     
     private void debug(Object o) {
-//        System.out.println(o.toString());
+        System.out.println(o.toString());
     }
 
     private JSONObject getJSON (String filepath) {

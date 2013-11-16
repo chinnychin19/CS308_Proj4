@@ -23,11 +23,15 @@ public class Constants {
 
     public static final String[] CATEGORIES =
     { "Type", "TypeMatrix", "Statistic", "Status", "Monster", "Attack", "Item", "NPC", "KeyItem",
-     "Obstacle", "WildRegion", "Player" };
+     "Obstacle", "WildRegion", "Player", "FightingNPC"};
     
     public static final String[] VIEWABLE_CATEGORIES =
-        { "NPC", "Obstacle", "WildRegion", "Player" };
+        { "NPC", "Obstacle", "WildRegion", "Player", "FightingNPC" };
     
+    public static final String UP = "up";
+    public static final String DOWN = "down";
+    public static final String RIGHT = "right";
+    public static final String LEFT = "left";
     
     //JSON keywords
     public static final String JSON_IMAGE = "image";
@@ -39,7 +43,9 @@ public class Constants {
     public static final String JSON_ORIENTATION = "orientation";
     public static final String JSON_LINE_OF_SIGHT_DISTANCE = "lineOfSightDistance";
     public static final String JSON_DIALOGUE = "dialogue";
+    public static final String JSON_POST_DIALOGUE = "postDialogue";
     public static final String JSON_FIGHT = "fight";
+    public static final String JSON_BET = "bet";
     
     public static final String JSON_FREQ = "frequency";
     public static final String JSON_MONSTERS = "monsters";
@@ -47,6 +53,8 @@ public class Constants {
     public static final String JSON_X = "x";
     public static final String JSON_Y = "y";
     public static final String JSON_KEYITEMS = "keyItems";
+
+
     
     
 }

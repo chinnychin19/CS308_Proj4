@@ -14,13 +14,28 @@
   "KeyItem" : [{ "name" : "razor" }],
   "NPC" : [
       {"name" : "walker1", 
+	   "image-up" : "images/players/mainPLayer1/up.png",
+	   "image-down" : "images/players/mainPLayer1/down.png",
+	   "image-left" : "images/players/mainPLayer1/left.png",
+	   "image-right" : "images/players/mainPLayer1/right.png",
+       "orientation" : "right",
+       "dialogue" : "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit.",
+       }
+    ],
+  "FightingNPC" : [
+  {
+  	   "name" : "fighter1",
+	   "image-up" : "images/players/mainPLayer1/up.png",
+	   "image-down" : "images/players/mainPLayer1/down.png",
+	   "image-left" : "images/players/mainPLayer1/left.png",
+	   "image-right" : "images/players/mainPLayer1/right.png",
        "orientation" : "right",
        "lineOfSightDistance" : "2",
        "dialogue" : "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit.",
-       "fight" : {
-          "monsters" : [], "bet" : "40", "keyItem" : "razor", 
-          "postDialogue" : "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit."
-        }
-       }
-    ]
+       "monsters" : [],
+       "bet" : 25,
+       "postDialogue" : "thank you come again.",
+       "keyItems" : [ "razor" ]
+  }
+  ]
 }
