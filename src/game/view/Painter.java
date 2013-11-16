@@ -1,8 +1,13 @@
 package game.view;
 
+import game.model.AbstractViewableObject;
 import game.model.Player;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.Collection;
+import java.util.Map;
+import location.Direction;
+import location.Loc;
 import constants.Constants;
 
 
@@ -33,13 +38,47 @@ public class Painter {
                           Constants.WIDTH, Constants.HEIGHT);
     }
 
-    public void drawBackground (Image bg) {
+    public void drawBackground (Image bg, int moveFrames, Direction direction) {
         // draws default background image
-        myBuffer.drawImage(bg, 0, 0,
+
+        double offX = 0;
+        double offY = 0;
+        double rawOffset =
+                moveFrames == Constants.MOVE_FRAMES ? 0 : (double) moveFrames /
+                                                          Constants.MOVE_FRAMES;
+        switch (direction) {
+            case LEFT:
+                offX += rawOffset * Constants.TILE_WIDTH;
+                break;
+            case RIGHT:
+                offX -= rawOffset * Constants.TILE_WIDTH;
+                break;
+            case UP:
+                offY += rawOffset * Constants.TILE_HEIGHT;
+                break;
+            case DOWN:
+                offY -= rawOffset * Constants.TILE_HEIGHT;
+                break;
+        }
+
+        myBuffer.drawImage(bg, (int) offX, (int) offY,
                            Constants.WIDTH,
                            Constants.HEIGHT,
                            null);
 
     }
 
+    public void drawViewableObjectsOnScreen (Collection<AbstractViewableObject> viewableObjects, Player p) {
+        for (AbstractViewableObject obj : viewableObjects){
+            
+            Loc tileLoc = obj.getTileLocationOnScreen(p);
+            myBuffer.drawImage(obj.getImage(),
+                               (int) (tileLoc.getX() * Constants.TILE_WIDTH),
+                               (int) (tileLoc.getY() * Constants.TILE_HEIGHT),
+                               (int) Constants.TILE_WIDTH,
+                               (int) Constants.TILE_HEIGHT,
+                               null);
+
+        }
+    }
 }

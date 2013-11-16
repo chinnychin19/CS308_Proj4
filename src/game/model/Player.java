@@ -1,66 +1,33 @@
 package game.model;
 
 import java.awt.Image;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import javax.swing.ImageIcon;
-import util.Direction;
-import util.Loc;
+import org.json.simple.JSONObject;
+
+import constants.Constants;
+import location.Direction;
+import location.Loc;
 
 
-public class Player extends AbstractViewableObject {
-    private Direction myDirection;
+public class Player extends AbstractCharacter {
     private List<Monster> myParty;
     private List<Item> myItems;
-    private List<KeyItem> myKeyItems;
-    private Image myImageUp, myImageDown, myImageRight, myImageLeft;
-    private Loc myLoc;
+    private Collection<KeyItem> myKeyItems;
 
-    public Player (int x, int y) {
-        // TODO
-        myLoc = new Loc(x, y);
-        myDirection = Direction.DOWN;
-        myImageUp = new ImageIcon("images/players/mainPlayer1/up.png").getImage();
-        myImageLeft = new ImageIcon("images/players/mainPlayer1/left.png").getImage();
-        myImageDown = new ImageIcon("images/players/mainPlayer1/down.png").getImage();
-        myImageRight = new ImageIcon("images/players/mainPlayer1/right.png").getImage();
+    public Player(World world, JSONObject definition, JSONObject objInWorld) {
+        super(world, definition, objInWorld);
+        myKeyItems = new HashSet<KeyItem>();
+        myKeyItems.add(new KeyItem("razor"));
     }
-
-    public Direction getDirection () {
-        return myDirection;
-    }
-
-    public void setDirection (Direction d) {
-        myDirection = d;
-    }
-
-    public Loc getLoc () {
-        return myLoc;
+    
+    public Collection<KeyItem> getKeyItems() {
+        return myKeyItems;
     }
 
     public List<Monster> getParty () {
         return myParty;
     }
-
-    // public abstract void move ();
-    //
-    // public abstract boolean canMove ();
-
-    @Override
-    public Image getImage () {
-        switch (myDirection) {
-            case UP:
-                return myImageUp;
-            case DOWN:
-                return myImageDown;
-            case LEFT:
-                return myImageLeft;
-            case RIGHT:
-                return myImageRight;
-        }
-        return null;
-    }
-
 }
-// view only cares about objects currently on screen
-// model returns currently viewablable objects
-//

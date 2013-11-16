@@ -16,7 +16,51 @@ public class Constants {
     public static final double TILE_HEIGHT = (double) HEIGHT / NUM_TILES_VERTICAL;
 
     public static final int REFRESH_RATE = 10;
+    public static final int MOVE_FRAMES = 15; // number of frames in one move
 
     public static final int BORDER_THICKNESS = 15;
     public static final Color BORDER_COLOR = Color.black;
+
+    public static final String[] CATEGORIES =
+    { "Type", "TypeMatrix", "Statistic", "Status", "Monster", "Attack", "Item", "NPC", "KeyItem",
+     "Obstacle", "WildRegion", "Player", "FightingNPC"};
+    
+    public static final String[] VIEWABLE_CATEGORIES =
+        { "NPC", "Obstacle", "WildRegion", "Player", "FightingNPC" };
+    
+    public static final String UP = "up";
+    public static final String DOWN = "down";
+    public static final String RIGHT = "right";
+    public static final String LEFT = "left";
+    
+    //JSON keywords
+    public static final String JSON_IMAGE = "image";
+    public static final String JSON_IMAGE_UP = "image-up";
+    public static final String JSON_IMAGE_DOWN = "image-down";
+    public static final String JSON_IMAGE_LEFT = "image-left";
+    public static final String JSON_IMAGE_RIGHT = "image-right";
+    
+    public static final String JSON_ORIENTATION = "orientation";
+    public static final String JSON_LINE_OF_SIGHT_DISTANCE = "lineOfSightDistance";
+    public static final String JSON_DIALOGUE = "dialogue";
+    public static final String JSON_POST_DIALOGUE = "postDialogue";
+    public static final String JSON_FIGHT = "fight";
+    public static final String JSON_BET = "bet";
+    
+    public static final String JSON_FREQ = "frequency";
+    public static final String JSON_MONSTERS = "monsters";
+    
+    public static final String JSON_X = "x";
+    public static final String JSON_Y = "y";
+    public static final String JSON_KEYITEMS = "keyItems";
+
+
+    
+    public static final String JSON_MONSTER_MAX_HP = "maxHP";
+    public static final String JSON_MONSTER_CATCH_RATE = "catchRate";
+    public static final String JSON_MONSTER_ALL_ATTACKS = "attacks";
+    public static final String JSON_MONSTER_ATTACK = "attack";
+
+    
+    
 }
