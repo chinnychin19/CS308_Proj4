@@ -6,20 +6,31 @@
     "image-left" : "images/players/mainPLayer1/left.png",
     "image-right" : "images/players/mainPLayer1/right.png",
   }],
-  "Monster" : [{
+
+  "Monster" : 
+  [{
     "name" : "tyler", 
     "maxHP" : "300", 
     "catchRate" : ".4",
-    "image" : "images/monsters/tyler.png" 
-    "attacks" : ["attack" : ["name" : "vineWhip", "unlockLevel" : "4"], "attack" : ["name" : "razor", "unlockLevel" : "6"]],
-    "evolution" : ["monster" : "hunter", "level" : "6"]   
-    }]
+    "image" : "images/monsters/tyler.png",
+    "evolution" : { 
+    	"name" : "hunter", 
+    	"level" : "8"
+    },
+    "attacks" : [
+    	{"name" : "vine whip", "unlockLevel" : "4" }, 
+    	{"name" : "razor leaf", "unlockLevel" : "6" },
+    ],
+  }],
+
   "Obstacle" : 
   [{
     "name" : "flower",
     "image" : "images/obstacles/flower.png",
   }],
+  
   "KeyItem" : [{ "name" : "razor" }],
+  
   "NPC" : [
       {"name" : "walker1", 
 	   "image-up" : "images/players/mainPLayer1/up.png",
@@ -30,8 +41,9 @@
        "dialogue" : "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit.",
        }
     ],
+  
   "FightingNPC" : [
-  {
+  	{
   	   "name" : "fighter1",
 	   "image-up" : "images/players/mainPLayer1/up.png",
 	   "image-down" : "images/players/mainPLayer1/down.png",
@@ -44,6 +56,6 @@
        "bet" : 25,
        "postDialogue" : "thank you come again.",
        "keyItems" : [ "razor" ]
-  }
+  	}
   ]
 }

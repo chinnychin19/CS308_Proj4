@@ -3,7 +3,7 @@
   "NPC" : [{
   	"name" : "walker1", "x" : "4", "y" : "6" 
   	}],
-  "FightingNPC" : []
+  "FightingNPC" : [],
   "Obstacle" : [
   {"name" : "flower",
    "x":"2", "y" : "2", "keyItems" : ["razor"]},

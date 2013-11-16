@@ -22,7 +22,7 @@ public abstract class Monster extends AbstractViewableObject {
 
 	private int myMaxHP;
 	private double myCatchRate;
-	private List<Attack> myAttacks;
+//	private List<Attack> myAttacks;
 	private List<Monster> myEvolution;
 	private Image myImage;
 	
@@ -33,10 +33,10 @@ public abstract class Monster extends AbstractViewableObject {
         myImage = new ImageIcon(imageURL).getImage();
         myMaxHP = Integer.parseInt(definition.get(Constants.JSON_MONSTER_MAX_HP).toString());
         myCatchRate = Double.parseDouble(definition.get(Constants.JSON_MONSTER_CATCH_RATE).toString());
-        myAttacks = new ArrayList<Attack>();
-        for(Object obj : (JSONArray) definition.get(Constants.JSON_MONSTER_ATTACK)){
-        	myAttacks.add(obj);
-        }
+//        myAttacks = new ArrayList<Attack>();
+//        for(Object obj : (JSONArray) definition.get(Constants.JSON_MONSTER_ATTACK)){
+//        	myAttacks.add(obj);
+//        }
         //TODO: Implement myEvolution
         
         
