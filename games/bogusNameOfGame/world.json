@@ -1,6 +1,8 @@
 {
   "Player" : [{"name" : "hero", "x" : "0", "y" : "0"}]
-  "NPC" : [],
+  "NPC" : [{
+  	"name" : "walker1", "x" : "4", "y" : "6" 
+  	}],
   "Obstacle" : [
   {"name" : "flower",
    "x":"2", "y" : "2", "keyItems" : ["razor"]},

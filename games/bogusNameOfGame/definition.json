@@ -11,5 +11,16 @@
     "name" : "flower",
     "image" : "images/obstacles/flower.png",
   }],
-  "KeyItem" : [{ "name" : "razor" }]
+  "KeyItem" : [{ "name" : "razor" }],
+  "NPC" : [
+      {"name" : "walker1", 
+       "orientation" : "right",
+       "lineOfSightDistance" : "2",
+       "dialogue" : "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit.",
+       "fight" : {
+          "monsters" : [], "bet" : "40", "keyItem" : "razor", 
+          "postDialogue" : "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit."
+        }
+       }
+    ]
 }
