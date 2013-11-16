@@ -56,5 +56,11 @@ public class Constants {
 
 
     
+    public static final String JSON_MONSTER_MAX_HP = "maxHP";
+    public static final String JSON_MONSTER_CATCH_RATE = "catchRate";
+    public static final String JSON_MONSTER_ALL_ATTACKS = "attacks";
+    public static final String JSON_MONSTER_ATTACK = "attack";
+
+    
     
 }
