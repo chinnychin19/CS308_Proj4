@@ -9,17 +9,16 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public abstract class AbstractTextPanel extends AbstractWizardPanel {
     
-    //private JLabel myTextLabel = new JLabel("Text:");
     protected JTextArea myTextArea;
 
     public AbstractTextPanel(String type) {
+    	// Default dimension size is 1x1
     	super(type);
-        /*this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        
-        myTextArea = new JTextArea();
-        
-        this.add(myTextLabel);
-        this.add(myTextArea);*/
+    }
+    
+    public AbstractTextPanel(String type, int rows, int columns) {
+    	// Constructor for lists/matrices that may not be 1x1
+    	super(type, rows, columns);
     }
     
     public Map<String, String> getUserInput() {

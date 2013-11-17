@@ -13,6 +13,13 @@ public abstract class AbstractWizardPanel extends JPanel {
 	private String myType;
 	
 	public AbstractWizardPanel(String type){
+		// Default dimension size is 1x1
+		myDimensions = new UserInputDimension(1, 1);
+		myType = type;
+	}
+	
+	public AbstractWizardPanel(String type, int rows, int columns){
+		myDimensions = new UserInputDimension(rows, columns);
 		myType = type;
 	}
 	
@@ -22,7 +29,20 @@ public abstract class AbstractWizardPanel extends JPanel {
 		return myType;
 	}
 	
-	protected class UserInputDimension{
+	public void addRow(){
+		myDimensions.addRow();
+	}
+	
+	public void addColumn(){
+		myDimensions.addColumn();
+	}
+	
+	public void increaseMatrixSize(){
+		addRow();
+		addColumn();
+	}
+	
+	protected class UserInputDimension {
 		
 		private int rowDimension;
 		private int columnDimension;

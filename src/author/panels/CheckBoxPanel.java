@@ -6,8 +6,9 @@ import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
+//import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class CheckBoxPanel extends AbstractWizardPanel {
 
     private JLabel myCheckBoxLabel;
@@ -37,7 +38,6 @@ public class CheckBoxPanel extends AbstractWizardPanel {
     
     @Override
     public Map<String, String> getUserInput () {
-        // TODO Auto-generated method stub
         Map<String, String> map = new HashMap<String, String>();
         map.put(myCheckBoxLabel.toString(), Boolean.toString(myIsSelected));
         return map;
