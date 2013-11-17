@@ -1,10 +1,13 @@
 package author.panels;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.*;
+import org.json.simple.JSONObject;
 
 
 @SuppressWarnings("serial")
-public class NamePanel extends JPanel {
+public class NamePanel extends AbstractWizardPanel {
     
     private JLabel myNameLabel = new JLabel("Name:");
     private JTextArea myNameArea;
@@ -18,8 +21,13 @@ public class NamePanel extends JPanel {
         this.add(myNameArea);
     }
     
-    public String getName() {
-        return myNameArea.getText();
+    public Map getUserInput() {
+        //JSONObject obj = new JSONObject();
+        //obj.put("Name", myNameArea.getText());
+        //return obj;
+        Map<String, String> map = new HashMap();
+        map.put("Name", myNameArea.getText());
+        return map;
     }
     
 }
