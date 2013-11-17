@@ -41,5 +41,5 @@ public abstract class AbstractWizardPanel extends JPanel {
 		public int getColumnDimension(){ return columnDimension; }
 		
 	}
-	
+
 }
