@@ -21,11 +21,11 @@ public class NamePanel extends AbstractWizardPanel {
         this.add(myNameArea);
     }
     
-    public Map getUserInput() {
+    public Map<String, String> getUserInput() {
         //JSONObject obj = new JSONObject();
         //obj.put("Name", myNameArea.getText());
         //return obj;
-        Map<String, String> map = new HashMap();
+        Map<String, String> map = new HashMap<String, String>();
         map.put("Name", myNameArea.getText());
         return map;
     }
