@@ -98,5 +98,9 @@ public class Wizard extends JDialog {
 
         this.add(myButtonPanel);
     }
+    
+    public JPanel getMyCardPanel() {
+        return myCardPanel;
+    }
 
 }
