@@ -13,6 +13,7 @@ public class NamePanel extends AbstractWizardPanel {
     private JTextArea myNameArea;
 
     public NamePanel() {
+        super("Name");
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         
         myNameArea = new JTextArea();

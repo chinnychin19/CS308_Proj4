@@ -13,6 +13,7 @@ public class NumberPanel extends AbstractWizardPanel {
     private JTextField myNumberField;
     
     public NumberPanel(){
+        super("Number");
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         
         myNumberField = new JTextField();
