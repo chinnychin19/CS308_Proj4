@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public abstract class AbstractWizardPanel extends JPanel {
 
+	protected UserInputDimension myDimensions;
 	protected JLabel myTextLabel;
 	private String myType;
 	
@@ -20,4 +21,25 @@ public abstract class AbstractWizardPanel extends JPanel {
 	public String getMyType(){
 		return myType;
 	}
+	
+	protected class UserInputDimension{
+		
+		private int rowDimension;
+		private int columnDimension;
+		
+		public UserInputDimension(int rows, int columns){
+			rowDimension = rows;
+			columnDimension = columns;
+		}
+		
+		public void addRow(){ rowDimension += 1; }
+		
+		public void addColumn(){ columnDimension += 1; }
+		
+		public int getRowDimension(){ return rowDimension; }
+		
+		public int getColumnDimension(){ return columnDimension; }
+		
+	}
+	
 }
