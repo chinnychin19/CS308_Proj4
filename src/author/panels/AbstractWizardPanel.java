@@ -37,7 +37,7 @@ public abstract class AbstractWizardPanel extends JPanel {
 		myDimensions.addColumn();
 	}
 	
-	public void increaseMatrixSize(){
+	public void expandSquareMatrix(){
 		addRow();
 		addColumn();
 	}
