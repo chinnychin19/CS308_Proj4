@@ -2,6 +2,7 @@ package author.panels;
 
 import java.awt.AWTEvent;
 import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.BoxLayout;
@@ -10,7 +11,7 @@ import javax.swing.JLabel;
 import author.listeners.CheckBoxListener;
 
 @SuppressWarnings("serial")
-public class CheckBoxPanel extends AbstractToggleButtonPanel {
+public class CheckBoxPanel extends AbstractToggleButtonPanel{
 
     private JLabel myCheckBoxLabel;
     private JCheckBox myCheckBox;
@@ -23,19 +24,16 @@ public class CheckBoxPanel extends AbstractToggleButtonPanel {
         
         myCheckBoxLabel = new JLabel("CheckBox:");
         myCheckBox = new JCheckBox();
+        myCheckBox.addItemListener((ItemListener) myEventListener);
+        myIsSelected = false;
         
         this.add(myCheckBoxLabel);
         this.add(myCheckBox);
     }
     
-/*   public void itemStateChanged(ItemEvent e) {
-        if (this == e.getItemSelectable()){
-            myIsSelected = (e.getStateChange() == ItemEvent.SELECTED);
-        }
-    }   */
-    
     public void updateSelectionState(AWTEvent e){
         myIsSelected = (((ItemEvent) e).getStateChange() == ItemEvent.SELECTED);
+        //System.out.println("State is now: " + myIsSelected);
     }
     
     @Override
@@ -44,5 +42,4 @@ public class CheckBoxPanel extends AbstractToggleButtonPanel {
         map.put(myCheckBoxLabel.toString(), Boolean.toString(myIsSelected));
         return map;
     }
-
 }

@@ -1,6 +1,7 @@
 package author.panels;
 
 import java.awt.AWTEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,12 +34,14 @@ public class RadioButtonsPanel extends AbstractToggleButtonPanel {
         for (String s :  buttonLabels){
             JRadioButton rb = new JRadioButton(s);
             myButtonGroup.add(rb);
+            rb.addActionListener((ActionListener) myEventListener);
             this.add(rb);
         }
     }
     
     public void updateSelectionState(AWTEvent e){
         mySelectedButton = ((JRadioButton) e.getSource()).getText();
+        //System.out.println("Selected button is now " + mySelectedButton);
     }
     
     @Override

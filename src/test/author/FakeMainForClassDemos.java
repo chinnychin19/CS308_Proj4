@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import author.ImageDisplayer;
 import author.ImagePicker;
+import author.panels.*;
 
 public class FakeMainForClassDemos {
 
@@ -13,7 +14,32 @@ public class FakeMainForClassDemos {
      */
     public static void main (String[] args) {
         //demoImageDisplayer();
-        demoImagePicker();
+        //demoImagePicker();
+        demoImagePanel();
+        //demoCheckBoxes();
+        //demoRadioButtons();
+    }
+
+    private static void demoRadioButtons () {
+        JFrame frame = new JFrame("DemoFrame");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setPreferredSize(new Dimension(800,600));
+        RadioButtonsPanel panel = new RadioButtonsPanel();
+        panel.addButtons("red","orange","yellow","green","blue","violet");
+        panel.addButtons("black", "gray", "white");
+        frame.getContentPane().add(panel, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true); 
+    }
+
+    private static void demoCheckBoxes() {
+        JFrame frame = new JFrame("DemoFrame");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setPreferredSize(new Dimension(800,600));
+        AbstractWizardPanel panel = new CheckBoxPanel();
+        frame.getContentPane().add(panel, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);        
     }
 
     private static void demoImageDisplayer() {
@@ -29,7 +55,7 @@ public class FakeMainForClassDemos {
         
     }
     
-    private static void demoImagePicker () {
+    private static void demoImagePicker() {
         JFrame frame = new JFrame("DemoFrame");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setPreferredSize(new Dimension(800,600));
@@ -38,5 +64,14 @@ public class FakeMainForClassDemos {
         frame.pack();
         frame.setVisible(true);        
     }
-
+    
+    private static void demoImagePanel () {
+        JFrame frame = new JFrame("DemoFrame");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setPreferredSize(new Dimension(800,600));
+        ImagePanel imgPicker = new ImagePanel();
+        frame.getContentPane().add(imgPicker, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);        
+    }
 }
