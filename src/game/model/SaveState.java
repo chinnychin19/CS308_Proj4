@@ -1,8 +1,13 @@
 package game.model;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import constants.Constants;
 import jsoncache.JSONReader;
 import location.Direction;
@@ -19,8 +24,7 @@ public class SaveState {
     public SaveState (World world, String nameOfGame) {
         myWorld = world;
         myNameOfGame = nameOfGame;
-        Player myPlayer = myWorld.getPlayer();
-
+        myPlayer = myWorld.getPlayer();
     }
 
     public void load () {
@@ -43,12 +47,10 @@ public class SaveState {
             keyItems.add(new KeyItem(jObj.toString()));
         }
         myPlayer.setKeyItems(keyItems);
-
-        
     }
 
-    public void save () {
-        
+    @SuppressWarnings("unchecked")
+    public void save () throws IOException {
         JSONObject state = new JSONObject();
         JSONObject player = new JSONObject();
         state.put("Player", player);
@@ -60,6 +62,8 @@ public class SaveState {
         String lastDir = myPlayer.getDirection().toString();
         player.put(Constants.JSON_ORIENTATION, lastDir);
         
-        //TODO : save this object to a file
+        String outFile = Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" + Constants.FILENAME_SAVESTATE;
+        Writer out = new PrintWriter(new File(outFile));
+        JSONValue.writeJSONString(state, out);
     }
 }

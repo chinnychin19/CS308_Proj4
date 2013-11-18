@@ -63,7 +63,6 @@ public class World {
             for (Object obj : objectArray) {
                 JSONObject objInWorld = (JSONObject) obj;
                 debug("Name: " + objInWorld.get(Constants.JSON_NAME));
-
                 JSONObject definition =
                         myDefinitionCache
                                 .getInstance(viewableCategory, objInWorld.get(Constants.JSON_NAME).toString());
