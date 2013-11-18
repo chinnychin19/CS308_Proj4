@@ -39,7 +39,6 @@ public class CheckBoxPanel extends AbstractToggleButtonPanel {
     
     @Override
     public Map<String, String> getUserInput () {
-        // TODO Auto-generated method stub
         Map<String, String> map = new HashMap<String, String>();
         map.put(myCheckBoxLabel.toString(), Boolean.toString(myIsSelected));
         return map;
