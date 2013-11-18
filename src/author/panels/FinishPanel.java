@@ -4,6 +4,7 @@ import javax.swing.*;
 import author.listeners.FinishListener;
 import author.wizard.Wizard;
 
+@SuppressWarnings("serial")
 public class FinishPanel extends JPanel {
 
     private JLabel FINISH_TEXT = new JLabel("Click 'finish' to create this object.");

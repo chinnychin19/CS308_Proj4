@@ -1,5 +1,6 @@
 package author;
 
+import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
 import javax.swing.Icon;
@@ -11,6 +12,10 @@ public class ImageDisplayer extends JLabel {
     private Icon myIcon;
     //private String myImageFilepath;
     private String myCaption;
+    public static final int MIN_X_SIZE = 100;
+    public static final int MIN_Y_SIZE = 100;
+    public static final int MAX_X_SIZE = 800;
+    public static final int MAX_Y_SIZE = 500;
     
     public ImageDisplayer(){
         init();
@@ -31,6 +36,8 @@ public class ImageDisplayer extends JLabel {
         this.setVerticalAlignment(CENTER);
         this.setHorizontalTextPosition(CENTER);
         this.setVerticalTextPosition(BOTTOM);
+        this.setMinimumSize(new Dimension(MIN_X_SIZE, MIN_Y_SIZE));
+        this.setMaximumSize(new Dimension(MAX_X_SIZE, MAX_Y_SIZE));
     }
     
     public void setImageAndCaption(File file){

@@ -1,6 +1,7 @@
 package constants;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 
 public class Constants {
@@ -61,6 +62,18 @@ public class Constants {
     public static final String JSON_MONSTER_ALL_ATTACKS = "attacks";
     public static final String JSON_MONSTER_ATTACK = "attack";
 
+    //Panel Type Names
+    public static final String LIST_PANEL = "List";
+    public static final String NUMBER_PANEL = "Number";
+    public static final String WORD_PANEL = "Word";
+    public static final String MATRIX_PANEL = "Matrix";
+    public static final String RADIOBUTTON_PANEL = "Radio Button";
+    public static final String CHECKBOX_PANEL = "Checkbox";
+    
+    //GUI Sizing Constants
+    public static final Dimension FRAME_SIZE = new Dimension(800,600);
+    public static final Dimension BUTTON_SIZE = new Dimension(198,28);
+    public static final Dimension TEXT_AREA_SIZE = new Dimension(400, 32);
     
     
 }

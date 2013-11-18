@@ -44,26 +44,6 @@ public class Wizard extends JDialog {
         this.add(myCardPanel);
 
         myCardPanel.setLayout(myCardLayout);
-        
-        initComponents();
-    }
-
-    public void initComponents () {
-        JPanel imagePicker = new ImagePicker();
-
-        JPanel firstCard = new JPanel();
-        firstCard.setBackground(Color.GREEN);
-
-        JPanel secondCard = new JPanel();
-        secondCard.setBackground(Color.BLUE);
-
-        JPanel thirdCard = new JPanel();
-        thirdCard.setBackground(Color.RED);
-
-        myCardPanel.add(imagePicker, "Image Picker");
-        myCardPanel.add(firstCard, "Green");
-        myCardPanel.add(secondCard, "Blue");
-        myCardPanel.add(thirdCard, "Red");
     }
 
     public void addButtons () {
@@ -97,6 +77,10 @@ public class Wizard extends JDialog {
         myButtonPanel.add(myBackButton);
 
         this.add(myButtonPanel);
+    }
+
+    public JPanel getMyCardPanel () {
+        return myCardPanel;
     }
 
 }
