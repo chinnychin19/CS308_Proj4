@@ -35,6 +35,8 @@ public class Constants {
     public static final String LEFT = "left";
     
     //JSON keywords
+    public static final String JSON_PLAYER = "Player";
+    
     public static final String JSON_IMAGE = "image";
     public static final String JSON_IMAGE_UP = "image-up";
     public static final String JSON_IMAGE_DOWN = "image-down";
