@@ -23,6 +23,10 @@ public class Player extends AbstractCharacter {
         myKeyItems.add(new KeyItem("razor"));
     }
     
+    public void setKeyItems(Collection<KeyItem> keyItems){
+        myKeyItems = keyItems;
+    }
+    
     public Collection<KeyItem> getKeyItems() {
         return myKeyItems;
     }

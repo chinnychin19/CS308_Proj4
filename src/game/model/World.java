@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 import jsoncache.JSONCache;
+import jsoncache.JSONReader;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -52,8 +53,8 @@ public class World {
         // TODO: Constants file
         String definitionJSONFilepath = "games/" + myNameOfGame + "/definition.json";
         String worldJSONFilepath = "games/" + myNameOfGame + "/world.json";
-        myDefinitionCache = new JSONCache(getJSON(definitionJSONFilepath));
-        myWorldJSON = getJSON(worldJSONFilepath);
+        myDefinitionCache = new JSONCache(JSONReader.getJSON(definitionJSONFilepath));
+        myWorldJSON = JSONReader.getJSON(worldJSONFilepath);
         for (String viewableCategory : Constants.VIEWABLE_CATEGORIES) {
             JSONArray objectArray = (JSONArray) myWorldJSON.get(viewableCategory);
             debug("Category: "+viewableCategory);
@@ -82,20 +83,6 @@ public class World {
     
     private void debug(Object o) {
         System.out.println(o.toString());
-    }
-
-    private JSONObject getJSON (String filepath) {
-        JSONObject json;
-        JSONParser parser = new JSONParser();
-        try {
-            System.out.println(filepath);
-            json = (JSONObject) parser.parse(new FileReader(filepath));
-            return json;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     protected void doInteraction () {
