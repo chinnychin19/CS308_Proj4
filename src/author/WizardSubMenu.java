@@ -2,6 +2,7 @@ package author;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import author.listeners.LaunchPlayerWizardListener;
 
 
 public class WizardSubMenu extends JMenu {
@@ -18,6 +19,7 @@ public class WizardSubMenu extends JMenu {
         super(title);
         
         JMenuItem playerItem = new JMenuItem(PLAYER);
+        playerItem.addActionListener(new LaunchPlayerWizardListener());
         this.add(playerItem);
         
         JMenuItem NPCItem = new JMenuItem(NPC);

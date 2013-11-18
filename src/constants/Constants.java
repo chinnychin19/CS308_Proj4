@@ -73,6 +73,7 @@ public class Constants {
     //GUI Sizing Constants
     public static final Dimension FRAME_SIZE = new Dimension(800,600);
     public static final Dimension BUTTON_SIZE = new Dimension(198,28);
+    public static final Dimension TEXT_AREA_SIZE = new Dimension(400, 32);
     
     
 }

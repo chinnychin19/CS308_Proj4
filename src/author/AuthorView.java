@@ -34,11 +34,6 @@ public class AuthorView extends JFrame {
         
         this.setJMenuBar(menuBar);
 
-        JButton launchWizardButton = new JButton(LAUNCH_WIZARD);
-        launchWizardButton.addActionListener(new LaunchPlayerWizardListener());
-        launchWizardButton.setPreferredSize(Constants.BUTTON_SIZE);
-        this.add(launchWizardButton);
-
         pack();
         this.setVisible(true);
     }
