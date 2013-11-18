@@ -8,8 +8,6 @@ import constants.Constants;
 
 @SuppressWarnings("serial")
 public class MatrixPanel extends AbstractTextPanel{
-
-    private JTextArea myTextArea;
     
     public MatrixPanel() {
     	super(Constants.MATRIX_PANEL);

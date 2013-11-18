@@ -2,14 +2,14 @@ package author.panels;
 
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
-import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
 public class NumberVerifier extends InputVerifier {
 
     @Override
     public boolean verify (JComponent arg0) {
-        JTextField tf = (JTextField) arg0;
-        return tf.getText().matches("-?\\d+(\\.\\d+)?");
+    	JTextArea text = (JTextArea) arg0;
+        return text.getText().matches("-?\\d+(\\.\\d+)?");
     }
 
 }

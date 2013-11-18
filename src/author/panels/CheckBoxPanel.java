@@ -9,6 +9,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import author.listeners.CheckBoxListener;
 
+@SuppressWarnings("serial")
 public class CheckBoxPanel extends AbstractToggleButtonPanel {
 
     private JLabel myCheckBoxLabel;

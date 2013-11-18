@@ -1,38 +1,39 @@
-package author;
+package author.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import author.FileChooserSingleton;
+import author.ImageDisplayer;
 
-public class ImagePicker extends JPanel implements ActionListener {
+public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     
+    private JLabel myLabel;
     private ImageDisplayer myImageDisplayer;
     private JFileChooser myChooser;
     private JButton myOpenButton;
     private File myFile;
-
     
-    public ImagePicker(){
-        init();    
-    }
-    
-    public ImagePicker(BorderLayout bl){
-        super(bl);
-        init();
-    }
-    
-    private void init(){
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        myImageDisplayer = new ImageDisplayer();
+    public ImagePanel(){
+        super("Image");
+        myLabel = new JLabel("Image:");
         createFileChooser();
-        this.add(myImageDisplayer);
+        myImageDisplayer = new ImageDisplayer();   
+        initLayout();  
+    }
+
+    private void initLayout(){
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(myImageDisplayer);    
         myImageDisplayer.setAlignmentX(CENTER_ALIGNMENT);
         this.add(myOpenButton);
         myOpenButton.setAlignmentX(CENTER_ALIGNMENT);
@@ -40,7 +41,6 @@ public class ImagePicker extends JPanel implements ActionListener {
     }
 
     private void createFileChooser () {
-        // TODO Auto-generated method stub
         myChooser = FileChooserSingleton.getInstance();
         myChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         myChooser.setFileFilter(new FileNameExtensionFilter("Image files (JPEG, GIF, PNG)", "jpg", "jpeg", "gif", "png"));
@@ -62,12 +62,11 @@ public class ImagePicker extends JPanel implements ActionListener {
         }
         
     }
-    
-    public File getFile(){
-        return myFile;
+    @Override
+    public Map<String, String> getUserInput () {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put(myLabel.toString(), myFile.getPath());
+        return map;
     }
-    
-    public String getFilepath(){
-        return myFile.getPath();
-    }
+
 }

@@ -2,23 +2,23 @@ package author.panels;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.JTextArea;
+
+import constants.Constants;
 
 @SuppressWarnings("serial")
 public class NumberPanel extends AbstractTextPanel {
-
-    private JLabel myNumberLabel = new JLabel("Number:");
-    private JTextField myNumberField;
     
     public NumberPanel(){
-        super("Number");
+        super(Constants.NUMBER_PANEL);
+        myTextLabel = new JLabel(Constants.NUMBER_PANEL + ":");
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         
-        myNumberField = new JTextField();
-        myNumberField.setInputVerifier(new NumberVerifier());
+        myTextArea = new JTextArea();
+        myTextArea.setInputVerifier(new NumberVerifier());
         
-        this.add(myNumberLabel);
-        this.add(myNumberField);
+        this.add(myTextLabel);
+        this.add(myTextArea);
     }
 
 }
