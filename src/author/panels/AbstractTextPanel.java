@@ -17,7 +17,7 @@ public abstract class AbstractTextPanel extends AbstractWizardPanel {
     }
     
     public AbstractTextPanel(String type, int rows, int columns) {
-    	// Constructor for lists/matrices that may not be 1x1
+    	// Constructor for lists/matrices that may not be 1x1 when initialized
     	super(type, rows, columns);
     }
     
