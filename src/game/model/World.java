@@ -74,7 +74,7 @@ public class World {
                                                                            definition,
                                                                            objInWorld);
                 addViewableObject(newViewableObject.getLoc(), newViewableObject);
-                if (viewableCategory.equals("Player")) {
+                if (viewableCategory.equals(Constants.JSON_PLAYER)) {
                     myPlayer = (Player) newViewableObject;
                 }
             }
