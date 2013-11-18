@@ -25,17 +25,19 @@ public class SaveState {
 
     public void load () {
 
-        String worldJSONFilepath = "games/" + myNameOfGame + "/saveState.json";
+        String worldJSONFilepath =
+                Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
+                        Constants.FILENAME_SAVESTATE;
         myJSON = JSONReader.getJSON(worldJSONFilepath);
-        JSONObject playerJSON = (JSONObject) myJSON.get("Player");
+        JSONObject playerJSON = (JSONObject) myJSON.get(Constants.JSON_PLAYER);
 
-        int x = Integer.parseInt(playerJSON.get("x").toString());
-        int y = Integer.parseInt(playerJSON.get("y").toString());
+        int x = Integer.parseInt(playerJSON.get(Constants.JSON_X).toString());
+        int y = Integer.parseInt(playerJSON.get(Constants.JSON_Y).toString());
         myPlayer.setLoc(new Loc(x, y));
-        
+
         String directionStr = playerJSON.get(Constants.JSON_ORIENTATION).toString();
-        myPlayer.setDirection( Direction.constructFromString(directionStr) );
-        
+        myPlayer.setDirection(Direction.constructFromString(directionStr));
+
         JSONArray playerKeyItems = (JSONArray) playerJSON.get(Constants.JSON_KEYITEMS);
         Collection<KeyItem> keyItems = new ArrayList<KeyItem>();
         for (Object o : playerKeyItems) {
@@ -44,22 +46,21 @@ public class SaveState {
         }
         myPlayer.setKeyItems(keyItems);
 
-        
     }
 
     public void save () {
-        
+
         JSONObject state = new JSONObject();
         JSONObject player = new JSONObject();
-        state.put("Player", player);
-        
+        state.put(Constants.JSON_PLAYER, player);
+
         Loc lastLoc = myPlayer.getLoc();
-        player.put("x", lastLoc.getX());
-        player.put("y", lastLoc.getY());
-        
+        player.put(Constants.JSON_X, lastLoc.getX());
+        player.put(Constants.JSON_Y, lastLoc.getY());
+
         String lastDir = myPlayer.getDirection().toString();
         player.put(Constants.JSON_ORIENTATION, lastDir);
-        
-        //TODO : save this object to a file
+
+        // TODO : save this object to a file
     }
 }
