@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-//import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class CheckBoxPanel extends AbstractWizardPanel {

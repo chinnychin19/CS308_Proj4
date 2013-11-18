@@ -8,8 +8,6 @@ import constants.Constants;
 
 @SuppressWarnings("serial")
 public class ListPanel extends AbstractTextPanel {
-	
-    private JTextArea myTextArea;
     
     public ListPanel() {
     	super(Constants.LIST_PANEL);
