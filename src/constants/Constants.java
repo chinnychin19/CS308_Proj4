@@ -50,17 +50,20 @@ public class Constants {
     public static final String JSON_FREQ = "frequency";
     public static final String JSON_MONSTERS = "monsters";
     
+    public static final String JSON_NAME = "name";
     public static final String JSON_X = "x";
     public static final String JSON_Y = "y";
     public static final String JSON_KEYITEMS = "keyItems";
-
-
     
     public static final String JSON_MONSTER_MAX_HP = "maxHP";
     public static final String JSON_MONSTER_CATCH_RATE = "catchRate";
     public static final String JSON_MONSTER_ALL_ATTACKS = "attacks";
     public static final String JSON_MONSTER_ATTACK = "attack";
-
     
-    
+    // Classpaths, folder paths, and filenames
+    public static final String CLASSPATH_GAME_MODEL = "game.model";
+    public static final String FOLDERPATH_GAMES = "games";
+    public static final String FILENAME_DEFINITION = "definition.json";
+    public static final String FILENAME_WORLD = "world.json";
+    public static final String FILENAME_SAVESTATE = "saveState.json";
 }
