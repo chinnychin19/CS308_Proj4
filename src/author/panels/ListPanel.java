@@ -17,7 +17,8 @@ public class ListPanel extends AbstractTextPanel {
         
         // TODO : Figure out how to prompt user for list length
         
-        myTextArea = new JTextArea();
+        JTextArea myTextArea = new JTextArea();
+        myTextArea.setPreferredSize(Constants.TEXT_AREA_SIZE);
         
         this.add(myTextLabel);
         this.add(myTextArea);

@@ -9,16 +9,16 @@ import author.wizard.Wizard;
 
 public class FinishListener implements ActionListener {
 
-	Wizard myParentWizard;
-	
-	public FinishListener(Wizard parentWizard) {
-		myParentWizard = parentWizard;
-	}
-	
+    Wizard myParentWizard;
+
+    public FinishListener (Wizard parentWizard) {
+        myParentWizard = parentWizard;
+    }
+
     @Override
     public void actionPerformed (ActionEvent e) {
         for (Component c : myParentWizard.getComponents()) {
-        	
+
         }
     }
 

@@ -32,6 +32,7 @@ public class AuthorView extends JFrame {
         
         menuBar.add(new Menu("File"));
         
+        //Set the menu bar to the frame.
         this.setJMenuBar(menuBar);
 
         pack();

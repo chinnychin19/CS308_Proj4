@@ -14,7 +14,8 @@ public class NumberPanel extends AbstractTextPanel {
         myTextLabel = new JLabel(Constants.NUMBER_PANEL + ":");
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         
-        myTextArea = new JTextArea();
+        JTextArea myTextArea = new JTextArea();
+        myTextArea.setPreferredSize(Constants.TEXT_AREA_SIZE);
         myTextArea.setInputVerifier(new NumberVerifier());
         
         this.add(myTextLabel);

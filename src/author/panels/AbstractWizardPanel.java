@@ -2,6 +2,7 @@ package author.panels;
 
 import java.util.Map;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -14,16 +15,15 @@ public abstract class AbstractWizardPanel extends JPanel {
 	
 	public AbstractWizardPanel(String type){
 		// Default dimension size is 1x1
-		myDimensions = new UserInputDimension(1, 1);
+		myDimensions = new UserInputDimension(3, 3);
 		myType = type;
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 	}
 	
 	public AbstractWizardPanel(String type, int rows, int columns){
 		myDimensions = new UserInputDimension(rows, columns);
 		myType = type;
 	}
-	
-    public abstract Map<String, String> getUserInput();
     
 	public String getMyType(){
 		return myType;

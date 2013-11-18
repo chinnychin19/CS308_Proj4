@@ -37,12 +37,5 @@ public class CheckBoxPanel extends AbstractToggleButtonPanel {
     public void updateSelectionState(AWTEvent e){
         myIsSelected = (((ItemEvent) e).getStateChange() == ItemEvent.SELECTED);
     }
-    
-    @Override
-    public Map<String, String> getUserInput () {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put(myCheckBoxLabel.toString(), Boolean.toString(myIsSelected));
-        return map;
-    }
-
+   
 }
