@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import javax.swing.JFileChooser;
 
@@ -13,7 +14,7 @@ import javax.swing.JFileChooser;
 public class WizardBuilder {
 
     private String myWizardFilePath;
-    private Wizard myWizard = new Wizard();
+    private Wizard myWizard;
 
     /**
      * Default constructor. Allows the user to retrieve a wizard file from
@@ -32,9 +33,10 @@ public class WizardBuilder {
                            IllegalAccessException, IllegalArgumentException,
                            InvocationTargetException, NoSuchMethodException, SecurityException,
                            IOException {
-
+        myWizard = new Wizard();
         myWizardFilePath = getFilePath();
         addPanelsFromFile(myWizardFilePath);
+        getConstructedWizard();
     }
 
     /**
@@ -55,8 +57,10 @@ public class WizardBuilder {
                                           IllegalAccessException, IllegalArgumentException,
                                           InvocationTargetException, NoSuchMethodException,
                                           SecurityException, IOException {
+        myWizard = new Wizard();
         myWizardFilePath = filePath;
         addPanelsFromFile(myWizardFilePath);
+        getConstructedWizard();
     }
 
     /**
@@ -84,9 +88,12 @@ public class WizardBuilder {
             // Create a new reader and a variable in which to store lines.
             BufferedReader reader = new BufferedReader(new FileReader(myWizardFilePath));
             String line = null;
+            Class[] args = new Class[0];
 
             // Iterate through the lines in the file.
             while ((line = reader.readLine()) != null) {
+                
+                
 
                 /*
                  * This is where it gets tricky. Get the string of the preference
@@ -94,10 +101,9 @@ public class WizardBuilder {
                  * which will then handle the value string and load the correct preference
                  * in its constructor.
                  */
-                Class classToInstantiate = Class.forName("author.panels." + line);
-                myWizard.getMyCardPanel().add((Component) classToInstantiate
-                           .getDeclaredConstructor(String.class)
-                           .newInstance(line));
+                Class<?> classToInstantiate = Class.forName("author.panels." + line);
+                Constructor<?> ctr = classToInstantiate.getConstructor();
+                myWizard.getMyCardPanel().add((Component) ctr.newInstance());
             }
         }
         catch (FileNotFoundException e) {

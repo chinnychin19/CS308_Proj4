@@ -6,19 +6,12 @@ import author.ImagePicker;
 import author.panels.FinishPanel;
 //import author.panels.TextPanel;
 
-
+@Deprecated
 @SuppressWarnings("serial")
 public class PlayerWizard extends Wizard {
 
     public PlayerWizard () {
         super();
-    }
-
-    @Override
-    public void initComponents () {
-        //this.myCardPanel.add(new TextPanel());
-        this.myCardPanel.add(new ImagePicker());
-        this.myCardPanel.add(new FinishPanel());
     }
 
 }
