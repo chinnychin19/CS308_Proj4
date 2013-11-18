@@ -5,6 +5,10 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.BoxLayout;
@@ -22,6 +26,7 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     private JFileChooser myChooser;
     private JButton myOpenButton;
     private File myFile;
+    public static String IMG_FOLDER_FILEPATH = "./images";
     
     public ImagePanel(){
         super("Image");
@@ -58,8 +63,36 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
                 File file = myChooser.getSelectedFile();
                 myFile = file;
                 myImageDisplayer.setImageAndCaption(myFile);
+                copyFileAndSelectCopy();
             }
         }
         
+    }
+    
+    @Override
+    public Map<String, String> getUserInput () {
+        Map<String, String> map = new HashMap<String, String>();
+        copyFileAndSelectCopy();
+        map.put(myLabel.toString(), myFile.getPath());
+        return map;
+    }
+    
+    public void copyFileAndSelectCopy(){
+        System.out.println("Parent folder: " + myFile.getParent());
+        if ( !myFile.getParentFile().equals(new File(IMG_FOLDER_FILEPATH)) ){
+            File newFile = new File(IMG_FOLDER_FILEPATH + "/" + myFile.getName());
+            try {
+                Files.copy(myFile.toPath(), new FileOutputStream(newFile));
+            }
+            catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            myFile = newFile;
+        }        
     }
 }

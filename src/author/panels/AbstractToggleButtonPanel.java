@@ -8,7 +8,7 @@ import author.listeners.CheckBoxListener;
 
 public abstract class AbstractToggleButtonPanel extends AbstractWizardPanel {
     
-    private EventListener myEventListener;
+    protected EventListener myEventListener;
 
     public AbstractToggleButtonPanel (String type, EventListener el) {
         super(type);

@@ -42,6 +42,8 @@ public abstract class AbstractWizardPanel extends JPanel {
 		addColumn();
 	}
 	
+	public abstract Map<String, String> getUserInput();
+	
 	protected class UserInputDimension {
 		
 		private int rowDimension;
