@@ -30,7 +30,7 @@ public class WordPanel extends AbstractTextPanel {
     
     public Map<String, String> getUserInput () {       
         Map<String, String> result = new HashMap<String, String>();
-        result.put(myTextLabel.toString(), myTextField.getText());
+        result.put(myTextLabel.getText(), myTextField.getText());
         return result;
     }
 
