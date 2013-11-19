@@ -1,5 +1,6 @@
 package game.model;
 
+import game.controller.AbstractMode;
 import java.io.IOException;
 import java.util.Map;
 import location.Direction;
@@ -39,15 +40,15 @@ public class GameModel {
         }
     }
 
-    public void movePlayer (Direction d) {
-        myWorld.movePlayer(d);
-    }
-
     public Map<Loc, AbstractViewableObject> getViewableObjects () {
         return myWorld.getViewableObjects();
     }
 
     public void doInteraction () {
         myWorld.doInteraction();
+    }
+    
+    public void doMove (Direction d) {
+        myWorld.movePlayer(d);
     }
 }
