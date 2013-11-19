@@ -28,9 +28,9 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     private File myFile;
     public static String IMG_FOLDER_FILEPATH = "./images";
     
-    public ImagePanel(){
+    public ImagePanel(String label){
         super("Image");
-        myLabel = new JLabel("Image:");
+        myLabel = new JLabel(label + ":");
         createFileChooser();
         myImageDisplayer = new ImageDisplayer();   
         initLayout();  
@@ -73,7 +73,8 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     public Map<String, String> getUserInput () {
         Map<String, String> map = new HashMap<String, String>();
         copyFileAndSelectCopy();
-        map.put(myLabel.toString(), myFile.getPath());
+        String label = myLabel.getText(); 
+        map.put(label.substring(0, label.length()-1), myFile.getPath());
         return map;
     }
     

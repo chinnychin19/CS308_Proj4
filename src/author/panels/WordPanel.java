@@ -14,12 +14,12 @@ public class WordPanel extends AbstractTextPanel {
     
     private JTextField myTextField;
 
-    public WordPanel () {
+    public WordPanel (String label) {
         super(Constants.WORD_PANEL);
         
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        myTextLabel = new JLabel(Constants.WORD_PANEL + ":");
+        myTextLabel = new JLabel(label + ":");
 
         myTextField = new JTextField();
         myTextField.setPreferredSize(Constants.TEXT_AREA_SIZE);
@@ -30,7 +30,8 @@ public class WordPanel extends AbstractTextPanel {
     
     public Map<String, String> getUserInput () {       
         Map<String, String> result = new HashMap<String, String>();
-        result.put(myTextLabel.toString(), myTextField.getText());
+        String label = myTextLabel.getText();
+        result.put(label.substring(0, label.length()-1), myTextField.getText());
         return result;
     }
 

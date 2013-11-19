@@ -1,5 +1,2 @@
 WordPanel
 NumberPanel
-ImagePanel
-MatrixPanel
-FinishPanel

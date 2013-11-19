@@ -28,7 +28,7 @@ public class NumberPanel extends AbstractTextPanel {
 
     public Map<String, String> getUserInput () {       
         Map<String, String> result = new HashMap<String, String>();
-        result.put(myTextLabel.toString(), myTextArea.getText());
+        result.put(myTextLabel.getText(), myTextArea.getText());
         return result;
     }
 

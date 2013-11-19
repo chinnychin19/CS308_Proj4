@@ -8,8 +8,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import javax.swing.JFileChooser;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
+import javax.swing.JFileChooser;
+import javax.swing.SwingUtilities;
+
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+
+import author.listeners.FinishListener;
 import author.panels.FinishPanel;
 
 
@@ -37,7 +47,7 @@ public class WizardBuilder {
                            IOException {
         myWizard = new Wizard();
         myWizardFilePath = getFilePath();
-        addPanelsFromFile(myWizardFilePath);
+        addPanelsFromFile2(myWizardFilePath);
         getConstructedWizard();
     }
 
@@ -61,7 +71,7 @@ public class WizardBuilder {
                                           SecurityException, IOException {
         myWizard = new Wizard();
         myWizardFilePath = filePath;
-        addPanelsFromFile(myWizardFilePath);
+        addPanelsFromFile2(myWizardFilePath);
         getConstructedWizard();
     }
 
@@ -105,17 +115,53 @@ public class WizardBuilder {
                  */
                 Class<?> classToInstantiate = Class.forName("author.panels." + line);
                 Constructor<?> ctr = classToInstantiate.getConstructor();
-                myWizard.getMyCardPanel().add((Component) ctr.newInstance());
+                myWizard.getCardPanel().add((Component) ctr.newInstance());
             }
             FinishPanel finish = new FinishPanel();
-            myWizard.getMyCardPanel().add(finish);
+            myWizard.getCardPanel().add(finish);
             finish.init();
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
+    
+    public void addPanelsFromFile2(String filePath) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+    	JSONObject json = getJSON(filePath);
+    	JSONArray playerArray = (JSONArray)json.get("Player");
+    	Map<String,String> wordToPanel = new HashMap<String,String>();
+    	wordToPanel.put("text", "WordPanel");
+    	wordToPanel.put("number", "NumberPanel");
+    	wordToPanel.put("fileurl", "ImagePanel");
+    	
+    	for (Object obj : playerArray) {
+    		JSONObject tempObject = ((JSONObject)obj);
+    		Set keySet = tempObject.keySet();
+    		for (Object s : keySet) {
+    			Class<?> classToInstantiate = Class.forName("author.panels." + wordToPanel.get(tempObject.get(s)) );
+                Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
+                myWizard.getCardPanel().add((Component) ctr.newInstance((String)s));
+    		}
+    	}
+    	FinishPanel finish = new FinishPanel();
+        myWizard.getCardPanel().add(finish);
+        finish.init();
+    }
 
+	private JSONObject getJSON(String filepath) {
+        JSONObject json;
+        JSONParser parser = new JSONParser();
+        try {
+            System.out.println(filepath);
+            json = (JSONObject) parser.parse(new FileReader(filepath));
+            return json;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
     /**
      * Get a file path from a file chooser dialog.
      * 

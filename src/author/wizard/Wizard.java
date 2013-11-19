@@ -16,6 +16,8 @@ public class Wizard extends JDialog {
 
     JButton myNextButton;
     JButton myBackButton;
+    
+    private String myTitle;
 
     private final static String NEXT = "Next";
     private final static String PREVIOUS = "Back";
@@ -80,8 +82,12 @@ public class Wizard extends JDialog {
         this.add(myButtonPanel);
     }
 
-    public JPanel getMyCardPanel () {
+    public JPanel getCardPanel () {
         return myCardPanel;
+    }
+    
+    public String getTitle() {
+    	return myTitle;
     }
 
 }
