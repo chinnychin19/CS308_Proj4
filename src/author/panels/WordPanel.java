@@ -1,5 +1,7 @@
 package author.panels;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -9,6 +11,8 @@ import constants.Constants;
 
 @SuppressWarnings("serial")
 public class WordPanel extends AbstractTextPanel {
+    
+    private JTextField myTextField;
 
     public WordPanel () {
         super(Constants.WORD_PANEL);
@@ -17,11 +21,17 @@ public class WordPanel extends AbstractTextPanel {
 
         myTextLabel = new JLabel(Constants.WORD_PANEL + ":");
 
-        JTextField myTextField = new JTextField();
+        myTextField = new JTextField();
         myTextField.setPreferredSize(Constants.TEXT_AREA_SIZE);
 
         this.add(myTextLabel);
         this.add(myTextField);
+    }
+    
+    public Map<String, String> getUserInput () {       
+        Map<String, String> result = new HashMap<String, String>();
+        result.put(myTextLabel.toString(), myTextField.getText());
+        return result;
     }
 
 }

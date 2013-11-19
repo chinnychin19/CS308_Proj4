@@ -1,6 +1,7 @@
 package author.panels;
 
 import java.awt.GridLayout;
+import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -65,6 +66,10 @@ public class MatrixPanel extends AbstractTextPanel {
         JButton addColumnButton = new JButton("Add Column");
         myButtonPanel.add(addRowButton);
         myButtonPanel.add(addColumnButton);
+    }
+    
+    public Map<String, String> getUserInput () {       
+        return null;
     }
 
 }
