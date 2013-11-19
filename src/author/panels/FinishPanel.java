@@ -1,5 +1,8 @@
 package author.panels;
 
+import java.awt.event.HierarchyEvent;
+import java.awt.event.HierarchyListener;
+
 import javax.swing.*;
 import author.listeners.FinishListener;
 import author.wizard.Wizard;
@@ -12,8 +15,10 @@ public class FinishPanel extends JPanel {
     
     public FinishPanel() {
         this.add(FINISH_TEXT);
-        FINISH_BUTTON.addActionListener(new FinishListener((Wizard)this.getParent()));
         this.add(FINISH_BUTTON);
     }
     
+    public void init() {
+    	FINISH_BUTTON.addActionListener(new FinishListener((Wizard)SwingUtilities.getAncestorNamed("wizard", this)));
+    }
 }

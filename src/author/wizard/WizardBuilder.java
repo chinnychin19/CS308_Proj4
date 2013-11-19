@@ -10,6 +10,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import javax.swing.JFileChooser;
 
+import author.panels.FinishPanel;
+
 
 public class WizardBuilder {
 
@@ -105,6 +107,9 @@ public class WizardBuilder {
                 Constructor<?> ctr = classToInstantiate.getConstructor();
                 myWizard.getMyCardPanel().add((Component) ctr.newInstance());
             }
+            FinishPanel finish = new FinishPanel();
+            myWizard.getMyCardPanel().add(finish);
+            finish.init();
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
