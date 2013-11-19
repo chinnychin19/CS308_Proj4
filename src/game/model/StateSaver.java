@@ -14,31 +14,34 @@ import location.Direction;
 import location.Loc;
 
 
-public class SaveState {
+public class StateSaver {
 
     private World myWorld;
     private String myNameOfGame;
     private Player myPlayer;
     private JSONObject myJSON;
 
-    public SaveState (World world, String nameOfGame) {
+    public StateSaver (World world, String nameOfGame) {
         myWorld = world;
         myNameOfGame = nameOfGame;
         myPlayer = myWorld.getPlayer();
     }
 
-    public void load () {
-
+    public void load () throws Exception {
         String worldJSONFilepath =
                 Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
                         Constants.FILENAME_SAVESTATE;
         myJSON = JSONReader.getJSON(worldJSONFilepath);
+        if (myJSON == null) {
+            throw new Exception("Save file not found");
+        }
         JSONObject playerJSON = (JSONObject) myJSON.get(Constants.JSON_PLAYER);
 
         int x = Integer.parseInt(playerJSON.get(Constants.JSON_X).toString());
         int y = Integer.parseInt(playerJSON.get(Constants.JSON_Y).toString());
-        myPlayer.setLoc(new Loc(x, y));
-
+        myPlayer.getLoc().setX(x);
+        myPlayer.getLoc().setY(y);
+        
         String directionStr = playerJSON.get(Constants.JSON_ORIENTATION).toString();
         myPlayer.setDirection(Direction.constructFromString(directionStr));
 

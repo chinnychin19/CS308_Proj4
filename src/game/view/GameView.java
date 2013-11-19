@@ -49,6 +49,7 @@ public class GameView extends JPanel {
             JOptionPane.showMessageDialog(null, "Error loading game data.");
             System.exit(1);
         }
+        myModel.loadState();
         myMoveFrames = Constants.MOVE_FRAMES;
         timer.start();
     }
