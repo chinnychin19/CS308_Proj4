@@ -22,7 +22,7 @@ public class WizardSubMenu extends JMenu {
         
         JSONObject template = getJSON("player.json");
         Set<String> keySet = template.keySet();
-        System.out.println(keySet);
+        System.out.println("Menu Populated with" + keySet);
         for (String s : keySet){
         	JMenuItem item = new JMenuItem(s);
         	item.addActionListener(new LaunchWizardListener(s));

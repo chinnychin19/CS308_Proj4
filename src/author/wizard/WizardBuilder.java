@@ -55,7 +55,7 @@ public class WizardBuilder {
     	wordToPanel.put("fileurl", "ImagePanel");
         myCategory = category;
         myWizardFilePath = getFilePath();
-        addPanelsFromFile3(myWizardFilePath);
+        addPanelsFromFile(myWizardFilePath);
         getConstructedWizard();
     }
 
@@ -83,81 +83,8 @@ public class WizardBuilder {
     	wordToPanel.put("fileurl", "ImagePanel");
         myCategory = category;
         myWizardFilePath = filePath;
-        addPanelsFromFile3(myWizardFilePath);
+        addPanelsFromFile(myWizardFilePath);
         getConstructedWizard();
-    }
-
-    /**
-     * Uses reflection to instantiate panel classes from given strings
-     * in a text file. Adds these panels to the wizard.
-     * 
-     * @param filePath
-     * @throws ClassNotFoundException
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
-     * @throws NoSuchMethodException
-     * @throws SecurityException
-     * @throws IOException
-     */
-    public void addPanelsFromFile (String filePath) throws ClassNotFoundException,
-                                                   InstantiationException, IllegalAccessException,
-                                                   IllegalArgumentException,
-                                                   InvocationTargetException,
-                                                   NoSuchMethodException, SecurityException,
-                                                   IOException {
-        // Begin try-catch block!
-        try {
-            // Create a new reader and a variable in which to store lines.
-            BufferedReader reader = new BufferedReader(new FileReader(myWizardFilePath));
-            String line = null;
-            Class[] args = new Class[0];
-
-            // Iterate through the lines in the file.
-            while ((line = reader.readLine()) != null) {
-                
-                
-
-                /*
-                 * This is where it gets tricky. Get the string of the preference
-                 * and use reflection to initialize the matching sub-class of that string
-                 * which will then handle the value string and load the correct preference
-                 * in its constructor.
-                 */
-                Class<?> classToInstantiate = Class.forName("author.panels." + line);
-                Constructor<?> ctr = classToInstantiate.getConstructor();
-                myWizard.getCardPanel().add((Component) ctr.newInstance());
-            }
-            FinishPanel finish = new FinishPanel();
-            myWizard.getCardPanel().add(finish);
-            finish.init();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void addPanelsFromFile2(String filePath) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
-    	JSONObject json = getJSON(filePath);
-    	JSONArray playerArray = (JSONArray)json.get("Player");
-    	Map<String,String> wordToPanel = new HashMap<String,String>();
-    	wordToPanel.put("text", "WordPanel");
-    	wordToPanel.put("number", "NumberPanel");
-    	wordToPanel.put("fileurl", "ImagePanel");
-    	
-    	for (Object obj : playerArray) {
-    		JSONObject tempObject = ((JSONObject)obj);
-    		Set keySet = tempObject.keySet();
-    		for (Object s : keySet) {
-    			Class<?> classToInstantiate = Class.forName("author.panels." + wordToPanel.get(tempObject.get(s)) );
-                Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
-                myWizard.getCardPanel().add((Component) ctr.newInstance((String)s));
-    		}
-    	}
-    	FinishPanel finish = new FinishPanel();
-        myWizard.getCardPanel().add(finish);
-        finish.init();
     }
     
     private void iterateOverJSONObject(JSONObject obj,JPanel currentPanel) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
@@ -208,7 +135,7 @@ public class WizardBuilder {
     	}
     }
     
-    public void addPanelsFromFile3(String filePath) {
+    public void addPanelsFromFile(String filePath) {
     	
     	JPanel currentPanel = myWizard.getCardPanel();
     	
