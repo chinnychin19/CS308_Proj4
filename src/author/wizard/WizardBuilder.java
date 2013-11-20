@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import org.json.simple.JSONObject;
@@ -20,13 +21,16 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
 import author.listeners.FinishListener;
+import author.panels.ContainerPanel;
 import author.panels.FinishPanel;
 
 
 public class WizardBuilder {
 
     private String myWizardFilePath;
+    private String myCategory;
     private Wizard myWizard;
+    Map<String,String> wordToPanel = new HashMap<String,String>();
 
     /**
      * Default constructor. Allows the user to retrieve a wizard file from
@@ -41,13 +45,17 @@ public class WizardBuilder {
      * @throws SecurityException
      * @throws IOException
      */
-    public WizardBuilder () throws ClassNotFoundException, InstantiationException,
+    public WizardBuilder (String category) throws ClassNotFoundException, InstantiationException,
                            IllegalAccessException, IllegalArgumentException,
                            InvocationTargetException, NoSuchMethodException, SecurityException,
                            IOException {
-        myWizard = new Wizard();
+        myWizard = new Wizard("");
+        wordToPanel.put("text", "WordPanel");
+    	wordToPanel.put("number", "NumberPanel");
+    	wordToPanel.put("fileurl", "ImagePanel");
+        myCategory = category;
         myWizardFilePath = getFilePath();
-        addPanelsFromFile2(myWizardFilePath);
+        addPanelsFromFile3(myWizardFilePath);
         getConstructedWizard();
     }
 
@@ -65,13 +73,17 @@ public class WizardBuilder {
      * @throws InstantiationException
      * @throws ClassNotFoundException
      */
-    public WizardBuilder (String filePath) throws ClassNotFoundException, InstantiationException,
+    public WizardBuilder (String category, String filePath) throws ClassNotFoundException, InstantiationException,
                                           IllegalAccessException, IllegalArgumentException,
                                           InvocationTargetException, NoSuchMethodException,
                                           SecurityException, IOException {
-        myWizard = new Wizard();
+        myWizard = new Wizard("");
+        wordToPanel.put("text", "WordPanel");
+    	wordToPanel.put("number", "NumberPanel");
+    	wordToPanel.put("fileurl", "ImagePanel");
+        myCategory = category;
         myWizardFilePath = filePath;
-        addPanelsFromFile2(myWizardFilePath);
+        addPanelsFromFile3(myWizardFilePath);
         getConstructedWizard();
     }
 
@@ -147,12 +159,80 @@ public class WizardBuilder {
         myWizard.getCardPanel().add(finish);
         finish.init();
     }
+    
+    private void iterateOverJSONObject(JSONObject obj,JPanel currentPanel) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+    	JSONObject tempObject = ((JSONObject)obj);
+		Set keySet = tempObject.keySet();
+		System.out.println(keySet);
+		for (Object s : keySet) {
+			if (tempObject.get(s) instanceof String) {
+				System.out.println("it's a string!");
+				Class<?> classToInstantiate = Class.forName("author.panels." + wordToPanel.get(tempObject.get(s)) );
+	            Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
+	            currentPanel.add((Component) ctr.newInstance((String)s));
+			} else if (tempObject.get(s) instanceof JSONObject) {
+				System.out.println("it's a JSONObject!");
+				JPanel container = new ContainerPanel((String)s);
+				currentPanel.add(container);
+				iterateOverJSONObject((JSONObject)tempObject.get(s),container);
+			} else if (tempObject.get(s) instanceof JSONArray) {
+				System.out.println("it's a JSONArray!");
+				JPanel container = new ContainerPanel((String)s);
+				currentPanel.add(container);
+				iterateOverJSONArray((JSONArray)tempObject.get(s),container,"");
+			}
+			
+		}
+    }
+    
+    private void iterateOverJSONArray(JSONArray arr,JPanel currentPanel, String label) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    	JSONArray tempArray = ((JSONArray)arr);
+    	for (Object con : tempArray) {
+    		if (con instanceof String) {
+				System.out.println("it's a string!");
+				Class<?> classToInstantiate = Class.forName("author.panels." + wordToPanel.get(con));
+	            Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
+	            currentPanel.add((Component) ctr.newInstance((String)con));
+			} else if (con instanceof JSONObject) {
+				System.out.println("it's a JSONObject!");
+				JPanel container = new ContainerPanel(label);
+				currentPanel.add(container);
+				iterateOverJSONObject((JSONObject)con,container);
+			} else if (con instanceof JSONArray) {
+				System.out.println("it's a JSONArray!");
+				JPanel container = new ContainerPanel(label);
+				currentPanel.add(container);
+				iterateOverJSONArray((JSONArray)con,container,"");
+			}
+			
+    	}
+    }
+    
+    public void addPanelsFromFile3(String filePath) {
+    	
+    	JPanel currentPanel = myWizard.getCardPanel();
+    	
+    	JSONObject json = getJSON(filePath);
+    	JSONArray majorArray = (JSONArray)json.get(myCategory);
+    	
+    	for (Object con : majorArray) {
+    		if (con instanceof JSONObject) {
+    			try {
+					iterateOverJSONObject((JSONObject)con,currentPanel);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    		}
+    	}
+    	FinishPanel finish = new FinishPanel();
+        currentPanel.add(finish);
+        finish.init();
+    }
 
 	private JSONObject getJSON(String filepath) {
         JSONObject json;
         JSONParser parser = new JSONParser();
         try {
-            System.out.println(filepath);
             json = (JSONObject) parser.parse(new FileReader(filepath));
             return json;
         }

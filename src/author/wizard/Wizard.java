@@ -25,7 +25,7 @@ public class Wizard extends JDialog {
     private final Dimension DIALOG_DIMENSION = new Dimension(800, 600);
     private final Dimension BUTTON_SIZE = new Dimension(128, 32);
 
-    public Wizard () {
+    public Wizard (String type) {
         this.setPreferredSize(DIALOG_DIMENSION);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
