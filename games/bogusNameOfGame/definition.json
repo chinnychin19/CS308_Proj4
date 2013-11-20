@@ -22,6 +22,25 @@
     	{"name" : "razor leaf", "unlockLevel" : "6" },
     ],
   }],
+  
+  "Attack" :
+  [{
+  	"name" : "vine whip",
+  	"power" : "20.0",
+  	"accuracy" : "0.95",
+  	"effects" : {
+  		"statisticEffect" : {
+  			"target" : "enemy",
+  			"statistic" : "defend",
+  			"change" : "-10.0"
+  		},
+  		"statusEffect" : {
+  			"status" : "poison",
+  			"target" : "enemy"
+  		}	
+  	}
+  }],
+  
 
   "Obstacle" : 
   [{
@@ -64,4 +83,18 @@
       "water" : { "water" : "1", "rock" : "2.0", "electric" : "0.5"}
     }
   }]
+  
+  "WildRegion" : [{
+  	"name" : "grass1", 
+  	"image" : "grass", 
+  	"probability" : ".05",
+	"monsters" : {
+		"monster" : {
+			"name" : "monster1", 
+			"level" : "14", 
+			"probability" : "0.8"
+		}
+	}
+  }]
+  
 }
