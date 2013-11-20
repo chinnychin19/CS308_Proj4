@@ -13,7 +13,7 @@ public class LaunchPlayerWizardListener implements ActionListener {
     @Override
     public void actionPerformed (ActionEvent e) {
         try {
-            new WizardBuilder("player.txt");
+            new WizardBuilder("player.json");
         }
         catch (ClassNotFoundException e1) {
             // TODO Auto-generated catch block

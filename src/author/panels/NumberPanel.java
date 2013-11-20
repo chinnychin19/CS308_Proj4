@@ -13,9 +13,9 @@ public class NumberPanel extends AbstractTextPanel {
     
     JTextArea myTextArea;
 
-    public NumberPanel () {
+    public NumberPanel (String label) {
         super(Constants.NUMBER_PANEL);
-        myTextLabel = new JLabel(Constants.NUMBER_PANEL + ":");
+        myTextLabel = new JLabel(label + ":");
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         myTextArea = new JTextArea();
@@ -28,7 +28,8 @@ public class NumberPanel extends AbstractTextPanel {
 
     public Map<String, String> getUserInput () {       
         Map<String, String> result = new HashMap<String, String>();
-        result.put(myTextLabel.toString(), myTextArea.getText());
+        String label = myTextLabel.getText();
+        result.put(label.substring(0, label.length()-1), myTextArea.getText());
         return result;
     }
 

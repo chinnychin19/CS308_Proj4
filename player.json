@@ -1,0 +1,65 @@
+{ "Player" : 
+	[{
+    "name" : "text",
+    "image-up" : "fileurl",
+    "image-down" : "fileurl",
+    "image-left" : "fileurl",
+    "image-right" : "fileurl",
+	}],
+
+  "Monster" : 
+  [{
+    "name" : "text", 
+    "maxHP" : "number", 
+    "catchRate" : "number",
+    "image" : "fileurl",
+    "evolution" : { 
+    	"name" : "text", 
+    	"level" : "number"
+    },
+    "attacks" : [
+    	{
+			"name" : "text", 
+			"unlockLevel" : "number" 
+		}, 
+    	{
+			"name" : "text", 
+			"unlockLevel" : "number" 
+		},
+    ],
+  }],
+
+  "Obstacle" : 
+  [{
+    "name" : "text",
+    "image" : "fileurl",
+  }],
+  
+  "KeyItem" : [{ "name" : "text" }],
+  
+  "NPC" : [
+      {"name" : "text", 
+	   "image-up" : "fileurl",
+	   "image-down" : "fileurl",
+	   "image-left" : "fileurl",
+	   "image-right" : "fileurl",
+       "dialogue" : "text",
+       }
+    ],
+  
+  "FightingNPC" : [
+  	{
+  	   "name" : "text",
+	   "image-up" : "fileurl",
+	   "image-down" : "fileurl",
+	   "image-left" : "fileurl",
+	   "image-right" : "fileurl",
+       "lineOfSightDistance" : "number",
+       "dialogue" : "text",
+       "monsters" : [],
+       "bet" : "number",
+       "postDialogue" : "text",
+       "keyItems" : [ "text" ]
+  	}
+  ]
+}
