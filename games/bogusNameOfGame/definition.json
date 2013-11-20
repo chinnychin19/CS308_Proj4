@@ -22,6 +22,25 @@
     	{"name" : "razor leaf", "unlockLevel" : "6" },
     ],
   }],
+  
+  "Attack" :
+  [{
+  	"name" : "vine whip",
+  	"power" : "20.0",
+  	"accuracy" : "0.95",
+  	"effects" : {
+  		"statisticEffect" : {
+  			"target" : "enemy",
+  			"statistic" : "defend",
+  			"change" : "-10.0"
+  		},
+  		"statusEffect" : {
+  			"status" : "poison",
+  			"target" : "enemy"
+  		}	
+  	}
+  }],
+  
 
   "Obstacle" : 
   [{
