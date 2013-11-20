@@ -7,28 +7,28 @@ import org.json.simple.JSONObject;
 //TODO: Write Tests
 public class TypeMatrix extends AbstractModelObject {
     private static final String MATRIX_KEY = "matrix";
-    private Map<Type,Map<Type,Float>> myTypeMap;
+    private Map<Type,Map<Type,Double>> myTypeMap;
     public TypeMatrix(JSONObject definition){
         super(definition);
-        myTypeMap = new HashMap<Type, Map<Type,Float>>(); 
+        myTypeMap = new HashMap<Type, Map<Type,Double>>(); 
         JSONObject matrix = (JSONObject) definition.get(MATRIX_KEY);
         for(Object key : matrix.keySet()){
             String s = (String) key;
             Type t = new Type(s);
-            myTypeMap.put(t, new HashMap<Type, Float>());
+            myTypeMap.put(t, new HashMap<Type, Double>());
             JSONObject damages = (JSONObject)matrix.get(s);
             for(Object other : damages.keySet()){
                 String versus = other.toString();
                 Type type = new Type(versus);
                 String damageMultiplier = damages.get(versus).toString();
-                float multiplier = Float.parseFloat(damageMultiplier);
-                Map<Type,Float> damageMap = myTypeMap.get(t);
+                double multiplier = Double.parseDouble(damageMultiplier);
+                Map<Type,Double> damageMap = myTypeMap.get(t);
                 damageMap.put(type, multiplier);
             }
         }
     }
     
-    public float getDamageMultiplier(Type from, Type to){
+    public double getDamageMultiplier(Type from, Type to){
         return myTypeMap.get(from).get(to);
     }
 }
