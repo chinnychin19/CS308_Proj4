@@ -121,7 +121,7 @@ public class GameView extends JPanel {
     public void paintComponent (Graphics g) {
         g.drawImage(myImage, 0, 0, getWidth(), getHeight(), null);
     }
-
+    
 //    private class CustomKeyListener extends KeyAdapter
 //    {
 //        private boolean isArrowKeyPressed = false;
