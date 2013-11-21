@@ -60,7 +60,12 @@ public class CheckBoxPanel extends AbstractToggleButtonPanel{
     @Override
     public Map<String, String> getUserInput () {
         Map<String, String> result = new HashMap<String, String>();
-        result.putAll(myBoxStates);
+        for (String s : myBoxStates.keySet()) {
+        	if (myBoxStates.get(s).equals("true")) {
+        		String label = myCheckBoxLabel.getText();
+        		result.put(s,label.substring(0, label.length()-1));
+        	}
+        }
         return result;
     }
 }

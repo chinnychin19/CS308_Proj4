@@ -10,6 +10,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import author.panels.AbstractWizardPanel;
+import author.panels.CheckBoxPanel;
 import author.panels.ContainerPanel;
 
 public class WizardConverter {
@@ -42,7 +43,7 @@ public class WizardConverter {
 		for (Component c : panel.getComponents()) {
 			
 	    	if (c instanceof AbstractWizardPanel) {
-	    		
+	    			
 	    		outputJSONObject.putAll(((AbstractWizardPanel)c).getUserInput());
 	    		
 	    	} else if (c instanceof ContainerPanel) {
@@ -70,7 +71,9 @@ public class WizardConverter {
 		JSONArray outputJSONArray = new JSONArray();
 		for (Component c : panel.getComponents()) {
 	    	if (c instanceof AbstractWizardPanel) {
+	    		
 	    		outputJSONArray.add(new JSONObject(((AbstractWizardPanel) c).getUserInput()));
+	    		
 	    	} else if (c instanceof ContainerPanel) {
 
 	    		ContainerPanel container = (ContainerPanel) c;
