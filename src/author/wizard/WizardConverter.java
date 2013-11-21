@@ -4,40 +4,85 @@ import java.awt.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JPanel;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import author.panels.AbstractWizardPanel;
+import author.panels.ContainerPanel;
 
 public class WizardConverter {
 	
+	private Wizard myWizard;
+	
 	public WizardConverter(Wizard parent) {
-		System.out.println(wizardToJSON(parent));
+		myWizard = parent;
+		System.out.println(wizardToJSON());
 	}
 	
-	private String wizardToJSON(Wizard wizard) {
-		//JSONObject gameObject = new JSONObject();
-		JSONArray wizardArray = new JSONArray();
-		
-		Map<String,String> wizardAsMap = wizardToMap(wizard);
-		
-	    JSONObject tempObject = new JSONObject(wizardAsMap);
+	private String wizardToJSON() {
+//		JSONObject gameObject = new JSONObject();
+		JSONArray wizardArray = new JSONArray();	    
+	    
+	    JSONObject tempObject = panelToJSONObject(myWizard.getCardPanel());
 	    
 	    wizardArray.add(tempObject);
 	    
-	    //gameObject.put("Player",wizardArray);
+//	    gameObject.put(myWizard.getObjectName(),wizardArray);
+//	    System.out.println(gameObject.toString());
 	    
 	    return wizardArray.toString();
 	}
 	
-	private Map<String,String> wizardToMap(Wizard wizard) {
-		Map<String,String> outputMap = new HashMap<String,String>();
+	private JSONObject panelToJSONObject(JPanel panel) {
 		
-		for (Component c : wizard.getCardPanel().getComponents()) {
+		JSONObject outputJSONObject = new JSONObject();
+		
+		for (Component c : panel.getComponents()) {
+			
 	    	if (c instanceof AbstractWizardPanel) {
-	    		outputMap.putAll(((AbstractWizardPanel) c).getUserInput()); 
+	    		
+	    		outputJSONObject.putAll(((AbstractWizardPanel)c).getUserInput());
+	    		
+	    	} else if (c instanceof ContainerPanel) {
+	    		
+	    		ContainerPanel container = (ContainerPanel) c;
+	    		
+	    		if (container.getType() == "array") {
+	    			outputJSONObject.put(
+	    					container.getLabel(), 
+	    					panelToJSONArray(container)
+	    					);
+	    		} else {
+	    			outputJSONObject.put(
+	    					container.getLabel(), 
+	    					panelToJSONObject(container)
+	    					);
+	    		}
 	    	}
 	    }
-		return outputMap;
+		
+		return outputJSONObject;
 	}
+	
+	private JSONArray panelToJSONArray(JPanel panel) {
+		JSONArray outputJSONArray = new JSONArray();
+		for (Component c : panel.getComponents()) {
+	    	if (c instanceof AbstractWizardPanel) {
+	    		outputJSONArray.add(new JSONObject(((AbstractWizardPanel) c).getUserInput()));
+	    	} else if (c instanceof ContainerPanel) {
+
+	    		ContainerPanel container = (ContainerPanel) c;
+	    		
+	    		if (container.getType() == "array") {
+	    			outputJSONArray.add(panelToJSONArray(container));
+	    		} else {
+	    			outputJSONArray.add(panelToJSONObject(container));
+	    		}
+	    	}
+	    }
+		return outputJSONArray;
+	}
+
 }

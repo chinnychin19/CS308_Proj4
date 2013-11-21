@@ -18,6 +18,7 @@ public class Wizard extends JDialog {
     JButton myBackButton;
     
     private String myTitle;
+    private String myObjectName; 
 
     private final static String NEXT = "Next";
     private final static String PREVIOUS = "Back";
@@ -30,6 +31,8 @@ public class Wizard extends JDialog {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setName("wizard");
+        
+        myObjectName = type;
 
         init();
         addButtons();
@@ -86,8 +89,8 @@ public class Wizard extends JDialog {
         return myCardPanel;
     }
     
-    public String getTitle() {
-    	return myTitle;
+    public String getObjectName() {
+    	return myObjectName;
     }
 
 }

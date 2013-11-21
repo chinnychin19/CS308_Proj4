@@ -38,6 +38,7 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
 
     private void initLayout(){
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(myLabel);
         this.add(myImageDisplayer);    
         myImageDisplayer.setAlignmentX(CENTER_ALIGNMENT);
         this.add(myOpenButton);

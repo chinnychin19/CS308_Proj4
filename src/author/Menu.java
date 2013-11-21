@@ -14,8 +14,8 @@ public class Menu extends JMenu {
         // Call to JMenu super constructor
         super(title);
 
-        // Add the "new" menu item        
-        this.add(new WizardSubMenu("New"));
+        // Add the "new" menu item
+        this.add(new EntitySubMenu("New Entity"));
 
         // Add the "load" menu item
         LOAD = new JMenuItem("Load wizard from file");

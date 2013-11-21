@@ -14,15 +14,15 @@ import author.listeners.LaunchWizardListener;
 import constants.Constants;
 
 
-public class WizardSubMenu extends JMenu {
+public class EntitySubMenu extends JMenu {
     
-    public WizardSubMenu (String title) {
+    public EntitySubMenu (String title) {
         
         super(title);
         
         JSONObject template = getJSON("player.json");
         Set<String> keySet = template.keySet();
-        System.out.println("Menu Populated with" + keySet);
+        System.out.println("Menu Populated with " + keySet);
         for (String s : keySet){
         	JMenuItem item = new JMenuItem(s);
         	item.addActionListener(new LaunchWizardListener(s));

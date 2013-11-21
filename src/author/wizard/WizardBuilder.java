@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -20,17 +21,30 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
+import constants.Constants;
+
 import author.listeners.FinishListener;
 import author.panels.ContainerPanel;
 import author.panels.FinishPanel;
 
-
 public class WizardBuilder {
 
+	public static final Map<String,String> KEYWORD_TO_PANEL_TYPE;
+    static {
+    	Map<String,String> aMap = new HashMap<String,String>();
+    	aMap.put("text", "WordPanel");
+    	aMap.put("number", "NumberPanel");
+    	aMap.put("fileurl", "ImagePanel");
+    	aMap.put("radio", "RadioButtonsPanel");
+    	aMap.put("list", "ListPanel");
+    	aMap.put("checkbox", "CheckBoxPanel");
+    	aMap.put("matrix","MatrixPanel");
+    	KEYWORD_TO_PANEL_TYPE = Collections.unmodifiableMap(aMap);
+    }
+	
     private String myWizardFilePath;
     private String myCategory;
     private Wizard myWizard;
-    Map<String,String> wordToPanel = new HashMap<String,String>();
 
     /**
      * Default constructor. Allows the user to retrieve a wizard file from
@@ -49,10 +63,7 @@ public class WizardBuilder {
                            IllegalAccessException, IllegalArgumentException,
                            InvocationTargetException, NoSuchMethodException, SecurityException,
                            IOException {
-        myWizard = new Wizard("");
-        wordToPanel.put("text", "WordPanel");
-    	wordToPanel.put("number", "NumberPanel");
-    	wordToPanel.put("fileurl", "ImagePanel");
+        myWizard = new Wizard(category);
         myCategory = category;
         myWizardFilePath = getFilePath();
         addPanelsFromFile(myWizardFilePath);
@@ -77,10 +88,7 @@ public class WizardBuilder {
                                           IllegalAccessException, IllegalArgumentException,
                                           InvocationTargetException, NoSuchMethodException,
                                           SecurityException, IOException {
-        myWizard = new Wizard("");
-        wordToPanel.put("text", "WordPanel");
-    	wordToPanel.put("number", "NumberPanel");
-    	wordToPanel.put("fileurl", "ImagePanel");
+        myWizard = new Wizard(category);
         myCategory = category;
         myWizardFilePath = filePath;
         addPanelsFromFile(myWizardFilePath);
@@ -90,21 +98,21 @@ public class WizardBuilder {
     private void iterateOverJSONObject(JSONObject obj,JPanel currentPanel) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
     	JSONObject tempObject = ((JSONObject)obj);
 		Set keySet = tempObject.keySet();
-		System.out.println(keySet);
+		System.out.println("Opening: " + keySet);
 		for (Object s : keySet) {
 			if (tempObject.get(s) instanceof String) {
-				System.out.println("it's a string!");
-				Class<?> classToInstantiate = Class.forName("author.panels." + wordToPanel.get(tempObject.get(s)) );
+				System.out.println((String)s + " = string (" + tempObject.get(s) + ")");
+				Class<?> classToInstantiate = Class.forName("author.panels." + KEYWORD_TO_PANEL_TYPE.get(tempObject.get(s)) );
 	            Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
 	            currentPanel.add((Component) ctr.newInstance((String)s));
 			} else if (tempObject.get(s) instanceof JSONObject) {
-				System.out.println("it's a JSONObject!");
-				JPanel container = new ContainerPanel((String)s);
+				System.out.println((String)s + " = JSONObject");
+				JPanel container = new ContainerPanel((String)s, "object");
 				currentPanel.add(container);
 				iterateOverJSONObject((JSONObject)tempObject.get(s),container);
 			} else if (tempObject.get(s) instanceof JSONArray) {
-				System.out.println("it's a JSONArray!");
-				JPanel container = new ContainerPanel((String)s);
+				System.out.println((String)s +" = JSONArray");
+				JPanel container = new ContainerPanel((String)s, "array");
 				currentPanel.add(container);
 				iterateOverJSONArray((JSONArray)tempObject.get(s),container,"");
 			}
@@ -116,18 +124,18 @@ public class WizardBuilder {
     	JSONArray tempArray = ((JSONArray)arr);
     	for (Object con : tempArray) {
     		if (con instanceof String) {
-				System.out.println("it's a string!");
-				Class<?> classToInstantiate = Class.forName("author.panels." + wordToPanel.get(con));
+    			System.out.println("string (" + con + ")");
+				Class<?> classToInstantiate = Class.forName("author.panels." + KEYWORD_TO_PANEL_TYPE.get(con));
 	            Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
 	            currentPanel.add((Component) ctr.newInstance((String)con));
 			} else if (con instanceof JSONObject) {
-				System.out.println("it's a JSONObject!");
-				JPanel container = new ContainerPanel(label);
+				System.out.println("JSONObject");
+				JPanel container = new ContainerPanel(label, "object");
 				currentPanel.add(container);
 				iterateOverJSONObject((JSONObject)con,container);
 			} else if (con instanceof JSONArray) {
-				System.out.println("it's a JSONArray!");
-				JPanel container = new ContainerPanel(label);
+				System.out.println("JSONArray");
+				JPanel container = new ContainerPanel(label, "array");
 				currentPanel.add(container);
 				iterateOverJSONArray((JSONArray)con,container,"");
 			}
