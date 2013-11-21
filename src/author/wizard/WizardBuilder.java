@@ -25,6 +25,7 @@ import org.json.simple.parser.ParseException;
 import constants.Constants;
 
 import author.listeners.FinishListener;
+import author.model.AuthoringCache;
 import author.panels.ContainerPanel;
 import author.panels.FinishPanel;
 
@@ -46,17 +47,18 @@ public class WizardBuilder {
     private String myWizardFilePath;
     private String myCategory;
     private Wizard myWizard;
-    private JSONObject myJSONCache;
+    private AuthoringCache myCache;
 
     /**
      * Default constructor. Allows the user to retrieve a wizard file from
      * a file dialog.
      * 
      */
-    public WizardBuilder (String category) {
+    public WizardBuilder (String category, AuthoringCache cache) {
         myWizard = new Wizard(category);
         myCategory = category;
         myWizardFilePath = getFilePath();
+        myCache = cache;
         addPanelsFromFile(myWizardFilePath);
         getConstructedWizard();
     }
@@ -66,10 +68,11 @@ public class WizardBuilder {
      * the file from which the wizard will be constructed.
      * 
      */
-    public WizardBuilder (String category, String filePath) {
+    public WizardBuilder (String category, String filePath, AuthoringCache cache) {
         myWizard = new Wizard(category);
         myCategory = category;
         myWizardFilePath = filePath;
+        myCache = cache;
         addPanelsFromFile(myWizardFilePath);
         getConstructedWizard();
     }
@@ -139,7 +142,7 @@ public class WizardBuilder {
     	String outputString = "";
     	if (limitedFieldType.split("_").length > 1 && limitedFieldType.indexOf(":") == -1) {
     		String[] locKeyPair = limitedFieldType.split("_")[1].split("\\.");
-    		JSONArray locationArray = (JSONArray)myJSONCache.get(locKeyPair[0]);
+    		JSONArray locationArray = (JSONArray)myCache.getRawJSON().get(locKeyPair[0]);
     		outputString = "~";
     		for (Object con : locationArray) {
     			outputString += (String)((JSONObject)con).get(locKeyPair[1])+".";
@@ -163,7 +166,7 @@ public class WizardBuilder {
     			iterateOverJSONObject((JSONObject)con,currentPanel);
     		}
     	}
-    	FinishPanel finish = new FinishPanel();
+    	FinishPanel finish = new FinishPanel(myCache);
         currentPanel.add(finish);
         finish.init();
     }
@@ -174,8 +177,6 @@ public class WizardBuilder {
         JSONParser parser = new JSONParser();
             try {
 				json = (JSONObject) parser.parse(new FileReader(filepath));
-				json2 = (JSONObject) parser.parse(new FileReader(".\\games\\bogusNameOfGame\\definition.json"));
-				myJSONCache = json2;
 				return json;
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block

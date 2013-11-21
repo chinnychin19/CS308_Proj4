@@ -11,21 +11,26 @@ import org.json.simple.parser.JSONParser;
 
 import author.listeners.LaunchPlayerWizardListener;
 import author.listeners.LaunchWizardListener;
+import author.model.AuthoringCache;
 import constants.Constants;
 
 
-public class EntitySubMenu extends JMenu {
+public class NewEntitySubMenu extends JMenu {
     
-    public EntitySubMenu (String title) {
+	private AuthoringCache myCache;
+	
+    public NewEntitySubMenu (String title, AuthoringCache cache) {
         
         super(title);
+        
+        myCache = cache;
         
         JSONObject template = getJSON("player.json");
         Set<String> keySet = template.keySet();
         System.out.println("Menu Populated with " + keySet);
         for (String s : keySet){
         	JMenuItem item = new JMenuItem(s);
-        	item.addActionListener(new LaunchWizardListener(s));
+        	item.addActionListener(new LaunchWizardListener(s,myCache));
         	this.add(item);
         }
     }

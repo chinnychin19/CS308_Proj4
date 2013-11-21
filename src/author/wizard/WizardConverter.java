@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import author.model.AuthoringCache;
 import author.panels.AbstractWizardPanel;
 import author.panels.CheckBoxPanel;
 import author.panels.ContainerPanel;
@@ -16,24 +18,28 @@ import author.panels.ContainerPanel;
 public class WizardConverter {
 	
 	private Wizard myWizard;
+	private AuthoringCache myCache;
 	
-	public WizardConverter(Wizard parent) {
+	public WizardConverter(Wizard parent, AuthoringCache cache) {
 		myWizard = parent;
-		System.out.println(wizardToJSON());
+		myCache = cache;
+		JSONObject temp = wizardToJSON();
+		myCache.add(myWizard.getObjectName(),temp);
+		SwingUtilities.getWindowAncestor(myWizard).dispose();
 	}
 	
-	private String wizardToJSON() {
+	private JSONObject wizardToJSON() {
 //		JSONObject gameObject = new JSONObject();
-		JSONArray wizardArray = new JSONArray();	    
+		//JSONArray wizardArray = new JSONArray();	    
 	    
 	    JSONObject tempObject = panelToJSONObject(myWizard.getCardPanel());
 	    
-	    wizardArray.add(tempObject);
+	    //wizardArray.add(tempObject);
 	    
 //	    gameObject.put(myWizard.getObjectName(),wizardArray);
 //	    System.out.println(gameObject.toString());
 	    
-	    return wizardArray.toString();
+	    return tempObject;
 	}
 	
 	private JSONObject panelToJSONObject(JPanel panel) {
