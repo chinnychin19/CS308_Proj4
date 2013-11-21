@@ -1,5 +1,6 @@
 package game.model;
 
+import game.model.attack.Attack;
 import java.util.HashMap;
 import java.util.Map;
 import jsoncache.JSONCache;
@@ -31,6 +32,8 @@ public class World {
         myDefinitionCache = new JSONCache(JSONReader.getJSON(definitionJSONFilepath));
         myWorldJSON = JSONReader.getJSON(worldJSONFilepath);
         setUpWorld();
+//        JSONObject obj = myDefinitionCache.getInstance("Attack", "vine whip");
+//        System.out.println(new Attack(obj).toString());
     }
 
     protected Player getPlayer () {

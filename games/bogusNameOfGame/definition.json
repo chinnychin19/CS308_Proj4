@@ -26,19 +26,17 @@
   "Attack" :
   [{
   	"name" : "vine whip",
-  	"power" : "20.0",
+  	"power" : "20",
   	"accuracy" : "0.95",
-  	"effects" : {
-  		"statisticEffect" : {
-  			"target" : "enemy",
-  			"statistic" : "defend",
-  			"change" : "-10.0"
-  		},
-  		"statusEffect" : {
-  			"status" : "poison",
-  			"target" : "enemy"
-  		}	
-  	}
+    "statisticEffect" : [{
+      "target" : "enemy",
+      "statistic" : "defend",
+      "change" : "-10"
+    }],
+    "statusEffect" : [{
+      "status" : "poison",
+      "target" : "enemy"
+    }]	
   }],
   
 

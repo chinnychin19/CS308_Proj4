@@ -26,8 +26,8 @@ public class Attack extends AbstractModelObject {
             myStatisticEffects.add(new StatisticEffect(json));
             
         }
-        JSONArray statusArray = (JSONArray)definition.get("statusEffects");
-        for(Object statusObject : statisticsArray){
+        JSONArray statusArray = (JSONArray)definition.get("statusEffect");
+        for(Object statusObject : statusArray){
             JSONObject json = (JSONObject)statusObject;
             myStatusEffects.add(new StatusEffect(json));
         }
