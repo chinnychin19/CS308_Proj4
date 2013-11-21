@@ -1,5 +1,7 @@
 package location;
 
+import constants.Constants;
+
 public enum Direction {
     UP, DOWN, LEFT, RIGHT;
     
@@ -18,4 +20,23 @@ public enum Direction {
         }
         return DOWN;
     }
+    
+    public static Direction constructFromString (String s) {
+        if (s.equalsIgnoreCase(Constants.UP)) {
+            return Direction.UP;
+        }
+        else if (s.equalsIgnoreCase(Constants.LEFT)) {
+            return Direction.LEFT;
+        }
+        else if (s.equalsIgnoreCase(Constants.DOWN)) {
+            return Direction.DOWN;
+        }
+        else if (s.equalsIgnoreCase(Constants.RIGHT)) {
+            return Direction.RIGHT;
+        }
+        else {
+            return null;
+        }
+    }
+
 }

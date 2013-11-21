@@ -5,4 +5,5 @@ import game.model.GameModel;
 
 public class AbstractJudge {
     GameModel myModel;
+    
 }
