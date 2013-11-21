@@ -20,6 +20,7 @@ import javax.swing.SwingUtilities;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import constants.Constants;
 
@@ -37,7 +38,7 @@ public class WizardBuilder {
     	aMap.put("fileurl", "ImagePanel");
     	aMap.put("radio", "RadioButtonsPanel");
     	aMap.put("list", "ListPanel");
-    	aMap.put("checkbox", "CheckBoxPanel");
+    	aMap.put("check", "CheckBoxPanel");
     	aMap.put("matrix","MatrixPanel");
     	KEYWORD_TO_PANEL_TYPE = Collections.unmodifiableMap(aMap);
     }
@@ -45,24 +46,14 @@ public class WizardBuilder {
     private String myWizardFilePath;
     private String myCategory;
     private Wizard myWizard;
+    private JSONObject myJSONCache;
 
     /**
      * Default constructor. Allows the user to retrieve a wizard file from
      * a file dialog.
      * 
-     * @throws ClassNotFoundException
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
-     * @throws NoSuchMethodException
-     * @throws SecurityException
-     * @throws IOException
      */
-    public WizardBuilder (String category) throws ClassNotFoundException, InstantiationException,
-                           IllegalAccessException, IllegalArgumentException,
-                           InvocationTargetException, NoSuchMethodException, SecurityException,
-                           IOException {
+    public WizardBuilder (String category) {
         myWizard = new Wizard(category);
         myCategory = category;
         myWizardFilePath = getFilePath();
@@ -74,20 +65,8 @@ public class WizardBuilder {
      * Second constructor. Allows the user to pass in the file path of
      * the file from which the wizard will be constructed.
      * 
-     * @param filePath
-     * @throws IOException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws ClassNotFoundException
      */
-    public WizardBuilder (String category, String filePath) throws ClassNotFoundException, InstantiationException,
-                                          IllegalAccessException, IllegalArgumentException,
-                                          InvocationTargetException, NoSuchMethodException,
-                                          SecurityException, IOException {
+    public WizardBuilder (String category, String filePath) {
         myWizard = new Wizard(category);
         myCategory = category;
         myWizardFilePath = filePath;
@@ -95,52 +74,81 @@ public class WizardBuilder {
         getConstructedWizard();
     }
     
-    private void iterateOverJSONObject(JSONObject obj,JPanel currentPanel) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
-    	JSONObject tempObject = ((JSONObject)obj);
+    private void iterateOverJSONObject(JSONObject obj,JPanel currentPanel) {
+    	JSONObject tempObject = (JSONObject)obj;
 		Set keySet = tempObject.keySet();
 		System.out.println("Opening: " + keySet);
 		for (Object s : keySet) {
 			if (tempObject.get(s) instanceof String) {
 				System.out.println((String)s + " = string (" + tempObject.get(s) + ")");
-				Class<?> classToInstantiate = Class.forName("author.panels." + KEYWORD_TO_PANEL_TYPE.get(tempObject.get(s)) );
-	            Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
-	            currentPanel.add((Component) ctr.newInstance((String)s));
+	            try {
+					currentPanel.add( createPanel( (String) s, (String) tempObject.get(s) ) );
+				} catch (Exception e) {
+					System.out.println("Failed to create '" + (String)s +"'  field, of type '" + (String) tempObject.get(s) + "'.");
+					e.printStackTrace();
+				}
 			} else if (tempObject.get(s) instanceof JSONObject) {
 				System.out.println((String)s + " = JSONObject");
-				JPanel container = new ContainerPanel((String)s, "object");
-				currentPanel.add(container);
-				iterateOverJSONObject((JSONObject)tempObject.get(s),container);
+				handleJSONObject((String)s, (JSONObject)tempObject.get(s), currentPanel);
 			} else if (tempObject.get(s) instanceof JSONArray) {
 				System.out.println((String)s +" = JSONArray");
-				JPanel container = new ContainerPanel((String)s, "array");
-				currentPanel.add(container);
-				iterateOverJSONArray((JSONArray)tempObject.get(s),container,"");
+				handleJSONArray((String)s, (JSONArray) tempObject.get(s), currentPanel);
 			}
 			
 		}
     }
     
-    private void iterateOverJSONArray(JSONArray arr,JPanel currentPanel, String label) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    private void iterateOverJSONArray(JSONArray arr, JPanel currentPanel, String label) {
     	JSONArray tempArray = ((JSONArray)arr);
-    	for (Object con : tempArray) {
-    		if (con instanceof String) {
-    			System.out.println("string (" + con + ")");
-				Class<?> classToInstantiate = Class.forName("author.panels." + KEYWORD_TO_PANEL_TYPE.get(con));
-	            Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
-	            currentPanel.add((Component) ctr.newInstance((String)con));
-			} else if (con instanceof JSONObject) {
+    	for (Object genericContainer : tempArray) {
+    		if (genericContainer instanceof String) {
+    			System.out.println("string (" + genericContainer + ")");
+	            try {
+					currentPanel.add( createPanel( "value", (String) genericContainer ) );
+				} catch (Exception e) {
+					System.out.println("Failed to create 'value' field, of type '" + (String) genericContainer + "'.");
+					e.printStackTrace();
+				}
+			} else if (genericContainer instanceof JSONObject) {
 				System.out.println("JSONObject");
-				JPanel container = new ContainerPanel(label, "object");
-				currentPanel.add(container);
-				iterateOverJSONObject((JSONObject)con,container);
-			} else if (con instanceof JSONArray) {
+				handleJSONObject(label, (JSONObject) genericContainer, currentPanel);
+			} else if (genericContainer instanceof JSONArray) {
 				System.out.println("JSONArray");
-				JPanel container = new ContainerPanel(label, "array");
-				currentPanel.add(container);
-				iterateOverJSONArray((JSONArray)con,container,"");
+				handleJSONArray(label, (JSONArray) genericContainer, currentPanel);
 			}
 			
     	}
+    }
+    
+    private void handleJSONObject(String panelLabel, JSONObject object, JPanel currentPanel) {
+    	JPanel container = new ContainerPanel(panelLabel, "object");
+		currentPanel.add(container);
+		iterateOverJSONObject(object,container);
+    }
+    
+    private void handleJSONArray(String panelLabel, JSONArray arr, JPanel currentPanel) {
+		JPanel container = new ContainerPanel(panelLabel, "array");
+		currentPanel.add(container);
+		iterateOverJSONArray(arr,container,"");
+    }
+    
+    private Component createPanel(String fieldName, String fieldType) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    	String[] fields = fieldType.split("_");
+    	String basicFieldType = (fields[0].equals("list")) ? fields[1] : fields[0];
+    	String limitedFieldType = (fields[0].equals("list")) ? fieldType.substring(5) : fieldType;
+    	String outputString = "";
+    	if (limitedFieldType.split("_").length > 1 && limitedFieldType.indexOf(":") == -1) {
+    		String[] locKeyPair = limitedFieldType.split("_")[1].split("\\.");
+    		JSONArray locationArray = (JSONArray)myJSONCache.get(locKeyPair[0]);
+    		outputString = "~";
+    		for (Object con : locationArray) {
+    			outputString += (String)((JSONObject)con).get(locKeyPair[1])+".";
+    		}
+    	}
+    	
+		Class<?> classToInstantiate = Class.forName("author.panels." + KEYWORD_TO_PANEL_TYPE.get(basicFieldType));
+        Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
+        return (Component) ctr.newInstance(fieldName+outputString);
     }
     
     public void addPanelsFromFile(String filePath) {
@@ -152,11 +160,7 @@ public class WizardBuilder {
     	
     	for (Object con : majorArray) {
     		if (con instanceof JSONObject) {
-    			try {
-					iterateOverJSONObject((JSONObject)con,currentPanel);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+    			iterateOverJSONObject((JSONObject)con,currentPanel);
     		}
     	}
     	FinishPanel finish = new FinishPanel();
@@ -166,15 +170,27 @@ public class WizardBuilder {
 
 	private JSONObject getJSON(String filepath) {
         JSONObject json;
+        JSONObject json2;
         JSONParser parser = new JSONParser();
-        try {
-            json = (JSONObject) parser.parse(new FileReader(filepath));
-            return json;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+            try {
+				json = (JSONObject) parser.parse(new FileReader(filepath));
+				json2 = (JSONObject) parser.parse(new FileReader(".\\games\\bogusNameOfGame\\definition.json"));
+				myJSONCache = json2;
+				return json;
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				System.out.println("File not found. Please try again.");
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+            
+
     }
     
     /**

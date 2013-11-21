@@ -16,7 +16,6 @@ public class RadioButtonListener implements ActionListener {
     {
             if (instance == null)
                     instance = new RadioButtonListener();
-
             return instance;
     }
 

@@ -16,19 +16,27 @@ import author.listeners.RadioButtonListener;
 public class RadioButtonsPanel extends AbstractToggleButtonPanel {
 
     private JLabel myRadioButtonsLabel;
-    // private JCheckBox myCheckBox;
     private ButtonGroup myButtonGroup;
     private String mySelectedButton;
 
-    public RadioButtonsPanel () {
+    public RadioButtonsPanel (String label) {
         super("RadioButtons", RadioButtonListener.getInstance());
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-
-        myRadioButtonsLabel = new JLabel("RadioButtons:");
+        
+        String[] input = label.split("~");
+        
+        myRadioButtonsLabel = new JLabel(input[0] + ":");
         myButtonGroup = new ButtonGroup();
-
+        
         this.add(myRadioButtonsLabel);
-        // this.add(myCheckBox);
+        
+        if (input.length > 1) {
+        	String[] buttons = input[1].split("\\.");
+        	for (String s : buttons) {
+        		addButtons(s);
+            }
+        }
+        
     }
 
     public void addButtons (String ... buttonLabels) {
@@ -45,8 +53,11 @@ public class RadioButtonsPanel extends AbstractToggleButtonPanel {
         // System.out.println("Selected button is now " + mySelectedButton);
     }
 
-    public Map<String, String> getUserInput () {       
-        return null;
+    public Map<String, String> getUserInput () {
+    	Map<String, String> result = new HashMap<String, String>();
+        String label = myRadioButtonsLabel.getText();
+        result.put(label.substring(0, label.length()-1), mySelectedButton);
+        return result;
     }
 
 }
