@@ -84,7 +84,7 @@
   
   "WildRegion" : [{
   	"name" : "grass1", 
-  	"image" : "grass", 
+  	"image" : "images/ground/wildGrass.png", 
   	"probability" : ".05",
 	"monsters" : {
 		"monster" : {

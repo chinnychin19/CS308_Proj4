@@ -9,27 +9,55 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
 
-public abstract class WildRegion { //TODO: extend AbstractGroundObject
+public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundObject
 
     private Image myImage;
-    private double myFreq;
-    private List<Monster> myMonsters;
+    private double myProbability;
+    private List<MonsterWrapper> myMonsters;
 
-//    public WildRegion (World world, SmartJsonObject definition, SmartJsonObject objInWord) {
-//        super(world, definition, objInWord);
-//
-//        try {
-//            String imageURL = definition.getString(Constants.JSON_IMAGE);
-//            myFreq = definition.getDouble(Constants.JSON_FREQ);
-//            myImage = new ImageIcon(imageURL).getImage();
-//        }
-//        catch (SmartJsonException e) {
-//            e.printStackTrace();
-//        }
-//        // TODO: Implement myMonsters
-//    }
-//
-//    // frequency of tile
-//    // frequnecy of monsters
+    public WildRegion (World world, SmartJsonObject definition, SmartJsonObject objInWord) {
+        super(world, definition, objInWord);
 
+        try {
+            myProbability = definition.getDouble(Constants.JSON_PROB);
+        }
+        catch (SmartJsonException e) {
+            e.printStackTrace();
+        }
+        // TODO: Implement myMonsters
+    }
+    
+    private Monster selectMonster(double rand){
+        double seen = 0;
+        for(MonsterWrapper m : myMonsters){
+            if(m.shouldUseMonster(rand, seen))
+                return m.getMonster();
+            seen += m.getProbability();
+        }
+        return null;
+    }
+    //
+    // // frequency of tile
+    // // frequnecy of monsters
+    private class MonsterWrapper {
+        private Monster myMonster;
+        private double myProbability;
+
+        public MonsterWrapper (Monster monster, double probability) {
+            myMonster = monster;
+            myProbability = probability;
+        }
+
+        public Monster getMonster () {
+            return myMonster;
+        }
+        
+        public double getProbability () {
+            return myProbability;
+        }
+        
+        public boolean shouldUseMonster (double rand, double sumOfAttemptedProbabilities) {
+            return (sumOfAttemptedProbabilities + myProbability >= rand);
+        }
+    }
 }

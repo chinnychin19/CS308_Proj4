@@ -60,7 +60,8 @@ public class Constants {
     
     public static final String JSON_FREQ = "frequency";
     public static final String JSON_MONSTERS = "monsters";
-    
+    public static final String JSON_PROB = "probability";
+
     public static final String JSON_NAME = "name";
     public static final String JSON_X = "x";
     public static final String JSON_Y = "y";
