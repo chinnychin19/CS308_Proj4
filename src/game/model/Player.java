@@ -43,7 +43,7 @@ public class Player extends AbstractCharacter {
           setDirection(dir);
           Loc target = getLoc().adjacentLoc(getDirection());
           if (!w.isLocOccupied(target)) {
-              setLoc(target);
+              setLoc(target, w);
           }
       }
     }

@@ -39,8 +39,7 @@ public class StateSaver {
 
         int x = Integer.parseInt(playerJSON.get(Constants.JSON_X).toString());
         int y = Integer.parseInt(playerJSON.get(Constants.JSON_Y).toString());
-        myPlayer.getLoc().setX(x); //does not change reference of player's loc
-        myPlayer.getLoc().setY(y);
+        myPlayer.setLoc(new Loc(x,y), myWorld);
         
         String directionStr = playerJSON.get(Constants.JSON_ORIENTATION).toString();
         myPlayer.setDirection(Direction.constructFromString(directionStr));

@@ -10,6 +10,7 @@ import java.util.Map;
 public class Constants {
     public static final int WIDTH = 800, HEIGHT = 500;
 
+    //These both must be odd numbers
     public static final int NUM_TILES_HORIZONTAL = 15;
     public static final int NUM_TILES_VERTICAL = 9;
 

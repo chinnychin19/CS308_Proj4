@@ -3,6 +3,7 @@ package game.model;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import location.Direction;
+import location.Loc;
 import org.json.simple.JSONObject;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
@@ -27,6 +28,16 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
         }catch(SmartJsonException e){
             e.printStackTrace();
         }   
+    }
+
+
+    public void setLoc (Loc loc, World w) {
+        getLoc().setX(loc.getX());
+        getLoc().setY(loc.getY());
+        
+        //update hash in world's map
+        destroy();
+        w.addViewable(this);
     }
 
     @Override

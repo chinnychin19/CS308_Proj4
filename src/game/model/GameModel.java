@@ -52,19 +52,19 @@ public class GameModel {
         }
     }
 
-    public Map<Loc, AbstractViewableObject> getViewableObjects () {
-        return myWorld.getViewableObjects();
+    public AbstractViewableObject getViewableObject (Loc loc) {
+        return myWorld.getViewableObject(loc);
     }
+    
+    public AbstractGround getGroundObject (Loc loc) {
+        return myWorld.getGroundObject(loc);
+    }
+    
+//    public Map<Loc, AbstractViewableObject> getViewableObjects () {
+//        return myWorld.getViewableObjects();
+//    }
     
     public World getWorld() {
         return myWorld;
     }
-
-//    public void doInteraction () {
-//        myWorld.doInteraction();
-//    }
-//    
-//    public void doMove (Direction d) {
-//        myWorld.movePlayer(d);
-//    }
 }
