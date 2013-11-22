@@ -1,5 +1,6 @@
 package game.model;
 
+import game.controller.AbstractMode;
 import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -40,8 +41,10 @@ public class NPC extends AbstractCharacter {
     }
     
     @Override
-    public void doInteraction(Player p) {
-        setDirection(Direction.opposite(p.getDirection()));
-        System.out.println(myDialogue);
+    public void doFrame (World w, boolean[] inputs) {
+        if (inputs[AbstractMode.INDEX_INTERACT] && getLoc().equals(w.locInFrontOfPlayer())) {
+            setDirection(Direction.opposite(w.getPlayer().getDirection()));
+            System.out.println(myDialogue);
+        }
     }
 }

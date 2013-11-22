@@ -1,5 +1,6 @@
 package game.model;
 
+import game.controller.GameController;
 import java.awt.Image;
 import location.Loc;
 import org.json.simple.JSONObject;
@@ -34,7 +35,8 @@ public abstract class AbstractViewableObject extends AbstractModelObject {
     }
 
     public void setLoc (Loc loc) {
-        myLoc = loc;
+        myLoc.setX(loc.getX());
+        myLoc.setY(loc.getY());
     }
 
     public Loc getTileLocationOnScreen (Player p) {
@@ -45,8 +47,10 @@ public abstract class AbstractViewableObject extends AbstractModelObject {
 
     public abstract Image getImage ();
     
-    public boolean canStepOver() {
-        return true; //overridden in subclass for interactable objects
+    public void doFrame(World w, boolean[] inputs) {
+        // null op by default.
+        //TODO: should this be abstract?
+//        System.out.println(getName()+": "+myLoc);
     }
     
     protected void destroy() {

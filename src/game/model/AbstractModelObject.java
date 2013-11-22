@@ -9,7 +9,7 @@ public class AbstractModelObject {
     private String myName;
     
     protected AbstractModelObject(){
-        
+        myName = "";
     }
     
     public AbstractModelObject (SmartJsonObject definition) {

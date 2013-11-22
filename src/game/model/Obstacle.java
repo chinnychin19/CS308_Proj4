@@ -1,5 +1,6 @@
 package game.model;
 
+import game.controller.AbstractMode;
 import java.awt.Image;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,10 +9,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
-
 import constants.Constants;
 
-public class Obstacle extends AbstractInteractableObject {
+public class Obstacle extends AbstractViewableObject {
     private Image myImage;
     private Set<KeyItem> myRequiredKeyItems;
     public Obstacle (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
@@ -41,19 +41,19 @@ public class Obstacle extends AbstractInteractableObject {
     }
     
     @Override
-    public void doInteraction(Player p) {
-        //System.out.println(myRequiredKeyItems);
-        if(myRequiredKeyItems.isEmpty()) {
-            return;
-        }
-        for(KeyItem item : myRequiredKeyItems){
-            if(!p.getKeyItems().contains(item)){
-                //TODO: Notify
-                System.out.println("MISSING ITEM: "+item.toString());
+    public void doFrame(World w, boolean[] inputs) {
+        if (inputs[AbstractMode.INDEX_INTERACT] && getLoc().equals(w.locInFrontOfPlayer())) {
+            if(myRequiredKeyItems.isEmpty()) {
                 return;
             }
+            for(KeyItem item : myRequiredKeyItems){
+                if(!w.getPlayer().getKeyItems().contains(item)){
+                    System.out.println("MISSING ITEM: "+item.toString());
+                    return;
+                }
+            }
+            destroy();            
         }
-        destroy();
     }
 }
 

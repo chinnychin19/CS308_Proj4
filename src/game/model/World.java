@@ -30,8 +30,6 @@ public class World {
         myModel = model;
         myWorldJSON = JSONReader.getJSON(worldJSONFilepath);
         setUpWorld();
-//        JSONObject obj = myDefinitionCache.getInstance("Attack", "vine whip");
-//        System.out.println(new Attack(obj).toString());
     }
 
     protected Player getPlayer () {
@@ -44,6 +42,14 @@ public class World {
 
     protected Map<Loc, AbstractViewableObject> getViewableObjects () {
         return myViewableObjects;
+    }
+
+    public boolean isLocOccupied(Loc loc) {
+        return null != myViewableObjects.get(loc);
+    }
+    
+    public Loc locInFrontOfPlayer() {
+        return myPlayer.getLoc().adjacentLoc(myPlayer.getDirection());
     }
 
     protected void movePlayer (Direction d) {
@@ -82,14 +88,14 @@ public class World {
         System.out.println(o.toString());
     }
 
-    // TODO: this will get removed. we'll now just call doAction() and pass inputs and reference to world
-    protected void doInteraction () {
-        Loc locInFrontOfPlayer = myPlayer.getLoc().adjacentLoc(myPlayer.getDirection());
-        if (myViewableObjects.containsKey(locInFrontOfPlayer)) {
-            AbstractViewableObject viewableObj = myViewableObjects.get(locInFrontOfPlayer);
-            ((AbstractInteractableObject) viewableObj).doInteraction(myPlayer);
-        }
-    }
+//    // TODO: this will get removed. we'll now just call doAction() and pass inputs and reference to world
+//    protected void doInteraction () {
+//        Loc locInFrontOfPlayer = myPlayer.getLoc().adjacentLoc(myPlayer.getDirection());
+//        if (myViewableObjects.containsKey(locInFrontOfPlayer)) {
+//            AbstractViewableObject viewableObj = myViewableObjects.get(locInFrontOfPlayer);
+//            ((AbstractInteractableObject) viewableObj).doInteraction(myPlayer);
+//        }
+//    }
     
     protected void removeObject(Loc loc) {
         myViewableObjects.remove(loc);

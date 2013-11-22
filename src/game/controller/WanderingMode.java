@@ -22,40 +22,48 @@ public class WanderingMode extends AbstractMode {
     public void paint () {
         paintBackground();
         paintPlayer();
-        paintViewableObjectsOnScreen(getModel().getViewableObjects().values());
+        paintViewableObjectsOnScreen();
         paintBorder();
+    }
+    
+    private Collection<AbstractViewableObject> getViewableObjectsOnScreen() {
+        return getModel().getViewableObjects().values();
+        //TODO: implement this properly
     }
 
     @Override
     public void act () {
-        // Check for movement
-        Direction dir = getMoveDirection();
-        if (null != dir) {
-            getModel().doMove(dir);
+        for (AbstractViewableObject obj : getViewableObjectsOnScreen()) {
+            obj.doFrame(getModel().getWorld(), getInputs());
         }
-
-        // Check for interaction
-        if (getInputs()[INDEX_INTERACT]) {
-            getModel().doInteraction();
-        }
+//        // Check for movement
+//        Direction dir = getMoveDirection();
+//        if (null != dir) {
+//            getModel().doMove(dir);
+//        }
+//
+//        // Check for interaction
+//        if (getInputs()[INDEX_INTERACT]) {
+//            getModel().doInteraction();
+//        }
     }
     
-    private Direction getMoveDirection() {
-        boolean[] inputs = getInputs();
-        if (inputs[INDEX_UP]) {
-            return Direction.UP;
-        }
-        if (inputs[INDEX_LEFT]) {
-            return Direction.LEFT;
-        }
-        if (inputs[INDEX_DOWN]) {
-            return Direction.DOWN;
-        }
-        if (inputs[INDEX_RIGHT]) {
-            return Direction.RIGHT;
-        }
-        return null;
-    }
+//    private Direction getMoveDirection() {
+//        boolean[] inputs = getInputs();
+//        if (inputs[INDEX_UP]) {
+//            return Direction.UP;
+//        }
+//        if (inputs[INDEX_LEFT]) {
+//            return Direction.LEFT;
+//        }
+//        if (inputs[INDEX_DOWN]) {
+//            return Direction.DOWN;
+//        }
+//        if (inputs[INDEX_RIGHT]) {
+//            return Direction.RIGHT;
+//        }
+//        return null;
+//    }
 
     public void paintPlayer () {
         getGraphics().drawImage(getModel().getPlayer().getImage(),
@@ -78,8 +86,8 @@ public class WanderingMode extends AbstractMode {
 
     }
 
-    public void paintViewableObjectsOnScreen (Collection<AbstractViewableObject> viewableObjects) {
-        for (AbstractViewableObject obj : viewableObjects){
+    private void paintViewableObjectsOnScreen () {
+        for (AbstractViewableObject obj : getViewableObjectsOnScreen()){
             Loc tileLoc = obj.getTileLocationOnScreen(getModel().getPlayer());
             getGraphics().drawImage(obj.getImage(),
                                (int) (tileLoc.getX() * Constants.TILE_WIDTH),

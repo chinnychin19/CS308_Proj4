@@ -8,7 +8,7 @@ import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
-public class AbstractCharacter extends AbstractInteractableObject {
+public abstract class AbstractCharacter extends AbstractViewableObject {
     private Direction myDirection;
     private Image myImageUp, myImageDown, myImageRight, myImageLeft;
 

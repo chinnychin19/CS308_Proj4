@@ -9,27 +9,27 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
 
-public abstract class WildRegion extends AbstractViewableObject {
+public abstract class WildRegion { //TODO: extend AbstractGroundObject
 
     private Image myImage;
     private double myFreq;
     private List<Monster> myMonsters;
 
-    public WildRegion (World world, SmartJsonObject definition, SmartJsonObject objInWord) {
-        super(world, definition, objInWord);
-
-        try {
-            String imageURL = definition.getString(Constants.JSON_IMAGE);
-            myFreq = definition.getDouble(Constants.JSON_FREQ);
-            myImage = new ImageIcon(imageURL).getImage();
-        }
-        catch (SmartJsonException e) {
-            e.printStackTrace();
-        }
-        // TODO: Implement myMonsters
-    }
-
-    // frequency of tile
-    // frequnecy of monsters
+//    public WildRegion (World world, SmartJsonObject definition, SmartJsonObject objInWord) {
+//        super(world, definition, objInWord);
+//
+//        try {
+//            String imageURL = definition.getString(Constants.JSON_IMAGE);
+//            myFreq = definition.getDouble(Constants.JSON_FREQ);
+//            myImage = new ImageIcon(imageURL).getImage();
+//        }
+//        catch (SmartJsonException e) {
+//            e.printStackTrace();
+//        }
+//        // TODO: Implement myMonsters
+//    }
+//
+//    // frequency of tile
+//    // frequnecy of monsters
 
 }

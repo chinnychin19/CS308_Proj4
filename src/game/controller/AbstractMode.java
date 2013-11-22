@@ -26,7 +26,7 @@ public abstract class AbstractMode extends KeyAdapter {
     /**
      * These final constants may be used to index into the boolean array of inputs
      */
-    protected final int INDEX_UP = 0,
+    public static final int INDEX_UP = 0,
             INDEX_LEFT = 1,
             INDEX_DOWN = 2,
             INDEX_RIGHT = 3,
