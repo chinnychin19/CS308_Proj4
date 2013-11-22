@@ -10,8 +10,8 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
 public abstract class AbstractGround extends AbstractViewable {
     private Image myImage;
 
-    public AbstractGround (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
-        super(world, definition, objInWorld);
+    public AbstractGround (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
+        super(model, world, definition, objInWorld);
         try {
             String imageURL = definition.getString(Constants.JSON_IMAGE);
             myImage = new ImageIcon(imageURL).getImage();

@@ -23,8 +23,8 @@ public class NPC extends AbstractCharacter {
 
     private String myDialogue;
         
-    public NPC (World world, SmartJsonObject definition, SmartJsonObject objInWorld){
-        super(world, definition, objInWorld);
+    public NPC (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld){
+        super(model, world, definition, objInWorld);
         try{
             myDialogue = definition.getString(Constants.JSON_DIALOGUE);
         } catch(SmartJsonException e){

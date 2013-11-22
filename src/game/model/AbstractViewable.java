@@ -10,8 +10,8 @@ public abstract class AbstractViewable extends AbstractModelObject {
     private Loc myLoc;
     private World myWorld;
 
-    public AbstractViewable (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
-        super(definition);
+    public AbstractViewable (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
+        super(model, definition);
         myWorld = world;
         try {
             int x = objInWorld.getInt(Constants.JSON_X);

@@ -15,8 +15,8 @@ public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundO
     private double myProbability;
     private List<MonsterWrapper> myMonsters;
 
-    public WildRegion (World world, SmartJsonObject definition, SmartJsonObject objInWord) {
-        super(world, definition, objInWord);
+    public WildRegion (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWord) {
+        super(model, world, definition, objInWord);
 
         try {
             myProbability = definition.getDouble(Constants.JSON_PROB);
@@ -25,6 +25,17 @@ public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundO
             e.printStackTrace();
         }
         // TODO: Implement myMonsters
+    }
+    
+    @Override
+    public void doFrame(World w, boolean[] inputs){
+        //if player on me, check prob
+        if(w.getPlayer().getLoc().equals(getLoc())){
+            double rand = Math.random();
+            if(rand <= myProbability){
+                System.out.println("WILD BATTLE MODE");
+            }
+        }
     }
     
     private Monster selectMonster(double rand){

@@ -28,18 +28,19 @@ public abstract class Monster extends AbstractModelObject {
     private List<Monster> myEvolution;
     private Image myImage;
 
-    public Monster (SmartJsonObject definition) {
-        super(definition);
+    public Monster (GameModel model, SmartJsonObject definition) {
+        super(model, definition);
         try {
 
             String imageURL = definition.getString(Constants.JSON_IMAGE);
             myImage = new ImageIcon(imageURL).getImage();
             myMaxHP = definition.getInt(Constants.JSON_MONSTER_MAX_HP);
             myCatchRate = definition.getDouble(Constants.JSON_MONSTER_CATCH_RATE);
-            ;
             myAttacks = new ArrayList<Attack>();
             for (Object obj : definition.getJSONArray(Constants.JSON_MONSTER_ALL_ATTACKS)) {
-                // myAttacks.add(obj);
+                SmartJsonObject attackJson = new SmartJsonObject((JSONObject) obj);
+                String name = attackJson.getString("name");
+
             }
         }
         catch (SmartJsonException e) {

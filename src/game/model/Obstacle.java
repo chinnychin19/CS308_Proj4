@@ -14,8 +14,8 @@ import constants.Constants;
 public class Obstacle extends AbstractViewableObject {
     private Image myImage;
     private Set<KeyItem> myRequiredKeyItems;
-    public Obstacle (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
-        super(world, definition, objInWorld);
+    public Obstacle (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
+        super(model, world, definition, objInWorld);
         try{
             String imageURL = definition.getString(Constants.JSON_IMAGE);
             myImage = new ImageIcon(imageURL).getImage();
@@ -23,7 +23,7 @@ public class Obstacle extends AbstractViewableObject {
             JSONArray keyItemArray = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
             if (null != keyItemArray) {
                 for (Object name : keyItemArray) {
-                    myRequiredKeyItems.add(new KeyItem(name.toString()));
+                    myRequiredKeyItems.add(new KeyItem(model, name.toString()));
                 }            
             }
         } catch(SmartJsonException e){

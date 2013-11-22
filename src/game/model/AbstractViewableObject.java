@@ -11,10 +11,11 @@ import constants.Constants;
 
 public abstract class AbstractViewableObject extends AbstractViewable {
 
-    public AbstractViewableObject (World world,
+    public AbstractViewableObject (GameModel model,
+                                   World world,
                                    SmartJsonObject definition,
                                    SmartJsonObject objInWorld) {
-        super(world, definition, objInWorld);
+        super(model, world, definition, objInWorld);
     }
     
     @Override

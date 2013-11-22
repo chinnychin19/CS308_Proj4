@@ -23,7 +23,7 @@ public class GameModel {
         myDefinitionCache = new JSONCache(JSONReader.getJSON(definitionJSONFilepath));
         myWorld = new World(nameOfGame, this);
         myPlayer = myWorld.getPlayer();
-        myStateSaver = new StateSaver(myWorld, nameOfGame);
+        myStateSaver = new StateSaver(this, myWorld, nameOfGame);
     }
     
     public JSONCache getDefinitionCache() {

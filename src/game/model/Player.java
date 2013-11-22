@@ -18,10 +18,10 @@ public class Player extends AbstractCharacter {
     private List<Item> myItems;
     private Collection<KeyItem> myKeyItems;
 
-    public Player(World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
-        super(world, definition, objInWorld);
+    public Player(GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
+        super(model, world, definition, objInWorld);
         myKeyItems = new HashSet<KeyItem>();
-        myKeyItems.add(new KeyItem("razor"));
+        myKeyItems.add(new KeyItem(model,"razor"));//TODO: REMOVE
     }
     
     public void setKeyItems(Collection<KeyItem> keyItems){

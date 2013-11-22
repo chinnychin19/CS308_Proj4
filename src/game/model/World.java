@@ -75,6 +75,7 @@ public class World {
                 String classPath = Constants.CLASSPATH_GAME_MODEL + "." + viewableCategory; 
                 AbstractViewable newViewable = 
                         (AbstractViewable) Reflection.createInstance(classPath,
+                                                                           myModel, 
                                                                            this,
                                                                            definition,
                                                                            objInWorld);

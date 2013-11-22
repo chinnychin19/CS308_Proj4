@@ -3,6 +3,7 @@ package game.model.attack;
 import java.util.ArrayList;
 import java.util.Collection;
 import game.model.AbstractModelObject;
+import game.model.GameModel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import util.Target;
@@ -22,8 +23,8 @@ public class Attack extends AbstractModelObject {
     Collection<StatisticEffect> myStatisticEffects;
     Collection<StatusEffect> myStatusEffects;
 
-    public Attack (SmartJsonObject definition) {
-        super(definition);
+    public Attack (GameModel model, SmartJsonObject definition) {
+        super(model, definition);
         myStatisticEffects = new ArrayList<Attack.StatisticEffect>();
         myStatusEffects = new ArrayList<Attack.StatusEffect>();
 

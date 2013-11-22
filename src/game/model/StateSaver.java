@@ -15,13 +15,14 @@ import location.Loc;
 
 
 public class StateSaver {
-
+    private GameModel myModel;
     private World myWorld;
     private String myNameOfGame;
     private Player myPlayer;
     private JSONObject myJSON;
 
-    public StateSaver (World world, String nameOfGame) {
+    public StateSaver (GameModel model, World world, String nameOfGame) {
+        myModel = model;
         myWorld = world;
         myNameOfGame = nameOfGame;
         myPlayer = myWorld.getPlayer();
@@ -48,7 +49,7 @@ public class StateSaver {
         Collection<KeyItem> keyItems = new ArrayList<KeyItem>();
         for (Object o : playerKeyItems) {
             JSONObject jObj = (JSONObject) o;
-            keyItems.add(new KeyItem(jObj.toString()));
+            keyItems.add(new KeyItem(myModel,jObj.toString()));
         }
         myPlayer.setKeyItems(keyItems);
     }

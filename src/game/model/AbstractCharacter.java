@@ -13,8 +13,8 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
     private Direction myDirection;
     private Image myImageUp, myImageDown, myImageRight, myImageLeft;
 
-    public AbstractCharacter (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
-        super(world, definition, objInWorld);
+    public AbstractCharacter (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
+        super(model, world, definition, objInWorld);
         try{
             myDirection = Direction.constructFromString(objInWorld.getString(Constants.JSON_ORIENTATION));
             String imageUpURL = definition.getString(Constants.JSON_IMAGE_UP);
