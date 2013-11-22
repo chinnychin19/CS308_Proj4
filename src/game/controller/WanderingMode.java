@@ -1,16 +1,11 @@
 package game.controller;
 
-import java.awt.Graphics;
-import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collection;
-import location.Direction;
 import location.Loc;
 import constants.Constants;
 import game.model.AbstractViewable;
-import game.model.AbstractViewableObject;
 import game.model.GameModel;
-import game.model.Player;
 import game.view.GameView;
 
 

@@ -73,14 +73,14 @@ public class World {
                         myModel.getDefinitionCache().
                                 getInstance(viewableCategory, objInWorld.getString(Constants.JSON_NAME));
                 String classPath = Constants.CLASSPATH_GAME_MODEL + "." + viewableCategory; 
-                AbstractViewableObject newViewableObject = 
-                        (AbstractViewableObject) Reflection.createInstance(classPath,
+                AbstractViewable newViewable = 
+                        (AbstractViewable) Reflection.createInstance(classPath,
                                                                            this,
                                                                            definition,
                                                                            objInWorld);
-                addViewable(newViewableObject);
+                addViewable(newViewable);
                 if (viewableCategory.equals(Constants.JSON_PLAYER)) {
-                    myPlayer = (Player) newViewableObject;
+                    myPlayer = (Player) newViewable;
                 }
             }
         }
