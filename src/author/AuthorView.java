@@ -59,6 +59,8 @@ public class AuthorView extends JFrame {
         //Set the menu bar to the frame.
         this.setJMenuBar(menuBar);
         
+        this.add(new LevelEditorCanvas());
+        
         pack();
         this.setVisible(true);
     }
