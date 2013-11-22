@@ -11,7 +11,7 @@ import author.panels.FinishPanel;
 public class PlayerWizard extends Wizard {
 
     public PlayerWizard () {
-        super();
+        super("Player");
     }
 
 }

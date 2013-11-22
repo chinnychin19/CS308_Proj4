@@ -2,6 +2,9 @@ package constants;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Constants {
@@ -35,6 +38,8 @@ public class Constants {
     public static final String LEFT = "left";
     
     //JSON keywords
+    public static final String JSON_PLAYER = "Player";
+    
     public static final String JSON_IMAGE = "image";
     public static final String JSON_IMAGE_UP = "image-up";
     public static final String JSON_IMAGE_DOWN = "image-down";
@@ -51,16 +56,17 @@ public class Constants {
     public static final String JSON_FREQ = "frequency";
     public static final String JSON_MONSTERS = "monsters";
     
+    public static final String JSON_NAME = "name";
     public static final String JSON_X = "x";
     public static final String JSON_Y = "y";
     public static final String JSON_KEYITEMS = "keyItems";
-
-
     
     public static final String JSON_MONSTER_MAX_HP = "maxHP";
     public static final String JSON_MONSTER_CATCH_RATE = "catchRate";
     public static final String JSON_MONSTER_ALL_ATTACKS = "attacks";
     public static final String JSON_MONSTER_ATTACK = "attack";
+    
+    public static final String JSON_DEFEATEDNPCS = "defeatedNPCs";
 
     //Panel Type Names
     public static final String LIST_PANEL = "List";
@@ -70,10 +76,17 @@ public class Constants {
     public static final String RADIOBUTTON_PANEL = "Radio Button";
     public static final String CHECKBOX_PANEL = "Checkbox";
     
+    
+    
     //GUI Sizing Constants
     public static final Dimension FRAME_SIZE = new Dimension(800,600);
     public static final Dimension BUTTON_SIZE = new Dimension(198,28);
     public static final Dimension TEXT_AREA_SIZE = new Dimension(400, 32);
-    
-    
+        
+    // Classpaths, folder paths, and filenames
+    public static final String CLASSPATH_GAME_MODEL = "game.model";
+    public static final String FOLDERPATH_GAMES = "games";
+    public static final String FILENAME_DEFINITION = "definition.json";
+    public static final String FILENAME_WORLD = "world.json";
+    public static final String FILENAME_SAVESTATE = "saveState.json";
 }
