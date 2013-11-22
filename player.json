@@ -1,0 +1,99 @@
+{ "Player" : 
+  [{
+    "name" : "text",
+    "image-up" : "fileurl",
+    "image-down" : "fileurl",
+    "image-left" : "fileurl",
+    "image-right" : "fileurl",
+  }],
+
+  "Monster" : 
+  [{
+    "name" : "text", 
+    "maxHP" : "number_1:1000", 
+    "catchRate" : "number_0:1",
+    "image" : "fileurl",
+    "evolution" : { 
+    	"name" : "text", 
+    	"level" : "number"
+    },
+    "attacks" : [
+    	{"name" : "list_radio_Attack.name", "unlockLevel" : "number" },
+    ],
+  }],
+
+  "Attack" :
+  [{
+  	"name" : "text",
+  	"power" : "number_1:100",
+  	"accuracy" : "number_0:1",
+  	"effects" : {
+  		"statisticEffect" : {
+  			"target" : "text",
+  			"statistic" : "text",
+  			"change" : "number_-100:100"
+  		},
+  		"statusEffect" : {
+  			"status" : "text",
+  			"target" : "text"
+  		}	
+  	}
+  }],
+  
+  
+  "Obstacle" : 
+  [{
+    "name" : "text",
+    "image" : "fileurl",
+  }],
+  
+  "KeyItem" : [{ "name" : "text" }],
+  
+  "NPC" : [
+      {"name" : "text", 
+	   "image-up" : "fileurl",
+	   "image-down" : "fileurl",
+	   "image-left" : "fileurl",
+	   "image-right" : "fileurl",
+       "dialogue" : "text",
+       }
+    ],
+  
+  "FightingNPC" : [
+  	{
+  	   "name" : "text",
+	   "image-up" : "fileurl",
+	   "image-down" : "fileurl",
+	   "image-left" : "fileurl",
+	   "image-right" : "fileurl",
+       "lineOfSightDistance" : "number_0:5",
+       "dialogue" : "text",
+       "monsters" : [{"name":"list_radio_Monster.name"}],
+       "bet" : "number_0:100",
+       "postDialogue" : "text",
+       "keyItems" : [ "check_KeyItem.name" ]
+  	}
+  ]
+  "TypeMatrix" : [{
+    "name" : "matrix",
+    "matrix" : {
+      "electric" : { "water" : "2", "rock" : "0.1", "electric" : "1" },
+      "rock" :{ "water" : "0.1", "rock" : "1", "electric" : "1.5"}, 
+      "water" : { "water" : "1", "rock" : "2.0", "electric" : "0.5"}
+    }
+  }]
+  
+  "WildRegion" : [{
+  	"name" : "text", 
+  	"image" : "text", 
+  	"probability" : "number_0:1",
+	"monsters" : {
+		"monster" : {
+			"name" : "list_radio_Monster.name", 
+			"level" : "number", 
+			"probability" : "number_0:1"
+		}
+	}
+  }]
+  
+}

@@ -49,6 +49,19 @@ public class Loc {
     public void setY (int b) {
         y = b;
     }
+    
+    public void setAdjacentLoc(Direction d) {
+        switch (d) {
+            case UP:
+                setY(y-1); break;
+            case DOWN:
+                setY(y+1); break;
+            case LEFT:
+                setX(x-1); break;
+            case RIGHT:
+                setX(x+1); break;
+        }
+    }
 
     public Loc adjacentLoc (Direction d) {
         switch (d) {

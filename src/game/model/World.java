@@ -1,12 +1,12 @@
 package game.model;
 
-import java.io.FileReader;
+import game.model.attack.Attack;
 import java.util.HashMap;
 import java.util.Map;
 import jsoncache.JSONCache;
+import jsoncache.JSONReader;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import reflection.Reflection;
 import constants.Constants;
 import location.Direction;
@@ -24,16 +24,24 @@ public class World {
     public World (String nameOfGame) throws Exception {
         myNameOfGame = nameOfGame;
         myViewableObjects = new HashMap<Loc, AbstractViewableObject>();
+        String definitionJSONFilepath =
+                Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
+                        Constants.FILENAME_DEFINITION;
+        String worldJSONFilepath = Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
+                Constants.FILENAME_WORLD;
+        myDefinitionCache = new JSONCache(JSONReader.getJSON(definitionJSONFilepath));
+        myWorldJSON = JSONReader.getJSON(worldJSONFilepath);
         setUpWorld();
+//        JSONObject obj = myDefinitionCache.getInstance("Attack", "vine whip");
+//        System.out.println(new Attack(obj).toString());
     }
 
     protected Player getPlayer () {
         return myPlayer;
-
     }
 
-    private void addViewableObject (Loc loc, AbstractViewableObject obj) {
-        myViewableObjects.put(loc, obj);
+    private void addViewableObject (AbstractViewableObject obj) {
+        myViewableObjects.put(obj.getLoc(), obj);
     }
 
     protected Map<Loc, AbstractViewableObject> getViewableObjects () {
@@ -44,36 +52,28 @@ public class World {
         myPlayer.setDirection(d);
         Loc targetLoc = myPlayer.getLoc().adjacentLoc(d);
         if (!myViewableObjects.containsKey(targetLoc)) {
-            myPlayer.setLoc(targetLoc);
+            myPlayer.getLoc().setAdjacentLoc(d); //does not change the reference of the player's Loc
         }
     }
-
+    
     protected void setUpWorld () throws Exception {
-        // TODO: Constants file
-        String definitionJSONFilepath = "games/" + myNameOfGame + "/definition.json";
-        String worldJSONFilepath = "games/" + myNameOfGame + "/world.json";
-        myDefinitionCache = new JSONCache(getJSON(definitionJSONFilepath));
-        myWorldJSON = getJSON(worldJSONFilepath);
         for (String viewableCategory : Constants.VIEWABLE_CATEGORIES) {
             JSONArray objectArray = (JSONArray) myWorldJSON.get(viewableCategory);
-            debug("Category: "+viewableCategory);
+//            debug("Category: "+viewableCategory);
             for (Object obj : objectArray) {
                 JSONObject objInWorld = (JSONObject) obj;
-                debug("Name: " + objInWorld.get("name"));
-
+//                debug("Name: " + objInWorld.get(Constants.JSON_NAME));
                 JSONObject definition =
                         myDefinitionCache
-                                .getInstance(viewableCategory, objInWorld.get("name").toString());
-                String classPath = "game.model." + viewableCategory; 
-                // TODO: Constants > game.model
-                // TODO: capitalization error possible in classPath?
+                                .getInstance(viewableCategory, objInWorld.get(Constants.JSON_NAME).toString());
+                String classPath = Constants.CLASSPATH_GAME_MODEL + "." + viewableCategory; 
                 AbstractViewableObject newViewableObject = 
                         (AbstractViewableObject) Reflection.createInstance(classPath,
                                                                            this,
                                                                            definition,
                                                                            objInWorld);
-                addViewableObject(newViewableObject.getLoc(), newViewableObject);
-                if (viewableCategory.equals("Player")) {
+                addViewableObject(newViewableObject);
+                if (viewableCategory.equals(Constants.JSON_PLAYER)) {
                     myPlayer = (Player) newViewableObject;
                 }
             }
@@ -82,20 +82,6 @@ public class World {
     
     private void debug(Object o) {
         System.out.println(o.toString());
-    }
-
-    private JSONObject getJSON (String filepath) {
-        JSONObject json;
-        JSONParser parser = new JSONParser();
-        try {
-            System.out.println(filepath);
-            json = (JSONObject) parser.parse(new FileReader(filepath));
-            return json;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     protected void doInteraction () {

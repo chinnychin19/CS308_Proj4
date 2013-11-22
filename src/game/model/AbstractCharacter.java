@@ -12,7 +12,7 @@ public class AbstractCharacter extends AbstractViewableObject {
 
     public AbstractCharacter (World world, JSONObject definition, JSONObject objInWorld) {
         super(world, definition, objInWorld);
-        myDirection = stringToDirection(objInWorld.get(Constants.JSON_ORIENTATION).toString());
+        myDirection = Direction.constructFromString(objInWorld.get(Constants.JSON_ORIENTATION).toString());
         String imageUpURL = definition.get(Constants.JSON_IMAGE_UP).toString();
         String imageDownURL = definition.get(Constants.JSON_IMAGE_DOWN).toString();
         String imageLeftURL = definition.get(Constants.JSON_IMAGE_LEFT).toString();
@@ -45,23 +45,4 @@ public class AbstractCharacter extends AbstractViewableObject {
     public void setDirection (Direction d) {
         myDirection = d;
     }
-    
-    protected Direction stringToDirection (String s) {
-        if (s.equalsIgnoreCase(Constants.UP)) {
-            return Direction.UP;
-        }
-        else if (s.equalsIgnoreCase(Constants.LEFT)) {
-            return Direction.LEFT;
-        }
-        else if (s.equalsIgnoreCase(Constants.DOWN)) {
-            return Direction.DOWN;
-        }
-        else if (s.equalsIgnoreCase(Constants.RIGHT)) {
-            return Direction.RIGHT;
-        }
-        else {
-            return null;
-        }
-    }
-
 }

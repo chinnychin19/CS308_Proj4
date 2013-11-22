@@ -28,9 +28,9 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     private File myFile;
     public static String IMG_FOLDER_FILEPATH = "./images";
     
-    public ImagePanel(){
+    public ImagePanel(String label){
         super("Image");
-        myLabel = new JLabel("Image:");
+        myLabel = new JLabel(label + ":");
         createFileChooser();
         myImageDisplayer = new ImageDisplayer();   
         initLayout();  
@@ -38,6 +38,7 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
 
     private void initLayout(){
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(myLabel);
         this.add(myImageDisplayer);    
         myImageDisplayer.setAlignmentX(CENTER_ALIGNMENT);
         this.add(myOpenButton);
@@ -72,8 +73,10 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     @Override
     public Map<String, String> getUserInput () {
         Map<String, String> map = new HashMap<String, String>();
-        copyFileAndSelectCopy();
-        map.put(myLabel.toString(), myFile.getPath());
+        //copyFileAndSelectCopy();
+        String label = myLabel.getText(); 
+        //map.put(label.substring(0, label.length()-1), myFile.getPath());
+        map.put(label.substring(0, label.length()-1), "");
         return map;
     }
     
