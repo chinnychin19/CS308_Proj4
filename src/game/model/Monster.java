@@ -1,7 +1,5 @@
 package game.model;
 
-import game.model.attack.AbstractAttack;
-
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +16,7 @@ import constants.Constants;
  *
  */
 
-public abstract class Monster extends AbstractViewableObject {
+public abstract class Monster extends AbstractModelObject {
 
 	private int myMaxHP;
 	private double myCatchRate;
@@ -27,8 +25,6 @@ public abstract class Monster extends AbstractViewableObject {
 	private Image myImage;
 	
     public Monster (World world, JSONObject definition, JSONObject objInWord) {
-        super(world, definition, objInWord);
-        
         String imageURL = definition.get(Constants.JSON_IMAGE).toString();
         myImage = new ImageIcon(imageURL).getImage();
         myMaxHP = Integer.parseInt(definition.get(Constants.JSON_MONSTER_MAX_HP).toString());

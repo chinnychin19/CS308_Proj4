@@ -6,7 +6,7 @@ import location.Direction;
 import org.json.simple.JSONObject;
 import constants.Constants;
 
-public class AbstractCharacter extends AbstractViewableObject {
+public class AbstractCharacter extends AbstractInteractableObject {
     private Direction myDirection;
     private Image myImageUp, myImageDown, myImageRight, myImageLeft;
 

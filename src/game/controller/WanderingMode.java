@@ -14,8 +14,8 @@ import game.view.GameView;
 
 public class WanderingMode extends AbstractMode {
 
-    public WanderingMode (GameModel model, GameView view, Graphics g) {
-        super(model, view, g);
+    public WanderingMode (GameModel model, GameView view) {
+        super(model, view);
     }
 
     @Override
@@ -68,10 +68,13 @@ public class WanderingMode extends AbstractMode {
     
     public void paintBackground () {
         // draws default background image
-        getGraphics().drawImage(getView().getBackgroundImage(), 0, 0,
-                           Constants.WIDTH,
-                           Constants.HEIGHT,
-                           null);
+        getGraphics().
+                drawImage(
+                          getView().
+                                  getBackgroundImage(), 0, 0,
+                          Constants.WIDTH,
+                          Constants.HEIGHT,
+                          null);
 
     }
 

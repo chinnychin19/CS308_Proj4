@@ -33,12 +33,11 @@ public abstract class AbstractMode extends KeyAdapter {
             INDEX_INTERACT = 4,
             INDEX_MENU = 5;
 
-    public AbstractMode (GameModel model, GameView view, Graphics g) {
+    public AbstractMode (GameModel model, GameView view) {
         myModel = model;
         myView = view;
-        myGraphics = g;
+        myGraphics = view.getBuffer();
         myInputs = new boolean[NUM_INPUTS];
-        paint(); //initially paint the state before waiting for key input
     }
 
     public abstract void paint ();

@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
 
 import constants.Constants;
 
-public class Obstacle extends AbstractViewableObject {
+public class Obstacle extends AbstractInteractableObject {
     private Image myImage;
     private Set<KeyItem> myRequiredKeyItems;
     public Obstacle (World world, JSONObject definition, JSONObject objInWorld) {

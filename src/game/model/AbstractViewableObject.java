@@ -38,10 +38,10 @@ public abstract class AbstractViewableObject extends AbstractModelObject {
 
     public abstract Image getImage ();
     
-    public void doInteraction(Player p) {
-        // null op by default
+    public boolean canStepOver() {
+        return true; //overridden in subclass for interactable objects
     }
-
+    
     protected void destroy() {
         myWorld.removeObject(myLoc);
     }
