@@ -15,8 +15,9 @@ import location.Loc;
 
 
 public class World {
+    
     private HashMap<Loc, AbstractViewableObject> myViewableObjects;
-
+    private HashMap<Loc, AbstractGround> myGroundObjects;
     private Player myPlayer;
     private GameModel myModel;
     private JSONObject myWorldJSON;
@@ -25,6 +26,7 @@ public class World {
     public World (String nameOfGame, GameModel model) throws Exception {
         myNameOfGame = nameOfGame;
         myViewableObjects = new HashMap<Loc, AbstractViewableObject>();
+        myGroundObjects = new HashMap<Loc, AbstractGround>();
         String worldJSONFilepath = Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
                 Constants.FILENAME_WORLD;
         myModel = model;
@@ -36,19 +38,27 @@ public class World {
         return myPlayer;
     }
 
-    private void addViewableObject (AbstractViewableObject obj) {
-        myViewableObjects.put(obj.getLoc(), obj);
+    private void addViewable (AbstractViewable obj) {
+        if (obj.canStepOn()) {
+            myGroundObjects.put(obj.getLoc(), (AbstractGround) obj);
+        } else {
+            myViewableObjects.put(obj.getLoc(), (AbstractViewableObject) obj);            
+        }
     }
 
     protected Map<Loc, AbstractViewableObject> getViewableObjects () {
         return myViewableObjects;
     }
+    
+    protected Map<Loc, AbstractGround> getGroundObjects () {
+        return myGroundObjects;
+    }
 
-    public boolean isLocOccupied(Loc loc) {
+    protected boolean isLocOccupied(Loc loc) {
         return null != myViewableObjects.get(loc);
     }
     
-    public Loc locInFrontOfPlayer() {
+    protected Loc locInFrontOfPlayer() {
         return myPlayer.getLoc().adjacentLoc(myPlayer.getDirection());
     }
 
@@ -76,7 +86,7 @@ public class World {
                                                                            this,
                                                                            definition,
                                                                            objInWorld);
-                addViewableObject(newViewableObject);
+                addViewable(newViewableObject);
                 if (viewableCategory.equals(Constants.JSON_PLAYER)) {
                     myPlayer = (Player) newViewableObject;
                 }

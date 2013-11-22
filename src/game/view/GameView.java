@@ -35,7 +35,9 @@ public class GameView extends JPanel {
         setFocusable(true);
         myImage = new BufferedImage(Constants.WIDTH, Constants.HEIGHT, BufferedImage.TYPE_INT_RGB);
         myGraphics = myImage.getGraphics();
-        myBackground = new ImageIcon("images/background/shortGrass.png").getImage();
+        myBackground = new ImageIcon("images/ground/shortGrass.png").getImage(); // TODO: no. not
+                                                                                 // this. Ground
+                                                                                 // objects.
         myController = new GameController(nameOfGame, this);
         myController.loadState(); // ought to be called by a user input
     }

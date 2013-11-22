@@ -36,34 +36,8 @@ public class WanderingMode extends AbstractMode {
         for (AbstractViewableObject obj : getViewableObjectsOnScreen()) {
             obj.doFrame(getModel().getWorld(), getInputs());
         }
-//        // Check for movement
-//        Direction dir = getMoveDirection();
-//        if (null != dir) {
-//            getModel().doMove(dir);
-//        }
-//
-//        // Check for interaction
-//        if (getInputs()[INDEX_INTERACT]) {
-//            getModel().doInteraction();
-//        }
     }
     
-//    private Direction getMoveDirection() {
-//        boolean[] inputs = getInputs();
-//        if (inputs[INDEX_UP]) {
-//            return Direction.UP;
-//        }
-//        if (inputs[INDEX_LEFT]) {
-//            return Direction.LEFT;
-//        }
-//        if (inputs[INDEX_DOWN]) {
-//            return Direction.DOWN;
-//        }
-//        if (inputs[INDEX_RIGHT]) {
-//            return Direction.RIGHT;
-//        }
-//        return null;
-//    }
 
     public void paintPlayer () {
         getGraphics().drawImage(getModel().getPlayer().getImage(),
