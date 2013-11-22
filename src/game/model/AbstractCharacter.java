@@ -8,14 +8,14 @@ import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
-public class AbstractCharacter extends AbstractViewableObject {
+public class AbstractCharacter extends AbstractInteractableObject {
     private Direction myDirection;
     private Image myImageUp, myImageDown, myImageRight, myImageLeft;
 
-    public AbstractCharacter (World world, SmartJsonObject definition, JSONObject objInWorld) {
+    public AbstractCharacter (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(world, definition, objInWorld);
-        myDirection = Direction.constructFromString(objInWorld.get(Constants.JSON_ORIENTATION).toString());
         try{
+            myDirection = Direction.constructFromString(objInWorld.getString(Constants.JSON_ORIENTATION));
             String imageUpURL = definition.getString(Constants.JSON_IMAGE_UP);
             String imageDownURL = definition.getString(Constants.JSON_IMAGE_DOWN);
             String imageLeftURL = definition.getString(Constants.JSON_IMAGE_LEFT);

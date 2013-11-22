@@ -12,12 +12,12 @@ public abstract class AbstractViewableObject extends AbstractModelObject {
     private Loc myLoc;
     private World myWorld;
 
-    public AbstractViewableObject (World world, SmartJsonObject definition, JSONObject objInWord) {
+    public AbstractViewableObject (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(definition);
         myWorld = world;
         try {
-            int x = definition.getInt(Constants.JSON_X);
-            int y = definition.getInt(Constants.JSON_Y);
+            int x = objInWorld.getInt(Constants.JSON_X);
+            int y = objInWorld.getInt(Constants.JSON_Y);
             myLoc = new Loc(x, y);
         }
         catch (SmartJsonException e) {
@@ -44,12 +44,12 @@ public abstract class AbstractViewableObject extends AbstractModelObject {
     }
 
     public abstract Image getImage ();
-
-    public void doInteraction (Player p) {
-        // null op by default
+    
+    public boolean canStepOver() {
+        return true; //overridden in subclass for interactable objects
     }
-
-    protected void destroy () {
+    
+    protected void destroy() {
         myWorld.removeObject(myLoc);
     }
 }

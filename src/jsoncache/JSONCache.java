@@ -3,6 +3,7 @@ package jsoncache;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import util.jsonwrapper.SmartJsonObject;
 
 
 /**
@@ -102,11 +103,11 @@ public class JSONCache {
      * @return
      * @throws JSONException Throws exception if object not found
      */
-    public JSONObject getInstance (String category, String name) throws JSONException {
+    public SmartJsonObject getInstance (String category, String name) throws JSONException {
         JSONArray cache = (JSONArray) myJSON.get(category);
         for (Object object : cache) {
             JSONObject jObject = (JSONObject) object;
-            if (jObject.get("name").equals(name)) { return copy(jObject); }
+            if (jObject.get("name").equals(name)) { return new SmartJsonObject(jObject); }
         }
         throw new JSONException();
     }
@@ -119,9 +120,9 @@ public class JSONCache {
      * @param object A JSON object
      * @return A deep copy of the object with the same values
      */
-    private JSONObject copy (JSONObject object) {
+    private SmartJsonObject copy (JSONObject object) {
         String asString = JSONValue.toJSONString(object);
-        return (JSONObject) JSONValue.parse(asString);
+        return new SmartJsonObject((JSONObject) JSONValue.parse(asString));
     }
 
     /**

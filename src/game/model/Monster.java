@@ -1,7 +1,5 @@
 package game.model;
 
-import game.model.attack.AbstractAttack;
-
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +17,7 @@ import constants.Constants;
  *
  */
 
-public abstract class Monster extends AbstractViewableObject {
+public abstract class Monster extends AbstractModelObject {
 
 	private int myMaxHP;
 	private double myCatchRate;
@@ -27,8 +25,8 @@ public abstract class Monster extends AbstractViewableObject {
 	private List<Monster> myEvolution;
 	private Image myImage;
 	
-    public Monster (World world, SmartJsonObject definition, SmartJsonObject objInWord) {
-        super(world, definition, objInWord);
+    public Monster (SmartJsonObject definition) {
+        super(definition);
         
 //        String imageURL = definition.get(Constants.JSON_IMAGE).toString();
 //        myImage = new ImageIcon(imageURL).getImage();

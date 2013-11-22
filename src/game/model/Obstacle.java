@@ -11,7 +11,7 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
 
 import constants.Constants;
 
-public class Obstacle extends AbstractViewableObject {
+public class Obstacle extends AbstractInteractableObject {
     private Image myImage;
     private Set<KeyItem> myRequiredKeyItems;
     public Obstacle (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
