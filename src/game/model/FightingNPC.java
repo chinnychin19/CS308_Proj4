@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
 public class FightingNPC extends NPC {
@@ -13,17 +15,20 @@ public class FightingNPC extends NPC {
     private int myBet;
     private int myLineOfSightDistance;
 
-    public FightingNPC (World world, JSONObject definition, JSONObject objInWorld) {
+    public FightingNPC (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(world, definition, objInWorld);
-        myPostDialogue = definition.get(Constants.JSON_POST_DIALOGUE).toString();
+        try{
+        myPostDialogue = definition.getString(Constants.JSON_POST_DIALOGUE);
         myKeyItems = new ArrayList<KeyItem>();
-        for (Object obj : (JSONArray) definition.get(Constants.JSON_KEYITEMS)) {
+        for (Object obj : definition.getJSONArray(Constants.JSON_KEYITEMS)) {
             myKeyItems.add(new KeyItem(obj.toString()));
         }
-        myBet = Integer.parseInt(definition.get(Constants.JSON_BET).toString());
-        myLineOfSightDistance =
-                Integer.parseInt(definition.get(Constants.JSON_LINE_OF_SIGHT_DISTANCE).toString());
+        myBet = definition.getInt(Constants.JSON_BET);
+        myLineOfSightDistance = definition.getInt(Constants.JSON_LINE_OF_SIGHT_DISTANCE);
         // TODO: load the party
+        } catch(SmartJsonException e){
+            e.printStackTrace();
+        }
     }
 
     /**

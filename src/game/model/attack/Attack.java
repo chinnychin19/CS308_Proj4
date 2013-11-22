@@ -22,25 +22,24 @@ public class Attack extends AbstractModelObject {
     Collection<StatisticEffect> myStatisticEffects;
     Collection<StatusEffect> myStatusEffects;
 
-    public Attack (JSONObject definition) {
+    public Attack (SmartJsonObject definition) {
         super(definition);
-        SmartJsonObject smartJSON = new SmartJsonObject(definition);
         myStatisticEffects = new ArrayList<Attack.StatisticEffect>();
         myStatusEffects = new ArrayList<Attack.StatusEffect>();
 
         try {
-            myPower = smartJSON.getInt(JSON_POWER);
+            myPower = definition.getInt(JSON_POWER);
 
-            myAccuracy = smartJSON.getDouble(JSON_ACCURACY);
-            JSONArray statisticsArray = smartJSON.getJSONArray(JSON_STATISTIC_EFFECT);
+            myAccuracy = definition.getDouble(JSON_ACCURACY);
+            JSONArray statisticsArray = definition.getJSONArray(JSON_STATISTIC_EFFECT);
             for (Object statObject : statisticsArray) {
-                JSONObject json = (JSONObject) statObject;
+                SmartJsonObject json = new SmartJsonObject((JSONObject) statObject);
                 myStatisticEffects.add(new StatisticEffect(json));
 
             }
-            JSONArray statusArray = smartJSON.getJSONArray(JSON_STATUS_EFFECT);
+            JSONArray statusArray = definition.getJSONArray(JSON_STATUS_EFFECT);
             for (Object statusObject : statusArray) {
-                JSONObject json = (JSONObject) statusObject;
+                SmartJsonObject json = new SmartJsonObject((JSONObject) statusObject);
                 myStatusEffects.add(new StatusEffect(json));
             }
         }
@@ -61,10 +60,15 @@ public class Attack extends AbstractModelObject {
         private String myStatistic;
         private int myChange;
 
-        public StatisticEffect (JSONObject definition) {
-            myTarget = Target.getTarget(definition.get("target").toString());
-            myStatistic = definition.get("statistic").toString();
-            myChange = Integer.parseInt(definition.get("change").toString());
+        public StatisticEffect (SmartJsonObject definition) {
+            try {
+                myTarget = Target.getTarget(definition.getString("target"));
+                myStatistic = definition.getString("statistic");
+                myChange = definition.getInt("change");
+            }
+            catch (SmartJsonException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -72,9 +76,14 @@ public class Attack extends AbstractModelObject {
         private String myStatus;
         private Target myTarget;
 
-        public StatusEffect (JSONObject definition) {
-            myTarget = Target.getTarget(definition.get("target").toString());
-            myStatus = definition.get("status").toString();
+        public StatusEffect (SmartJsonObject definition) {
+            try {
+                myTarget = Target.getTarget(definition.getString("target"));
+                myStatus = definition.getString("status");
+            }
+            catch (SmartJsonException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

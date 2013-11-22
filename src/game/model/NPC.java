@@ -7,6 +7,8 @@ import jsoncache.JSONCache;
 import location.Direction;
 import location.Loc;
 import org.json.simple.JSONObject;
+import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
 /**
@@ -20,9 +22,13 @@ public class NPC extends AbstractCharacter {
 
     private String myDialogue;
         
-    public NPC (World world, JSONObject definition, JSONObject objInWorld){
+    public NPC (World world, SmartJsonObject definition, JSONObject objInWorld){
         super(world, definition, objInWorld);
-        myDialogue = definition.get(Constants.JSON_DIALOGUE).toString();
+        try{
+            myDialogue = definition.getString(Constants.JSON_DIALOGUE);
+        } catch(SmartJsonException e){
+            e.printStackTrace();
+        }
     }
                 
     /**

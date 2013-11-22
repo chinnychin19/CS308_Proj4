@@ -6,23 +6,30 @@ import java.util.Set;
 import javax.swing.ImageIcon;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.SmartJsonException;
 
 import constants.Constants;
 
 public class Obstacle extends AbstractViewableObject {
     private Image myImage;
     private Set<KeyItem> myRequiredKeyItems;
-    public Obstacle (World world, JSONObject definition, JSONObject objInWorld) {
+    public Obstacle (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(world, definition, objInWorld);
-        String imageURL = definition.get(Constants.JSON_IMAGE).toString();
-        myImage = new ImageIcon(imageURL).getImage();
-        myRequiredKeyItems = new HashSet<KeyItem>();
-        Object keyItemArray = objInWorld.get(Constants.JSON_KEYITEMS);
-        if (null != keyItemArray) {
-            for (Object name : (JSONArray) keyItemArray) {
-                myRequiredKeyItems.add(new KeyItem(name.toString()));
-            }            
+        try{
+            String imageURL = definition.getString(Constants.JSON_IMAGE);
+            myImage = new ImageIcon(imageURL).getImage();
+            myRequiredKeyItems = new HashSet<KeyItem>();
+            JSONArray keyItemArray = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
+            if (null != keyItemArray) {
+                for (Object name : keyItemArray) {
+                    myRequiredKeyItems.add(new KeyItem(name.toString()));
+                }            
+            }
+        } catch(SmartJsonException e){
+            e.printStackTrace();
         }
+        
     }
     @Override
     public Image getImage () {

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import javax.swing.ImageIcon;
 import org.json.simple.JSONObject;
+import util.jsonwrapper.SmartJsonObject;
 
 import constants.Constants;
 import location.Direction;
@@ -17,7 +18,7 @@ public class Player extends AbstractCharacter {
     private List<Item> myItems;
     private Collection<KeyItem> myKeyItems;
 
-    public Player(World world, JSONObject definition, JSONObject objInWorld) {
+    public Player(World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(world, definition, objInWorld);
         myKeyItems = new HashSet<KeyItem>();
         myKeyItems.add(new KeyItem("razor"));

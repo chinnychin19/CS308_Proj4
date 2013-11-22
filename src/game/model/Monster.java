@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import util.jsonwrapper.SmartJsonObject;
 import constants.Constants;
 
 /**
@@ -26,13 +27,13 @@ public abstract class Monster extends AbstractViewableObject {
 	private List<Monster> myEvolution;
 	private Image myImage;
 	
-    public Monster (World world, JSONObject definition, JSONObject objInWord) {
+    public Monster (World world, SmartJsonObject definition, SmartJsonObject objInWord) {
         super(world, definition, objInWord);
         
-        String imageURL = definition.get(Constants.JSON_IMAGE).toString();
-        myImage = new ImageIcon(imageURL).getImage();
-        myMaxHP = Integer.parseInt(definition.get(Constants.JSON_MONSTER_MAX_HP).toString());
-        myCatchRate = Double.parseDouble(definition.get(Constants.JSON_MONSTER_CATCH_RATE).toString());
+//        String imageURL = definition.get(Constants.JSON_IMAGE).toString();
+//        myImage = new ImageIcon(imageURL).getImage();
+//        myMaxHP = Integer.parseInt(definition.get(Constants.JSON_MONSTER_MAX_HP).toString());
+//        myCatchRate = Double.parseDouble(definition.get(Constants.JSON_MONSTER_CATCH_RATE).toString());
 //        myAttacks = new ArrayList<Attack>();
 //        for(Object obj : (JSONArray) definition.get(Constants.JSON_MONSTER_ATTACK)){
 //        	myAttacks.add(obj);
