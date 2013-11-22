@@ -1,11 +1,12 @@
 package game.model;
 
 import org.json.simple.JSONObject;
+import util.jsonwrapper.SmartJsonObject;
 
 
 public class KeyItem extends AbstractModelObject {
     // Key items only have names.
-    public KeyItem (JSONObject definition) {
+    public KeyItem (SmartJsonObject definition) {
         super(definition);
     }
     

@@ -1,5 +1,6 @@
 package game.model;
 
+import game.controller.AbstractMode;
 import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -7,6 +8,8 @@ import jsoncache.JSONCache;
 import location.Direction;
 import location.Loc;
 import org.json.simple.JSONObject;
+import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
 /**
@@ -20,9 +23,13 @@ public class NPC extends AbstractCharacter {
 
     private String myDialogue;
         
-    public NPC (World world, JSONObject definition, JSONObject objInWorld){
+    public NPC (World world, SmartJsonObject definition, SmartJsonObject objInWorld){
         super(world, definition, objInWorld);
-        myDialogue = definition.get(Constants.JSON_DIALOGUE).toString();
+        try{
+            myDialogue = definition.getString(Constants.JSON_DIALOGUE);
+        } catch(SmartJsonException e){
+            e.printStackTrace();
+        }
     }
                 
     /**
@@ -34,8 +41,10 @@ public class NPC extends AbstractCharacter {
     }
     
     @Override
-    public void doInteraction(Player p) {
-        setDirection(Direction.opposite(p.getDirection()));
-        System.out.println(myDialogue);
+    public void doFrame (World w, boolean[] inputs) {
+        if (inputs[AbstractMode.INDEX_INTERACT] && getLoc().equals(w.locInFrontOfPlayer())) {
+            setDirection(Direction.opposite(w.getPlayer().getDirection()));
+            System.out.println(myDialogue);
+        }
     }
 }

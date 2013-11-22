@@ -26,19 +26,18 @@ public abstract class AbstractMode extends KeyAdapter {
     /**
      * These final constants may be used to index into the boolean array of inputs
      */
-    protected final int INDEX_UP = 0,
+    public static final int INDEX_UP = 0,
             INDEX_LEFT = 1,
             INDEX_DOWN = 2,
             INDEX_RIGHT = 3,
             INDEX_INTERACT = 4,
             INDEX_MENU = 5;
 
-    public AbstractMode (GameModel model, GameView view, Graphics g) {
+    public AbstractMode (GameModel model, GameView view) {
         myModel = model;
         myView = view;
-        myGraphics = g;
+        myGraphics = view.getBuffer();
         myInputs = new boolean[NUM_INPUTS];
-        paint(); //initially paint the state before waiting for key input
     }
 
     public abstract void paint ();

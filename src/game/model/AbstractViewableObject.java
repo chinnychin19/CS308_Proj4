@@ -1,8 +1,11 @@
 package game.model;
 
+import game.controller.GameController;
 import java.awt.Image;
 import location.Loc;
 import org.json.simple.JSONObject;
+import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
 
@@ -10,15 +13,20 @@ public abstract class AbstractViewableObject extends AbstractModelObject {
     private Loc myLoc;
     private World myWorld;
 
-    public AbstractViewableObject (World world, JSONObject definition, JSONObject objInWord) {
+    public AbstractViewableObject (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(definition);
         myWorld = world;
-        int x = Integer.parseInt(objInWord.get(Constants.JSON_X).toString());
-        int y = Integer.parseInt(objInWord.get(Constants.JSON_Y).toString());
-        myLoc = new Loc(x, y);
+        try {
+            int x = objInWorld.getInt(Constants.JSON_X);
+            int y = objInWorld.getInt(Constants.JSON_Y);
+            myLoc = new Loc(x, y);
+        }
+        catch (SmartJsonException e) {
+            e.printStackTrace();
+        }
     }
-    
-    public World getWorld() {
+
+    public World getWorld () {
         return myWorld;
     }
 
@@ -27,7 +35,8 @@ public abstract class AbstractViewableObject extends AbstractModelObject {
     }
 
     public void setLoc (Loc loc) {
-        myLoc = loc;
+        myLoc.setX(loc.getX());
+        myLoc.setY(loc.getY());
     }
 
     public Loc getTileLocationOnScreen (Player p) {
@@ -38,10 +47,12 @@ public abstract class AbstractViewableObject extends AbstractModelObject {
 
     public abstract Image getImage ();
     
-    public void doInteraction(Player p) {
-        // null op by default
+    public void doFrame(World w, boolean[] inputs) {
+        // null op by default.
+        //TODO: should this be abstract?
+//        System.out.println(getName()+": "+myLoc);
     }
-
+    
     protected void destroy() {
         myWorld.removeObject(myLoc);
     }
