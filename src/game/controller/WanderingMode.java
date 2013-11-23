@@ -26,11 +26,11 @@ public class WanderingMode extends AbstractMode {
     @Override
     public void act () {
         for (AbstractViewable obj : getGroundObjectsOnScreen()) {
-            obj.doFrame(getModel().getWorld(), getInputs());
+            obj.doFrame(getModel().getWorld(), this.getInput());
         }
         for (AbstractViewable obj : getViewableObjectsOnScreen()) {
 //            System.out.println("act object: "+obj.getLoc());
-            obj.doFrame(getModel().getWorld(), getInputs());
+            obj.doFrame(getModel().getWorld(), this.getInput());
         }
     }
     

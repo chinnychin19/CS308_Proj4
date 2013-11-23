@@ -1,5 +1,7 @@
 package game.model;
 
+import game.controller.Input;
+
 import java.awt.Image;
 import location.Loc;
 import util.jsonwrapper.SmartJsonObject;
@@ -41,7 +43,7 @@ public abstract class AbstractViewable extends AbstractModelObject {
 
     public abstract Image getImage ();
     
-    public void doFrame(World w, boolean[] inputs) {
+    public void doFrame(World w, Input inputs) {
         // null op by default.
         //TODO: should this be abstract?
 //        System.out.println(getName()+": "+myLoc);

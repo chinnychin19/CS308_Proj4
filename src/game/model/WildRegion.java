@@ -2,6 +2,8 @@ package game.model;
 
 import game.controller.AbstractMode;
 import game.controller.GameController;
+import game.controller.Input;
+
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,7 @@ public class WildRegion extends AbstractGround {
     }
     
     @Override
-    public void doFrame(World w, boolean[] inputs){
+    public void doFrame(World w, Input input){
         //if player on me, check prob
         if(w.getPlayer().getLoc().equals(getLoc())){
             double rand = Math.random();

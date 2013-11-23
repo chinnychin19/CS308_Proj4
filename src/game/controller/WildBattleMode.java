@@ -1,7 +1,9 @@
 package game.controller;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Polygon;
 import constants.Constants;
 import game.model.GameModel;
 import game.model.Monster;
@@ -14,7 +16,6 @@ import game.view.GameView;
 
 public class WildBattleMode extends AbstractBattleMode {
     private Battle myBattle;
-    private Monster enemyMonster;
     private Graphics myOptionsBuffer;
     private Graphics myHealthBuffer;
     private Graphics myMonsterBuffer;
@@ -24,11 +25,9 @@ public class WildBattleMode extends AbstractBattleMode {
     
     public WildBattleMode (GameModel model, GameView view) {
         super(model, view);
-        enemyMonster = null; //set through setMonster()
     }
     
     public void setEnemyMonster(Monster monster) {
-        enemyMonster = monster;
         WildPlayerParty attacker = new WildPlayerParty(getModel().getController(), getModel().getPlayer());
         WildMonsterParty defender = new WildMonsterParty(getModel().getController(), monster);
         myBattle = new Battle(attacker, defender);
@@ -87,18 +86,12 @@ public class WildBattleMode extends AbstractBattleMode {
         paintOptions();
     }
 
-    private void paintOptions () {
-        // TODO Auto-generated method stub
-        myOptionsBuffer.setColor(BEIGE);
-        myOptionsBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
-                                 myOptionsBuffer.getClipBounds().height);
-    }
-
     private void paintMyHealth () {
         // TODO Auto-generated method stub
         myHealthBuffer.setColor(BEIGE);
         myHealthBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
                                 myOptionsBuffer.getClipBounds().height);
+        paintHealthBuffer(myHealthBuffer, myBattle.getPlayerParty().getCurrentMonster());
     }
 
     private void paintEnemyHealth () {
@@ -106,6 +99,28 @@ public class WildBattleMode extends AbstractBattleMode {
         enemyHealthBuffer.setColor(BEIGE);
         enemyHealthBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
                                    myOptionsBuffer.getClipBounds().height);
+        paintHealthBuffer(enemyHealthBuffer, myBattle.getEnemyParty().getCurrentMonster());
+    }
+    
+    private void paintHealthBuffer (Graphics g, Monster m) {
+        g.setColor(Color.black);
+        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+        
+        String nameStr = String.format("Name: %s", m.getName());
+        String hpStr = String.format("HP: %d/%d", m.getCurHP(), m.getMaxHP());
+        String lvlStr = String.format("Level: %d", m.getLevel());
+        String atkStr = String.format("Attack: %d", m.getAttack());
+        String defStr = String.format("Defense: %d", m.getDefense());
+        
+        int x1 = 15, x2 = 165;
+        int y1 = 30;
+        int yInc = 50;
+        
+        g.drawString(nameStr, x1, y1 + 0 * yInc);
+        g.drawString(hpStr, x1, y1 + 1 * yInc);
+        g.drawString(lvlStr, x2, y1 + 1 * yInc);
+        g.drawString(atkStr, x1, y1 + 2 * yInc);
+        g.drawString(defStr, x2, y1 + 2 * yInc);
     }
 
     private void paintMyMonster () {
@@ -117,18 +132,47 @@ public class WildBattleMode extends AbstractBattleMode {
     }
 
     private void paintEnemyMonster () {
-        enemyMonsterBuffer.drawImage(enemyMonster.getImage(), 0, 0, 
+        enemyMonsterBuffer.drawImage(myBattle.getEnemyParty().getCurrentMonster().getImage(), 0, 0, 
                                      enemyMonsterBuffer.getClipBounds().width, 
                                      enemyMonsterBuffer.getClipBounds().height, 
                                      null);
     }
 
+    private int selectedOption = 0;
+    private String[] options = {"ATTACK", "PARTY", "ITEM"};
+    private void paintOptions () {
+        // TODO Auto-generated method stub
+        myOptionsBuffer.setColor(Color.cyan);
+        myOptionsBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
+                                 myOptionsBuffer.getClipBounds().height);
+        myOptionsBuffer.setColor(Color.black);
+        myOptionsBuffer.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+        
+        int x = 15;
+        int y = 30;
+        int inc = 50;
+        for (int i = 0; i < options.length; i++) {
+            if (i == selectedOption) {
+                myOptionsBuffer.setColor(Color.white);
+            }
+            myOptionsBuffer.drawString(options[i], x, y + i * inc);
+            if (i == selectedOption) {
+                myOptionsBuffer.setColor(Color.black);
+            }
+        }
+    }
+
     @Override
     public void act () {
-        boolean[] inputs = getInputs();
-        if (inputs[AbstractMode.INDEX_INTERACT]) {
+        Input input = getInput();
+        if (input.isKeyInteractPressed()) {
             System.out.println("interacting in wild battle");
             myBattle.conduct();
+        }
+        if (input.isKeyUpPressed() && selectedOption > 0) {
+            selectedOption--;
+        } else if (input.isKeyDownPressed() && selectedOption < options.length - 1) {
+            selectedOption++;
         }
     }
 }

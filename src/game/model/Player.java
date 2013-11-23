@@ -1,6 +1,8 @@
 package game.model;
 
 import game.controller.AbstractMode;
+import game.controller.Input;
+
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -79,8 +81,8 @@ public class Player extends AbstractCharacter implements Fighter {
     }
 
     @Override
-    public void doFrame (World w, boolean[] inputs) { //TODO: inputs should be an object
-      Direction dir = getMoveDirection(inputs);
+    public void doFrame (World w, Input input) { //TODO: inputs should be an object
+      Direction dir = getMoveDirection(input);
       if (null != dir) {
           setDirection(dir);
           Loc target = getLoc().adjacentLoc(getDirection());
@@ -91,17 +93,17 @@ public class Player extends AbstractCharacter implements Fighter {
     }
     
     //TODO: this method should be in the inputs object
-    private Direction getMoveDirection(boolean[] inputs) {
-        if (inputs[AbstractMode.INDEX_UP]) {
+    private Direction getMoveDirection(Input input) {
+        if (input.isKeyUpPressed()) {
             return Direction.UP;
         }
-        if (inputs[AbstractMode.INDEX_LEFT]) {
+        if (input.isKeyLeftPressed()) {
             return Direction.LEFT;
         }
-        if (inputs[AbstractMode.INDEX_DOWN]) {
+        if (input.isKeyDownPressed()) {
             return Direction.DOWN;
         }
-        if (inputs[AbstractMode.INDEX_RIGHT]) {
+        if (input.isKeyRightPressed()) {
             return Direction.RIGHT;
         }
         return null;

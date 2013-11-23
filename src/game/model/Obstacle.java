@@ -1,6 +1,8 @@
 package game.model;
 
 import game.controller.AbstractMode;
+import game.controller.Input;
+
 import java.awt.Image;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,8 +43,8 @@ public class Obstacle extends AbstractViewableObject {
     }
     
     @Override
-    public void doFrame(World w, boolean[] inputs) {
-        if (inputs[AbstractMode.INDEX_INTERACT] && getLoc().equals(w.locInFrontOfPlayer())) {
+    public void doFrame(World w, Input input) {
+        if (input.isKeyInteractPressed() && getLoc().equals(w.locInFrontOfPlayer())) {
             if(myRequiredKeyItems.isEmpty()) {
                 return;
             }

@@ -12,9 +12,9 @@
         "image": "images/monsters/tyler.png",
         "catchRate": ".4",
         "type" : "water",
-        "baseHP" : "18",
-        "baseAttack" : "13",
-        "baseDefense" : "15",
+        "baseHP" : "8",
+        "baseAttack" : "3",
+        "baseDefense" : "5",
         "attacks": [{
             "name": "vine whip",
             "unlockLevel": "4"
@@ -32,7 +32,7 @@
     "Attack": [
     {
         "name": "vine whip",
-        "power": "15",
+        "power": "165",
         "accuracy": "0.95",
         "statisticEffect": [{
             "target": "enemy",
