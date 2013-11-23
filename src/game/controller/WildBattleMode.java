@@ -21,6 +21,17 @@ public class WildBattleMode extends AbstractBattleMode {
     public WildBattleMode (GameModel model, GameView view, Monster monster) {
         super(model, view);
         myMonster = monster;
+    }
+
+    @Override
+    public void turnOff () {
+        getView().removeKeyListener(this);
+        closeBuffers();
+    }
+
+    @Override
+    public void turnOn () {
+        getView().addKeyListener(this);
         initBuffers();
     }
 
@@ -46,9 +57,16 @@ public class WildBattleMode extends AbstractBattleMode {
         enemyMonsterBuffer = getGraphics().create(m2X, m2Y, m2W, m2H);
     }
 
+    private void closeBuffers () {
+        myOptionsBuffer.dispose();
+        myHealthBuffer.dispose();
+        myMonsterBuffer.dispose();
+        enemyHealthBuffer.dispose();
+        enemyMonsterBuffer.dispose();
+    }
+
     @Override
     public void paint () {
-        // TODO Auto-generated method stub
         paintMyMonster();
         paintMyHealth();
         paintEnemyMonster();
@@ -56,12 +74,6 @@ public class WildBattleMode extends AbstractBattleMode {
         paintOptions();
     }
 
-    // private void refreshCanvas () {
-    // // TODO Auto-generated method stub
-    // System.out.println("refreshing canvas");
-    // getGraphics().clearRect(0, 0, Constants.WIDTH, Constants.HEIGHT);
-    // }
-    //
     private void paintOptions () {
         // TODO Auto-generated method stub
         myOptionsBuffer.setColor(Color.cyan);
@@ -101,7 +113,8 @@ public class WildBattleMode extends AbstractBattleMode {
     @Override
     public void act () {
         // TODO Auto-generated method stub
-
+        if (Math.random() < .1) {
+            getModel().setMode(GameController.INDEX_WANDERING);
+        }
     }
-
 }

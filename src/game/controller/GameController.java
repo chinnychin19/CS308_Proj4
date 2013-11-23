@@ -29,9 +29,11 @@ public class GameController {
 
     public void setMode (int newModeIndex) {
         //TODO: we should "turn off" previous mode and "turn on" new mode
-        myView.removeKeyListener(myModeArray[myModeIndex]);
+//        myView.removeKeyListener(myModeArray[myModeIndex]);
+        myModeArray[myModeIndex].turnOff();
         myModeIndex = newModeIndex;
-        myView.addKeyListener(myModeArray[newModeIndex]);
+        myModeArray[newModeIndex].turnOn();
+//        myView.addKeyListener(myModeArray[newModeIndex]);
     }
 
     private void initModes () {
