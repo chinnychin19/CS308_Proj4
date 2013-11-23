@@ -13,7 +13,7 @@ import game.view.GameView;
  * etc. Each mode performs different with different user input and paints the screen differently.
  * This mode serves as a controller and has access to the view and the model.
  * 
- * @author Chinmay
+ * @author Chinmay, rtoussaint
  * 
  */
 
