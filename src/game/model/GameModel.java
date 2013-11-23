@@ -33,8 +33,8 @@ public class GameModel {
         return myDefinitionCache;
     }
     
-    public void setMode(int mode) {
-        myController.setMode(mode);
+    public GameController getController() {
+        return myController;
     }
 
     public Player getPlayer () {
