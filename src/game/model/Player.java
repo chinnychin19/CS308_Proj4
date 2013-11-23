@@ -22,12 +22,21 @@ public class Player extends AbstractCharacter implements Fighter {
     private List<Item> myItems;
     private Collection<KeyItem> myKeyItems;
 
-    public Player(GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
+    public Player (GameModel model,
+                   World world,
+                   SmartJsonObject definition,
+                   SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
+        myKeyItems = new HashSet<KeyItem>();
+        myKeyItems.add(new KeyItem(model, "razor"));// TODO: REMOVE
+        myParty = new ArrayList<Monster>(); // TODO: populate
+        loadFromWorld(objInWorld);
+    }
+    
+    public void loadFromWorld(SmartJsonObject objInWorld){
         try {
-            myKeyItems = new HashSet<KeyItem>();
-            myKeyItems.add(new KeyItem(model,"razor"));//TODO: REMOVE
-            myParty = new ArrayList<Monster>(); //TODO: populate
+            //ADDING MONSTERS
+            myParty = new ArrayList<Monster>(); // TODO: populate
             JSONArray myMonstersJSON = objInWorld.getJSONArray("monsters");
             for (Object monsterObj : myMonstersJSON) {
                 SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
@@ -36,12 +45,26 @@ public class Player extends AbstractCharacter implements Fighter {
                                 .getInstance("Monster", monsterInWorld.getString(Constants.JSON_NAME));
                 myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
             }
-        }
-        catch (SmartJsonException e) {
-            e.printStackTrace();
+            
+            int x = objInWorld.getInt(Constants.JSON_X);
+            int y = objInWorld.getInt(Constants.JSON_Y);
+            setLoc(new Loc(x, y), getWorld());
+
+            String directionStr = objInWorld.getString(Constants.JSON_ORIENTATION);
+            setDirection(Direction.constructFromString(directionStr));
+            
+            //ADDING KEY ITEMS
+            myKeyItems = new HashSet<KeyItem>();
+            JSONArray playerKeyItems = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
+            Collection<KeyItem> keyItems = new ArrayList<KeyItem>();
+            for (Object o : playerKeyItems) {
+                keyItems.add(new KeyItem(getModel(), (String)o));
+            }
+            setKeyItems(keyItems);
+        } catch(SmartJsonException e){
+            
         }
     }
-    
     public void setKeyItems(Collection<KeyItem> keyItems){
         myKeyItems = keyItems;
     }

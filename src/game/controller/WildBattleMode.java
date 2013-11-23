@@ -20,7 +20,8 @@ public class WildBattleMode extends AbstractBattleMode {
     private Graphics myMonsterBuffer;
     private Graphics enemyHealthBuffer;
     private Graphics enemyMonsterBuffer;
-
+    private static final Color BEIGE = new Color(245, 245, 220);
+    
     public WildBattleMode (GameModel model, GameView view) {
         super(model, view);
         enemyMonster = null; //set through setMonster()
@@ -88,21 +89,21 @@ public class WildBattleMode extends AbstractBattleMode {
 
     private void paintOptions () {
         // TODO Auto-generated method stub
-        myOptionsBuffer.setColor(Color.cyan);
+        myOptionsBuffer.setColor(BEIGE);
         myOptionsBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
                                  myOptionsBuffer.getClipBounds().height);
     }
 
     private void paintMyHealth () {
         // TODO Auto-generated method stub
-        myHealthBuffer.setColor(Color.red);
+        myHealthBuffer.setColor(BEIGE);
         myHealthBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
                                 myOptionsBuffer.getClipBounds().height);
     }
 
     private void paintEnemyHealth () {
         // TODO Auto-generated method stub
-        enemyHealthBuffer.setColor(Color.green);
+        enemyHealthBuffer.setColor(BEIGE);
         enemyHealthBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
                                    myOptionsBuffer.getClipBounds().height);
     }
