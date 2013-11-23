@@ -62,6 +62,7 @@ public class Constants {
     public static final String JSON_FREQ = "frequency";
     public static final String JSON_MONSTERS = "monsters";
     public static final String JSON_PROB = "probability";
+    public static final String JSON_LEVEL = "level";
 
     public static final String JSON_NAME = "name";
     public static final String JSON_X = "x";
@@ -97,4 +98,5 @@ public class Constants {
     public static final String FILENAME_DEFINITION = "definition.json";
     public static final String FILENAME_WORLD = "world.json";
     public static final String FILENAME_SAVESTATE = "saveState.json";
+
 }
