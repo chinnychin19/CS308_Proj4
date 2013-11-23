@@ -39,12 +39,12 @@ public class Player extends AbstractCharacter implements Fighter {
         try {
             //ADDING MONSTERS
             myParty = new ArrayList<Monster>(); // TODO: populate
-            JSONArray myMonstersJSON = objInWorld.getJSONArray("monsters");
+            JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWWERCASE);
             for (Object monsterObj : myMonstersJSON) {
                 SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
                 SmartJsonObject monsterDefinition =
                         getModel().getDefinitionCache()
-                                .getInstance("Monster", monsterInWorld.getString(Constants.JSON_NAME));
+                                .getInstance(Constants.MONSTER_UPPERCASE, monsterInWorld.getString(Constants.JSON_NAME));
                 myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
             }
             
@@ -81,7 +81,7 @@ public class Player extends AbstractCharacter implements Fighter {
     }
 
     @Override
-    public void doFrame (World w, Input input) { //TODO: inputs should be an object
+    public void doFrame (World w, Input input) {
       Direction dir = getMoveDirection(input);
       if (null != dir) {
           setDirection(dir);

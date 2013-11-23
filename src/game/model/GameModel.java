@@ -35,9 +35,8 @@ public class GameModel {
     }
     
     private void loadTypeMatrix() {
-        //TODO: constant
         try {
-            SmartJsonObject matrixDefinition = myDefinitionCache.getInstance("TypeMatrix", "matrix");
+            SmartJsonObject matrixDefinition = myDefinitionCache.getInstance(Constants.TYPE_MATRIX, Constants.MATRIX);
             myTypeMatrix = new TypeMatrix(this, matrixDefinition);
         }
         catch (SmartJsonException e) {
@@ -66,6 +65,7 @@ public class GameModel {
             myStateSaver.load();
         }
         catch (Exception e) {
+        	//TODO: handle exception
             // Save state file was not found. This will happen the first time, so do nothing.
         }
     }
@@ -87,6 +87,7 @@ public class GameModel {
         return myWorld.getGroundObject(loc);
     }
     
+    //TODO: delete this?
 //    public Map<Loc, AbstractViewableObject> getViewableObjects () {
 //        return myWorld.getViewableObjects();
 //    }

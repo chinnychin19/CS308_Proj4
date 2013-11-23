@@ -129,37 +129,35 @@ public class Monster extends AbstractModelObject {
         myDefense = (int) (myBaseDefense * myLevel * factor);
     }
         
-    //TODO: make constants
     private void readStats(SmartJsonObject objInWorld) {
         try {
             myLevel = objInWorld.getInt(Constants.JSON_LEVEL);
-            myExp = objInWorld.getInt("exp");
-            myExpToNextLevel = objInWorld.getInt("expToNextLevel");
-            myMaxHP = objInWorld.getInt("maxHP");
-            myCurHP = objInWorld.getInt("curHP");
-            myAttack = objInWorld.getInt("attack");
-            myDefense = objInWorld.getInt("defense");
+            myExp = objInWorld.getInt(Constants.EXP);
+            myExpToNextLevel = objInWorld.getInt(Constants.EXP_TO_NEXT_LEVEL);
+            myMaxHP = objInWorld.getInt(Constants.MAX_HP);
+            myCurHP = objInWorld.getInt(Constants.CUR_HP);
+            myAttack = objInWorld.getInt(Constants.ATTACK_LOWERCASE);
+            myDefense = objInWorld.getInt(Constants.DEFENSE);
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
         }
     }
     
-    //TODO: make constants
     private void readDefinition(SmartJsonObject definition) {
         try {
             String imageURL = definition.getString(Constants.JSON_IMAGE);
             myImage = new ImageIcon(imageURL).getImage();
             myCatchRate = definition.getDouble(Constants.JSON_MONSTER_CATCH_RATE);
-            myType = new Type(definition.getString("type"));
-            myBaseHP = definition.getInt("baseHP");
-            myBaseAttack = definition.getInt("baseAttack");
-            myBaseDefense = definition.getInt("baseDefense");
+            myType = new Type(definition.getString(Constants.TYPE));
+            myBaseHP = definition.getInt(Constants.BASE_HP);
+            myBaseAttack = definition.getInt(Constants.BASE_ATTACK);
+            myBaseDefense = definition.getInt(Constants.BASE_DEFENSE);
             myAttacks = new ArrayList<AttackWrapper>();
             for (Object obj : definition.getJSONArray(Constants.JSON_MONSTER_ALL_ATTACKS)) {
                 SmartJsonObject attackJson = new SmartJsonObject((JSONObject) obj);
-                String name = attackJson.getString("name");
-                SmartJsonObject a = getModel().getDefinitionCache().getInstance("Attack", name);
+                String name = attackJson.getString(Constants.NAME);
+                SmartJsonObject a = getModel().getDefinitionCache().getInstance(Constants.ATTACK_UPPERCASE, name);
                 Attack attack = new Attack(getModel(), a);
                 int unlockLevel = attackJson.getInt(Constants.JSON_ATTACK_UNLOCK_LEVEL);
                 myAttacks.add(new AttackWrapper(attack, unlockLevel));
