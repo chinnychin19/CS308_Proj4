@@ -62,7 +62,6 @@ public class WildRegion extends AbstractGround {
         private double myProbability;
         private String myName;
         private int myLevel;
-//                SmartJsonObject monsterJson = getModel().getDefinitionCache().getInstance("Monster", monsterInfo.getString(Constants.JSON_NAME)); // TODO: Constants
 
         public MonsterWrapper (SmartJsonObject monsterInfo) {
             try{
@@ -76,7 +75,8 @@ public class WildRegion extends AbstractGround {
 
         public Monster getMonster () {
             try{
-                return new Monster(getModel(), getModel().getDefinitionCache().getInstance("Monster", myName));
+                return new Monster(getModel(), getModel().getDefinitionCache()
+                        .getInstance("Monster", myName), myLevel);
             } catch(SmartJsonException e){
                 e.printStackTrace();
             }

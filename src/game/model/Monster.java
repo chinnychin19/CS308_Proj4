@@ -22,19 +22,29 @@ import constants.Constants;
 
 public class Monster extends AbstractModelObject {
 
-    private int myMaxHP;
-    private double myCatchRate;
-    private List<AttackWrapper> myAttacks;
     private Image myImage;
-    private int myCurrentLevel;
+    private double myCatchRate;
+    private Type myType;
+    private int myBaseHP;
+    private int myBaseAttack;
+    private int myBaseDefense;
+    private int myLevel;
+    private int myExp;
+    private int myExpToNextLevel;
+    private int myMaxHP;
+    private int myCurHP;
+    private int myAttack;
+    private int myDefense;
+    private List<AttackWrapper> myAttacks;
 //  private List<Monster> myEvolution; //this should not be a list...
 
     //To be called for an NPC's monsters or wild monsters
     //It will generate stats based on the level and base stats
-    public Monster (GameModel model, SmartJsonObject definition) {
+    public Monster (GameModel model, SmartJsonObject definition, int level) {
         super(model, definition);
         readDefinition(definition);
-        //TODO: generate stats for maxHP, curHP, attack, defense
+        myLevel = level;
+        generateStats();
     }
     
     //To be called for the Player's monsters because they already have stats
@@ -44,16 +54,41 @@ public class Monster extends AbstractModelObject {
         readStats(objInWorld);
     }
     
-    private void readStats(SmartJsonObject objInWorld) {
-        //TODO: read in cur stats for maxHP, curHP, attack, defense
+    private void generateStats() {
+        myExp = 0;
+        myExpToNextLevel = Integer.MAX_VALUE;
+        myMaxHP = myBaseHP * myLevel;
+        myCurHP = myMaxHP;
+        myAttack = myBaseAttack * myLevel;
+        myDefense = myBaseDefense * myLevel;
     }
     
+    //TODO: make constants
+    private void readStats(SmartJsonObject objInWorld) {
+        try {
+            myLevel = objInWorld.getInt(Constants.JSON_LEVEL);
+            myExp = objInWorld.getInt("exp");
+            myExpToNextLevel = objInWorld.getInt("expToNextLevel");
+            myMaxHP = objInWorld.getInt("maxHP");
+            myCurHP = objInWorld.getInt("curHP");
+            myAttack = objInWorld.getInt("attack");
+            myDefense = objInWorld.getInt("defense");
+        }
+        catch (SmartJsonException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    //TODO: make constants
     private void readDefinition(SmartJsonObject definition) {
         try {
             String imageURL = definition.getString(Constants.JSON_IMAGE);
             myImage = new ImageIcon(imageURL).getImage();
-            myMaxHP = definition.getInt(Constants.JSON_MONSTER_MAX_HP);
             myCatchRate = definition.getDouble(Constants.JSON_MONSTER_CATCH_RATE);
+            myType = new Type(definition.getString("type"));
+            myBaseHP = definition.getInt("baseHP");
+            myBaseAttack = definition.getInt("baseAttack");
+            myBaseDefense = definition.getInt("baseDefense");
             myAttacks = new ArrayList<AttackWrapper>();
             for (Object obj : definition.getJSONArray(Constants.JSON_MONSTER_ALL_ATTACKS)) {
                 SmartJsonObject attackJson = new SmartJsonObject((JSONObject) obj);
@@ -77,7 +112,7 @@ public class Monster extends AbstractModelObject {
     public List<Attack> getAllAvailableAttacks(){
         List<Attack> attacks = new ArrayList<Attack>();
         for(AttackWrapper aw : myAttacks){
-            if(aw.canUse(myCurrentLevel)){
+            if(aw.canUse(myLevel)){
                 attacks.add(aw.getAttack());
             }
         }
