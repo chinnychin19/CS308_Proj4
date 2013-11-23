@@ -12,8 +12,7 @@ import game.view.GameView;
  */
 
 public class Input {
-	private boolean[] myInputs;
-	private final int NUM_INPUTS = 7;
+	private boolean[] interactionValues;
 	
 	public enum Index{
 		UP(0), LEFT(1), DOWN(2), RIGHT(3), INTERACT(4), MENU(5), CURRENTLY_PRESSED(6);
@@ -28,9 +27,9 @@ public class Input {
 	}
           
 	public Input() {
-		 myInputs = new boolean[NUM_INPUTS];
-		 for(int i = 0; i < myInputs.length; i++){
-			 myInputs[i] = false;
+		 interactionValues = new boolean[Constants.NUM_INPUTS];
+		 for(int i = 0; i < interactionValues.length; i++){
+			 interactionValues[i] = false;
 		 }
    }
 	/**
@@ -38,42 +37,42 @@ public class Input {
 	 * @return position of key
 	 */
 	public boolean isKeyUpPressed(){
-		return myInputs[Index.UP.getValue()];
+		return interactionValues[Index.UP.getValue()];
 	}
 	/**
 	 * Checks to see if the down key is pressed
 	 * @return position of key
 	 */
 	public boolean isKeyDownPressed(){
-		return myInputs[Index.DOWN.getValue()];
+		return interactionValues[Index.DOWN.getValue()];
 	}
 	/**
 	 * Checks to see if the left key is pressed
 	 * @return position of key
 	 */
 	public boolean isKeyLeftPressed(){
-		return myInputs[Index.LEFT.getValue()];
+		return interactionValues[Index.LEFT.getValue()];
 	}
 	/**
 	 * Checks to see if the right key is pressed
 	 * @return position of key
 	 */
 	public boolean isKeyRightPressed(){
-		return myInputs[Index.RIGHT.getValue()];
+		return interactionValues[Index.RIGHT.getValue()];
 	}
 	/**
 	 * Checks to see if the interact key is pressed
 	 * @return position of key
 	 */
 	public boolean isKeyInteractPressed(){
-		return myInputs[Index.INTERACT.getValue()];
+		return interactionValues[Index.INTERACT.getValue()];
 	}
 	/**
 	 * Checks to see if the menu key is pressed
 	 * @return position of key
 	 */
 	public boolean isKeyMenuPressed(){
-		return myInputs[Index.MENU.getValue()];
+		return interactionValues[Index.MENU.getValue()];
 	}
 	/**
 	 * Checks to see if any of the direction keys are pressed
@@ -81,8 +80,8 @@ public class Input {
 	 */
 	public boolean isDirectionPressed(){
 		for(int i=0; i < Constants.NUM_OF_DIRECTIONS; i++){
-			if(myInputs[i]){
-				return myInputs[i];
+			if(interactionValues[i]){
+				return interactionValues[i];
 			}
 		}
 		return false;
@@ -92,7 +91,7 @@ public class Input {
 	 * @return position of key
 	 */
 	public boolean isKeyCurrentlyPressed(){
-		return myInputs[Index.CURRENTLY_PRESSED.getValue()];
+		return interactionValues[Index.CURRENTLY_PRESSED.getValue()];
 	}
 	/**
 	 * Checks to see if the current key has been released
@@ -106,14 +105,14 @@ public class Input {
 	 * @param val index of which key to set
 	 */
 	public void setKeyPressed(int val){
-		myInputs[val] = true;
+		interactionValues[val] = true;
 	}
 	/**
 	 * Set a specific key to the 'unpressed state'
 	 * @param val index of which key to set
 	 */
 	public void setKeyUnpressed(int val){
-		myInputs[val] = false;
+		interactionValues[val] = false;
 	}
 	/**
 	 * Set the 'Current' key to the 'pressed state' -- unlike other set methods, which require a key index to be specified, this
@@ -121,7 +120,7 @@ public class Input {
 	 * key is currently pressed.  As a result, it doesn't know which key is pressed, just that a key IS pressed
 	 */
 	public void setKeyCurrentlyPressed(){
-		myInputs[Index.CURRENTLY_PRESSED.getValue()] = true;
+		interactionValues[Index.CURRENTLY_PRESSED.getValue()] = true;
 	}
 	/**
 	 * Set the 'Current' key to unreleased.  'Current' key is its own key, that keeps track if any key is pressed at the current 
@@ -129,15 +128,20 @@ public class Input {
 	 * not a specific key.   
 	 */
 	public void setKeyCurrentlyReleased(){
-		myInputs[Index.CURRENTLY_PRESSED.getValue()] = false;
+		interactionValues[Index.CURRENTLY_PRESSED.getValue()] = false;
 	}
 	/**
 	 * Reset all the inputs to the original states
 	 */
 	public void resetAllInputs(){
-		for(int i = 0; i < myInputs.length; i++){
-			myInputs[i] = false;
+		for(int i = 0; i < interactionValues.length; i++){
+			interactionValues[i] = false;
 		}
+	}
+	
+	public boolean[] getIndexValues(){
+		boolean[] copyOfOriginal = interactionValues.clone();
+		return copyOfOriginal;
 	}
 	
 }

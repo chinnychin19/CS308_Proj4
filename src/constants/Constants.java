@@ -100,5 +100,7 @@ public class Constants {
     public static final String FILENAME_SAVESTATE = "saveState.json";
     
     public static final int NUM_OF_DIRECTIONS = 4;
+    public static final int NUM_INPUTS = 7;
+    
 
 }

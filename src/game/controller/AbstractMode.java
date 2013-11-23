@@ -21,23 +21,13 @@ public abstract class AbstractMode extends KeyAdapter {
     private GameModel myModel;
     private GameView myView;
     private Graphics myGraphics;
-    private boolean[] myInputs;
-    private final int NUM_INPUTS = 6;
-    /**
-     * These final constants may be used to index into the boolean array of inputs
-     */
-    public static final int INDEX_UP = 0,
-            INDEX_LEFT = 1,
-            INDEX_DOWN = 2,
-            INDEX_RIGHT = 3,
-            INDEX_INTERACT = 4,
-            INDEX_MENU = 5;
+    private Input myInputs;
 
     public AbstractMode (GameModel model, GameView view) {
         myModel = model;
         myView = view;
         myGraphics = view.getBuffer();
-        myInputs = new boolean[NUM_INPUTS];
+        myInputs = new Input();
     }
 
     public abstract void paint ();
@@ -64,7 +54,7 @@ public abstract class AbstractMode extends KeyAdapter {
      * @return
      */
     protected boolean[] getInputs () {
-        return myInputs;
+        return myInputs.getIndexValues();
     }
 
     /**
@@ -111,8 +101,17 @@ public abstract class AbstractMode extends KeyAdapter {
      */
     private void updateInputs (KeyEvent e, boolean flag) {
         int x = e.getKeyCode();
-        if (x == KeyEvent.VK_UP) {
-            myInputs[INDEX_UP] = flag;
+        if(flag){
+        	myInputs.setKeyPressed(x);
+        }
+        else{
+        	myInputs.setKeyUnpressed(x);
+        }
+        
+        
+        
+   /*    if (x == KeyEvent.VK_UP) {
+        	myInputs[INDEX_UP] = flag;
         }
         if (x == KeyEvent.VK_LEFT) {
             myInputs[INDEX_LEFT] = flag;
@@ -128,7 +127,7 @@ public abstract class AbstractMode extends KeyAdapter {
         }
         if (x == KeyEvent.VK_SPACE) {
             myInputs[INDEX_MENU] = flag;
-        }
+        }*/
     }
 
     /**
