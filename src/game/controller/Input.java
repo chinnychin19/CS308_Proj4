@@ -2,10 +2,6 @@ package game.controller;
 
 import java.util.HashMap;
 
-import constants.Constants;
-import game.model.GameModel;
-import game.view.GameView;
-
 /**
  * Organizes the statuses of all the directions and key presses so that the model can stay updated.  Calls can be made to see if 
  * a key is pressed or to set a key to being pressed
@@ -23,7 +19,7 @@ public class Input {
 		}
 	}
           
-	public Input() { //TODO: change this to a map
+	public Input() {
 		 myInputs = new HashMap<Enum, Boolean>();
 		 for (InputIndex key : InputIndex.values()){
 			 myInputs.put(key, false);
