@@ -46,7 +46,7 @@
     },
    {
         "name": "pusha slap",
-        "power": "20",
+        "power": "200",
         "accuracy": "0.99",
         "statisticEffect": [{
             "target": "enemy",
