@@ -14,22 +14,16 @@ public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundO
 
     private Image myImage;
     private double myProbability;
-    private List<MonsterWrapper> myMonsters;
-
+    private List<MonsterWrapper> myMonsterWrappers;
     public WildRegion (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWord) {
         super(model, world, definition, objInWord);
 
         try {
             myProbability = definition.getDouble(Constants.JSON_PROB);
-            myMonsters = new ArrayList<MonsterWrapper>();
+            myMonsterWrappers = new ArrayList<MonsterWrapper>();
             for(Object objMonster : definition.getJSONArray(Constants.JSON_MONSTERS)){
                 SmartJsonObject monsterInfo = new SmartJsonObject((JSONObject)objMonster);
-                SmartJsonObject monsterJson = getModel().getDefinitionCache().getInstance("Monster", monsterInfo.getString(Constants.JSON_NAME)); // TODO: Constants
-                Monster monster = new Monster(getModel(), monsterJson);
-                double probability = monsterInfo.getDouble(Constants.JSON_PROB);
-                int level = monsterInfo.getInt(Constants.JSON_LEVEL);
-                monster.setLevel(level);
-                myMonsters.add(new MonsterWrapper(monster, probability));
+                myMonsterWrappers.add(new MonsterWrapper(monsterInfo));
             }
         }
         catch (SmartJsonException e) {
@@ -46,14 +40,14 @@ public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundO
             if(rand <= myProbability){
                 System.out.println("WILD BATTLE MODE");
                 Monster toFight = selectMonster(Math.random());
-                System.out.println("Fighting with: "+toFight.getName());
+                System.out.println("Fighting with: "+toFight.getName()+"\t"+toFight);
             }
         }
     }
     
     private Monster selectMonster(double rand){
         double seen = 0;
-        for(MonsterWrapper m : myMonsters){
+        for(MonsterWrapper m : myMonsterWrappers){
             if(m.shouldUseMonster(rand, seen))
                 return m.getMonster();
             seen += m.getProbability();
@@ -64,16 +58,28 @@ public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundO
     // // frequency of tile
     // // frequnecy of monsters
     private class MonsterWrapper {
-        private Monster myMonster;
         private double myProbability;
+        private String myName;
+        private int myLevel;
+//                SmartJsonObject monsterJson = getModel().getDefinitionCache().getInstance("Monster", monsterInfo.getString(Constants.JSON_NAME)); // TODO: Constants
 
-        public MonsterWrapper (Monster monster, double probability) {
-            myMonster = monster;
-            myProbability = probability;
+        public MonsterWrapper (SmartJsonObject monsterInfo) {
+            try{
+                myProbability = monsterInfo.getDouble(Constants.JSON_PROB);
+                myName = monsterInfo.getString(Constants.JSON_NAME);
+                myLevel = monsterInfo.getInt(Constants.JSON_LEVEL);
+            } catch(SmartJsonException e){
+                e.printStackTrace();
+            }
         }
 
         public Monster getMonster () {
-            return myMonster;
+            try{
+                return new Monster(getModel(), getModel().getDefinitionCache().getInstance("Monster", myName));
+            } catch(SmartJsonException e){
+                e.printStackTrace();
+            }
+            return null;
         }
         
         public double getProbability () {
