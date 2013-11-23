@@ -21,13 +21,13 @@ public abstract class AbstractMode extends KeyAdapter {
     private GameModel myModel;
     private GameView myView;
     private Graphics myGraphics;
-    private Input myInputs;
+    private Input myInput;
 
     public AbstractMode (GameModel model, GameView view) {
         myModel = model;
         myView = view;
         myGraphics = view.getBuffer();
-        myInputs = new Input();
+        myInput = new Input();
     }
 
     public abstract void paint ();
@@ -39,6 +39,10 @@ public abstract class AbstractMode extends KeyAdapter {
     
     public abstract void turnOn();
 
+    public Input getInput(){
+    	return myInput;
+    }
+    
     protected GameModel getModel () {
         return myModel;
     }
@@ -92,22 +96,22 @@ public abstract class AbstractMode extends KeyAdapter {
     private void updateInputs (KeyEvent e, boolean flag) {
         int x = e.getKeyCode();
        if (x == KeyEvent.VK_UP) {
-    	   myInputs.setInput(InputIndex.UP, flag);
+    	   myInput.setInput(InputIndex.UP, flag);
         }
         if (x == KeyEvent.VK_LEFT) {
-        	myInputs.setInput(InputIndex.LEFT, flag);
+        	myInput.setInput(InputIndex.LEFT, flag);
         }
         if (x == KeyEvent.VK_DOWN) {
-        	myInputs.setInput(InputIndex.DOWN, flag);
+        	myInput.setInput(InputIndex.DOWN, flag);
         }
         if (x == KeyEvent.VK_RIGHT) {
-        	myInputs.setInput(InputIndex.RIGHT, flag);
+        	myInput.setInput(InputIndex.RIGHT, flag);
         }
         if (x == KeyEvent.VK_Z) {
-        	myInputs.setInput(InputIndex.INTERACT, flag);
+        	myInput.setInput(InputIndex.INTERACT, flag);
         }
         if (x == KeyEvent.VK_SPACE) {
-        	myInputs.setInput(InputIndex.MENU, flag);
+        	myInput.setInput(InputIndex.MENU, flag);
         }
     }
 

@@ -124,8 +124,8 @@ public class WildBattleMode extends AbstractBattleMode {
 
     @Override
     public void act () {
-        boolean[] inputs = getInputs();
-        if (inputs[AbstractMode.INDEX_INTERACT]) {
+        Input input = getInput();
+        if (input.isKeyInteractPressed()) {
             System.out.println("interacting in wild battle");
             myBattle.conduct();
         }
