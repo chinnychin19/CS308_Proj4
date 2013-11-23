@@ -11,13 +11,6 @@ import java.util.HashMap;
 
 public class Input {
 	private HashMap<Enum, Boolean> myInputs;
-	
-	public enum InputIndex{
-		UP, LEFT, DOWN, RIGHT, INTERACT, MENU;
-		
-		private InputIndex(){
-		}
-	}
           
 	public Input() {
 		 myInputs = new HashMap<Enum, Boolean>();
@@ -113,5 +106,8 @@ public class Input {
 		for (InputIndex key : InputIndex.values()){
 			 myInputs.put(key, false);
 		 }
+	}
+	public void setInput(InputIndex input, boolean value){
+		myInputs.put(input, value);
 	}
 }

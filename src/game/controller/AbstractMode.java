@@ -3,8 +3,6 @@ package game.controller;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
-
 import constants.Constants;
 import game.model.GameModel;
 import game.view.GameView;
@@ -93,33 +91,24 @@ public abstract class AbstractMode extends KeyAdapter {
      */
     private void updateInputs (KeyEvent e, boolean flag) {
         int x = e.getKeyCode();
-       /* if(flag){
-        	myInputs.setKeyPressed(x);
-        }
-        else{
-        	myInputs.setKeyUnpressed(x);
-        }*/
-        
-        
-        
-   /*    if (x == KeyEvent.VK_UP) {
-        	myInputs[INDEX_UP] = flag;
+       if (x == KeyEvent.VK_UP) {
+    	   myInputs.setInput(InputIndex.UP, flag);
         }
         if (x == KeyEvent.VK_LEFT) {
-            myInputs[INDEX_LEFT] = flag;
+        	myInputs.setInput(InputIndex.LEFT, flag);
         }
         if (x == KeyEvent.VK_DOWN) {
-            myInputs[INDEX_DOWN] = flag;
+        	myInputs.setInput(InputIndex.DOWN, flag);
         }
         if (x == KeyEvent.VK_RIGHT) {
-            myInputs[INDEX_RIGHT] = flag;
+        	myInputs.setInput(InputIndex.RIGHT, flag);
         }
         if (x == KeyEvent.VK_Z) {
-            myInputs[INDEX_INTERACT] = flag;
+        	myInputs.setInput(InputIndex.INTERACT, flag);
         }
         if (x == KeyEvent.VK_SPACE) {
-            myInputs[INDEX_MENU] = flag;
-        }*/
+        	myInputs.setInput(InputIndex.MENU, flag);
+        }
     }
 
     /**
