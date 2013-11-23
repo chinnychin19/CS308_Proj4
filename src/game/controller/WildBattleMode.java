@@ -18,9 +18,13 @@ public class WildBattleMode extends AbstractBattleMode {
     private Graphics enemyHealthBuffer;
     private Graphics enemyMonsterBuffer;
 
-    public WildBattleMode (GameModel model, GameView view, Monster monster) {
+    public WildBattleMode (GameModel model, GameView view) {
         super(model, view);
-        myMonster = monster;
+        myMonster = null; //set through setMonster()
+    }
+    
+    public void setMonster(Monster m) {
+        myMonster = m;
     }
 
     @Override
@@ -116,7 +120,7 @@ public class WildBattleMode extends AbstractBattleMode {
     public void act () {
         // TODO Auto-generated method stub
         if (Math.random() < .1) {
-            getModel().setMode(GameController.INDEX_WANDERING);
+            getModel().getController().setWanderingMode();
         }
     }
 }

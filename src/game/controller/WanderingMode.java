@@ -110,7 +110,6 @@ public class WanderingMode extends AbstractMode {
                                (int) Constants.TILE_WIDTH,
                                (int) Constants.TILE_HEIGHT,
                                null);
-
         }
     }
 
