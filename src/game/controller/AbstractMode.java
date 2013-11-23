@@ -3,6 +3,8 @@ package game.controller;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+
 import constants.Constants;
 import game.model.GameModel;
 import game.view.GameView;
@@ -45,16 +47,6 @@ public abstract class AbstractMode extends KeyAdapter {
 
     protected GameView getView () {
         return myView;
-    }
-
-    /**
-     * Returns the state of the inputs as a boolean array. It may be index into by the final
-     * constants defined above
-     * 
-     * @return
-     */
-    protected boolean[] getInputs () {
-        return myInputs.getIndexValues();
     }
 
     /**
@@ -101,12 +93,12 @@ public abstract class AbstractMode extends KeyAdapter {
      */
     private void updateInputs (KeyEvent e, boolean flag) {
         int x = e.getKeyCode();
-        if(flag){
+       /* if(flag){
         	myInputs.setKeyPressed(x);
         }
         else{
         	myInputs.setKeyUnpressed(x);
-        }
+        }*/
         
         
         
