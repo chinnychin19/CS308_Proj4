@@ -1,5 +1,7 @@
 package game.model;
 
+import game.controller.AbstractMode;
+import game.controller.GameController;
 import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -39,6 +41,7 @@ public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundO
             double rand = Math.random();
             if(rand <= myProbability){
                 System.out.println("WILD BATTLE MODE");
+                getModel().setMode(GameController.INDEX_WILD_BATTLE);
             }
         }
     }

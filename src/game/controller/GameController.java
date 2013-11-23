@@ -10,12 +10,12 @@ public class GameController {
     private GameModel myModel;
     private int myModeIndex;
     private AbstractMode[] myModeArray;
-    private static final int INDEX_WANDERING = 0;
+    public static final int INDEX_WANDERING = 0, INDEX_WILD_BATTLE = 1;
 
     public GameController (String nameOfGame, GameView view) {
         myView = view;
         try {
-            myModel = new GameModel(nameOfGame);
+            myModel = new GameModel(nameOfGame, this);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -28,6 +28,7 @@ public class GameController {
     }
 
     public void setMode (int newModeIndex) {
+        //TODO: we should "turn off" previous mode and "turn on" new mode
         myView.removeKeyListener(myModeArray[myModeIndex]);
         myModeIndex = newModeIndex;
         myView.addKeyListener(myModeArray[newModeIndex]);
@@ -36,6 +37,7 @@ public class GameController {
     private void initModes () {
         myModeArray = new AbstractMode[] {
                                           new WanderingMode(myModel, myView),
+                                          new WildBattleMode(myModel, myView, null),
         };
         myModeIndex = INDEX_WANDERING;
     }
