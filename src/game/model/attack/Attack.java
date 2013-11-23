@@ -62,7 +62,7 @@ public class Attack extends AbstractModelObject {
     }
     
     private double damageFunction(int attackLevel, int attack, int defense, int power, double multiplier) {
-        return (2 + ( 2 + (attackLevel * 0.4)) * attack * power / 50 / defense) * multiplier;
+        return 5 * (2 + ( 2 + (attackLevel * 0.4)) * attack * power / 50 / defense) * multiplier;
     }
 
     @Override

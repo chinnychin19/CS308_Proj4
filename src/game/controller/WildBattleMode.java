@@ -21,7 +21,8 @@ public class WildBattleMode extends AbstractBattleMode {
     private Graphics myMonsterBuffer;
     private Graphics enemyHealthBuffer;
     private Graphics enemyMonsterBuffer;
-
+    private static final Color BEIGE = new Color(245, 245, 220);
+    
     public WildBattleMode (GameModel model, GameView view) {
         super(model, view);
     }
@@ -87,7 +88,7 @@ public class WildBattleMode extends AbstractBattleMode {
 
     private void paintMyHealth () {
         // TODO Auto-generated method stub
-        myHealthBuffer.setColor(Color.red);
+        myHealthBuffer.setColor(BEIGE);
         myHealthBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
                                 myOptionsBuffer.getClipBounds().height);
         paintHealthBuffer(myHealthBuffer, myBattle.getPlayerParty().getCurrentMonster());
@@ -95,7 +96,7 @@ public class WildBattleMode extends AbstractBattleMode {
 
     private void paintEnemyHealth () {
         // TODO Auto-generated method stub
-        enemyHealthBuffer.setColor(Color.green);
+        enemyHealthBuffer.setColor(BEIGE);
         enemyHealthBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
                                    myOptionsBuffer.getClipBounds().height);
         paintHealthBuffer(enemyHealthBuffer, myBattle.getEnemyParty().getCurrentMonster());
@@ -163,15 +164,15 @@ public class WildBattleMode extends AbstractBattleMode {
 
     @Override
     public void act () {
-        boolean[] inputs = getInputs();
-        if (inputs[AbstractMode.INDEX_UP] && selectedOption > 0) {
+        Input input = getInput();
+        if (input.isKeyInteractPressed()) {
+            System.out.println("interacting in wild battle");
+            myBattle.conduct();
+        }
+        if (input.isKeyUpPressed() && selectedOption > 0) {
             selectedOption--;
-        } else if (inputs[AbstractMode.INDEX_DOWN] && selectedOption < options.length - 1) {
+        } else if (input.isKeyDownPressed() && selectedOption < options.length - 1) {
             selectedOption++;
         }
-//        if (inputs[AbstractMode.INDEX_INTERACT]) {
-//            System.out.println("interacting in wild battle");
-//            myBattle.conduct();
-//        }
     }
 }

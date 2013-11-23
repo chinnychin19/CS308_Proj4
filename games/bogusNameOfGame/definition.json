@@ -27,7 +27,7 @@
 
     "Attack": [{
         "name": "vine whip",
-        "power": "15",
+        "power": "165",
         "accuracy": "0.95",
         "statisticEffect": [{
             "target": "enemy",

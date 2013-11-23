@@ -8,6 +8,7 @@ import java.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import util.jsonwrapper.SmartJsonObject;
 import constants.Constants;
 import jsoncache.JSONReader;
 import location.Direction;
@@ -28,30 +29,22 @@ public class StateSaver {
         myPlayer = myWorld.getPlayer();
     }
 
+    //TODO: NEEDS REFACTOR
     public void load () throws Exception {
         String worldJSONFilepath =
                 Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
                         Constants.FILENAME_SAVESTATE;
         myJSON = JSONReader.getJSON(worldJSONFilepath);
-        if (myJSON == null) {
-            throw new Exception("Save file not found");
-        }
-        JSONObject playerJSON = (JSONObject) myJSON.get(Constants.JSON_PLAYER);
+        if (myJSON == null) { throw new Exception("Save file not found"); }
+        try {
+            SmartJsonObject playerJSON =
+                    new SmartJsonObject((JSONObject) myJSON.get(Constants.JSON_PLAYER));
 
-        int x = Integer.parseInt(playerJSON.get(Constants.JSON_X).toString());
-        int y = Integer.parseInt(playerJSON.get(Constants.JSON_Y).toString());
-        myPlayer.setLoc(new Loc(x,y), myWorld);
-        
-        String directionStr = playerJSON.get(Constants.JSON_ORIENTATION).toString();
-        myPlayer.setDirection(Direction.constructFromString(directionStr));
-
-        JSONArray playerKeyItems = (JSONArray) playerJSON.get(Constants.JSON_KEYITEMS);
-        Collection<KeyItem> keyItems = new ArrayList<KeyItem>();
-        for (Object o : playerKeyItems) {
-            JSONObject jObj = (JSONObject) o;
-            keyItems.add(new KeyItem(myModel,jObj.toString()));
+            myPlayer.loadFromWorld(playerJSON);
         }
-        myPlayer.setKeyItems(keyItems);
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -66,8 +59,10 @@ public class StateSaver {
 
         String lastDir = myPlayer.getDirection().toString();
         player.put(Constants.JSON_ORIENTATION, lastDir);
-        
-        String outFile = Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" + Constants.FILENAME_SAVESTATE;
+
+        String outFile =
+                Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
+                        Constants.FILENAME_SAVESTATE;
         Writer out = new PrintWriter(new File(outFile));
         JSONValue.writeJSONString(state, out);
     }

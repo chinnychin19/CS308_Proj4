@@ -4,6 +4,7 @@
         "x": "0",
         "y": "0",
         "orientation": "down",
+        "keyItems" : [],
         "monsters" : [ {
           "name" : "tyler",
           "level" : "5",
