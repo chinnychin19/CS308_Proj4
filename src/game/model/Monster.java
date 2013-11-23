@@ -25,14 +25,31 @@ public class Monster extends AbstractModelObject {
     private int myMaxHP;
     private double myCatchRate;
     private List<AttackWrapper> myAttacks;
-    private List<Monster> myEvolution;
     private Image myImage;
-    private int myCurrentLevel = 1; //TODO: READ FROM JSON
+    private int myCurrentLevel;
+//  private List<Monster> myEvolution; //this should not be a list...
 
+    //To be called for an NPC's monsters or wild monsters
+    //It will generate stats based on the level and base stats
     public Monster (GameModel model, SmartJsonObject definition) {
         super(model, definition);
+        readDefinition(definition);
+        //TODO: generate stats for maxHP, curHP, attack, defense
+    }
+    
+    //To be called for the Player's monsters because they already have stats
+    public Monster(GameModel model, SmartJsonObject definition, SmartJsonObject objInWorld) {
+        super(model, definition);
+        readDefinition(definition);
+        readStats(objInWorld);
+    }
+    
+    private void readStats(SmartJsonObject objInWorld) {
+        //TODO: read in cur stats for maxHP, curHP, attack, defense
+    }
+    
+    private void readDefinition(SmartJsonObject definition) {
         try {
-
             String imageURL = definition.getString(Constants.JSON_IMAGE);
             myImage = new ImageIcon(imageURL).getImage();
             myMaxHP = definition.getInt(Constants.JSON_MONSTER_MAX_HP);
@@ -45,23 +62,18 @@ public class Monster extends AbstractModelObject {
                 Attack attack = new Attack(getModel(), a);
                 int unlockLevel = attackJson.getInt(Constants.JSON_ATTACK_UNLOCK_LEVEL);
                 myAttacks.add(new AttackWrapper(attack, unlockLevel));
+                // TODO: Implement myEvolution
             }
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
         }
-        // TODO: Implement myEvolution
-        
     }
     
     public Image getImage(){
         return myImage;
     }
-    
-    public void setLevel(int level){
-        myCurrentLevel = level;
-    }
-    
+        
     public List<Attack> getAllAvailableAttacks(){
         List<Attack> attacks = new ArrayList<Attack>();
         for(AttackWrapper aw : myAttacks){

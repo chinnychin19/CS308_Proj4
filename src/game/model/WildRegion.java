@@ -12,7 +12,7 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
 
-public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundObject
+public class WildRegion extends AbstractGround {
 
     private Image myImage;
     private double myProbability;

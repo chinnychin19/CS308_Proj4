@@ -2,7 +2,18 @@
 	"Player" : {
 		"x" : "-2", 
 		"y" : "-4", 
-		"orientation" : "down"
+		"orientation" : "down",
 		"keyItems" : ["razor"],
+        "monsters" : [ {
+          "name" : "tyler",
+          "level" : "8",
+          "exp" : "0",
+          "expToNextLevel" : "300",
+          "maxHP" : "20",
+          "curHP" : "20",
+          "attack" : "23",
+          "defense" : "36"
+          },
+        ]
 	},
 }

@@ -1,96 +1,107 @@
-{ "Player" : 
-  [{
-    "name" : "hero",
-    "image-up" : "images/players/mainPLayer1/up.png",
-    "image-down" : "images/players/mainPLayer1/down.png",
-    "image-left" : "images/players/mainPLayer1/left.png",
-    "image-right" : "images/players/mainPLayer1/right.png",
-  }],
-
-  "Monster" : 
-  [{
-    "name" : "tyler", 
-    "maxHP" : "300", 
-    "catchRate" : ".4",
-    "image" : "images/monsters/tyler.png",
-    "evolution" : { 
-    	"name" : "hunter", 
-    	"level" : "8"
-    },
-    "attacks" : [
-    	{"name" : "vine whip", "unlockLevel" : "4" }
-    ],
-  }],
-  
-  "Attack" :
-  [{
-  	"name" : "vine whip",
-  	"power" : "20",
-  	"accuracy" : "0.95",
-    "statisticEffect" : [{
-      "target" : "enemy",
-      "statistic" : "defend",
-      "change" : "-10"
+{
+    "Player": [{
+        "name": "hero",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
     }],
-    "statusEffect" : [{
-      "status" : "poison",
-      "target" : "enemy"
-    }]	
-  }],
-  
 
-  "Obstacle" : 
-  [{
-    "name" : "flower",
-    "image" : "images/obstacles/flower.png",
-  }],
-  
-  "KeyItem" : [{ "name" : "razor" }],
-  
-  "NPC" : [
-      {"name" : "walker1", 
-	   "image-up" : "images/players/mainPLayer1/up.png",
-	   "image-down" : "images/players/mainPLayer1/down.png",
-	   "image-left" : "images/players/mainPLayer1/left.png",
-	   "image-right" : "images/players/mainPLayer1/right.png",
-       "dialogue" : "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit.",
-       }
-    ],
-  
-  "FightingNPC" : [
-  	{
-  	   "name" : "fighter1",
-	   "image-up" : "images/players/mainPLayer1/up.png",
-	   "image-down" : "images/players/mainPLayer1/down.png",
-	   "image-left" : "images/players/mainPLayer1/left.png",
-	   "image-right" : "images/players/mainPLayer1/right.png",
-       "lineOfSightDistance" : "2",
-       "dialogue" : "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit.",
-       "monsters" : [],
-       "bet" : 25,
-       "postDialogue" : "thank you come again.",
-       "keyItems" : [ "razor" ]
-  	}
-  ]
-  "TypeMatrix" : [{
-    "name" : "matrix",
-    "matrix" : {
-      "electric" : { "water" : "2", "rock" : "0.1", "electric" : "1" },
-      "rock" :{ "water" : "0.1", "rock" : "1", "electric" : "1.5"}, 
-      "water" : { "water" : "1", "rock" : "2.0", "electric" : "0.5"}
-    }
-  }]
-  
-  "WildRegion" : [{
-  	"name" : "grass1", 
-  	"image" : "images/ground/wildGrass.png", 
-  	"probability" : ".05",
-	  "monsters" : [
-      {
-			"name" : "tyler", 
-			"level" : "14", 
-			"probability" : "1.0"
-		  }]
-  }]
-  
+    "Monster": [{
+        "name": "tyler",
+        "image": "images/monsters/tyler.png",
+        "catchRate": ".4",
+        "type" : "water",
+        "baseHP" : "20",
+        "baseAttack" : "17",
+        "baseDefense" : "25",
+        "attacks": [{
+            "name": "vine whip",
+            "unlockLevel": "4"
+        }],
+        "evolution": {
+            "name": "hunter",
+            "level": "8"
+        },
+    }],
+
+    "Attack": [{
+        "name": "vine whip",
+        "power": "20",
+        "accuracy": "0.95",
+        "statisticEffect": [{
+            "target": "enemy",
+            "statistic": "defend",
+            "change": "-10"
+        }],
+        "statusEffect": [{
+            "status": "poison",
+            "target": "enemy"
+        }]
+    }],
+
+
+    "Obstacle": [{
+        "name": "flower",
+        "image": "images/obstacles/flower.png",
+    }],
+
+    "KeyItem": [{
+        "name": "razor"
+    }],
+
+    "NPC": [{
+        "name": "walker1",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "dialogue": "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit.",
+    }],
+
+    "FightingNPC": [{
+        "name": "fighter1",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "2",
+        "dialogue": "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit.",
+        "monsters": [],
+        "bet": 25,
+        "postDialogue": "thank you come again.",
+        "keyItems": ["razor"]
+    }]
+    "TypeMatrix": [{
+        "name": "matrix",
+        "matrix": {
+            "electric": {
+                "water": "2",
+                "rock": "0.1",
+                "electric": "1"
+            },
+            "rock": {
+                "water": "0.1",
+                "rock": "1",
+                "electric": "1.5"
+            },
+            "water": {
+                "water": "1",
+                "rock": "2.0",
+                "electric": "0.5"
+            }
+        }
+    }]
+
+    "WildRegion": [{
+        "name": "grass1",
+        "image": "images/ground/wildGrass.png",
+        "probability": ".05",
+        "monsters": [{
+            "name": "tyler",
+            "level": "14",
+            "probability": "1.0"
+        }]
+    }]
+
 }

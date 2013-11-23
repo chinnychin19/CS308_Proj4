@@ -1,31 +1,57 @@
 {
-  "Player" : [{"name" : "hero", "x" : "0", "y" : "0", "orientation" : "down"}],
-  
-  "NPC" : [
-  	{"name" : "walker1", "x" : "4", "y" : "6", "orientation" : "right"}
-  ],
-  	
-  "FightingNPC" : [],
-  
-  "Obstacle" : [
-	  {"name" : "flower",
-	   "x":"2", "y" : "2", "keyItems" : ["razor"]},
-	  {"name" : "flower",
-	   "x":"2", "y" : "3"}
-  ],
-  
-  "WildRegion" : [
-    {"name" : "grass1",
-     "x": "2", 
-     "y" : "1"},
-    {"name" : "grass1",
-     "x": "3", 
-     "y" : "1"},
-    {"name" : "grass1",
-     "x": "2", 
-     "y" : "0"},
-    {"name" : "grass1",
-     "x": "3", 
-     "y" : "0"},
-     ]
+    "Player": [{
+        "name": "hero",
+        "x": "0",
+        "y": "0",
+        "orientation": "down",
+        "monsters" : [ {
+          "name" : "tyler",
+          "level" : "5",
+          "exp" : "0",
+          "expToNextLevel" : "300",
+          "maxHP" : "20",
+          "curHP" : "20",
+          "attack" : "17",
+          "defense" : "25"
+          },
+        ]
+    }],
+
+    "NPC": [{
+        "name": "walker1",
+        "x": "4",
+        "y": "6",
+        "orientation": "right"
+    }],
+
+    "FightingNPC": [],
+
+    "Obstacle": [{
+        "name": "flower",
+        "x": "2",
+        "y": "2",
+        "keyItems": ["razor"]
+    }, {
+        "name": "flower",
+        "x": "2",
+        "y": "3"
+    }],
+
+    "WildRegion": [{
+        "name": "grass1",
+        "x": "2",
+        "y": "1"
+    }, {
+        "name": "grass1",
+        "x": "3",
+        "y": "1"
+    }, {
+        "name": "grass1",
+        "x": "2",
+        "y": "0"
+    }, {
+        "name": "grass1",
+        "x": "3",
+        "y": "0"
+    }, ]
 }
