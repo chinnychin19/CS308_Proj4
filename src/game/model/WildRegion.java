@@ -1,6 +1,7 @@
 package game.model;
 
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import org.json.simple.JSONObject;
@@ -20,10 +21,15 @@ public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundO
 
         try {
             myProbability = definition.getDouble(Constants.JSON_PROB);
+            myMonsters = new ArrayList<MonsterWrapper>();
             for(Object objMonster : definition.getJSONArray(Constants.JSON_MONSTERS)){
                 SmartJsonObject monsterInfo = new SmartJsonObject((JSONObject)objMonster);
                 SmartJsonObject monsterJson = getModel().getDefinitionCache().getInstance("Monster", monsterInfo.getString(Constants.JSON_NAME)); // TODO: Constants
                 Monster monster = new Monster(getModel(), monsterJson);
+                double probability = monsterInfo.getDouble(Constants.JSON_PROB);
+                int level = monsterInfo.getInt(Constants.JSON_LEVEL);
+                monster.setLevel(level);
+                myMonsters.add(new MonsterWrapper(monster, probability));
             }
         }
         catch (SmartJsonException e) {
@@ -39,6 +45,8 @@ public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundO
             double rand = Math.random();
             if(rand <= myProbability){
                 System.out.println("WILD BATTLE MODE");
+                Monster toFight = selectMonster(Math.random());
+                System.out.println("Fighting with: "+toFight.getName());
             }
         }
     }

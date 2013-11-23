@@ -54,6 +54,10 @@ public class Monster extends AbstractModelObject {
         
     }
     
+    public void setLevel(int level){
+        myCurrentLevel = level;
+    }
+    
     public List<Attack> getAllAvailableAttacks(){
         List<Attack> attacks = new ArrayList<Attack>();
         for(AttackWrapper aw : myAttacks){
