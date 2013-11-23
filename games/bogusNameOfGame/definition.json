@@ -12,9 +12,9 @@
         "image": "images/monsters/tyler.png",
         "catchRate": ".4",
         "type" : "water",
-        "baseHP" : "20",
-        "baseAttack" : "17",
-        "baseDefense" : "25",
+        "baseHP" : "18",
+        "baseAttack" : "13",
+        "baseDefense" : "15",
         "attacks": [{
             "name": "vine whip",
             "unlockLevel": "4"
@@ -27,7 +27,7 @@
 
     "Attack": [{
         "name": "vine whip",
-        "power": "20",
+        "power": "15",
         "accuracy": "0.95",
         "statisticEffect": [{
             "target": "enemy",
@@ -68,10 +68,10 @@
         "lineOfSightDistance": "2",
         "dialogue": "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit.",
         "monsters": [],
-        "bet": 25,
+        "bet": "25",
         "postDialogue": "thank you come again.",
         "keyItems": ["razor"]
-    }]
+    }],
     "TypeMatrix": [{
         "name": "matrix",
         "matrix": {
@@ -91,7 +91,7 @@
                 "electric": "0.5"
             }
         }
-    }]
+    }],
 
     "WildRegion": [{
         "name": "grass1",
@@ -99,7 +99,7 @@
         "probability": ".05",
         "monsters": [{
             "name": "tyler",
-            "level": "14",
+            "level": "4",
             "probability": "1.0"
         }]
     }]

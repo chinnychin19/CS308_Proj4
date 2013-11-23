@@ -34,7 +34,7 @@ public class GameController {
     
     public void setWildBattleMode(Monster monster) {
         // need to set the monster before activating the mode so it can draw the image
-        ((WildBattleMode) myModeArray[INDEX_WILD_BATTLE]).setMonster(monster);
+        ((WildBattleMode) myModeArray[INDEX_WILD_BATTLE]).setEnemyMonster(monster);
         setMode(INDEX_WILD_BATTLE);
     }
 

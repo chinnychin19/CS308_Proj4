@@ -6,12 +6,15 @@ import constants.Constants;
 import game.model.GameModel;
 import game.model.Monster;
 import game.model.Player;
+import game.model.battle.Battle;
+import game.model.battle.WildMonsterParty;
+import game.model.battle.WildPlayerParty;
 import game.view.GameView;
 
 
 public class WildBattleMode extends AbstractBattleMode {
-
-    private Monster myMonster;
+    private Battle myBattle;
+    private Monster enemyMonster;
     private Graphics myOptionsBuffer;
     private Graphics myHealthBuffer;
     private Graphics myMonsterBuffer;
@@ -20,11 +23,16 @@ public class WildBattleMode extends AbstractBattleMode {
 
     public WildBattleMode (GameModel model, GameView view) {
         super(model, view);
-        myMonster = null; //set through setMonster()
+        enemyMonster = null; //set through setMonster()
     }
     
-    public void setMonster(Monster m) {
-        myMonster = m;
+    public void setEnemyMonster(Monster monster) {
+        enemyMonster = monster;
+        WildPlayerParty attacker = new WildPlayerParty(getModel().getController(), getModel().getPlayer());
+        WildMonsterParty defender = new WildMonsterParty(getModel().getController(), monster);
+        myBattle = new Battle(attacker, defender);
+        attacker.setBattle(myBattle);
+        defender.setBattle(myBattle);
     }
 
     @Override
@@ -100,27 +108,26 @@ public class WildBattleMode extends AbstractBattleMode {
     }
 
     private void paintMyMonster () {
-        // TODO Auto-generated method stub
-        myMonsterBuffer.setColor(Color.pink);
-        myMonsterBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
-                                 myOptionsBuffer.getClipBounds().height);
-    }
-
-    private void paintEnemyMonster () {
-        // TODO Auto-generated method stub
-        //enemyMonsterBuffer.setColor(Color.white);
-        enemyMonsterBuffer.drawImage(myMonster.getImage(), 0, 0, 
+        Monster monster = myBattle.getPlayerParty().getCurrentMonster();
+        myMonsterBuffer.drawImage(monster.getImage(), 0, 0, 
                                      enemyMonsterBuffer.getClipBounds().width, 
                                      enemyMonsterBuffer.getClipBounds().height, 
                                      null);
+    }
 
+    private void paintEnemyMonster () {
+        enemyMonsterBuffer.drawImage(enemyMonster.getImage(), 0, 0, 
+                                     enemyMonsterBuffer.getClipBounds().width, 
+                                     enemyMonsterBuffer.getClipBounds().height, 
+                                     null);
     }
 
     @Override
     public void act () {
-        // TODO Auto-generated method stub
-        if (Math.random() < .1) {
-            getModel().getController().setWanderingMode();
+        boolean[] inputs = getInputs();
+        if (inputs[AbstractMode.INDEX_INTERACT]) {
+            System.out.println("interacting in wild battle");
+            myBattle.conduct();
         }
     }
 }

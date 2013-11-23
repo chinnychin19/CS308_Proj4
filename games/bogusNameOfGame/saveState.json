@@ -9,8 +9,8 @@
           "level" : "8",
           "exp" : "0",
           "expToNextLevel" : "300",
-          "maxHP" : "20",
-          "curHP" : "20",
+          "maxHP" : "200",
+          "curHP" : "200",
           "attack" : "23",
           "defense" : "36"
           },

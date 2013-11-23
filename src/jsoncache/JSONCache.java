@@ -96,6 +96,10 @@ public class JSONCache {
         }
         throw new JSONException();
     }
+    
+//    public JSONObject getCategory(String category) {
+//        return (JSONObject) myJSON.get(category);
+//    }
 
     /**
      * Returns a copy of the requested object with the given category and unique name.

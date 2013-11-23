@@ -8,7 +8,7 @@ import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
-public class FightingNPC extends NPC {
+public class FightingNPC extends NPC implements Fighter {
     private List<Monster> myParty;
     private String myPostDialogue;
     private List<KeyItem> myKeyItems;
@@ -56,6 +56,7 @@ public class FightingNPC extends NPC {
      * Returns the NPC's party, containing the monsters that it has
      * @return myParty
      */
+    @Override
     public List<Monster> getParty(){
         return myParty;
     } 

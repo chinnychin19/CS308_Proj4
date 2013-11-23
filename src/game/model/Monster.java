@@ -54,15 +54,81 @@ public class Monster extends AbstractModelObject {
         readStats(objInWorld);
     }
     
-    private void generateStats() {
-        myExp = 0;
-        myExpToNextLevel = Integer.MAX_VALUE;
-        myMaxHP = myBaseHP * myLevel;
-        myCurHP = myMaxHP;
-        myAttack = myBaseAttack * myLevel;
-        myDefense = myBaseDefense * myLevel;
+    public Image getImage () {
+        return myImage;
+    }
+
+    public double getCatchRate () {
+        return myCatchRate;
+    }
+
+    public Type getType () {
+        return myType;
+    }
+
+    public int getBaseHP () {
+        return myBaseHP;
+    }
+
+    public int getBaseAttack () {
+        return myBaseAttack;
+    }
+
+    public int getBaseDefense () {
+        return myBaseDefense;
+    }
+
+    public int getLevel () {
+        return myLevel;
+    }
+
+    public int getExp () {
+        return myExp;
+    }
+
+    public int getExpToNextLevel () {
+        return myExpToNextLevel;
+    }
+
+    public int getMaxHP () {
+        return myMaxHP;
+    }
+
+    public int getCurHP () {
+        return myCurHP;
+    }
+
+    public int getAttack () {
+        return myAttack;
+    }
+
+    public int getDefense () {
+        return myDefense;
+    }
+
+    public List<AttackWrapper> getMyAttacks () {
+        return myAttacks;
+    }
+
+    public void changeHealth(int amount) {
+        myCurHP += amount;
+        if (myCurHP < 0) {
+            myCurHP = 0;
+        } else if (myCurHP > myMaxHP) {
+            myCurHP = myMaxHP;
+        }
     }
     
+    private void generateStats() {
+        double factor = 1 + Math.log(35);
+        myExp = 0;
+        myExpToNextLevel = Integer.MAX_VALUE; //TODO: wild pokemon
+        myMaxHP = (int) (myBaseHP * myLevel * factor);
+        myCurHP = myMaxHP;
+        myAttack = (int) (myBaseAttack * myLevel * factor);
+        myDefense = (int) (myBaseDefense * myLevel * factor);
+    }
+        
     //TODO: make constants
     private void readStats(SmartJsonObject objInWorld) {
         try {
@@ -103,10 +169,6 @@ public class Monster extends AbstractModelObject {
         catch (SmartJsonException e) {
             e.printStackTrace();
         }
-    }
-    
-    public Image getImage(){
-        return myImage;
     }
         
     public List<Attack> getAllAvailableAttacks(){
