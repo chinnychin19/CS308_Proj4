@@ -41,13 +41,14 @@ public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundO
             double rand = Math.random();
             if(rand <= myProbability){
                 System.out.println("WILD BATTLE MODE");
-                getModel().setMode(GameController.INDEX_WILD_BATTLE);
-                Monster toFight = selectMonster(Math.random());
+                Monster toFight = selectMonster();
+                getModel().getController().setWildBattleMode(toFight);
             }
         }
     }
     
-    private Monster selectMonster(double rand){
+    private Monster selectMonster(){
+        double rand = Math.random();
         double seen = 0;
         for(MonsterWrapper m : myMonsterWrappers){
             if(m.shouldUseMonster(rand, seen))
