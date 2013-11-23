@@ -110,17 +110,17 @@ public class Input {
 		myInputs[val] = false;
 	}
 	/**
-	 * Set the CURRENT key to the 'pressed state' -- unlike other set methods, which require a key index to be specified, this
+	 * Set the 'Current' key to the 'pressed state' -- unlike other set methods, which require a key index to be specified, this
 	 * method makes a note that a key is currently pressed.  This key could be anything, all this method cares about is that some
-	 * key is currently pressed.
+	 * key is currently pressed.  As a result, it doesn't know which key is pressed, just that a key IS pressed
 	 */
 	public void setKeyCurrentlyPressed(){
 		myInputs[INDEX_KEY_PRESSED] = true;
 	}
 	/**
-	 * Set the specific index in the Input object to false, that corresponds to the 'Current Key'.  Current key is its own key,
-	 * that keeps track if any key is pressed at the current moment.  This method does not require an index like other set methods,
-	 * but it just keeps track if any key is pressed, not a specific key.   
+	 * Set the 'Current' key to unreleased.  'Current' key is its own key, that keeps track if any key is pressed at the current 
+	 * moment.  This method does not require an index like other set methods, rather it just keeps track if any key is pressed, 
+	 * not a specific key.   
 	 */
 	public void setKeyCurrentlyReleased(){
 		myInputs[INDEX_KEY_PRESSED] = false;
