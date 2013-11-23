@@ -1,5 +1,7 @@
 package game.model;
 
+import game.controller.AbstractMode;
+import game.controller.GameController;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +41,8 @@ public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundO
             double rand = Math.random();
             if(rand <= myProbability){
                 System.out.println("WILD BATTLE MODE");
+                getModel().setMode(GameController.INDEX_WILD_BATTLE);
                 Monster toFight = selectMonster(Math.random());
-                System.out.println("Fighting with: "+toFight.getName()+"\t"+toFight);
             }
         }
     }
@@ -54,9 +56,7 @@ public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundO
         }
         return null;
     }
-    //
-    // // frequency of tile
-    // // frequnecy of monsters
+
     private class MonsterWrapper {
         private double myProbability;
         private String myName;

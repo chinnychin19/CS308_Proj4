@@ -1,6 +1,7 @@
 package game.model;
 
 import game.controller.AbstractMode;
+import game.controller.GameController;
 import java.io.IOException;
 import java.util.Map;
 import constants.Constants;
@@ -11,12 +12,14 @@ import location.Loc;
 
 
 public class GameModel {
+    private GameController myController;
     private Player myPlayer;
     private World myWorld;
     private StateSaver myStateSaver;
     private JSONCache myDefinitionCache;
 
-    public GameModel (String nameOfGame) throws Exception {
+    public GameModel (String nameOfGame, GameController controller) throws Exception {
+        myController = controller;
         String definitionJSONFilepath =
                 Constants.FOLDERPATH_GAMES + "/" + nameOfGame + "/" +
                         Constants.FILENAME_DEFINITION;
@@ -28,6 +31,10 @@ public class GameModel {
     
     public JSONCache getDefinitionCache() {
         return myDefinitionCache;
+    }
+    
+    public void setMode(int mode) {
+        myController.setMode(mode);
     }
 
     public Player getPlayer () {

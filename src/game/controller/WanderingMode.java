@@ -113,4 +113,14 @@ public class WanderingMode extends AbstractMode {
 
         }
     }
+
+    @Override
+    public void turnOff () {
+        getView().removeKeyListener(this);
+    }
+
+    @Override
+    public void turnOn () {
+        getView().addKeyListener(this);
+    }
 }
