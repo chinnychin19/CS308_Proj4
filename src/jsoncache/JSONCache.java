@@ -4,6 +4,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
+import util.jsonwrapper.jsonexceptions.SmartJsonException;
 
 
 /**
@@ -103,13 +105,13 @@ public class JSONCache {
      * @return
      * @throws JSONException Throws exception if object not found
      */
-    public SmartJsonObject getInstance (String category, String name) throws JSONException {
+    public SmartJsonObject getInstance (String category, String name) throws SmartJsonException {
         JSONArray cache = (JSONArray) myJSON.get(category);
         for (Object object : cache) {
             JSONObject jObject = (JSONObject) object;
             if (jObject.get("name").equals(name)) { return new SmartJsonObject(jObject); }
         }
-        throw new JSONException();
+        throw new NoJSONObjectJsonException();
     }
 
     /**

@@ -20,6 +20,11 @@ public class WildRegion extends AbstractGround { // TODO: extend AbstractGroundO
 
         try {
             myProbability = definition.getDouble(Constants.JSON_PROB);
+            for(Object objMonster : definition.getJSONArray(Constants.JSON_MONSTERS)){
+                SmartJsonObject monsterInfo = new SmartJsonObject((JSONObject)objMonster);
+                SmartJsonObject monsterJson = getModel().getDefinitionCache().getInstance("Monster", monsterInfo.getString(Constants.JSON_NAME)); // TODO: Constants
+                Monster monster = new Monster(getModel(), monsterJson);
+            }
         }
         catch (SmartJsonException e) {
             e.printStackTrace();

@@ -18,8 +18,7 @@
     	"level" : "8"
     },
     "attacks" : [
-    	{"name" : "vine whip", "unlockLevel" : "4" }, 
-    	{"name" : "razor leaf", "unlockLevel" : "6" },
+    	{"name" : "vine whip", "unlockLevel" : "4" }
     ],
   }],
   
@@ -86,13 +85,12 @@
   	"name" : "grass1", 
   	"image" : "images/ground/wildGrass.png", 
   	"probability" : ".05",
-	"monsters" : {
-		"monster" : {
-			"name" : "monster1", 
+	  "monsters" : [
+      {
+			"name" : "tyler", 
 			"level" : "14", 
 			"probability" : "0.8"
-		}
-	}
+		  }]
   }]
   
 }

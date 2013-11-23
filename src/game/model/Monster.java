@@ -20,13 +20,14 @@ import constants.Constants;
  * 
  */
 
-public abstract class Monster extends AbstractModelObject {
+public class Monster extends AbstractModelObject {
 
     private int myMaxHP;
     private double myCatchRate;
-    private List<Attack> myAttacks;
+    private List<AttackWrapper> myAttacks;
     private List<Monster> myEvolution;
     private Image myImage;
+    private int myCurrentLevel = 1; //TODO: READ FROM JSON
 
     public Monster (GameModel model, SmartJsonObject definition) {
         super(model, definition);
@@ -36,17 +37,47 @@ public abstract class Monster extends AbstractModelObject {
             myImage = new ImageIcon(imageURL).getImage();
             myMaxHP = definition.getInt(Constants.JSON_MONSTER_MAX_HP);
             myCatchRate = definition.getDouble(Constants.JSON_MONSTER_CATCH_RATE);
-            myAttacks = new ArrayList<Attack>();
+            myAttacks = new ArrayList<AttackWrapper>();
             for (Object obj : definition.getJSONArray(Constants.JSON_MONSTER_ALL_ATTACKS)) {
                 SmartJsonObject attackJson = new SmartJsonObject((JSONObject) obj);
                 String name = attackJson.getString("name");
-
+                SmartJsonObject a = getModel().getDefinitionCache().getInstance("Attack", name);
+                Attack attack = new Attack(getModel(), a);
+                int unlockLevel = attackJson.getInt(Constants.JSON_ATTACK_UNLOCK_LEVEL);
+                myAttacks.add(new AttackWrapper(attack, unlockLevel));
             }
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
         }
         // TODO: Implement myEvolution
-
+        
+    }
+    
+    public List<Attack> getAllAvailableAttacks(){
+        List<Attack> attacks = new ArrayList<Attack>();
+        for(AttackWrapper aw : myAttacks){
+            if(aw.canUse(myCurrentLevel)){
+                attacks.add(aw.getAttack());
+            }
+        }
+        return attacks;
+    }
+    
+    private class AttackWrapper{
+        private Attack myAttack;
+        private int myUnlockLevel;
+        public AttackWrapper(Attack a, int unlockLevel){
+            myAttack = a;
+            myUnlockLevel = unlockLevel;
+        }
+        
+        public Attack getAttack(){
+            return myAttack;
+        }
+        
+        public boolean canUse(int level){
+            return myUnlockLevel <= level;
+        }
     }
 }
