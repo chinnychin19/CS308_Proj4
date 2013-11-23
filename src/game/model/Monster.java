@@ -54,6 +54,10 @@ public class Monster extends AbstractModelObject {
         
     }
     
+    public Image getImage(){
+        return myImage;
+    }
+    
     public void setLevel(int level){
         myCurrentLevel = level;
     }
