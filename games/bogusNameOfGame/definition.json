@@ -18,6 +18,10 @@
         "attacks": [{
             "name": "vine whip",
             "unlockLevel": "4"
+        },
+        {
+          "name" : "pusha slap",
+          "unlockLevel" : "3"
         }],
         "evolution": {
             "name": "hunter",
@@ -25,7 +29,8 @@
         },
     }],
 
-    "Attack": [{
+    "Attack": [
+    {
         "name": "vine whip",
         "power": "165",
         "accuracy": "0.95",
@@ -38,7 +43,23 @@
             "status": "poison",
             "target": "enemy"
         }]
-    }],
+    },
+   {
+        "name": "pusha slap",
+        "power": "20",
+        "accuracy": "0.99",
+        "statisticEffect": [{
+            "target": "enemy",
+            "statistic": "defend",
+            "change": "-15"
+        }],
+        "statusEffect": [{
+            "status": "poison",
+            "target": "enemy"
+        }]
+    }
+
+    ],
 
 
     "Obstacle": [{
