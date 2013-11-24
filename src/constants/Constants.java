@@ -126,5 +126,6 @@ public class Constants {
     public static final String MATRIX = "matrix";
     
     public final static String IMG_FOLDER_FILEPATH = "./images";
-
+    
+    public final static String EMPTY_STRING = "";
 }
