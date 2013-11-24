@@ -42,7 +42,7 @@ public class StateSaver {
                 Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
                         Constants.FILENAME_SAVESTATE;
         myJSON = JSONReader.getJSON(worldJSONFilepath);
-        if (myJSON == null) { throw new Exception("Save file not found"); }
+        if (myJSON == null) { throw new Exception(Constants.SAVE_FILE_NOT_FOUND); }
         try {
             SmartJsonObject playerJSON =
                     new SmartJsonObject((JSONObject) myJSON.get(Constants.JSON_PLAYER));
@@ -53,7 +53,7 @@ public class StateSaver {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * Saves the state 
      * @throws IOException
