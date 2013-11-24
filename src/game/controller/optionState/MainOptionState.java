@@ -1,5 +1,6 @@
 package game.controller.optionState;
 
+import game.controller.AbstractBattleMode;
 import game.controller.Input;
 import game.controller.WildBattleMode;
 import java.awt.Color;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class MainOptionState extends AbstractOptionState {
     List<OptionBundle> myOptions;
-    public MainOptionState(WildBattleMode mode){
+    public MainOptionState(AbstractBattleMode mode){
         super(mode);
         myOptions = new ArrayList<OptionBundle>();
         addOption("Attack", new AttackOptionState(mode));

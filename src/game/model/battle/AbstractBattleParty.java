@@ -75,7 +75,7 @@ public abstract class AbstractBattleParty {
         return aliveMonsters;
     }
     
-    public int numberOfAliveMonsters(){
+    public int getNumberOfAliveMonsters(){
         return getAliveMonsters().size();
     }
     public GameController getController() {

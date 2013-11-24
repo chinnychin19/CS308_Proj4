@@ -1,5 +1,6 @@
 package game.controller.optionState;
 
+import game.controller.AbstractBattleMode;
 import game.controller.Input;
 import game.controller.WildBattleMode;
 import game.model.AbstractModelObject;
@@ -12,10 +13,10 @@ import constants.Constants;
 
 public abstract class AbstractOptionState {
     protected Graphics myBuffer;
-    protected WildBattleMode myMode;
+    protected AbstractBattleMode myMode;
     protected int mySelected = 0;
 
-    public AbstractOptionState (WildBattleMode mode) {
+    public AbstractOptionState (AbstractBattleMode mode) {
         myMode = mode;
         int x = 0, y = Constants.HEIGHT * 2 / 3, w = Constants.WIDTH, h =
                 Constants.HEIGHT / 3;

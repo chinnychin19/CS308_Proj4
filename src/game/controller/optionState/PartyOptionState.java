@@ -1,5 +1,6 @@
 package game.controller.optionState;
 
+import game.controller.AbstractBattleMode;
 import game.controller.Input;
 import game.controller.WildBattleMode;
 import game.model.Monster;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class PartyOptionState extends AbstractOptionState{
     
-    public PartyOptionState (WildBattleMode mode) {
+    public PartyOptionState (AbstractBattleMode mode) {
         super(mode);
     }
 

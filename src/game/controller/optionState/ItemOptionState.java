@@ -3,6 +3,7 @@ package game.controller.optionState;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
+import game.controller.AbstractBattleMode;
 import game.controller.WildBattleMode;
 import game.model.Item;
 import game.model.Player;
@@ -10,7 +11,7 @@ import game.model.attack.Attack;
 
 public class ItemOptionState extends AbstractOptionState {
 
-    public ItemOptionState (WildBattleMode mode) {
+    public ItemOptionState (AbstractBattleMode mode) {
         super(mode);
     }
 
