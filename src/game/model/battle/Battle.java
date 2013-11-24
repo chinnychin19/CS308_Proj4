@@ -31,6 +31,17 @@ public class Battle {
     public void conductTurns() { //TODO: implement properly
         myPlayerParty.doTurn(); //TODO: supposed to wait for player to choose something
         myEnemyParty.doTurn();
+    }
+    
+    public void attackEnemy(Attack a){
+        a.doAttack( myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
+    }
+    
+    public void attackPlayer(Attack a){
+        a.doAttack( myEnemyParty.getCurrentMonster(),myPlayerParty.getCurrentMonster());
+    }
+    public void registerUserCompleted(){
+        myEnemyParty.doTurn();
         System.out.println("health: "+myPlayerParty.getCurrentMonster().getCurHP());
     }
     

@@ -14,16 +14,12 @@ public class MainOptionState extends AbstractOptionState {
         myOptions = new ArrayList<OptionBundle>();
         addOption("Attack", new AttackOptionState(mode));
         addOption("Party", new PartyOptionState(mode));
-        addOption("Items", new AttackOptionState(mode));
+        addOption("Items", new ItemOptionState(mode));
     }
 
     @Override
     public void paint () {
-        myBuffer.setColor(Color.cyan);
-        myBuffer.fillRect(0, 0, myBuffer.getClipBounds().width,
-                                 myBuffer.getClipBounds().height);
-        myBuffer.setColor(Color.black);
-        myBuffer.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+        super.paint();
 
         int x = 15;
         int y = 30;
@@ -64,5 +60,13 @@ public class MainOptionState extends AbstractOptionState {
     @Override
     protected void onInteract () {
         myMode.setOptionState(myOptions.get(mySelected).getState());
+    }
+
+    /**
+     * Does Nothing - null-op
+     */
+    @Override
+    protected void onBack () {
+        
     }
 }

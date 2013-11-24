@@ -14,12 +14,8 @@ public class AttackOptionState extends AbstractOptionState {
 
     @Override
     public void paint () {
-        myBuffer.setColor(Color.cyan);
-        myBuffer.fillRect(0, 0, myBuffer.getClipBounds().width,
-                                 myBuffer.getClipBounds().height);
-        myBuffer.setColor(Color.black);
-        myBuffer.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-
+        super.paint();
+        
         int x = 15;
         int y = 30;
         int inc = 50;
@@ -35,18 +31,24 @@ public class AttackOptionState extends AbstractOptionState {
             }
         }
     }
-    
-    private List<Attack> getAttacks(){
-        return myMode.getBattle().getPlayerParty().getCurrentMonster().getAllAvailableAttacks();
-    }
 
     @Override
     protected void onInteract () {
         List<Attack> attacks = getAttacks();
         Attack chosen = attacks.get(mySelected);
         myMode.getBattle().setNextPlayerAttack(chosen);
-        myMode.getBattle().conductTurns();
+        myMode.getBattle().attackEnemy(chosen);
+        myMode.getBattle().registerUserCompleted();
         myMode.setOptionState(new MainOptionState(myMode));
 
+    }
+    
+    @Override
+    protected void onBack () {
+        myMode.setOptionState(new MainOptionState(myMode));
+    }
+    
+    private List<Attack> getAttacks(){
+        return myMode.getBattle().getPlayerParty().getCurrentMonster().getAllAvailableAttacks();
     }
 }
