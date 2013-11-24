@@ -55,6 +55,7 @@ public class WildRegion extends AbstractGround {
             if(rand <= myProbability){
                 System.out.println("WILD BATTLE MODE");
                 Monster toFight = selectMonster();
+                //TODO: Discuss with Chinmay about better way to do this
                 getModel().getController().setMode(new WildBattleMode(getModel(), getModel().getController().getView(), toFight));
             }
         }
