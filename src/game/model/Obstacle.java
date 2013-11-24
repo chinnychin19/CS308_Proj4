@@ -13,6 +13,11 @@ import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
+/**
+ * Represents an Obstacle in the game, such as a tree
+ * @author tylernisonoff
+ *
+ */
 public class Obstacle extends AbstractViewableObject {
     private Image myImage;
     private Set<KeyItem> myRequiredKeyItems;
@@ -33,15 +38,28 @@ public class Obstacle extends AbstractViewableObject {
         }
         
     }
+    
+    /**
+     * Returns the Image of the obstacle
+     */
     @Override
     public Image getImage () {
         return myImage;
     }
     
+    /**
+     * 
+     * @return - The required key Items for an obstacle to disappear
+     */
     public Set<KeyItem> getRequiredKeyItems() {
         return myRequiredKeyItems;
     }
     
+    /**
+     * Checks to see if a player is trying to interact with it
+     * If it is, it checks to see if the player has the required key items
+     * It if does, it calls playerInteractingWithKeyItems
+     */
     @Override
     public void doFrame(World w, Input input) {
         if (input.isKeyInteractPressed() && getLoc().equals(w.locInFrontOfPlayer())) {
@@ -54,8 +72,19 @@ public class Obstacle extends AbstractViewableObject {
                     return;
                 }
             }
-            destroy();            
+            playerInteractingWithKeyItems();
         }
+    }
+    
+    /**
+     * Called when a player is allowed to interact with an obstacle given
+     * that it has the required key items
+     * 
+     * Performs the necessary action
+     * For a default Obstacle, this will destroy the obstacle
+     */
+    public void playerInteractingWithKeyItems(){
+        destroy();
     }
 }
 
