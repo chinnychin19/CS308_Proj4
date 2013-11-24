@@ -36,7 +36,7 @@
             "name": "ryan",
             "image": "images/monsters/ryan.jpg",
             "catchRate": ".4",
-            "type": "fire",
+            "type": "rock",
             "baseHP": "10",
             "baseAttack": "3",
             "baseDefense": "8",
