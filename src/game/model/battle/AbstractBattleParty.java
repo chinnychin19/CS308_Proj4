@@ -8,6 +8,12 @@ import game.model.Fighter;
 import game.model.GameModel;
 import game.model.Monster;
 
+/**
+ * Abstract Class for Battle Parties
+ * Contains a collection on monsters, a fighter, and a reference to the Battle
+ * @author tylernisonoff
+ *
+ */
 public abstract class AbstractBattleParty {
     private List<Monster> myMonsters;
     private Fighter myFighter;

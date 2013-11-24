@@ -12,12 +12,16 @@
         "image": "images/monsters/tyler.png",
         "catchRate": ".4",
         "type" : "water",
-        "baseHP" : "18",
-        "baseAttack" : "13",
-        "baseDefense" : "15",
+        "baseHP" : "8",
+        "baseAttack" : "3",
+        "baseDefense" : "5",
         "attacks": [{
             "name": "vine whip",
             "unlockLevel": "4"
+        },
+        {
+          "name" : "pusha slap",
+          "unlockLevel" : "3"
         }],
         "evolution": {
             "name": "hunter",
@@ -25,9 +29,10 @@
         },
     }],
 
-    "Attack": [{
+    "Attack": [
+    {
         "name": "vine whip",
-        "power": "15",
+        "power": "165",
         "accuracy": "0.95",
         "statisticEffect": [{
             "target": "enemy",
@@ -38,7 +43,23 @@
             "status": "poison",
             "target": "enemy"
         }]
-    }],
+    },
+   {
+        "name": "pusha slap",
+        "power": "200",
+        "accuracy": "0.99",
+        "statisticEffect": [{
+            "target": "enemy",
+            "statistic": "defend",
+            "change": "-15"
+        }],
+        "statusEffect": [{
+            "status": "poison",
+            "target": "enemy"
+        }]
+    }
+
+    ],
 
 
     "Obstacle": [{

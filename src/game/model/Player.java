@@ -18,7 +18,12 @@ import constants.Constants;
 import location.Direction;
 import location.Loc;
 
-
+/**
+ * The Main Player class
+ * Represents the user the player controllers
+ * @author tylernisonoff
+ *
+ */
 public class Player extends AbstractCharacter implements Fighter {
     private List<Monster> myParty;
     private List<Item> myItems;
@@ -35,6 +40,11 @@ public class Player extends AbstractCharacter implements Fighter {
         loadFromWorld(objInWorld);
     }
     
+    /**
+     * Creates the player from a JSON object
+     * Can come from initial world definition or a savedState
+     * @param objInWorld - JSON Object that describes the player
+     */
     public void loadFromWorld(SmartJsonObject objInWorld){
         try {
             //ADDING MONSTERS
@@ -67,19 +77,35 @@ public class Player extends AbstractCharacter implements Fighter {
             
         }
     }
+    
+    /**
+     * sets a Collection of keyItems for a user
+     * @param keyItems
+     */
     public void setKeyItems(Collection<KeyItem> keyItems){
         myKeyItems = keyItems;
     }
     
+    /**
+     * 
+     * @return - Key Items of the Player
+     */
     public Collection<KeyItem> getKeyItems() {
         return myKeyItems;
     }
-
+    
+    /**
+     * Returns the Party for battle
+     */
     @Override
     public List<Monster> getParty () {
         return myParty;
     }
 
+    /**
+     * Method called on each movement in wandering mode
+     * Makes sure that the player is allowed to walk in a given space
+     */
     @Override
     public void doFrame (World w, Input input) {
       Direction dir = getMoveDirection(input);

@@ -42,6 +42,10 @@ public class NPC extends AbstractCharacter {
     	return myDialogue;
     }
     
+    /**
+     * Checks to see if a user is trying to interact with it
+     * If so, it shows the dialogue
+     */
     @Override
     public void doFrame (World w, Input input) {
         if (input.isKeyInteractPressed() && getLoc().equals(w.locInFrontOfPlayer())) {

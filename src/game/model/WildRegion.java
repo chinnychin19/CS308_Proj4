@@ -13,7 +13,14 @@ import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
-
+/**
+ * Represents a wild region - a ground region that stores monsters
+ * At random times, if a user is standing on a wild region, they will
+ * go into "Wild Battle Mode"
+ * 
+ * @author tylernisonoff
+ *
+ */
 public class WildRegion extends AbstractGround {
 
     private Image myImage;
@@ -36,6 +43,9 @@ public class WildRegion extends AbstractGround {
         // TODO: Implement myMonsters
     }
     
+    /**
+     * Frame-by-frame method for the Wild Region in Wandering Mode
+     */
     @Override
     public void doFrame(World w, Input input){
         //if player on me, check prob
@@ -49,6 +59,11 @@ public class WildRegion extends AbstractGround {
         }
     }
     
+    /**
+     * Randomly selects on monster from its list of monsters
+     * based on their probability of being selected
+     * @return
+     */
     private Monster selectMonster(){
         double rand = Math.random();
         double seen = 0;
@@ -59,7 +74,14 @@ public class WildRegion extends AbstractGround {
         }
         return null;
     }
-
+    
+    /**
+     * Stores a Monster and its probability of being selected
+     * Useful to couple to these two structures, while also allowing
+     * a new monster to be generated every time through the getMonster method
+     * @author tylernisonoff
+     *
+     */
     private class MonsterWrapper {
         private double myProbability;
         private String myName;
@@ -75,6 +97,10 @@ public class WildRegion extends AbstractGround {
             }
         }
 
+        /**
+         * Returns an instance of the Monster it is storing internally
+         * @return a fresh Monster
+         */
         public Monster getMonster () {
             try{
                 return new Monster(getModel(), getModel().getDefinitionCache()
@@ -89,6 +115,12 @@ public class WildRegion extends AbstractGround {
             return myProbability;
         }
         
+        /**
+         * Determines if a monster should be selected based off of a random number
+         * @param rand - the random number chosen for the selector
+         * @param sumOfAttemptedProbabilities - the sum of the previous probabilities of monsters seen before
+         * @return - true if the monster should be used, else false
+         */
         public boolean shouldUseMonster (double rand, double sumOfAttemptedProbabilities) {
             return (sumOfAttemptedProbabilities + myProbability >= rand);
         }
