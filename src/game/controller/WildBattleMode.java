@@ -27,12 +27,8 @@ import game.view.GameView;
 public class WildBattleMode extends AbstractBattleMode {
     
     
-    public WildBattleMode (GameModel model, GameView view) {
+    public WildBattleMode (GameModel model, GameView view, Monster monster) {
         super(model, view);
-    }
-
-    //TODO: Leave for Chinmay to comment
-    public void setEnemyMonster (Monster monster) {
         WildPlayerParty attacker =
                 new WildPlayerParty(getModel().getController(), getModel().getPlayer());
         WildMonsterParty defender = new WildMonsterParty(getModel().getController(), monster);
@@ -42,10 +38,4 @@ public class WildBattleMode extends AbstractBattleMode {
         mySelectedOption = 0;
         mySelectedAttack = 0;
     }
-
-    
-
-
-
-    
 }
