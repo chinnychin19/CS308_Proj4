@@ -107,6 +107,7 @@ public class Input {
 			 myInputs.put(key, false);
 		 }
 	}
+	
 	public void setInput(InputIndex input, boolean value){
 		myInputs.put(input, value);
 	}

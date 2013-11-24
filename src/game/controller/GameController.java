@@ -5,7 +5,13 @@ import game.model.GameModel;
 import game.model.Monster;
 import game.view.GameView;
 
-
+/**
+ * The main controller for the Game
+ * Orchestrates communication between the Game Model and the Game view
+ * Also Orchestrates switching between modes
+ * @author tylernisonoff
+ *
+ */
 public class GameController {
     private GameView myView;
     private GameModel myModel;
@@ -28,14 +34,29 @@ public class GameController {
         myView.addKeyListener(myModeArray[myModeIndex]);
     }
     
+    /**
+     * Puts the Game in Wandering Mode
+     */
     public void setWanderingMode() {
         setMode(INDEX_WANDERING);
     }
     
+    /**
+     * Puts the Game in WildBattleMode
+     * @param monster - The Monster of the WildBattle
+     */
     public void setWildBattleMode(Monster monster) {
         // need to set the monster before activating the mode so it can draw the image
         ((WildBattleMode) myModeArray[INDEX_WILD_BATTLE]).setEnemyMonster(monster);
         setMode(INDEX_WILD_BATTLE);
+    }
+    
+    /**
+     * Loads the models state and then sets the default mode
+     */
+    public void loadState () {
+        myModel.loadState();
+        myModeArray[myModeIndex].paint(); // paints changes caused by loading the save state
     }
 
     private void setMode (int newModeIndex) {
@@ -52,8 +73,4 @@ public class GameController {
         myModeIndex = INDEX_WANDERING;
     }
 
-    public void loadState () {
-        myModel.loadState();
-        myModeArray[myModeIndex].paint(); // paints changes caused by loading the save state
-    }
 }

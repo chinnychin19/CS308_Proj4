@@ -2,6 +2,11 @@ package game.model;
 
 import location.Loc;
 
+/**
+ * Simple Class to Represent a Type
+ * @author tylernisonoff
+ *
+ */
 public class Type {
     private String myType;
     public Type(String type){

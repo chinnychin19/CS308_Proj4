@@ -9,6 +9,13 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
 
 
 // TODO: Write Tests
+/**
+ * Represents how well a certain type performs against another Type in battle
+ * Information is read in throught the definition.json for the game
+ * Uses a Map to store the data internally
+ * @author tylernisonoff
+ *
+ */
 public class TypeMatrix extends AbstractModelObject {
     private static final String MATRIX_KEY = "matrix";
     private Map<Type, Map<Type, Double>> myTypeMap;
@@ -36,7 +43,13 @@ public class TypeMatrix extends AbstractModelObject {
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * Calculates the damage multiplier for a given type attacking another type
+     * @param from - The type performing the attack
+     * @param to  - The type recieving the attack
+     * @return the mulitpling factor for the damage
+     */
     public double getDamageMultiplier (Type from, Type to) {
         return myTypeMap.get(from).get(to);
     }
