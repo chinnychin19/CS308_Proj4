@@ -65,6 +65,19 @@ public abstract class AbstractBattleParty {
         return myMonsters;
     }
     
+    public List<Monster> getAliveMonsters() {
+        List<Monster> aliveMonsters = new ArrayList<Monster>();
+        for(Monster mon : getMonsters()){
+            if(mon.getCurHP() > 0){
+                aliveMonsters.add(mon);
+            }
+        }
+        return aliveMonsters;
+    }
+    
+    public int numberOfAliveMonsters(){
+        return getAliveMonsters().size();
+    }
     public GameController getController() {
         return myController;
     }
