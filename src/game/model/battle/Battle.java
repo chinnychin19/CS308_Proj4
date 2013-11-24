@@ -1,6 +1,8 @@
 package game.model.battle;
 
 import game.controller.AbstractBattleMode;
+import game.controller.optionState.BattleOverState;
+import game.controller.optionState.MainOptionState;
 import game.model.Monster;
 import game.model.attack.Attack;
 
@@ -41,12 +43,27 @@ public class Battle {
     public void registerUserCompleted(){
         if(myEnemyParty.getNumberOfAliveMonsters() == 0){
             System.out.println("=============\nYOU WON!\n=============");
-            //myMode.s
+            userWon();
+        } else{
+            myEnemyParty.doTurn();
+            System.out.println("health: "+myPlayerParty.getCurrentMonster().getCurHP());
+            if(myPlayerParty.getNumberOfAliveMonsters() == 0){
+                computerWon();
+            } else{
+                myMode.setOptionState(new MainOptionState(myMode));
+            }
         }
-        myEnemyParty.doTurn();
-        System.out.println("health: "+myPlayerParty.getCurrentMonster().getCurHP());
+       
     }
     
+    private void computerWon () {
+        myMode.setOptionState(new BattleOverState(myMode, "You were defeated :("));
+    }
+
+    private void userWon () {
+        myMode.setOptionState(new BattleOverState(myMode, "You won! :)"));        
+    }
+
     public boolean isOver() {
         boolean aLost = true, bLost = false;
         for (Monster m : myPlayerParty.getMonsters()) {

@@ -34,6 +34,11 @@ public abstract class AbstractMode extends KeyAdapter {
         return myModel;
     }
     
+    //TODO: Consider refactoring to have access to controller
+    public GameController getController() {
+       return myModel.getController();
+    }
+    
     public abstract void paint ();
 
     public abstract void act (); // TODO: take some sort of input object as parameter? or is this

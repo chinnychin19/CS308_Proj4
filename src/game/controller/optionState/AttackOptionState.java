@@ -40,7 +40,6 @@ public class AttackOptionState extends AbstractOptionState {
         myMode.getBattle().setNextPlayerAttack(chosen);
         myMode.getBattle().attackEnemy(chosen);
         myMode.getBattle().registerUserCompleted();
-        myMode.setOptionState(new MainOptionState(myMode));
 
     }
     
