@@ -127,5 +127,5 @@ public class Constants {
     
     public final static String IMG_FOLDER_FILEPATH = "./images";
     
-
+    public final static String EMPTY_STRING = "";
 }
