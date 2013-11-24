@@ -1,14 +1,17 @@
 package game.model.battle;
 
+import game.controller.AbstractBattleMode;
 import game.model.Monster;
 import game.model.attack.Attack;
 
 public class Battle {
     AbstractBattleParty myPlayerParty;
     AbstractBattleParty myEnemyParty;
-    public Battle(AbstractBattleParty playerParty, AbstractBattleParty enemyParty) {
+    AbstractBattleMode myMode;
+    public Battle(AbstractBattleParty playerParty, AbstractBattleParty enemyParty, AbstractBattleMode mode) {
         myPlayerParty = playerParty;
         myEnemyParty = enemyParty;
+        myMode = mode;
     }
     
     public AbstractBattleParty getOtherParty(AbstractBattleParty self) {
@@ -28,8 +31,18 @@ public class Battle {
         ((WildPlayerParty) myPlayerParty).setNextAttack(a);
     }
     
-    public void conductTurns() { //TODO: implement properly
-        myPlayerParty.doTurn(); //TODO: supposed to wait for player to choose something
+    public void attackEnemy(Attack a){
+        a.doAttack( myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
+    }
+    
+    public void attackPlayer(Attack a){
+        a.doAttack( myEnemyParty.getCurrentMonster(),myPlayerParty.getCurrentMonster());
+    }
+    public void registerUserCompleted(){
+        if(myEnemyParty.getNumberOfAliveMonsters() == 0){
+            System.out.println("=============\nYOU WON!\n=============");
+            //myMode.s
+        }
         myEnemyParty.doTurn();
         System.out.println("health: "+myPlayerParty.getCurrentMonster().getCurHP());
     }

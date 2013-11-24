@@ -3,6 +3,7 @@ package game.model;
 import game.controller.AbstractMode;
 import game.controller.GameController;
 import game.controller.Input;
+import game.controller.WildBattleMode;
 
 import java.awt.Image;
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class WildRegion extends AbstractGround {
             if(rand <= myProbability){
                 System.out.println("WILD BATTLE MODE");
                 Monster toFight = selectMonster();
-                getModel().getController().setWildBattleMode(toFight);
+                getModel().getController().setMode(new WildBattleMode(getModel(), getModel().getController().getView(), toFight));
             }
         }
     }

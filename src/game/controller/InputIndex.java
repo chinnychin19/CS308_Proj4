@@ -6,5 +6,5 @@ package game.controller;
  *
  */
 public enum InputIndex{
-	UP, LEFT, DOWN, RIGHT, INTERACT, MENU;
+	UP, LEFT, DOWN, RIGHT, INTERACT, MENU, BACK;
 }

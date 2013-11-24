@@ -3,6 +3,7 @@ package game.model;
 import game.controller.AbstractMode;
 import game.controller.Input;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;

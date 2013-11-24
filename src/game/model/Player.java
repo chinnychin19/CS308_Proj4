@@ -37,6 +37,7 @@ public class Player extends AbstractCharacter implements Fighter {
         myKeyItems = new HashSet<KeyItem>();
         myKeyItems.add(new KeyItem(model, "razor"));// TODO: REMOVE
         myParty = new ArrayList<Monster>(); // TODO: populate
+        myItems = new ArrayList<Item>(); //TODO: populate
         loadFromWorld(objInWorld);
     }
     
@@ -94,6 +95,13 @@ public class Player extends AbstractCharacter implements Fighter {
         return myKeyItems;
     }
     
+    /**
+     * 
+     * @return - Key Items of the Player
+     */
+    public List<Item> getItems() {
+        return myItems;
+    }
     /**
      * Returns the Party for battle
      */

@@ -120,7 +120,7 @@ public class Constants {
     public static final String MONSTER_UPPERCASE = "Monster";
     
     public static final int NUM_OF_DIRECTIONS = 4;
-    public static final int NUM_INPUTS = 7;
+    public static final int NUM_INPUTS = 8;
     
     public static final String TYPE_MATRIX = "TypeMatrix";
     public static final String MATRIX = "matrix";
