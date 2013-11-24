@@ -1,5 +1,6 @@
 package game.controller;
 
+import java.awt.Graphics;
 import javax.swing.JOptionPane;
 import game.model.GameModel;
 import game.model.Monster;
@@ -51,6 +52,9 @@ public class GameController {
         setMode(INDEX_WILD_BATTLE);
     }
     
+    public AbstractMode getMode(){
+        return myModeArray[myModeIndex];
+    }
     /**
      * Loads the models state and then sets the default mode
      */

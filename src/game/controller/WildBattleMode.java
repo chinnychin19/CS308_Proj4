@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Polygon;
 import java.util.List;
 import constants.Constants;
+import game.controller.optionState.AbstractOptionState;
+import game.controller.optionState.MainOptionState;
 import game.model.GameModel;
 import game.model.Monster;
 import game.model.Player;
@@ -34,10 +36,12 @@ public class WildBattleMode extends AbstractBattleMode {
     private int mySelectedOption;
     private String[] options = { "ATTACK", "PARTY", "ITEM" };
     private int mySelectedAttack;
-    private State myState;
 
+    private AbstractOptionState myOptionState;
+    
     public WildBattleMode (GameModel model, GameView view) {
         super(model, view);
+        myOptionState = new MainOptionState(this);
     }
 
     //TODO: Leave for Chinmay to comment
@@ -50,7 +54,6 @@ public class WildBattleMode extends AbstractBattleMode {
         defender.setBattle(myBattle);
         mySelectedOption = 0;
         mySelectedAttack = 0;
-        myState = State.OPTIONS;
     }
 
     /**
@@ -81,12 +84,15 @@ public class WildBattleMode extends AbstractBattleMode {
         paintMyHealth();
         paintEnemyMonster();
         paintEnemyHealth();
-        if (myState == State.OPTIONS) {
-            paintOptions();
-        }
-        else if (myState == State.ATTACKS) {
-            paintAttacks();
-        }
+        myOptionState.paint();
+//        if (myState == State.OPTIONS) {
+//            paintOptions();
+//        }
+//        else if (myState == State.ATTACKS) {
+//            paintAttacks();
+//        } else if (myState == State.PARTY) {
+//            paintParty();
+//        }
     }
 
     //TODO: Chinmay should comment
@@ -95,42 +101,15 @@ public class WildBattleMode extends AbstractBattleMode {
         Input input = getInput();
         List<Attack> attacks =
                 myBattle.getPlayerParty().getCurrentMonster().getAllAvailableAttacks();
-        if (input.isKeyInteractPressed()) {
-            if (myState == State.OPTIONS) {
-                // TODO: choose which next state to go to.
-                // Right now, just hard coding attacks
-                setState(State.ATTACKS);
-            }
-            else if (myState == State.ATTACKS) {
-                // TODO: choose the correct attack, use it, and setState to options
-                Attack chosen = attacks.get(mySelectedAttack);
-                myBattle.setNextPlayerAttack(chosen);
-                myBattle.conductTurns();
-                setState(State.OPTIONS);
-            }
-            // System.out.println("interacting in wild battle");
-            // myBattle.conductTurns();
-        }
-        if (input.isKeyUpPressed()) {
-            if (myState == State.OPTIONS && mySelectedOption > 0) {
-                mySelectedOption--;
-            }
-            if (myState == State.ATTACKS && mySelectedAttack > 0) {
-                mySelectedAttack--;
-            }
-        }
-        else if (input.isKeyDownPressed()) {
-            if (myState == State.OPTIONS && mySelectedOption < options.length - 1) {
-                mySelectedOption++;
-            }
-            if (myState == State.ATTACKS && mySelectedAttack < attacks.size() - 1) {
-                mySelectedAttack++;
-            }
-        }
+        myOptionState.act(input);
     }
 
-    private void setState (State st) {
-        myState = st;
+    public void setOptionState (AbstractOptionState st) {
+        myOptionState = st;
+    }
+    
+    public Battle getBattle(){
+        return myBattle;
     }
     
     private void initBuffers () {
@@ -214,53 +193,7 @@ public class WildBattleMode extends AbstractBattleMode {
                                      null);
     }
 
-    private void paintOptions () {
-        // TODO Auto-generated method stub
-        myOptionsBuffer.setColor(Color.cyan);
-        myOptionsBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
-                                 myOptionsBuffer.getClipBounds().height);
-        myOptionsBuffer.setColor(Color.black);
-        myOptionsBuffer.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 
-        int x = 15;
-        int y = 30;
-        int inc = 50;
-        for (int i = 0; i < options.length; i++) {
-            if (i == mySelectedOption) {
-                myOptionsBuffer.setColor(Color.white);
-            }
-            myOptionsBuffer.drawString(options[i], x, y + i * inc);
-            if (i == mySelectedOption) {
-                myOptionsBuffer.setColor(Color.black);
-            }
-        }
-    }
 
-    private void paintAttacks () {
-        List<Attack> attacks =
-                myBattle.getPlayerParty().getCurrentMonster().getAllAvailableAttacks();
-
-        myOptionsBuffer.setColor(Color.cyan);
-        myOptionsBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
-                                 myOptionsBuffer.getClipBounds().height);
-        myOptionsBuffer.setColor(Color.black);
-        myOptionsBuffer.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-
-        int x = 15;
-        int y = 30;
-        int inc = 50;
-        for (int i = 0; i < attacks.size(); i++) {
-            if (i == mySelectedAttack) {
-                myOptionsBuffer.setColor(Color.white);
-            }
-            myOptionsBuffer.drawString(attacks.get(i).getName(), x, y + i * inc);
-            if (i == mySelectedAttack) {
-                myOptionsBuffer.setColor(Color.black);
-            }
-        }
-    }
-
-    private enum State {
-        OPTIONS, ATTACKS;
-    }
+    
 }

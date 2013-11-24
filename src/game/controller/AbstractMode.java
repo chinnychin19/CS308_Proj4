@@ -56,7 +56,7 @@ public abstract class AbstractMode extends KeyAdapter {
      * 
      * @return
      */
-    protected Graphics getGraphics () {
+    public Graphics getGraphics () {
         return myGraphics;
     }
 

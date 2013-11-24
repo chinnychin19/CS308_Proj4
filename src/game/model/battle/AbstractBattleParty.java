@@ -72,4 +72,8 @@ public abstract class AbstractBattleParty {
     public Monster getCurrentMonster() {
         return myCurrentMonster;
     }
+    
+    public void setCurrentMonster(Monster m){
+        myCurrentMonster = m;
+    }
 }

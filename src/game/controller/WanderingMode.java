@@ -1,5 +1,6 @@
 package game.controller;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collection;
 import location.Loc;
@@ -80,7 +81,7 @@ public class WanderingMode extends AbstractMode {
                           null);
 
     }
-
+    
     private Collection<AbstractViewable> getViewableObjectsOnScreen() {
         ArrayList<AbstractViewable> list = new ArrayList<AbstractViewable>();
         int px = getModel().getPlayer().getLoc().getX();
