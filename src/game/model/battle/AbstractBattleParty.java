@@ -46,7 +46,7 @@ public abstract class AbstractBattleParty {
         return myBattle;
     }
     
-    private Monster getFirstAliveMonster () {
+    protected Monster getFirstAliveMonster () {
         for (Monster m : myMonsters) {
             if (m.getCurHP() > 0) {
                 return m;

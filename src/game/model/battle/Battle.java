@@ -6,64 +6,82 @@ import game.controller.optionState.MainOptionState;
 import game.model.Monster;
 import game.model.attack.Attack;
 
+
 public class Battle {
     AbstractBattleParty myPlayerParty;
     AbstractBattleParty myEnemyParty;
     AbstractBattleMode myMode;
-    public Battle(AbstractBattleParty playerParty, AbstractBattleParty enemyParty, AbstractBattleMode mode) {
+
+    public Battle (AbstractBattleParty playerParty,
+                   AbstractBattleParty enemyParty,
+                   AbstractBattleMode mode) {
         myPlayerParty = playerParty;
         myEnemyParty = enemyParty;
         myMode = mode;
     }
-    
-    public AbstractBattleParty getOtherParty(AbstractBattleParty self) {
+
+    public AbstractBattleParty getOtherParty (AbstractBattleParty self) {
         return (self == myPlayerParty) ? myEnemyParty : myPlayerParty;
     }
-    
-    public AbstractBattleParty getPlayerParty() {
+
+    public AbstractBattleParty getPlayerParty () {
         return myPlayerParty;
     }
-    
-    public AbstractBattleParty getEnemyParty() {
+
+    public AbstractBattleParty getEnemyParty () {
         return myEnemyParty;
     }
-    
+
     public void setNextPlayerAttack (Attack a) {
-        //TODO: make abstract player party? extend for wild and trainer battles?
+        // TODO: make abstract player party? extend for wild and trainer battles?
         ((WildPlayerParty) myPlayerParty).setNextAttack(a);
     }
-    
-    public void attackEnemy(Attack a){
-        a.doAttack( myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
+
+    public void attackEnemy (Attack a) {
+        a.doAttack(myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
     }
-    
-    public void attackPlayer(Attack a){
-        a.doAttack( myEnemyParty.getCurrentMonster(),myPlayerParty.getCurrentMonster());
+
+    public void attackPlayer (Attack a) {
+        a.doAttack(myEnemyParty.getCurrentMonster(), myPlayerParty.getCurrentMonster());
     }
-    public void registerUserCompleted(){
-        if(myEnemyParty.getNumberOfAliveMonsters() == 0){
+
+    public void registerUserCompleted () {
+        if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
             System.out.println("=============\nYOU WON!\n=============");
             userWon();
-        } else{
+        }
+        else {
             myEnemyParty.doTurn();
-            System.out.println("health: "+myPlayerParty.getCurrentMonster().getCurHP());
-            if(myPlayerParty.getNumberOfAliveMonsters() == 0){
+            System.out.println("health: " + myPlayerParty.getCurrentMonster().getCurHP());
+            if (myPlayerParty.getNumberOfAliveMonsters() == 0) {
                 computerWon();
-            } else{
+            }
+            else {
                 myMode.setOptionState(new MainOptionState(myMode));
             }
-        }       
+        }
     }
-    
+
     private void computerWon () {
         myMode.setOptionState(new BattleOverState(myMode, "You were defeated :("));
     }
 
     private void userWon () {
-        myMode.setOptionState(new BattleOverState(myMode, "You won! :)"));        
+        myMode.setOptionState(new BattleOverState(myMode, "You won! :)"));
     }
 
-    public boolean isOver() {
+    public boolean isOver () {
         return myEnemyParty.getNumberOfAliveMonsters() + myPlayerParty.getNumberOfAliveMonsters() == 0;
+    }
+
+    public boolean caughtWildMonster () {
+        WildMonsterParty wildMonster = (WildMonsterParty) myEnemyParty;
+        double probability = wildMonster.calculateCatchProbability();
+        return Math.random() <= probability;
+    }
+
+    public void transferWildMonster () {
+        // TODO Auto-generated method stub
+        
     }
 }

@@ -146,6 +146,9 @@ public class Monster extends AbstractModelObject {
     public int getDefense () {
         return myDefense;
     }
+    
+    
+    
     /**
      * Get the attacks associated with the monster
      * @return list of attacks
@@ -250,5 +253,12 @@ public class Monster extends AbstractModelObject {
         public boolean canUse(int level){
             return myUnlockLevel <= level;
         }
+    }
+
+    public double getCatchProbability () {
+      double levelFactor = 1/this.getLevel();
+      double healthFactor = 1 - this.getCurHP()/this.getMaxHP();
+      return this.getCatchRate()*levelFactor*healthFactor;
+              //TODO - Statuses
     }
 }
