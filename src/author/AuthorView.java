@@ -10,6 +10,7 @@ import javax.swing.JMenuItem;
 import author.listeners.LaunchPlayerWizardListener;
 import author.listeners.LaunchWizardListener;
 import author.listeners.OutputJSONListener;
+import author.listeners.WriteJSONOutputListener;
 import author.model.AuthoringCache;
 import author.wizard.Wizard;
 import author.wizardState.*;
@@ -47,6 +48,10 @@ public class AuthorView extends JFrame {
         JMenuItem item = new JMenuItem("Show Generated Output");
         item.addActionListener(new OutputJSONListener(ac));
         viewMenu.add(item);
+        
+        JMenuItem writeJSON = new JMenuItem("Write JSON to file");
+        writeJSON.addActionListener(new WriteJSONOutputListener(ac));
+        viewMenu.add(writeJSON);
 
         menuBar.add(fileMenu);
         menuBar.add(editMenu);

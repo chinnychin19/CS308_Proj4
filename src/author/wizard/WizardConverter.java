@@ -47,7 +47,7 @@ public class WizardConverter {
         Set keys = data.keySet();
         Map<String, Object> tempMap = new HashMap<String, Object>();
         for (Object s : keys) {
-            if (data.get(s).charAt(0) == '{') {
+            if (data.get(s).length() > 0 && data.get(s).charAt(0) == '{') {
                 JSONParser parser = new JSONParser();
                 try {
                     tempMap.put((String) s, parser.parse(data.get(s)));
@@ -68,7 +68,7 @@ public class WizardConverter {
         Set keys = data.keySet();
         Map<String, Object> tempMap = new HashMap<String, Object>();
         for (Object s : keys) {
-            if (data.get(s).charAt(0) == '{') {
+            if (data.get(s).length() > 0 && data.get(s).charAt(0) == '{') {
                 JSONParser parser = new JSONParser();
                 try {
                     tempMap.put((String) s, parser.parse(data.get(s)));
