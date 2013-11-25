@@ -52,8 +52,7 @@ public class Battle {
             } else{
                 myMode.setOptionState(new MainOptionState(myMode));
             }
-        }
-       
+        }       
     }
     
     private void computerWon () {
@@ -65,19 +64,6 @@ public class Battle {
     }
 
     public boolean isOver() {
-        boolean aLost = true, bLost = false;
-        for (Monster m : myPlayerParty.getMonsters()) {
-            if (m.getCurHP() > 0) {
-                aLost = false;
-                break;
-            }
-        }
-        for (Monster m : myEnemyParty.getMonsters()) {
-            if (m.getCurHP() > 0) {
-                bLost = false;
-                break;
-            }
-        }
-        return aLost || bLost;
+        return myEnemyParty.getNumberOfAliveMonsters() + myPlayerParty.getNumberOfAliveMonsters() == 0;
     }
 }
