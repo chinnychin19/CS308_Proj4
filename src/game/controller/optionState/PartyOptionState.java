@@ -41,6 +41,14 @@ public class PartyOptionState extends AbstractOptionState{
     }
     
     @Override
+    public void act(Input input) {
+        super.act(input);
+        if(mySelected >= getMonsters().size()){
+            mySelected = Math.max(0, getMonsters().size()-1);
+        }
+    }
+    
+    @Override
     public void onInteract(){
         List<Monster> monsters = getMonsters();
         Monster selectedMonster = monsters.get(mySelected);

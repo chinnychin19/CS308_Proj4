@@ -36,7 +36,7 @@ public abstract class AbstractOptionState {
     protected abstract void onBack ();
     
     public void act (Input input) {
-        if (input.isKeyUpPressed()) {
+        if (input.isKeyUpPressed() && mySelected > 0) {
             mySelected--;
         }
         else if (input.isKeyDownPressed()) {

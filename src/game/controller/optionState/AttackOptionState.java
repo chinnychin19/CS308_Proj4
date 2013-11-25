@@ -34,6 +34,13 @@ public class AttackOptionState extends AbstractOptionState {
     }
 
     @Override
+    public void act(Input input) {
+        super.act(input);
+        if(mySelected >= getAttacks().size()){
+            mySelected = Math.max(0, getAttacks().size()-1);
+        }
+    }
+    @Override
     protected void onInteract () {
         List<Attack> attacks = getAttacks();
         Attack chosen = attacks.get(mySelected);

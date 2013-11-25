@@ -17,7 +17,15 @@ public class MainOptionState extends AbstractOptionState {
         addOption("Party", new PartyOptionState(mode));
         addOption("Items", new ItemOptionState(mode));
     }
-
+    
+    @Override
+    public void act(Input input){
+        super.act(input);
+        if(mySelected >= myOptions.size()){
+            mySelected = Math.max(0, myOptions.size()-1);
+        }
+    }
+    
     @Override
     public void paint () {
         super.paint();

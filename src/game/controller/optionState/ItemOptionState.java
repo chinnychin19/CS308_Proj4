@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
 import game.controller.AbstractBattleMode;
+import game.controller.Input;
 import game.controller.WildBattleMode;
 import game.model.Item;
 import game.model.Player;
@@ -15,6 +16,14 @@ public class ItemOptionState extends AbstractOptionState {
         super(mode);
     }
 
+    @Override
+    public void act(Input input) {
+        super.act(input);
+        if(mySelected >= getItems().size()){
+            mySelected = Math.max(0,getItems().size()-1);
+        }
+    }
+    
     @Override
     public void paint () {
         super.paint();
