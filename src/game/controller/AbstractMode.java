@@ -13,7 +13,7 @@ import game.view.GameView;
  * etc. Each mode performs different with different user input and paints the screen differently.
  * This mode serves as a controller and has access to the view and the model.
  * 
- * @author Chinmay
+ * @author Chinmay, rtoussaint
  * 
  */
 
@@ -21,46 +21,34 @@ public abstract class AbstractMode extends KeyAdapter {
     private GameModel myModel;
     private GameView myView;
     private Graphics myGraphics;
-    private boolean[] myInputs;
-    private final int NUM_INPUTS = 6;
-    /**
-     * These final constants may be used to index into the boolean array of inputs
-     */
-    public static final int INDEX_UP = 0,
-            INDEX_LEFT = 1,
-            INDEX_DOWN = 2,
-            INDEX_RIGHT = 3,
-            INDEX_INTERACT = 4,
-            INDEX_MENU = 5;
+    private Input myInput;
 
     public AbstractMode (GameModel model, GameView view) {
         myModel = model;
         myView = view;
         myGraphics = view.getBuffer();
-        myInputs = new boolean[NUM_INPUTS];
+        myInput = new Input();
     }
 
     public abstract void paint ();
 
     public abstract void act (); // TODO: take some sort of input object as parameter? or is this
                                  // the input object?
+    
+    public abstract void turnOff();
+    
+    public abstract void turnOn();
 
+    public Input getInput(){
+    	return myInput;
+    }
+    
     protected GameModel getModel () {
         return myModel;
     }
 
     protected GameView getView () {
         return myView;
-    }
-
-    /**
-     * Returns the state of the inputs as a boolean array. It may be index into by the final
-     * constants defined above
-     * 
-     * @return
-     */
-    protected boolean[] getInputs () {
-        return myInputs;
     }
 
     /**
@@ -107,23 +95,23 @@ public abstract class AbstractMode extends KeyAdapter {
      */
     private void updateInputs (KeyEvent e, boolean flag) {
         int x = e.getKeyCode();
-        if (x == KeyEvent.VK_UP) {
-            myInputs[INDEX_UP] = flag;
+       if (x == KeyEvent.VK_UP) {
+    	   myInput.setInput(InputIndex.UP, flag);
         }
         if (x == KeyEvent.VK_LEFT) {
-            myInputs[INDEX_LEFT] = flag;
+        	myInput.setInput(InputIndex.LEFT, flag);
         }
         if (x == KeyEvent.VK_DOWN) {
-            myInputs[INDEX_DOWN] = flag;
+        	myInput.setInput(InputIndex.DOWN, flag);
         }
         if (x == KeyEvent.VK_RIGHT) {
-            myInputs[INDEX_RIGHT] = flag;
+        	myInput.setInput(InputIndex.RIGHT, flag);
         }
         if (x == KeyEvent.VK_Z) {
-            myInputs[INDEX_INTERACT] = flag;
+        	myInput.setInput(InputIndex.INTERACT, flag);
         }
         if (x == KeyEvent.VK_SPACE) {
-            myInputs[INDEX_MENU] = flag;
+        	myInput.setInput(InputIndex.MENU, flag);
         }
     }
 

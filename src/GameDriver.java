@@ -9,7 +9,7 @@ public abstract class GameDriver {
         String nameOfGame = "bogusNameOfGame";
         JFrame frame = new JFrame(nameOfGame);
         frame.setSize(Constants.WIDTH, Constants.HEIGHT);
-//        frame.setLocation(200, 100);
+        // frame.setLocation(200, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(new GameView(nameOfGame));
         frame.setResizable(false);// won't accidentally change size

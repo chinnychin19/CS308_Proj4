@@ -1,6 +1,8 @@
 package game.model;
 
 import game.controller.AbstractMode;
+import game.controller.Input;
+
 import java.awt.Image;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,8 +16,8 @@ import constants.Constants;
 public class Obstacle extends AbstractViewableObject {
     private Image myImage;
     private Set<KeyItem> myRequiredKeyItems;
-    public Obstacle (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
-        super(world, definition, objInWorld);
+    public Obstacle (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
+        super(model, world, definition, objInWorld);
         try{
             String imageURL = definition.getString(Constants.JSON_IMAGE);
             myImage = new ImageIcon(imageURL).getImage();
@@ -23,7 +25,7 @@ public class Obstacle extends AbstractViewableObject {
             JSONArray keyItemArray = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
             if (null != keyItemArray) {
                 for (Object name : keyItemArray) {
-                    myRequiredKeyItems.add(new KeyItem(name.toString()));
+                    myRequiredKeyItems.add(new KeyItem(model, name.toString()));
                 }            
             }
         } catch(SmartJsonException e){
@@ -41,8 +43,8 @@ public class Obstacle extends AbstractViewableObject {
     }
     
     @Override
-    public void doFrame(World w, boolean[] inputs) {
-        if (inputs[AbstractMode.INDEX_INTERACT] && getLoc().equals(w.locInFrontOfPlayer())) {
+    public void doFrame(World w, Input input) {
+        if (input.isKeyInteractPressed() && getLoc().equals(w.locInFrontOfPlayer())) {
             if(myRequiredKeyItems.isEmpty()) {
                 return;
             }

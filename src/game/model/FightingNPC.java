@@ -8,20 +8,20 @@ import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
-public class FightingNPC extends NPC {
+public class FightingNPC extends NPC implements Fighter {
     private List<Monster> myParty;
     private String myPostDialogue;
     private List<KeyItem> myKeyItems;
     private int myBet;
     private int myLineOfSightDistance;
 
-    public FightingNPC (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
-        super(world, definition, objInWorld);
+    public FightingNPC (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
+        super(model, world, definition, objInWorld);
         try{
         myPostDialogue = definition.getString(Constants.JSON_POST_DIALOGUE);
         myKeyItems = new ArrayList<KeyItem>();
         for (Object obj : definition.getJSONArray(Constants.JSON_KEYITEMS)) {
-            myKeyItems.add(new KeyItem(obj.toString()));
+            myKeyItems.add(new KeyItem(model, obj.toString()));
         }
         myBet = definition.getInt(Constants.JSON_BET);
         myLineOfSightDistance = definition.getInt(Constants.JSON_LINE_OF_SIGHT_DISTANCE);
@@ -56,6 +56,7 @@ public class FightingNPC extends NPC {
      * Returns the NPC's party, containing the monsters that it has
      * @return myParty
      */
+    @Override
     public List<Monster> getParty(){
         return myParty;
     } 

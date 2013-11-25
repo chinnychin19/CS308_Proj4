@@ -5,8 +5,8 @@ import util.jsonwrapper.SmartJsonObject;
 
 public class Stat extends AbstractModelObject {
 
-    public Stat (SmartJsonObject definition) {
-        super(definition);
+    public Stat (GameModel model, SmartJsonObject definition) {
+        super(model, definition);
         // TODO Auto-generated constructor stub
     }
 

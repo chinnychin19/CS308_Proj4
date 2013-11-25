@@ -10,6 +10,7 @@ import java.util.Map;
 public class Constants {
     public static final int WIDTH = 800, HEIGHT = 500;
 
+    //These both must be odd numbers
     public static final int NUM_TILES_HORIZONTAL = 15;
     public static final int NUM_TILES_VERTICAL = 9;
 
@@ -60,7 +61,9 @@ public class Constants {
     
     public static final String JSON_FREQ = "frequency";
     public static final String JSON_MONSTERS = "monsters";
-    
+    public static final String JSON_PROB = "probability";
+    public static final String JSON_LEVEL = "level";
+
     public static final String JSON_NAME = "name";
     public static final String JSON_X = "x";
     public static final String JSON_Y = "y";
@@ -70,6 +73,7 @@ public class Constants {
     public static final String JSON_MONSTER_CATCH_RATE = "catchRate";
     public static final String JSON_MONSTER_ALL_ATTACKS = "attacks";
     public static final String JSON_MONSTER_ATTACK = "attack";
+    public static final String JSON_ATTACK_UNLOCK_LEVEL = "unlockLevel";
     
     public static final String JSON_DEFEATEDNPCS = "defeatedNPCs";
 
@@ -94,4 +98,9 @@ public class Constants {
     public static final String FILENAME_DEFINITION = "definition.json";
     public static final String FILENAME_WORLD = "world.json";
     public static final String FILENAME_SAVESTATE = "saveState.json";
+    
+    public static final int NUM_OF_DIRECTIONS = 4;
+    public static final int NUM_INPUTS = 7;
+    
+
 }
