@@ -25,9 +25,14 @@ public class Constants {
     public static final int BORDER_THICKNESS = 15;
     public static final Color BORDER_COLOR = Color.black;
 
+    // Order matters because certain things depend on other things already being known. e.g. Attacks
+    // need to be known before Monsters are created
     public static final String[] CATEGORIES =
-    { "Type", "TypeMatrix", "Statistic", "Status", "Monster", "Attack", "Item", "NPC", "KeyItem",
-     "Obstacle", "WildRegion", "Player", "FightingNPC"};
+    { "TypeMatrix", 
+      "Status", "Attack", "Monster", "KeyItem", "Item", "FightingNPC", "Obstacle",  
+      "NPC",
+     "WildRegion",
+     "Player", };
     
     public static final String[] VIEWABLE_CATEGORIES =
         { "NPC", "Obstacle", "WildRegion", "Player", "FightingNPC" };

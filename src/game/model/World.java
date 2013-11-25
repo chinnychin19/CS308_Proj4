@@ -8,6 +8,7 @@ import jsoncache.JSONReader;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import reflection.Reflection;
+import util.jsonwrapper.SmartJsonObject;
 import constants.Constants;
 import location.Direction;
 import location.Loc;
@@ -17,23 +18,18 @@ public class World {
     private HashMap<Loc, AbstractViewableObject> myViewableObjects;
 
     private Player myPlayer;
-    private JSONCache myDefinitionCache;
+    private GameModel myModel;
     private JSONObject myWorldJSON;
     private String myNameOfGame;
 
-    public World (String nameOfGame) throws Exception {
+    public World (String nameOfGame, GameModel model) throws Exception {
         myNameOfGame = nameOfGame;
         myViewableObjects = new HashMap<Loc, AbstractViewableObject>();
-        String definitionJSONFilepath =
-                Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
-                        Constants.FILENAME_DEFINITION;
         String worldJSONFilepath = Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
                 Constants.FILENAME_WORLD;
-        myDefinitionCache = new JSONCache(JSONReader.getJSON(definitionJSONFilepath));
+        myModel = model;
         myWorldJSON = JSONReader.getJSON(worldJSONFilepath);
         setUpWorld();
-//        JSONObject obj = myDefinitionCache.getInstance("Attack", "vine whip");
-//        System.out.println(new Attack(obj).toString());
     }
 
     protected Player getPlayer () {
@@ -46,6 +42,14 @@ public class World {
 
     protected Map<Loc, AbstractViewableObject> getViewableObjects () {
         return myViewableObjects;
+    }
+
+    public boolean isLocOccupied(Loc loc) {
+        return null != myViewableObjects.get(loc);
+    }
+    
+    public Loc locInFrontOfPlayer() {
+        return myPlayer.getLoc().adjacentLoc(myPlayer.getDirection());
     }
 
     protected void movePlayer (Direction d) {
@@ -61,11 +65,11 @@ public class World {
             JSONArray objectArray = (JSONArray) myWorldJSON.get(viewableCategory);
 //            debug("Category: "+viewableCategory);
             for (Object obj : objectArray) {
-                JSONObject objInWorld = (JSONObject) obj;
+                SmartJsonObject objInWorld = new SmartJsonObject((JSONObject) obj);
 //                debug("Name: " + objInWorld.get(Constants.JSON_NAME));
-                JSONObject definition =
-                        myDefinitionCache
-                                .getInstance(viewableCategory, objInWorld.get(Constants.JSON_NAME).toString());
+                SmartJsonObject definition =
+                        myModel.getDefinitionCache().
+                                getInstance(viewableCategory, objInWorld.getString(Constants.JSON_NAME));
                 String classPath = Constants.CLASSPATH_GAME_MODEL + "." + viewableCategory; 
                 AbstractViewableObject newViewableObject = 
                         (AbstractViewableObject) Reflection.createInstance(classPath,
@@ -84,12 +88,14 @@ public class World {
         System.out.println(o.toString());
     }
 
-    protected void doInteraction () {
-        Loc locInFrontOfPlayer = myPlayer.getLoc().adjacentLoc(myPlayer.getDirection());
-        if (myViewableObjects.containsKey(locInFrontOfPlayer)) {
-            myViewableObjects.get(locInFrontOfPlayer).doInteraction(myPlayer);
-        }
-    }
+//    // TODO: this will get removed. we'll now just call doAction() and pass inputs and reference to world
+//    protected void doInteraction () {
+//        Loc locInFrontOfPlayer = myPlayer.getLoc().adjacentLoc(myPlayer.getDirection());
+//        if (myViewableObjects.containsKey(locInFrontOfPlayer)) {
+//            AbstractViewableObject viewableObj = myViewableObjects.get(locInFrontOfPlayer);
+//            ((AbstractInteractableObject) viewableObj).doInteraction(myPlayer);
+//        }
+//    }
     
     protected void removeObject(Loc loc) {
         myViewableObjects.remove(loc);

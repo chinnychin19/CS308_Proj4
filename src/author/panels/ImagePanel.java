@@ -26,7 +26,7 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     private JFileChooser myChooser;
     private JButton myOpenButton;
     private File myFile;
-    public static String IMG_FOLDER_FILEPATH = "./images";
+    public static String IMG_FOLDER_FILEPATH = System.getProperty("user.dir") + File.separator + "images";
     
     public ImagePanel(String label){
         super("Image");
@@ -82,6 +82,7 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     
     public void copyFileAndSelectCopy(){
         System.out.println("Parent folder: " + myFile.getParent());
+        System.out.println("Project's images folder: " + (new File(IMG_FOLDER_FILEPATH)).getAbsolutePath());
         if ( !myFile.getParentFile().equals(new File(IMG_FOLDER_FILEPATH)) ){
             File newFile = new File(IMG_FOLDER_FILEPATH + "/" + myFile.getName());
             try {
@@ -95,7 +96,8 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            myFile = newFile;
-        }        
+            myFile = newFile;            
+            System.out.println("Not already in folder; copy made");
+        } else { System.out.println("Already in folder"); }    
     }
 }

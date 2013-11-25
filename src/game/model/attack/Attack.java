@@ -6,55 +6,84 @@ import game.model.AbstractModelObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import util.Target;
+import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.NoIntValueJsonException;
+import util.jsonwrapper.jsonexceptions.SmartJsonException;
+
 
 public class Attack extends AbstractModelObject {
+    private static final String JSON_POWER = "power";
+    private static final String JSON_ACCURACY = "accuracy";
+    private static final String JSON_STATISTIC_EFFECT = "statisticEffect";
+    private static final String JSON_STATUS_EFFECT = "statusEffect";
+
     private int myPower;
     private double myAccuracy;
     Collection<StatisticEffect> myStatisticEffects;
     Collection<StatusEffect> myStatusEffects;
 
-    public Attack(JSONObject definition){
+    public Attack (SmartJsonObject definition) {
         super(definition);
         myStatisticEffects = new ArrayList<Attack.StatisticEffect>();
         myStatusEffects = new ArrayList<Attack.StatusEffect>();
 
-        myPower = Integer.parseInt(definition.get("power").toString());
-        myAccuracy = Double.parseDouble(definition.get("accuracy").toString());
-        JSONArray statisticsArray = (JSONArray)definition.get("statisticEffect");
-        for(Object statObject : statisticsArray){
-            JSONObject json = (JSONObject)statObject;
-            myStatisticEffects.add(new StatisticEffect(json));
-            
+        try {
+            myPower = definition.getInt(JSON_POWER);
+
+            myAccuracy = definition.getDouble(JSON_ACCURACY);
+            JSONArray statisticsArray = definition.getJSONArray(JSON_STATISTIC_EFFECT);
+            for (Object statObject : statisticsArray) {
+                SmartJsonObject json = new SmartJsonObject((JSONObject) statObject);
+                myStatisticEffects.add(new StatisticEffect(json));
+
+            }
+            JSONArray statusArray = definition.getJSONArray(JSON_STATUS_EFFECT);
+            for (Object statusObject : statusArray) {
+                SmartJsonObject json = new SmartJsonObject((JSONObject) statusObject);
+                myStatusEffects.add(new StatusEffect(json));
+            }
         }
-        JSONArray statusArray = (JSONArray)definition.get("statusEffect");
-        for(Object statusObject : statusArray){
-            JSONObject json = (JSONObject)statusObject;
-            myStatusEffects.add(new StatusEffect(json));
+        catch (SmartJsonException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
-    
+
     @Override
-    public String toString(){
-        return ""+myPower+"\t"+myAccuracy+"\t"+myStatisticEffects.toString()+myStatusEffects.toString();
+    public String toString () {
+        return "" + myPower + "\t" + myAccuracy + "\t" + myStatisticEffects.toString() +
+               myStatusEffects.toString();
     }
-    
+
     private class StatisticEffect {
         private Target myTarget;
         private String myStatistic;
         private int myChange;
-        public StatisticEffect(JSONObject definition){
-            myTarget = Target.getTarget(definition.get("target").toString());
-            myStatistic = definition.get("statistic").toString();
-            myChange = Integer.parseInt(definition.get("change").toString());
+
+        public StatisticEffect (SmartJsonObject definition) {
+            try {
+                myTarget = Target.getTarget(definition.getString("target"));
+                myStatistic = definition.getString("statistic");
+                myChange = definition.getInt("change");
+            }
+            catch (SmartJsonException e) {
+                e.printStackTrace();
+            }
         }
     }
-    
+
     private class StatusEffect {
         private String myStatus;
         private Target myTarget;
-        public StatusEffect(JSONObject definition){
-            myTarget = Target.getTarget(definition.get("target").toString());
-            myStatus = definition.get("status").toString();
+
+        public StatusEffect (SmartJsonObject definition) {
+            try {
+                myTarget = Target.getTarget(definition.getString("target"));
+                myStatus = definition.getString("status");
+            }
+            catch (SmartJsonException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
