@@ -22,7 +22,7 @@ public class WordPanel extends AbstractTextPanel {
         myTextLabel = new JLabel(label + ":");
 
         myTextField = new JTextField();
-        myTextField.setPreferredSize(Constants.TEXT_AREA_SIZE);
+        myTextField.setMaximumSize(Constants.TEXT_AREA_SIZE);
 
         this.add(myTextLabel);
         this.add(myTextField);

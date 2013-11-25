@@ -73,10 +73,10 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     @Override
     public Map<String, String> getUserInput () {
         Map<String, String> map = new HashMap<String, String>();
-        //copyFileAndSelectCopy();
+        copyFileAndSelectCopy();
         String label = myLabel.getText(); 
-        //map.put(label.substring(0, label.length()-1), myFile.getPath());
-        map.put(label.substring(0, label.length()-1), "");
+        map.put(label.substring(0, label.length()-1), myFile.getPath());
+        //map.put(label.substring(0, label.length()-1), "");
         return map;
     }
     
