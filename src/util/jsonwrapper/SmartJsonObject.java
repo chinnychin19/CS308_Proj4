@@ -1,5 +1,6 @@
 package util.jsonwrapper;
 
+import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import util.jsonwrapper.jsonexceptions.NoDoubleValueJsonException;
@@ -52,5 +53,10 @@ public class SmartJsonObject extends JSONObject {
         } catch(Exception e){
             throw new NoJSONArrayJsonException();
         }
+    }
+    
+    @Override
+    public Set<Object> keySet(){
+        return myJson.keySet();
     }
 }

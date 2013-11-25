@@ -76,11 +76,6 @@
   ]
   "TypeMatrix" : [{
     "name" : "matrix",
-    "matrix" : {
-      "electric" : { "water" : "2", "rock" : "0.1", "electric" : "1" },
-      "rock" :{ "water" : "0.1", "rock" : "1", "electric" : "1.5"}, 
-      "water" : { "water" : "1", "rock" : "2.0", "electric" : "0.5"}
-    }
   }]
   
   "WildRegion" : [{

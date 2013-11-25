@@ -3,6 +3,7 @@ package game.model;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import location.Direction;
+import location.Loc;
 import org.json.simple.JSONObject;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
@@ -12,8 +13,8 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
     private Direction myDirection;
     private Image myImageUp, myImageDown, myImageRight, myImageLeft;
 
-    public AbstractCharacter (World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
-        super(world, definition, objInWorld);
+    public AbstractCharacter (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
+        super(model, world, definition, objInWorld);
         try{
             myDirection = Direction.constructFromString(objInWorld.getString(Constants.JSON_ORIENTATION));
             String imageUpURL = definition.getString(Constants.JSON_IMAGE_UP);
@@ -27,6 +28,16 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
         }catch(SmartJsonException e){
             e.printStackTrace();
         }   
+    }
+
+
+    public void setLoc (Loc loc, World w) {
+        getLoc().setX(loc.getX());
+        getLoc().setY(loc.getY());
+        
+        //update hash in world's map
+        destroy();
+        w.addViewable(this);
     }
 
     @Override

@@ -15,8 +15,9 @@ import location.Loc;
 
 
 public class World {
+    
     private HashMap<Loc, AbstractViewableObject> myViewableObjects;
-
+    private HashMap<Loc, AbstractGround> myGroundObjects;
     private Player myPlayer;
     private GameModel myModel;
     private JSONObject myWorldJSON;
@@ -25,6 +26,7 @@ public class World {
     public World (String nameOfGame, GameModel model) throws Exception {
         myNameOfGame = nameOfGame;
         myViewableObjects = new HashMap<Loc, AbstractViewableObject>();
+        myGroundObjects = new HashMap<Loc, AbstractGround>();
         String worldJSONFilepath = Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
                 Constants.FILENAME_WORLD;
         myModel = model;
@@ -36,28 +38,28 @@ public class World {
         return myPlayer;
     }
 
-    private void addViewableObject (AbstractViewableObject obj) {
-        myViewableObjects.put(obj.getLoc(), obj);
+    public void addViewable (AbstractViewable obj) {
+        if (obj.canStepOn()) {
+            myGroundObjects.put(obj.getLoc(), (AbstractGround) obj);
+        } else {
+            myViewableObjects.put(obj.getLoc(), (AbstractViewableObject) obj);            
+        }
     }
 
-    protected Map<Loc, AbstractViewableObject> getViewableObjects () {
-        return myViewableObjects;
+    protected AbstractViewableObject getViewableObject (Loc loc) {
+        return myViewableObjects.get(loc);
     }
-
-    public boolean isLocOccupied(Loc loc) {
+    
+    protected AbstractGround getGroundObject (Loc loc) {
+        return myGroundObjects.get(loc);
+    }
+    
+    protected boolean isLocOccupied(Loc loc) {
         return null != myViewableObjects.get(loc);
     }
     
-    public Loc locInFrontOfPlayer() {
+    protected Loc locInFrontOfPlayer() {
         return myPlayer.getLoc().adjacentLoc(myPlayer.getDirection());
-    }
-
-    protected void movePlayer (Direction d) {
-        myPlayer.setDirection(d);
-        Loc targetLoc = myPlayer.getLoc().adjacentLoc(d);
-        if (!myViewableObjects.containsKey(targetLoc)) {
-            myPlayer.getLoc().setAdjacentLoc(d); //does not change the reference of the player's Loc
-        }
     }
     
     protected void setUpWorld () throws Exception {
@@ -71,14 +73,15 @@ public class World {
                         myModel.getDefinitionCache().
                                 getInstance(viewableCategory, objInWorld.getString(Constants.JSON_NAME));
                 String classPath = Constants.CLASSPATH_GAME_MODEL + "." + viewableCategory; 
-                AbstractViewableObject newViewableObject = 
-                        (AbstractViewableObject) Reflection.createInstance(classPath,
+                AbstractViewable newViewable = 
+                        (AbstractViewable) Reflection.createInstance(classPath,
+                                                                           myModel, 
                                                                            this,
                                                                            definition,
                                                                            objInWorld);
-                addViewableObject(newViewableObject);
+                addViewable(newViewable);
                 if (viewableCategory.equals(Constants.JSON_PLAYER)) {
-                    myPlayer = (Player) newViewableObject;
+                    myPlayer = (Player) newViewable;
                 }
             }
         }
@@ -88,15 +91,6 @@ public class World {
         System.out.println(o.toString());
     }
 
-//    // TODO: this will get removed. we'll now just call doAction() and pass inputs and reference to world
-//    protected void doInteraction () {
-//        Loc locInFrontOfPlayer = myPlayer.getLoc().adjacentLoc(myPlayer.getDirection());
-//        if (myViewableObjects.containsKey(locInFrontOfPlayer)) {
-//            AbstractViewableObject viewableObj = myViewableObjects.get(locInFrontOfPlayer);
-//            ((AbstractInteractableObject) viewableObj).doInteraction(myPlayer);
-//        }
-//    }
-    
     protected void removeObject(Loc loc) {
         myViewableObjects.remove(loc);
     }

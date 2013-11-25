@@ -11,24 +11,24 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+
 public class ImagePicker extends JPanel implements ActionListener {
-    
+
     private ImageDisplayer myImageDisplayer;
     private JFileChooser myChooser;
     private JButton myOpenButton;
     private File myFile;
 
-    
-    public ImagePicker(){
-        init();    
+    public ImagePicker () {
+        init();
     }
-    
-    public ImagePicker(BorderLayout bl){
+
+    public ImagePicker (BorderLayout bl) {
         super(bl);
         init();
     }
-    
-    private void init(){
+
+    private void init () {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         myImageDisplayer = new ImageDisplayer();
         createFileChooser();
@@ -36,15 +36,17 @@ public class ImagePicker extends JPanel implements ActionListener {
         myImageDisplayer.setAlignmentX(CENTER_ALIGNMENT);
         this.add(myOpenButton);
         myOpenButton.setAlignmentX(CENTER_ALIGNMENT);
-        this.setMinimumSize(new Dimension(ImageDisplayer.MIN_X_SIZE, ImageDisplayer.MIN_Y_SIZE + 100));
+        this.setMinimumSize(new Dimension(ImageDisplayer.MIN_X_SIZE,
+                                          ImageDisplayer.MIN_Y_SIZE + 100));
     }
 
     private void createFileChooser () {
         // TODO Auto-generated method stub
         myChooser = FileChooserSingleton.getInstance();
         myChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        myChooser.setFileFilter(new FileNameExtensionFilter("Image files (JPEG, GIF, PNG)", "jpg", "jpeg", "gif", "png"));
-        
+        myChooser.setFileFilter(new FileNameExtensionFilter("Image files (JPEG, GIF, PNG)", "jpg",
+                                                            "jpeg", "gif", "png"));
+
         myOpenButton = new JButton("Select image...");
         myOpenButton.addActionListener(this);
     }
@@ -60,14 +62,14 @@ public class ImagePicker extends JPanel implements ActionListener {
                 myImageDisplayer.setImageAndCaption(myFile);
             }
         }
-        
+
     }
-    
-    public File getFile(){
+
+    public File getFile () {
         return myFile;
     }
-    
-    public String getFilepath(){
+
+    public String getFilepath () {
         return myFile.getPath();
     }
 }

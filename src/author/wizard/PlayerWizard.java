@@ -1,10 +1,12 @@
 package author.wizard;
 
-//import java.awt.Color;
-//import javax.swing.JPanel;
+// import java.awt.Color;
+// import javax.swing.JPanel;
 import author.ImagePicker;
 import author.panels.FinishPanel;
-//import author.panels.TextPanel;
+
+
+// import author.panels.TextPanel;
 
 @Deprecated
 @SuppressWarnings("serial")

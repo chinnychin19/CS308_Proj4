@@ -13,8 +13,8 @@ public class TypeMatrix extends AbstractModelObject {
     private static final String MATRIX_KEY = "matrix";
     private Map<Type, Map<Type, Double>> myTypeMap;
 
-    public TypeMatrix (SmartJsonObject definition) {
-        super(definition);
+    public TypeMatrix (GameModel model, SmartJsonObject definition) {
+        super(model, definition);
         myTypeMap = new HashMap<Type, Map<Type, Double>>();
         try {
             SmartJsonObject matrix = definition.getSmartJsonObject(MATRIX_KEY);
