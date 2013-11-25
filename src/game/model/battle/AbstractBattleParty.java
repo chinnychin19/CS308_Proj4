@@ -33,7 +33,6 @@ public abstract class AbstractBattleParty {
         myMonsters = new ArrayList<Monster>();
         myController = controller;
         myCurrentMonster = monster;
-        myMonsters = new ArrayList<Monster>();
         myMonsters.add(monster);
         myFighter = null;
     }

@@ -36,10 +36,16 @@ public class Monster extends AbstractModelObject {
     private int myAttack;
     private int myDefense;
     private List<AttackWrapper> myAttacks;
-//  private List<Monster> myEvolution; //this should not be a list...
+    private Monster myEvolution;
 
-    //To be called for an NPC's monsters or wild monsters
-    //It will generate stats based on the level and base stats
+    
+    /**
+     * To be called for an NPC's monsters or wild monster
+     * It will generate stats based on the level and base stats 
+     * @param model
+     * @param definition
+     * @param level
+     */
     public Monster (GameModel model, SmartJsonObject definition, int level) {
         super(model, definition);
         readDefinition(definition);
@@ -47,7 +53,12 @@ public class Monster extends AbstractModelObject {
         generateStats();
     }
     
-    //To be called for the Player's monsters because they already have stats
+    /**
+     * To be called for the Player's monsters because they already have stats
+     * @param model
+     * @param definition
+     * @param objInWorld
+     */
     public Monster(GameModel model, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(model, definition);
         readDefinition(definition);
@@ -252,9 +263,18 @@ public class Monster extends AbstractModelObject {
         }
     }
 
+    /**
+     *  Returns the probability of catching this monster.  The probability decreases as a monster
+     *  increases their level, and increases as the monster loses more HP. TODO - Incorporating
+     *  the current status of the monster into this equation
+     *  HealthFactor returns the minimum between .01 and 1-CurrentHP/MaxHP - so if they have 100% health,
+     *  the HealthFactor will be .01 instead of 0 so that there is still a chance to catch the pokemon.
+     *  Otherwise, it would be impossible.
+     * @return
+     */
     public double getCatchProbability () {
       double levelFactor = 1/this.getLevel();
-      double healthFactor = 1 - this.getCurHP()/this.getMaxHP();
+      double healthFactor = Math.min(1 - this.getCurHP()/this.getMaxHP(), 0.01);
       return this.getCatchRate()*levelFactor*healthFactor;
               //TODO - Statuses
     }

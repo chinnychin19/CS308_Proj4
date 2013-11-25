@@ -2,7 +2,6 @@ package game.model;
 
 import game.controller.AbstractMode;
 import game.controller.Input;
-
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,11 +17,13 @@ import constants.Constants;
 import location.Direction;
 import location.Loc;
 
+
 /**
  * The Main Player class
  * Represents the user the player controllers
+ * 
  * @author tylernisonoff
- *
+ * 
  */
 public class Player extends AbstractCharacter implements Fighter {
     private List<Monster> myParty;
@@ -37,71 +38,76 @@ public class Player extends AbstractCharacter implements Fighter {
         myKeyItems = new HashSet<KeyItem>();
         myKeyItems.add(new KeyItem(model, "razor"));// TODO: REMOVE
         myParty = new ArrayList<Monster>(); // TODO: populate
-        myItems = new ArrayList<Item>(); //TODO: populate
+        myItems = new ArrayList<Item>(); // TODO: populate
         loadFromWorld(objInWorld);
     }
-    
+
     /**
      * Creates the player from a JSON object
      * Can come from initial world definition or a savedState
+     * 
      * @param objInWorld - JSON Object that describes the player
      */
-    public void loadFromWorld(SmartJsonObject objInWorld){
+    public void loadFromWorld (SmartJsonObject objInWorld) {
         try {
-            //ADDING MONSTERS
+            // ADDING MONSTERS
             myParty = new ArrayList<Monster>(); // TODO: populate
             JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWWERCASE);
             for (Object monsterObj : myMonstersJSON) {
                 SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
                 SmartJsonObject monsterDefinition =
                         getModel().getDefinitionCache()
-                                .getInstance(Constants.MONSTER_UPPERCASE, monsterInWorld.getString(Constants.JSON_NAME));
+                                .getInstance(Constants.MONSTER_UPPERCASE,
+                                             monsterInWorld.getString(Constants.JSON_NAME));
                 myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
             }
-            
+
             int x = objInWorld.getInt(Constants.JSON_X);
             int y = objInWorld.getInt(Constants.JSON_Y);
             setLoc(new Loc(x, y), getWorld());
 
             String directionStr = objInWorld.getString(Constants.JSON_ORIENTATION);
             setDirection(Direction.constructFromString(directionStr));
-            
-            //ADDING KEY ITEMS
+
+            // ADDING KEY ITEMS
             myKeyItems = new HashSet<KeyItem>();
             JSONArray playerKeyItems = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
             Collection<KeyItem> keyItems = new ArrayList<KeyItem>();
             for (Object o : playerKeyItems) {
-                keyItems.add(new KeyItem(getModel(), (String)o));
+                keyItems.add(new KeyItem(getModel(), (String) o));
             }
             setKeyItems(keyItems);
-        } catch(SmartJsonException e){
-            
+        }
+        catch (SmartJsonException e) {
+
         }
     }
-    
+
     /**
      * sets a Collection of keyItems for a user
+     * 
      * @param keyItems
      */
-    public void setKeyItems(Collection<KeyItem> keyItems){
+    public void setKeyItems (Collection<KeyItem> keyItems) {
         myKeyItems = keyItems;
     }
-    
+
     /**
      * 
      * @return - Key Items of the Player
      */
-    public Collection<KeyItem> getKeyItems() {
+    public Collection<KeyItem> getKeyItems () {
         return myKeyItems;
     }
-    
+
     /**
      * 
      * @return - Key Items of the Player
      */
-    public List<Item> getItems() {
+    public List<Item> getItems () {
         return myItems;
     }
+
     /**
      * Returns the Party for battle
      */
@@ -116,30 +122,26 @@ public class Player extends AbstractCharacter implements Fighter {
      */
     @Override
     public void doFrame (World w, Input input) {
-      Direction dir = getMoveDirection(input);
-      if (null != dir) {
-          setDirection(dir);
-          Loc target = getLoc().adjacentLoc(getDirection());
-          if (!w.isLocOccupied(target)) {
-              setLoc(target, w);
-          }
-      }
+        Direction dir = getMoveDirection(input);
+        if (null != dir) {
+            setDirection(dir);
+            Loc target = getLoc().adjacentLoc(getDirection());
+            if (!w.isLocOccupied(target)) {
+                setLoc(target, w);
+            }
+        }
     }
-    
-    //TODO: this method should be in the inputs object
-    private Direction getMoveDirection(Input input) {
-        if (input.isKeyUpPressed()) {
-            return Direction.UP;
-        }
-        if (input.isKeyLeftPressed()) {
-            return Direction.LEFT;
-        }
-        if (input.isKeyDownPressed()) {
-            return Direction.DOWN;
-        }
-        if (input.isKeyRightPressed()) {
-            return Direction.RIGHT;
-        }
+
+    // TODO: this method should be in the inputs object
+    private Direction getMoveDirection (Input input) {
+        if (input.isKeyUpPressed()) { return Direction.UP; }
+        if (input.isKeyLeftPressed()) { return Direction.LEFT; }
+        if (input.isKeyDownPressed()) { return Direction.DOWN; }
+        if (input.isKeyRightPressed()) { return Direction.RIGHT; }
         return null;
+    }
+
+    public void addMonsterToParty (Monster m) {
+        myParty.add(m);
     }
 }

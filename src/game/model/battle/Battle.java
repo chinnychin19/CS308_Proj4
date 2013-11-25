@@ -10,7 +10,8 @@ public class Battle {
     AbstractBattleParty myPlayerParty;
     AbstractBattleParty myEnemyParty;
     AbstractBattleMode myMode;
-    private static final double RANDOM_FACTOR = 0.99 + Math.random() * 0.01;
+    private static final double CATCH_MIN = 0.90;
+    private static final double RANDOM_FACTOR = CATCH_MIN + Math.random() * (1.00 - CATCH_MIN);
 
     public Battle (AbstractBattleParty playerParty,
                    AbstractBattleParty enemyParty,
@@ -85,6 +86,6 @@ public class Battle {
     }
 
     public void transferWildMonster () {
-        myPlayerParty.addMonster(myEnemyParty.getCurrentMonster());
+        myMode.getModel().getPlayer().addMonsterToParty(myEnemyParty.getCurrentMonster());
     }
 }

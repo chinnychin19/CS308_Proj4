@@ -11,14 +11,16 @@ public class CatchOptionState extends AbstractOptionState {
 
     @Override
     protected void onInteract () {
+      
         if (myMode.getBattle().caughtWildMonster()) {
-            myMode.setOptionState(new TextState(myMode, "You caught the monster!"));
+            myMode.setOptionState(new BattleOverState(myMode, "You caught the monster!"));
+           //myMode.setOptionState(new TextState(myMode, "You caught the monster!"));
         }
-        else {
-            // myMode.setOptionState(new BattleOverState(myMode, "You did not catch the monster!"));
-            myMode.setOptionState(new MainOptionState(myMode));
-            myMode.getBattle().registerUserCompleted();
-        }
+//        else {
+//            // myMode.setOptionState(new BattleOverState(myMode, "You did not catch the monster!"));
+//            myMode.setOptionState(new MainOptionState(myMode));
+//            myMode.getBattle().registerUserCompleted();
+//        }
     }
 
     @Override

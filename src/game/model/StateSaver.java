@@ -16,7 +16,7 @@ import location.Loc;
 
 /**
  * Class to assist with the Save state - loading and saving a given state of the game
- * @author tylernisonoff
+ * @author tylernisonoff, chinmay, austinness
  *
  */
 public class StateSaver {
