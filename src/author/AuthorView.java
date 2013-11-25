@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
 import author.listeners.LaunchPlayerWizardListener;
 import author.listeners.LaunchWizardListener;
 import author.listeners.OutputJSONListener;
@@ -21,7 +20,6 @@ public class AuthorView extends JFrame {
     private List<AbstractWizardState> myWizardStates;
 
     private AuthorView av = this;
-    
 
     public static final String TITLE = "Authoring View";
     public static final String LAUNCH_WIZARD = "Launch Wizard";
@@ -32,35 +30,33 @@ public class AuthorView extends JFrame {
         this.setTitle(TITLE);
         this.setPreferredSize(Constants.FRAME_SIZE);
         this.setLocationRelativeTo(null);
-        
+
         JMenuBar menuBar = new JMenuBar();
-        
+
         AuthoringCache ac = new AuthoringCache(this);
-        
+
         JMenu fileMenu = new JMenu("File");
         fileMenu.add(new NewEntitySubMenu("New Entity", ac));
         fileMenu.add(new JMenuItem("Choose Alternate Template (JSON)"));
         fileMenu.add(new JMenuItem("Load Existing Game (JSON)"));
-        
+
         JMenu editMenu = new JMenu("Edit");
         editMenu.add(new EditEntitySubMenu("Edit Existing Entity", ac));
-        
+
         JMenu viewMenu = new JMenu("View");
         JMenuItem item = new JMenuItem("Show Generated Output");
         item.addActionListener(new OutputJSONListener(ac));
         viewMenu.add(item);
-        
-        
+
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
         menuBar.add(viewMenu);
 
-        
-        //Set the menu bar to the frame.
+        // Set the menu bar to the frame.
         this.setJMenuBar(menuBar);
-        
+
         this.add(new LevelEditorCanvas());
-        
+
         pack();
         this.setVisible(true);
     }
@@ -73,9 +69,9 @@ public class AuthorView extends JFrame {
             return av;
         }
     }
-    
-    public void update() {
-    	((EditEntitySubMenu)av.getJMenuBar().getMenu(1).getItem(0)).refreshMenu();
+
+    public void update () {
+        ((EditEntitySubMenu) av.getJMenuBar().getMenu(1).getItem(0)).refreshMenu();
     }
 
 }
