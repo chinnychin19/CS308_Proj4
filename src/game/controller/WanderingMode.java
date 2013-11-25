@@ -1,14 +1,11 @@
 package game.controller;
 
-import java.awt.Graphics;
-import java.awt.Image;
+import java.util.ArrayList;
 import java.util.Collection;
-import location.Direction;
 import location.Loc;
 import constants.Constants;
-import game.model.AbstractViewableObject;
+import game.model.AbstractViewable;
 import game.model.GameModel;
-import game.model.Player;
 import game.view.GameView;
 
 
@@ -22,50 +19,22 @@ public class WanderingMode extends AbstractMode {
     public void paint () {
         paintBackground();
         paintPlayer();
-        paintViewableObjectsOnScreen();
+        paintViewablesOnScreen();
         paintBorder();
     }
     
-    private Collection<AbstractViewableObject> getViewableObjectsOnScreen() {
-        return getModel().getViewableObjects().values();
-        //TODO: implement this properly
-    }
-
     @Override
     public void act () {
-        for (AbstractViewableObject obj : getViewableObjectsOnScreen()) {
-            obj.doFrame(getModel().getWorld(), getInputs());
+        for (AbstractViewable obj : getGroundObjectsOnScreen()) {
+            obj.doFrame(getModel().getWorld(), this.getInput());
         }
-//        // Check for movement
-//        Direction dir = getMoveDirection();
-//        if (null != dir) {
-//            getModel().doMove(dir);
-//        }
-//
-//        // Check for interaction
-//        if (getInputs()[INDEX_INTERACT]) {
-//            getModel().doInteraction();
-//        }
+        for (AbstractViewable obj : getViewableObjectsOnScreen()) {
+//            System.out.println("act object: "+obj.getLoc());
+            obj.doFrame(getModel().getWorld(), this.getInput());
+        }
     }
     
-//    private Direction getMoveDirection() {
-//        boolean[] inputs = getInputs();
-//        if (inputs[INDEX_UP]) {
-//            return Direction.UP;
-//        }
-//        if (inputs[INDEX_LEFT]) {
-//            return Direction.LEFT;
-//        }
-//        if (inputs[INDEX_DOWN]) {
-//            return Direction.DOWN;
-//        }
-//        if (inputs[INDEX_RIGHT]) {
-//            return Direction.RIGHT;
-//        }
-//        return null;
-//    }
-
-    public void paintPlayer () {
+    private void paintPlayer () {
         getGraphics().drawImage(getModel().getPlayer().getImage(),
                                 (int) (Constants.MIDDLE_TILE_HORIZONTAL * Constants.TILE_WIDTH),
                                 (int) (Constants.MIDDLE_TILE_VERTICAL * Constants.TILE_HEIGHT),
@@ -74,7 +43,7 @@ public class WanderingMode extends AbstractMode {
                                 null);
     }
     
-    public void paintBackground () {
+    private void paintBackground () {
         // draws default background image
         getGraphics().
                 drawImage(
@@ -86,8 +55,44 @@ public class WanderingMode extends AbstractMode {
 
     }
 
-    private void paintViewableObjectsOnScreen () {
-        for (AbstractViewableObject obj : getViewableObjectsOnScreen()){
+    private Collection<AbstractViewable> getViewableObjectsOnScreen() {
+        ArrayList<AbstractViewable> list = new ArrayList<AbstractViewable>();
+        int px = getModel().getPlayer().getLoc().getX();
+        int py = getModel().getPlayer().getLoc().getY();
+        int tilesRight = Constants.NUM_TILES_HORIZONTAL/2;
+        int tilesDown = Constants.NUM_TILES_VERTICAL/2;
+        for (int i = px-tilesRight; i <= px+tilesRight; i++) {
+            for (int j = py-tilesDown; j <= py+tilesDown; j++) {
+                Loc target = new Loc(i,j);
+                AbstractViewable object = getModel().getViewableObject(target);
+                if (null != object) {
+                    list.add(object);
+                }
+            }
+        }
+        return list;
+    }
+
+    private Collection<AbstractViewable> getGroundObjectsOnScreen() {
+        ArrayList<AbstractViewable> list = new ArrayList<AbstractViewable>();
+        int px = getModel().getPlayer().getLoc().getX();
+        int py = getModel().getPlayer().getLoc().getY();
+        int tilesRight = Constants.NUM_TILES_HORIZONTAL/2;
+        int tilesDown = Constants.NUM_TILES_VERTICAL/2;
+        for (int i = -tilesRight; i <= tilesRight; i++) {
+            for (int j = -tilesDown; j <= tilesDown; j++) {
+                Loc target = new Loc(i,j);
+                AbstractViewable ground = getModel().getGroundObject(target);
+                if (null != ground) {
+                    list.add(ground);
+                }
+            }
+        }
+        return list;
+    }
+
+    private void paintViewablesOnScreen () {
+        for (AbstractViewable obj : getGroundObjectsOnScreen()){
             Loc tileLoc = obj.getTileLocationOnScreen(getModel().getPlayer());
             getGraphics().drawImage(obj.getImage(),
                                (int) (tileLoc.getX() * Constants.TILE_WIDTH),
@@ -97,5 +102,24 @@ public class WanderingMode extends AbstractMode {
                                null);
 
         }
+        for (AbstractViewable obj : getViewableObjectsOnScreen()){
+            Loc tileLoc = obj.getTileLocationOnScreen(getModel().getPlayer());
+            getGraphics().drawImage(obj.getImage(),
+                               (int) (tileLoc.getX() * Constants.TILE_WIDTH),
+                               (int) (tileLoc.getY() * Constants.TILE_HEIGHT),
+                               (int) Constants.TILE_WIDTH,
+                               (int) Constants.TILE_HEIGHT,
+                               null);
+        }
+    }
+
+    @Override
+    public void turnOff () {
+        getView().removeKeyListener(this);
+    }
+
+    @Override
+    public void turnOn () {
+        getView().addKeyListener(this);
     }
 }

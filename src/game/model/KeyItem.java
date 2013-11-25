@@ -6,11 +6,12 @@ import util.jsonwrapper.SmartJsonObject;
 
 public class KeyItem extends AbstractModelObject {
     // Key items only have names.
-    public KeyItem (SmartJsonObject definition) {
-        super(definition);
+    public KeyItem (GameModel model, SmartJsonObject definition) {
+        super(model, definition);
     }
     
-    public KeyItem (String name){
+    public KeyItem (GameModel model, String name){
+        super(model);
         setName(name);
     }
     

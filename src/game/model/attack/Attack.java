@@ -3,6 +3,8 @@ package game.model.attack;
 import java.util.ArrayList;
 import java.util.Collection;
 import game.model.AbstractModelObject;
+import game.model.GameModel;
+import game.model.Monster;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import util.Target;
@@ -22,8 +24,8 @@ public class Attack extends AbstractModelObject {
     Collection<StatisticEffect> myStatisticEffects;
     Collection<StatusEffect> myStatusEffects;
 
-    public Attack (SmartJsonObject definition) {
-        super(definition);
+    public Attack (GameModel model, SmartJsonObject definition) {
+        super(model, definition);
         myStatisticEffects = new ArrayList<Attack.StatisticEffect>();
         myStatusEffects = new ArrayList<Attack.StatusEffect>();
 
@@ -44,9 +46,23 @@ public class Attack extends AbstractModelObject {
             }
         }
         catch (SmartJsonException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    public void doAttack (Monster attacker, Monster defender) {
+        //TODO: consider accuracy
+        int attack = attacker.getAttack();
+        int defense = defender.getDefense();
+        double multiplier = getModel().getTypeMatrix().getDamageMultiplier(attacker.getType(),
+                                                                           defender.getType());
+        double damage = damageFunction(attacker.getLevel(), attack, defense, myPower, multiplier);
+        System.out.println("damage: "+damage);
+        defender.changeHealth((int)(-damage));
+    }
+    
+    private double damageFunction(int attackLevel, int attack, int defense, int power, double multiplier) {
+        return 5 * (2 + ( 2 + (attackLevel * 0.4)) * attack * power / 50 / defense) * multiplier;
     }
 
     @Override

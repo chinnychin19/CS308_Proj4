@@ -1,8 +1,12 @@
 package game.model;
 
 import game.controller.AbstractMode;
+import game.controller.GameController;
 import java.io.IOException;
 import java.util.Map;
+import org.json.simple.JSONObject;
+import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 import jsoncache.JSONCache;
 import jsoncache.JSONReader;
@@ -11,23 +15,46 @@ import location.Loc;
 
 
 public class GameModel {
+    private GameController myController;
     private Player myPlayer;
     private World myWorld;
     private StateSaver myStateSaver;
     private JSONCache myDefinitionCache;
+    private TypeMatrix myTypeMatrix;
 
-    public GameModel (String nameOfGame) throws Exception {
+    public GameModel (String nameOfGame, GameController controller) throws Exception {
+        myController = controller;
         String definitionJSONFilepath =
                 Constants.FOLDERPATH_GAMES + "/" + nameOfGame + "/" +
                         Constants.FILENAME_DEFINITION;
         myDefinitionCache = new JSONCache(JSONReader.getJSON(definitionJSONFilepath));
+        loadTypeMatrix();
         myWorld = new World(nameOfGame, this);
         myPlayer = myWorld.getPlayer();
-        myStateSaver = new StateSaver(myWorld, nameOfGame);
+        myStateSaver = new StateSaver(this, myWorld, nameOfGame);
+    }
+    
+    private void loadTypeMatrix() {
+        //TODO: constant
+        try {
+            SmartJsonObject matrixDefinition = myDefinitionCache.getInstance("TypeMatrix", "matrix");
+            myTypeMatrix = new TypeMatrix(this, matrixDefinition);
+        }
+        catch (SmartJsonException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public TypeMatrix getTypeMatrix() {
+        return myTypeMatrix;
     }
     
     public JSONCache getDefinitionCache() {
         return myDefinitionCache;
+    }
+    
+    public GameController getController() {
+        return myController;
     }
 
     public Player getPlayer () {
@@ -52,19 +79,19 @@ public class GameModel {
         }
     }
 
-    public Map<Loc, AbstractViewableObject> getViewableObjects () {
-        return myWorld.getViewableObjects();
+    public AbstractViewableObject getViewableObject (Loc loc) {
+        return myWorld.getViewableObject(loc);
     }
+    
+    public AbstractGround getGroundObject (Loc loc) {
+        return myWorld.getGroundObject(loc);
+    }
+    
+//    public Map<Loc, AbstractViewableObject> getViewableObjects () {
+//        return myWorld.getViewableObjects();
+//    }
     
     public World getWorld() {
         return myWorld;
     }
-
-//    public void doInteraction () {
-//        myWorld.doInteraction();
-//    }
-//    
-//    public void doMove (Direction d) {
-//        myWorld.movePlayer(d);
-//    }
 }

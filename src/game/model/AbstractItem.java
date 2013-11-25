@@ -5,8 +5,8 @@ import util.jsonwrapper.SmartJsonObject;
 
 public abstract class AbstractItem extends AbstractModelObject {
 
-    public AbstractItem (SmartJsonObject definition) {
-        super(definition);
+    public AbstractItem (GameModel model, SmartJsonObject definition) {
+        super(model, definition);
     }
     
 }
