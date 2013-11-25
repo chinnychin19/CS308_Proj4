@@ -2,15 +2,15 @@ package game.controller.optionState;
 
 import game.controller.AbstractBattleMode;
 import game.controller.Input;
-import game.controller.WildBattleMode;
 import java.awt.Color;
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MainOptionState extends AbstractOptionState {
     List<OptionBundle> myOptions;
-    public MainOptionState(AbstractBattleMode mode){
+
+    public MainOptionState (AbstractBattleMode mode) {
         super(mode);
         myOptions = new ArrayList<OptionBundle>();
         addOption("Attack", new AttackOptionState(mode));
@@ -18,15 +18,15 @@ public class MainOptionState extends AbstractOptionState {
         addOption("Items", new ItemOptionState(mode));
         addOption("Catch", new CatchOptionState(mode));
     }
-    
+
     @Override
-    public void act(Input input){
+    public void act (Input input) {
         super.act(input);
-        if(mySelected >= myOptions.size()){
-            mySelected = Math.max(0, myOptions.size()-1);
+        if (mySelected >= myOptions.size()) {
+            mySelected = Math.max(0, myOptions.size() - 1);
         }
     }
-    
+
     @Override
     public void paint () {
         super.paint();
@@ -44,11 +44,11 @@ public class MainOptionState extends AbstractOptionState {
             }
         }
     }
-    
-    public void addOption(String s, AbstractOptionState state){
+
+    public void addOption (String s, AbstractOptionState state) {
         myOptions.add(new OptionBundle(s, state));
     }
-    
+
     private class OptionBundle {
         private String myString;
         private AbstractOptionState myState;
@@ -57,12 +57,12 @@ public class MainOptionState extends AbstractOptionState {
             myString = s;
             myState = state;
         }
-        
-        public String getName(){
+
+        public String getName () {
             return myString;
         }
-        
-        public AbstractOptionState getState(){
+
+        public AbstractOptionState getState () {
             return myState;
         }
     }
@@ -77,6 +77,6 @@ public class MainOptionState extends AbstractOptionState {
      */
     @Override
     protected void onBack () {
-        
+
     }
 }

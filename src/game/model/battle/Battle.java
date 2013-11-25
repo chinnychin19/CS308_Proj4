@@ -3,7 +3,6 @@ package game.model.battle;
 import game.controller.AbstractBattleMode;
 import game.controller.optionState.BattleOverState;
 import game.controller.optionState.MainOptionState;
-import game.model.Monster;
 import game.model.attack.Attack;
 
 
@@ -11,7 +10,7 @@ public class Battle {
     AbstractBattleParty myPlayerParty;
     AbstractBattleParty myEnemyParty;
     AbstractBattleMode myMode;
-    private static final double RANDOM_FACTOR = 0.99 + Math.random()*0.01;
+    private static final double RANDOM_FACTOR = 0.99 + Math.random() * 0.01;
 
     public Battle (AbstractBattleParty playerParty,
                    AbstractBattleParty enemyParty,
@@ -77,8 +76,8 @@ public class Battle {
 
     public boolean caughtWildMonster () {
         WildMonsterParty wildMonster = (WildMonsterParty) myEnemyParty;
-        double probability = wildMonster.calculateCatchProbability()*RANDOM_FACTOR;
-        if(Math.random() <= probability){
+        double probability = wildMonster.calculateCatchProbability() * RANDOM_FACTOR;
+        if (Math.random() <= probability) {
             transferWildMonster();
             return true;
         }
