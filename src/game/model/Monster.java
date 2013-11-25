@@ -145,10 +145,7 @@ public class Monster extends AbstractModelObject {
      */
     public int getDefense () {
         return myDefense;
-    }
-    
-    
-    
+    }   
     /**
      * Get the attacks associated with the monster
      * @return list of attacks

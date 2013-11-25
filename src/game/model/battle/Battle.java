@@ -78,11 +78,14 @@ public class Battle {
     public boolean caughtWildMonster () {
         WildMonsterParty wildMonster = (WildMonsterParty) myEnemyParty;
         double probability = wildMonster.calculateCatchProbability()*RANDOM_FACTOR;
-        return Math.random() <= probability;
+        if(Math.random() <= probability){
+            transferWildMonster();
+            return true;
+        }
+        return false;
     }
 
     public void transferWildMonster () {
-        // TODO Auto-generated method stub
-        
+        myPlayerParty.addMonster(myEnemyParty.getCurrentMonster());
     }
 }

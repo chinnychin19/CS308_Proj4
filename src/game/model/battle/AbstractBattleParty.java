@@ -89,4 +89,8 @@ public abstract class AbstractBattleParty {
     public void setCurrentMonster(Monster m){
         myCurrentMonster = m;
     }
+
+    public void addMonster (Monster currentMonster) {
+        myMonsters.add(currentMonster);
+    }
 }

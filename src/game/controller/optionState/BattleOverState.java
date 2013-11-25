@@ -1,9 +1,6 @@
 package game.controller.optionState;
 
-import java.awt.Color;
-import java.util.List;
 import game.controller.AbstractBattleMode;
-import game.model.attack.Attack;
 
 public class BattleOverState extends AbstractOptionState {
     private String myText;

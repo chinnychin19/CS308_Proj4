@@ -27,6 +27,6 @@ public class WildMonsterParty extends AbstractBattleParty {
     }
 
     public double calculateCatchProbability () {
-        return getFirstAliveMonster().getCatchProbability();
+        return getBattle().getEnemyParty().getCurrentMonster().getCatchProbability();
     }
 }
