@@ -10,7 +10,7 @@ import constants.Constants;
 
 @SuppressWarnings("serial")
 public class NumberPanel extends AbstractTextPanel {
-    
+
     JTextArea myTextArea;
 
     public NumberPanel (String label) {
@@ -26,10 +26,10 @@ public class NumberPanel extends AbstractTextPanel {
         this.add(myTextArea);
     }
 
-    public Map<String, String> getUserInput () {       
+    public Map<String, String> getUserInput () {
         Map<String, String> result = new HashMap<String, String>();
         String label = myTextLabel.getText();
-        result.put(label.substring(0, label.length()-1), myTextArea.getText());
+        result.put(label.substring(0, label.length() - 1), myTextArea.getText());
         return result;
     }
 

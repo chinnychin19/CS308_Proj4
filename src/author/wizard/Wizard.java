@@ -34,6 +34,7 @@ public class Wizard extends JDialog {
         
         myObjectName = type;
 
+
         init();
         addButtons();
 
