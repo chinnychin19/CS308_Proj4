@@ -11,6 +11,7 @@ public class Battle {
     AbstractBattleParty myPlayerParty;
     AbstractBattleParty myEnemyParty;
     AbstractBattleMode myMode;
+    private static final double RANDOM_FACTOR = 0.99 + Math.random()*0.01;
 
     public Battle (AbstractBattleParty playerParty,
                    AbstractBattleParty enemyParty,
@@ -76,7 +77,7 @@ public class Battle {
 
     public boolean caughtWildMonster () {
         WildMonsterParty wildMonster = (WildMonsterParty) myEnemyParty;
-        double probability = wildMonster.calculateCatchProbability();
+        double probability = wildMonster.calculateCatchProbability()*RANDOM_FACTOR;
         return Math.random() <= probability;
     }
 
