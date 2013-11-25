@@ -44,16 +44,6 @@ public class GameController {
         setMode(myMainMode);
     }
     
-//    /**
-//     * Puts the Game in WildBattleMode
-//     * @param monster - The Monster of the WildBattle
-//     */
-//    public void setWildBattleMode(Monster monster) {
-//        // need to set the monster before activating the mode so it can draw the image
-//        //((WildBattleMode) myModeArray[INDEX_WILD_BATTLE]).setEnemyMonster(monster);
-//        //setMode(INDEX_WILD_BATTLE);
-//    }
-//    
     public AbstractMode getMode(){
         return myCurrentMode;
     }

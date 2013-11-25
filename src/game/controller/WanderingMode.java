@@ -50,6 +50,7 @@ public class WanderingMode extends AbstractMode {
      */
     @Override
     public void turnOff () {
+        getInput().resetAllInputs();
         getView().removeKeyListener(this);
     }
 
@@ -58,6 +59,7 @@ public class WanderingMode extends AbstractMode {
      */
     @Override
     public void turnOn () {
+        getInput().resetAllInputs();
         getView().addKeyListener(this);
     }
     
@@ -79,7 +81,6 @@ public class WanderingMode extends AbstractMode {
                           Constants.WIDTH,
                           Constants.HEIGHT,
                           null);
-
     }
     
     private Collection<AbstractViewable> getViewableObjectsOnScreen() {
