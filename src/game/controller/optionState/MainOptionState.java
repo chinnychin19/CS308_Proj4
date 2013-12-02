@@ -16,6 +16,7 @@ public class MainOptionState extends AbstractOptionState {
         addOption("Attack", new AttackOptionState(mode));
         addOption("Party", new PartyOptionState(mode));
         addOption("Items", new ItemOptionState(mode));
+        
     }
     
     @Override

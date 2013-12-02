@@ -53,7 +53,6 @@ public class Battle {
                 myMode.setOptionState(new MainOptionState(myMode));
             }
         }
-       
     }
     
     private void computerWon () {
