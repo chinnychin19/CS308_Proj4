@@ -6,21 +6,17 @@ import game.controller.AbstractBattleMode;
 public class TextState extends AbstractOptionState {
 
     private String myText;
-    private AbstractBattleMode myMode;
-
-    // private AbstractOptionState myNextState;
+    private AbstractOptionState myNextState;
 
     public TextState (AbstractBattleMode mode, String text) {
-        super(mode);
-        myMode = mode;
-        myText = text;
+        this(mode, text, new MainOptionState(mode));
     }
-
-    // public TextState (AbstractBattleMode mode, String text, AbstractOptionState nextState) {
-    // super(mode);
-    // myNextState = nextState;
-    // new TextState(mode, text);
-    // }
+    
+     public TextState (AbstractBattleMode mode, String text, AbstractOptionState nextState) {
+         super(mode);
+         myText = text;
+         myNextState = nextState;
+     }
 
     @Override
     public void paint () {
@@ -32,9 +28,7 @@ public class TextState extends AbstractOptionState {
 
     @Override
     protected void onInteract () {
-        // if(myNextState != null) myMode.setOptionState(myNextState);
-        // else myMode.setOptionState(new MainOptionState(myMode));
-        myMode.setOptionState(new MainOptionState(myMode));
+        myMode.setOptionState(myNextState);
     }
 
     @Override

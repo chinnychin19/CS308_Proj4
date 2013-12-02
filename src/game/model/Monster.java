@@ -176,6 +176,14 @@ public class Monster extends AbstractModelObject {
             myCurHP = myMaxHP;
         }
     }
+    
+    /**
+     * Determines if a pokemon is dead
+     * @return true if current HP is 0
+     */
+    public boolean isDead(){
+        return myCurHP == 0;
+    }
     /**
      * Stats for the monster
      */

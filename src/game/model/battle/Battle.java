@@ -2,7 +2,10 @@ package game.model.battle;
 
 import game.controller.AbstractBattleMode;
 import game.controller.optionState.BattleOverState;
+import game.controller.optionState.LivingPartyOptionState;
 import game.controller.optionState.MainOptionState;
+import game.controller.optionState.PartyOptionState;
+import game.controller.optionState.TextState;
 import game.model.attack.Attack;
 
 
@@ -56,6 +59,8 @@ public class Battle {
             System.out.println("health: " + myPlayerParty.getCurrentMonster().getCurHP());
             if (myPlayerParty.getNumberOfAliveMonsters() == 0) {
                 computerWon();
+            } else if(myPlayerParty.getCurrentMonster().isDead()){
+               myMode.setOptionState(new TextState(myMode, "Monster Died.  Choose a new Monster", new LivingPartyOptionState(myMode,false))); 
             }
             else {
                 myMode.setOptionState(new MainOptionState(myMode));

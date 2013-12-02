@@ -12,20 +12,29 @@ public abstract class AbstractOptionState {
     protected Graphics myBuffer;
     protected AbstractBattleMode myMode;
     protected int mySelected = 0;
+    private boolean myCanGoBack;
 
     public AbstractOptionState (AbstractBattleMode mode) {
+        this(mode, true);
+    }
+    
+    public AbstractOptionState(AbstractBattleMode mode, boolean canGoBack){
         myMode = mode;
         int x = 0, y = Constants.HEIGHT * 2 / 3, w = Constants.WIDTH, h =
                 Constants.HEIGHT / 3;
         myBuffer = myMode.getGraphics().create(x, y, w, h);
+        myCanGoBack = canGoBack;
     }
-
     public void paint () {
         myBuffer.setColor(Color.cyan);
         myBuffer.fillRect(0, 0, myBuffer.getClipBounds().width,
                           myBuffer.getClipBounds().height);
         myBuffer.setColor(Color.black);
         myBuffer.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+    }
+    
+    protected boolean canGoBack(){
+        return myCanGoBack;
     }
 
     protected abstract void onInteract ();
