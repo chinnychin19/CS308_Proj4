@@ -37,7 +37,7 @@ public class Monster extends AbstractModelObject {
     private int myDefense;
     private List<AttackWrapper> myAttacks;
     private Monster myEvolution;
-
+    //TODOL: EVOLUTION
     
     /**
      * To be called for an NPC's monsters or wild monster
@@ -289,5 +289,18 @@ public class Monster extends AbstractModelObject {
       double healthFactor = Math.min(1 - this.getCurHP()/this.getMaxHP(), 0.01);
       return this.getCatchRate()*levelFactor*healthFactor;
               //TODO - Statuses
+    }
+
+    public int getRewardExperience () {
+        return 100; //TODO: Actually implement
+    }
+
+    public void addExperience (int exp) {
+        myExp+= exp;
+        while(myExp >= myExpToNextLevel){
+            myLevel++;
+            myExp = myExp - myExpToNextLevel;         
+        }
+        //TODO: EVOLUTION
     }
 }

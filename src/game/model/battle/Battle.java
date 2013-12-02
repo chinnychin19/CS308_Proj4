@@ -66,19 +66,34 @@ public class Battle {
             userLost();
             return false; // my monsters are all dead
         }
-        else if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
+        if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
             userWon();
             return false; //opposing monster is dead
         }
         
         if (myPlayerParty.getCurrentMonster().isDead()) {
-            myMode.setOptionState(new TextState(myMode, "Monster Died.  Choose a new Monster",
-                                                new LivingPartyOptionState(myMode, false)));
+            handleUserMonsterDied();
             return false; //my current monster is dead
         }
+        
+        if (myEnemyParty.getCurrentMonster().isDead()){
+            handleWildMonsterDied();
+        }
+        
+        
+        
         return true;
     }
 
+    private void handleUserMonsterDied () {
+        myMode.setOptionState(new TextState(myMode, "Monster Died.  Choose a new Monster",
+                                            new LivingPartyOptionState(myMode, false)));
+    }
+
+    private void handleWildMonsterDied () {
+        myPlayerParty.getCurrentMonster().addExperience(myEnemyParty.getCurrentMonster().getRewardExperience());
+    }
+    
     private void userLost () {
         myMode.setOptionState(new UserLostWildBattleCompleteState(myMode));
     }
