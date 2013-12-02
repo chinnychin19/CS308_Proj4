@@ -6,7 +6,12 @@ import constants.Constants;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 
-
+/**
+ * The abstract class that deals with terrain in the game.  This class establishes what image is set as the ground and if 
+ * the terrain can be stepped on by other objects that are movable.
+ * @author tylernisonoff
+ *
+ */
 public abstract class AbstractGround extends AbstractViewable {
     private Image myImage;
 

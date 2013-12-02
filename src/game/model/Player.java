@@ -18,7 +18,12 @@ import constants.Constants;
 import location.Direction;
 import location.Loc;
 
-
+/**
+ * The Main Player class
+ * Represents the user the player controllers
+ * @author tylernisonoff
+ *
+ */
 public class Player extends AbstractCharacter implements Fighter {
     private List<Monster> myParty;
     private List<Item> myItems;
@@ -32,19 +37,25 @@ public class Player extends AbstractCharacter implements Fighter {
         myKeyItems = new HashSet<KeyItem>();
         myKeyItems.add(new KeyItem(model, "razor"));// TODO: REMOVE
         myParty = new ArrayList<Monster>(); // TODO: populate
+        myItems = new ArrayList<Item>(); //TODO: populate
         loadFromWorld(objInWorld);
     }
     
+    /**
+     * Creates the player from a JSON object
+     * Can come from initial world definition or a savedState
+     * @param objInWorld - JSON Object that describes the player
+     */
     public void loadFromWorld(SmartJsonObject objInWorld){
         try {
             //ADDING MONSTERS
             myParty = new ArrayList<Monster>(); // TODO: populate
-            JSONArray myMonstersJSON = objInWorld.getJSONArray("monsters");
+            JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWWERCASE);
             for (Object monsterObj : myMonstersJSON) {
                 SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
                 SmartJsonObject monsterDefinition =
                         getModel().getDefinitionCache()
-                                .getInstance("Monster", monsterInWorld.getString(Constants.JSON_NAME));
+                                .getInstance(Constants.MONSTER_UPPERCASE, monsterInWorld.getString(Constants.JSON_NAME));
                 myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
             }
             
@@ -67,21 +78,44 @@ public class Player extends AbstractCharacter implements Fighter {
             
         }
     }
+    
+    /**
+     * sets a Collection of keyItems for a user
+     * @param keyItems
+     */
     public void setKeyItems(Collection<KeyItem> keyItems){
         myKeyItems = keyItems;
     }
     
+    /**
+     * 
+     * @return - Key Items of the Player
+     */
     public Collection<KeyItem> getKeyItems() {
         return myKeyItems;
     }
-
+    
+    /**
+     * 
+     * @return - Key Items of the Player
+     */
+    public List<Item> getItems() {
+        return myItems;
+    }
+    /**
+     * Returns the Party for battle
+     */
     @Override
     public List<Monster> getParty () {
         return myParty;
     }
 
+    /**
+     * Method called on each movement in wandering mode
+     * Makes sure that the player is allowed to walk in a given space
+     */
     @Override
-    public void doFrame (World w, Input input) { //TODO: inputs should be an object
+    public void doFrame (World w, Input input) {
       Direction dir = getMoveDirection(input);
       if (null != dir) {
           setDirection(dir);

@@ -8,6 +8,12 @@ import game.model.Fighter;
 import game.model.GameModel;
 import game.model.Monster;
 
+/**
+ * Abstract Class for Battle Parties
+ * Contains a collection on monsters, a fighter, and a reference to the Battle
+ * @author tylernisonoff
+ *
+ */
 public abstract class AbstractBattleParty {
     private List<Monster> myMonsters;
     private Fighter myFighter;
@@ -59,11 +65,28 @@ public abstract class AbstractBattleParty {
         return myMonsters;
     }
     
+    public List<Monster> getAliveMonsters() {
+        List<Monster> aliveMonsters = new ArrayList<Monster>();
+        for(Monster mon : getMonsters()){
+            if(mon.getCurHP() > 0){
+                aliveMonsters.add(mon);
+            }
+        }
+        return aliveMonsters;
+    }
+    
+    public int getNumberOfAliveMonsters(){
+        return getAliveMonsters().size();
+    }
     public GameController getController() {
         return myController;
     }
     
     public Monster getCurrentMonster() {
         return myCurrentMonster;
+    }
+    
+    public void setCurrentMonster(Monster m){
+        myCurrentMonster = m;
     }
 }

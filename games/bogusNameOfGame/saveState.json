@@ -14,6 +14,16 @@
           "attack" : "70",
           "defense" : "116"
           },
+          {
+          "name" : "ryan",
+          "level" : "7",
+          "exp" : "0",
+          "expToNextLevel" : "300",
+          "maxHP" : "800",
+          "curHP" : "800",
+          "attack" : "60",
+          "defense" : "70"
+          }
         ]
 	},
 }
