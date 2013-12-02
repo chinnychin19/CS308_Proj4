@@ -15,6 +15,9 @@ public class LivingPartyOptionState extends PartyOptionState {
         super(mode, canGoBack);
     }
     
+    /**
+     * @return Only returns the list of alive monsters
+     */
     @Override
     protected List<Monster> getMonsters(){
         List<Monster> allMonsters = myMode.getBattle().getPlayerParty().getMonsters();
@@ -24,7 +27,6 @@ public class LivingPartyOptionState extends PartyOptionState {
                 aliveMonsters.add(m);
             }
         }
-        System.out.println("alive monsters "+aliveMonsters.size());
         return aliveMonsters;
     }
 }

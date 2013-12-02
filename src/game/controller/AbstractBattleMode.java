@@ -39,6 +39,7 @@ public abstract class AbstractBattleMode extends AbstractMode {
      */
     @Override
     public void turnOff () {
+        super.turnOff();
         getView().removeKeyListener(this);
         closeBuffers();
     }

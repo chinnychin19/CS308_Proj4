@@ -10,10 +10,11 @@ public class TextState extends AbstractOptionState {
 
     public TextState (AbstractBattleMode mode, String text) {
         this(mode, text, new MainOptionState(mode));
+
     }
     
      public TextState (AbstractBattleMode mode, String text, AbstractOptionState nextState) {
-         super(mode);
+         super(mode, "DIALOGUE");
          myText = text;
          myNextState = nextState;
      }

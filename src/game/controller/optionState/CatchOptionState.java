@@ -6,7 +6,7 @@ import game.controller.AbstractBattleMode;
 public class CatchOptionState extends AbstractOptionState {
 
     public CatchOptionState (AbstractBattleMode mode) {
-        super(mode);
+        super(mode, "CATCH");
     }
 
     @Override

@@ -44,7 +44,10 @@ public abstract class AbstractMode extends KeyAdapter {
     public abstract void act (); // TODO: take some sort of input object as parameter? or is this
                                  // the input object?
     
-    public abstract void turnOff();
+    //super should be called in sub classes
+    public void turnOff() {
+        getInput().resetAllInputs();
+    }
     
     public abstract void turnOn();
 

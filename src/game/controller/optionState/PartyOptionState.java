@@ -15,7 +15,7 @@ public class PartyOptionState extends AbstractOptionState{
     }
     
     public PartyOptionState (AbstractBattleMode mode, boolean canGoBack){
-        super(mode, canGoBack);
+        super(mode,"PARTY",canGoBack);
     }
     
     @Override

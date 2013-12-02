@@ -8,15 +8,16 @@ import java.util.List;
 
 
 public class MainOptionState extends AbstractOptionState {
-    List<OptionBundle> myOptions;
+    List<AbstractOptionState> myOptions;
 
     public MainOptionState (AbstractBattleMode mode) {
-        super(mode);
-        myOptions = new ArrayList<OptionBundle>();
-        addOption("Attack", new AttackOptionState(mode));
-        addOption("Party", new PartyOptionState(mode));
-        addOption("Items", new ItemOptionState(mode));
-        addOption("Catch", new CatchOptionState(mode));
+        super(mode, "MAIN");
+        //TODO: feels dirty
+        myOptions = new ArrayList<AbstractOptionState>();
+        myOptions.add( new AttackOptionState(mode));
+        myOptions.add( new LivingPartyOptionState(mode));
+        myOptions.add(new ItemOptionState(mode));
+        myOptions.add(new CatchOptionState(mode));
     }
 
     @Override
@@ -45,31 +46,10 @@ public class MainOptionState extends AbstractOptionState {
         }
     }
 
-    public void addOption (String s, AbstractOptionState state) {
-        myOptions.add(new OptionBundle(s, state));
-    }
-
-    private class OptionBundle {
-        private String myString;
-        private AbstractOptionState myState;
-
-        OptionBundle (String s, AbstractOptionState state) {
-            myString = s;
-            myState = state;
-        }
-
-        public String getName () {
-            return myString;
-        }
-
-        public AbstractOptionState getState () {
-            return myState;
-        }
-    }
 
     @Override
     protected void onInteract () {
-        myMode.setOptionState(myOptions.get(mySelected).getState());
+        myMode.setOptionState(myOptions.get(mySelected));
     }
 
     /**
