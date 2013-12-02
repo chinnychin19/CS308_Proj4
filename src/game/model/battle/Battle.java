@@ -50,22 +50,31 @@ public class Battle {
     }
 
     public void registerUserCompleted () {
-        if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
-            System.out.println("=============\nYOU WON!\n=============");
+        if (checkNoMonstersDiedOnTurn()) {
+            myEnemyParty.doTurn();            
+        }
+        if(checkNoMonstersDiedOnTurn()) {
+            myMode.setOptionState(new MainOptionState(myMode));
+        }
+    }
+    
+    private boolean checkNoMonstersDiedOnTurn () {
+        // check if battle is over first
+        if (myPlayerParty.getNumberOfAliveMonsters() == 0) {
+            computerWon();
+            return false; // my monsters are all dead
+        }
+        else if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
             userWon();
+            return false; //opposing monster is dead
         }
-        else {
-            myEnemyParty.doTurn();
-            System.out.println("health: " + myPlayerParty.getCurrentMonster().getCurHP());
-            if (myPlayerParty.getNumberOfAliveMonsters() == 0) {
-                computerWon();
-            } else if(myPlayerParty.getCurrentMonster().isDead()){
-               myMode.setOptionState(new TextState(myMode, "Monster Died.  Choose a new Monster", new LivingPartyOptionState(myMode,false))); 
-            }
-            else {
-                myMode.setOptionState(new MainOptionState(myMode));
-            }
+        
+        if (myPlayerParty.getCurrentMonster().isDead()) {
+            myMode.setOptionState(new TextState(myMode, "Monster Died.  Choose a new Monster",
+                                                new LivingPartyOptionState(myMode, false)));
+            return false; //my current monster is dead
         }
+        return true;
     }
 
     private void computerWon () {

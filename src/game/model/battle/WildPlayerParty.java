@@ -13,7 +13,8 @@ public class WildPlayerParty extends AbstractBattleParty {
 
     @Override
     public void doTurn () {
-        myNextAttack.doAttack(getCurrentMonster(), getBattle().getOtherParty(this).getCurrentMonster());
+        //TODO: can this stay commented out?
+//        myNextAttack.doAttack(getCurrentMonster(), getBattle().getOtherParty(this).getCurrentMonster());
     }
     
     public void setNextAttack(Attack a) {
