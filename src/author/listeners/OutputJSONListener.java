@@ -1,10 +1,8 @@
 package author.listeners;
 
-import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
 import author.model.AuthoringCache;
 
