@@ -29,14 +29,11 @@ public class Constants {
     // Order matters because certain things depend on other things already being known. e.g. Attacks
     // need to be known before Monsters are created
     public static final String[] CATEGORIES =
-    { "TypeMatrix", 
-      "Status", "Attack", "Monster", "KeyItem", "Item", "FightingNPC", "Obstacle",  
-      "NPC",
-     "WildRegion",
-     "Player", };
+    { "TypeMatrix", "Status", "Attack", "Monster", "KeyItem", "Item", "FightingNPC", "Obstacle",  
+      "NPC", "WildRegion", "Player", "HealItem" };
     
     public static final String[] VIEWABLE_CATEGORIES =
-        { "NPC", "Obstacle", "WildRegion", "Player", "FightingNPC" };
+        { "NPC", "Obstacle", "WildRegion", "Player", "FightingNPC", "HealItem" };
     
     public static final String UP = "up";
     public static final String DOWN = "down";
