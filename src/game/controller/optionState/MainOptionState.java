@@ -8,11 +8,11 @@ import java.util.List;
 
 
 public class MainOptionState extends AbstractOptionState {
-    List<OptionBundle> myOptions;
+    List<AbstractOptionState> myOptions;
 
     public MainOptionState (AbstractBattleMode mode) {
-        super(mode);
-        myOptions = new ArrayList<OptionBundle>();
+        super(mode, "MAIN");
+        myOptions = new ArrayList<AbstractOptionState>();
         addOption("Attack", new AttackOptionState(mode));
         addOption("Party", new PartyOptionState(mode));
         addOption("Items", new ItemOptionState(mode));
@@ -46,7 +46,7 @@ public class MainOptionState extends AbstractOptionState {
     }
 
     public void addOption (String s, AbstractOptionState state) {
-        myOptions.add(new OptionBundle(s, state));
+        myOptions.add(state);
     }
 
     private class OptionBundle {
@@ -69,7 +69,7 @@ public class MainOptionState extends AbstractOptionState {
 
     @Override
     protected void onInteract () {
-        myMode.setOptionState(myOptions.get(mySelected).getState());
+        myMode.setOptionState(myOptions.get(mySelected));
     }
 
     /**

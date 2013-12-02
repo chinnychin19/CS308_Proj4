@@ -7,7 +7,7 @@ public class BattleOverState extends AbstractOptionState {
     private String myText;
 
     public BattleOverState (AbstractBattleMode mode, String text) {
-        super(mode);
+        super(mode, "BATTLE OVER!");
         myText = text;
     }
 

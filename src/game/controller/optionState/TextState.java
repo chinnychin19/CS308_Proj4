@@ -11,7 +11,7 @@ public class TextState extends AbstractOptionState {
     // private AbstractOptionState myNextState;
 
     public TextState (AbstractBattleMode mode, String text) {
-        super(mode);
+        super(mode, "DIALOGUE");
         myMode = mode;
         myText = text;
     }

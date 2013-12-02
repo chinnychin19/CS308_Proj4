@@ -12,7 +12,7 @@ import java.util.List;
 public class PartyOptionState extends AbstractOptionState{
     
     public PartyOptionState (AbstractBattleMode mode) {
-        super(mode);
+        super(mode, "PARTY");
     }
 
     @Override

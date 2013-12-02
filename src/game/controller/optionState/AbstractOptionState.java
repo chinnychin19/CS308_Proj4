@@ -11,13 +11,20 @@ import constants.Constants;
 public abstract class AbstractOptionState {
     protected Graphics myBuffer;
     protected AbstractBattleMode myMode;
-    protected int mySelected = 0;
+    protected int mySelected;
+    protected String myName;
 
-    public AbstractOptionState (AbstractBattleMode mode) {
+    public AbstractOptionState (AbstractBattleMode mode, String name) {
         myMode = mode;
+        mySelected = 0;
+        myName = name;
         int x = 0, y = Constants.HEIGHT * 2 / 3, w = Constants.WIDTH, h =
                 Constants.HEIGHT / 3;
         myBuffer = myMode.getGraphics().create(x, y, w, h);
+    }
+    
+    public String getName() {
+        return myName;
     }
 
     public void paint () {
