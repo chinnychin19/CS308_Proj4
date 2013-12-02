@@ -17,6 +17,7 @@ import author.wizardState.*;
 import constants.Constants;
 
 
+@SuppressWarnings("serial")
 public class AuthorView extends JFrame {
     private List<AbstractWizardState> myWizardStates;
 
@@ -50,7 +51,7 @@ public class AuthorView extends JFrame {
         viewMenu.add(item);
         
         JMenuItem writeJSON = new JMenuItem("Write JSON to file");
-        writeJSON.addActionListener(new WriteJSONOutputListener(ac));
+        //writeJSON.addActionListener(new WriteJSONOutputListener(ac));
         viewMenu.add(writeJSON);
 
         menuBar.add(fileMenu);

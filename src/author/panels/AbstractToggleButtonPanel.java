@@ -1,12 +1,18 @@
 package author.panels;
 
+/**
+ * This is an abstract class that is extended by WordPanel, ListPanel, NumberPanel,
+ * and MatrixPanel.  It is extended by all classes that take some form of user typing
+ * in order to get a result.
+ * 
+ * @author mray90
+ * 
+ */
+
 import java.awt.AWTEvent;
-import java.awt.event.ItemEvent;
 import java.util.EventListener;
-import java.util.Map;
-import author.listeners.CheckBoxListener;
 
-
+@SuppressWarnings("serial")
 public abstract class AbstractToggleButtonPanel extends AbstractWizardPanel {
 
     protected EventListener myEventListener;

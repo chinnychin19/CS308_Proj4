@@ -19,6 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import author.FileChooserSingleton;
 import author.ImageDisplayer;
 
+@SuppressWarnings("serial")
 public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     
     private JLabel myLabel;

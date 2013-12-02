@@ -1,5 +1,14 @@
 package author.panels;
 
+/**
+ * This is an abstract class that is extended by AbstractTextPanel, AbstractToggleButtonPanel, 
+ * and ImagePanel.  It represents every type of input that our engine can write to a JSON file
+ * including text, checkboxes, radio buttons, lists, matrices, Images, and numbers.
+ * 
+ * @author weskpga
+ * 
+ */
+
 import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;

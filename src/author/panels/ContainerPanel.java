@@ -1,12 +1,14 @@
 package author.panels;
 
-import java.awt.event.HierarchyEvent;
-import java.awt.event.HierarchyListener;
-import java.util.Map;
-import javax.swing.*;
-import constants.Constants;
-import author.listeners.FinishListener;
-import author.wizard.Wizard;
+/**
+ * This the panel that contains our wizardPanels when the user is creating
+ * a game with the game engine.
+ * 
+ */
+
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 
 @SuppressWarnings("serial")

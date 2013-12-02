@@ -1,10 +1,16 @@
 package author.panels;
 
+/**
+ * This wizard allows the user to define any sort of text input
+ * 
+ * @author weskpga
+ * 
+ */
+
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import constants.Constants;
 

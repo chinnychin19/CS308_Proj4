@@ -1,8 +1,14 @@
 package author.panels;
 
+/**
+ * This class verifies that a NumberPanel input is a proper input
+ * 
+ * @author mray90
+ * 
+ */
+
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 

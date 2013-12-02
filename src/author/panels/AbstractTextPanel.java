@@ -1,12 +1,14 @@
 package author.panels;
 
-import java.awt.FlowLayout;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.*;
+/**
+ * This is an abstract class that is extended by WordPanel, ListPanel, NumberPanel,
+ * and MatrixPanel.  It is extended by all classes that take some form of user typing
+ * in order to get a result.
+ * 
+ * @author weskpga
+ * 
+ */
 
-
-// import org.json.simple.JSONObject;
 
 @SuppressWarnings("serial")
 public abstract class AbstractTextPanel extends AbstractWizardPanel {

@@ -1,25 +1,22 @@
 package author.panels;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
+/**
+ * This wizard allows the user to define a matrix-shaped input
+ * 
+ */
+
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import org.json.simple.JSONObject;
 import author.listeners.AddMatrixEntryListener;
-import constants.Constants;
-
 
 @SuppressWarnings("serial")
 public class MatrixPanel extends AbstractTextPanel {
@@ -39,7 +36,7 @@ public class MatrixPanel extends AbstractTextPanel {
         // Create grid
         TableModel myDataModel = new AbstractTableModel() {
 
-            private String[] columnNames = new String[STARTING_COLUMNS];
+            //private String[] columnNames = new String[STARTING_COLUMNS];
             private Object[][] data = new Object[STARTING_ROWS][STARTING_COLUMNS];
 
             public int getColumnCount () {
@@ -74,7 +71,7 @@ public class MatrixPanel extends AbstractTextPanel {
                 int row = e.getFirstRow();
                 int col = e.getColumn();
                 TableModel model = (TableModel) e.getSource();
-                Object data = model.getValueAt(row, col);
+                /*Object data = */model.getValueAt(row, col);
             }
 
         });
