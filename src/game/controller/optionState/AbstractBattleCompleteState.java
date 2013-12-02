@@ -3,10 +3,10 @@ package game.controller.optionState;
 import game.controller.AbstractBattleMode;
 
 
-public class BattleOverState extends AbstractOptionState {
+public abstract class AbstractBattleCompleteState extends AbstractOptionState {
     private String myText;
 
-    public BattleOverState (AbstractBattleMode mode, String text) {
+    public AbstractBattleCompleteState (AbstractBattleMode mode, String text) {
         super(mode, "BATTLE OVER!");
         myText = text;
     }
@@ -19,11 +19,6 @@ public class BattleOverState extends AbstractOptionState {
 
         myBuffer.drawString(myText, x, y);
 
-    }
-
-    @Override
-    protected void onInteract () {
-        myMode.getController().setWanderingMode();
     }
 
     @Override

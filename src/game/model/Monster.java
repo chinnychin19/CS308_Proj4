@@ -156,7 +156,11 @@ public class Monster extends AbstractModelObject {
      */
     public int getDefense () {
         return myDefense;
-    }   
+    }
+    
+    public void heal() {
+        myCurHP = myMaxHP;
+    }
     /**
      * Get the attacks associated with the monster
      * @return list of attacks
