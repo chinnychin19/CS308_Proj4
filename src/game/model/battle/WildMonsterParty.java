@@ -6,6 +6,7 @@ import game.model.Fighter;
 import game.model.Monster;
 import game.model.attack.Attack;
 
+
 public class WildMonsterParty extends AbstractBattleParty {
 
     public WildMonsterParty (GameController controller, Monster monster) {
@@ -19,9 +20,13 @@ public class WildMonsterParty extends AbstractBattleParty {
         getBattle().attackPlayer(attack);
     }
 
-    public Attack getAttack() {
+    public Attack getAttack () {
         List<Attack> attacks = getCurrentMonster().getAllAvailableAttacks();
         int rand = (int) (Math.random() * attacks.size());
         return attacks.get(rand);
+    }
+
+    public double calculateCatchProbability () {
+        return getBattle().getEnemyParty().getCurrentMonster().getCatchProbability();
     }
 }
