@@ -1,6 +1,5 @@
 package game.controller;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collection;
 import location.Loc;
@@ -9,10 +8,12 @@ import game.model.AbstractViewable;
 import game.model.GameModel;
 import game.view.GameView;
 
+
 /**
  * Represents the Wandering Mode of the Game
+ * 
  * @author tylernisonoff
- *
+ * 
  */
 public class WanderingMode extends AbstractMode {
 
@@ -30,7 +31,7 @@ public class WanderingMode extends AbstractMode {
         paintViewablesOnScreen();
         paintBorder();
     }
-    
+
     /**
      * Calls doFrame() on all ViewableObjects and GroundObjects
      */
@@ -40,11 +41,11 @@ public class WanderingMode extends AbstractMode {
             obj.doFrame(getModel().getWorld(), this.getInput());
         }
         for (AbstractViewable obj : getViewableObjectsOnScreen()) {
-//            System.out.println("act object: "+obj.getLoc());
+            // System.out.println("act object: "+obj.getLoc());
             obj.doFrame(getModel().getWorld(), this.getInput());
         }
     }
-    
+
     /**
      * Turns off Wandering Mode - removes KeyListeners
      */
@@ -62,7 +63,7 @@ public class WanderingMode extends AbstractMode {
         getInput().resetAllInputs();
         getView().addKeyListener(this);
     }
-    
+
     private void paintPlayer () {
         getGraphics().drawImage(getModel().getPlayer().getImage(),
                                 (int) (Constants.MIDDLE_TILE_HORIZONTAL * Constants.TILE_WIDTH),
@@ -71,7 +72,7 @@ public class WanderingMode extends AbstractMode {
                                 (int) Constants.TILE_HEIGHT,
                                 null);
     }
-    
+
     private void paintBackground () {
         // draws default background image
         getGraphics().
@@ -82,16 +83,16 @@ public class WanderingMode extends AbstractMode {
                           Constants.HEIGHT,
                           null);
     }
-    
-    private Collection<AbstractViewable> getViewableObjectsOnScreen() {
+
+    private Collection<AbstractViewable> getViewableObjectsOnScreen () {
         ArrayList<AbstractViewable> list = new ArrayList<AbstractViewable>();
         int px = getModel().getPlayer().getLoc().getX();
         int py = getModel().getPlayer().getLoc().getY();
-        int tilesRight = Constants.NUM_TILES_HORIZONTAL/2;
-        int tilesDown = Constants.NUM_TILES_VERTICAL/2;
-        for (int i = px-tilesRight; i <= px+tilesRight; i++) {
-            for (int j = py-tilesDown; j <= py+tilesDown; j++) {
-                Loc target = new Loc(i,j);
+        int tilesRight = Constants.NUM_TILES_HORIZONTAL / 2;
+        int tilesDown = Constants.NUM_TILES_VERTICAL / 2;
+        for (int i = px - tilesRight; i <= px + tilesRight; i++) {
+            for (int j = py - tilesDown; j <= py + tilesDown; j++) {
+                Loc target = new Loc(i, j);
                 AbstractViewable object = getModel().getViewableObject(target);
                 if (null != object) {
                     list.add(object);
@@ -101,15 +102,15 @@ public class WanderingMode extends AbstractMode {
         return list;
     }
 
-    private Collection<AbstractViewable> getGroundObjectsOnScreen() {
+    private Collection<AbstractViewable> getGroundObjectsOnScreen () {
         ArrayList<AbstractViewable> list = new ArrayList<AbstractViewable>();
         int px = getModel().getPlayer().getLoc().getX();
         int py = getModel().getPlayer().getLoc().getY();
-        int tilesRight = Constants.NUM_TILES_HORIZONTAL/2;
-        int tilesDown = Constants.NUM_TILES_VERTICAL/2;
+        int tilesRight = Constants.NUM_TILES_HORIZONTAL / 2;
+        int tilesDown = Constants.NUM_TILES_VERTICAL / 2;
         for (int i = -tilesRight; i <= tilesRight; i++) {
             for (int j = -tilesDown; j <= tilesDown; j++) {
-                Loc target = new Loc(i,j);
+                Loc target = new Loc(i, j);
                 AbstractViewable ground = getModel().getGroundObject(target);
                 if (null != ground) {
                     list.add(ground);
@@ -120,24 +121,24 @@ public class WanderingMode extends AbstractMode {
     }
 
     private void paintViewablesOnScreen () {
-        for (AbstractViewable obj : getGroundObjectsOnScreen()){
+        for (AbstractViewable obj : getGroundObjectsOnScreen()) {
             Loc tileLoc = obj.getTileLocationOnScreen(getModel().getPlayer());
             getGraphics().drawImage(obj.getImage(),
-                               (int) (tileLoc.getX() * Constants.TILE_WIDTH),
-                               (int) (tileLoc.getY() * Constants.TILE_HEIGHT),
-                               (int) Constants.TILE_WIDTH,
-                               (int) Constants.TILE_HEIGHT,
-                               null);
+                                    (int) (tileLoc.getX() * Constants.TILE_WIDTH),
+                                    (int) (tileLoc.getY() * Constants.TILE_HEIGHT),
+                                    (int) Constants.TILE_WIDTH,
+                                    (int) Constants.TILE_HEIGHT,
+                                    null);
 
         }
-        for (AbstractViewable obj : getViewableObjectsOnScreen()){
+        for (AbstractViewable obj : getViewableObjectsOnScreen()) {
             Loc tileLoc = obj.getTileLocationOnScreen(getModel().getPlayer());
             getGraphics().drawImage(obj.getImage(),
-                               (int) (tileLoc.getX() * Constants.TILE_WIDTH),
-                               (int) (tileLoc.getY() * Constants.TILE_HEIGHT),
-                               (int) Constants.TILE_WIDTH,
-                               (int) Constants.TILE_HEIGHT,
-                               null);
+                                    (int) (tileLoc.getX() * Constants.TILE_WIDTH),
+                                    (int) (tileLoc.getY() * Constants.TILE_HEIGHT),
+                                    (int) Constants.TILE_WIDTH,
+                                    (int) Constants.TILE_HEIGHT,
+                                    null);
         }
     }
 }

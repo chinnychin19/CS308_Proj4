@@ -33,7 +33,6 @@ public abstract class AbstractBattleParty {
         myMonsters = new ArrayList<Monster>();
         myController = controller;
         myCurrentMonster = monster;
-        myMonsters = new ArrayList<Monster>();
         myMonsters.add(monster);
         myFighter = null;
     }
@@ -46,7 +45,7 @@ public abstract class AbstractBattleParty {
         return myBattle;
     }
     
-    private Monster getFirstAliveMonster () {
+    protected Monster getFirstAliveMonster () {
         for (Monster m : myMonsters) {
             if (m.getCurHP() > 0) {
                 return m;
@@ -88,5 +87,9 @@ public abstract class AbstractBattleParty {
     
     public void setCurrentMonster(Monster m){
         myCurrentMonster = m;
+    }
+
+    public void addMonster (Monster currentMonster) {
+        myMonsters.add(currentMonster);
     }
 }

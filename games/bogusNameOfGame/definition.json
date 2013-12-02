@@ -203,5 +203,10 @@
                 }
             ]
         }
+    ],
+    "HealItem": [
+        {
+            "image": "images/items/healPokeBall.png"
+        }
     ]
 }

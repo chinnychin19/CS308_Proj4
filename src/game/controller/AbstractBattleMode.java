@@ -13,7 +13,8 @@ import game.model.attack.Attack;
 import game.model.battle.Battle;
 import game.view.GameView;
 
-public abstract class AbstractBattleMode extends AbstractMode {  
+
+public abstract class AbstractBattleMode extends AbstractMode {
     protected Battle myBattle;
     private Graphics myOptionsBuffer;
     private Graphics myHealthBuffer;
@@ -26,13 +27,13 @@ public abstract class AbstractBattleMode extends AbstractMode {
     protected int mySelectedAttack;
 
     private AbstractOptionState myOptionState;
-    
+
     public AbstractBattleMode (GameModel model, GameView view) {
         super(model, view);
         myOptionState = new MainOptionState(this);
 
     }
-    
+
     /**
      * Turns off WildBattleMode - removes keyListeners and closes the buffers
      */
@@ -53,7 +54,7 @@ public abstract class AbstractBattleMode extends AbstractMode {
 
     /**
      * Paints the fighting monsters, their states, and the options on the screen
-     * If the user has selected attack, it will paint the available attacks 
+     * If the user has selected attack, it will paint the available attacks
      */
     @Override
     public void paint () {
@@ -62,17 +63,17 @@ public abstract class AbstractBattleMode extends AbstractMode {
         paintEnemyMonster();
         paintEnemyHealth();
         myOptionState.paint();
-//        if (myState == State.OPTIONS) {
-//            paintOptions();
-//        }
-//        else if (myState == State.ATTACKS) {
-//            paintAttacks();
-//        } else if (myState == State.PARTY) {
-//            paintParty();
-//        }
+        // if (myState == State.OPTIONS) {
+        // paintOptions();
+        // }
+        // else if (myState == State.ATTACKS) {
+        // paintAttacks();
+        // } else if (myState == State.PARTY) {
+        // paintParty();
+        // }
     }
 
-    //TODO: Chinmay should comment
+    // TODO: Chinmay should comment
     @Override
     public void act () {
         Input input = getInput();
@@ -84,11 +85,11 @@ public abstract class AbstractBattleMode extends AbstractMode {
     public void setOptionState (AbstractOptionState st) {
         myOptionState = st;
     }
-    
-    public Battle getBattle(){
+
+    public Battle getBattle () {
         return myBattle;
     }
-    
+
     private void initBuffers () {
         int opX = 0, opY = Constants.HEIGHT * 2 / 3, opW = Constants.WIDTH, opH =
                 Constants.HEIGHT / 3;
@@ -117,7 +118,7 @@ public abstract class AbstractBattleMode extends AbstractMode {
         enemyHealthBuffer.dispose();
         enemyMonsterBuffer.dispose();
     }
-    
+
     private void paintMyHealth () {
         // TODO Auto-generated method stub
         myHealthBuffer.setColor(BEIGE);

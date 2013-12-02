@@ -62,12 +62,12 @@ public class Input {
 	}
 	
 	/**
-         * Checks to see if the menu key is pressed
-         * @return position of key
-         */
-        public boolean isKeyBackPressed(){
-                return myInputs.get(InputIndex.BACK);
-        }
+	 * Checks to see if the menu key is pressed
+     * @return position of key
+     */
+    public boolean isKeyBackPressed(){
+         return myInputs.get(InputIndex.BACK);
+    }
 	/**
 	 * Checks to see if any of the direction keys are pressed
 	 * @return true if a direction is pressed
