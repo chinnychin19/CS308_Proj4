@@ -12,7 +12,7 @@ import author.listeners.LaunchPlayerWizardListener;
 import author.listeners.LaunchWizardListener;
 import author.listeners.OutputJSONListener;
 import author.mapCreation.MapCreationView;
-//import author.listeners.WriteJSONOutputListener;
+import author.listeners.WriteJSONOutputListener;
 import author.model.AuthoringCache;
 import author.wizard.Wizard;
 import author.wizardState.*;
@@ -54,7 +54,7 @@ public class AuthorView extends JFrame {
         viewMenu.add(item);
         
         JMenuItem writeJSON = new JMenuItem("Write JSON to file");
-        //writeJSON.addActionListener(new WriteJSONOutputListener(ac));
+        writeJSON.addActionListener(new WriteJSONOutputListener(ac));
         viewMenu.add(writeJSON);
 
         menuBar.add(fileMenu);
