@@ -12,7 +12,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import author.model.AuthoringCache;
 import author.panels.AbstractWizardPanel;
-import author.panels.CheckBoxPanel;
+//import author.panels.CheckBoxPanel;
 import author.panels.ContainerPanel;
 
 
@@ -44,7 +44,7 @@ public class WizardConverter {
     }
 
     private void smartJSONObjectAdd (JSONObject parent, Map<String, String> data) {
-        Set keys = data.keySet();
+        Set<String> keys = data.keySet();
         Map<String, Object> tempMap = new HashMap<String, Object>();
         for (Object s : keys) {
             if (data.get(s).length() > 0 && data.get(s).charAt(0) == '{') {
@@ -65,7 +65,7 @@ public class WizardConverter {
     }
 
     private void smartJSONArrayAdd (JSONArray parent, Map<String, String> data) {
-        Set keys = data.keySet();
+        Set<String> keys = data.keySet();
         Map<String, Object> tempMap = new HashMap<String, Object>();
         for (Object s : keys) {
             if (data.get(s).length() > 0 && data.get(s).charAt(0) == '{') {

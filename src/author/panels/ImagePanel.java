@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
+//import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.BoxLayout;
@@ -87,16 +87,18 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
         if ( !myFile.getParentFile().equals(new File(IMG_FOLDER_FILEPATH)) ){
             File newFile = new File(IMG_FOLDER_FILEPATH + "/" + myFile.getName());
             try {
-                Files.copy(myFile.toPath(), new FileOutputStream(newFile));
+                //Files.copy(myFile.toPath(), new FileOutputStream(newFile));
+            } catch (Exception e){
+            	
             }
-            catch (FileNotFoundException e) {
+            /*catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-            }
+            }*/
             myFile = newFile;            
             System.out.println("Not already in folder; copy made");
         } else { System.out.println("Already in folder"); }    

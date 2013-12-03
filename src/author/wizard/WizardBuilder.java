@@ -1,7 +1,7 @@
 package author.wizard;
 
 import java.awt.Component;
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,13 +14,13 @@ import java.util.Map;
 import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+//import javax.swing.SwingUtilities;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import constants.Constants;
-import author.listeners.FinishListener;
+//import constants.Constants;
+//import author.listeners.FinishListener;
 import author.model.AuthoringCache;
 import author.panels.ContainerPanel;
 import author.panels.FinishPanel;
@@ -76,7 +76,7 @@ public class WizardBuilder {
 
     private void iterateOverJSONObject (JSONObject obj, JPanel currentPanel) {
         JSONObject tempObject = (JSONObject) obj;
-        Set keySet = tempObject.keySet();
+        Set<?> keySet = tempObject.keySet();
         System.out.println("Opening: " + keySet);
         for (Object s : keySet) {
             if (tempObject.get(s) instanceof String) {
@@ -186,7 +186,7 @@ public class WizardBuilder {
 
     private JSONObject getJSON (String filepath) {
         JSONObject json;
-        JSONObject json2;
+        //JSONObject json2;
         JSONParser parser = new JSONParser();
         try {
             json = (JSONObject) parser.parse(new FileReader(filepath));
@@ -221,7 +221,11 @@ public class WizardBuilder {
         String path = null;
 
         // If a file is approved, get the name.
-        if (returnVal == fileChooser.APPROVE_OPTION) {
+        //if (returnVal == FileChooser.APPROVE_OPTION) {
+        
+        // TODO: Changed this so there wouldn't be a warning.  If it fails,
+        //		 use the commented line above
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             File f = fileChooser.getSelectedFile();
             path = f.getAbsolutePath();
         }

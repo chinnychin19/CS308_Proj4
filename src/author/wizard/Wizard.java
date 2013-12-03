@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import author.ImagePicker;
+//import author.ImagePicker;
 
 
 @SuppressWarnings("serial")
@@ -17,7 +17,7 @@ public class Wizard extends JDialog {
     JButton myNextButton;
     JButton myBackButton;
     
-    private String myTitle;
+    //private String myTitle;
     private String myObjectName; 
 
     private final static String NEXT = "Next";
