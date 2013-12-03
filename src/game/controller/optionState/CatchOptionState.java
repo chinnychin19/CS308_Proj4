@@ -11,10 +11,10 @@ public class CatchOptionState extends AbstractOptionState {
 
     @Override
     protected void onInteract () {
-      
         if (myMode.getBattle().caughtWildMonster()) {
             myMode.setOptionState(new CatchWildBattleCompleteState(myMode));
         }
+        else myMode.setOptionState(new CatchWildBattleFailedState(myMode));
     }
 
     @Override
