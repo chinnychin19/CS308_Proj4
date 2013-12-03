@@ -60,6 +60,14 @@ public class Input {
 	public boolean isKeyMenuPressed(){
 		return myInputs.get(InputIndex.MENU);
 	}
+	
+	/**
+         * Checks to see if the menu key is pressed
+         * @return position of key
+         */
+        public boolean isKeyBackPressed(){
+                return myInputs.get(InputIndex.BACK);
+        }
 	/**
 	 * Checks to see if any of the direction keys are pressed
 	 * @return true if a direction is pressed
@@ -107,6 +115,7 @@ public class Input {
 			 myInputs.put(key, false);
 		 }
 	}
+	
 	public void setInput(InputIndex input, boolean value){
 		myInputs.put(input, value);
 	}

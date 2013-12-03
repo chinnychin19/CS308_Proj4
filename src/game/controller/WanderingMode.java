@@ -1,5 +1,6 @@
 package game.controller;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collection;
 import location.Loc;
@@ -8,13 +9,20 @@ import game.model.AbstractViewable;
 import game.model.GameModel;
 import game.view.GameView;
 
-
+/**
+ * Represents the Wandering Mode of the Game
+ * @author tylernisonoff
+ *
+ */
 public class WanderingMode extends AbstractMode {
 
     public WanderingMode (GameModel model, GameView view) {
         super(model, view);
     }
 
+    /**
+     * Paints the background, player, objects on screen, and screen boarder
+     */
     @Override
     public void paint () {
         paintBackground();
@@ -23,6 +31,9 @@ public class WanderingMode extends AbstractMode {
         paintBorder();
     }
     
+    /**
+     * Calls doFrame() on all ViewableObjects and GroundObjects
+     */
     @Override
     public void act () {
         for (AbstractViewable obj : getGroundObjectsOnScreen()) {
@@ -32,6 +43,24 @@ public class WanderingMode extends AbstractMode {
 //            System.out.println("act object: "+obj.getLoc());
             obj.doFrame(getModel().getWorld(), this.getInput());
         }
+    }
+    
+    /**
+     * Turns off Wandering Mode - removes KeyListeners
+     */
+    @Override
+    public void turnOff () {
+        getInput().resetAllInputs();
+        getView().removeKeyListener(this);
+    }
+
+    /**
+     * Turns on Wandering Mode - adds KeyListeners
+     */
+    @Override
+    public void turnOn () {
+        getInput().resetAllInputs();
+        getView().addKeyListener(this);
     }
     
     private void paintPlayer () {
@@ -52,9 +81,8 @@ public class WanderingMode extends AbstractMode {
                           Constants.WIDTH,
                           Constants.HEIGHT,
                           null);
-
     }
-
+    
     private Collection<AbstractViewable> getViewableObjectsOnScreen() {
         ArrayList<AbstractViewable> list = new ArrayList<AbstractViewable>();
         int px = getModel().getPlayer().getLoc().getX();
@@ -111,15 +139,5 @@ public class WanderingMode extends AbstractMode {
                                (int) Constants.TILE_HEIGHT,
                                null);
         }
-    }
-
-    @Override
-    public void turnOff () {
-        getView().removeKeyListener(this);
-    }
-
-    @Override
-    public void turnOn () {
-        getView().addKeyListener(this);
     }
 }

@@ -29,7 +29,16 @@ public abstract class AbstractMode extends KeyAdapter {
         myGraphics = view.getBuffer();
         myInput = new Input();
     }
-
+    
+    public GameModel getModel () {
+        return myModel;
+    }
+    
+    //TODO: Consider refactoring to have access to controller
+    public GameController getController() {
+       return myModel.getController();
+    }
+    
     public abstract void paint ();
 
     public abstract void act (); // TODO: take some sort of input object as parameter? or is this
@@ -42,21 +51,17 @@ public abstract class AbstractMode extends KeyAdapter {
     public Input getInput(){
     	return myInput;
     }
-    
-    protected GameModel getModel () {
-        return myModel;
-    }
 
     protected GameView getView () {
         return myView;
     }
-
+    
     /**
      * Returns the Graphics object to be used by subclasses when painting
      * 
      * @return
      */
-    protected Graphics getGraphics () {
+    public Graphics getGraphics () {
         return myGraphics;
     }
 
@@ -113,6 +118,9 @@ public abstract class AbstractMode extends KeyAdapter {
         if (x == KeyEvent.VK_SPACE) {
         	myInput.setInput(InputIndex.MENU, flag);
         }
+        if (x == KeyEvent.VK_B) {
+            myInput.setInput(InputIndex.BACK, flag);
+    }
     }
 
     /**

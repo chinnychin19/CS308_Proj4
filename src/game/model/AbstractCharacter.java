@@ -9,6 +9,13 @@ import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
+/**
+ * An abstract class containing all the general information for a character including, the direction that it is facing and
+ * the all the images that will be displayed based on this direction.
+ * @author tylernisonoff, rtoussaint
+ *
+ */
+
 public abstract class AbstractCharacter extends AbstractViewableObject {
     private Direction myDirection;
     private Image myImageUp, myImageDown, myImageRight, myImageLeft;
@@ -30,7 +37,11 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
         }   
     }
 
-
+    /**
+     * Set the x and y location of the character and add it to the world
+     * @param loc location that the character will be set at
+     * @param w world that the character will be added to
+     */
     public void setLoc (Loc loc, World w) {
         getLoc().setX(loc.getX());
         getLoc().setY(loc.getY());
@@ -55,10 +66,18 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
         return null;
     }
     
+    /**
+     * Gets the direction that the character is facing
+     * @return current direction of the character
+     */
     public Direction getDirection () {
         return myDirection;
     }
 
+    /**
+     * Sets the direction that the character will face
+     * @param d the direction that you want the character to face
+     */
     public void setDirection (Direction d) {
         myDirection = d;
     }

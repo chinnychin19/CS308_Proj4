@@ -14,7 +14,11 @@ import jsoncache.JSONReader;
 import location.Direction;
 import location.Loc;
 
-
+/**
+ * Class to assist with the Save state - loading and saving a given state of the game
+ * @author tylernisonoff
+ *
+ */
 public class StateSaver {
     private GameModel myModel;
     private World myWorld;
@@ -29,13 +33,16 @@ public class StateSaver {
         myPlayer = myWorld.getPlayer();
     }
 
-    //TODO: NEEDS REFACTOR
+    /**
+     * Attempts to load the saveState file from the game's directory
+     * @throws Exception - throws if no file is found
+     */
     public void load () throws Exception {
         String worldJSONFilepath =
                 Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
                         Constants.FILENAME_SAVESTATE;
         myJSON = JSONReader.getJSON(worldJSONFilepath);
-        if (myJSON == null) { throw new Exception("Save file not found"); }
+        if (myJSON == null) { throw new Exception(Constants.SAVE_FILE_NOT_FOUND); }
         try {
             SmartJsonObject playerJSON =
                     new SmartJsonObject((JSONObject) myJSON.get(Constants.JSON_PLAYER));
@@ -47,6 +54,10 @@ public class StateSaver {
         }
     }
 
+    /**
+     * Saves the state 
+     * @throws IOException
+     */
     @SuppressWarnings("unchecked")
     public void save () throws IOException {
         JSONObject state = new JSONObject();

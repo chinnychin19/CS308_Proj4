@@ -23,7 +23,6 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
  * @author Austin Ness
  * 
  */
-
 public class JSONCache {
     private JSONObject myJSON;
 

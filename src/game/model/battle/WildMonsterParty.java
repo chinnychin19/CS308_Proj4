@@ -16,7 +16,7 @@ public class WildMonsterParty extends AbstractBattleParty {
     public void doTurn () {
         Attack attack = getAttack();
         System.out.println(attack.getName());
-        attack.doAttack(getCurrentMonster(), getBattle().getOtherParty(this).getCurrentMonster());
+        getBattle().attackPlayer(attack);
     }
 
     public Attack getAttack() {

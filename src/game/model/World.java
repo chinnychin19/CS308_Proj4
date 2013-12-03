@@ -13,7 +13,11 @@ import constants.Constants;
 import location.Direction;
 import location.Loc;
 
-
+/**
+ * Represents the World in wandering Mode
+ * @author tylernisonoff
+ *
+ */
 public class World {
     
     private HashMap<Loc, AbstractViewableObject> myViewableObjects;
@@ -33,11 +37,19 @@ public class World {
         myWorldJSON = JSONReader.getJSON(worldJSONFilepath);
         setUpWorld();
     }
-
+    
+    /**
+     * 
+     * @return the main Player
+     */
     protected Player getPlayer () {
         return myPlayer;
     }
-
+    
+    /**
+     * Adds a viewable entity to the world.
+     * @param obj - object to be added
+     */
     public void addViewable (AbstractViewable obj) {
         if (obj.canStepOn()) {
             myGroundObjects.put(obj.getLoc(), (AbstractGround) obj);
@@ -45,23 +57,47 @@ public class World {
             myViewableObjects.put(obj.getLoc(), (AbstractViewableObject) obj);            
         }
     }
-
+    
+    /**
+     *  
+     * @param Location of the object you want to get
+     * @return - a Viewable Object for a given location
+     */
     protected AbstractViewableObject getViewableObject (Loc loc) {
         return myViewableObjects.get(loc);
     }
     
+    /**
+     *  
+     * @param loc - Location of the object you want to get
+     * @return - Returns the round object for the given location
+     */
     protected AbstractGround getGroundObject (Loc loc) {
         return myGroundObjects.get(loc);
     }
     
+    /**
+     * 
+     * @param loc - Location you are querying on
+     * @return true if occupied by a viewable object, else false
+     */
     protected boolean isLocOccupied(Loc loc) {
         return null != myViewableObjects.get(loc);
     }
     
+    /**
+     * 
+     * @return The Location in front of the player based on his orientation
+     */
     protected Loc locInFrontOfPlayer() {
         return myPlayer.getLoc().adjacentLoc(myPlayer.getDirection());
     }
     
+    /**
+     * Creates the world from JSON
+     * Uses reflection to figure out which classes to instantiate
+     * @throws Exception - if file not found
+     */
     protected void setUpWorld () throws Exception {
         for (String viewableCategory : Constants.VIEWABLE_CATEGORIES) {
             JSONArray objectArray = (JSONArray) myWorldJSON.get(viewableCategory);

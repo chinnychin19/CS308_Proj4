@@ -54,62 +54,109 @@ public class Monster extends AbstractModelObject {
         readStats(objInWorld);
     }
     
+    /**
+     * Get the image of the monster
+     * @return monster's image
+     */
     public Image getImage () {
         return myImage;
     }
-
+    /**
+     * Get the catch rate of the monster.  A value of how difficult it is to catch this monster
+     * @return monster's catch rate
+     */
     public double getCatchRate () {
         return myCatchRate;
     }
-
+    
+    /**
+     * Gets the type of the monster
+     * @return type of monster
+     */
     public Type getType () {
         return myType;
     }
-
+    /**
+     * Gets the base HP of the monster
+     * @return base HP of the monster
+     */
     public int getBaseHP () {
         return myBaseHP;
     }
-
+    /**
+     * Gets the base attack of the monster
+     * @return base attack of the monster 
+     */
     public int getBaseAttack () {
         return myBaseAttack;
     }
-
+    /**
+     * Gets the base defense of the monster
+     * @return base defense of the monster
+     */
     public int getBaseDefense () {
         return myBaseDefense;
     }
-
+    /**
+     * Gets the level of the monster
+     * @return Monster's level
+     */
     public int getLevel () {
         return myLevel;
     }
-
+    /**
+     * Gets the experience of the monster
+     * @return experience of the monster
+     */
     public int getExp () {
         return myExp;
     }
-
+    /**
+     * Get the amount of experience that is needed to move onto the next level
+     * @return amount to move onto the next level
+     */
     public int getExpToNextLevel () {
         return myExpToNextLevel;
     }
-
+    /**
+     * Gets the max HP of the monster
+     * @return Max hp of monster
+     */
     public int getMaxHP () {
         return myMaxHP;
     }
-
+    /**
+     * Gets the current HP of the monster
+     * @return the current HP
+     */
     public int getCurHP () {
         return myCurHP;
     }
-
+    /**
+     * Gets the attack value
+     * @return attack value
+     */
     public int getAttack () {
         return myAttack;
     }
-
+    /**
+     * defense value of the monster
+     * @return defense value
+     */
     public int getDefense () {
         return myDefense;
     }
-
+    /**
+     * Get the attacks associated with the monster
+     * @return list of attacks
+     */
     public List<AttackWrapper> getMyAttacks () {
         return myAttacks;
     }
-
+    /**
+     * Change the health of the monster and see if the monster is at 0 health or max health
+     * @param amount the change in the monster's health
+     */
     public void changeHealth(int amount) {
         myCurHP += amount;
         if (myCurHP < 0) {
@@ -118,7 +165,9 @@ public class Monster extends AbstractModelObject {
             myCurHP = myMaxHP;
         }
     }
-    
+    /**
+     * Stats for the monster
+     */
     private void generateStats() {
         double factor = 1 + Math.log(35);
         myExp = 0;
@@ -128,38 +177,43 @@ public class Monster extends AbstractModelObject {
         myAttack = (int) (myBaseAttack * myLevel * factor);
         myDefense = (int) (myBaseDefense * myLevel * factor);
     }
-        
-    //TODO: make constants
+    /**
+     * Read in the stats for the monster    
+     * @param objInWorld object containing the monster's stats
+     */
     private void readStats(SmartJsonObject objInWorld) {
         try {
             myLevel = objInWorld.getInt(Constants.JSON_LEVEL);
-            myExp = objInWorld.getInt("exp");
-            myExpToNextLevel = objInWorld.getInt("expToNextLevel");
-            myMaxHP = objInWorld.getInt("maxHP");
-            myCurHP = objInWorld.getInt("curHP");
-            myAttack = objInWorld.getInt("attack");
-            myDefense = objInWorld.getInt("defense");
+            myExp = objInWorld.getInt(Constants.EXP);
+            myExpToNextLevel = objInWorld.getInt(Constants.EXP_TO_NEXT_LEVEL);
+            myMaxHP = objInWorld.getInt(Constants.MAX_HP);
+            myCurHP = objInWorld.getInt(Constants.CUR_HP);
+            myAttack = objInWorld.getInt(Constants.ATTACK_LOWERCASE);
+            myDefense = objInWorld.getInt(Constants.DEFENSE);
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
         }
     }
     
-    //TODO: make constants
+    /**
+     * Read in the definition information for the monster
+     * @param definition the file containing the monster's info
+     */
     private void readDefinition(SmartJsonObject definition) {
         try {
             String imageURL = definition.getString(Constants.JSON_IMAGE);
             myImage = new ImageIcon(imageURL).getImage();
             myCatchRate = definition.getDouble(Constants.JSON_MONSTER_CATCH_RATE);
-            myType = new Type(definition.getString("type"));
-            myBaseHP = definition.getInt("baseHP");
-            myBaseAttack = definition.getInt("baseAttack");
-            myBaseDefense = definition.getInt("baseDefense");
+            myType = new Type(definition.getString(Constants.TYPE));
+            myBaseHP = definition.getInt(Constants.BASE_HP);
+            myBaseAttack = definition.getInt(Constants.BASE_ATTACK);
+            myBaseDefense = definition.getInt(Constants.BASE_DEFENSE);
             myAttacks = new ArrayList<AttackWrapper>();
             for (Object obj : definition.getJSONArray(Constants.JSON_MONSTER_ALL_ATTACKS)) {
                 SmartJsonObject attackJson = new SmartJsonObject((JSONObject) obj);
-                String name = attackJson.getString("name");
-                SmartJsonObject a = getModel().getDefinitionCache().getInstance("Attack", name);
+                String name = attackJson.getString(Constants.NAME);
+                SmartJsonObject a = getModel().getDefinitionCache().getInstance(Constants.ATTACK_UPPERCASE, name);
                 Attack attack = new Attack(getModel(), a);
                 int unlockLevel = attackJson.getInt(Constants.JSON_ATTACK_UNLOCK_LEVEL);
                 myAttacks.add(new AttackWrapper(attack, unlockLevel));
@@ -188,7 +242,7 @@ public class Monster extends AbstractModelObject {
             myAttack = a;
             myUnlockLevel = unlockLevel;
         }
-        
+     
         public Attack getAttack(){
             return myAttack;
         }

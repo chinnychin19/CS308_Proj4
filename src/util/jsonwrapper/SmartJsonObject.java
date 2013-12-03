@@ -9,12 +9,24 @@ import util.jsonwrapper.jsonexceptions.NoJSONArrayJsonException;
 import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
 import util.jsonwrapper.jsonexceptions.NoStringValueJsonException;
 
-public class SmartJsonObject extends JSONObject {
+/**
+ * Wrapper around the SimpleJSON library to retrieve specific types from the JSON
+ * Throws SmartJsonExceptions when appropriate
+ * @author tylernisonoff
+ *
+ */
+public class SmartJsonObject {
     JSONObject myJson;
     public SmartJsonObject(JSONObject obj){
         myJson = obj;
     }
     
+   /**
+    * Finds a String value given a key
+    * @param key - key in the json object
+    * @return - The String value for the given key
+    * @throws NoStringValueJsonException
+    */
     public String getString(String key) throws NoStringValueJsonException{
         try{
             return myJson.get(key).toString();
@@ -23,6 +35,12 @@ public class SmartJsonObject extends JSONObject {
         }
     }
     
+    /**
+     * Finds a Double value given a key
+     * @param key - key in the json object
+     * @return - The double value for the given key
+     * @throws NoDoubleValueJsonException
+     */
     public double getDouble(String key) throws NoDoubleValueJsonException{
         try{
             return Double.parseDouble(myJson.get(key).toString());
@@ -31,6 +49,12 @@ public class SmartJsonObject extends JSONObject {
         }       
     }
     
+    /**
+     * Finds a int value given a key
+     * @param key - key in the json object
+     * @return - The int value for the given key
+     * @throws NoIntValueJsonException
+     */
     public int getInt(String key) throws NoIntValueJsonException{
         try{
             return Integer.parseInt(myJson.get(key).toString());
@@ -39,6 +63,13 @@ public class SmartJsonObject extends JSONObject {
         }
     }
     
+    /**
+     * Finds a JsonObject for a given key
+     * Turns it into a SmartJSON object
+     * @param key - key in the json object
+     * @return - a SmartJsonObject for the key
+     * @throws NoJSONObjectJsonException
+     */
     public SmartJsonObject getSmartJsonObject(String key) throws NoJSONObjectJsonException{
         try{
             return new SmartJsonObject((JSONObject) myJson.get(key));
@@ -47,6 +78,12 @@ public class SmartJsonObject extends JSONObject {
         }
     }
     
+    /**
+     * Finds a JSONArray for a given key
+     * @param key - key in the json object
+     * @return - a JSONArray for the key
+     * @throws NoJSONArrayJsonException
+     */
     public JSONArray getJSONArray(String key) throws NoJSONArrayJsonException{
         try{
             return (JSONArray) myJson.get(key);
@@ -54,8 +91,9 @@ public class SmartJsonObject extends JSONObject {
             throw new NoJSONArrayJsonException();
         }
     }
-    
-    @Override
+    /**
+     * @return - The Keys of the JSON Object
+     */
     public Set<Object> keySet(){
         return myJson.keySet();
     }
