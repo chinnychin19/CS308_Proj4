@@ -44,22 +44,29 @@ public class NPC extends AbstractCharacter {
     public String getDialogue(){
     	return myDialogue;
     }
-    
-    /**
-     * Checks to see if a user is trying to interact with it
-     * If so, it shows the dialogue
-     */
-    @Override
-    public void doFrame (World w, Input input) {
-        if (input.isKeyInteractPressed() && getLoc().equals(w.locInFrontOfPlayer())) {
-            setDirection(Direction.opposite(w.getPlayer().getDirection()));
-            System.out.println(myDialogue);
-            AbstractMode mode = getModel().getController().getMode();
-            mode.addDynamicState(new TextState(mode, 20, 20, Constants.WIDTH-Constants.BORDER_THICKNESS-20, 100, "Hi Mom!"));
-        }
-    }
+  
     
     public void paintDialogue(){
     	
     }
+
+    /**
+     * Checks to see if a user is trying to interact with it
+     * If so, it shows the dialogue
+     */
+	@Override
+	protected void onInteract() {
+		if (getLoc().equals(getWorld().locInFrontOfPlayer())) {
+            setDirection(Direction.opposite(getWorld().getPlayer().getDirection()));
+            System.out.println(myDialogue);
+            AbstractMode mode = getModel().getController().getMode();
+            //TODO: Make Constants
+            mode.addDynamicState(new TextState(mode, 20, 20, Constants.WIDTH-Constants.BORDER_THICKNESS-20, 100, myDialogue));
+        }
+	}
+
+	@Override
+	protected void onBack() {
+
+	}
 }

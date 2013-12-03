@@ -56,27 +56,6 @@ public class Obstacle extends AbstractViewableObject {
     }
     
     /**
-     * Checks to see if a player is trying to interact with it
-     * If it is, it checks to see if the player has the required key items
-     * It if does, it calls playerInteractingWithKeyItems
-     */
-    @Override
-    public void doFrame(World w, Input input) {
-        if (input.isKeyInteractPressed() && getLoc().equals(w.locInFrontOfPlayer())) {
-            if(myRequiredKeyItems.isEmpty()) {
-                return;
-            }
-            for(KeyItem item : myRequiredKeyItems){
-                if(!w.getPlayer().getKeyItems().contains(item)){
-                    System.out.println("MISSING ITEM: "+item.toString());
-                    return;
-                }
-            }
-            playerInteractingWithKeyItems();
-        }
-    }
-    
-    /**
      * Called when a player is allowed to interact with an obstacle given
      * that it has the required key items
      * 
@@ -86,6 +65,33 @@ public class Obstacle extends AbstractViewableObject {
     public void playerInteractingWithKeyItems(){
         destroy();
     }
+
+    /**
+     * Checks to see if a player is trying to interact with it
+     * If it is, it checks to see if the player has the required key items
+     * It if does, it calls playerInteractingWithKeyItems
+     */
+	@Override
+	protected void onInteract() {
+		if ( getLoc().equals(getWorld().locInFrontOfPlayer())) {
+            if(myRequiredKeyItems.isEmpty()) {
+                return;
+            }
+            for(KeyItem item : myRequiredKeyItems){
+                if(!getWorld().getPlayer().getKeyItems().contains(item)){
+                    System.out.println("MISSING ITEM: "+item.toString());
+                    return;
+                }
+            }
+            playerInteractingWithKeyItems();
+        }
+	}
+
+	@Override
+	protected void onBack() {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
    

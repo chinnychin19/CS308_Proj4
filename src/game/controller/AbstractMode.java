@@ -134,6 +134,7 @@ public abstract class AbstractMode extends KeyAdapter {
     }
     }
 
+    //TODO: Comment methods below
     
     public void addDynamicState(AbstractState state ) {
     	myStates.add(state);

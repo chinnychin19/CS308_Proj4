@@ -30,9 +30,21 @@ public class HealItem extends AbstractViewableObject {
 	 * 
 	 */
 	public void interact(){
+		
+	}
+
+	@Override
+	protected void onInteract() {
+		if(getLoc().equals(getWorld().locInFrontOfPlayer()))
 		System.out.println("at Heal item");
 		for(Monster monster : getModel().getPlayer().getParty()){
 			monster.heal();
 		}
+	}
+
+	@Override
+	protected void onBack() {
+		// TODO Auto-generated method stub
+		
 	}
 }
