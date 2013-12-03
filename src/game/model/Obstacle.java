@@ -2,11 +2,15 @@ package game.model;
 
 import game.controller.AbstractMode;
 import game.controller.Input;
+import game.controller.state.TextState;
 
 import java.awt.Image;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.ImageIcon;
+
+import location.Direction;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import util.jsonwrapper.SmartJsonObject;
@@ -73,13 +77,16 @@ public class Obstacle extends AbstractViewableObject {
      */
 	@Override
 	protected void onInteract() {
-		if ( getLoc().equals(getWorld().locInFrontOfPlayer())) {
+		if (getLoc().equals(getWorld().locInFrontOfPlayer())) {
             if(myRequiredKeyItems.isEmpty()) {
                 return;
             }
             for(KeyItem item : myRequiredKeyItems){
                 if(!getWorld().getPlayer().getKeyItems().contains(item)){
                     System.out.println("MISSING ITEM: "+item.toString());
+                            AbstractMode mode = getModel().getController().getMode();
+                            //TODO: Make Constants
+                            mode.addDynamicState(new TextState(mode, 20, 20, Constants.WIDTH-Constants.BORDER_THICKNESS-20, 100, "MISSING ITEM: "+item.toString() + " acquire this item and try again"));
                     return;
                 }
             }

@@ -1,9 +1,14 @@
 package game.model;
 
+import game.controller.AbstractMode;
+import game.controller.state.TextState;
+
 import java.awt.Image;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+
+import constants.Constants;
 
 import util.jsonwrapper.SmartJsonObject;
 
@@ -36,10 +41,12 @@ public class HealItem extends AbstractViewableObject {
 	@Override
 	protected void onInteract() {
 		if(getLoc().equals(getWorld().locInFrontOfPlayer()))
-		System.out.println("at Heal item");
 		for(Monster monster : getModel().getPlayer().getParty()){
 			monster.heal();
 		}
+		AbstractMode mode = getModel().getController().getMode();
+		//TODO: make constants
+		mode.addDynamicState(new TextState(mode, 20, 20, Constants.WIDTH-Constants.BORDER_THICKNESS-20, 100, "All Monsters Healed"));
 	}
 
 	@Override
