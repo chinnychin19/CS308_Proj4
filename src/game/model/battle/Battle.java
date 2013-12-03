@@ -1,17 +1,22 @@
 package game.model.battle;
 
 import game.controller.AbstractBattleMode;
-import game.controller.state.option.BattleOverState;
+import game.controller.optionState.LivingPartyOptionState;
+import game.controller.optionState.UserLostWildBattleCompleteState;
+import game.controller.optionState.UserWonWildBattleCompleteState;
 import game.controller.state.option.MainOptionState;
+import game.controller.state.option.TextOptionState;
 import game.model.attack.Attack;
+
+
 
 
 public class Battle {
     AbstractBattleParty myPlayerParty;
     AbstractBattleParty myEnemyParty;
     AbstractBattleMode myMode;
-    private static final double CATCH_MIN = 0.90;
-    private static final double RANDOM_FACTOR = CATCH_MIN + Math.random() * (1.00 - CATCH_MIN);
+    private static final double CATCH_MIN = 0.95;
+    private static final double RANDOM_FACTOR = CATCH_MIN + Math.random() * (0.99 - CATCH_MIN);
 
     public Battle (AbstractBattleParty playerParty,
                    AbstractBattleParty enemyParty,
@@ -47,28 +52,54 @@ public class Battle {
     }
 
     public void registerUserCompleted () {
-        if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
-            System.out.println("=============\nYOU WON!\n=============");
-            userWon();
+        if (checkNoMonstersDiedOnTurn()) {
+            myEnemyParty.doTurn();            
         }
-        else {
-            myEnemyParty.doTurn();
-            System.out.println("health: " + myPlayerParty.getCurrentMonster().getCurHP());
-            if (myPlayerParty.getNumberOfAliveMonsters() == 0) {
-                computerWon();
-            }
-            else {
-                myMode.setOptionState(new MainOptionState(myMode));
-            }
+        if(checkNoMonstersDiedOnTurn()) {
+            myMode.setOptionState(new MainOptionState(myMode));
         }
     }
+    
+    private boolean checkNoMonstersDiedOnTurn () {
+        // check if battle is over first
+        if (myPlayerParty.getNumberOfAliveMonsters() == 0) {
+            userLost();
+            return false; // my monsters are all dead
+        }
+        if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
+            userWon();
+            return false; //opposing monster is dead
+        }
+        
+        if (myPlayerParty.getCurrentMonster().isDead()) {
+            handleUserMonsterDied();
+            return false; //my current monster is dead
+        }
+        
+        if (myEnemyParty.getCurrentMonster().isDead()){
+            handleWildMonsterDied();
+        }
+        
+        
+        
+        return true;
+    }
 
-    private void computerWon () {
-        myMode.setOptionState(new BattleOverState(myMode, "You were defeated :("));
+    private void handleUserMonsterDied () {
+        myMode.setOptionState(new TextOptionState(myMode, "Monster Died.  Choose a new Monster",
+                                            new LivingPartyOptionState(myMode, false)));
+    }
+
+    private void handleWildMonsterDied () {
+        myPlayerParty.getCurrentMonster().addExperience(myEnemyParty.getCurrentMonster().getRewardExperience());
+    }
+    
+    private void userLost () {
+        myMode.setOptionState(new UserLostWildBattleCompleteState(myMode));
     }
 
     private void userWon () {
-        myMode.setOptionState(new BattleOverState(myMode, "You won! :)"));
+        myMode.setOptionState(new UserWonWildBattleCompleteState(myMode));
     }
 
     public boolean isOver () {
@@ -79,13 +110,17 @@ public class Battle {
         WildMonsterParty wildMonster = (WildMonsterParty) myEnemyParty;
         double probability = wildMonster.calculateCatchProbability() * RANDOM_FACTOR;
         if (Math.random() <= probability) {
-            transferWildMonster();
+            acquireWildMonster();
             return true;
         }
         return false;
+        
+//        acquireWildMonster();
+//        return true;
+        
     }
 
-    public void transferWildMonster () {
+    public void acquireWildMonster () {
         myMode.getModel().getPlayer().addMonsterToParty(myEnemyParty.getCurrentMonster());
     }
 }

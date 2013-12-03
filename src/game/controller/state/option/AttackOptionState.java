@@ -11,7 +11,7 @@ import game.model.attack.Attack;
 
 public class AttackOptionState extends AbstractOptionState {
     public AttackOptionState (AbstractBattleMode mode) {
-        super(mode);
+        super(mode, "ATTACK");
     }
 
     @Override
@@ -46,7 +46,7 @@ public class AttackOptionState extends AbstractOptionState {
     protected void onInteract () {
         List<Attack> attacks = getAttacks();
         Attack chosen = attacks.get(mySelected);
-        myMode.getBattle().setNextPlayerAttack(chosen);
+       // myMode.getBattle().setNextPlayerAttack(chosen);
         myMode.getBattle().attackEnemy(chosen);
         myMode.getBattle().registerUserCompleted();
 
@@ -54,7 +54,9 @@ public class AttackOptionState extends AbstractOptionState {
 
     @Override
     protected void onBack () {
-        myMode.setOptionState(new MainOptionState(myMode));
+        if(canGoBack()){
+            myMode.setOptionState(new MainOptionState(myMode));
+        }
     }
 
     private List<Attack> getAttacks () {

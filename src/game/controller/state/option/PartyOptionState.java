@@ -10,11 +10,14 @@ import java.awt.Font;
 import java.util.List;
 
 public class PartyOptionState extends AbstractOptionState{
-    
     public PartyOptionState (AbstractBattleMode mode) {
-        super(mode);
+        this(mode, true);
     }
-
+    
+    public PartyOptionState (AbstractBattleMode mode, boolean canGoBack){
+        super(mode,"PARTY",canGoBack);
+    }
+    
     @Override
     public void paint () {
         // TODO Auto-generated method stub
@@ -59,10 +62,12 @@ public class PartyOptionState extends AbstractOptionState{
     
     @Override
     protected void onBack () {
-        myMode.setOptionState(new MainOptionState(myMode));
+        if(canGoBack()){
+            myMode.setOptionState(new MainOptionState(myMode));
+        }
     }
 
-    private List<Monster> getMonsters(){
+    protected List<Monster> getMonsters(){
         return myMode.getBattle().getPlayerParty().getMonsters();
     }
 }

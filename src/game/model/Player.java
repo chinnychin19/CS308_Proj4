@@ -82,6 +82,12 @@ public class Player extends AbstractCharacter implements Fighter {
 
         }
     }
+    
+    public void healAllMonsters() {
+        for (Monster m: myParty) {
+            m.heal();
+        }
+    }
 
     /**
      * sets a Collection of keyItems for a user

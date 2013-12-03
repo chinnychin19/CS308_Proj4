@@ -13,7 +13,7 @@ import game.model.attack.Attack;
 public class ItemOptionState extends AbstractOptionState {
 
     public ItemOptionState (AbstractBattleMode mode) {
-        super(mode);
+        super(mode, "ITEMS");
     }
 
     @Override

@@ -58,7 +58,7 @@ public class WanderingMode extends AbstractMode {
      */
     @Override
     public void turnOff () {
-        getInput().resetAllInputs();
+        super.turnOff();
         getView().removeKeyListener(this);
     }
 

@@ -33,6 +33,9 @@ public class GameController {
         myView.addKeyListener(myCurrentMode);
     }
     
+    public GameModel getModel() {
+        return myModel;
+    }
     
     public GameView getView(){
         return myView;

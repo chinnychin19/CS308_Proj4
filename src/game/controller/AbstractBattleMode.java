@@ -24,7 +24,6 @@ public abstract class AbstractBattleMode extends AbstractMode {
     private static final Color BEIGE = new Color(245, 245, 220);
 
     protected int mySelectedOption;
-    protected String[] options = { "ATTACK", "PARTY", "ITEM" };
     protected int mySelectedAttack;
 
     private AbstractOptionState myOptionState;
@@ -40,6 +39,7 @@ public abstract class AbstractBattleMode extends AbstractMode {
      */
     @Override
     public void turnOff () {
+        super.turnOff();
         getView().removeKeyListener(this);
         closeBuffers();
     }
