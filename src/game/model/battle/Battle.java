@@ -1,14 +1,19 @@
 package game.model.battle;
 
+import game.controller.AbstractBattleMode;
+import game.controller.optionState.BattleOverState;
+import game.controller.optionState.MainOptionState;
 import game.model.Monster;
 import game.model.attack.Attack;
 
 public class Battle {
     AbstractBattleParty myPlayerParty;
     AbstractBattleParty myEnemyParty;
-    public Battle(AbstractBattleParty playerParty, AbstractBattleParty enemyParty) {
+    AbstractBattleMode myMode;
+    public Battle(AbstractBattleParty playerParty, AbstractBattleParty enemyParty, AbstractBattleMode mode) {
         myPlayerParty = playerParty;
         myEnemyParty = enemyParty;
+        myMode = mode;
     }
     
     public AbstractBattleParty getOtherParty(AbstractBattleParty self) {
@@ -28,12 +33,37 @@ public class Battle {
         ((WildPlayerParty) myPlayerParty).setNextAttack(a);
     }
     
-    public void conductTurns() { //TODO: implement properly
-        myPlayerParty.doTurn(); //TODO: supposed to wait for player to choose something
-        myEnemyParty.doTurn();
-        System.out.println("health: "+myPlayerParty.getCurrentMonster().getCurHP());
+    public void attackEnemy(Attack a){
+        a.doAttack( myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
     }
     
+    public void attackPlayer(Attack a){
+        a.doAttack( myEnemyParty.getCurrentMonster(),myPlayerParty.getCurrentMonster());
+    }
+    public void registerUserCompleted(){
+        if(myEnemyParty.getNumberOfAliveMonsters() == 0){
+            System.out.println("=============\nYOU WON!\n=============");
+            userWon();
+        } else{
+            myEnemyParty.doTurn();
+            System.out.println("health: "+myPlayerParty.getCurrentMonster().getCurHP());
+            if(myPlayerParty.getNumberOfAliveMonsters() == 0){
+                computerWon();
+            } else{
+                myMode.setOptionState(new MainOptionState(myMode));
+            }
+        }
+       
+    }
+    
+    private void computerWon () {
+        myMode.setOptionState(new BattleOverState(myMode, "You were defeated :("));
+    }
+
+    private void userWon () {
+        myMode.setOptionState(new BattleOverState(myMode, "You won! :)"));        
+    }
+
     public boolean isOver() {
         boolean aLost = true, bLost = false;
         for (Monster m : myPlayerParty.getMonsters()) {

@@ -3,7 +3,12 @@ package game.model;
 import org.json.simple.JSONObject;
 import util.jsonwrapper.SmartJsonObject;
 
-
+/**
+ * Key items are used to progress the Player class throughout the game.  They are used to unlock different parts of the map
+ * or to acquire different stats, powerups, or items
+ * @author Chinmay
+ *
+ */
 public class KeyItem extends AbstractModelObject {
     // Key items only have names.
     public KeyItem (GameModel model, SmartJsonObject definition) {
