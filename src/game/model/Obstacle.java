@@ -84,7 +84,6 @@ public class Obstacle extends AbstractViewableObject {
             for(KeyItem item : myRequiredKeyItems){
                 if(!getWorld().getPlayer().getKeyItems().contains(item)){
                             AbstractMode mode = getModel().getController().getMode();
-                            //TODO: Make Constants
                             mode.addDynamicState(new TextState(mode, 
                             		Constants.BORDER_THICKNESS, 
                 					Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT, 

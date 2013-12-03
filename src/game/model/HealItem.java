@@ -45,7 +45,6 @@ public class HealItem extends AbstractViewableObject {
 				monster.heal();
 			}
 			AbstractMode mode = getModel().getController().getMode();
-			// TODO: make constants
 			mode.addDynamicState(new TextState(mode, 
 					Constants.BORDER_THICKNESS, 
 					Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT, 
