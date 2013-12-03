@@ -38,18 +38,21 @@ public class MapCreationView extends JPanel {
 
             @Override
             public void mouseClicked (MouseEvent arg0) {
-                System.out.println("Mouse clicked at: " + arg0.getX() + ", " + arg0.getY());
+            	int x = arg0.getX();
+            	int y = arg0.getY();
+            	
+                System.out.println("Mouse clicked at: " + x + ", " + y);
+                System.out.println("Click translates to tile " +
+                "column: " + myTileManager.getHorizontalTileNum(x) + 
+                ", row: " + myTileManager.getVerticalTileNum(y));
             }
 
             @Override
             public void mouseEntered (MouseEvent arg0) { /* Intentionally left blank */ }
-
             @Override
             public void mouseExited (MouseEvent arg0) { /* Intentionally left blank */ }
-
             @Override
             public void mousePressed (MouseEvent arg0) { /* Intentionally left blank */ }
-
             @Override
             public void mouseReleased (MouseEvent arg0) { /* Intentionally left blank */ }
 

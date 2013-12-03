@@ -68,6 +68,14 @@ public class CanvasTileManager {
     }
     
     
+    public int getHorizontalTileNum(int xValue){
+    	return (int) (xValue/tileWidth);
+    }
+    
+    public int getVerticalTileNum(int yValue){
+    	return (int) (yValue/tileHeight);
+    }
+    
     public double getTileWidth(){
     	return tileWidth;
     }
