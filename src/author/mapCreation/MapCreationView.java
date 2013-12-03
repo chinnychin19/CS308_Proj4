@@ -1,6 +1,5 @@
 package author.mapCreation;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -17,24 +16,25 @@ public class MapCreationView extends JPanel {
     private Image myBackground;
     private BufferedImage myImage;
     private Graphics myGraphics;
-
-    private int horizontalTilesShowing;
-    private int verticalTilesShowing;
-
-    private int middleHorizontalTile;
-    private int middleVerticalTile;
-
-    private double tileWidth;
-    private double tileHeight;
+    private CanvasTileManager myTileManager;
 
     public MapCreationView () {
         setFocusable(true);
         myImage = new BufferedImage(Constants.WIDTH, Constants.HEIGHT, BufferedImage.TYPE_INT_RGB);
         myGraphics = myImage.getGraphics();
         myBackground = new ImageIcon("images/background/shortGrass.png").getImage();
-        configureTiles(Constants.NUM_TILES_HORIZONTAL, Constants.NUM_TILES_VERTICAL); // 15, 9
+        myTileManager = new CanvasTileManager(); // 15, 9
         // this.setBackground(Color.BLUE);
-        this.addMouseListener(new MouseListener() {
+        createMouseListener();
+        createZoomListener();
+    }
+    
+    private void createZoomListener(){
+    	
+    }
+
+	private void createMouseListener() {
+		this.addMouseListener(new MouseListener() {
 
             @Override
             public void mouseClicked (MouseEvent arg0) {
@@ -42,39 +42,22 @@ public class MapCreationView extends JPanel {
             }
 
             @Override
-            public void mouseEntered (MouseEvent arg0) {
-                // TODO Auto-generated method stub
-
-            }
+            public void mouseEntered (MouseEvent arg0) { /* Intentionally left blank */ }
 
             @Override
-            public void mouseExited (MouseEvent arg0) {
-                // TODO Auto-generated method stub
-
-            }
+            public void mouseExited (MouseEvent arg0) { /* Intentionally left blank */ }
 
             @Override
-            public void mousePressed (MouseEvent arg0) {
-                // TODO Auto-generated method stub
-
-            }
+            public void mousePressed (MouseEvent arg0) { /* Intentionally left blank */ }
 
             @Override
-            public void mouseReleased (MouseEvent arg0) {
-                // TODO Auto-generated method stub
-
-            }
+            public void mouseReleased (MouseEvent arg0) { /* Intentionally left blank */ }
 
         });
-    }
-
-    private void configureTiles (int horizontal, int vertical) {
-        horizontalTilesShowing = horizontal;
-        verticalTilesShowing = vertical;
-        middleHorizontalTile = horizontalTilesShowing / 2;
-        middleVerticalTile = verticalTilesShowing / 2;
-        tileWidth = (double) Constants.WIDTH / horizontalTilesShowing;
-        tileHeight = (double) Constants.HEIGHT / verticalTilesShowing;
+	}
+    
+    public CanvasTileManager getTileManager(){
+    	return myTileManager;
     }
 
     public void paintComponent (Graphics g) {
