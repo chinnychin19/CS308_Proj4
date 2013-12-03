@@ -27,7 +27,6 @@ public class MapCreationView extends JPanel {
 		myGraphics = myImage.getGraphics();
 		myBackground = new ImageIcon("images/background/shortGrass.png").getImage();
 		myTileManager = new CanvasTileManager(); // 15, 9
-		// this.setBackground(Color.BLUE);
 		createMouseListener();
 		createZoomListener();
 	}
@@ -39,30 +38,53 @@ public class MapCreationView extends JPanel {
 			public void keyPressed(KeyEvent arg0) {
 				int key = arg0.getKeyCode();
 
-				// Zoom out
-				if (key == KeyEvent.VK_Z){ myTileManager.expandMap(); }
+				if (key == KeyEvent.VK_X) { // 'X' == Zoom out
+					myTileManager.expandView(); 
+				}
 
-				// Zoom in
-				if (key == KeyEvent.VK_X){ myTileManager.contractMap(); }
+				if (key == KeyEvent.VK_Z) { // 'Z' == Zoom in
+					myTileManager.contractView(); 
+				}
+				
+				if (key == KeyEvent.VK_UP) { // Up Arrow == Move Up
+					myTileManager.decreaseVerticalOffset();
+				}
+				
+				if (key == KeyEvent.VK_DOWN) { // Down Arrow == Move Down
+					myTileManager.increaseVerticalOffset();
+				}
+				
+				if (key == KeyEvent.VK_RIGHT) { // Right Arrow == Move Right
+					myTileManager.increaseHorizontalOffset();
+				}
+				
+				if (key == KeyEvent.VK_LEFT) { // Left Arrow == Move Left
+					myTileManager.decreaseHorizontalOffset();
+				}
 			}
+			
 			@Override
 			public void keyReleased(KeyEvent arg0) { 
 				int key = arg0.getKeyCode();
 
 				// Finished Zooming out
-				if (key == KeyEvent.VK_Z){ 
-					System.out.println(
-							"Map expanded to " + 
+				if (key == KeyEvent.VK_Z || key == KeyEvent.VK_X){ 
+					System.out.println("View size changed to " + 
 							myTileManager.getTotalHorizontalTiles() + " x " +
-							myTileManager.getTotalVerticalTiles() + " tiles");
+							myTileManager.getTotalVerticalTiles() + " tiles"
+					);
 				}
-
-				// Finished Zooming in
-				if (key == KeyEvent.VK_X){ 
-					System.out.println(
-							"Map contracted to " + 
-							myTileManager.getTotalHorizontalTiles() + " x " +
-							myTileManager.getTotalVerticalTiles() + " tiles");
+				
+				if (key == KeyEvent.VK_UP
+				 || key == KeyEvent.VK_DOWN
+				 || key == KeyEvent.VK_LEFT
+				 || key == KeyEvent.VK_RIGHT) { // Finished changing window
+					System.out.println("Window moved.  Showing "
+							+ "columns " + myTileManager.getHorizontalTileNum(0)
+							+ " through " + (myTileManager.getHorizontalTileNum(0) + myTileManager.getTotalHorizontalTiles())
+							+ " and rows " + myTileManager.getVerticalTileNum(0)
+							+ " through " + (myTileManager.getVerticalTileNum(0) + myTileManager.getTotalVerticalTiles())
+					);
 				}
 			}
 

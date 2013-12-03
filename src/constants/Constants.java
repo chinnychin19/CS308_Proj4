@@ -2,10 +2,6 @@ package constants;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 
 public class Constants {
     public static final int WIDTH = 800, HEIGHT = 500;
@@ -85,7 +81,11 @@ public class Constants {
     public static final String RADIOBUTTON_PANEL = "Radio Button";
     public static final String CHECKBOX_PANEL = "Checkbox";
     
-    
+    // Map Creation Values
+    public static final int MIN_X_COORD = 0;
+    public static final int MAX_X_COORD = 1005;
+    public static final int MIN_Y_COORD = 0;
+    public static final int MAX_Y_COORD = 603;
     
     //GUI Sizing Constants
     public static final Dimension FRAME_SIZE = new Dimension(800,600);
