@@ -3,14 +3,14 @@ package game.controller.state.option;
 import game.controller.AbstractBattleMode;
 
 
-public class TextState extends AbstractOptionState {
+public class TextOptionState extends AbstractOptionState {
 
     private String myText;
     private AbstractBattleMode myMode;
 
     // private AbstractOptionState myNextState;
 
-    public TextState (AbstractBattleMode mode, String text) {
+    public TextOptionState (AbstractBattleMode mode, String text) {
         super(mode);
         myMode = mode;
         myText = text;

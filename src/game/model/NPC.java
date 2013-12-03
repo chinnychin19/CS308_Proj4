@@ -2,7 +2,8 @@ package game.model;
 
 import game.controller.AbstractMode;
 import game.controller.Input;
-import game.controller.state.option.TextState;
+import game.controller.state.TextState;
+import game.controller.state.option.TextOptionState;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -53,7 +54,8 @@ public class NPC extends AbstractCharacter {
         if (input.isKeyInteractPressed() && getLoc().equals(w.locInFrontOfPlayer())) {
             setDirection(Direction.opposite(w.getPlayer().getDirection()));
             System.out.println(myDialogue);
-            getModel().getController().getMode().addDynamicState();
+            AbstractMode mode = getModel().getController().getMode();
+            mode.addDynamicState(new TextState(mode, 20, 20, Constants.WIDTH-Constants.BORDER_THICKNESS-20, 100, "Hi Mom!"));
         }
     }
     
