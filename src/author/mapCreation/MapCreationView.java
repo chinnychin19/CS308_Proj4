@@ -32,27 +32,13 @@ public class MapCreationView extends JPanel {
 	}
 
 	private void createZoomListener(){
-		this.addKeyListener(new KeyListener(){
+		this.initKeyListeners();
+		
+		//this.addKeyListener(new KeyListener(){})
 
-			@Override
+			/*@Override
 			public void keyPressed(KeyEvent arg0) {
 				int key = arg0.getKeyCode();
-
-				if (key == KeyEvent.VK_X) { // 'X' == Zoom out
-					myTileManager.expandView(); 
-				}
-
-				if (key == KeyEvent.VK_Z) { // 'Z' == Zoom in
-					myTileManager.contractView(); 
-				}
-				
-				if (key == KeyEvent.VK_UP) { // Up Arrow == Move Up
-					myTileManager.decreaseVerticalOffset();
-				}
-				
-				if (key == KeyEvent.VK_DOWN) { // Down Arrow == Move Down
-					myTileManager.increaseVerticalOffset();
-				}
 				
 				if (key == KeyEvent.VK_RIGHT) { // Right Arrow == Move Right
 					myTileManager.increaseHorizontalOffset();
@@ -89,9 +75,13 @@ public class MapCreationView extends JPanel {
 			}
 
 			@Override
-			public void keyTyped(KeyEvent arg0) { /* do nothing... */ }
+			public void keyTyped(KeyEvent arg0) { /* do nothing...  }
 
-		});
+		});*/
+	}
+	
+	private void initKeyListeners(){
+		
 	}
 
 	private void createMouseListener() {

@@ -2,6 +2,7 @@ package constants;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 
 public class Constants {
     public static final int WIDTH = 800, HEIGHT = 500;
@@ -86,6 +87,14 @@ public class Constants {
     public static final int MAX_X_COORD = 1005;
     public static final int MIN_Y_COORD = 0;
     public static final int MAX_Y_COORD = 603;
+    
+    // Key Values for Map Creation
+    public static final int ZOOM_OUT_KEY = KeyEvent.VK_X;
+    public static final int ZOOM_IN_KEY = KeyEvent.VK_Z;
+    public static final int UP_ARROW_KEY = KeyEvent.VK_UP;
+    public static final int DOWN_ARROW_KEY = KeyEvent.VK_DOWN;
+    public static final int RIGHT_ARROW_KEY = KeyEvent.VK_RIGHT;
+    public static final int LEFT_ARROW_KEY = KeyEvent.VK_LEFT;
     
     //GUI Sizing Constants
     public static final Dimension FRAME_SIZE = new Dimension(800,600);
