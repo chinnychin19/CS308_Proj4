@@ -1,8 +1,8 @@
 package game.model.battle;
 
 import game.controller.AbstractBattleMode;
-import game.controller.optionState.BattleOverState;
-import game.controller.optionState.MainOptionState;
+import game.controller.state.option.BattleOverState;
+import game.controller.state.option.MainOptionState;
 import game.model.attack.Attack;
 
 

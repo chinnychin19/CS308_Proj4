@@ -35,5 +35,4 @@ public class HealItem extends AbstractViewableObject {
 			monster.heal();
 		}
 	}
-
 }

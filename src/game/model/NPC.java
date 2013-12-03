@@ -2,6 +2,7 @@ package game.model;
 
 import game.controller.AbstractMode;
 import game.controller.Input;
+import game.controller.state.option.TextState;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -52,6 +53,11 @@ public class NPC extends AbstractCharacter {
         if (input.isKeyInteractPressed() && getLoc().equals(w.locInFrontOfPlayer())) {
             setDirection(Direction.opposite(w.getPlayer().getDirection()));
             System.out.println(myDialogue);
+            getModel().getController().getMode().addDynamicState();
         }
+    }
+    
+    public void paintDialogue(){
+    	
     }
 }

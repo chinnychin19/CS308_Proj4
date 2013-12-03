@@ -1,4 +1,4 @@
-package game.controller.optionState;
+package game.controller.state.option;
 
 import java.awt.Color;
 import java.awt.Font;

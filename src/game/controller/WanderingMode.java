@@ -2,8 +2,11 @@ package game.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 import location.Loc;
 import constants.Constants;
+import game.controller.state.option.AbstractOptionState;
 import game.model.AbstractViewable;
 import game.model.GameModel;
 import game.view.GameView;
@@ -16,9 +19,10 @@ import game.view.GameView;
  * 
  */
 public class WanderingMode extends AbstractMode {
-
+	private List<AbstractOptionState> myStates;
     public WanderingMode (GameModel model, GameView view) {
         super(model, view);
+        myStates = new ArrayList<AbstractOptionState>();
     }
 
     /**
@@ -30,9 +34,17 @@ public class WanderingMode extends AbstractMode {
         paintPlayer();
         paintViewablesOnScreen();
         paintBorder();
+        paintDynamicStates();
     }
 
-    /**
+    private void paintDynamicStates() {
+		// TODO Auto-generated method stub
+		for(AbstractOptionState state : myStates){
+			state.paint();
+		}
+	}
+
+	/**
      * Calls doFrame() on all ViewableObjects and GroundObjects
      */
     @Override
@@ -101,7 +113,11 @@ public class WanderingMode extends AbstractMode {
         }
         return list;
     }
-
+    
+    public void addDynamicState( ) {
+    	
+	}
+    
     private Collection<AbstractViewable> getGroundObjectsOnScreen () {
         ArrayList<AbstractViewable> list = new ArrayList<AbstractViewable>();
         int px = getModel().getPlayer().getLoc().getX();
