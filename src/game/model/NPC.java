@@ -60,7 +60,12 @@ public class NPC extends AbstractCharacter {
             setDirection(Direction.opposite(getWorld().getPlayer().getDirection()));
             AbstractMode mode = getModel().getController().getMode();
             //TODO: Make Constants
-            mode.addDynamicState(new TextState(mode, 20, 20, Constants.WIDTH-Constants.BORDER_THICKNESS-20, 100, myDialogue));
+            mode.addDynamicState(new TextState(mode, 
+            		Constants.BORDER_THICKNESS, 
+					Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT, 
+					Constants.WIDTH - 2*Constants.BORDER_THICKNESS, 
+					Constants.DIALOGUE_HEIGHT,  
+					myDialogue));
         }
 	}
 

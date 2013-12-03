@@ -85,7 +85,12 @@ public class Obstacle extends AbstractViewableObject {
                 if(!getWorld().getPlayer().getKeyItems().contains(item)){
                             AbstractMode mode = getModel().getController().getMode();
                             //TODO: Make Constants
-                            mode.addDynamicState(new TextState(mode, 20, 20, Constants.WIDTH-Constants.BORDER_THICKNESS-20, 100, Constants.PROMPT_MISSING_ITEM+item.toString() + Constants.PROMPT_AQUIRE_MISSING_ITEM));
+                            mode.addDynamicState(new TextState(mode, 
+                            		Constants.BORDER_THICKNESS, 
+                					Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT, 
+                					Constants.WIDTH - 2*Constants.BORDER_THICKNESS, 
+                					Constants.DIALOGUE_HEIGHT, 
+                					Constants.PROMPT_MISSING_ITEM+item.toString() + Constants.PROMPT_AQUIRE_MISSING_ITEM));
                     return;
                 }
             }
