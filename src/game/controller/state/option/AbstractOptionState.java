@@ -16,7 +16,7 @@ public abstract class AbstractOptionState {
     protected String myName;
     
     public AbstractOptionState (AbstractBattleMode mode) {
-        this(mode, "");
+        this(mode, Constants.MODE_DEFAULT);
     }
     
     public AbstractOptionState(AbstractBattleMode mode, String name){

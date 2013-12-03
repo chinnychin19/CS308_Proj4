@@ -48,7 +48,7 @@ public class HealItem extends AbstractViewableObject {
 			// TODO: make constants
 			mode.addDynamicState(new TextState(mode, 20, 20, Constants.WIDTH
 					- Constants.BORDER_THICKNESS - 20, 100,
-					"All Monsters Healed"));
+					Constants.PROMPT_MONSTERS_HEALED));
 		}
 	}
 

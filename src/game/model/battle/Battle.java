@@ -1,5 +1,6 @@
 package game.model.battle;
 
+import constants.Constants;
 import game.controller.AbstractBattleMode;
 import game.controller.optionState.LivingPartyOptionState;
 import game.controller.optionState.UserLostWildBattleCompleteState;
@@ -86,7 +87,7 @@ public class Battle {
     }
 
     private void handleUserMonsterDied () {
-        myMode.setOptionState(new TextOptionState(myMode, "Monster Died.  Choose a new Monster",
+        myMode.setOptionState(new TextOptionState(myMode, Constants.PROMPT_MONSTER_DEAD,
                                             new LivingPartyOptionState(myMode, false)));
     }
 

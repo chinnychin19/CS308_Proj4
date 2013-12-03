@@ -83,10 +83,9 @@ public class Obstacle extends AbstractViewableObject {
             }
             for(KeyItem item : myRequiredKeyItems){
                 if(!getWorld().getPlayer().getKeyItems().contains(item)){
-                    System.out.println("MISSING ITEM: "+item.toString());
                             AbstractMode mode = getModel().getController().getMode();
                             //TODO: Make Constants
-                            mode.addDynamicState(new TextState(mode, 20, 20, Constants.WIDTH-Constants.BORDER_THICKNESS-20, 100, "MISSING ITEM: "+item.toString() + " acquire this item and try again"));
+                            mode.addDynamicState(new TextState(mode, 20, 20, Constants.WIDTH-Constants.BORDER_THICKNESS-20, 100, Constants.PROMPT_MISSING_ITEM+item.toString() + Constants.PROMPT_AQUIRE_MISSING_ITEM));
                     return;
                 }
             }
