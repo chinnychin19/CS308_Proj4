@@ -56,7 +56,6 @@ public class RadioButtonsPanel extends AbstractToggleButtonPanel {
 
     public void updateSelectionState (AWTEvent e) {
         mySelectedButton = ((JRadioButton) e.getSource()).getText();
-        // System.out.println("Selected button is now " + mySelectedButton);
     }
 
     public Map<String, String> getUserInput () {

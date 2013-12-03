@@ -12,7 +12,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import author.model.AuthoringCache;
 import author.panels.AbstractWizardPanel;
-//import author.panels.CheckBoxPanel;
 import author.panels.ContainerPanel;
 
 
@@ -43,7 +42,8 @@ public class WizardConverter {
         return tempObject;
     }
 
-    private void smartJSONObjectAdd (JSONObject parent, Map<String, String> data) {
+    @SuppressWarnings("unchecked")
+	private void smartJSONObjectAdd (JSONObject parent, Map<String, String> data) {
         Set<String> keys = data.keySet();
         Map<String, Object> tempMap = new HashMap<String, Object>();
         for (Object s : keys) {
@@ -64,7 +64,8 @@ public class WizardConverter {
         parent.putAll(tempMap);
     }
 
-    private void smartJSONArrayAdd (JSONArray parent, Map<String, String> data) {
+    @SuppressWarnings("unchecked")
+	private void smartJSONArrayAdd (JSONArray parent, Map<String, String> data) {
         Set<String> keys = data.keySet();
         Map<String, Object> tempMap = new HashMap<String, Object>();
         for (Object s : keys) {
@@ -86,7 +87,8 @@ public class WizardConverter {
         parent.add(new JSONObject(tempMap));
     }
 
-    private JSONObject panelToJSONObject (JPanel panel) {
+    @SuppressWarnings("unchecked")
+	private JSONObject panelToJSONObject (JPanel panel) {
 
         JSONObject outputJSONObject = new JSONObject();
 
@@ -119,14 +121,12 @@ public class WizardConverter {
         return outputJSONObject;
     }
 
-    private JSONArray panelToJSONArray (JPanel panel) {
+    @SuppressWarnings("unchecked")
+	private JSONArray panelToJSONArray (JPanel panel) {
         JSONArray outputJSONArray = new JSONArray();
         for (Component c : panel.getComponents()) {
             if (c instanceof AbstractWizardPanel) {
-
-                // outputJSONArray.add(new JSONObject(((AbstractWizardPanel) c).getUserInput()));
                 smartJSONArrayAdd(outputJSONArray, ((AbstractWizardPanel) c).getUserInput());
-
             }
             else if (c instanceof ContainerPanel) {
 

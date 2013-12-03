@@ -1,5 +1,4 @@
 package author.model;
-import org.json.simple.JSONObject;
 
 public class AuthorModel {
     public AuthorModel () {
@@ -8,5 +7,4 @@ public class AuthorModel {
 
     // add functions for the itemcache, attackcache, etc...
 
-    // generateXML()
 }

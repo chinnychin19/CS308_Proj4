@@ -3,6 +3,8 @@ package author.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import constants.Constants;
+
 import author.model.AuthoringCache;
 import author.wizard.WizardBuilder;
 
@@ -13,6 +15,6 @@ public class LaunchPlayerWizardListener implements ActionListener {
 	
     @Override
     public void actionPerformed (ActionEvent e) {
-    	new WizardBuilder("player.json",myCache);
+    	new WizardBuilder(Constants.PLAYER_JSON,myCache);
     }
 }

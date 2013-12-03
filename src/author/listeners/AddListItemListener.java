@@ -10,7 +10,7 @@ public class AddListItemListener implements ActionListener {
     @Override
     public void actionPerformed (ActionEvent e) {
         Component button = (Component) e.getSource();
-        /*Component parent = */button.getParent();
+        button.getParent();
 
     }
 

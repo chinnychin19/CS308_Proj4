@@ -1,13 +1,13 @@
 package author.panels;
 
-import java.awt.BorderLayout;
+//import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+//import java.io.FileNotFoundException;
+//import java.io.FileOutputStream;
+//import java.io.IOException;
 //import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
@@ -87,6 +87,8 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
         if ( !myFile.getParentFile().equals(new File(IMG_FOLDER_FILEPATH)) ){
             File newFile = new File(IMG_FOLDER_FILEPATH + "/" + myFile.getName());
             try {
+            	// TODO: Commented this all out because it was giving an error
+            	
                 //Files.copy(myFile.toPath(), new FileOutputStream(newFile));
             } catch (Exception e){
             	

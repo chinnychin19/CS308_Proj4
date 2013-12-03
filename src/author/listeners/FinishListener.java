@@ -20,7 +20,7 @@ public class FinishListener implements ActionListener {
 	
     @Override
     public void actionPerformed (ActionEvent e) {
-    	/*WizardConverter c = */new WizardConverter(myParentWizard, myCache);
+    	new WizardConverter(myParentWizard, myCache);
     }
 
 }

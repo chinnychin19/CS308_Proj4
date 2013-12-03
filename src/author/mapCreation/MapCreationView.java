@@ -24,7 +24,7 @@ public class MapCreationView extends JPanel {
 		setFocusable(true);
 		myImage = new BufferedImage(Constants.WIDTH, Constants.HEIGHT, BufferedImage.TYPE_INT_RGB);
 		myGraphics = myImage.getGraphics();
-		myBackground = new ImageIcon("images/background/shortGrass.png").getImage();
+		myBackground = new ImageIcon(Constants.SHORTGRASS_PNG_FILEPATH).getImage();
 		myTileManager = new CanvasTileManager(); // 15, 9
 		initListeners();
 	}

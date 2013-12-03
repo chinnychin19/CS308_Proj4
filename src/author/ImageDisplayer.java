@@ -7,12 +7,13 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import constants.Constants;
+
 
 @SuppressWarnings("serial")
 public class ImageDisplayer extends JLabel {
 
     private Icon myIcon;
-    // private String myImageFilepath;
     private String myCaption;
     public static final int MIN_X_SIZE = 100;
     public static final int MIN_Y_SIZE = 100;
@@ -54,8 +55,7 @@ public class ImageDisplayer extends JLabel {
         }
         catch (FileNotFoundException e) {
             myIcon = null;
-            // myImageFilepath = "";
-            myCaption = "Error: File not found.";
+            myCaption = Constants.FILE_NOT_FOUND_ERROR;
         }
         this.setIcon(myIcon);
         this.setText(myCaption);
@@ -63,12 +63,9 @@ public class ImageDisplayer extends JLabel {
 
     private void setIcon (String filepath) throws FileNotFoundException {
         if (!new File(filepath).isFile()) {
-            // System.out.println("is an error");
             throw new FileNotFoundException();
         }
         myIcon = new ImageIcon(filepath);
-        // myImageFilepath = filename;
-        // System.out.println("set icon");
         return;
     }
 
@@ -80,7 +77,4 @@ public class ImageDisplayer extends JLabel {
         return myIcon.getIconHeight();
     }
 
-    // public String getImageFilepath(){
-    // return myImageFilepath;
-    // }
 }

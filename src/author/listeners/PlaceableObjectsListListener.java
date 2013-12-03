@@ -15,7 +15,6 @@ public class PlaceableObjectsListListener implements ListSelectionListener{
 
     @Override
     public void valueChanged (ListSelectionEvent e) {
-        // TODO Auto-generated method stub
         ListSelectionModel lsm = (ListSelectionModel)e.getSource();
         
         

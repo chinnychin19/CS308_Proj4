@@ -6,10 +6,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import author.listeners.LaunchPlayerWizardListener;
+
+import constants.Constants;
 import author.listeners.LaunchWizardListener;
 import author.model.AuthoringCache;
-import constants.Constants;
 
 
 @SuppressWarnings("serial")
@@ -17,13 +17,14 @@ public class NewEntitySubMenu extends JMenu {
 
     private AuthoringCache myCache;
 
-    public NewEntitySubMenu (String title, AuthoringCache cache) {
+    @SuppressWarnings("unchecked")
+	public NewEntitySubMenu (String title, AuthoringCache cache) {
 
         super(title);
 
         myCache = cache;
 
-        JSONObject template = getJSON("player.json");
+        JSONObject template = getJSON(Constants.PLAYER_JSON);
         Set<String> keySet = template.keySet();
         System.out.println("Menu Populated with " + keySet);
         for (String s : keySet) {

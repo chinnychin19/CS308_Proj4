@@ -100,8 +100,21 @@ public class Constants {
     public static final Dimension FRAME_SIZE = new Dimension(800,600);
     public static final Dimension BUTTON_SIZE = new Dimension(198,28);
     public static final Dimension TEXT_AREA_SIZE = new Dimension(400, 32);
-        
+      
+    // Authoring JMenu Options Constants
+    public static final String FILE_MENU = "File";
+    public static final String EDIT_MENU = "Edit";
+    public static final String VIEW_MENU = "View";
+    public static final String NEW_ENTITY_SUBMENU = "New Entity";
+    public static final String EDIT_ENTITY_SUBMENU = "Edit Existing Entity";
+    public static final String CHOOSE_ALTERNATE_TEMPLATE = "Choose Alternate Template (JSON)";
+    public static final String LOAD_EXISTING_GAME = "Load Existing Game (JSON)";
+    public static final String CREATE_NEW_MAP = "Create New Map";
+    public static final String SHOW_GENERATED_OUTPUT = "Show Generated Output";
+    
     // Classpaths, folder paths, and filenames
+    public static final String WRITE_JSON_TO_FILE = "Write JSON to file";
+    public static final String PLAYER_JSON = "player.json";
     public static final String CLASSPATH_GAME_MODEL = "game.model";
     public static final String FOLDERPATH_GAMES = "games";
     public static final String FILENAME_DEFINITION = "definition.json";
@@ -124,6 +137,8 @@ public class Constants {
     
     public static final String SAVE_FILE_NOT_FOUND = "Save file not found";
     public static final String UNCHECKED = "unchecked";
+    
+    public static final String FILE_NOT_FOUND_ERROR = "Error: File not found.";
 
     public static final String MONSTERS_LOWWERCASE = "monsters";
     public static final String MONSTER_UPPERCASE = "Monster";
@@ -135,6 +150,8 @@ public class Constants {
     public static final String MATRIX = "matrix";
     
     public final static String IMG_FOLDER_FILEPATH = "./images";
+    
+    public final static String SHORTGRASS_PNG_FILEPATH = "images/background/shortGrass.png";
     
     public final static String EMPTY_STRING = "";
 }

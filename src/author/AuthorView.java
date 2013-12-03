@@ -1,21 +1,15 @@
 package author;
 
-import java.awt.Color;
-import java.awt.MenuBar;
 import java.util.List;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import author.listeners.LaunchPlayerWizardListener;
-import author.listeners.LaunchWizardListener;
 import author.listeners.OutputJSONListener;
 import author.mapCreation.MapCreationView;
 import author.listeners.WriteJSONOutputListener;
 import author.model.AuthoringCache;
-import author.wizard.Wizard;
-import author.wizardState.*;
+import author.wizardState.AbstractWizardState;
 import constants.Constants;
 
 
@@ -39,21 +33,21 @@ public class AuthorView extends JFrame {
 
         AuthoringCache ac = new AuthoringCache(this);
 
-        JMenu fileMenu = new JMenu("File");
-        fileMenu.add(new NewEntitySubMenu("New Entity", ac));
-        fileMenu.add(new JMenuItem("Choose Alternate Template (JSON)"));
-        fileMenu.add(new JMenuItem("Load Existing Game (JSON)"));
-        fileMenu.add(new JMenuItem("Create New Map"));
+        JMenu fileMenu = new JMenu(Constants.FILE_MENU);
+        fileMenu.add(new NewEntitySubMenu(Constants.NEW_ENTITY_SUBMENU, ac));
+        fileMenu.add(new JMenuItem(Constants.CHOOSE_ALTERNATE_TEMPLATE));
+        fileMenu.add(new JMenuItem(Constants.LOAD_EXISTING_GAME));
+        fileMenu.add(new JMenuItem(Constants.CREATE_NEW_MAP));
 
-        JMenu editMenu = new JMenu("Edit");
-        editMenu.add(new EditEntitySubMenu("Edit Existing Entity", ac));
+        JMenu editMenu = new JMenu(Constants.EDIT_MENU);
+        editMenu.add(new EditEntitySubMenu(Constants.EDIT_ENTITY_SUBMENU, ac));
 
-        JMenu viewMenu = new JMenu("View");
-        JMenuItem item = new JMenuItem("Show Generated Output");
+        JMenu viewMenu = new JMenu(Constants.VIEW_MENU);
+        JMenuItem item = new JMenuItem(Constants.SHOW_GENERATED_OUTPUT);
         item.addActionListener(new OutputJSONListener(ac));
         viewMenu.add(item);
         
-        JMenuItem writeJSON = new JMenuItem("Write JSON to file");
+        JMenuItem writeJSON = new JMenuItem(Constants.WRITE_JSON_TO_FILE);
         writeJSON.addActionListener(new WriteJSONOutputListener(ac));
         viewMenu.add(writeJSON);
 
@@ -64,12 +58,14 @@ public class AuthorView extends JFrame {
         // Set the menu bar to the frame.
         this.setJMenuBar(menuBar);
 
-        //this.add(new LevelEditorCanvas());
         this.add(new MapCreationView());
-        //this.setBackground(Color.BLUE);
         
         pack();
         this.setVisible(true);
+    }
+    
+    public List<AbstractWizardState> getWizardStates(){
+    	return myWizardStates;
     }
 
     public AuthorView getAuthorView () {

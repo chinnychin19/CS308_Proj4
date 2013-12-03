@@ -23,7 +23,6 @@ public class CheckBoxPanel extends AbstractToggleButtonPanel{
 
     private JLabel myCheckBoxLabel;
     private Map<String,String> myBoxStates;
-    //private ButtonGroup myButtonGroup;
         
     public CheckBoxPanel(String label){
         super("CheckBox", CheckBoxListener.getInstance());
@@ -57,7 +56,6 @@ public class CheckBoxPanel extends AbstractToggleButtonPanel{
     public void updateSelectionState (AWTEvent e) {
         String state = (myBoxStates.get(((JCheckBox) e.getSource()).getText()).equals("true")) ? "false" : "true";
         myBoxStates.put(((JCheckBox) e.getSource()).getText(), state);
-        // System.out.println("Selected button is now " + mySelectedButton);
     }
     
     @Override

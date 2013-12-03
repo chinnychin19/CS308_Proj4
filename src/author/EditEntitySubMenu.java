@@ -29,9 +29,10 @@ public class EditEntitySubMenu extends JMenu {
 
     }
 
-    public void refreshMenu () {
+    @SuppressWarnings("unchecked")
+	public void refreshMenu () {
         JSONObject template = myCache.getRawJSON();
-        Set<String> keySet = template.keySet();
+		Set<String> keySet = template.keySet();
         me.removeAll();
         System.out.println("Menu Populated with " + keySet);
         for (Object s : keySet) {

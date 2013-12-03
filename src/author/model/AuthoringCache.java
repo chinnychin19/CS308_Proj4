@@ -19,13 +19,15 @@ public class AuthoringCache {
         initCategories();
     }
 
-    private void initCategories () {
+    @SuppressWarnings("unchecked")
+	private void initCategories () {
         for (String category : Constants.CATEGORIES) {
             myJSON.put(category, new JSONArray());
         }
     }
 
-    public void add (String category, JSONObject data) {
+    @SuppressWarnings("unchecked")
+	public void add (String category, JSONObject data) {
         JSONArray cache = (JSONArray) myJSON.get(category);
         cache.add(data);
         myView.update();

@@ -3,6 +3,8 @@ package author.panels;
 /**
  * This wizard allows the user to define a matrix-shaped input
  * 
+ * @author michaelmarion
+ * 
  */
 
 import java.util.HashMap;
@@ -36,7 +38,6 @@ public class MatrixPanel extends AbstractTextPanel {
         // Create grid
         TableModel myDataModel = new AbstractTableModel() {
 
-            //private String[] columnNames = new String[STARTING_COLUMNS];
             private Object[][] data = new Object[STARTING_ROWS][STARTING_COLUMNS];
 
             public int getColumnCount () {
@@ -71,7 +72,7 @@ public class MatrixPanel extends AbstractTextPanel {
                 int row = e.getFirstRow();
                 int col = e.getColumn();
                 TableModel model = (TableModel) e.getSource();
-                /*Object data = */model.getValueAt(row, col);
+                model.getValueAt(row, col);
             }
 
         });
