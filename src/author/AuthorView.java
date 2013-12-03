@@ -1,5 +1,6 @@
 package author;
 
+import java.awt.Color;
 import java.awt.MenuBar;
 import java.util.List;
 import javax.swing.JButton;
@@ -10,8 +11,9 @@ import javax.swing.JMenuItem;
 import author.listeners.LaunchPlayerWizardListener;
 import author.listeners.LaunchWizardListener;
 import author.listeners.OutputJSONListener;
-import author.listeners.WriteJSONOutputListener;
+//import author.listeners.WriteJSONOutputListener;
 import author.model.AuthoringCache;
+import author.view.MapCreationView;
 import author.wizard.Wizard;
 import author.wizardState.*;
 import constants.Constants;
@@ -41,6 +43,7 @@ public class AuthorView extends JFrame {
         fileMenu.add(new NewEntitySubMenu("New Entity", ac));
         fileMenu.add(new JMenuItem("Choose Alternate Template (JSON)"));
         fileMenu.add(new JMenuItem("Load Existing Game (JSON)"));
+        fileMenu.add(new JMenuItem("Create New Map"));
 
         JMenu editMenu = new JMenu("Edit");
         editMenu.add(new EditEntitySubMenu("Edit Existing Entity", ac));
@@ -61,8 +64,10 @@ public class AuthorView extends JFrame {
         // Set the menu bar to the frame.
         this.setJMenuBar(menuBar);
 
-        this.add(new LevelEditorCanvas());
-
+        //this.add(new LevelEditorCanvas());
+        this.add(new MapCreationView());
+        //this.setBackground(Color.BLUE);
+        
         pack();
         this.setVisible(true);
     }

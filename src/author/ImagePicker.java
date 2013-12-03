@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
+@SuppressWarnings("serial")
 public class ImagePicker extends JPanel implements ActionListener {
 
     private ImageDisplayer myImageDisplayer;

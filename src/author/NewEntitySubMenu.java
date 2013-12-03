@@ -12,6 +12,7 @@ import author.model.AuthoringCache;
 import constants.Constants;
 
 
+@SuppressWarnings("serial")
 public class NewEntitySubMenu extends JMenu {
 
     private AuthoringCache myCache;

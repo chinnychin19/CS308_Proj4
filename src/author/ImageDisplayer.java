@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 
+@SuppressWarnings("serial")
 public class ImageDisplayer extends JLabel {
 
     private Icon myIcon;

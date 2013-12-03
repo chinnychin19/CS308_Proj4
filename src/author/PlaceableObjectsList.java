@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import author.listeners.PlaceableObjectsListListener;
 
+@SuppressWarnings("serial")
 public class PlaceableObjectsList extends JPanel {
     
     private JList myList;
@@ -41,8 +42,16 @@ public class PlaceableObjectsList extends JPanel {
 
     public void chooseListElement (int index) {
         // TODO Auto-generated method stub
-        myCurrentPlaceableObject = (AbstractViewableObject) myListModel.get(index);
+        setMyCurrentPlaceableObject((AbstractViewableObject) myListModel.get(index));
     }
+
+	public AbstractViewableObject getMyCurrentPlaceableObject() {
+		return myCurrentPlaceableObject;
+	}
+
+	public void setMyCurrentPlaceableObject(AbstractViewableObject myCurrentPlaceableObject) {
+		this.myCurrentPlaceableObject = myCurrentPlaceableObject;
+	}
 
 
 
