@@ -8,6 +8,9 @@ public class CanvasTileManager {
 	
 	private int widthRatio;
 	private int heightRatio;
+	
+	private int widthFactor;
+	private int heightFactor;
 
     private int middleHorizontalTile;
     private int middleVerticalTile;
@@ -31,6 +34,9 @@ public class CanvasTileManager {
     	myGCD = GCD(horizontal, vertical);
         widthRatio = horizontal/myGCD;
         heightRatio = vertical/myGCD;
+        
+        widthFactor = horizontal/widthRatio;
+        heightFactor = vertical/heightRatio;
     	
         calcNewTileValues();
     }
@@ -39,8 +45,8 @@ public class CanvasTileManager {
 		middleHorizontalTile = (myGCD * widthRatio) / 2;
         middleVerticalTile = (myGCD * heightRatio) / 2;
         
-        tileWidth = (double) Constants.WIDTH / (myGCD * widthRatio);
-        tileHeight = (double) Constants.HEIGHT / (myGCD * heightRatio);
+        tileWidth = (double) Constants.WIDTH / (getTotalHorizontalTiles());
+        tileHeight = (double) Constants.HEIGHT / (getTotalVerticalTiles());
 	}
     
     private int GCD(int a, int b){
@@ -53,20 +59,31 @@ public class CanvasTileManager {
     }
     
     public void expandMap(){
-    	widthRatio += 1;
-    	heightRatio += 1;
+    	widthFactor += 1;
+    	heightFactor += 1;
+    	//widthRatio = widthRatio * widthFactor;
+    	//heightRatio = heightRatio * heightFactor;
     	calcNewTileValues();
     }
     
     public void contractMap(){
-    	if (widthRatio > 1 && heightRatio > 1){
-    		widthRatio -= 1;
-    		heightRatio -= 1;
+    	if (widthFactor > 1 && heightFactor > 1){
+    		widthFactor -= 1;
+    		heightFactor -= 1;
+    		//widthRatio = widthRatio * widthFactor;
+        	//heightRatio = heightRatio * heightFactor;
     		calcNewTileValues();
     	}
     	// do nothing otherwise
     }
     
+    public int getTotalHorizontalTiles(){
+    	return widthRatio * widthFactor;
+    }
+    
+    public int getTotalVerticalTiles(){
+    	return heightRatio * heightFactor;
+    }
     
     public int getHorizontalTileNum(int xValue){
     	return (int) (xValue/tileWidth);
