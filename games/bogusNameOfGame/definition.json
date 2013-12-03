@@ -206,6 +206,7 @@
     ],
     "HealItem": [
         {
+            "name": "heal1",
             "image": "images/items/healPokeBall.png"
         }
     ]

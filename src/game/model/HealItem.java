@@ -20,8 +20,8 @@ public class HealItem extends AbstractViewableObject {
 
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
-		return null;
+		return myImage;
+		//TODO: consider moving this to abstract
 	}
 	
 	
@@ -29,8 +29,9 @@ public class HealItem extends AbstractViewableObject {
 	 * Work in progress -- ideally this method will not take any arguments
 	 * 
 	 */
-	public void interact(List<Monster> monsterParty){
-		for(Monster monster : monsterParty){
+	public void interact(){
+		System.out.println("at Heal item");
+		for(Monster monster : getModel().getPlayer().getParty()){
 			monster.heal();
 		}
 	}
