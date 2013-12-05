@@ -56,7 +56,7 @@ public class FightingNPC extends NPC implements Fighter {
     	 
     	boolean playerWithinRange = checkLineOfSight();
     	
-    	System.out.println("I got out of checkLineOfSight and the boolean is:" + playerWithinRange);
+    	System.out.println("check lineOfSight boolean is:" + playerWithinRange);
     	
     	if (input.isKeyInteractPressed()) {
             onInteract();
@@ -68,32 +68,30 @@ public class FightingNPC extends NPC implements Fighter {
     }
         
     private boolean checkLineOfSight() {
-		int sight = 0;
-		Loc tempLoc = new Loc(this.getLoc().getX(), this.getLoc().getY());
+    	System.out.println("inside method");
+    	int sight = 0;
+		Loc tempLoc = this.getLoc();
     	while(sight <= myLineOfSightDistance){
-    		if(myDirection == Direction.UP){
-    			if(tempLoc == getModel().getPlayer().getLoc()){
-    				return true;
-    			}
+    		System.out.println("inside while loop");
+    		if(tempLoc.equals(getModel().getPlayer().getLoc())){
+    			System.out.println("location is equal");
+    			return true;
+			}
+    		else if(myDirection == Direction.UP){
+    			System.out.println("up change");
     			tempLoc.setY(tempLoc.getY()-1);
     		}
     		else if(myDirection == Direction.LEFT){
-    			if(tempLoc == getModel().getPlayer().getLoc()){
-    				return true;
-    			}
+    			System.out.println("left change");
     			tempLoc.setX(tempLoc.getX()-1);
     		}
     		else if(myDirection == Direction.DOWN){
-    			if(tempLoc == getModel().getPlayer().getLoc()){
-    				return true;
-    			}
+    			System.out.println("down change");
     			tempLoc.setY(tempLoc.getY()+1);
     		}
     		//right
     		else{
-    			if(tempLoc == getModel().getPlayer().getLoc()){
-    				return true;
-    			}
+    			System.out.println("right change");
     			tempLoc.setX(tempLoc.getX()+1);
     		}
     		sight++;
