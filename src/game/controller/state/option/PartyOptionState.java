@@ -57,7 +57,7 @@ public class PartyOptionState extends AbstractOptionState{
         Monster selectedMonster = monsters.get(mySelected);
         myMode.getBattle().getPlayerParty().setCurrentMonster(selectedMonster);
         myMode.setOptionState(new MainOptionState(myMode));
-        myMode.getBattle().registerUserCompleted();
+        myMode.getBattle().doNextTurn();
     }
     
     @Override

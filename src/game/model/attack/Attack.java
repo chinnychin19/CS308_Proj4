@@ -50,7 +50,7 @@ public class Attack extends AbstractModelObject {
         }
     }
 
-    public void doAttack (Monster attacker, Monster defender) {
+    public double doAttack (Monster attacker, Monster defender) {
         //TODO: consider accuracy
         int attack = attacker.getAttack();
         int defense = defender.getDefense();
@@ -59,6 +59,7 @@ public class Attack extends AbstractModelObject {
         double damage = damageFunction(attacker.getLevel(), attack, defense, myPower, multiplier);
         System.out.println("damage: "+damage);
         defender.changeHealth((int)(-damage));
+        return damage;
     }
     
     private double damageFunction(int attackLevel, int attack, int defense, int power, double multiplier) {
