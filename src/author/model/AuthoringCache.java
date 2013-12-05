@@ -1,29 +1,36 @@
 package author.model;
 
-import java.io.StringWriter;
+//import java.io.StringWriter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+
+import author.AuthorView;
 import constants.Constants;
 
 
 public class AuthoringCache {
     private JSONObject myJSON;
+    private AuthorView myView;
 
-    public AuthoringCache () {
+    public AuthoringCache (AuthorView av) {
         myJSON = new JSONObject();
+        myView = av;
         initCategories();
     }
 
-    private void initCategories () {
+    @SuppressWarnings("unchecked")
+	private void initCategories () {
         for (String category : Constants.CATEGORIES) {
-            myJSON.put(category.toLowerCase(), new JSONArray());
+            myJSON.put(category, new JSONArray());
         }
     }
 
-    public void add (String category, JSONObject data) {
+    @SuppressWarnings("unchecked")
+	public void add (String category, JSONObject data) {
         JSONArray cache = (JSONArray) myJSON.get(category);
         cache.add(data);
+        myView.update();
     }
 
     public void delete (String category, String name) {
@@ -63,5 +70,9 @@ public class AuthoringCache {
     public void update (String category, JSONObject data) {
         delete(category, (String) data.get("name"));
         add(category, data);
+    }
+    
+    public JSONObject getRawJSON() {
+    	return myJSON;
     }
 }

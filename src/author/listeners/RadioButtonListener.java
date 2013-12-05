@@ -3,7 +3,6 @@ package author.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JRadioButton;
-import author.panels.AbstractToggleButtonPanel;
 import author.panels.RadioButtonsPanel;
 
 public class RadioButtonListener implements ActionListener {

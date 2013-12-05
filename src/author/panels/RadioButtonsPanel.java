@@ -1,18 +1,24 @@
 package author.panels;
 
+/**
+ * This allows the user to choose an option from a pre-defined list of options.
+ * 
+ * @author mray90
+ * 
+ */
+
 import java.awt.AWTEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import author.listeners.RadioButtonListener;
 
 
+@SuppressWarnings("serial")
 public class RadioButtonsPanel extends AbstractToggleButtonPanel {
 
     private JLabel myRadioButtonsLabel;
@@ -50,7 +56,6 @@ public class RadioButtonsPanel extends AbstractToggleButtonPanel {
 
     public void updateSelectionState (AWTEvent e) {
         mySelectedButton = ((JRadioButton) e.getSource()).getText();
-        // System.out.println("Selected button is now " + mySelectedButton);
     }
 
     public Map<String, String> getUserInput () {

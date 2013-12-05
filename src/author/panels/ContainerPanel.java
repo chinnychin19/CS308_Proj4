@@ -1,32 +1,33 @@
 package author.panels;
 
-import java.awt.event.HierarchyEvent;
-import java.awt.event.HierarchyListener;
-import java.util.Map;
+/**
+ * This the panel that contains our wizardPanels when the user is creating
+ * a game with the game engine.
+ * 
+ */
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import constants.Constants;
-import author.listeners.FinishListener;
-import author.wizard.Wizard;
 
 @SuppressWarnings("serial")
 public class ContainerPanel extends JPanel {
-	private JLabel  myLabel;
-	private String myType;
-	
-	public ContainerPanel (String label, String type) {
-		myLabel = new JLabel(label);
-		myType = type;
+    private JLabel myLabel;
+    private String myType;
+
+    public ContainerPanel (String label, String type) {
+        myLabel = new JLabel(label);
+        myType = type;
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.add(myLabel);
     }
-	
-	public String getLabel() {
-		return myLabel.getText();
-	}
-	
-	public String getType() {
-		return myType;
-	}
+
+    public String getLabel () {
+        return myLabel.getText();
+    }
+
+    public String getType () {
+        return myType;
+    }
 }
