@@ -40,10 +40,10 @@ public class Battle {
         return myEnemyParty;
     }
 
-    public void setNextPlayerAttack (Attack a) {
-        // TODO: make abstract player party? extend for wild and trainer battles?
-        ((WildPlayerParty) myPlayerParty).setNextAttack(a);
-    }
+//    public void setNextPlayerAttack (Attack a) {
+//        // TODO: make abstract player party? extend for wild and trainer battles?
+//        ((WildPlayerParty) myPlayerParty).setNextAttack(a);
+//    }
 
     public void attackEnemy (Attack a) {
         a.doAttack(myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
