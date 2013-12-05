@@ -3,6 +3,7 @@ package game.controller.optionState;
 import java.util.ArrayList;
 import java.util.List;
 import game.controller.AbstractBattleMode;
+import game.controller.state.option.PartyOptionState;
 import game.model.Monster;
 
 public class LivingPartyOptionState extends PartyOptionState {

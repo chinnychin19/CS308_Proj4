@@ -1,10 +1,16 @@
 package author.wizard;
 
-import java.awt.*;
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
-import author.ImagePicker;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 
 @SuppressWarnings("serial")
@@ -17,7 +23,7 @@ public class Wizard extends JDialog {
     JButton myNextButton;
     JButton myBackButton;
     
-    private String myTitle;
+    //private String myTitle;
     private String myObjectName; 
 
     private final static String NEXT = "Next";
@@ -33,6 +39,7 @@ public class Wizard extends JDialog {
         this.setName("wizard");
         
         myObjectName = type;
+
 
         init();
         addButtons();

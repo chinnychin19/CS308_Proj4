@@ -1,6 +1,9 @@
 package game.model;
 
 import game.model.attack.Attack;
+import game.model.evolution.AbstractEvolution;
+import game.model.evolution.Evolution;
+import game.model.evolution.NullEvolution;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,12 +39,14 @@ public class Monster extends AbstractModelObject {
     private int myAttack;
     private int myDefense;
     private List<AttackWrapper> myAttacks;
-    private Monster myEvolution;
-    //TODOL: EVOLUTION
-    
+    private AbstractEvolution myEvolution;
+
+    // TODO: EVOLUTION
+
     /**
      * To be called for an NPC's monsters or wild monster
-     * It will generate stats based on the level and base stats 
+     * It will generate stats based on the level and base stats
+     * 
      * @param model
      * @param definition
      * @param level
@@ -52,159 +57,194 @@ public class Monster extends AbstractModelObject {
         myLevel = level;
         generateStats();
     }
-    
+
     /**
      * To be called for the Player's monsters because they already have stats
+     * 
      * @param model
      * @param definition
      * @param objInWorld
      */
-    public Monster(GameModel model, SmartJsonObject definition, SmartJsonObject objInWorld) {
+    public Monster (GameModel model, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(model, definition);
         readDefinition(definition);
         readStats(objInWorld);
     }
-    
+
     /**
      * Get the image of the monster
+     * 
      * @return monster's image
      */
     public Image getImage () {
         return myImage;
     }
+
     /**
-     * Get the catch rate of the monster.  A value of how difficult it is to catch this monster
+     * Get the catch rate of the monster. A value of how difficult it is to catch this monster
+     * 
      * @return monster's catch rate
      */
     public double getCatchRate () {
         return myCatchRate;
     }
-    
+
     /**
      * Gets the type of the monster
+     * 
      * @return type of monster
      */
     public Type getType () {
         return myType;
     }
+
     /**
      * Gets the base HP of the monster
+     * 
      * @return base HP of the monster
      */
     public int getBaseHP () {
         return myBaseHP;
     }
+
     /**
      * Gets the base attack of the monster
-     * @return base attack of the monster 
+     * 
+     * @return base attack of the monster
      */
     public int getBaseAttack () {
         return myBaseAttack;
     }
+
     /**
      * Gets the base defense of the monster
+     * 
      * @return base defense of the monster
      */
     public int getBaseDefense () {
         return myBaseDefense;
     }
+
     /**
      * Gets the level of the monster
+     * 
      * @return Monster's level
      */
     public int getLevel () {
         return myLevel;
     }
+
     /**
      * Gets the experience of the monster
+     * 
      * @return experience of the monster
      */
     public int getExp () {
         return myExp;
     }
+
     /**
      * Get the amount of experience that is needed to move onto the next level
+     * 
      * @return amount to move onto the next level
      */
     public int getExpToNextLevel () {
         return myExpToNextLevel;
     }
+
     /**
      * Gets the max HP of the monster
+     * 
      * @return Max hp of monster
      */
     public int getMaxHP () {
         return myMaxHP;
     }
+
     /**
      * Gets the current HP of the monster
+     * 
      * @return the current HP
      */
     public int getCurHP () {
         return myCurHP;
     }
+
     /**
      * Gets the attack value
+     * 
      * @return attack value
      */
     public int getAttack () {
         return myAttack;
     }
+
     /**
      * defense value of the monster
+     * 
      * @return defense value
      */
     public int getDefense () {
         return myDefense;
     }
-    
-    public void heal() {
+
+    public void heal () {
         myCurHP = myMaxHP;
+
     }
+
     /**
      * Get the attacks associated with the monster
+     * 
      * @return list of attacks
      */
     public List<AttackWrapper> getMyAttacks () {
         return myAttacks;
     }
+
     /**
      * Change the health of the monster and see if the monster is at 0 health or max health
+     * 
      * @param amount the change in the monster's health
      */
-    public void changeHealth(int amount) {
+    public void changeHealth (int amount) {
         myCurHP += amount;
         if (myCurHP < 0) {
             myCurHP = 0;
-        } else if (myCurHP > myMaxHP) {
+        }
+        else if (myCurHP > myMaxHP) {
             myCurHP = myMaxHP;
         }
     }
-    
+
     /**
      * Determines if a pokemon is dead
+     * 
      * @return true if current HP is 0
      */
-    public boolean isDead(){
+    public boolean isDead () {
         return myCurHP == 0;
     }
+
     /**
      * Stats for the monster
      */
-    private void generateStats() {
+    private void generateStats () {
         double factor = 1 + Math.log(35);
         myExp = 0;
-        myExpToNextLevel = Integer.MAX_VALUE; //TODO: wild pokemon
+        myExpToNextLevel = Integer.MAX_VALUE; // TODO: wild pokemon
         myMaxHP = (int) (myBaseHP * myLevel * factor);
         myCurHP = myMaxHP;
         myAttack = (int) (myBaseAttack * myLevel * factor);
         myDefense = (int) (myBaseDefense * myLevel * factor);
     }
+
     /**
-     * Read in the stats for the monster    
+     * Read in the stats for the monster
+     * 
      * @param objInWorld object containing the monster's stats
      */
-    private void readStats(SmartJsonObject objInWorld) {
+    private void readStats (SmartJsonObject objInWorld) {
         try {
             myLevel = objInWorld.getInt(Constants.JSON_LEVEL);
             myExp = objInWorld.getInt(Constants.EXP);
@@ -218,12 +258,13 @@ public class Monster extends AbstractModelObject {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * Read in the definition information for the monster
+     * 
      * @param definition the file containing the monster's info
      */
-    private void readDefinition(SmartJsonObject definition) {
+    private void readDefinition (SmartJsonObject definition) {
         try {
             String imageURL = definition.getString(Constants.JSON_IMAGE);
             myImage = new ImageIcon(imageURL).getImage();
@@ -236,71 +277,97 @@ public class Monster extends AbstractModelObject {
             for (Object obj : definition.getJSONArray(Constants.JSON_MONSTER_ALL_ATTACKS)) {
                 SmartJsonObject attackJson = new SmartJsonObject((JSONObject) obj);
                 String name = attackJson.getString(Constants.NAME);
-                SmartJsonObject a = getModel().getDefinitionCache().getInstance(Constants.ATTACK_UPPERCASE, name);
+                SmartJsonObject a =
+                        getModel().getDefinitionCache().getInstance(Constants.ATTACK_UPPERCASE,
+                                                                    name);
                 Attack attack = new Attack(getModel(), a);
                 int unlockLevel = attackJson.getInt(Constants.JSON_ATTACK_UNLOCK_LEVEL);
                 myAttacks.add(new AttackWrapper(attack, unlockLevel));
                 // TODO: Implement myEvolution
             }
+            myEvolution = readEvolution(definition);
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
         }
     }
-        
-    public List<Attack> getAllAvailableAttacks(){
+
+    public List<Attack> getAllAvailableAttacks () {
         List<Attack> attacks = new ArrayList<Attack>();
-        for(AttackWrapper aw : myAttacks){
-            if(aw.canUse(myLevel)){
+        for (AttackWrapper aw : myAttacks) {
+            if (aw.canUse(myLevel)) {
                 attacks.add(aw.getAttack());
             }
         }
         return attacks;
     }
-    
-    private class AttackWrapper{
+
+    public void setImage (String imagePath) {
+        myImage = new ImageIcon(imagePath).getImage();
+    }
+
+    public void setImage (Image i) {
+        myImage = i;
+    }
+
+    public void setEvolution (AbstractEvolution ev) {
+        myEvolution = ev;
+    }
+
+    private class AttackWrapper {
         private Attack myAttack;
         private int myUnlockLevel;
-        public AttackWrapper(Attack a, int unlockLevel){
+
+        public AttackWrapper (Attack a, int unlockLevel) {
             myAttack = a;
             myUnlockLevel = unlockLevel;
         }
-     
-        public Attack getAttack(){
+
+        public Attack getAttack () {
             return myAttack;
         }
-        
-        public boolean canUse(int level){
+
+        public boolean canUse (int level) {
             return myUnlockLevel <= level;
         }
     }
 
-    /**
-     *  Returns the probability of catching this monster.  The probability decreases as a monster
-     *  increases their level, and increases as the monster loses more HP. TODO - Incorporating
-     *  the current status of the monster into this equation
-     *  HealthFactor returns the minimum between .01 and 1-CurrentHP/MaxHP - so if they have 100% health,
-     *  the HealthFactor will be .01 instead of 0 so that there is still a chance to catch the pokemon.
-     *  Otherwise, it would be impossible.
-     * @return
-     */
-    public double getCatchProbability () {
-      double levelFactor = 1/this.getLevel();
-      double healthFactor = Math.min(1 - this.getCurHP()/this.getMaxHP(), 0.01);
-      return this.getCatchRate()*levelFactor*healthFactor;
-              //TODO - Statuses
-    }
-
     public int getRewardExperience () {
-        return 100; //TODO: Actually implement
+        return 300; // TODO: Actually implement
     }
 
-    public void addExperience (int exp) {
-        myExp+= exp;
-        while(myExp >= myExpToNextLevel){
+    public StateChange addExperience (int exp) {
+        boolean level_up = false, evolved = false;
+
+        System.out.printf("Adding experience: %d exp to next: %d curr exp: %d \n", exp,
+                          myExpToNextLevel, myExp);
+        myExp += exp;
+        while (myExp >= myExpToNextLevel) {
             myLevel++;
-            myExp = myExp - myExpToNextLevel;         
+            level_up = true;
+            myExp = myExp - myExpToNextLevel;
+            if (myEvolution.exists() && myEvolution.shouldEvolve(myLevel)) {
+                System.out.println("Evolving!!!");
+                evolved = true;
+                evolve();
+            }
         }
-        //TODO: EVOLUTION
+        return StateChange.getStateChange(level_up, evolved);
+    }
+
+    private AbstractEvolution readEvolution (SmartJsonObject definition) {
+        try {
+            SmartJsonObject evolutionJson = definition.getSmartJsonObject(Constants.JSON_EVOLUTION);
+            return new Evolution(evolutionJson, getModel());
+        }
+        catch (SmartJsonException e) {
+            return new NullEvolution(getModel());
+        }
+    }
+
+    private void evolve () {
+        setName(myEvolution.getName());
+        setImage(myEvolution.getImage());
+        setEvolution(myEvolution.getNextEvolution());
     }
 }

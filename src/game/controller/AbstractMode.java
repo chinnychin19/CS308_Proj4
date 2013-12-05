@@ -3,7 +3,15 @@ package game.controller;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 import constants.Constants;
+import game.controller.state.AbstractState;
 import game.model.GameModel;
 import game.view.GameView;
 
@@ -22,12 +30,15 @@ public abstract class AbstractMode extends KeyAdapter {
     private GameView myView;
     private Graphics myGraphics;
     private Input myInput;
+	private Queue<AbstractState> myStates;
 
     public AbstractMode (GameModel model, GameView view) {
         myModel = model;
         myView = view;
         myGraphics = view.getBuffer();
         myInput = new Input();
+        myStates = new ConcurrentLinkedQueue<AbstractState>();
+
     }
     
     public GameModel getModel () {
@@ -126,6 +137,28 @@ public abstract class AbstractMode extends KeyAdapter {
     }
     }
 
+    //TODO: Comment methods below
+    
+    public void addDynamicState(AbstractState state ) {
+    	myStates.add(state);
+	}
+    
+    public void removeDynamicState(AbstractState st) {
+    	myStates.remove(st);
+    }
+    
+    protected void paintDynamicStates() {
+		for(AbstractState state : myStates){
+			state.paint();
+		}
+	}
+    
+    protected void actDynamicStates() {
+    	for(AbstractState state : myStates){
+			state.act(getInput());
+		}
+    }
+    
     /**
      * Paints a border around the edge of the screen.
      */

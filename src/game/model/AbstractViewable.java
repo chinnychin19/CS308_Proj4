@@ -18,7 +18,7 @@ import constants.Constants;
 public abstract class AbstractViewable extends AbstractModelObject {
     private Loc myLoc;
     private World myWorld;
-    
+
     public AbstractViewable (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(model, definition);
         myWorld = world;

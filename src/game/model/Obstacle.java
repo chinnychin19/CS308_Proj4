@@ -2,11 +2,15 @@ package game.model;
 
 import game.controller.AbstractMode;
 import game.controller.Input;
+import game.controller.state.TextState;
 
 import java.awt.Image;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.ImageIcon;
+
+import location.Direction;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import util.jsonwrapper.SmartJsonObject;
@@ -56,27 +60,6 @@ public class Obstacle extends AbstractViewableObject {
     }
     
     /**
-     * Checks to see if a player is trying to interact with it
-     * If it is, it checks to see if the player has the required key items
-     * It if does, it calls playerInteractingWithKeyItems
-     */
-    @Override
-    public void doFrame(World w, Input input) {
-        if (input.isKeyInteractPressed() && getLoc().equals(w.locInFrontOfPlayer())) {
-            if(myRequiredKeyItems.isEmpty()) {
-                return;
-            }
-            for(KeyItem item : myRequiredKeyItems){
-                if(!w.getPlayer().getKeyItems().contains(item)){
-                    System.out.println("MISSING ITEM: "+item.toString());
-                    return;
-                }
-            }
-            playerInteractingWithKeyItems();
-        }
-    }
-    
-    /**
      * Called when a player is allowed to interact with an obstacle given
      * that it has the required key items
      * 
@@ -86,6 +69,39 @@ public class Obstacle extends AbstractViewableObject {
     public void playerInteractingWithKeyItems(){
         destroy();
     }
+
+    /**
+     * Checks to see if a player is trying to interact with it
+     * If it is, it checks to see if the player has the required key items
+     * It if does, it calls playerInteractingWithKeyItems
+     */
+	@Override
+	protected void onInteract() {
+		if (getLoc().equals(getWorld().locInFrontOfPlayer())) {
+            if(myRequiredKeyItems.isEmpty()) {
+                return;
+            }
+            for(KeyItem item : myRequiredKeyItems){
+                if(!getWorld().getPlayer().getKeyItems().contains(item)){
+                            AbstractMode mode = getModel().getController().getMode();
+                            mode.addDynamicState(new TextState(mode, 
+                            		Constants.BORDER_THICKNESS, 
+                					Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT, 
+                					Constants.WIDTH - 2*Constants.BORDER_THICKNESS, 
+                					Constants.DIALOGUE_HEIGHT, 
+                					Constants.PROMPT_MISSING_ITEM+item.toString() + Constants.PROMPT_AQUIRE_MISSING_ITEM));
+                    return;
+                }
+            }
+            playerInteractingWithKeyItems();
+        }
+	}
+
+	@Override
+	protected void onBack() {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
    

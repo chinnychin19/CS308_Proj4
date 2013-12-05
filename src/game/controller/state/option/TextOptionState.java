@@ -1,24 +1,29 @@
-package game.controller.optionState;
+package game.controller.state.option;
 
 import game.controller.AbstractBattleMode;
 
 
-public class TextState extends AbstractOptionState {
+public class TextOptionState extends AbstractOptionState {
 
     private String myText;
     private AbstractOptionState myNextState;
 
-    public TextState (AbstractBattleMode mode, String text) {
+
+    public TextOptionState (AbstractBattleMode mode, String text) {
         this(mode, text, new MainOptionState(mode));
 
     }
     
-     public TextState (AbstractBattleMode mode, String text, AbstractOptionState nextState) {
+     public TextOptionState (AbstractBattleMode mode, String text, AbstractOptionState nextState) {
          super(mode, "DIALOGUE");
          myText = text;
          myNextState = nextState;
      }
-
+     
+     public void setNextState(AbstractOptionState st){
+         myNextState = st;
+     }
+     
     @Override
     public void paint () {
         super.paint();

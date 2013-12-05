@@ -2,6 +2,8 @@ package game.model;
 
 import game.controller.AbstractMode;
 import game.controller.Input;
+import game.controller.state.TextState;
+import game.controller.state.option.TextOptionState;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -42,16 +44,33 @@ public class NPC extends AbstractCharacter {
     public String getDialogue(){
     	return myDialogue;
     }
+  
     
+    public void paintDialogue(){
+    	
+    }
+
     /**
      * Checks to see if a user is trying to interact with it
      * If so, it shows the dialogue
      */
-    @Override
-    public void doFrame (World w, Input input) {
-        if (input.isKeyInteractPressed() && getLoc().equals(w.locInFrontOfPlayer())) {
-            setDirection(Direction.opposite(w.getPlayer().getDirection()));
-            System.out.println(myDialogue);
+	@Override
+	protected void onInteract() {
+		if (getLoc().equals(getWorld().locInFrontOfPlayer())) {
+            setDirection(Direction.opposite(getWorld().getPlayer().getDirection()));
+            AbstractMode mode = getModel().getController().getMode();
+            //TODO: Wrap Dialogue every 63 characters (the amount for one line)
+            mode.addDynamicState(new TextState(mode, 
+            		Constants.BORDER_THICKNESS, 
+					Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT, 
+					Constants.WIDTH - 2*Constants.BORDER_THICKNESS, 
+					Constants.DIALOGUE_HEIGHT,  
+					myDialogue));
         }
-    }
+	}
+
+	@Override
+	protected void onBack() {
+
+	}
 }

@@ -1,12 +1,15 @@
-package game.controller.optionState;
+package game.controller.state.option;
 
+import constants.Constants;
 import game.controller.AbstractBattleMode;
+import game.controller.optionState.CatchWildBattleCompleteState;
+import game.controller.optionState.CatchWildBattleFailedState;
 
 
 public class CatchOptionState extends AbstractOptionState {
 
     public CatchOptionState (AbstractBattleMode mode) {
-        super(mode, "CATCH");
+        super(mode, Constants.MODE_CATCH);
     }
 
     @Override
@@ -23,7 +26,7 @@ public class CatchOptionState extends AbstractOptionState {
 
         int x = 15;
         int y = 30;
-        myBuffer.drawString("Press interact to ty to catch", x, y);
+        myBuffer.drawString(Constants.PROMPT_PRESS_TO_CATCH, x, y);
 
     }
 

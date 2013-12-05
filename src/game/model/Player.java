@@ -82,9 +82,9 @@ public class Player extends AbstractCharacter implements Fighter {
 
         }
     }
-    
-    public void healAllMonsters() {
-        for (Monster m: myParty) {
+
+    public void healAllMonsters () {
+        for (Monster m : myParty) {
             m.heal();
         }
     }
@@ -128,6 +128,7 @@ public class Player extends AbstractCharacter implements Fighter {
      */
     @Override
     public void doFrame (World w, Input input) {
+        super.doFrame(w, input);
         Direction dir = getMoveDirection(input);
         if (null != dir) {
             setDirection(dir);
@@ -147,7 +148,13 @@ public class Player extends AbstractCharacter implements Fighter {
         return null;
     }
 
-    public void addMonsterToParty (Monster m) {
-        myParty.add(m);
+    @Override
+    protected void onInteract () {
+
+    }
+
+    @Override
+    protected void onBack () {
+
     }
 }

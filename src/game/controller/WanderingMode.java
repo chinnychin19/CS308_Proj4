@@ -2,8 +2,12 @@ package game.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 import location.Loc;
 import constants.Constants;
+import game.controller.state.AbstractState;
+import game.controller.state.option.AbstractOptionState;
 import game.model.AbstractViewable;
 import game.model.GameModel;
 import game.view.GameView;
@@ -15,8 +19,7 @@ import game.view.GameView;
  * @author tylernisonoff
  * 
  */
-public class WanderingMode extends AbstractMode {
-
+public class WanderingMode extends AbstractMode {	
     public WanderingMode (GameModel model, GameView view) {
         super(model, view);
     }
@@ -30,9 +33,12 @@ public class WanderingMode extends AbstractMode {
         paintPlayer();
         paintViewablesOnScreen();
         paintBorder();
+        paintDynamicStates();
     }
 
-    /**
+   
+
+	/**
      * Calls doFrame() on all ViewableObjects and GroundObjects
      */
     @Override
@@ -44,6 +50,7 @@ public class WanderingMode extends AbstractMode {
             // System.out.println("act object: "+obj.getLoc());
             obj.doFrame(getModel().getWorld(), this.getInput());
         }
+        actDynamicStates();
     }
 
     /**
@@ -101,7 +108,7 @@ public class WanderingMode extends AbstractMode {
         }
         return list;
     }
-
+    
     private Collection<AbstractViewable> getGroundObjectsOnScreen () {
         ArrayList<AbstractViewable> list = new ArrayList<AbstractViewable>();
         int px = getModel().getPlayer().getLoc().getX();

@@ -1,14 +1,14 @@
 package author.panels;
 
-import java.awt.BorderLayout;
+//import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
+//import java.io.FileNotFoundException;
+//import java.io.FileOutputStream;
+//import java.io.IOException;
+//import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.BoxLayout;
@@ -19,6 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import author.FileChooserSingleton;
 import author.ImageDisplayer;
 
+@SuppressWarnings("serial")
 public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     
     private JLabel myLabel;
@@ -26,7 +27,7 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     private JFileChooser myChooser;
     private JButton myOpenButton;
     private File myFile;
-    public static String IMG_FOLDER_FILEPATH = "./images";
+    public static String IMG_FOLDER_FILEPATH = System.getProperty("user.dir") + File.separator + "images";
     
     public ImagePanel(String label){
         super("Image");
@@ -73,29 +74,35 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     @Override
     public Map<String, String> getUserInput () {
         Map<String, String> map = new HashMap<String, String>();
-        //copyFileAndSelectCopy();
+        copyFileAndSelectCopy();
         String label = myLabel.getText(); 
-        //map.put(label.substring(0, label.length()-1), myFile.getPath());
-        map.put(label.substring(0, label.length()-1), "");
+        map.put(label.substring(0, label.length()-1), myFile.getPath());
+        //map.put(label.substring(0, label.length()-1), "");
         return map;
     }
     
     public void copyFileAndSelectCopy(){
         System.out.println("Parent folder: " + myFile.getParent());
+        System.out.println("Project's images folder: " + (new File(IMG_FOLDER_FILEPATH)).getAbsolutePath());
         if ( !myFile.getParentFile().equals(new File(IMG_FOLDER_FILEPATH)) ){
             File newFile = new File(IMG_FOLDER_FILEPATH + "/" + myFile.getName());
             try {
-                Files.copy(myFile.toPath(), new FileOutputStream(newFile));
+            	// TODO: Commented this all out because it was giving an error
+            	
+                //Files.copy(myFile.toPath(), new FileOutputStream(newFile));
+            } catch (Exception e){
+            	
             }
-            catch (FileNotFoundException e) {
+            /*catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-            }
-            myFile = newFile;
-        }        
+            }*/
+            myFile = newFile;            
+            System.out.println("Not already in folder; copy made");
+        } else { System.out.println("Already in folder"); }    
     }
 }

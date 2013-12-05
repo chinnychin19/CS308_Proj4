@@ -68,9 +68,10 @@ public class Painter {
 
     }
 
-    public void drawViewableObjectsOnScreen (Collection<AbstractViewableObject> viewableObjects, Player p) {
-        for (AbstractViewableObject obj : viewableObjects){
-            
+    public void drawViewableObjectsOnScreen (Collection<AbstractViewableObject> viewableObjects,
+                                             Player p) {
+        for (AbstractViewableObject obj : viewableObjects) {
+
             Loc tileLoc = obj.getTileLocationOnScreen(p);
             myBuffer.drawImage(obj.getImage(),
                                (int) (tileLoc.getX() * Constants.TILE_WIDTH),

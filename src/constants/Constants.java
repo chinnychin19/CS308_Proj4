@@ -2,10 +2,7 @@ package constants;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
+import java.awt.event.KeyEvent;
 
 public class Constants {
     public static final int WIDTH = 800, HEIGHT = 500;
@@ -29,14 +26,11 @@ public class Constants {
     // Order matters because certain things depend on other things already being known. e.g. Attacks
     // need to be known before Monsters are created
     public static final String[] CATEGORIES =
-    { "TypeMatrix", 
-      "Status", "Attack", "Monster", "KeyItem", "Item", "FightingNPC", "Obstacle",  
-      "NPC",
-     "WildRegion",
-     "Player", };
+    { "TypeMatrix", "Status", "Attack", "Monster", "KeyItem", "Item", "FightingNPC", "Obstacle",  
+      "NPC", "WildRegion", "Player", "HealItem" };
     
     public static final String[] VIEWABLE_CATEGORIES =
-        { "NPC", "Obstacle", "WildRegion", "Player", "FightingNPC" };
+        { "NPC", "Obstacle", "WildRegion", "Player", "FightingNPC", "HealItem" };
     
     public static final String UP = "up";
     public static final String DOWN = "down";
@@ -74,7 +68,8 @@ public class Constants {
     public static final String JSON_MONSTER_ALL_ATTACKS = "attacks";
     public static final String JSON_MONSTER_ATTACK = "attack";
     public static final String JSON_ATTACK_UNLOCK_LEVEL = "unlockLevel";
-    
+    public static final String JSON_EVOLUTION = "evolution";
+
     public static final String JSON_DEFEATEDNPCS = "defeatedNPCs";
 
     //Panel Type Names
@@ -85,14 +80,39 @@ public class Constants {
     public static final String RADIOBUTTON_PANEL = "Radio Button";
     public static final String CHECKBOX_PANEL = "Checkbox";
     
+    // Map Creation Values
+    public static final int MIN_X_COORD = 0;
+    public static final int MAX_X_COORD = 1005;
+    public static final int MIN_Y_COORD = 0;
+    public static final int MAX_Y_COORD = 603;
     
+    // Key Values for Map Creation
+    public static final int ZOOM_OUT_KEY = KeyEvent.VK_X;
+    public static final int ZOOM_IN_KEY = KeyEvent.VK_Z;
+    public static final int UP_ARROW_KEY = KeyEvent.VK_UP;
+    public static final int DOWN_ARROW_KEY = KeyEvent.VK_DOWN;
+    public static final int RIGHT_ARROW_KEY = KeyEvent.VK_RIGHT;
+    public static final int LEFT_ARROW_KEY = KeyEvent.VK_LEFT;
     
     //GUI Sizing Constants
     public static final Dimension FRAME_SIZE = new Dimension(800,600);
     public static final Dimension BUTTON_SIZE = new Dimension(198,28);
     public static final Dimension TEXT_AREA_SIZE = new Dimension(400, 32);
-        
+      
+    // Authoring JMenu Options Constants
+    public static final String FILE_MENU = "File";
+    public static final String EDIT_MENU = "Edit";
+    public static final String VIEW_MENU = "View";
+    public static final String NEW_ENTITY_SUBMENU = "New Entity";
+    public static final String EDIT_ENTITY_SUBMENU = "Edit Existing Entity";
+    public static final String CHOOSE_ALTERNATE_TEMPLATE = "Choose Alternate Template (JSON)";
+    public static final String LOAD_EXISTING_GAME = "Load Existing Game (JSON)";
+    public static final String CREATE_NEW_MAP = "Create New Map";
+    public static final String SHOW_GENERATED_OUTPUT = "Show Generated Output";
+    
     // Classpaths, folder paths, and filenames
+    public static final String WRITE_JSON_TO_FILE = "Write JSON to file";
+    public static final String PLAYER_JSON = "player.json";
     public static final String CLASSPATH_GAME_MODEL = "game.model";
     public static final String FOLDERPATH_GAMES = "games";
     public static final String FILENAME_DEFINITION = "definition.json";
@@ -115,6 +135,8 @@ public class Constants {
     
     public static final String SAVE_FILE_NOT_FOUND = "Save file not found";
     public static final String UNCHECKED = "unchecked";
+    
+    public static final String FILE_NOT_FOUND_ERROR = "Error: File not found.";
 
     public static final String MONSTERS_LOWWERCASE = "monsters";
     public static final String MONSTER_UPPERCASE = "Monster";
@@ -127,5 +149,32 @@ public class Constants {
     
     public final static String IMG_FOLDER_FILEPATH = "./images";
     
+    public final static String SHORTGRASS_PNG_FILEPATH = "images/background/shortGrass.png";
+    
     public final static String EMPTY_STRING = "";
+    
+    //MODE STRINGS
+    public final static String MODE_CATCH = "CATCH";
+    public final static String MODE_DEFAULT = "";
+    public final static String MODE_BATTLE_OVER = "BATTLE OVER!";
+    public final static String MODE_MONSTER_CAUGHT = "You caught the monster!";
+    public final static String MODE_MONSTER_NOT_CAUGHT = "You failed to catch the wild monster!";
+    
+    
+    //Dialogue Strings
+    public final static String PROMPT_INVALID_KEYITEM = "";
+    public final static String PROMPT_MONSTER_DEAD = "Monster Died.  Choose a new Monster";
+    public final static String PROMPT_PRESS_TO_CATCH = "Press interact to attempt to catch";
+    public final static String PROMPT_MONSTERS_HEALED =  "All Monsters Healed";
+    public final static String PROMPT_MISSING_ITEM = "MISSING ITEM: ";
+    public final static String PROMPT_AQUIRE_MISSING_ITEM = ".  Acquire this item and try again";
+    
+    //Dialogue Box Placement
+    public final static int DIALOGUE_HEIGHT = 80;
+    //public final static int DIALOGUE_PADDING = 20;
+    
+    
+    
+    
+    
 }

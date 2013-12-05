@@ -1,7 +1,9 @@
-package game.controller.optionState;
+package game.controller.state.option;
 
 import game.controller.AbstractBattleMode;
 import game.controller.Input;
+import game.controller.optionState.LivingPartyOptionState;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
