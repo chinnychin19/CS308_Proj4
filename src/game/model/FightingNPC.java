@@ -1,6 +1,8 @@
 package game.model;
 
 import game.controller.Input;
+import game.controller.AbstractMode;
+import game.controller.state.TextState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,5 +121,18 @@ public class FightingNPC extends NPC implements Fighter {
     @Override
     public List<Monster> getParty(){
         return myParty;
-    } 
+    }
+    
+    @Override
+    public void onInteract() {
+        super.onInteract();
+        AbstractMode mode = getModel().getController().getMode();
+        //TODO: Wrap Dialogue every 63 characters (the amount for one line)
+        mode.addDynamicState(new TextState(mode, 
+                    Constants.BORDER_THICKNESS, 
+                                    Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT, 
+                                    Constants.WIDTH - 2*Constants.BORDER_THICKNESS, 
+                                    Constants.DIALOGUE_HEIGHT,  
+                                    getDialogue()));
+    }
 }

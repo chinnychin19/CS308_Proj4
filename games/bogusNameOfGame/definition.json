@@ -160,7 +160,28 @@
             "image-right": "images/players/mainPLayer1/right.png",
             "lineOfSightDistance": "2",
             "dialogue": "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit.",
-            "monsters": [],
+            "monsters": [
+            {
+              "name" : "tyler",
+              "level" : "5",
+              "exp" : "0",
+              "expToNextLevel" : "300",
+              "maxHP" : "100",
+              "curHP" : "100",
+              "attack" : "35",
+              "defense" : "60"
+            },
+            {
+              "name" : "ryan",
+              "level" : "5",
+              "exp" : "0",
+              "expToNextLevel" : "300",
+              "maxHP" : "400",
+              "curHP" : "400",
+              "attack" : "40",
+              "defense" : "50"
+            }
+            ],
             "bet": "25",
             "postDialogue": "thank you come again.",
             "keyItems": [

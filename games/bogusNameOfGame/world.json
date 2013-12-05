@@ -35,7 +35,12 @@
         "orientation": "right"
     }],
 
-    "FightingNPC": [],
+    "FightingNPC": [{
+        "name": "fighter1",
+        "x": "0",
+        "y": "6",
+        "orientation": "left"
+      }],
 
     "Obstacle": [{
         "name": "flower",

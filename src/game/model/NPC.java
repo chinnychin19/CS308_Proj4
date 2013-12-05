@@ -56,8 +56,7 @@ public class NPC extends AbstractCharacter {
      */
 	@Override
 	protected void onInteract() {
-		if (getLoc().equals(getWorld().locInFrontOfPlayer())) {
-            setDirection(Direction.opposite(getWorld().getPlayer().getDirection()));
+	    super.onInteract();
             AbstractMode mode = getModel().getController().getMode();
             //TODO: Wrap Dialogue every 63 characters (the amount for one line)
             mode.addDynamicState(new TextState(mode, 
@@ -66,7 +65,6 @@ public class NPC extends AbstractCharacter {
 					Constants.WIDTH - 2*Constants.BORDER_THICKNESS, 
 					Constants.DIALOGUE_HEIGHT,  
 					myDialogue));
-        }
 	}
 
 	@Override
