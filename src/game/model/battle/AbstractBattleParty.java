@@ -22,7 +22,6 @@ public abstract class AbstractBattleParty {
     private Battle myBattle;
     
     public AbstractBattleParty(GameController controller, Fighter fighter) {
-        myMonsters = new ArrayList<Monster>();
         myController = controller;
         myFighter = fighter;
         myMonsters = fighter.getParty();
@@ -30,10 +29,10 @@ public abstract class AbstractBattleParty {
     }
     
     public AbstractBattleParty(GameController controller, Monster monster) {
-        myMonsters = new ArrayList<Monster>();
         myController = controller;
-        myCurrentMonster = monster;
+        myMonsters = new ArrayList<Monster>();
         myMonsters.add(monster);
+        myCurrentMonster = monster;
         myFighter = null;
     }
     
@@ -54,7 +53,9 @@ public abstract class AbstractBattleParty {
         return null;
     }
 
-    public abstract void doTurn();
+    public void doTurn(){
+        myBattle.doNextTurn();
+    }
     
     public Fighter getFighter() {
         return myFighter;

@@ -17,6 +17,7 @@ public class WildMonsterParty extends AbstractBattleParty {
         Attack attack = getAttack();
         System.out.println(attack.getName());
         getBattle().attackPlayer(attack);
+        super.doTurn();
     }
 
     public Attack getAttack () {

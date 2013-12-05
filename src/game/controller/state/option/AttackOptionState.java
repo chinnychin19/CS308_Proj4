@@ -48,7 +48,6 @@ public class AttackOptionState extends AbstractOptionState {
         Attack chosen = attacks.get(mySelected);
        // myMode.getBattle().setNextPlayerAttack(chosen);
         myMode.getBattle().attackEnemy(chosen);
-        myMode.getBattle().registerUserCompleted();
 
     }
 

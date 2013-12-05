@@ -7,7 +7,11 @@ import game.controller.state.option.MainOptionState;
 import game.controller.optionState.UserLostWildBattleCompleteState;
 import game.controller.optionState.UserWonWildBattleCompleteState;
 import game.controller.state.option.TextOptionState;
+<<<<<<< HEAD
 import game.model.Monster;
+=======
+import game.controller.state.option.StateTransitionTextOptionState;
+>>>>>>> 6cadc03c28dea47d69c1ae7714be833833d8d4a0
 import game.model.StateChange;
 import game.model.attack.Attack;
 
@@ -16,15 +20,22 @@ public class Battle {
     AbstractBattleParty myPlayerParty;
     AbstractBattleParty myEnemyParty;
     AbstractBattleMode myMode;
+<<<<<<< HEAD
     private static final double CATCH_MIN = 0.80;
     private static final double CATCH_MAX = 0.99;
 
+=======
+    private static final double CATCH_MIN = 0.95;
+    private static final double RANDOM_FACTOR = CATCH_MIN + Math.random() * (0.99 - CATCH_MIN);
+    private boolean myIsUsersTurn;
+>>>>>>> 6cadc03c28dea47d69c1ae7714be833833d8d4a0
     public Battle (AbstractBattleParty playerParty,
                    AbstractBattleParty enemyParty,
                    AbstractBattleMode mode) {
         myPlayerParty = playerParty;
         myEnemyParty = enemyParty;
         myMode = mode;
+        myIsUsersTurn = true;
     }
 
     public AbstractBattleParty getOtherParty (AbstractBattleParty self) {
@@ -39,16 +50,18 @@ public class Battle {
         return myEnemyParty;
     }
 
-    public void setNextPlayerAttack (Attack a) {
-        // TODO: make abstract player party? extend for wild and trainer battles?
-        ((WildPlayerParty) myPlayerParty).setNextAttack(a);
-    }
+//    public void setNextPlayerAttack (Attack a) {
+//        // TODO: make abstract player party? extend for wild and trainer battles?
+//        ((WildPlayerParty) myPlayerParty).setNextAttack(a);
+//    }
 
     public void attackEnemy (Attack a) {
-        a.doAttack(myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
+        double damage = a.doAttack(myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
+        myMode.pushState(new StateTransitionTextOptionState(myMode, String.format("%s did %f damage", myPlayerParty.getCurrentMonster().getName(), damage), this));
     }
 
     public void attackPlayer (Attack a) {
+<<<<<<< HEAD
         a.doAttack(myEnemyParty.getCurrentMonster(), myPlayerParty.getCurrentMonster());
     }
 
@@ -61,6 +74,10 @@ public class Battle {
             }
         }
 
+=======
+        double damage = a.doAttack(myEnemyParty.getCurrentMonster(), myPlayerParty.getCurrentMonster());
+        myMode.pushState(new TextOptionState(myMode, String.format("%s did %f damage", myEnemyParty.getCurrentMonster().getName(), damage)));
+>>>>>>> 6cadc03c28dea47d69c1ae7714be833833d8d4a0
     }
 
     private boolean checkNoMonstersDiedOnTurn () {
@@ -117,7 +134,6 @@ public class Battle {
                 break;
         }
         myMode.pushState(new TextOptionState(myMode, "You Killed Da Monster!"));
-
     }
 
     private void userLost () {
@@ -141,13 +157,22 @@ public class Battle {
             return true;
         }
         return false;
-
-        // acquireWildMonster();
-        // return true;
     }
 
     public void acquireWildMonster () {
         myMode.getModel().getPlayer().getParty().add(myEnemyParty.getCurrentMonster());
     }
 
+    public void doNextTurn () {
+        // TODO Auto-generated method stub
+        toggleUsersTurn();
+        checkNoMonstersDiedOnTurn();
+        if(!myIsUsersTurn){
+            getEnemyParty().doTurn();
+        }
+    }
+    
+    private void toggleUsersTurn(){
+        myIsUsersTurn = !myIsUsersTurn;
+    }
 }

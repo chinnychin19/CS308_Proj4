@@ -1,31 +1,25 @@
 package game.controller;
 
+import game.model.FightingNPC;
 import game.model.GameModel;
-import game.model.Monster;
 import game.model.battle.Battle;
+import game.model.battle.NPCParty;
 import game.model.battle.WildMonsterParty;
 import game.model.battle.PlayerParty;
 import game.view.GameView;
 
+public class TrainerBattleMode extends AbstractBattleMode {
 
-/**
- * Represents WildBattleMode
- * 
- * @author tylernisonoff
- * 
- */
-public class WildBattleMode extends AbstractBattleMode {
-    
-    
-    public WildBattleMode (GameModel model, GameView view, Monster monster) {
+    public TrainerBattleMode (GameModel model, GameView view, FightingNPC enemy) {
         super(model, view);
         PlayerParty attacker =
                 new PlayerParty(getModel().getController(), getModel().getPlayer());
-        WildMonsterParty defender = new WildMonsterParty(getModel().getController(), monster);
+        NPCParty defender = new NPCParty(getModel().getController(), enemy);
         myBattle = new Battle(attacker, defender, this);
         attacker.setBattle(myBattle);
         defender.setBattle(myBattle);
         mySelectedOption = 0;
         mySelectedAttack = 0;
     }
+    
 }
