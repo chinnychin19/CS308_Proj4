@@ -7,31 +7,34 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import constants.Constants;
+
+
+@SuppressWarnings("serial")
 public class ImageDisplayer extends JLabel {
-    
+
     private Icon myIcon;
-    //private String myImageFilepath;
     private String myCaption;
     public static final int MIN_X_SIZE = 100;
     public static final int MIN_Y_SIZE = 100;
     public static final int MAX_X_SIZE = 800;
     public static final int MAX_Y_SIZE = 500;
-    
-    public ImageDisplayer(){
+
+    public ImageDisplayer () {
         init();
     }
-    
-    public ImageDisplayer(String filename){
+
+    public ImageDisplayer (String filename) {
         init();
         this.setImageAndCaption(filename);
     }
-    
-    public ImageDisplayer(File file){
+
+    public ImageDisplayer (File file) {
         init();
         this.setImageAndCaption(file);
     }
-    
-    private void init(){
+
+    private void init () {
         this.setHorizontalAlignment(CENTER);
         this.setVerticalAlignment(CENTER);
         this.setHorizontalTextPosition(CENTER);
@@ -39,45 +42,39 @@ public class ImageDisplayer extends JLabel {
         this.setMinimumSize(new Dimension(MIN_X_SIZE, MIN_Y_SIZE));
         this.setMaximumSize(new Dimension(MAX_X_SIZE, MAX_Y_SIZE));
     }
-    
-    public void setImageAndCaption(File file){
+
+    public void setImageAndCaption (File file) {
         String filepath = file.getPath();
         setImageAndCaption(filepath);
     }
-    
-    public void setImageAndCaption(String filepath) {
+
+    public void setImageAndCaption (String filepath) {
         myCaption = filepath;
-        try{
+        try {
             setIcon(filepath);
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             myIcon = null;
-            //myImageFilepath = "";
-            myCaption = "Error: File not found.";
+            myCaption = Constants.FILE_NOT_FOUND_ERROR;
         }
         this.setIcon(myIcon);
         this.setText(myCaption);
     }
-    
-    private void setIcon(String filepath) throws FileNotFoundException{
-        if (!new File(filepath).isFile()){
-            //System.out.println("is an error");
+
+    private void setIcon (String filepath) throws FileNotFoundException {
+        if (!new File(filepath).isFile()) {
             throw new FileNotFoundException();
-        }    
+        }
         myIcon = new ImageIcon(filepath);
-        //myImageFilepath = filename;
-        //System.out.println("set icon");
         return;
     }
-    
-    public int getImageWidth(){
+
+    public int getImageWidth () {
         return myIcon.getIconWidth();
     }
-    
-    public int getImageHeight(){
+
+    public int getImageHeight () {
         return myIcon.getIconHeight();
     }
-    
-//    public String getImageFilepath(){
-//        return myImageFilepath;
-//    }
+
 }

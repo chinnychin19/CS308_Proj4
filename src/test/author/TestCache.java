@@ -6,6 +6,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.Test;
+
+import author.AuthorView;
 import author.model.AuthoringCache;
 
 
@@ -13,7 +15,8 @@ public class TestCache {
 
     @Test
     public void testAdd () {
-        AuthoringCache cache = new AuthoringCache();
+    	AuthorView view = new AuthorView();
+        AuthoringCache cache = new AuthoringCache(view);
         assertFalse(cache.contains("item", "item1"));
 
         String file = "json/test_json_1.json";
@@ -27,7 +30,8 @@ public class TestCache {
 
     @Test
     public void testDelete () {
-        AuthoringCache cache = new AuthoringCache();
+    	AuthorView view = new AuthorView();
+        AuthoringCache cache = new AuthoringCache(view);
         assertFalse(cache.contains("item", "item1"));
 
         String file = "json/test_json_1.json";
@@ -44,7 +48,8 @@ public class TestCache {
 
     @Test
     public void testGetInstance () {
-        AuthoringCache cache = new AuthoringCache();
+    	AuthorView view = new AuthorView();
+        AuthoringCache cache = new AuthoringCache(view);
         assertFalse(cache.contains("item", "item1"));
 
         String file = "json/test_json_1.json";
@@ -64,7 +69,8 @@ public class TestCache {
 
     @Test
     public void testUpdate () {
-        AuthoringCache cache = new AuthoringCache();
+    	AuthorView view = new AuthorView();
+        AuthoringCache cache = new AuthoringCache(view);
         assertFalse(cache.contains("item", "item1"));
 
         String file = "json/test_json_1.json";

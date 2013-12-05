@@ -1,17 +1,20 @@
 package author.panels;
 
+/**
+ * This is the wizardPanel that is used for results that are on/off, true/false,
+ * 0/1, etc.
+ * 
+ * @author mray90
+ * 
+ */
+
 import java.awt.AWTEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 
 import author.listeners.CheckBoxListener;
 
@@ -20,7 +23,6 @@ public class CheckBoxPanel extends AbstractToggleButtonPanel{
 
     private JLabel myCheckBoxLabel;
     private Map<String,String> myBoxStates;
-    private ButtonGroup myButtonGroup;
         
     public CheckBoxPanel(String label){
         super("CheckBox", CheckBoxListener.getInstance());
@@ -54,7 +56,6 @@ public class CheckBoxPanel extends AbstractToggleButtonPanel{
     public void updateSelectionState (AWTEvent e) {
         String state = (myBoxStates.get(((JCheckBox) e.getSource()).getText()).equals("true")) ? "false" : "true";
         myBoxStates.put(((JCheckBox) e.getSource()).getText(), state);
-        // System.out.println("Selected button is now " + mySelectedButton);
     }
     
     @Override

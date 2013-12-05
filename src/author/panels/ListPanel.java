@@ -1,6 +1,12 @@
 package author.panels;
 
-import java.util.HashMap;
+/**
+ * Wizard panel that gives the user the ability to define a list.
+ * 
+ * @author weskpga
+ * 
+ */
+
 import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;

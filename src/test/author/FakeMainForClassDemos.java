@@ -24,7 +24,7 @@ public class FakeMainForClassDemos {
         JFrame frame = new JFrame("DemoFrame");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setPreferredSize(new Dimension(800,600));
-        RadioButtonsPanel panel = new RadioButtonsPanel();
+        RadioButtonsPanel panel = new RadioButtonsPanel("colors~red.green.blue");
         panel.addButtons("red","orange","yellow","green","blue","violet");
         panel.addButtons("black", "gray", "white");
         frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -36,7 +36,7 @@ public class FakeMainForClassDemos {
         JFrame frame = new JFrame("DemoFrame");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setPreferredSize(new Dimension(800,600));
-        AbstractWizardPanel panel = new CheckBoxPanel();
+        AbstractWizardPanel panel = new CheckBoxPanel("colors~red.green.blue");
         frame.getContentPane().add(panel, BorderLayout.CENTER);
         frame.pack();
         frame.setVisible(true);        
@@ -69,7 +69,7 @@ public class FakeMainForClassDemos {
         JFrame frame = new JFrame("DemoFrame");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setPreferredSize(new Dimension(800,600));
-        ImagePanel imgPicker = new ImagePanel();
+        ImagePanel imgPicker = new ImagePanel("blah");
         frame.getContentPane().add(imgPicker, BorderLayout.CENTER);
         frame.pack();
         frame.setVisible(true);        
