@@ -71,7 +71,8 @@ public class Constants {
     public static final String JSON_MONSTER_ALL_ATTACKS = "attacks";
     public static final String JSON_MONSTER_ATTACK = "attack";
     public static final String JSON_ATTACK_UNLOCK_LEVEL = "unlockLevel";
-    
+    public static final String JSON_EVOLUTION = "evolution";
+
     public static final String JSON_DEFEATEDNPCS = "defeatedNPCs";
 
     //Panel Type Names

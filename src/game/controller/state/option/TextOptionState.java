@@ -19,7 +19,11 @@ public class TextOptionState extends AbstractOptionState {
          myText = text;
          myNextState = nextState;
      }
-
+     
+     public void setNextState(AbstractOptionState st){
+         myNextState = st;
+     }
+     
     @Override
     public void paint () {
         super.paint();

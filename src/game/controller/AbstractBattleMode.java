@@ -7,6 +7,7 @@ import java.util.List;
 import constants.Constants;
 import game.controller.state.option.AbstractOptionState;
 import game.controller.state.option.MainOptionState;
+import game.controller.state.option.TextOptionState;
 import game.model.GameModel;
 import game.model.Monster;
 import game.model.attack.Attack;
@@ -27,7 +28,7 @@ public abstract class AbstractBattleMode extends AbstractMode {
     protected int mySelectedAttack;
 
     private AbstractOptionState myOptionState;
-
+    
     public AbstractBattleMode (GameModel model, GameView view) {
         super(model, view);
         myOptionState = new MainOptionState(this);
@@ -85,6 +86,11 @@ public abstract class AbstractBattleMode extends AbstractMode {
 
     public void setOptionState (AbstractOptionState st) {
         myOptionState = st;
+    }
+    
+    public void pushState (TextOptionState st) {
+       st.setNextState(myOptionState);
+       myOptionState = st;
     }
 
     public Battle getBattle () {

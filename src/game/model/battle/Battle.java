@@ -6,6 +6,7 @@ import game.controller.optionState.UserLostWildBattleCompleteState;
 import game.controller.optionState.UserWonWildBattleCompleteState;
 import game.controller.state.option.MainOptionState;
 import game.controller.state.option.TextOptionState;
+import game.model.StateChange;
 import game.model.attack.Attack;
 
 
@@ -52,37 +53,40 @@ public class Battle {
     }
 
     public void registerUserCompleted () {
+        myMode.setOptionState(new MainOptionState(myMode));
         if (checkNoMonstersDiedOnTurn()) {
-            myEnemyParty.doTurn();            
+            myEnemyParty.doTurn(); 
+            if(checkNoMonstersDiedOnTurn()) {
+                myMode.setOptionState(new MainOptionState(myMode));
+            }
         }
-        if(checkNoMonstersDiedOnTurn()) {
-            myMode.setOptionState(new MainOptionState(myMode));
-        }
+        
     }
     
     private boolean checkNoMonstersDiedOnTurn () {
+        boolean shouldContinue = true;
+        System.out.println("checking Monsters");
         // check if battle is over first
-        if (myPlayerParty.getNumberOfAliveMonsters() == 0) {
+        
+        if (myPlayerParty.getNumberOfAliveMonsters() == 0 ) {
             userLost();
-            return false; // my monsters are all dead
+            shouldContinue = false;
         }
+
         if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
             userWon();
-            return false; //opposing monster is dead
+            shouldContinue = false;
         }
         
         if (myPlayerParty.getCurrentMonster().isDead()) {
             handleUserMonsterDied();
-            return false; //my current monster is dead
         }
         
         if (myEnemyParty.getCurrentMonster().isDead()){
             handleWildMonsterDied();
         }
-        
-        
-        
-        return true;
+                
+        return shouldContinue;
     }
 
     private void handleUserMonsterDied () {
@@ -91,7 +95,27 @@ public class Battle {
     }
 
     private void handleWildMonsterDied () {
-        myPlayerParty.getCurrentMonster().addExperience(myEnemyParty.getCurrentMonster().getRewardExperience());
+        System.out.println("Wild Monster Died");
+        StateChange state = myPlayerParty.getCurrentMonster().addExperience(myEnemyParty.getCurrentMonster().getRewardExperience());
+        System.out.println(state);
+        switch(state){
+            case NONE:
+                break;
+            case LEVEL_UP:
+                myMode.pushState(new TextOptionState(myMode, "You Leveled Up!"));
+                break;
+            case EVOLUTION:
+                myMode.pushState(new TextOptionState(myMode, "You Evolved!"));
+                break;
+            case BOTH:
+                myMode.pushState(new TextOptionState(myMode, "You Evolved!"));
+                myMode.pushState(new TextOptionState(myMode, "You Leveled Up!"));
+                break;
+            default:
+                break;
+        }
+        myMode.pushState(new TextOptionState(myMode, "You Killed Da Monster!"));
+
     }
     
     private void userLost () {
@@ -123,4 +147,5 @@ public class Battle {
     public void acquireWildMonster () {
         myMode.getModel().getPlayer().addMonsterToParty(myEnemyParty.getCurrentMonster());
     }
+    
 }

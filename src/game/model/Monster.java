@@ -1,6 +1,9 @@
 package game.model;
 
 import game.model.attack.Attack;
+import game.model.evolution.AbstractEvolution;
+import game.model.evolution.Evolution;
+import game.model.evolution.NullEvolution;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,8 +39,8 @@ public class Monster extends AbstractModelObject {
     private int myAttack;
     private int myDefense;
     private List<AttackWrapper> myAttacks;
-    private Monster myEvolution;
-    //TODOL: EVOLUTION
+    private AbstractEvolution myEvolution;
+    //TODO: EVOLUTION
     
     /**
      * To be called for an NPC's monsters or wild monster
@@ -244,6 +247,7 @@ public class Monster extends AbstractModelObject {
                 myAttacks.add(new AttackWrapper(attack, unlockLevel));
                 // TODO: Implement myEvolution
             }
+            myEvolution = readEvolution(definition);
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
@@ -258,6 +262,18 @@ public class Monster extends AbstractModelObject {
             }
         }
         return attacks;
+    }
+    
+    public void setImage(String imagePath){
+        myImage = new ImageIcon(imagePath).getImage();
+    }
+    
+    public void setImage(Image i){
+        myImage = i;
+    }
+    
+    public void setEvolution(AbstractEvolution ev){
+        myEvolution = ev;
     }
     
     private class AttackWrapper{
@@ -294,15 +310,38 @@ public class Monster extends AbstractModelObject {
     }
 
     public int getRewardExperience () {
-        return 100; //TODO: Actually implement
+        return 300; //TODO: Actually implement
     }
 
-    public void addExperience (int exp) {
+    public StateChange addExperience (int exp) {
+        boolean level_up = false, evolved = false;
+        
+        System.out.printf("Adding experience: %d exp to next: %d curr exp: %d \n", exp, myExpToNextLevel, myExp);
         myExp+= exp;
         while(myExp >= myExpToNextLevel){
             myLevel++;
-            myExp = myExp - myExpToNextLevel;         
+            level_up = true;
+            myExp = myExp - myExpToNextLevel; 
+            if(myEvolution.exists() && myEvolution.shouldEvolve(myLevel)){
+                System.out.println("Evolving!!!");
+                evolved = true;
+                evolve();
+            }
         }
-        //TODO: EVOLUTION
+        return StateChange.getStateChange(level_up, evolved);
+    }
+    
+    private AbstractEvolution readEvolution(SmartJsonObject definition){
+        try{
+            SmartJsonObject evolutionJson = definition.getSmartJsonObject(Constants.JSON_EVOLUTION);
+            return new Evolution(evolutionJson, getModel());
+        } catch(SmartJsonException e){
+            return new NullEvolution(getModel());
+        }
+    }
+    private void evolve(){
+        setName(myEvolution.getName());
+        setImage(myEvolution.getImage());
+        setEvolution(myEvolution.getNextEvolution());
     }
 }

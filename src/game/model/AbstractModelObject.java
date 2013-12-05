@@ -43,12 +43,12 @@ public class AbstractModelObject {
     public String getName () {
         return myName;
     }
-
+    
     /**
      * Set the name for this object
      * @param name the name of the object
      */
-    protected void setName (String name) {
+    public void setName (String name) {
         myName = name;
     }
 }
