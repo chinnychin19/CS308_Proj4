@@ -22,7 +22,6 @@ public class FightingNPC extends NPC implements Fighter {
     private List<KeyItem> myKeyItems;
     private int myBet;
     private int myLineOfSightDistance;
-    private Direction myDirection;
     public FightingNPC (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
         try{
@@ -57,50 +56,37 @@ public class FightingNPC extends NPC implements Fighter {
     public void doFrame(World w, Input input) {
     	 
     	boolean playerWithinRange = checkLineOfSight();
-    	
-    	System.out.println("check lineOfSight boolean is:" + playerWithinRange);
-    	
-    	if (input.isKeyInteractPressed()) {
-            onInteract();
-        }
-
-        if (input.isKeyBackPressed()) {
-            onBack();
-        }
-    }
-        
-    private boolean checkLineOfSight() {
-    	System.out.println("inside method");
-    	int sight = 0;
-		Loc tempLoc = this.getLoc();
-    	while(sight <= myLineOfSightDistance){
-    		System.out.println("inside while loop");
-    		if(tempLoc.equals(getModel().getPlayer().getLoc())){
-    			System.out.println("location is equal");
-    			return true;
-			}
-    		else if(myDirection == Direction.UP){
-    			System.out.println("up change");
-    			tempLoc.setY(tempLoc.getY()-1);
-    		}
-    		else if(myDirection == Direction.LEFT){
-    			System.out.println("left change");
-    			tempLoc.setX(tempLoc.getX()-1);
-    		}
-    		else if(myDirection == Direction.DOWN){
-    			System.out.println("down change");
-    			tempLoc.setY(tempLoc.getY()+1);
-    		}
-    		//right
-    		else{
-    			System.out.println("right change");
-    			tempLoc.setX(tempLoc.getX()+1);
-    		}
-    		sight++;
+    	if(playerWithinRange){
+    		System.out.println("WE ARE HERE!!!");
+    		//move NPC to player
+    		moveTowardsPlayer();
+    		
+    		//onInteract();
     		
     	}
+    }
+        
+    private void moveTowardsPlayer() {
+    	///TODO: freeze player keyboard for movement
+    	Direction oppositeDirection = Direction.opposite(getDirection());
+    	while(!getLoc().equals(getModel().getPlayer().getLoc().adjacentLoc(oppositeDirection))){
+    		setLoc(getLoc().adjacentLoc(getDirection()), getWorld());
+    	}
+    	getModel().getPlayer().setDirection(oppositeDirection);
     	
-    	// TODO Auto-generated method stub
+    	
+	}
+
+	private boolean checkLineOfSight() {
+    	int sight = 0;
+		Loc tempLoc = getLoc();
+    	while(sight <= myLineOfSightDistance){
+    		if(tempLoc.equals(getModel().getPlayer().getLoc())){
+    			return true;
+    		}
+    		tempLoc = tempLoc.adjacentLoc(getDirection());
+    		sight++;	
+    	}
 		return false;
 	}
 
