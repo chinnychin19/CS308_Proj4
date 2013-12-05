@@ -54,7 +54,9 @@ public abstract class AbstractBattleParty {
         return null;
     }
 
-    public abstract void doTurn();
+    public void doTurn(){
+        myBattle.doNextTurn();
+    }
     
     public Fighter getFighter() {
         return myFighter;
