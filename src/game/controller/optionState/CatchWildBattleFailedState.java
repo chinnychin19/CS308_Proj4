@@ -1,5 +1,6 @@
 package game.controller.optionState;
 
+import constants.Constants;
 import game.controller.AbstractBattleMode;
 import game.controller.state.option.AbstractOptionState;
 import game.controller.state.option.MainOptionState;
@@ -16,7 +17,7 @@ public class CatchWildBattleFailedState extends AbstractOptionState {
 
         int x = 15;
         int y = 30;
-        myBuffer.drawString("You failed to catch the wild monster!", x, y);
+        myBuffer.drawString(Constants.MODE_MONSTER_NOT_CAUGHT, x, y);
 
     }
     

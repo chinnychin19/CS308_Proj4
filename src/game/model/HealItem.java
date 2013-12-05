@@ -45,10 +45,12 @@ public class HealItem extends AbstractViewableObject {
 				monster.heal();
 			}
 			AbstractMode mode = getModel().getController().getMode();
-			// TODO: make constants
-			mode.addDynamicState(new TextState(mode, 20, 20, Constants.WIDTH
-					- Constants.BORDER_THICKNESS - 20, 100,
-					"All Monsters Healed"));
+			mode.addDynamicState(new TextState(mode, 
+					Constants.BORDER_THICKNESS, 
+					Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT, 
+					Constants.WIDTH - 2*Constants.BORDER_THICKNESS, 
+					Constants.DIALOGUE_HEIGHT, 
+					Constants.PROMPT_MONSTERS_HEALED));
 		}
 	}
 
