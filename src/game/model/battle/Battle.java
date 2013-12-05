@@ -1,10 +1,8 @@
 package game.model.battle;
 
 import game.controller.AbstractBattleMode;
-import game.controller.optionState.AbstractBattleCompleteState;
 import game.controller.optionState.LivingPartyOptionState;
 import game.controller.optionState.MainOptionState;
-import game.controller.optionState.PartyOptionState;
 import game.controller.optionState.TextState;
 import game.controller.optionState.UserLostWildBattleCompleteState;
 import game.controller.optionState.UserWonWildBattleCompleteState;

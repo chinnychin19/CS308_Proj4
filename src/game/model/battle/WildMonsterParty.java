@@ -2,7 +2,6 @@ package game.model.battle;
 
 import java.util.List;
 import game.controller.GameController;
-import game.model.Fighter;
 import game.model.Monster;
 import game.model.attack.Attack;
 
