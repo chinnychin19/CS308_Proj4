@@ -45,7 +45,6 @@ public abstract class AbstractBattleMode extends AbstractMode {
     @Override
     public void turnOff () {
         super.turnOff();
-        getView().removeKeyListener(this);
         closeBuffers();
     }
 
@@ -55,7 +54,6 @@ public abstract class AbstractBattleMode extends AbstractMode {
     @Override
     public void turnOn () {
         super.turnOn();
-        getView().addKeyListener(this);
         initBuffers();
     }
 

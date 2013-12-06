@@ -60,7 +60,6 @@ public class WanderingMode extends AbstractMode {
     @Override
     public void turnOff () {
         super.turnOff();
-        getView().removeKeyListener(this);
     }
 
     /**
@@ -68,9 +67,7 @@ public class WanderingMode extends AbstractMode {
      */
     @Override
     public void turnOn () {
-        super.turnOn(); //TODO: why isn't this working in wandering mode?
-        getInput().resetAllInputs();
-        getView().addKeyListener(this);
+        super.turnOn();
     }
 
     private void paintPlayer () {
