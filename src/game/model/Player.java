@@ -58,7 +58,7 @@ public class Player extends AbstractCharacter implements Fighter {
                         getModel().getDefinitionCache()
                                 .getInstance(Constants.MONSTER_UPPERCASE,
                                              monsterInWorld.getString(Constants.JSON_NAME));
-                myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
+               // myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
             }
             
             int x = objInWorld.getInt(Constants.JSON_X);

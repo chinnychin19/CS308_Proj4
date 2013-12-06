@@ -278,7 +278,6 @@ public class Monster extends AbstractModelObject {
         myBaseDefense = definition.getInt(Constants.BASE_DEFENSE);
 
         myAttacks = new ArrayList<AttackWrapper>();
-        System.out.println("PLAYER");
 
         for (Object obj : definition.getJSONArray(Constants.JSON_MONSTER_ALL_ATTACKS)) {
             SmartJsonObject attackJson = new SmartJsonObject((JSONObject) obj);
@@ -290,9 +289,8 @@ public class Monster extends AbstractModelObject {
             int unlockLevel = attackJson.getInt(Constants.JSON_ATTACK_UNLOCK_LEVEL);
             myAttacks.add(new AttackWrapper(attack, unlockLevel));
             // TODO: Implement myEvolution
-        }
+        }        System.out.println("PLAYER");
         myEvolution = readEvolution(definition);
-
     }
 
     public List<Attack> getAllAvailableAttacks () {

@@ -76,10 +76,5 @@ public class NPC extends AbstractCharacter {
     protected void onBack () {
 
     }
-    
-    @Override
-    protected void readDefinition(SmartJsonObject definition) throws SmartJsonException {
-        
-    }
 
 }
