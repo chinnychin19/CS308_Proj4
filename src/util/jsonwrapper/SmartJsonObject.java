@@ -101,6 +101,10 @@ public class SmartJsonObject {
     public Set<Object> keySet(){
         return myJson.keySet();
     }
+    
+    public String toString(){
+        return myJson.toJSONString();
+    }
 
 //    public boolean isNull () {
 //        return myJson == null;
