@@ -136,17 +136,11 @@ public class Battle {
     public boolean caughtWildMonster () {
         double randomFactor = CATCH_MIN + Math.random() * (CATCH_MAX - CATCH_MIN);
         double probability = ((WildMonsterParty) myEnemyParty).getCatchProbability()*randomFactor;
-        System.out.print(probability);
-        if (Math.random() < probability) {
-            acquireWildMonster();
-            return true;
-        }
-        return false;
+        System.out.print(probability + " ---> This is the catch probability in Battle.java");
+        return (Math.random() < probability);
     }
 
-    public void acquireWildMonster () {
-        myMode.getModel().getPlayer().getParty().add(myEnemyParty.getCurrentMonster());
-    }
+
 
     public void doNextTurn () {
         // TODO Auto-generated method stub

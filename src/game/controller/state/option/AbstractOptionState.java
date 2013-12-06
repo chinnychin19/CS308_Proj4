@@ -5,6 +5,7 @@ import game.controller.Input;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.List;
 import constants.Constants;
 
 
@@ -14,6 +15,7 @@ public abstract class AbstractOptionState {
     protected int mySelected = 0;
     private boolean myCanGoBack;
     protected String myName;
+    List<AbstractOptionState> myOptions;
     
     public AbstractOptionState (AbstractBattleMode mode) {
         this(mode, Constants.MODE_DEFAULT);
@@ -55,11 +57,22 @@ public abstract class AbstractOptionState {
     protected abstract void onBack ();
 
     public void act (Input input) {
-        if (input.isKeyUpPressed() && mySelected > 0) {
-            mySelected--;
+        if (input.isKeyUpPressed()) {
+            if(mySelected == 0) mySelected = myOptions.size()-1;
+            else mySelected--;
         }
-        else if (input.isKeyDownPressed()) {
-            mySelected++;
+        
+        if (input.isKeyDownPressed()) {
+            if(mySelected == myOptions.size()-1) mySelected = 0;
+            else mySelected++;
+        }
+        
+        if (input.isKeyLeftPressed()){
+            if(mySelected - 3 >= 0) mySelected = mySelected - 3;
+        }
+        
+        if(input.isKeyRightPressed()){
+            if(mySelected + 3 < myOptions.size()) mySelected = mySelected + 3;
         }
 
         if (input.isKeyInteractPressed()) {

@@ -10,7 +10,6 @@ import java.util.List;
 
 
 public class MainOptionState extends AbstractOptionState {
-    List<AbstractOptionState> myOptions;
 
     public MainOptionState (AbstractBattleMode mode) {
         super(mode, "MAIN");
@@ -20,6 +19,7 @@ public class MainOptionState extends AbstractOptionState {
         myOptions.add( new LivingPartyOptionState(mode));
         myOptions.add(new ItemOptionState(mode));
         myOptions.add(new CatchOptionState(mode));
+        myOptions.add(new RunAwayOptionState(mode));
     }
 
     @Override
@@ -38,10 +38,16 @@ public class MainOptionState extends AbstractOptionState {
         int y = 30;
         int inc = 50;
         for (int i = 0; i < myOptions.size(); i++) {
+            
+            if(i%3 == 0 && i != 0) {
+                x = x+200;
+                y = 30;
+            }
             if (i == mySelected) {
                 myBuffer.setColor(Color.white);
             }
-            myBuffer.drawString(myOptions.get(i).getName(), x, y + i * inc);
+            
+            myBuffer.drawString(myOptions.get(i).getName(), x, y + i%3 * inc);
             if (i == mySelected) {
                 myBuffer.setColor(Color.black);
             }
