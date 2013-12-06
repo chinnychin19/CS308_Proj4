@@ -5,7 +5,7 @@ import game.controller.AbstractMode;
 public class TextState extends AbstractState {
 	private String myText;
 	public TextState(AbstractMode mode, int x, int y, int w, int h, String text) {
-		super(mode, x, y, w, h);
+		super("", mode, x, y, w, h);
 		myText = text;
 	}
 

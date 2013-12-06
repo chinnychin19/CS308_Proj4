@@ -2,18 +2,17 @@ package game.controller.state.option;
 
 import game.controller.AbstractBattleMode;
 import game.controller.Input;
+import game.controller.state.AbstractState;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import constants.Constants;
 
 
-public abstract class AbstractOptionState {
-    protected Graphics myBuffer;
+public abstract class AbstractOptionState extends AbstractState{
     protected AbstractBattleMode myMode;
     protected int mySelected = 0;
     private boolean myCanGoBack;
-    protected String myName;
     
     public AbstractOptionState (AbstractBattleMode mode) {
         this(mode, Constants.MODE_DEFAULT);
@@ -24,12 +23,10 @@ public abstract class AbstractOptionState {
     }
 
     public AbstractOptionState (AbstractBattleMode mode,  String name, boolean canGoBack) {
+        super(name, mode, 0, Constants.HEIGHT*2/3, Constants.WIDTH, Constants.HEIGHT/3);
         myMode = mode;
         mySelected = 0;
         myName = name;
-        int x = 0, y = Constants.HEIGHT * 2 / 3, w = Constants.WIDTH, h =
-                Constants.HEIGHT / 3;
-        myBuffer = myMode.getGraphics().create(x, y, w, h);
         myCanGoBack = canGoBack;
     }
 

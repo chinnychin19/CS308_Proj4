@@ -173,7 +173,13 @@ public class Constants {
     public final static int DIALOGUE_HEIGHT = 80;
     //public final static int DIALOGUE_PADDING = 20;
     
-    
+    //Main Menu 
+    public final static int MAIN_MENU_X = 0;
+    public final static int MAIN_MENU_Y = 0;
+    public final static int MAIN_MENU_WIDTH = WIDTH;
+    public final static int MAIN_MENU_HEIGHT = HEIGHT;
+
+
     
     
     
