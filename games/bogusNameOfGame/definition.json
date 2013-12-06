@@ -29,9 +29,9 @@
         "name": "ryan",
         "image": "images/monsters/ryan.jpg",
         "catchRate": ".4",
-        "type": "rock",
+        "type": "electric",
         "baseHP": "10",
-        "baseAttack": "3",
+        "baseAttack": "10",
         "baseDefense": "8",
         "attacks": [{
             "name": "sql injection",
@@ -69,7 +69,7 @@
         }]
     }, {
         "name": "sql injection",
-        "power": "130",
+        "power": "200",
         "accuracy": "0.78",
         "statisticEffect": [{
             "target": "enemy",
@@ -82,7 +82,7 @@
         }]
     }, {
         "name": "slash",
-        "power": "180",
+        "power": "210",
         "accuracy": "0.99",
         "statisticEffect": [{
             "target": "enemy",

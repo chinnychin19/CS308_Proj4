@@ -48,7 +48,7 @@ public class StateSaver {
                     new SmartJsonObject((JSONObject) myJSON.get(Constants.JSON_PLAYER));
 
             myPlayer.readSaveState(playerJSON);
-
+//TODO: Read in rest of world
 //            JSONArray defeatedArray = (JSONArray) myJSON.get("Defeated");
 //            for (Object o : defeatedArray) {
 //                SmartJsonObject npc = new SmartJsonObject((JSONObject) o);

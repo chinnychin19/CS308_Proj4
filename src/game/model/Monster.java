@@ -314,23 +314,9 @@ public class Monster extends AbstractModelObject implements Saveable {
     public void setEvolution (AbstractEvolution ev) {
         myEvolution = ev;
     }
-
-    private class AttackWrapper {
-        private Attack myAttack;
-        private int myUnlockLevel;
-
-        public AttackWrapper (Attack a, int unlockLevel) {
-            myAttack = a;
-            myUnlockLevel = unlockLevel;
-        }
-
-        public Attack getAttack () {
-            return myAttack;
-        }
-
-        public boolean canUse (int level) {
-            return myUnlockLevel <= level;
-        }
+    
+    public void setAttacks (List<AttackWrapper> attacks) {
+        myAttacks = attacks;
     }
 
     public int getRewardExperience () {
@@ -374,7 +360,9 @@ public class Monster extends AbstractModelObject implements Saveable {
     private void evolve () {
         setName(myEvolution.getName());
         setImage(myEvolution.getImage());
+        setAttacks(myEvolution.getAttacks());
         setEvolution(myEvolution.getNextEvolution());
+        
         // TODO: update stats
     }
 
