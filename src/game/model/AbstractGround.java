@@ -17,13 +17,6 @@ public abstract class AbstractGround extends AbstractViewable {
 
     public AbstractGround (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
-        try {
-            String imageURL = definition.getString(Constants.JSON_IMAGE);
-            myImage = new ImageIcon(imageURL).getImage();
-        }
-        catch (SmartJsonException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -34,5 +27,11 @@ public abstract class AbstractGround extends AbstractViewable {
     @Override
     public Image getImage () {
         return myImage;
+    }
+   
+    @Override
+    protected void readDefinition (SmartJsonObject definition) throws SmartJsonException {
+        String imageURL = definition.getString(Constants.JSON_IMAGE);
+        myImage = new ImageIcon(imageURL).getImage();    
     }
 }

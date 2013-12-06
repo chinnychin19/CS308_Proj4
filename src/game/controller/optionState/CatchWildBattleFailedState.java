@@ -3,7 +3,8 @@ package game.controller.optionState;
 import constants.Constants;
 import game.controller.AbstractBattleMode;
 import game.controller.state.option.AbstractOptionState;
-import game.controller.state.option.MainOptionState;
+import game.controller.state.option.AbstractMainOptionState;
+import game.controller.state.option.WildMainOptionState;
 
 public class CatchWildBattleFailedState extends AbstractOptionState {
 
@@ -23,13 +24,13 @@ public class CatchWildBattleFailedState extends AbstractOptionState {
     
     @Override
     protected void onInteract () {
-        myMode.setOptionState(new MainOptionState(myMode));
+        myMode.setOptionState(new WildMainOptionState(myMode));
         myMode.getBattle().doNextTurn();
     }
     
     @Override
     protected void onBack () {
-        myMode.setOptionState(new MainOptionState(myMode));
+        myMode.setOptionState(new WildMainOptionState(myMode));
         myMode.getBattle().doNextTurn();
     }
 

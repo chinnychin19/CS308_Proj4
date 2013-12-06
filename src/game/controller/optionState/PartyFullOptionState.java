@@ -6,7 +6,7 @@ import game.controller.state.NotListableException;
 import game.controller.state.option.AbstractListableOptionState;
 import game.controller.state.option.AbstractOptionState;
 import game.controller.state.option.BattleOverState;
-import game.controller.state.option.MainOptionState;
+import game.controller.state.option.AbstractMainOptionState;
 import game.controller.state.option.TextOptionState;
 import game.model.Monster;
 import java.awt.Color;

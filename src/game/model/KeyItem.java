@@ -15,11 +15,6 @@ public class KeyItem extends AbstractModelObject {
         super(model, definition);
     }
     
-    public KeyItem (GameModel model, String name){
-        super(model);
-        setName(name);
-    }
-    
     @Override
     public int hashCode () {
         return getName().hashCode();

@@ -11,12 +11,10 @@ import game.model.Monster;
 
 public class Evolution extends AbstractEvolution {
 
-    private String myName;
     private int myLevel;
     public Evolution (SmartJsonObject definition, GameModel model) {
-        super(model);
+        super(model, definition);
         try {
-            myName = definition.getString(Constants.NAME);
             myLevel = definition.getInt(Constants.JSON_LEVEL);
         }
         catch (SmartJsonException e) {
@@ -32,11 +30,6 @@ public class Evolution extends AbstractEvolution {
     @Override
     public boolean shouldEvolve(int currentLevel){
         return currentLevel >= myLevel;
-    }
-
-    @Override
-    public String getName () {
-        return myName;
     }
 
     @Override
@@ -70,6 +63,6 @@ public class Evolution extends AbstractEvolution {
     }
     
     private SmartJsonObject getJsonMonster() throws SmartJsonException{
-        return getModel().getDefinitionCache().getInstance(Constants.MONSTER_UPPERCASE, myName);
+        return getModel().getDefinitionCache().getInstance(Constants.MONSTER_UPPERCASE, getName());
     }
 }

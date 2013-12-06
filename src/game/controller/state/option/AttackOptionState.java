@@ -36,7 +36,6 @@ public class AttackOptionState extends AbstractListableOptionState {
     protected void onInteract () {
         List<Attack> attacks = getAttacks();
         Attack chosen = attacks.get(mySelected);
-       // myMode.getBattle().setNextPlayerAttack(chosen);
         myMode.getBattle().attackEnemy(chosen);
 
     }
@@ -44,7 +43,7 @@ public class AttackOptionState extends AbstractListableOptionState {
     @Override
     protected void onBack () {
         if(canGoBack()){
-            myMode.setOptionState(new MainOptionState(myMode));
+            myMode.setOptionState(myMode.getAMainOptionState());
         }
     }
 

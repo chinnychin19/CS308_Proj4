@@ -31,17 +31,6 @@ public class WildRegion extends AbstractGround {
                        SmartJsonObject objInWord) {
         super(model, world, definition, objInWord);
 
-        try {
-            myProbability = definition.getDouble(Constants.JSON_PROB);
-            myMonsterWrappers = new ArrayList<MonsterWrapper>();
-            for (Object objMonster : definition.getJSONArray(Constants.JSON_MONSTERS)) {
-                SmartJsonObject monsterInfo = new SmartJsonObject((JSONObject) objMonster);
-                myMonsterWrappers.add(new MonsterWrapper(monsterInfo));
-            }
-        }
-        catch (SmartJsonException e) {
-            e.printStackTrace();
-        }
         // TODO: Implement myMonsters
     }
 
@@ -54,12 +43,22 @@ public class WildRegion extends AbstractGround {
         if (w.getPlayer().getLoc().equals(getLoc())) {
             double rand = Math.random();
             if (rand <= myProbability) {
-                System.out.println("WILD BATTLE MODE");
                 Monster toFight = selectMonster();
                 // TODO: Discuss with Chinmay about better way to do this
                 getModel().getController().setMode(new WildBattleMode(getModel(), getModel()
                         .getController().getView(), toFight));
             }
+        }
+    }
+    
+    @Override
+    protected void readDefinition(SmartJsonObject definition) throws SmartJsonException{
+        super.readDefinition(definition);
+        myProbability = definition.getDouble(Constants.JSON_PROB);
+        myMonsterWrappers = new ArrayList<MonsterWrapper>();
+        for (Object objMonster : definition.getJSONArray(Constants.JSON_MONSTERS)) {
+            SmartJsonObject monsterInfo = new SmartJsonObject((JSONObject) objMonster);
+            myMonsterWrappers.add(new MonsterWrapper(monsterInfo));
         }
     }
 

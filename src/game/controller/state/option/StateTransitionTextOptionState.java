@@ -12,8 +12,7 @@ public class StateTransitionTextOptionState extends TextOptionState {
     
     @Override
     protected void onInteract () {
-        super.onInteract();
-        myMode.setOptionState(new MainOptionState(myMode));
+        myMode.setOptionState(myMode.getAMainOptionState());
         myBattle.doNextTurn();
     }
 }

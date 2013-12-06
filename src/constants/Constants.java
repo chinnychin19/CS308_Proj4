@@ -17,7 +17,7 @@ public class Constants {
     public static final double TILE_WIDTH = (double) WIDTH / NUM_TILES_HORIZONTAL;
     public static final double TILE_HEIGHT = (double) HEIGHT / NUM_TILES_VERTICAL;
 
-    public static final int REFRESH_RATE = 10;
+    public static final long KEY_DELAY_MILLISECONDS = 100;
     public static final int MOVE_FRAMES = 15; // number of frames in one move
 
     public static final int BORDER_THICKNESS = 15;
@@ -39,6 +39,7 @@ public class Constants {
     
     //JSON keywords
     public static final String JSON_PLAYER = "Player";
+    public static String JSON_KEYITEM = "KeyItem";
     
     public static final String JSON_IMAGE = "image";
     public static final String JSON_IMAGE_UP = "image-up";
@@ -183,7 +184,8 @@ public class Constants {
     public static final int MAX_PARTY_SIZE = 6;
 
     
-
+    //Type Matrix
+    public static final String TYPE_MATRIX_KEY = "matrix";
     
 
    
@@ -203,6 +205,7 @@ public class Constants {
     public final static String MAIN_MENU_ITEM = "ITEM";
     public final static String MAIN_MENU_SAVE = "SAVE";
     public final static String MAIN_MENU_EXIT = "EXIT";
+
 
     
     
