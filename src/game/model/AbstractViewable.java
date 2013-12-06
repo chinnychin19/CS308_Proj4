@@ -23,13 +23,18 @@ public abstract class AbstractViewable extends AbstractModelObject {
         super(model, definition);
         myWorld = world;
         try {
-            int x = objInWorld.getInt(Constants.JSON_X);
-            int y = objInWorld.getInt(Constants.JSON_Y);
-            myLoc = new Loc(x, y);
+            createWorldInstance(objInWorld);
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
         }
+    }
+    
+    
+    protected void createWorldInstance(SmartJsonObject objInWorld) throws SmartJsonException {
+        int x = objInWorld.getInt(Constants.JSON_X);
+        int y = objInWorld.getInt(Constants.JSON_Y);
+        myLoc = new Loc(x, y);
     }
     
     /**
@@ -83,4 +88,6 @@ public abstract class AbstractViewable extends AbstractModelObject {
     protected void destroy() {
         myWorld.removeObject(myLoc);
     }
+    
+    
 }

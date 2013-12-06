@@ -33,13 +33,6 @@ public class Obstacle extends AbstractViewableObject {
         try {
             String imageURL = definition.getString(Constants.JSON_IMAGE);
             myImage = new ImageIcon(imageURL).getImage();
-            myRequiredKeyItems = new HashSet<KeyItem>();
-            JSONArray keyItemArray = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
-            if (null != keyItemArray) {
-                for (Object name : keyItemArray) {
-                    myRequiredKeyItems.add(new KeyItem(model, name.toString()));
-                }
-            }
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
@@ -106,5 +99,17 @@ public class Obstacle extends AbstractViewableObject {
     protected void onBack () {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    protected void createWorldInstance (SmartJsonObject objInWorld) throws SmartJsonException {
+        super.createWorldInstance(objInWorld);
+        myRequiredKeyItems = new HashSet<KeyItem>();
+        JSONArray keyItemArray = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
+        if (null != keyItemArray) {
+            for (Object name : keyItemArray) {
+                myRequiredKeyItems.add(new KeyItem(getModel(), name.toString()));
+            }
+        }
     }
 }

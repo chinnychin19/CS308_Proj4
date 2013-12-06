@@ -6,6 +6,7 @@ import location.Direction;
 import location.Loc;
 import org.json.simple.JSONObject;
 import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.NoStringValueJsonException;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
@@ -23,7 +24,6 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
     public AbstractCharacter (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
         try{
-            myDirection = Direction.constructFromString(objInWorld.getString(Constants.JSON_ORIENTATION));
             String imageUpURL = definition.getString(Constants.JSON_IMAGE_UP);
             String imageDownURL = definition.getString(Constants.JSON_IMAGE_DOWN);
             String imageLeftURL = definition.getString(Constants.JSON_IMAGE_LEFT);
@@ -85,5 +85,11 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
     @Override
     protected void onInteract() {
         setDirection(Direction.opposite(getWorld().getPlayer().getDirection()));
+    }
+    
+    @Override
+    protected void createWorldInstance (SmartJsonObject objInWorld) throws SmartJsonException {
+        super.createWorldInstance(objInWorld);
+        myDirection = Direction.constructFromString(objInWorld.getString(Constants.JSON_ORIENTATION));
     }
 }
