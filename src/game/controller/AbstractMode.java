@@ -135,7 +135,7 @@ public abstract class AbstractMode extends KeyAdapter {
         if (x == KeyEvent.VK_SPACE) {
         	myInput.setInput(InputIndex.MENU, flag);
         }
-        if (x == KeyEvent.VK_B) {
+        if (x == KeyEvent.VK_X) {
             myInput.setInput(InputIndex.BACK, flag);
     }
     }
