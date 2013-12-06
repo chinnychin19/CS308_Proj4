@@ -28,10 +28,11 @@ public abstract class AbstractBattleMode extends AbstractMode {
     protected int mySelectedAttack;
 
     private AbstractOptionState myOptionState;
-    
+
     public AbstractBattleMode (GameModel model, GameView view) {
         super(model, view);
         myOptionState = new MainOptionState(this);
+        // TODO: separate wild battle options from trainer battle options
 
     }
 
@@ -65,32 +66,26 @@ public abstract class AbstractBattleMode extends AbstractMode {
         paintEnemyMonster();
         paintEnemyHealth();
         myOptionState.paint();
-        // if (myState == State.OPTIONS) {
-        // paintOptions();
-        // }
-        // else if (myState == State.ATTACKS) {
-        // paintAttacks();
-        // } else if (myState == State.PARTY) {
-        // paintParty();
-        // }
     }
 
-    // TODO: Chinmay should comment
+    /**
+     * This method is called when keyPressed or keyReleased is triggered. It tells the
+     * current option state to update itself and take appropriate action. For example, the attack
+     * option state applies the selected attack on interaction.
+     */
     @Override
     public void act () {
         Input input = getInput();
-        List<Attack> attacks =
-                myBattle.getPlayerParty().getCurrentMonster().getAllAvailableAttacks();
         myOptionState.act(input);
     }
 
     public void setOptionState (AbstractOptionState st) {
         myOptionState = st;
     }
-    
+
     public void pushState (TextOptionState st) {
-       st.setNextState(myOptionState);
-       myOptionState = st;
+        st.setNextState(myOptionState);
+        myOptionState = st;
     }
 
     public Battle getBattle () {

@@ -8,6 +8,7 @@ import util.jsonwrapper.jsonexceptions.NoIntValueJsonException;
 import util.jsonwrapper.jsonexceptions.NoJSONArrayJsonException;
 import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
 import util.jsonwrapper.jsonexceptions.NoStringValueJsonException;
+import util.jsonwrapper.jsonexceptions.SmartJsonException;
 
 /**
  * Wrapper around the SimpleJSON library to retrieve specific types from the JSON
@@ -17,7 +18,10 @@ import util.jsonwrapper.jsonexceptions.NoStringValueJsonException;
  */
 public class SmartJsonObject {
     JSONObject myJson;
-    public SmartJsonObject(JSONObject obj){
+    public SmartJsonObject(JSONObject obj) throws NoJSONObjectJsonException {
+        if (obj == null) {
+            throw new NoJSONObjectJsonException();
+        }
         myJson = obj;
     }
     
@@ -97,4 +101,8 @@ public class SmartJsonObject {
     public Set<Object> keySet(){
         return myJson.keySet();
     }
+
+//    public boolean isNull () {
+//        return myJson == null;
+//    }
 }
