@@ -111,6 +111,14 @@ public class CanvasTileManager {
 	public int getVerticalTileNum(int yValue){
 		return (int) ((yValue/tileHeight) + verticalOffset);
 	}
+	
+	public double getTileAnchorX(int x) {
+	    return x * tileWidth;
+	}
+	
+	public double getTileAnchorY(int y) {
+	    return y * tileHeight;
+	}
 
 	public void increaseHorizontalOffset(){
 		if (horizontalOffset + getTotalHorizontalTiles() < Constants.MAX_X_COORD) { horizontalOffset += 1; }

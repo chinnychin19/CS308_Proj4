@@ -46,7 +46,7 @@ public class AuthorView extends JFrame {
         JMenuItem item = new JMenuItem(Constants.SHOW_GENERATED_OUTPUT);
         item.addActionListener(new OutputJSONListener(ac));
         viewMenu.add(item);
-        
+
         JMenuItem writeJSON = new JMenuItem(Constants.WRITE_JSON_TO_FILE);
         writeJSON.addActionListener(new WriteJSONOutputListener(ac));
         viewMenu.add(writeJSON);
@@ -59,13 +59,13 @@ public class AuthorView extends JFrame {
         this.setJMenuBar(menuBar);
 
         this.add(new MapCreationView());
-        
+
         pack();
         this.setVisible(true);
     }
-    
-    public List<AbstractWizardState> getWizardStates(){
-    	return myWizardStates;
+
+    public List<AbstractWizardState> getWizardStates () {
+        return myWizardStates;
     }
 
     public AuthorView getAuthorView () {

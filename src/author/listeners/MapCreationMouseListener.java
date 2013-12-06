@@ -1,16 +1,19 @@
 package author.listeners;
 
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import author.mapCreation.CanvasTileManager;
+import author.mapCreation.MapCreationView;
 
 public class MapCreationMouseListener implements MouseListener {
 
 	private CanvasTileManager myTileManager;
+	private MapCreationView myMapCreationView;
 
-	public MapCreationMouseListener(CanvasTileManager tileManager){
+	public MapCreationMouseListener(MapCreationView mapCreation, CanvasTileManager tileManager){
 		myTileManager = tileManager;
+		myMapCreationView = mapCreation;
 	}
 
 
@@ -30,9 +33,8 @@ public class MapCreationMouseListener implements MouseListener {
 				", row: " + myTileManager.getVerticalTileNum(y));
 		
 		myTileManager.getTileClickLoc(xTile, yTile);
-	}
-	
-	public void giveTileClickLoc(int column, int row){
+		
+		myMapCreationView.paintTile(myMapCreationView.getGraphics(), xTile, yTile);
 		
 	}
 
