@@ -1,14 +1,27 @@
 package game.model;
 
+import game.controller.Input;
 import game.controller.AbstractMode;
 import game.controller.state.TextState;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import location.Direction;
+import location.Loc;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
+
+/**
+ * A class used to create FightingNPCs and to interact with the Player.  The NPC will check to see whether or not the Player is within its line of sight.  If so,
+ * the NPC will move towards the player and go into battle mode.
+ * @author rtoussaint
+ *
+ */
 
 public class FightingNPC extends NPC implements Fighter {
     private List<Monster> myParty;
@@ -16,7 +29,6 @@ public class FightingNPC extends NPC implements Fighter {
     private List<KeyItem> myKeyItems;
     private int myBet;
     private int myLineOfSightDistance;
-
     public FightingNPC (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
         try{
@@ -43,8 +55,53 @@ public class FightingNPC extends NPC implements Fighter {
     public int getLineOfSightDistance(){
         return myLineOfSightDistance;
     }
-        
+    
     /**
+     * Check to see if the FightingNPC should interact with the Player
+     */
+    @Override
+    public void doFrame(World w, Input input) {
+    	 
+    	boolean playerWithinRange = checkLineOfSight();
+    	if(playerWithinRange){
+    		moveTowardsPlayer();
+        	//TODO: Chinmay uncomment onInteract method when you implement it.
+    		//onInteract();	
+    		//TODO: move NPC back to original spot??
+    	}
+    }
+        
+
+    /**
+     * Check to see if the player is within the line of sight of the player
+     * @return whether or not the NPC can 'see' the player
+     */
+	private boolean checkLineOfSight() {
+    	int sight = 0;
+		Loc tempLoc = getLoc();
+    	while(sight <= myLineOfSightDistance){
+    		if(tempLoc.equals(getModel().getPlayer().getLoc())){
+    			return true;
+    		}
+    		tempLoc = tempLoc.adjacentLoc(getDirection());
+    		sight++;	
+    	}
+		return false;
+	}
+	
+	/**
+	 * move towards the player when it is within the NPC's line of sight
+	 */
+    private void moveTowardsPlayer() {
+    	///TODO: freeze player keyboard for movement/animation
+    	Direction oppositeDirection = Direction.opposite(getDirection());
+    	while(!getLoc().equals(getModel().getPlayer().getLoc().adjacentLoc(oppositeDirection))){
+    		setLoc(getLoc().adjacentLoc(getDirection()), getWorld());
+    	}
+    	getModel().getPlayer().setDirection(oppositeDirection);
+	}
+
+	/**
      * Returns the NPC's key items. These are items that will help the main player get through
      * obstacles and advance through the game.
      * 

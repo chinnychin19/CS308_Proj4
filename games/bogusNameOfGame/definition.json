@@ -158,7 +158,7 @@
             "image-down": "images/players/mainPLayer1/down.png",
             "image-left": "images/players/mainPLayer1/left.png",
             "image-right": "images/players/mainPLayer1/right.png",
-            "lineOfSightDistance": "2",
+            "lineOfSightDistance": "5",
             "dialogue": "Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit.",
             "monsters": [
             {
