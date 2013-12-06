@@ -166,15 +166,15 @@ public abstract class AbstractMode extends KeyAdapter {
     }
 
     //TODO: Comment methods below
-    
-    public void addDynamicState(AbstractState state ) {
-    	myStates.add(state);
-	}
-    
-    public void removeDynamicState(AbstractState st) {
-    	myStates.remove(st);
+
+    public void addDynamicState (AbstractState state) {
+        myStates.add(state);
     }
-    
+
+    public void removeDynamicState (AbstractState st) {
+        myStates.remove(st);
+    }
+
     protected void paintDynamicStates() {
 		for(AbstractState state : myStates){
 			state.paint();
