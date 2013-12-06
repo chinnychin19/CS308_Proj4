@@ -2,6 +2,7 @@ package game.model.battle;
 
 import constants.Constants;
 import game.controller.AbstractBattleMode;
+import game.controller.TrainerBattleMode;
 import game.controller.optionState.LivingPartyOptionState;
 import game.controller.state.option.AbstractMainOptionState;
 import game.controller.optionState.UserLostWildBattleCompleteState;
@@ -109,7 +110,9 @@ public class Battle {
     }
 
     private void userWon () {
-        ((FightingNPC) myEnemyParty.getFighter()).setDefeated(true);
+        if (myMode instanceof TrainerBattleMode) {
+            ((FightingNPC) myEnemyParty.getFighter()).setDefeated(true);
+        }
         myMode.setOptionState(new UserWonWildBattleCompleteState(myMode));
     }
 
