@@ -20,11 +20,20 @@ public class MapCreationMouseListener implements MouseListener {
 		
 		int x = arg0.getX();
 		int y = arg0.getY();
+		
+		int xTile = myTileManager.getHorizontalTileNum(x);
+		int yTile = myTileManager.getVerticalTileNum(y);
 
 		System.out.println("Mouse clicked at: " + x + ", " + y);
 		System.out.println("Click translates to tile " +
 				"column: " + myTileManager.getHorizontalTileNum(x) + 
 				", row: " + myTileManager.getVerticalTileNum(y));
+		
+		myTileManager.getTileClickLoc(xTile, yTile);
+	}
+	
+	public void giveTileClickLoc(int column, int row){
+		
 	}
 
 	@Override

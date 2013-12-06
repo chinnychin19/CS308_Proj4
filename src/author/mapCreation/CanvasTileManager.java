@@ -1,9 +1,12 @@
 package author.mapCreation;
 
+import location.Loc;
 import constants.Constants;
 
 public class CanvasTileManager {
-
+	
+	private WorldTiles myWorld;
+	
 	private int myGCD;
 
 	private int widthRatio;
@@ -22,6 +25,7 @@ public class CanvasTileManager {
 	private double tileHeight;
 
 	public CanvasTileManager(){
+		myWorld = new WorldTiles();
 		horizontalOffset = Constants.MIN_X_COORD;
 		verticalOffset = Constants.MIN_Y_COORD;
 
@@ -65,6 +69,10 @@ public class CanvasTileManager {
 			a = temp;
 		}
 		return a;
+	}
+	
+	public void getTileClickLoc(int x, int y){
+		myWorld.addToMap(new Loc(x, y), new GenericTileWrapper("blah", null/*new Image()*/));
 	}
 
 	public void expandView(){
@@ -138,6 +146,10 @@ public class CanvasTileManager {
 
 	public int getMiddleHorizontalTile(){
 		return middleHorizontalTile;
+	}
+	
+	public WorldTiles getWorld(){
+		return myWorld;
 	}
 
 }

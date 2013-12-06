@@ -15,6 +15,7 @@ import constants.Constants;
 @SuppressWarnings("serial")
 public class MapCreationView extends JPanel {
 
+	private WorldTiles myWorld;
 	private Image myBackground;
 	private BufferedImage myImage;
 	private Graphics myGraphics;
@@ -27,6 +28,10 @@ public class MapCreationView extends JPanel {
 		myBackground = new ImageIcon(Constants.SHORTGRASS_PNG_FILEPATH).getImage();
 		myTileManager = new CanvasTileManager(); // 15, 9
 		initListeners();
+	}
+	
+	public WorldTiles getMyWorld(){
+		return myWorld;
 	}
 	
 	private void initListeners(){
