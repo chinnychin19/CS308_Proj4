@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
 import constants.Constants;
 import game.controller.state.AbstractState;
 import game.model.GameModel;
@@ -30,6 +29,7 @@ public abstract class AbstractMode extends KeyAdapter {
     private GameView myView;
     private Graphics myGraphics;
     private Input myInput;
+    private long myLastKeyPressTime;
 	private Queue<AbstractState> myStates;
 
     public AbstractMode (GameModel model, GameView view) {
@@ -38,7 +38,7 @@ public abstract class AbstractMode extends KeyAdapter {
         myGraphics = view.getBuffer();
         myInput = new Input();
         myStates = new ConcurrentLinkedQueue<AbstractState>();
-
+        myLastKeyPressTime = 0;
     }
     
     public GameModel getModel () {
@@ -84,6 +84,9 @@ public abstract class AbstractMode extends KeyAdapter {
      */
     @Override
     public void keyPressed (KeyEvent e) {
+        long timeSinceKeyPress = System.currentTimeMillis() - myLastKeyPressTime;
+        if (timeSinceKeyPress < Constants.KEY_DELAY_MILLISECONDS) { return; }
+        myLastKeyPressTime = System.currentTimeMillis();
         updateInputs(e, true);
         actAndPaint();
     }

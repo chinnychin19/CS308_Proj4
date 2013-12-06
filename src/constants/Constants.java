@@ -17,7 +17,7 @@ public class Constants {
     public static final double TILE_WIDTH = (double) WIDTH / NUM_TILES_HORIZONTAL;
     public static final double TILE_HEIGHT = (double) HEIGHT / NUM_TILES_VERTICAL;
 
-    public static final int REFRESH_RATE = 10;
+    public static final long KEY_DELAY_MILLISECONDS = 100;
     public static final int MOVE_FRAMES = 15; // number of frames in one move
 
     public static final int BORDER_THICKNESS = 15;
