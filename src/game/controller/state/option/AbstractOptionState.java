@@ -16,7 +16,8 @@ public abstract class AbstractOptionState {
     protected int mySelected = 0;
     private boolean myCanGoBack;
     protected String myName;
-    List<AbstractOptionState> myOptions;
+    protected int myNumOptions;
+
 
     public AbstractOptionState (AbstractBattleMode mode) {
         this(mode, Constants.MODE_DEFAULT);
@@ -27,6 +28,7 @@ public abstract class AbstractOptionState {
     }
 
     public AbstractOptionState (AbstractBattleMode mode, String name, boolean canGoBack) {
+        myNumOptions = 0;
         myMode = mode;
         mySelected = 0;
         myName = name;
@@ -34,7 +36,6 @@ public abstract class AbstractOptionState {
                 Constants.HEIGHT / 3;
         myBuffer = myMode.getGraphics().create(x, y, w, h);
         myCanGoBack = canGoBack;
-        myOptions = new ArrayList<AbstractOptionState>();
     }
 
     public String getName () {
@@ -58,12 +59,13 @@ public abstract class AbstractOptionState {
     protected abstract void onBack ();
 
     public void act (Input input) {
-        if (input.isKeyUpPressed() && mySelected != 0) {
-            mySelected--;
+        if (input.isKeyUpPressed()) {
+           if(mySelected != 0) mySelected--;
+           else if(myNumOptions != 0) mySelected = myNumOptions - 1;
         }
 
         if (input.isKeyDownPressed()) {
-            if (mySelected == myOptions.size() - 1)
+            if (mySelected == myNumOptions - 1)
                 mySelected = 0;
             else mySelected++;
         }
@@ -73,7 +75,7 @@ public abstract class AbstractOptionState {
         }
 
         if (input.isKeyRightPressed()) {
-            if (mySelected + 3 < myOptions.size()) mySelected = mySelected + 3;
+            if (mySelected + 3 < myNumOptions) mySelected = mySelected + 3;
         }
 
         if (input.isKeyInteractPressed()) {
