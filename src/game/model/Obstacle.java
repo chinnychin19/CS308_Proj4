@@ -111,4 +111,19 @@ public class Obstacle extends AbstractViewableObject {
             }
         }
     }
+    
+    @Override
+    public JSONObject getSavedJson(){
+        JSONObject toSave = super.getSavedJson();
+        toSave.put(Constants.JSON_KEYITEMS, getKeyItemsToSave());
+        return toSave;
+    }
+    
+    private JSONArray getKeyItemsToSave(){
+        JSONArray array = new JSONArray();
+        for(KeyItem item : myRequiredKeyItems){
+            array.add(item.getName());
+        }
+        return array;
+    }
 }

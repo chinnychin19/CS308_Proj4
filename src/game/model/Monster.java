@@ -23,7 +23,7 @@ import constants.Constants;
  * 
  */
 
-public class Monster extends AbstractModelObject {
+public class Monster extends AbstractModelObject implements Saveable {
 
     private Image myImage;
     private double myCatchRate;
@@ -376,5 +376,18 @@ public class Monster extends AbstractModelObject {
         setImage(myEvolution.getImage());
         setEvolution(myEvolution.getNextEvolution());
         // TODO: update stats
+    }
+
+    @Override
+    public JSONObject getSavedJson () {
+        JSONObject toSave = super.getSavedJson();
+        toSave.put(Constants.JSON_LEVEL, ""+getLevel());
+        toSave.put(Constants.EXP, ""+getExp());
+        toSave.put(Constants.EXP_TO_NEXT_LEVEL, ""+getExpToNextLevel());
+        toSave.put(Constants.MAX_HP, ""+getMaxHP());
+        toSave.put(Constants.CUR_HP, ""+getCurHP());
+        toSave.put(Constants.ATTACK_LOWERCASE, ""+getAttack());
+        toSave.put(Constants.DEFENSE, ""+getDefense());
+        return toSave;
     }
 }

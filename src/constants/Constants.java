@@ -73,6 +73,12 @@ public class Constants {
 
     public static final String JSON_DEFEATEDNPCS = "defeatedNPCs";
 
+    public static final String JSON_NPC = "NPC";
+    public static final String JSON_FIGHTING_NPC = "FightingNPC";
+    public static final String JSON_OBSTACLE = "Obstacle";
+    public static final String JSON_HEAL_ITEM = "HealItem";
+    public static final String JSON_WILD_REGION = "WildRegion";
+
     //Panel Type Names
     public static final String LIST_PANEL = "List";
     public static final String NUMBER_PANEL = "Number";

@@ -184,14 +184,9 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
 
     @Override
     public JSONObject getSavedJson () {
-        JSONObject toSave = new JSONObject();
-        toSave.put(Constants.NAME, getName());
-        toSave.put(Constants.JSON_X, getLoc().getX());
-        toSave.put(Constants.JSON_Y, getLoc().getY());
-        toSave.put(Constants.JSON_ORIENTATION, Direction.getString(getDirection()));
+        JSONObject toSave = super.getSavedJson();       
         toSave.put(Constants.JSON_KEYITEMS, getKeyItemsToSave());
-
-
+        toSave.put(Constants.JSON_MONSTERS, getMonstersToSave());
         return toSave;
     }
     
@@ -199,6 +194,14 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
         JSONArray array = new JSONArray();
         for(KeyItem item : myKeyItems){
             array.add(item.getName());
+        }
+        return array;
+    }
+    
+    private JSONArray getMonstersToSave(){
+        JSONArray array = new JSONArray();
+        for(Monster m : myParty){
+            array.add(m.getSavedJson());
         }
         return array;
     }

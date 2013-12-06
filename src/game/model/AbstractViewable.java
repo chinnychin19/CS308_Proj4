@@ -3,6 +3,7 @@ package game.model;
 import game.controller.Input;
 
 import java.awt.Image;
+import org.json.simple.JSONObject;
 import location.Loc;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.NoIntValueJsonException;
@@ -88,4 +89,12 @@ public abstract class AbstractViewable extends AbstractModelObject {
         int y = objInWorld.getInt(Constants.JSON_Y);
         myLoc = new Loc(x, y);
     }
+    
+    @Override
+    public JSONObject getSavedJson() {
+        JSONObject toSave = super.getSavedJson();
+        toSave.put(Constants.JSON_X, ""+getLoc().getX());
+        toSave.put(Constants.JSON_Y, ""+getLoc().getY());
+        return toSave;
+   }
 }
