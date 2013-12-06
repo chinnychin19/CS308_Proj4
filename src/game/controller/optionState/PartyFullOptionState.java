@@ -2,6 +2,8 @@ package game.controller.optionState;
 
 import game.controller.AbstractBattleMode;
 import game.controller.Input;
+import game.controller.state.NotListableException;
+import game.controller.state.option.AbstractListableOptionState;
 import game.controller.state.option.AbstractOptionState;
 import game.controller.state.option.BattleOverState;
 import game.controller.state.option.MainOptionState;
@@ -13,7 +15,7 @@ import java.util.List;
 import constants.Constants;
 
 
-public class PartyFullOptionState extends AbstractOptionState {
+public class PartyFullOptionState extends AbstractListableOptionState {
 
     public PartyFullOptionState (AbstractBattleMode mode) {
         super(mode);
@@ -21,35 +23,18 @@ public class PartyFullOptionState extends AbstractOptionState {
 
     @Override
     public void paint () {
-
-        List<Monster> monsters = getMonsters();
-
-        myBuffer.setColor(Color.cyan);
-        myBuffer.fillRect(0, 0, myBuffer.getClipBounds().width,
-                          myBuffer.getClipBounds().height);
-        myBuffer.setColor(Color.black);
-        myBuffer.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-
-        int x = 15;
-        int y = 30;
-        int inc = 50;
-        for (int i = 0; i < monsters.size(); i++) {
-            if (i == mySelected) {
-                myBuffer.setColor(Color.white);
-            }
-            myBuffer.drawString(monsters.get(i).getName(), x, y + i * inc);
-            if (i == mySelected) {
-                myBuffer.setColor(Color.black);
-            }
+        try { 
+            paintList(getMonsters()); 
+        }
+        catch (NotListableException e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void act (Input input) {
         super.act(input);
-        if (mySelected >= getMonsters().size()) {
-            mySelected = Math.max(0, getMonsters().size() - 1);
-        }
+        actList(input, getMonsters());
     }
 
     @Override

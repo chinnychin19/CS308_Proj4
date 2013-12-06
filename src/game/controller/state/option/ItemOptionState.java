@@ -6,11 +6,12 @@ import java.util.List;
 import game.controller.AbstractBattleMode;
 import game.controller.Input;
 import game.controller.WildBattleMode;
+import game.controller.state.NotListableException;
 import game.model.Item;
 import game.model.Player;
 import game.model.attack.Attack;
 
-public class ItemOptionState extends AbstractOptionState {
+public class ItemOptionState extends AbstractListableOptionState {
 
     public ItemOptionState (AbstractBattleMode mode) {
         super(mode, "ITEMS");
@@ -19,29 +20,16 @@ public class ItemOptionState extends AbstractOptionState {
     @Override
     public void act(Input input) {
         super.act(input);
-        if(mySelected >= getItems().size()){
-            mySelected = Math.max(0,getItems().size()-1);
-        }
+        actList(input, getItems());
     }
     
     @Override
     public void paint () {
-        super.paint();
-
-
-        int x = 15;
-        int y = 30;
-        int inc = 50;
-        
-        List<Item> items = getItems();
-        for (int i = 0; i < items.size(); i++) {
-            if (i == mySelected) {
-                myBuffer.setColor(Color.white);
-            }
-            myBuffer.drawString(items.get(i).getName(), x, y + i * inc);
-            if (i == mySelected) {
-                myBuffer.setColor(Color.black);
-            }
+        try { 
+            paintList(getItems()); 
+        }
+        catch (NotListableException e) {
+            e.printStackTrace();
         }
     }
 

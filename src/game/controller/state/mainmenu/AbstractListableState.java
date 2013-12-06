@@ -51,11 +51,13 @@ public abstract class AbstractListableState extends AbstractMenuState {
     }
     
     protected <S> void actList (Input input, List<S> list) {
-        if (input.isKeyUpPressed() && mySelected > 0) {
-            decrementSelected();
+        if (input.isKeyUpPressed()) {
+            if(mySelected == 0) mySelected = list.size()-1;
+            else decrementSelected();
         }
-        else if (input.isKeyDownPressed() && mySelected < list.size()-1) {
-            incrementSelected();
+        else if (input.isKeyDownPressed()) {
+            if(mySelected == list.size()-1) mySelected = 0;
+            else incrementSelected();
         }
 
         if (input.isKeyInteractPressed()) {
