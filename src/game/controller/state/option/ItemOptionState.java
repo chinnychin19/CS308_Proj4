@@ -45,7 +45,7 @@ public class ItemOptionState extends AbstractListableOptionState {
 
     @Override
     protected void onBack () {
-        myMode.setOptionState(new MainOptionState(myMode));
+        myMode.setOptionState(myMode.getAMainOptionState());
     }
 
 }

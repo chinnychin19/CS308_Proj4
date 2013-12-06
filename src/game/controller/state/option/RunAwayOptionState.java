@@ -27,6 +27,6 @@ public class RunAwayOptionState extends AbstractOptionState {
 
     @Override
     protected void onBack () {
-        myMode.setOptionState(new MainOptionState(myMode));
+        myMode.setOptionState(myMode.getAMainOptionState());
     }
 }

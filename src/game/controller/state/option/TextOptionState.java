@@ -10,7 +10,7 @@ public class TextOptionState extends AbstractOptionState {
 
 
     public TextOptionState (AbstractBattleMode mode, String text) {
-        this(mode, text, new MainOptionState(mode));
+        this(mode, text, mode.getAMainOptionState());
 
     }
     

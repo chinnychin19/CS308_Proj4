@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.util.List;
 import constants.Constants;
 import game.controller.state.option.AbstractOptionState;
-import game.controller.state.option.MainOptionState;
+import game.controller.state.option.AbstractMainOptionState;
 import game.controller.state.option.TextOptionState;
 import game.model.GameModel;
 import game.model.Monster;
@@ -31,10 +31,12 @@ public abstract class AbstractBattleMode extends AbstractMode {
 
     public AbstractBattleMode (GameModel model, GameView view) {
         super(model, view);
-        myOptionState = new MainOptionState(this);
+        myOptionState = getAMainOptionState();
         // TODO: separate wild battle options from trainer battle options
 
     }
+    
+    public abstract AbstractMainOptionState getAMainOptionState();
 
     /**
      * Turns off WildBattleMode - removes keyListeners and closes the buffers
