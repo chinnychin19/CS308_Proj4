@@ -127,7 +127,13 @@ public class JSONCache {
      */
     private SmartJsonObject copy (JSONObject object) {
         String asString = JSONValue.toJSONString(object);
-        return new SmartJsonObject((JSONObject) JSONValue.parse(asString));
+        try {
+            return new SmartJsonObject((JSONObject) JSONValue.parse(asString));
+        }
+        catch (NoJSONObjectJsonException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**

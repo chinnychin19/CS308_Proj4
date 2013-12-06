@@ -127,7 +127,6 @@ public class Player extends AbstractCharacter implements Fighter {
         Direction dir = getMoveDirection(input);
         if (null != dir) {
             setDirection(dir);
-            System.out.println("moving");
             Loc target = getLoc().adjacentLoc(getDirection());
             if (!w.isLocOccupied(target)) {
                 setLoc(target, w);

@@ -289,7 +289,7 @@ public class Monster extends AbstractModelObject {
             int unlockLevel = attackJson.getInt(Constants.JSON_ATTACK_UNLOCK_LEVEL);
             myAttacks.add(new AttackWrapper(attack, unlockLevel));
             // TODO: Implement myEvolution
-        }        System.out.println("PLAYER");
+        }
         myEvolution = readEvolution(definition);
     }
 

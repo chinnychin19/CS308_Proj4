@@ -13,7 +13,7 @@ public class Evolution extends AbstractEvolution {
 
     private int myLevel;
     public Evolution (SmartJsonObject definition, GameModel model) {
-        super(model);
+        super(model, definition);
         try {
             myLevel = definition.getInt(Constants.JSON_LEVEL);
         }
