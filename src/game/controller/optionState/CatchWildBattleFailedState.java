@@ -30,6 +30,7 @@ public class CatchWildBattleFailedState extends AbstractOptionState {
     @Override
     protected void onBack () {
         myMode.setOptionState(new MainOptionState(myMode));
+        myMode.getBattle().doNextTurn();
     }
 
 }

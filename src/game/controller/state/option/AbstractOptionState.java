@@ -2,39 +2,41 @@ package game.controller.state.option;
 
 import game.controller.AbstractBattleMode;
 import game.controller.Input;
+import game.controller.state.AbstractState;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 import constants.Constants;
 
 
-public abstract class AbstractOptionState {
-    protected Graphics myBuffer;
+public abstract class AbstractOptionState extends AbstractState{
     protected AbstractBattleMode myMode;
     protected int mySelected = 0;
     private boolean myCanGoBack;
-    protected String myName;
-    
+
+    protected int myNumOptions;
+
+
     public AbstractOptionState (AbstractBattleMode mode) {
         this(mode, Constants.MODE_DEFAULT);
     }
-    
-    public AbstractOptionState(AbstractBattleMode mode, String name){
+
+    public AbstractOptionState (AbstractBattleMode mode, String name) {
         this(mode, name, true);
     }
 
     public AbstractOptionState (AbstractBattleMode mode,  String name, boolean canGoBack) {
+        super(name, mode, 0, Constants.HEIGHT*2/3, Constants.WIDTH, Constants.HEIGHT/3);
+        myNumOptions = 0;
         myMode = mode;
         mySelected = 0;
         myName = name;
-        int x = 0, y = Constants.HEIGHT * 2 / 3, w = Constants.WIDTH, h =
-                Constants.HEIGHT / 3;
-        myBuffer = myMode.getGraphics().create(x, y, w, h);
         myCanGoBack = canGoBack;
     }
 
-    
-    public String getName() {
+    public String getName () {
         return myName;
     }
 
@@ -45,8 +47,8 @@ public abstract class AbstractOptionState {
         myBuffer.setColor(Color.black);
         myBuffer.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
     }
-    
-    protected boolean canGoBack(){
+
+    protected boolean canGoBack () {
         return myCanGoBack;
     }
 
@@ -55,11 +57,23 @@ public abstract class AbstractOptionState {
     protected abstract void onBack ();
 
     public void act (Input input) {
-        if (input.isKeyUpPressed() && mySelected > 0) {
-            mySelected--;
+        if (input.isKeyUpPressed()) {
+           if(mySelected != 0) mySelected--;
+           else if(myNumOptions != 0) mySelected = myNumOptions - 1;
         }
-        else if (input.isKeyDownPressed()) {
-            mySelected++;
+
+        if (input.isKeyDownPressed()) {
+            if (mySelected == myNumOptions - 1)
+                mySelected = 0;
+            else mySelected++;
+        }
+
+        if (input.isKeyLeftPressed()) {
+            if (mySelected - 3 >= 0) mySelected = mySelected - 3;
+        }
+
+        if (input.isKeyRightPressed()) {
+            if (mySelected + 3 < myNumOptions) mySelected = mySelected + 3;
         }
 
         if (input.isKeyInteractPressed()) {

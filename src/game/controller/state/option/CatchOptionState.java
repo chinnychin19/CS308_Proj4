@@ -4,6 +4,7 @@ import constants.Constants;
 import game.controller.AbstractBattleMode;
 import game.controller.optionState.CatchWildBattleCompleteState;
 import game.controller.optionState.CatchWildBattleFailedState;
+import game.model.Monster;
 
 
 public class CatchOptionState extends AbstractOptionState {
@@ -15,6 +16,7 @@ public class CatchOptionState extends AbstractOptionState {
     @Override
     protected void onInteract () {
         if (myMode.getBattle().caughtWildMonster()) {
+            acquireWildMonster();
             myMode.setOptionState(new CatchWildBattleCompleteState(myMode));
         }
         else myMode.setOptionState(new CatchWildBattleFailedState(myMode));
@@ -33,6 +35,11 @@ public class CatchOptionState extends AbstractOptionState {
     @Override
     protected void onBack () {
         myMode.setOptionState(new MainOptionState(myMode));
+    }
+    
+    public void acquireWildMonster () {
+        Monster m = myMode.getBattle().getEnemyParty().getCurrentMonster();
+        myMode.getModel().getPlayer().getParty().add(m);
     }
 
 }

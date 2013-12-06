@@ -1,5 +1,6 @@
 package game.model;
 
+import game.controller.state.Listable;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
@@ -10,7 +11,7 @@ import constants.Constants;
  *
  */
 
-public class AbstractModelObject {
+public class AbstractModelObject implements Listable{
     private String myName;
     private GameModel myModel;
 

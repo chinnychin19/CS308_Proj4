@@ -3,9 +3,9 @@ package game.model.battle;
 import constants.Constants;
 import game.controller.AbstractBattleMode;
 import game.controller.optionState.LivingPartyOptionState;
+import game.controller.state.option.MainOptionState;
 import game.controller.optionState.UserLostWildBattleCompleteState;
 import game.controller.optionState.UserWonWildBattleCompleteState;
-import game.controller.state.option.MainOptionState;
 import game.controller.state.option.TextOptionState;
 import game.controller.state.option.StateTransitionTextOptionState;
 import game.model.LevelChange;
@@ -13,15 +13,14 @@ import game.model.Monster;
 import game.model.attack.Attack;
 
 
-
-
 public class Battle {
     AbstractBattleParty myPlayerParty;
     AbstractBattleParty myEnemyParty;
     AbstractBattleMode myMode;
-    private static final double CATCH_MIN = 0.95;
-    private static final double RANDOM_FACTOR = CATCH_MIN + Math.random() * (0.99 - CATCH_MIN);
+    private static final double CATCH_MIN = 0.80;
+    private static final double CATCH_MAX = 0.99;
     private boolean myIsUsersTurn;
+
     public Battle (AbstractBattleParty playerParty,
                    AbstractBattleParty enemyParty,
                    AbstractBattleMode mode) {
@@ -99,7 +98,7 @@ public class Battle {
         }
         myMode.pushState(new TextOptionState(myMode, "You Killed Da Monster!"));
     }
-    
+
     private void userLost () {
         // Heal enemy's monsters for the next time you battle
         for (Monster m: myEnemyParty.getMonsters()) {
@@ -117,18 +116,13 @@ public class Battle {
     }
 
     public boolean caughtWildMonster () {
-        WildMonsterParty wildMonster = (WildMonsterParty) myEnemyParty;
-        double probability = wildMonster.calculateCatchProbability() * RANDOM_FACTOR;
-        if (Math.random() <= probability) {
-            acquireWildMonster();
-            return true;
-        }
-        return false;
+        double randomFactor = CATCH_MIN + Math.random() * (CATCH_MAX - CATCH_MIN);
+        double probability = ((WildMonsterParty) myEnemyParty).getCatchProbability()*randomFactor;
+        System.out.print(probability + " ---> This is the catch probability in Battle.java");
+        return (Math.random() < probability);
     }
 
-    public void acquireWildMonster () {
-        myMode.getModel().getPlayer().addMonsterToParty(myEnemyParty.getCurrentMonster());
-    }
+
 
     public void doNextTurn () {
         toggleUsersTurn();

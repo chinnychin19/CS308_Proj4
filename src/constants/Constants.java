@@ -155,25 +155,48 @@ public class Constants {
     
     //MODE STRINGS
     public final static String MODE_CATCH = "CATCH";
+    public static final String MODE_RUN_AWAY = "RUN AWAY";
     public final static String MODE_DEFAULT = "";
     public final static String MODE_BATTLE_OVER = "BATTLE OVER!";
     public final static String MODE_MONSTER_CAUGHT = "You caught the monster!";
     public final static String MODE_MONSTER_NOT_CAUGHT = "You failed to catch the wild monster!";
-    
+    public final static String MODE_PARTY_FULL = "Your party is full.  Choose a monster to release.";
+    public static final String MODE_MONSTER_RELEASE_1 = "Goodbye ";
+    public static final String MODE_MONSTER_RELEASE_2 = "!  We had some great memories together.";
     
     //Dialogue Strings
     public final static String PROMPT_INVALID_KEYITEM = "";
     public final static String PROMPT_MONSTER_DEAD = "Monster Died.  Choose a new Monster";
     public final static String PROMPT_PRESS_TO_CATCH = "Press interact to attempt to catch";
+    public static final String PROMPT_PRESS_TO_RUN = "Press interact to run away from this battle";
     public final static String PROMPT_MONSTERS_HEALED =  "All Monsters Healed";
     public final static String PROMPT_MISSING_ITEM = "MISSING ITEM: ";
     public final static String PROMPT_AQUIRE_MISSING_ITEM = ".  Acquire this item and try again";
     
+    //Fighting NPC intro speech
+    public final static String PROMPT_FIGHTING_NPC_BEFORE_BATTLE = "Hey you, let's battle! Come here.";
+    
     //Dialogue Box Placement
     public final static int DIALOGUE_HEIGHT = 80;
     //public final static int DIALOGUE_PADDING = 20;
+
+    public static final int MAX_PARTY_SIZE = 6;
+
+    
+
+    
+
+   
+
     
     
+    //Main Menu 
+    public final static int MAIN_MENU_X = 0;
+    public final static int MAIN_MENU_Y = 0;
+    public final static int MAIN_MENU_WIDTH = WIDTH;
+    public final static int MAIN_MENU_HEIGHT = HEIGHT;
+
+
     
     
     

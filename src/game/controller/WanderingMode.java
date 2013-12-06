@@ -43,6 +43,9 @@ public class WanderingMode extends AbstractMode {
      */
     @Override
     public void act () {
+        if(getInput().isKeyMenuPressed()){
+            getController().setMode(new MainMenuMode(getModel(), getView()));
+        }
         for (AbstractViewable obj : getGroundObjectsOnScreen()) {
             obj.doFrame(getModel().getWorld(), this.getInput());
         }
