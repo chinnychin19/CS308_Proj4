@@ -34,7 +34,7 @@ public abstract class AbstractMode extends KeyAdapter {
     private Input myInput;
     protected Sound mySound;
     private long myLastKeyPressTime;
-	private Queue<AbstractState> myStates;
+    private Queue<AbstractState> myStates;
 
     public AbstractMode (GameModel model, GameView view) {
         myModel = model;

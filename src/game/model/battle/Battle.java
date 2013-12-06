@@ -103,18 +103,14 @@ public class Battle {
     }
 
     private void userLost () {
-        // Heal enemy's monsters for the next time you battle
-        for (Monster m: myEnemyParty.getMonsters()) {
-            m.heal();
-        }
-        myMode.setOptionState(new UserLostWildBattleCompleteState(myMode));
+        myMode.setOptionState(myMode.getBattleCompleteState(false));
     }
 
     private void userWon () {
         if (myMode instanceof TrainerBattleMode) {
             ((FightingNPC) myEnemyParty.getFighter()).setDefeated(true);
         }
-        myMode.setOptionState(new UserWonWildBattleCompleteState(myMode));
+        myMode.setOptionState(myMode.getBattleCompleteState(true));
     }
 
     public boolean isOver () {
