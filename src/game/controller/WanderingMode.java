@@ -51,6 +51,7 @@ public class WanderingMode extends AbstractMode {
         }
         for (AbstractViewable obj : getViewableObjectsOnScreen()) {
             // System.out.println("act object: "+obj.getLoc());
+            System.out.println(obj.getClass().toString());
             obj.doFrame(getModel().getWorld(), this.getInput());
         }
         actDynamicStates();

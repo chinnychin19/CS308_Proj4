@@ -39,6 +39,7 @@ public class Constants {
     
     //JSON keywords
     public static final String JSON_PLAYER = "Player";
+    public static String JSON_KEYITEM = "KeyItem";
     
     public static final String JSON_IMAGE = "image";
     public static final String JSON_IMAGE_UP = "image-up";
@@ -183,7 +184,8 @@ public class Constants {
     public static final int MAX_PARTY_SIZE = 6;
 
     
-
+    //Type Matrix
+    public static final String TYPE_MATRIX_KEY = "matrix";
     
 
    
@@ -203,6 +205,7 @@ public class Constants {
     public final static String MAIN_MENU_ITEM = "ITEM";
     public final static String MAIN_MENU_SAVE = "SAVE";
     public final static String MAIN_MENU_EXIT = "EXIT";
+
 
     
     

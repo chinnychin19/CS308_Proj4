@@ -1,17 +1,20 @@
 package game.model.evolution;
 
 import java.awt.Image;
+import util.jsonwrapper.SmartJsonObject;
 import game.model.AbstractModelObject;
 import game.model.GameModel;
 
 public abstract class AbstractEvolution extends AbstractModelObject {
     
+    public AbstractEvolution (GameModel model, SmartJsonObject definition) {
+        super(model, definition);
+    }
+    
     public AbstractEvolution (GameModel model) {
         super(model);
     }
     public abstract boolean shouldEvolve(int currentLevel);
-
-    public abstract String getName();
     
     public abstract int getLevel();
     
