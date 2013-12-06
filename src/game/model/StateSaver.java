@@ -47,7 +47,7 @@ public class StateSaver {
             SmartJsonObject playerJSON =
                     new SmartJsonObject((JSONObject) myJSON.get(Constants.JSON_PLAYER));
 
-            myPlayer.createWorldInstance(playerJSON);
+            myPlayer.readWorld(playerJSON);
         }
         catch (Exception e) {
             e.printStackTrace();

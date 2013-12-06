@@ -31,17 +31,6 @@ public class WildRegion extends AbstractGround {
                        SmartJsonObject objInWord) {
         super(model, world, definition, objInWord);
 
-        try {
-            myProbability = definition.getDouble(Constants.JSON_PROB);
-            myMonsterWrappers = new ArrayList<MonsterWrapper>();
-            for (Object objMonster : definition.getJSONArray(Constants.JSON_MONSTERS)) {
-                SmartJsonObject monsterInfo = new SmartJsonObject((JSONObject) objMonster);
-                myMonsterWrappers.add(new MonsterWrapper(monsterInfo));
-            }
-        }
-        catch (SmartJsonException e) {
-            e.printStackTrace();
-        }
         // TODO: Implement myMonsters
     }
 
@@ -59,6 +48,17 @@ public class WildRegion extends AbstractGround {
                 getModel().getController().setMode(new WildBattleMode(getModel(), getModel()
                         .getController().getView(), toFight));
             }
+        }
+    }
+    
+    @Override
+    protected void readDefinition(SmartJsonObject definition) throws SmartJsonException{
+        super.readDefinition(definition);
+        myProbability = definition.getDouble(Constants.JSON_PROB);
+        myMonsterWrappers = new ArrayList<MonsterWrapper>();
+        for (Object objMonster : definition.getJSONArray(Constants.JSON_MONSTERS)) {
+            SmartJsonObject monsterInfo = new SmartJsonObject((JSONObject) objMonster);
+            myMonsterWrappers.add(new MonsterWrapper(monsterInfo));
         }
     }
 

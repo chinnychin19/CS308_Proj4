@@ -30,14 +30,6 @@ public class Obstacle extends AbstractViewableObject {
                      SmartJsonObject definition,
                      SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
-        try {
-            String imageURL = definition.getString(Constants.JSON_IMAGE);
-            myImage = new ImageIcon(imageURL).getImage();
-        }
-        catch (SmartJsonException e) {
-            e.printStackTrace();
-        }
-
     }
 
     /**
@@ -97,18 +89,24 @@ public class Obstacle extends AbstractViewableObject {
 
     @Override
     protected void onBack () {
-        // TODO Auto-generated method stub
 
     }
-
+    
     @Override
-    protected void createWorldInstance (SmartJsonObject objInWorld) throws SmartJsonException {
-        super.createWorldInstance(objInWorld);
+    protected void readDefinition(SmartJsonObject definition) throws SmartJsonException {
+        super.readDefinition(definition);
+        String imageURL = definition.getString(Constants.JSON_IMAGE);
+        myImage = new ImageIcon(imageURL).getImage();
+       
+    }
+    
+    @Override
+    protected void readWorld(SmartJsonObject objInWorld) throws SmartJsonException {
         myRequiredKeyItems = new HashSet<KeyItem>();
         JSONArray keyItemArray = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
         if (null != keyItemArray) {
             for (Object name : keyItemArray) {
-                myRequiredKeyItems.add(new KeyItem(getModel(), name.toString()));
+                myRequiredKeyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache().getInstance("KeyItem", (String)name)));
             }
         }
     }

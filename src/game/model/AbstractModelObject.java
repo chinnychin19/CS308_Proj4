@@ -14,11 +14,6 @@ import constants.Constants;
 public class AbstractModelObject implements Listable{
     private String myName;
     private GameModel myModel;
-
-    protected AbstractModelObject (GameModel model) {
-        myName = Constants.EMPTY_STRING;
-        myModel = model;
-    }
    
     public AbstractModelObject (GameModel model, SmartJsonObject definition) {
         myModel = model;

@@ -265,14 +265,21 @@ public class Monster extends AbstractModelObject {
     @Override
     protected void readDefinition (SmartJsonObject definition) throws SmartJsonException {
         super.readDefinition(definition);
+
         String imageURL = definition.getString(Constants.JSON_IMAGE);
         myImage = new ImageIcon(imageURL).getImage();
         myCatchRate = definition.getDouble(Constants.JSON_MONSTER_CATCH_RATE);
+
         myType = new Type(definition.getString(Constants.TYPE));
+
         myBaseHP = definition.getInt(Constants.BASE_HP);
         myBaseAttack = definition.getInt(Constants.BASE_ATTACK);
+
         myBaseDefense = definition.getInt(Constants.BASE_DEFENSE);
+
         myAttacks = new ArrayList<AttackWrapper>();
+        System.out.println("PLAYER");
+
         for (Object obj : definition.getJSONArray(Constants.JSON_MONSTER_ALL_ATTACKS)) {
             SmartJsonObject attackJson = new SmartJsonObject((JSONObject) obj);
             String name = attackJson.getString(Constants.NAME);

@@ -5,6 +5,7 @@ import game.controller.Input;
 import java.awt.Image;
 import location.Loc;
 import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.NoIntValueJsonException;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
@@ -23,18 +24,11 @@ public abstract class AbstractViewable extends AbstractModelObject {
         super(model, definition);
         myWorld = world;
         try {
-            createWorldInstance(objInWorld);
+            readWorld(objInWorld);
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
         }
-    }
-    
-    
-    protected void createWorldInstance(SmartJsonObject objInWorld) throws SmartJsonException {
-        int x = objInWorld.getInt(Constants.JSON_X);
-        int y = objInWorld.getInt(Constants.JSON_Y);
-        myLoc = new Loc(x, y);
     }
     
     /**
@@ -89,5 +83,9 @@ public abstract class AbstractViewable extends AbstractModelObject {
         myWorld.removeObject(myLoc);
     }
     
-    
+    protected void readWorld(SmartJsonObject objInWorld) throws SmartJsonException{
+        int x = objInWorld.getInt(Constants.JSON_X);
+        int y = objInWorld.getInt(Constants.JSON_Y);
+        myLoc = new Loc(x, y);
+    }
 }

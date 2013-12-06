@@ -6,7 +6,6 @@ import location.Direction;
 import location.Loc;
 import org.json.simple.JSONObject;
 import util.jsonwrapper.SmartJsonObject;
-import util.jsonwrapper.jsonexceptions.NoStringValueJsonException;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
@@ -86,10 +85,5 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
         myImageLeft = new ImageIcon(imageLeftURL).getImage();
         myImageDown = new ImageIcon(imageDownURL).getImage();
         myImageRight = new ImageIcon(imageRightURL).getImage();
-    }
-    @Override
-    protected void createWorldInstance (SmartJsonObject objInWorld) throws SmartJsonException {
-        super.createWorldInstance(objInWorld);
-        myDirection = Direction.constructFromString(objInWorld.getString(Constants.JSON_ORIENTATION));
     }
 }

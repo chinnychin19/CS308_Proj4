@@ -36,7 +36,7 @@ public class Player extends AbstractCharacter implements Fighter {
                    SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
         myKeyItems = new HashSet<KeyItem>();
-        myKeyItems.add(new KeyItem(model, "razor"));// TODO: REMOVE
+//        myKeyItems.add(new KeyItem(model, "razor"));// TODO: REMOVE
         myParty = new ArrayList<Monster>(); // TODO: populate
         myItems = new ArrayList<Item>(); // TODO: populate
     }
@@ -47,37 +47,36 @@ public class Player extends AbstractCharacter implements Fighter {
      * 
      * @param objInWorld - JSON Object that describes the player
      */
-    @Override
-    public void createWorldInstance (SmartJsonObject objInWorld) throws SmartJsonException {
-        super.createWorldInstance(objInWorld);
-        // ADDING MONSTERS
-        myParty = new ArrayList<Monster>(); // TODO: populate
-        JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWWERCASE);
-        for (Object monsterObj : myMonstersJSON) {
-            SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
-            SmartJsonObject monsterDefinition =
-                    getModel().getDefinitionCache()
-                            .getInstance(Constants.MONSTER_UPPERCASE,
-                                         monsterInWorld.getString(Constants.JSON_NAME));
-            myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
-        }
+    protected void readWorld (SmartJsonObject objInWorld) throws SmartJsonException{
+            super.readWorld(objInWorld);
+            // ADDING MONSTERS
+            myParty = new ArrayList<Monster>(); // TODO: populate
+            JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWWERCASE);
+            for (Object monsterObj : myMonstersJSON) {
+                SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
+                SmartJsonObject monsterDefinition =
+                        getModel().getDefinitionCache()
+                                .getInstance(Constants.MONSTER_UPPERCASE,
+                                             monsterInWorld.getString(Constants.JSON_NAME));
+                myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
+            }
+            
+            int x = objInWorld.getInt(Constants.JSON_X);
+            int y = objInWorld.getInt(Constants.JSON_Y);
+            setLoc(new Loc(x, y), getWorld());
 
-        int x = objInWorld.getInt(Constants.JSON_X);
-        int y = objInWorld.getInt(Constants.JSON_Y);
-        setLoc(new Loc(x, y), getWorld());
+            String directionStr = objInWorld.getString(Constants.JSON_ORIENTATION);
+            setDirection(Direction.constructFromString(directionStr));
 
-        String directionStr = objInWorld.getString(Constants.JSON_ORIENTATION);
-        setDirection(Direction.constructFromString(directionStr));
-
-        // ADDING KEY ITEMS
-        myKeyItems = new HashSet<KeyItem>();
-        JSONArray playerKeyItems = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
-        Collection<KeyItem> keyItems = new ArrayList<KeyItem>();
-        for (Object o : playerKeyItems) {
-            keyItems.add(new KeyItem(getModel(), (String) o));
-        }
-        setKeyItems(keyItems);
-
+            // ADDING KEY ITEMS
+            myKeyItems = new HashSet<KeyItem>();
+            JSONArray playerKeyItems = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
+            Collection<KeyItem> keyItems = new ArrayList<KeyItem>();
+            for (Object o : playerKeyItems) {
+              //TODO: TYLER  keyItems.add(new KeyItem(getModel(), (String) o));
+            }
+            setKeyItems(keyItems);
+       
     }
 
     public void healAllMonsters () {

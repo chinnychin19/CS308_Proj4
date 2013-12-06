@@ -35,7 +35,7 @@ public class FightingNPC extends NPC implements Fighter {
         myPostDialogue = definition.getString(Constants.JSON_POST_DIALOGUE);
         myKeyItems = new ArrayList<KeyItem>();
         for (Object obj : definition.getJSONArray(Constants.JSON_KEYITEMS)) {
-            myKeyItems.add(new KeyItem(model, obj.toString()));
+           // myKeyItems.add(new KeyItem(model, obj.toString()));
         }
         myBet = definition.getInt(Constants.JSON_BET);
         myLineOfSightDistance = definition.getInt(Constants.JSON_LINE_OF_SIGHT_DISTANCE);
