@@ -13,7 +13,7 @@ import game.model.Monster;
 public class MonsterSelectingState extends AbstractListableState {
     private int myChosen;
     public MonsterSelectingState (MainMenuMode mode, int chosen) {
-        super("MONSTER SELECTING", mode);
+        super("", mode);
         myChosen = chosen;
         //myBuffer.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT);
     }

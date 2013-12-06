@@ -39,7 +39,6 @@ public class MonsterSelecterState extends AbstractListableState{
 
     @Override
     protected void onInteract () {
-        System.out.println("SELECTING");
         getMode().setState(new MonsterSelectingState(getMode(), mySelected));
     }
     
