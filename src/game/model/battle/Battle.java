@@ -41,18 +41,23 @@ public class Battle {
         return myEnemyParty;
     }
 
-//    public void setNextPlayerAttack (Attack a) {
-//        // TODO: make abstract player party? extend for wild and trainer battles?
-//        ((WildPlayerParty) myPlayerParty).setNextAttack(a);
-//    }
+    // public void setNextPlayerAttack (Attack a) {
+    // // TODO: make abstract player party? extend for wild and trainer battles?
+    // ((WildPlayerParty) myPlayerParty).setNextAttack(a);
+    // }
 
     public void attackEnemy (Attack a) {
-        double damage = a.doAttack(myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
-        myMode.pushState(new StateTransitionTextOptionState(myMode, String.format("%s did %f damage", myPlayerParty.getCurrentMonster().getName(), damage), this));
+        double damage =
+                a.doAttack(myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
+        myMode.pushState(new StateTransitionTextOptionState(myMode, String
+                .format("%s did %f damage", myPlayerParty.getCurrentMonster().getName(), damage),
+                                                            this));
     }
 
     public void attackPlayer (Attack a) {
-        a.doAttack(myEnemyParty.getCurrentMonster(), myPlayerParty.getCurrentMonster());
+        double damage = a.doAttack(myEnemyParty.getCurrentMonster(), myPlayerParty.getCurrentMonster());
+        myMode.pushState(new TextOptionState(myMode, String
+                .format("%s did %f damage", myEnemyParty.getCurrentMonster().getName(), damage)));
     }
 
     public void registerUserCompleted () {
@@ -135,23 +140,21 @@ public class Battle {
 
     public boolean caughtWildMonster () {
         double randomFactor = CATCH_MIN + Math.random() * (CATCH_MAX - CATCH_MIN);
-        double probability = ((WildMonsterParty) myEnemyParty).getCatchProbability()*randomFactor;
+        double probability = ((WildMonsterParty) myEnemyParty).getCatchProbability() * randomFactor;
         System.out.print(probability + " ---> This is the catch probability in Battle.java");
         return (Math.random() < probability);
     }
-
-
 
     public void doNextTurn () {
         // TODO Auto-generated method stub
         toggleUsersTurn();
         checkNoMonstersDiedOnTurn();
-        if(!myIsUsersTurn){
+        if (!myIsUsersTurn) {
             getEnemyParty().doTurn();
         }
     }
-    
-    private void toggleUsersTurn(){
+
+    private void toggleUsersTurn () {
         myIsUsersTurn = !myIsUsersTurn;
     }
 }
