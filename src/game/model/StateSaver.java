@@ -54,6 +54,7 @@ public class StateSaver {
      */
     @SuppressWarnings("unchecked")
     public void save () throws IOException {
+        myModel.getPlayer().saveThisLoc();
         JSONObject state = new JSONObject();
         JSONArray playerArray = new JSONArray();
         playerArray.add(myModel.getPlayer().getSavedJson());
