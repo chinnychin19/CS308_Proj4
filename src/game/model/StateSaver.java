@@ -44,10 +44,10 @@ public class StateSaver {
         myJSON = JSONReader.getJSON(worldJSONFilepath);
         if (myJSON == null) { throw new Exception(Constants.SAVE_FILE_NOT_FOUND); }
         try {
-            SmartJsonObject playerJSON =
-                    new SmartJsonObject((JSONObject) myJSON.get(Constants.JSON_PLAYER));
-
-            myPlayer.readSaveState(playerJSON);
+           
+            //myPlayer.readSaveState(playerJSON);
+            
+            myWorld.setUpWorld(myJSON);
 //TODO: Read in rest of world
 //            JSONArray defeatedArray = (JSONArray) myJSON.get("Defeated");
 //            for (Object o : defeatedArray) {
@@ -55,7 +55,6 @@ public class StateSaver {
 //                AbstractViewableObject obj = myWorld.getViewableObject(new Loc(npc.getInt("x"), npc.getInt("y")));
 //                ((FightingNPC) obj).setDefeated(true);
 //            }
-            save();
 
         }
         catch (Exception e) {
@@ -70,8 +69,9 @@ public class StateSaver {
     @SuppressWarnings("unchecked")
     public void save () throws IOException {
         JSONObject state = new JSONObject();
-        
-        state.put(Constants.JSON_PLAYER, myModel.getPlayer().getSavedJson());
+        JSONArray playerArray = new JSONArray();
+        playerArray.add(myModel.getPlayer().getSavedJson());
+        state.put(Constants.JSON_PLAYER, playerArray);
         state.put(Constants.JSON_NPC, getJSONArray(myWorld.getAllNPCs()));
         state.put(Constants.JSON_FIGHTING_NPC, getJSONArray(myWorld.getAllFightingNPCs()));
         state.put(Constants.JSON_OBSTACLE, getJSONArray(myWorld.getAllObstacles()));

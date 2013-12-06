@@ -34,10 +34,10 @@ public class World {
         myViewableObjects = new HashMap<Loc, AbstractViewableObject>();
         myGroundObjects = new HashMap<Loc, AbstractGround>();
         String worldJSONFilepath = Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
-                Constants.FILENAME_WORLD;
+                "saveState2.json";
         myModel = model;
         myWorldJSON = JSONReader.getJSON(worldJSONFilepath);
-        setUpWorld();
+        setUpWorld( myWorldJSON );
     }
     
     /**
@@ -100,9 +100,9 @@ public class World {
      * Uses reflection to figure out which classes to instantiate
      * @throws Exception - if file not found
      */
-    protected void setUpWorld () throws Exception {
+    protected void setUpWorld (JSONObject worldJSON) throws Exception {
         for (String viewableCategory : Constants.VIEWABLE_CATEGORIES) {
-            JSONArray objectArray = (JSONArray) myWorldJSON.get(viewableCategory);
+            JSONArray objectArray = (JSONArray) (worldJSON.get(viewableCategory));
 //            debug("Category: "+viewableCategory);
             for (Object obj : objectArray) {
                 SmartJsonObject objInWorld = new SmartJsonObject((JSONObject) obj);
@@ -119,6 +119,10 @@ public class World {
                                                                            objInWorld);
                 addViewable(newViewable);
                 if (viewableCategory.equals(Constants.JSON_PLAYER)) {
+                    if(myPlayer != null){
+                        myViewableObjects.remove(myPlayer.getLoc());
+                        addViewable((Player)newViewable);
+                    }
                     myPlayer = (Player) newViewable;
                 }
             }
