@@ -1,10 +1,7 @@
 package game.model;
 
 import game.controller.Input;
-import game.controller.AbstractMode;
 import game.controller.TrainerBattleMode;
-import game.controller.WildBattleMode;
-import game.controller.state.TextState;
 import java.util.ArrayList;
 import java.util.List;
 import location.Direction;
@@ -31,6 +28,7 @@ public class FightingNPC extends NPC implements Fighter {
     private List<KeyItem> myKeyItems;
     private int myBet;
     private int myLineOfSightDistance;
+    private boolean myIsDefeated;
 
     public FightingNPC (GameModel model,
                         World world,
@@ -43,6 +41,7 @@ public class FightingNPC extends NPC implements Fighter {
             for (Object obj : definition.getJSONArray(Constants.JSON_KEYITEMS)) {
                 myKeyItems.add(new KeyItem(model, obj.toString()));
             }
+            myIsDefeated = false;
             myBet = definition.getInt(Constants.JSON_BET);
             myLineOfSightDistance = definition.getInt(Constants.JSON_LINE_OF_SIGHT_DISTANCE);
             myParty = new ArrayList<Monster>();
@@ -59,6 +58,10 @@ public class FightingNPC extends NPC implements Fighter {
         catch (SmartJsonException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void setDefeated(boolean defeated) {
+        myIsDefeated = defeated;
     }
 
     /**
@@ -91,6 +94,9 @@ public class FightingNPC extends NPC implements Fighter {
      * @return whether or not the NPC can 'see' the player
      */
     private boolean checkLineOfSight () {
+        if (myIsDefeated) {
+            return false;
+        }
         int sight = 0;
         Loc tempLoc = getLoc();
         while (sight <= myLineOfSightDistance) {
@@ -145,8 +151,11 @@ public class FightingNPC extends NPC implements Fighter {
         // Constants.WIDTH - 2*Constants.BORDER_THICKNESS,
         // Constants.DIALOGUE_HEIGHT,
         // getDialogue()));
-        getModel().getController().setMode(new TrainerBattleMode(getModel(), getModel()
-                .getController().getView(), this));
-
+        if (!myIsDefeated) {
+            getModel().getController().setMode(new TrainerBattleMode(getModel(), getModel()
+                                                                     .getController().getView(), this));
+        } else {
+            System.out.println(myPostDialogue);
+        }
     }
 }

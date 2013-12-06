@@ -48,6 +48,12 @@ public class StateSaver {
                     new SmartJsonObject((JSONObject) myJSON.get(Constants.JSON_PLAYER));
 
             myPlayer.loadFromWorld(playerJSON);
+            JSONArray defeatedArray = (JSONArray) myJSON.get("Defeated");
+            for (Object o : defeatedArray) {
+                SmartJsonObject npc = new SmartJsonObject((JSONObject) o);
+                AbstractViewableObject obj = myWorld.getViewableObject(new Loc(npc.getInt("x"), npc.getInt("y")));
+                ((FightingNPC) obj).setDefeated(true);
+            }
         }
         catch (Exception e) {
             e.printStackTrace();

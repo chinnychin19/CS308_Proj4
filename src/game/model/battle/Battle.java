@@ -8,6 +8,7 @@ import game.controller.optionState.UserLostWildBattleCompleteState;
 import game.controller.optionState.UserWonWildBattleCompleteState;
 import game.controller.state.option.TextOptionState;
 import game.controller.state.option.StateTransitionTextOptionState;
+import game.model.FightingNPC;
 import game.model.LevelChange;
 import game.model.Monster;
 import game.model.attack.Attack;
@@ -108,6 +109,7 @@ public class Battle {
     }
 
     private void userWon () {
+        ((FightingNPC) myEnemyParty.getFighter()).setDefeated(true);
         myMode.setOptionState(new UserWonWildBattleCompleteState(myMode));
     }
 
