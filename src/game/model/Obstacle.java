@@ -102,11 +102,12 @@ public class Obstacle extends AbstractViewableObject {
     
     @Override
     protected void readWorld(SmartJsonObject objInWorld) throws SmartJsonException {
+        super.readWorld(objInWorld);
         myRequiredKeyItems = new HashSet<KeyItem>();
         JSONArray keyItemArray = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
         if (null != keyItemArray) {
             for (Object name : keyItemArray) {
-                myRequiredKeyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache().getInstance("KeyItem", (String)name)));
+                myRequiredKeyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache().getInstance("KeyItem", name.toString())));
             }
         }
     }
