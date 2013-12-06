@@ -16,12 +16,14 @@ public class PartyOptionState extends AbstractOptionState{
     
     public PartyOptionState (AbstractBattleMode mode, boolean canGoBack){
         super(mode,"PARTY",canGoBack);
+
     }
     
     @Override
     public void paint () {
         // TODO Auto-generated method stub
         List<Monster> monsters = getMonsters();
+        myNumOptions = monsters.size();
 
         myBuffer.setColor(Color.cyan);
         myBuffer.fillRect(0, 0, myBuffer.getClipBounds().width,
@@ -34,17 +36,15 @@ public class PartyOptionState extends AbstractOptionState{
         int x = 15;
         int y = 30;
         int inc = 50;
+        
         for (int i = 0; i < monsters.size(); i++) {
-
+            
             if (i % 3 == 0 && i != 0) {
                 x = x + 3 * inc;
                 y = 30;
             }
-
-            if (i == mySelected) {
-                myBuffer.setColor(Color.white);
-            }
-
+            if (i == mySelected) myBuffer.setColor(Color.white); 
+            
             myBuffer.drawString(monsters.get(i).getName(), x, y + i % 3 * inc);
             if (i == mySelected) {
                 myBuffer.setColor(Color.black);

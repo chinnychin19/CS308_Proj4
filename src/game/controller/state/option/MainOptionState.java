@@ -10,6 +10,8 @@ import java.util.List;
 
 public class MainOptionState extends AbstractOptionState {
 
+    List<AbstractOptionState> myOptions;
+    
     public MainOptionState (AbstractBattleMode mode) {
         super(mode, "MAIN");
         // TODO: feels dirty
@@ -19,6 +21,7 @@ public class MainOptionState extends AbstractOptionState {
         myOptions.add(new ItemOptionState(mode));
         myOptions.add(new CatchOptionState(mode));
         myOptions.add(new RunAwayOptionState(mode));
+        myNumOptions = myOptions.size();
     }
 
     @Override
