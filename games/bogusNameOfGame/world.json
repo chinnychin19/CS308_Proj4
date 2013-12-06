@@ -39,7 +39,8 @@
         "name": "fighter1",
         "x": "0",
         "y": "6",
-        "orientation": "left"
+        "orientation": "left",
+        "defeated": "false",
       }],
 
     "Obstacle": [{

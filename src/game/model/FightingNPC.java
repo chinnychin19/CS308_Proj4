@@ -159,4 +159,11 @@ public class FightingNPC extends NPC implements Fighter {
             System.out.println(myPostDialogue);
         }
     }
+    
+    @Override
+    public JSONObject getSavedJson(){
+        JSONObject toSave = super.getSavedJson();
+        toSave.put("defeated", myIsDefeated);
+        return toSave;
+    }
 }
