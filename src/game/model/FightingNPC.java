@@ -42,7 +42,6 @@ public class FightingNPC extends NPC implements Fighter {
                 myKeyItems.add(new KeyItem(model, getModel().getDefinitionCache()
                         .getInstance(Constants.JSON_KEYITEM, obj.toString())));
             }
-            myIsDefeated = false;
             myBet = definition.getInt(Constants.JSON_BET);
             myLineOfSightDistance = definition.getInt(Constants.JSON_LINE_OF_SIGHT_DISTANCE);
             myParty = new ArrayList<Monster>();
@@ -165,5 +164,11 @@ public class FightingNPC extends NPC implements Fighter {
         JSONObject toSave = super.getSavedJson();
         toSave.put("defeated", myIsDefeated);
         return toSave;
+    }
+    
+    @Override
+    protected void readWorld(SmartJsonObject objInWorld) throws SmartJsonException {
+        super.readWorld(objInWorld);
+        myIsDefeated = objInWorld.getBoolean("defeated");
     }
 }
