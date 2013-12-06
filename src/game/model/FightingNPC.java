@@ -16,6 +16,13 @@ import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
+/**
+ * A class used to create FightingNPCs and to interact with the Player.  The NPC will check to see whether or not the Player is within its line of sight.  If so,
+ * the NPC will move towards the player and go into battle mode.
+ * @author rtoussaint
+ *
+ */
+
 public class FightingNPC extends NPC implements Fighter {
     private List<Monster> myParty;
     private String myPostDialogue;
@@ -50,33 +57,25 @@ public class FightingNPC extends NPC implements Fighter {
     }
     
     /**
-     * Check line of site of NPC with current positionf of the player
+     * Check to see if the FightingNPC should interact with the Player
      */
     @Override
     public void doFrame(World w, Input input) {
     	 
     	boolean playerWithinRange = checkLineOfSight();
     	if(playerWithinRange){
-    		System.out.println("WE ARE HERE!!!");
-    		//move NPC to player
     		moveTowardsPlayer();
-    		
-    		//onInteract();
-    		
+        	//TODO: Chinmay uncomment onInteract method when you implement it.
+    		//onInteract();	
+    		//TODO: move NPC back to original spot??
     	}
     }
         
-    private void moveTowardsPlayer() {
-    	///TODO: freeze player keyboard for movement
-    	Direction oppositeDirection = Direction.opposite(getDirection());
-    	while(!getLoc().equals(getModel().getPlayer().getLoc().adjacentLoc(oppositeDirection))){
-    		setLoc(getLoc().adjacentLoc(getDirection()), getWorld());
-    	}
-    	getModel().getPlayer().setDirection(oppositeDirection);
-    	
-    	
-	}
 
+    /**
+     * Check to see if the player is within the line of sight of the player
+     * @return whether or not the NPC can 'see' the player
+     */
 	private boolean checkLineOfSight() {
     	int sight = 0;
 		Loc tempLoc = getLoc();
@@ -88,6 +87,18 @@ public class FightingNPC extends NPC implements Fighter {
     		sight++;	
     	}
 		return false;
+	}
+	
+	/**
+	 * move towards the player when it is within the NPC's line of sight
+	 */
+    private void moveTowardsPlayer() {
+    	///TODO: freeze player keyboard for movement/animation
+    	Direction oppositeDirection = Direction.opposite(getDirection());
+    	while(!getLoc().equals(getModel().getPlayer().getLoc().adjacentLoc(oppositeDirection))){
+    		setLoc(getLoc().adjacentLoc(getDirection()), getWorld());
+    	}
+    	getModel().getPlayer().setDirection(oppositeDirection);
 	}
 
 	/**
