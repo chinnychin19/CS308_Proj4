@@ -1,5 +1,6 @@
 package game.controller;
 
+import util.Sound;
 import game.controller.state.option.AbstractMainOptionState;
 import game.controller.state.option.WildMainOptionState;
 import game.model.GameModel;
@@ -17,8 +18,7 @@ import game.view.GameView;
  * 
  */
 public class WildBattleMode extends AbstractBattleMode {
-    
-    
+
     public WildBattleMode (GameModel model, GameView view, Monster monster) {
         super(model, view);
         PlayerParty attacker =
@@ -29,6 +29,7 @@ public class WildBattleMode extends AbstractBattleMode {
         defender.setBattle(myBattle);
         mySelectedOption = 0;
         mySelectedAttack = 0;
+        mySound = new Sound("music/nfl.wav");
     }
 
     @Override

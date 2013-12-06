@@ -67,6 +67,7 @@ public class GameController {
     private void initModes () {
         myMainMode = new WanderingMode(myModel, myView);
         myCurrentMode = myMainMode;
+        setMode(myCurrentMode); //initializes music
     }
 
 }

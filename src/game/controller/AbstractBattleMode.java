@@ -1,5 +1,6 @@
 package game.controller;
 
+import util.Sound;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -53,6 +54,7 @@ public abstract class AbstractBattleMode extends AbstractMode {
      */
     @Override
     public void turnOn () {
+        super.turnOn();
         getView().addKeyListener(this);
         initBuffers();
     }

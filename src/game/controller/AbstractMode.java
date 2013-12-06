@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import util.Sound;
 import constants.Constants;
 import game.controller.state.AbstractState;
 import game.model.GameModel;
@@ -29,6 +30,7 @@ public abstract class AbstractMode extends KeyAdapter {
     private GameView myView;
     private Graphics myGraphics;
     private Input myInput;
+    protected Sound mySound;
     private long myLastKeyPressTime;
 	private Queue<AbstractState> myStates;
 
@@ -58,9 +60,13 @@ public abstract class AbstractMode extends KeyAdapter {
     //super should be called in sub classes
     public void turnOff() {
         getInput().resetAllInputs();
+        mySound.stop();
     }
     
-    public abstract void turnOn();
+    public void turnOn() {
+        System.out.println("starting");
+        mySound.start();
+    }
 
     public Input getInput(){
     	return myInput;
