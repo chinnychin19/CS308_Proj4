@@ -95,12 +95,18 @@ public class World {
         return myPlayer.getLoc().adjacentLoc(myPlayer.getDirection());
     }
     
+    private void resetWorld() {
+        myViewableObjects.clear();
+        myGroundObjects.clear();
+    }
+    
     /**
      * Creates the world from JSON
      * Uses reflection to figure out which classes to instantiate
      * @throws Exception - if file not found
      */
     protected void setUpWorld (JSONObject worldJSON) throws Exception {
+        resetWorld();
         for (String viewableCategory : Constants.VIEWABLE_CATEGORIES) {
             JSONArray objectArray = (JSONArray) (worldJSON.get(viewableCategory));
 //            debug("Category: "+viewableCategory);

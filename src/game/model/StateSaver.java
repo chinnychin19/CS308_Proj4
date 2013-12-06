@@ -44,18 +44,7 @@ public class StateSaver {
         myJSON = JSONReader.getJSON(worldJSONFilepath);
         if (myJSON == null) { throw new Exception(Constants.SAVE_FILE_NOT_FOUND); }
         try {
-           
-            //myPlayer.readSaveState(playerJSON);
-            
-            myWorld.setUpWorld(myJSON);
-//TODO: Read in rest of world
-//            JSONArray defeatedArray = (JSONArray) myJSON.get("Defeated");
-//            for (Object o : defeatedArray) {
-//                SmartJsonObject npc = new SmartJsonObject((JSONObject) o);
-//                AbstractViewableObject obj = myWorld.getViewableObject(new Loc(npc.getInt("x"), npc.getInt("y")));
-//                ((FightingNPC) obj).setDefeated(true);
-//            }
-
+            myWorld = new World(myNameOfGame, myModel);
         }
         catch (Exception e) {
             e.printStackTrace();
