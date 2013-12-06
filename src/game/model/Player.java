@@ -36,7 +36,6 @@ public class Player extends AbstractCharacter implements Fighter {
                    SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
         myKeyItems = new HashSet<KeyItem>();
-        myKeyItems.add(new KeyItem(model, "razor"));// TODO: REMOVE
         myParty = new ArrayList<Monster>(); // TODO: populate
         myItems = new ArrayList<Item>(); // TODO: populate
         loadFromWorld(objInWorld);
@@ -51,7 +50,7 @@ public class Player extends AbstractCharacter implements Fighter {
     public void loadFromWorld (SmartJsonObject objInWorld) {
         try {
             // ADDING MONSTERS
-            myParty = new ArrayList<Monster>(); // TODO: populate
+            myParty = new ArrayList<Monster>();
             JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWWERCASE);
             for (Object monsterObj : myMonstersJSON) {
                 SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);

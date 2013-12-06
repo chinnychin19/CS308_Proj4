@@ -8,7 +8,8 @@ import game.controller.optionState.UserWonWildBattleCompleteState;
 import game.controller.state.option.MainOptionState;
 import game.controller.state.option.TextOptionState;
 import game.controller.state.option.StateTransitionTextOptionState;
-import game.model.StateChange;
+import game.model.LevelChange;
+import game.model.Monster;
 import game.model.attack.Attack;
 
 
@@ -42,57 +43,45 @@ public class Battle {
         return myEnemyParty;
     }
 
-//    public void setNextPlayerAttack (Attack a) {
-//        // TODO: make abstract player party? extend for wild and trainer battles?
-//        ((WildPlayerParty) myPlayerParty).setNextAttack(a);
-//    }
-
     public void attackEnemy (Attack a) {
         double damage = a.doAttack(myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
-        myMode.pushState(new StateTransitionTextOptionState(myMode, String.format("%s did %f damage", myPlayerParty.getCurrentMonster().getName(), damage), this));
+        myMode.pushState(new StateTransitionTextOptionState(myMode, String.format("Your %s did %f damage", myPlayerParty.getCurrentMonster().getName(), damage), this));
     }
 
     public void attackPlayer (Attack a) {
         double damage = a.doAttack(myEnemyParty.getCurrentMonster(), myPlayerParty.getCurrentMonster());
-        myMode.pushState(new TextOptionState(myMode, String.format("%s did %f damage", myEnemyParty.getCurrentMonster().getName(), damage)));
+        myMode.pushState(new TextOptionState(myMode, String.format("Enemy %s did %f damage", myEnemyParty.getCurrentMonster().getName(), damage)));
     }
     
-    private boolean checkNoMonstersDiedOnTurn () {
-        boolean shouldContinue = true;
-        System.out.println("checking Monsters");
-        // check if battle is over first
-        
-        if (myPlayerParty.getNumberOfAliveMonsters() == 0 ) {
-            userLost();
-            shouldContinue = false;
-        }
-
-        if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
-            userWon();
-            shouldContinue = false;
-        }
-        
+    private void handleMonsterDeaths () {
         if (myPlayerParty.getCurrentMonster().isDead()) {
             handleUserMonsterDied();
         }
-        
         if (myEnemyParty.getCurrentMonster().isDead()){
-            handleWildMonsterDied();
+            handleEnemyMonsterDied();
         }
-                
-        return shouldContinue;
     }
 
     private void handleUserMonsterDied () {
-        myMode.setOptionState(new TextOptionState(myMode, Constants.PROMPT_MONSTER_DEAD,
-                                            new LivingPartyOptionState(myMode, false)));
+        if (myPlayerParty.getNumberOfAliveMonsters() == 0) {
+            userLost();
+        }
+        else {
+            myMode.setOptionState(new TextOptionState(myMode, Constants.PROMPT_MONSTER_DEAD,
+                                                      new LivingPartyOptionState(myMode, false)));
+        }
     }
 
-    private void handleWildMonsterDied () {
-        System.out.println("Wild Monster Died");
-        StateChange state = myPlayerParty.getCurrentMonster().addExperience(myEnemyParty.getCurrentMonster().getRewardExperience());
-        System.out.println(state);
-        switch(state){
+    //TODO: string constants
+    private void handleEnemyMonsterDied () {
+        myIsUsersTurn = true;
+        LevelChange change = myPlayerParty.getCurrentMonster().addExperience(myEnemyParty.getCurrentMonster().getRewardExperience());
+        if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
+            userWon();
+        } else {
+            myEnemyParty.chooseRandomNextMonster();
+        }
+        switch(change){
             case NONE:
                 break;
             case LEVEL_UP:
@@ -112,6 +101,10 @@ public class Battle {
     }
     
     private void userLost () {
+        // Heal enemy's monsters for the next time you battle
+        for (Monster m: myEnemyParty.getMonsters()) {
+            m.heal();
+        }
         myMode.setOptionState(new UserLostWildBattleCompleteState(myMode));
     }
 
@@ -138,10 +131,9 @@ public class Battle {
     }
 
     public void doNextTurn () {
-        // TODO Auto-generated method stub
         toggleUsersTurn();
-        checkNoMonstersDiedOnTurn();
-        if(!myIsUsersTurn){
+        handleMonsterDeaths(); // sets myIsUsersTurn to true if enemy dies
+        if(!myIsUsersTurn) {
             getEnemyParty().doTurn();
         }
     }

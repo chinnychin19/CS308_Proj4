@@ -2,11 +2,11 @@ package game.model;
 
 import game.controller.AbstractBattleMode;
 
-public enum StateChange {
+public enum LevelChange {
     
     NONE, LEVEL_UP, EVOLUTION, BOTH;
     
-    public static StateChange getStateChange(boolean level, boolean evolution){
+    public static LevelChange getStateChange(boolean level, boolean evolution){
         if(level){
             if(evolution){
                 return BOTH;

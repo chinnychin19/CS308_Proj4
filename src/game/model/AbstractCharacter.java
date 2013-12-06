@@ -84,6 +84,10 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
     
     @Override
     protected void onInteract() {
+        facePlayer();
+    }
+    
+    protected void facePlayer() {
         setDirection(Direction.opposite(getWorld().getPlayer().getDirection()));
     }
 }

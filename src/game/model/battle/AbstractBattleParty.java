@@ -25,6 +25,7 @@ public abstract class AbstractBattleParty {
         myController = controller;
         myFighter = fighter;
         myMonsters = fighter.getParty();
+        System.out.println("monsters: "+ myMonsters);
         myCurrentMonster = getFirstAliveMonster();
     }
     
@@ -92,5 +93,11 @@ public abstract class AbstractBattleParty {
 
     public void addMonster (Monster currentMonster) {
         myMonsters.add(currentMonster);
+    }
+
+    public void chooseRandomNextMonster () {
+        List<Monster> possNext = getAliveMonsters();
+        int index = (int)(Math.random() * possNext.size());
+        myCurrentMonster = possNext.get(index);
     }
 }

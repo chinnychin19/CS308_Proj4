@@ -163,7 +163,7 @@ public class Monster extends AbstractModelObject {
     
     public void heal(){
     	myCurHP = myMaxHP;
-
+    	//TODO: set status to okay
     }
     
     /**
@@ -313,22 +313,27 @@ public class Monster extends AbstractModelObject {
         return 300; //TODO: Actually implement
     }
 
-    public StateChange addExperience (int exp) {
-        boolean level_up = false, evolved = false;
+    public LevelChange addExperience (int exp) {
+        boolean didLevelUp = false, didEvolve = false;
         
         System.out.printf("Adding experience: %d exp to next: %d curr exp: %d \n", exp, myExpToNextLevel, myExp);
         myExp+= exp;
         while(myExp >= myExpToNextLevel){
-            myLevel++;
-            level_up = true;
+            levelUp();
+            didLevelUp = true;
             myExp = myExp - myExpToNextLevel; 
             if(myEvolution.exists() && myEvolution.shouldEvolve(myLevel)){
                 System.out.println("Evolving!!!");
-                evolved = true;
+                didEvolve = true;
                 evolve();
             }
         }
-        return StateChange.getStateChange(level_up, evolved);
+        return LevelChange.getStateChange(didLevelUp, didEvolve);
+    }
+    
+    private void levelUp() {
+        myLevel++;
+        // TODO: update stats
     }
     
     private AbstractEvolution readEvolution(SmartJsonObject definition){
@@ -343,5 +348,6 @@ public class Monster extends AbstractModelObject {
         setName(myEvolution.getName());
         setImage(myEvolution.getImage());
         setEvolution(myEvolution.getNextEvolution());
+        // TODO: update stats
     }
 }
