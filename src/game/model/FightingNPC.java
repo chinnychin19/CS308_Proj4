@@ -1,7 +1,10 @@
 package game.model;
 
+import game.controller.AbstractMode;
 import game.controller.Input;
 import game.controller.TrainerBattleMode;
+import game.controller.state.ModeTransitionTextState;
+import game.controller.state.TextState;
 import java.util.ArrayList;
 import java.util.List;
 import location.Direction;
@@ -152,9 +155,26 @@ public class FightingNPC extends NPC implements Fighter {
         // Constants.DIALOGUE_HEIGHT,
         // getDialogue()));
         if (!myIsDefeated) {
-            getModel().getController().setMode(new TrainerBattleMode(getModel(), getModel()
-                                                                     .getController().getView(), this));
+            
+            AbstractMode trainerBattleMode = new TrainerBattleMode(getModel(), getModel()
+                                                                     .getController().getView(), this);
+            AbstractMode mode = getModel().getController().getMode();
+
+           mode.addDynamicState(new ModeTransitionTextState(mode, Constants.BORDER_THICKNESS,
+                                                            Constants.HEIGHT - Constants.BORDER_THICKNESS -
+                                                            Constants.DIALOGUE_HEIGHT,
+                                                    Constants.WIDTH - 2 * Constants.BORDER_THICKNESS,
+                                                    Constants.DIALOGUE_HEIGHT, getDialogue(), trainerBattleMode));
+           
         } else {
+            AbstractMode mode = getModel().getController().getMode();
+            mode.addDynamicState(new TextState(mode,
+                                               Constants.BORDER_THICKNESS,
+                                               Constants.HEIGHT - Constants.BORDER_THICKNESS -
+                                                       Constants.DIALOGUE_HEIGHT,
+                                               Constants.WIDTH - 2 * Constants.BORDER_THICKNESS,
+                                               Constants.DIALOGUE_HEIGHT,
+                                               myPostDialogue));
             System.out.println(myPostDialogue);
         }
     }
