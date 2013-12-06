@@ -29,14 +29,23 @@ public class PartyOptionState extends AbstractOptionState{
         myBuffer.setColor(Color.black);
         myBuffer.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 
+        // TODO : For Tyler - This is duplicated code - same as in MainOptionState.java
+
         int x = 15;
         int y = 30;
         int inc = 50;
         for (int i = 0; i < monsters.size(); i++) {
+
+            if (i % 3 == 0 && i != 0) {
+                x = x + 3 * inc;
+                y = 30;
+            }
+
             if (i == mySelected) {
                 myBuffer.setColor(Color.white);
             }
-            myBuffer.drawString(monsters.get(i).getName(), x, y + i * inc);
+
+            myBuffer.drawString(monsters.get(i).getName(), x, y + i % 3 * inc);
             if (i == mySelected) {
                 myBuffer.setColor(Color.black);
             }

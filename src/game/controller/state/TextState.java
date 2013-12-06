@@ -18,7 +18,7 @@ public class TextState extends AbstractState {
 	}
 	@Override
 	protected void onBack() {
-		myMode.removeDynamicState(this);
+		//TODO: FIX //myMode.removeDynamicState(this);
 	}
 
 	@Override

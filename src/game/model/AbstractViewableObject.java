@@ -32,11 +32,11 @@ public abstract class AbstractViewableObject extends AbstractViewable {
     
     @Override
     public void doFrame(World w, Input input) {
-    	if (input.isKeyInteractPressed()) {
+    	if (input.isKeyInteractPressed() && getLoc().equals(getWorld().locInFrontOfPlayer())) {
             onInteract();
         }
 
-        if (input.isKeyBackPressed()) {
+        if (input.isKeyBackPressed() && getLoc().equals(getWorld().locInFrontOfPlayer())) {
             onBack();
         }
     }
