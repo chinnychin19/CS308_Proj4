@@ -1,6 +1,8 @@
 package game.model.evolution;
 
 import java.awt.Image;
+import java.util.List;
+import game.model.AttackWrapper;
 import game.model.GameModel;
 
 public class NullEvolution extends AbstractEvolution {
@@ -38,6 +40,12 @@ public class NullEvolution extends AbstractEvolution {
     @Override
     public boolean shouldEvolve (int currentLevel) {
         return false;
+    }
+
+    @Override
+    public List<AttackWrapper> getAttacks () {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

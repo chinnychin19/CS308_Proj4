@@ -22,8 +22,8 @@
           "expToNextLevel" : "300",
           "maxHP" : "130",
           "curHP" : "130",
-          "attack" : "60",
-          "defense" : "70"
+          "attack" : "80",
+          "defense" : "95"
           }
         ]
     }],
