@@ -90,9 +90,5 @@ public abstract class AbstractListableOptionState extends AbstractOptionState {
          if (input.isKeyRightPressed()) {
              if (mySelected + 3 < list.size()) mySelected = mySelected + 3;
          }
-        
-
     }
- 
-
 }
