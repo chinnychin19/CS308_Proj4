@@ -1,5 +1,7 @@
 package game.controller;
 
+import game.controller.state.option.AbstractMainOptionState;
+import game.controller.state.option.WildMainOptionState;
 import game.model.GameModel;
 import game.model.Monster;
 import game.model.battle.Battle;
@@ -27,5 +29,10 @@ public class WildBattleMode extends AbstractBattleMode {
         defender.setBattle(myBattle);
         mySelectedOption = 0;
         mySelectedAttack = 0;
+    }
+
+    @Override
+    public AbstractMainOptionState getAMainOptionState () {
+        return new WildMainOptionState(this);
     }
 }

@@ -2,7 +2,7 @@ package game.controller.optionState;
 
 import constants.Constants;
 import game.controller.AbstractBattleMode;
-import game.controller.state.option.MainOptionState;
+import game.controller.state.option.AbstractMainOptionState;
 import game.controller.state.option.TextOptionState;
 
 

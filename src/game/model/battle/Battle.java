@@ -2,8 +2,8 @@ package game.model.battle;
 
 import constants.Constants;
 import game.controller.AbstractBattleMode;
+import game.controller.TrainerBattleMode;
 import game.controller.optionState.LivingPartyOptionState;
-import game.controller.state.option.MainOptionState;
 import game.controller.optionState.UserLostWildBattleCompleteState;
 import game.controller.optionState.UserWonWildBattleCompleteState;
 import game.controller.state.option.TextOptionState;
@@ -50,7 +50,9 @@ public class Battle {
 
     public void attackPlayer (Attack a) {
         double damage = a.doAttack(myEnemyParty.getCurrentMonster(), myPlayerParty.getCurrentMonster());
-        myMode.pushState(new TextOptionState(myMode, String.format("Enemy %s did %f damage", myEnemyParty.getCurrentMonster().getName(), damage)));
+        myMode.pushState(new TextOptionState(myMode, String
+                .format("%s did %f damage", myEnemyParty.getCurrentMonster().getName(), damage)));
+
     }
     
     private void handleMonsterDeaths () {
@@ -109,7 +111,9 @@ public class Battle {
     }
 
     private void userWon () {
-        ((FightingNPC) myEnemyParty.getFighter()).setDefeated(true);
+        if (myMode instanceof TrainerBattleMode) {
+            ((FightingNPC) myEnemyParty.getFighter()).setDefeated(true);
+        }
         myMode.setOptionState(new UserWonWildBattleCompleteState(myMode));
     }
 
@@ -119,12 +123,10 @@ public class Battle {
 
     public boolean caughtWildMonster () {
         double randomFactor = CATCH_MIN + Math.random() * (CATCH_MAX - CATCH_MIN);
-        double probability = ((WildMonsterParty) myEnemyParty).getCatchProbability()*randomFactor;
+        double probability = ((WildMonsterParty) myEnemyParty).getCatchProbability() * randomFactor;
         System.out.print(probability + " ---> This is the catch probability in Battle.java");
         return (Math.random() < probability);
     }
-
-
 
     public void doNextTurn () {
         toggleUsersTurn();
@@ -133,8 +135,8 @@ public class Battle {
             getEnemyParty().doTurn();
         }
     }
-    
-    private void toggleUsersTurn(){
+
+    private void toggleUsersTurn () {
         myIsUsersTurn = !myIsUsersTurn;
     }
 }

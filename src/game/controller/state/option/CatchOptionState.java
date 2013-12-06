@@ -34,7 +34,7 @@ public class CatchOptionState extends AbstractOptionState {
 
     @Override
     protected void onBack () {
-        myMode.setOptionState(new MainOptionState(myMode));
+        myMode.setOptionState(myMode.getAMainOptionState());
     }
     
     public void acquireWildMonster () {

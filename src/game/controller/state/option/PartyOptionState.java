@@ -40,14 +40,14 @@ public class PartyOptionState extends AbstractListableOptionState{
         List<Monster> monsters = getMonsters();
         Monster selectedMonster = monsters.get(mySelected);
         myMode.getBattle().getPlayerParty().setCurrentMonster(selectedMonster);
-        myMode.setOptionState(new MainOptionState(myMode));
+        myMode.setOptionState(myMode.getAMainOptionState());
         myMode.getBattle().doNextTurn();
     }
     
     @Override
     protected void onBack () {
         if(canGoBack()){
-            myMode.setOptionState(new MainOptionState(myMode));
+            myMode.setOptionState(myMode.getAMainOptionState());
         }
     }
 
