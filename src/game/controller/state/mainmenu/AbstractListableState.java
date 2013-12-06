@@ -2,6 +2,7 @@ package game.controller.state.mainmenu;
 
 import java.awt.Color;
 import java.util.List;
+import constants.Constants;
 import game.controller.AbstractMode;
 import game.controller.Input;
 import game.controller.MainMenuMode;
@@ -20,9 +21,10 @@ public abstract class AbstractListableState extends AbstractMenuState {
     }
     
     protected <S> void paintList(List<S> list) throws NotListableException{
-        int x = 15;
-        int y = 30;
-        int inc = 50;
+        int x = Constants.START_TEXT_X;
+        int y = Constants.START_TEXT_Y;
+        int inc = Constants.START_TEXT_INC;
+        
         for (int i = 0; i < list.size(); i++) {
             if (i == mySelected) {
                 myBuffer.setColor(Color.white);

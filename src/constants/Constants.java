@@ -188,14 +188,21 @@ public class Constants {
 
    
 
-    
+    //State Text Constants
+    public final static int START_TEXT_X = 15;
+    public final static int START_TEXT_Y = 30;
+    public final static int START_TEXT_INC = 50;
+
     
     //Main Menu 
     public final static int MAIN_MENU_X = 0;
     public final static int MAIN_MENU_Y = 0;
     public final static int MAIN_MENU_WIDTH = WIDTH;
     public final static int MAIN_MENU_HEIGHT = HEIGHT;
-
+    public final static String MAIN_MENU_PARTY = "PARTY";
+    public final static String MAIN_MENU_ITEM = "ITEM";
+    public final static String MAIN_MENU_SAVE = "SAVE";
+    public final static String MAIN_MENU_EXIT = "EXIT";
 
     
     
