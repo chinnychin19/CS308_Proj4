@@ -268,15 +268,13 @@ public class Monster extends AbstractModelObject {
 
         String imageURL = definition.getString(Constants.JSON_IMAGE);
         myImage = new ImageIcon(imageURL).getImage();
+        
+        //TODO : Put all these statistics in a map, ya dingus
         myCatchRate = definition.getDouble(Constants.JSON_MONSTER_CATCH_RATE);
-
         myType = new Type(definition.getString(Constants.TYPE));
-
         myBaseHP = definition.getInt(Constants.BASE_HP);
         myBaseAttack = definition.getInt(Constants.BASE_ATTACK);
-
         myBaseDefense = definition.getInt(Constants.BASE_DEFENSE);
-
         myAttacks = new ArrayList<AttackWrapper>();
 
         for (Object obj : definition.getJSONArray(Constants.JSON_MONSTER_ALL_ATTACKS)) {
@@ -376,5 +374,10 @@ public class Monster extends AbstractModelObject {
         setImage(myEvolution.getImage());
         setEvolution(myEvolution.getNextEvolution());
         // TODO: update stats
+    }
+
+    public void changeStatistic (String myStatistic, int myChange) {
+        // TODO Auto-generated method stub
+        
     }
 }

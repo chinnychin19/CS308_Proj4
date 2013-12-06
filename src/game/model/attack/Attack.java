@@ -59,6 +59,12 @@ public class Attack extends AbstractModelObject {
         double damage = damageFunction(attacker.getLevel(), attack, defense, myPower, multiplier);
         System.out.println("damage: "+damage);
         defender.changeHealth((int)(-damage));
+        for(StatisticEffect se : myStatisticEffects){
+            Monster receiver = (se.myTarget == Target.SELF) ? attacker : defender;
+            receiver.changeStatistic(se.myStatistic, se.myChange);
+            
+            
+        }
         return damage;
     }
     
