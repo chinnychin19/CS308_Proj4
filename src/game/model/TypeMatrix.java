@@ -3,6 +3,7 @@ package game.model;
 import java.util.HashMap;
 import java.util.Map;
 import org.json.simple.JSONObject;
+import constants.Constants;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
@@ -17,14 +18,13 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
  *
  */
 public class TypeMatrix extends AbstractModelObject {
-    private static final String MATRIX_KEY = "matrix";
     private Map<Type, Map<Type, Double>> myTypeMap;
 
     public TypeMatrix (GameModel model, SmartJsonObject definition) {
         super(model, definition);
         myTypeMap = new HashMap<Type, Map<Type, Double>>();
         try {
-            SmartJsonObject matrix = definition.getSmartJsonObject(MATRIX_KEY);
+            SmartJsonObject matrix = definition.getSmartJsonObject(Constants.TYPE_MATRIX_KEY);
             for (Object key : matrix.keySet()) {
                 String s = (String) key;
                 Type t = new Type(s);

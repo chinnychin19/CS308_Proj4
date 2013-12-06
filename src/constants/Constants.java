@@ -183,7 +183,8 @@ public class Constants {
     public static final int MAX_PARTY_SIZE = 6;
 
     
-
+    //Type Matrix
+    public static final String TYPE_MATRIX_KEY = "matrix";
     
 
    

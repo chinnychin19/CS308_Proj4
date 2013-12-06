@@ -22,7 +22,7 @@ import constants.Constants;
  * @author rtoussaint
  *
  */
-
+//TODO: Use readDefinition 
 public class FightingNPC extends NPC implements Fighter {
     private List<Monster> myParty;
     private String myPostDialogue;

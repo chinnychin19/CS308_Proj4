@@ -23,7 +23,7 @@ public class AbstractModelObject implements Listable{
     public AbstractModelObject (GameModel model, SmartJsonObject definition) {
         myModel = model;
         try {
-            myName = definition.getString(Constants.JSON_NAME);
+            readDefinition(definition);
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
@@ -51,5 +51,9 @@ public class AbstractModelObject implements Listable{
      */
     public void setName (String name) {
         myName = name;
+    }
+    
+    protected void readDefinition (SmartJsonObject definition) throws SmartJsonException {
+        myName = definition.getString(Constants.JSON_NAME);
     }
 }
