@@ -31,6 +31,7 @@ public abstract class AbstractGround extends AbstractViewable {
    
     @Override
     protected void readDefinition (SmartJsonObject definition) throws SmartJsonException {
+        super.readDefinition(definition);
         String imageURL = definition.getString(Constants.JSON_IMAGE);
         myImage = new ImageIcon(imageURL).getImage();    
     }

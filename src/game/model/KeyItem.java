@@ -1,6 +1,7 @@
 package game.model;
 
 import org.json.simple.JSONObject;
+import constants.Constants;
 import util.jsonwrapper.SmartJsonObject;
 
 /**
@@ -31,4 +32,5 @@ public class KeyItem extends AbstractModelObject {
     public String toString() {
         return getName();
     }
+
 }

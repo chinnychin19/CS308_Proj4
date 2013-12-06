@@ -38,5 +38,21 @@ public enum Direction {
             return null;
         }
     }
+    
+    public static String getString (Direction d) {
+        switch(d){
+            case UP:
+                return Constants.UP;
+            case DOWN:
+                return Constants.DOWN;
+            case LEFT:
+                return Constants.LEFT;
+            case RIGHT:
+                return Constants.RIGHT;
+            default:
+                return null;
+        }
+    }
+    
 
 }
