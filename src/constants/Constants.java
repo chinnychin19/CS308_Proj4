@@ -173,6 +173,9 @@ public class Constants {
     public final static String PROMPT_MISSING_ITEM = "MISSING ITEM: ";
     public final static String PROMPT_AQUIRE_MISSING_ITEM = ".  Acquire this item and try again";
     
+    //Fighting NPC intro speech
+    public final static String PROMPT_FIGHTING_NPC_BEFORE_BATTLE = "Hey you, let's battle! Come here.";
+    
     //Dialogue Box Placement
     public final static int DIALOGUE_HEIGHT = 80;
     //public final static int DIALOGUE_PADDING = 20;

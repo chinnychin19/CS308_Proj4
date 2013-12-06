@@ -66,7 +66,25 @@ public class FightingNPC extends NPC implements Fighter {
     	if(playerWithinRange){
     		moveTowardsPlayer();
         	//TODO: Chinmay uncomment onInteract method when you implement it.
+    		AbstractMode mode = getModel().getController().getMode();
+    		mode.addDynamicState(new TextState(mode,
+                    Constants.BORDER_THICKNESS,
+                    Constants.HEIGHT - Constants.BORDER_THICKNESS -
+                            Constants.DIALOGUE_HEIGHT,
+                    Constants.WIDTH - 2 * Constants.BORDER_THICKNESS,
+                    Constants.DIALOGUE_HEIGHT,
+                    Constants.PROMPT_FIGHTING_NPC_BEFORE_BATTLE));
+    		
     		//onInteract();	
+    		/*mode.addDynamicState(new TextState(mode,
+                    Constants.BORDER_THICKNESS,
+                    Constants.HEIGHT - Constants.BORDER_THICKNESS -
+                            Constants.DIALOGUE_HEIGHT,
+                    Constants.WIDTH - 2 * Constants.BORDER_THICKNESS,
+                    Constants.DIALOGUE_HEIGHT,
+                    myPostDialogue));
+                    */
+    		//TODO: uncomment post dialogue box above
     		//TODO: move NPC back to original spot??
     	}
     }
