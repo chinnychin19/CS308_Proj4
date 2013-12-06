@@ -2,6 +2,7 @@ package game.model.battle;
 
 import game.controller.GameController;
 import game.model.Fighter;
+import game.model.Monster;
 import game.model.attack.Attack;
 
 public class PlayerParty extends AbstractBattleParty {

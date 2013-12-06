@@ -159,7 +159,9 @@ public class Constants {
     public final static String MODE_BATTLE_OVER = "BATTLE OVER!";
     public final static String MODE_MONSTER_CAUGHT = "You caught the monster!";
     public final static String MODE_MONSTER_NOT_CAUGHT = "You failed to catch the wild monster!";
-    
+    public final static String MODE_PARTY_FULL = "Your party is full.  Choose a monster to release.";
+    public static final String MODE_MONSTER_RELEASE_1 = "Goodbye ";
+    public static final String MODE_MONSTER_RELEASE_2 = "!  We had some great memories together.";
     
     //Dialogue Strings
     public final static String PROMPT_INVALID_KEYITEM = "";
@@ -175,6 +177,12 @@ public class Constants {
     //Dialogue Box Placement
     public final static int DIALOGUE_HEIGHT = 80;
     //public final static int DIALOGUE_PADDING = 20;
+
+    public static final int MAX_PARTY_SIZE = 6;
+
+   
+
+    
     
     
     
