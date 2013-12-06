@@ -29,6 +29,7 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
     private List<Monster> myParty;
     private List<Item> myItems;
     private Collection<KeyItem> myKeyItems;
+    private int myLastSavedX, myLastSavedY;
 
     public Player (GameModel model,
                    World world,
@@ -62,6 +63,8 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
             
             int x = objInWorld.getInt(Constants.JSON_X);
             int y = objInWorld.getInt(Constants.JSON_Y);
+            myLastSavedX = x;
+            myLastSavedY = y;
             setLoc(new Loc(x, y), getWorld());
 
             String directionStr = objInWorld.getString(Constants.JSON_ORIENTATION);
@@ -76,6 +79,15 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
             }
             setKeyItems(keyItems);
        
+    }
+    
+    public void goToLastSavedLoc() {
+        setLoc(new Loc(myLastSavedX, myLastSavedY), getWorld());
+    }
+    
+    public void saveThisLoc() {
+        myLastSavedX = getLoc().getX();
+        myLastSavedY = getLoc().getY();
     }
 
     public void healAllMonsters () {
