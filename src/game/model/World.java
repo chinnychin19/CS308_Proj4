@@ -1,7 +1,9 @@
 package game.model;
 
 import game.model.attack.Attack;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import jsoncache.JSONCache;
 import jsoncache.JSONReader;
@@ -129,5 +131,60 @@ public class World {
 
     protected void removeObject(Loc loc) {
         myViewableObjects.remove(loc);
+    }
+    
+    public List<Saveable> getAllNPCs(){
+        List<Saveable> NPCs = new ArrayList<Saveable>();
+        for(Loc l : myViewableObjects.keySet()){
+            AbstractViewableObject viewable = myViewableObjects.get(l);
+            if((viewable != null) && (viewable instanceof NPC) && !(viewable instanceof FightingNPC)){
+                NPCs.add((NPC)viewable);
+            }
+        }
+        return NPCs;
+    }
+    
+    public List<Saveable> getAllFightingNPCs(){
+        List<Saveable> fightingNPCs = new ArrayList<Saveable>();
+        for(Loc l : myViewableObjects.keySet()){
+            AbstractViewableObject viewable = myViewableObjects.get(l);
+            if((viewable != null) && (viewable instanceof FightingNPC) ){
+                fightingNPCs.add((FightingNPC)viewable);
+            }
+        }
+        return fightingNPCs;
+    }
+    
+    public List<Saveable> getAllObstacles(){
+        List<Saveable> obstacles = new ArrayList<Saveable>();
+        for(Loc l : myViewableObjects.keySet()){
+            AbstractViewableObject viewable = myViewableObjects.get(l);
+            if((viewable != null) && (viewable instanceof Obstacle) ){
+                obstacles.add((Obstacle)viewable);
+            }
+        }
+        return obstacles;
+    }
+    
+    public List<Saveable> getAllHealItems(){
+        List<Saveable> healItems = new ArrayList<Saveable>();
+        for(Loc l : myViewableObjects.keySet()){
+            AbstractViewableObject viewable = myViewableObjects.get(l);
+            if((viewable != null) && (viewable instanceof HealItem) ){
+                healItems.add((HealItem)viewable);
+            }
+        }
+        return healItems;
+    }
+    
+    public List<Saveable> getAllWildRegions(){
+        List<Saveable> healItems = new ArrayList<Saveable>();
+        for(Loc l : myGroundObjects.keySet()){
+            AbstractGround viewable = myGroundObjects.get(l);
+            if((viewable != null) && (viewable instanceof WildRegion) ){
+                healItems.add((WildRegion)viewable);
+            }
+        }
+        return healItems;
     }
 }

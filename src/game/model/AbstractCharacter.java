@@ -96,4 +96,11 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
         super.readWorld(objInWorld);
         myDirection = Direction.LEFT;//Direction.constructFromString(objInWorld.getString(Constants.JSON_ORIENTATION));
     }
+    
+    @Override
+    public JSONObject getSavedJson(){
+        JSONObject toSave = super.getSavedJson();
+        toSave.put(Constants.JSON_ORIENTATION, Direction.getString(getDirection()));
+        return toSave;
+    }
 }

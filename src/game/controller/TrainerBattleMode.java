@@ -1,5 +1,6 @@
 package game.controller;
 
+import util.Sound;
 import game.controller.state.option.AbstractMainOptionState;
 import game.controller.state.option.TrainerMainOptionState;
 import game.model.FightingNPC;
@@ -22,8 +23,9 @@ public class TrainerBattleMode extends AbstractBattleMode {
         defender.setBattle(myBattle);
         mySelectedOption = 0;
         mySelectedAttack = 0;
+        mySound = new Sound("music/nfl.wav");
     }
-
+    
     @Override
     public AbstractMainOptionState getAMainOptionState () {
         return new TrainerMainOptionState(this);

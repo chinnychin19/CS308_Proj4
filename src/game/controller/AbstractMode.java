@@ -3,12 +3,15 @@ package game.controller;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import util.Sound;
 import constants.Constants;
 import game.controller.state.AbstractState;
 import game.model.GameModel;
@@ -29,6 +32,7 @@ public abstract class AbstractMode extends KeyAdapter {
     private GameView myView;
     private Graphics myGraphics;
     private Input myInput;
+    protected Sound mySound;
     private long myLastKeyPressTime;
 	private Queue<AbstractState> myStates;
 
@@ -57,10 +61,31 @@ public abstract class AbstractMode extends KeyAdapter {
     
     //super should be called in sub classes
     public void turnOff() {
+        removeAllKeyListeners();
         getInput().resetAllInputs();
+        stopMusic();
     }
     
-    public abstract void turnOn();
+    public void turnOn() {
+        removeAllKeyListeners();
+        getInput().resetAllInputs();
+        getView().addKeyListener(this);
+        startMusic();
+    }
+    
+    private void removeAllKeyListeners() {
+        for (KeyListener k : getView().getKeyListeners()) {
+            getView().removeKeyListener(k);
+        }
+    }
+    
+    protected void startMusic() {
+        mySound.start();
+    }
+    
+    protected void stopMusic() {
+        mySound.stop();
+    }
 
     public Input getInput(){
     	return myInput;

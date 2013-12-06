@@ -25,7 +25,7 @@ import location.Loc;
  * @author tylernisonoff
  * 
  */
-public class Player extends AbstractCharacter implements Fighter {
+public class Player extends AbstractCharacter implements Fighter, Saveable {
     private List<Monster> myParty;
     private List<Item> myItems;
     private Collection<KeyItem> myKeyItems;
@@ -180,5 +180,29 @@ public class Player extends AbstractCharacter implements Fighter {
             keyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache().getInstance("KeyItem", (String)o)));
         }
         setKeyItems(keyItems);
+    }
+
+    @Override
+    public JSONObject getSavedJson () {
+        JSONObject toSave = super.getSavedJson();       
+        toSave.put(Constants.JSON_KEYITEMS, getKeyItemsToSave());
+        toSave.put(Constants.JSON_MONSTERS, getMonstersToSave());
+        return toSave;
+    }
+    
+    private JSONArray getKeyItemsToSave(){
+        JSONArray array = new JSONArray();
+        for(KeyItem item : myKeyItems){
+            array.add(item.getName());
+        }
+        return array;
+    }
+    
+    private JSONArray getMonstersToSave(){
+        JSONArray array = new JSONArray();
+        for(Monster m : myParty){
+            array.add(m.getSavedJson());
+        }
+        return array;
     }
 }

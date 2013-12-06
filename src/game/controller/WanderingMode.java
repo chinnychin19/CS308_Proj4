@@ -3,7 +3,7 @@ package game.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
+import util.Sound;
 import location.Loc;
 import constants.Constants;
 import game.controller.state.AbstractState;
@@ -19,9 +19,10 @@ import game.view.GameView;
  * @author tylernisonoff
  * 
  */
-public class WanderingMode extends AbstractMode {	
+public class WanderingMode extends AbstractMode {
     public WanderingMode (GameModel model, GameView view) {
         super(model, view);
+        mySound = new Sound("music/nfl.wav");
     }
 
     /**
@@ -36,14 +37,12 @@ public class WanderingMode extends AbstractMode {
         paintDynamicStates();
     }
 
-   
-
-	/**
+    /**
      * Calls doFrame() on all ViewableObjects and GroundObjects
      */
     @Override
     public void act () {
-        if(getInput().isKeyMenuPressed()){
+        if (getInput().isKeyMenuPressed()) {
             getController().setMode(new MainMenuMode(getModel(), getView()));
         }
         for (AbstractViewable obj : getGroundObjectsOnScreen()) {
@@ -61,7 +60,6 @@ public class WanderingMode extends AbstractMode {
     @Override
     public void turnOff () {
         super.turnOff();
-        getView().removeKeyListener(this);
     }
 
     /**
@@ -69,8 +67,7 @@ public class WanderingMode extends AbstractMode {
      */
     @Override
     public void turnOn () {
-        getInput().resetAllInputs();
-        getView().addKeyListener(this);
+        super.turnOn();
     }
 
     private void paintPlayer () {
@@ -110,7 +107,7 @@ public class WanderingMode extends AbstractMode {
         }
         return list;
     }
-    
+
     private Collection<AbstractViewable> getGroundObjectsOnScreen () {
         ArrayList<AbstractViewable> list = new ArrayList<AbstractViewable>();
         int px = getModel().getPlayer().getLoc().getX();

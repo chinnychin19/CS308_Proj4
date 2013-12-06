@@ -1,5 +1,6 @@
 package game.model;
 
+import org.json.simple.JSONObject;
 import game.controller.state.Listable;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
@@ -11,7 +12,7 @@ import constants.Constants;
  *
  */
 
-public class AbstractModelObject implements Listable{
+public class AbstractModelObject implements Listable, Saveable{
     private String myName;
     private GameModel myModel;
    
@@ -55,5 +56,12 @@ public class AbstractModelObject implements Listable{
     
     protected void readDefinition (SmartJsonObject definition) throws SmartJsonException {
         myName = definition.getString(Constants.JSON_NAME);
+    }
+
+    @Override
+    public JSONObject getSavedJson () {
+        JSONObject toSave = new JSONObject();
+        toSave.put(Constants.NAME, getName());
+        return toSave;
     }
 }

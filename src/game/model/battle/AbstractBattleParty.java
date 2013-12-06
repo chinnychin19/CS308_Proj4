@@ -25,7 +25,6 @@ public abstract class AbstractBattleParty {
         myController = controller;
         myFighter = fighter;
         myMonsters = fighter.getParty();
-        System.out.println("monsters: "+ myMonsters);
         myCurrentMonster = getFirstAliveMonster();
     }
     

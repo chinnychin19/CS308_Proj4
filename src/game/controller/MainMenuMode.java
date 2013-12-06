@@ -1,5 +1,6 @@
 package game.controller;
 
+import util.Sound;
 import game.controller.state.AbstractState;
 import game.controller.state.mainmenu.MainMenuState;
 import game.controller.state.option.AbstractOptionState;
@@ -13,7 +14,7 @@ public class MainMenuMode extends AbstractMode{
     public MainMenuMode (GameModel model, GameView view) {
         super(model, view);
         myState = new MainMenuState(this);
-        // TODO Auto-generated constructor stub
+        mySound = new Sound("music/nfl.wav");
     }
 
     @Override
@@ -28,13 +29,12 @@ public class MainMenuMode extends AbstractMode{
 
     @Override
     public void turnOn () {
-        getView().addKeyListener(this);
+        super.turnOn();
     }
     
     @Override
     public void turnOff () {
         super.turnOff();
-        getView().removeKeyListener(this);
     }
     
     public void setState(AbstractState state){
