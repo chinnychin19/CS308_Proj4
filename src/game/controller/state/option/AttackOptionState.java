@@ -43,7 +43,7 @@ public class AttackOptionState extends AbstractListableOptionState {
     @Override
     protected void onBack () {
         if(canGoBack()){
-            myMode.setOptionState(new MainOptionState(myMode));
+            myMode.setOptionState(myMode.getAMainOptionState());
         }
     }
 

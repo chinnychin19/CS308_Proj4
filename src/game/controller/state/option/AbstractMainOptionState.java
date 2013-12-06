@@ -2,27 +2,26 @@ package game.controller.state.option;
 
 import game.controller.AbstractBattleMode;
 import game.controller.Input;
-import game.controller.optionState.LivingPartyOptionState;
 import game.controller.state.NotListableException;
-import java.awt.Color;
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainOptionState extends AbstractListableOptionState {
+public abstract class AbstractMainOptionState extends AbstractListableOptionState {
 
-    List<AbstractOptionState> myOptions;
+    private List<AbstractOptionState> myOptions;
     
-    public MainOptionState (AbstractBattleMode mode) {
+    public AbstractMainOptionState (AbstractBattleMode mode) {
         super(mode, "MAIN");
-        // TODO: feels dirty
         myOptions = new ArrayList<AbstractOptionState>();
-        myOptions.add(new AttackOptionState(mode));
-        myOptions.add(new LivingPartyOptionState(mode));
-        myOptions.add(new ItemOptionState(mode));
-        myOptions.add(new CatchOptionState(mode));
-        myOptions.add(new RunAwayOptionState(mode));
+    }
+    
+    protected List<AbstractOptionState> getOptions() {
+        return myOptions;
+    }
+    
+    protected void addOption(AbstractOptionState st) {
+        myOptions.add(st);
     }
 
     @Override

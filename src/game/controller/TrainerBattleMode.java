@@ -1,5 +1,7 @@
 package game.controller;
 
+import game.controller.state.option.AbstractMainOptionState;
+import game.controller.state.option.TrainerMainOptionState;
 import game.model.FightingNPC;
 import game.model.GameModel;
 import game.model.battle.Battle;
@@ -21,5 +23,9 @@ public class TrainerBattleMode extends AbstractBattleMode {
         mySelectedOption = 0;
         mySelectedAttack = 0;
     }
-    
+
+    @Override
+    public AbstractMainOptionState getAMainOptionState () {
+        return new TrainerMainOptionState(this);
+    }
 }

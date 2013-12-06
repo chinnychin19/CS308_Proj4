@@ -3,7 +3,7 @@ package game.model.battle;
 import constants.Constants;
 import game.controller.AbstractBattleMode;
 import game.controller.optionState.LivingPartyOptionState;
-import game.controller.state.option.MainOptionState;
+import game.controller.state.option.AbstractMainOptionState;
 import game.controller.optionState.UserLostWildBattleCompleteState;
 import game.controller.optionState.UserWonWildBattleCompleteState;
 import game.controller.state.option.TextOptionState;
