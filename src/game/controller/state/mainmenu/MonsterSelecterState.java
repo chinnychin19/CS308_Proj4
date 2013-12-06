@@ -2,6 +2,7 @@ package game.controller.state.mainmenu;
 
 import java.awt.Color;
 import java.util.List;
+import constants.Constants;
 import game.controller.AbstractMode;
 import game.controller.Input;
 import game.controller.MainMenuMode;
@@ -11,7 +12,7 @@ import game.model.Monster;
 public class MonsterSelecterState extends AbstractListableState{
     private int mySelected;
     public MonsterSelecterState (MainMenuMode mode) {
-        super("MONSTERS", mode);
+        super(Constants.MAIN_MENU_PARTY, mode);
         mySelected = 0;
     }
 
