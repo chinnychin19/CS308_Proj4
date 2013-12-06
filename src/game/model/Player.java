@@ -36,9 +36,6 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
                    SmartJsonObject definition,
                    SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
-        myKeyItems = new HashSet<KeyItem>();
-        myParty = new ArrayList<Monster>(); // TODO: populate
-        myItems = new ArrayList<Item>(); // TODO: populate
     }
 
     /**
@@ -51,9 +48,7 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
             super.readWorld(objInWorld);
             // ADDING MONSTERS
             myParty = new ArrayList<Monster>(); // TODO: populate
-            System.out.println(objInWorld.toString());
             JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWWERCASE);
-            System.out.println("json array size: "+myMonstersJSON.size());
             for (Object monsterObj : myMonstersJSON) {
                 SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
                 SmartJsonObject monsterDefinition =
@@ -62,7 +57,6 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
                                              monsterInWorld.getString(Constants.JSON_NAME));
                myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
             }
-            System.out.println(myParty.size());
             int x = objInWorld.getInt(Constants.JSON_X);
             int y = objInWorld.getInt(Constants.JSON_Y);
             myLastSavedX = x;
@@ -145,8 +139,6 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
                 setLoc(target, w);
             }
         }
-        System.out.println(myParty.size());
-
     }
 
     // TODO: this method should be in the inputs object
@@ -167,35 +159,7 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
     protected void onBack () {
 
     }
-    public void readSaveState (SmartJsonObject objInWorld) throws SmartJsonException {
-        // ADDING MONSTERS
-        myParty = new ArrayList<Monster>(); // TODO: populate
-        JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWWERCASE);
-        for (Object monsterObj : myMonstersJSON) {
-            SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
-            SmartJsonObject monsterDefinition =
-                    getModel().getDefinitionCache()
-                            .getInstance(Constants.MONSTER_UPPERCASE,
-                                         monsterInWorld.getString(Constants.JSON_NAME));
-            myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
-        }
-        System.out.println("new size"+myParty.size());
-        int x = objInWorld.getInt(Constants.JSON_X);
-        int y = objInWorld.getInt(Constants.JSON_Y);
-        setLoc(new Loc(x, y), getWorld());
-
-        String directionStr = objInWorld.getString(Constants.JSON_ORIENTATION);
-        setDirection(Direction.constructFromString(directionStr));
-
-        // ADDING KEY ITEMS
-        myKeyItems = new HashSet<KeyItem>();
-        JSONArray playerKeyItems = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
-        Collection<KeyItem> keyItems = new ArrayList<KeyItem>();
-        for (Object o : playerKeyItems) {
-            keyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache().getInstance("KeyItem", (String)o)));
-        }
-        setKeyItems(keyItems);
-    }
+    
 
     @Override
     public JSONObject getSavedJson () {
