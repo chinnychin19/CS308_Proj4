@@ -71,4 +71,5 @@ public class NPC extends AbstractCharacter {
 	protected void onBack() {
 
 	}
+
 }

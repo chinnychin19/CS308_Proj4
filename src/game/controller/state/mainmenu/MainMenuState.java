@@ -24,7 +24,7 @@ public class MainMenuState extends AbstractListableState {
     }
     
     public MainMenuState (MainMenuMode mode, int x, int y, int w, int h) {
-        super("Main Menu", mode);
+        super("", mode);
         myOptions = new ArrayList<AbstractState>();
         myOptions.add(new MonsterSelecterState(getMode()));
         myOptions.add(new ItemMenuState(getMode()));
