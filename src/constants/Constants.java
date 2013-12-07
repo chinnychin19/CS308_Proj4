@@ -18,7 +18,7 @@ public class Constants {
     public static final double TILE_HEIGHT = (double) HEIGHT / NUM_TILES_VERTICAL;
 
     public static final long KEY_DELAY_MILLISECONDS = 100;
-
+    
     public static final int BORDER_THICKNESS = 15;
     public static final Color BORDER_COLOR = Color.black;
 

@@ -11,6 +11,7 @@ public class TextState extends AbstractState {
         super("", mode, x, y, w, h);
         myText = text;
         myMode = mode;
+        getMode().turnMovementOff();
     }
 
     @Override
@@ -23,12 +24,13 @@ public class TextState extends AbstractState {
 
     @Override
     protected void onBack () {
-        myMode.removeDynamicState(this);
+        getMode().turnMovementOn();
+        myMode.clearDynamicStates();
     }
 
     @Override
     protected void onInteract () {
-
+        
     }
 
     protected AbstractMode getMode () {
