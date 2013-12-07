@@ -27,9 +27,9 @@ public class NewEntitySubMenu extends JMenu {
         JSONObject template = getJSON(Constants.PLAYER_JSON);
         Set<String> keySet = template.keySet();
         System.out.println("Menu Populated with " + keySet);
-        for (String s : keySet) {
-            JMenuItem item = new JMenuItem(s);
-            item.addActionListener(new LaunchWizardListener(s, myCache));
+        for (String keyName : keySet) {
+            JMenuItem item = new JMenuItem(keyName);
+            item.addActionListener(new LaunchWizardListener(keyName, myCache));
             this.add(item);
         }
     }

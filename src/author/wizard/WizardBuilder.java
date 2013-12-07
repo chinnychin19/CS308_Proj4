@@ -152,6 +152,7 @@ public class WizardBuilder {
         String basicFieldType = (fields[0].equals("list")) ? fields[1] : fields[0];
         String limitedFieldType = (fields[0].equals("list")) ? fieldType.substring(5) : fieldType;
         String outputString = "";
+        
         if (limitedFieldType.split("_").length > 1 && limitedFieldType.indexOf(":") == -1) {
             String[] locKeyPair = limitedFieldType.split("_")[1].split("\\.");
             JSONArray locationArray = (JSONArray) myCache.getRawJSON().get(locKeyPair[0]);
@@ -164,7 +165,14 @@ public class WizardBuilder {
         Class<?> classToInstantiate =
                 Class.forName("author.panels." + KEYWORD_TO_PANEL_TYPE.get(basicFieldType));
         Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
-        return (Component) ctr.newInstance(fieldName + outputString);
+        
+        Component output = (Component) ctr.newInstance(fieldName + outputString); 
+        
+        if (fields[0].equals("list")) {
+        	
+        }
+        
+        return output;
     }
 
     public void addPanelsFromFile (String filePath) {

@@ -24,6 +24,7 @@ public class AuthoringCache {
         for (String category : Constants.CATEGORIES) {
             myJSON.put(category, new JSONArray());
         }
+        //myJSON.put("TestThing", new JSONArray());
     }
 
     @SuppressWarnings("unchecked")
