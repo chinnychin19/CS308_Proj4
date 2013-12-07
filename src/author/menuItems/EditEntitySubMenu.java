@@ -1,4 +1,4 @@
-package author;
+package author.menuItems;
 
 //import java.awt.Component;
 //import java.io.FileReader;
