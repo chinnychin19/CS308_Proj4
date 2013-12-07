@@ -1,6 +1,5 @@
 package author.listeners;
 
-import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import author.mapCreation.CanvasTileManager;

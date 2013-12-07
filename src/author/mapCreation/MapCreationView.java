@@ -32,7 +32,7 @@ public class MapCreationView extends JPanel {
     }
 
     private void initListeners () {
-        this.addKeyListener(new MapCreationKeyListener(myTileManager));
+        this.addKeyListener(new MapCreationKeyListener(this, myTileManager));
         this.addMouseListener(new MapCreationMouseListener(this, myTileManager));
     }
 
