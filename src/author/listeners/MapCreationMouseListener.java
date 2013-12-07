@@ -1,8 +1,10 @@
 package author.listeners;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.ImageObserver;
 import author.mapCreation.CanvasTileManager;
 import author.mapCreation.MapCreationView;
 
@@ -10,6 +12,7 @@ public class MapCreationMouseListener implements MouseListener {
 
 	private CanvasTileManager myTileManager;
 	private MapCreationView myMapCreationView;
+	private Image myActiveImage;
 
 	public MapCreationMouseListener(MapCreationView mapCreation, CanvasTileManager tileManager){
 		myTileManager = tileManager;
@@ -34,8 +37,7 @@ public class MapCreationMouseListener implements MouseListener {
 		
 		myTileManager.getTileClickLoc(xTile, yTile);
 		
-		myMapCreationView.paintTile(myMapCreationView.getGraphics(), xTile, yTile);
-		
+		myMapCreationView.paintTile(myMapCreationView.getGraphics(), xTile, yTile, null);	
 	}
 
 	@Override
