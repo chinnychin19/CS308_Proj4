@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import author.listeners.MapCreationKeyListener;
@@ -16,15 +17,16 @@ public class MapCreationView extends JPanel {
 
     private WorldTiles myWorld;
     private Image myBackground;
-    private BufferedImage myImage;
     private CanvasTileManager myTileManager;
 
     public MapCreationView () {
         setFocusable(true);
-        myImage = new BufferedImage(Constants.WIDTH, Constants.HEIGHT, BufferedImage.TYPE_INT_RGB);
+        //myImage = new BufferedImage(Constants.WIDTH, Constants.HEIGHT, BufferedImage.TYPE_INT_RGB);
+        this.setPreferredSize(Constants.MAP_CREATOR_SIZE);
         myBackground = new ImageIcon(Constants.SHORTGRASS_PNG_FILEPATH).getImage();
         myTileManager = new CanvasTileManager(); // 15, 9
         initListeners();
+        
     }
 
     public WorldTiles getMyWorld () {
@@ -41,16 +43,17 @@ public class MapCreationView extends JPanel {
     }
 
     public void paintComponent (Graphics g) {
-        g.drawImage(myImage, 0, 0, getWidth(), getHeight(), null);
+        g.drawImage(myBackground, 0, 0, getWidth(), getHeight(), null);
     }
 
-    public void paintTile (Graphics g, int x, int y) {
+    public void paintTile (Graphics g, int x, int y, ImageObserver io) {
         double topLeftX = myTileManager.getTileAnchorX(x);
         double topLeftY = myTileManager.getTileAnchorY(y);
         super.paintComponent(g);
         g.drawRect((int) topLeftX, (int) topLeftY, (int) myTileManager.getTileWidth(), (int) myTileManager.getTileHeight());
         g.setColor(Color.RED);
         g.fillRect((int) topLeftX, (int) topLeftY, (int) myTileManager.getTileWidth(), (int) myTileManager.getTileHeight());
+        //g.drawImage(myBackground, (int) myTileManager.getTileAnchorX(x), (int) myTileManager.getTileAnchorY(y), (int) myTileManager.getTileWidth(), (int) myTileManager.getTileHeight(), io);
     }
 
     public Image getBackgroundImage () {

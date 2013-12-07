@@ -1,10 +1,12 @@
 package author;
 
+import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import author.listeners.OutputJSONListener;
 import author.mapCreation.MapCreationView;
 import author.listeners.WriteJSONOutputListener;
@@ -28,7 +30,25 @@ public class AuthorView extends JFrame {
         this.setTitle(TITLE);
         this.setPreferredSize(Constants.FRAME_SIZE);
         this.setLocationRelativeTo(null);
+        this.setLayout(new FlowLayout());
 
+        makeMenuBar();
+        
+        JPanel mainView = new JPanel();
+        mainView.setPreferredSize(Constants.FRAME_SIZE);
+        
+        mainView.add(new MapCreationView());
+        mainView.add(new SidebarPanel());
+        
+        this.add(mainView);
+
+        //this.add(new MapCreationView());
+
+        pack();
+        this.setVisible(true);
+    }
+
+    public void makeMenuBar () {
         JMenuBar menuBar = new JMenuBar();
 
         AuthoringCache ac = new AuthoringCache(this);
@@ -57,11 +77,6 @@ public class AuthorView extends JFrame {
 
         // Set the menu bar to the frame.
         this.setJMenuBar(menuBar);
-
-        this.add(new MapCreationView());
-
-        pack();
-        this.setVisible(true);
     }
 
     public List<AbstractWizardState> getWizardStates () {
