@@ -1,9 +1,12 @@
 package author.mapCreation;
 
+import location.Loc;
 import constants.Constants;
 
 public class CanvasTileManager {
-
+	
+	private WorldTiles myWorld;
+	
 	private int myGCD;
 
 	private int widthRatio;
@@ -22,6 +25,7 @@ public class CanvasTileManager {
 	private double tileHeight;
 
 	public CanvasTileManager(){
+		myWorld = new WorldTiles();
 		horizontalOffset = Constants.MIN_X_COORD;
 		verticalOffset = Constants.MIN_Y_COORD;
 
@@ -56,6 +60,7 @@ public class CanvasTileManager {
 
 		tileWidth = (double) Constants.WIDTH / (getTotalHorizontalTiles());
 		tileHeight = (double) Constants.HEIGHT / (getTotalVerticalTiles());
+		
 	}
 
 	private int GCD(int a, int b){
@@ -65,6 +70,10 @@ public class CanvasTileManager {
 			a = temp;
 		}
 		return a;
+	}
+	
+	public void getTileClickLoc(int x, int y){
+		myWorld.addToMap(new Loc(x, y), new GenericTileWrapper("blah", null/*new Image()*/));
 	}
 
 	public void expandView(){
@@ -103,6 +112,14 @@ public class CanvasTileManager {
 	public int getVerticalTileNum(int yValue){
 		return (int) ((yValue/tileHeight) + verticalOffset);
 	}
+	
+	public double getTileAnchorX(int x) {
+	    return x * tileWidth;
+	}
+	
+	public double getTileAnchorY(int y) {
+	    return y * tileHeight;
+	}
 
 	public void increaseHorizontalOffset(){
 		if (horizontalOffset + getTotalHorizontalTiles() < Constants.MAX_X_COORD) { horizontalOffset += 1; }
@@ -138,6 +155,10 @@ public class CanvasTileManager {
 
 	public int getMiddleHorizontalTile(){
 		return middleHorizontalTile;
+	}
+	
+	public WorldTiles getWorld(){
+		return myWorld;
 	}
 
 }

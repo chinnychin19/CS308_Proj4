@@ -101,9 +101,11 @@ public class Constants {
     public static final int LEFT_ARROW_KEY = KeyEvent.VK_LEFT;
     
     //GUI Sizing Constants
-    public static final Dimension FRAME_SIZE = new Dimension(800,600);
+    public static final Dimension FRAME_SIZE = new Dimension(1024,620);
     public static final Dimension BUTTON_SIZE = new Dimension(198,28);
     public static final Dimension TEXT_AREA_SIZE = new Dimension(400, 32);
+    public static final Dimension SIDEBAR_SIZE = new Dimension(200,600);
+    public static final Dimension MAP_CREATOR_SIZE = new Dimension(800,600);
       
     // Authoring JMenu Options Constants
     public static final String FILE_MENU = "File";

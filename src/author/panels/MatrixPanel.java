@@ -114,6 +114,7 @@ public class MatrixPanel extends AbstractTextPanel {
         Map<String, String> colRelationship = new HashMap<String, String>();
 
         for (int row = 1; row < myMatrixTable.getRowCount(); row++) {
+        	System.out.println(row + " " + col);
             colRelationship.put(myMatrixTable.getModel().getValueAt(row, 0).toString(),
                                 myMatrixTable.getModel().getValueAt(row, col).toString());
         }
