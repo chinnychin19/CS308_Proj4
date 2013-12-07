@@ -60,6 +60,7 @@ public class CanvasTileManager {
 
 		tileWidth = (double) Constants.WIDTH / (getTotalHorizontalTiles());
 		tileHeight = (double) Constants.HEIGHT / (getTotalVerticalTiles());
+		
 	}
 
 	private int GCD(int a, int b){
