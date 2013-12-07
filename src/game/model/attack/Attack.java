@@ -50,16 +50,18 @@ public class Attack extends AbstractModelObject {
         }
     }
 
-    public double doAttack (Monster attacker, Monster defender) {
+    public AttackResult doAttack (Monster attacker, Monster defender) {
         //TODO: consider accuracy
         int attack = attacker.getAttack();
         int defense = defender.getDefense();
         double multiplier = getModel().getTypeMatrix().getDamageMultiplier(attacker.getType(),
                                                                            defender.getType());
+        if (Math.random() > myAccuracy) { //attack missed
+            return new AttackResult(attacker.getName(), getName(), 0, multiplier, false);
+        }
         double damage = damageFunction(attacker.getLevel(), attack, defense, myPower, multiplier);
-        System.out.println("damage: "+damage);
         defender.changeHealth((int)(-damage));
-        return damage;
+        return new AttackResult(attacker.getName(), getName(), damage, multiplier, true);
     }
     
     private double damageFunction(int attackLevel, int attack, int defense, int power, double multiplier) {

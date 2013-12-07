@@ -17,8 +17,7 @@ public class Constants {
     public static final double TILE_WIDTH = (double) WIDTH / NUM_TILES_HORIZONTAL;
     public static final double TILE_HEIGHT = (double) HEIGHT / NUM_TILES_VERTICAL;
 
-    public static final long KEY_DELAY_MILLISECONDS = 200;
-    public static final int MOVE_FRAMES = 15; // number of frames in one move
+    public static final long KEY_DELAY_MILLISECONDS = 100;
 
     public static final int BORDER_THICKNESS = 15;
     public static final Color BORDER_COLOR = Color.black;
@@ -197,9 +196,10 @@ public class Constants {
    
 
     //State Text Constants
-    public final static int START_TEXT_X = 15;
-    public final static int START_TEXT_Y = 30;
-    public final static int START_TEXT_INC = 50;
+    public final static int TEXT_START_X = 15;
+    public final static int TEXT_START_Y = 30;
+    public final static int TEXT_START_INC = 50;
+    public static final int TEXT_CHARS_PER_LINE = 60;
 
     
     //Main Menu 
@@ -211,7 +211,6 @@ public class Constants {
     public final static String MAIN_MENU_ITEM = "ITEM";
     public final static String MAIN_MENU_SAVE = "SAVE";
     public final static String MAIN_MENU_EXIT = "EXIT";
-
 
     
     

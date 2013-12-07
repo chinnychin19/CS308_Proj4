@@ -12,6 +12,7 @@ import game.model.FightingNPC;
 import game.model.LevelChange;
 import game.model.Monster;
 import game.model.attack.Attack;
+import game.model.attack.AttackResult;
 
 
 public class Battle {
@@ -44,14 +45,13 @@ public class Battle {
     }
 
     public void attackEnemy (Attack a) {
-        double damage = a.doAttack(myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
-        myMode.pushState(new StateTransitionTextOptionState(myMode, String.format("Your %s did %f damage", myPlayerParty.getCurrentMonster().getName(), damage), this));
+        AttackResult result = a.doAttack(myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
+        myMode.pushState(new StateTransitionTextOptionState(myMode, result.toString(), this));
     }
 
     public void attackPlayer (Attack a) {
-        double damage = a.doAttack(myEnemyParty.getCurrentMonster(), myPlayerParty.getCurrentMonster());
-        myMode.pushState(new TextOptionState(myMode, String
-                .format("%s did %f damage", myEnemyParty.getCurrentMonster().getName(), damage)));
+        AttackResult result = a.doAttack(myEnemyParty.getCurrentMonster(), myPlayerParty.getCurrentMonster());
+        myMode.pushState(new TextOptionState(myMode, result.toString()));
 
     }
     
