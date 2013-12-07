@@ -15,7 +15,7 @@ public class AuthorViewEditMenu extends JMenu {
 	}
 	
 	private void addEditEntitySubMenu(AuthoringCache ac){
-		EditEntitySubMenu item = new EditEntitySubMenu(Constants.EDIT_ENTITY_SUBMENU, ac);
+		EditEntitySubMenu item = new EditEntitySubMenu(ac);
 		this.add(item);
 	}
 	

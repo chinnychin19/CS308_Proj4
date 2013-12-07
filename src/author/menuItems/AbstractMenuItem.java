@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 
 @SuppressWarnings("serial")
-public abstract class AbstractMenuItem extends JMenuItem implements ActionListener{
+public abstract class AbstractMenuItem extends JMenuItem implements ActionListener {
 	
 	public AbstractMenuItem(String myText){
 		super(myText);

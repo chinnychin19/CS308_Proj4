@@ -15,19 +15,19 @@ import author.model.AuthoringCache;
 @SuppressWarnings("serial")
 public class NewEntitySubMenu extends JMenu {
 
-    private AuthoringCache myCache;
+    private AuthoringCache myAuthoringCache;
 
     @SuppressWarnings("unchecked")
-	public NewEntitySubMenu (String title, AuthoringCache cache) {
-        super(title);
-        myCache = cache;
+	public NewEntitySubMenu (AuthoringCache cache) {
+        super(Constants.NEW_ENTITY_SUBMENU);
+        myAuthoringCache = cache;
 
         JSONObject template = getJSON(Constants.PLAYER_JSON);
         Set<String> keySet = template.keySet();
         System.out.println("Menu Populated with " + keySet);
         for (String s : keySet) {
             JMenuItem item = new JMenuItem(s);
-            item.addActionListener(new LaunchWizardListener(s, myCache));
+            item.addActionListener(new LaunchWizardListener(s, myAuthoringCache));
             this.add(item);
         }
     }

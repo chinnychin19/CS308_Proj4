@@ -8,6 +8,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import constants.Constants;
+import author.listeners.LaunchWizardListener;
 //import org.json.simple.parser.JSONParser;
 //import author.listeners.LaunchPlayerWizardListener;
 //import author.listeners.LaunchWizardListener;
@@ -21,8 +24,8 @@ public class EditEntitySubMenu extends JMenu {
     private AuthoringCache myCache;
     private JMenu me = this;
 
-    public EditEntitySubMenu (String title, AuthoringCache cache) {
-        super(title);
+    public EditEntitySubMenu (AuthoringCache cache) {
+        super(Constants.EDIT_ENTITY_SUBMENU);
 
         myCache = cache;
         refreshMenu();
@@ -42,7 +45,7 @@ public class EditEntitySubMenu extends JMenu {
             for (Object con : locationArray) {
                 String tempString = (String) ((JSONObject) con).get("name");
                 JMenuItem item = new JMenuItem(tempString);
-                // item.addActionListener(new LaunchWizardListener(s,myCache));
+                item.addActionListener(new LaunchWizardListener((String) s,myCache));
                 menu.add(item);
             }
 
