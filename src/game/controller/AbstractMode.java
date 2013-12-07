@@ -35,7 +35,7 @@ public abstract class AbstractMode extends KeyAdapter {
     protected Sound mySound;
     private long myLastKeyPressTime;
     private Queue<AbstractState> myStates;
-
+    private boolean myIsMovementAllowed;
     public AbstractMode (GameModel model, GameView view) {
         myModel = model;
         myView = view;
@@ -43,6 +43,7 @@ public abstract class AbstractMode extends KeyAdapter {
         myInput = new Input();
         myStates = new ConcurrentLinkedQueue<AbstractState>();
         myLastKeyPressTime = 0;
+        myIsMovementAllowed = true;
     }
     
     public GameModel getModel () {
@@ -142,37 +143,81 @@ public abstract class AbstractMode extends KeyAdapter {
      */
     private void updateInputs (KeyEvent e, boolean flag) {
         int x = e.getKeyCode();
-       if (x == KeyEvent.VK_UP) {
-    	   myInput.setInput(InputIndex.UP, flag);
+        if (x == getInteractKey()) {
+            myInput.setInput(InputIndex.INTERACT, flag);
         }
-        if (x == KeyEvent.VK_LEFT) {
-        	myInput.setInput(InputIndex.LEFT, flag);
+        if (x == getMenuKey()) {
+            myInput.setInput(InputIndex.MENU, flag);
         }
-        if (x == KeyEvent.VK_DOWN) {
-        	myInput.setInput(InputIndex.DOWN, flag);
-        }
-        if (x == KeyEvent.VK_RIGHT) {
-        	myInput.setInput(InputIndex.RIGHT, flag);
-        }
-        if (x == KeyEvent.VK_Z) {
-        	myInput.setInput(InputIndex.INTERACT, flag);
-        }
-        if (x == KeyEvent.VK_SPACE) {
-        	myInput.setInput(InputIndex.MENU, flag);
-        }
-        if (x == KeyEvent.VK_X) {
+        if (x == getBackKey()) {
             myInput.setInput(InputIndex.BACK, flag);
+        }
+        if(isMovementAllowed()){
+            updateMovementInputs(e, flag);
+        }
     }
+    
+    private void updateMovementInputs(KeyEvent e, boolean flag){
+        int x = e.getKeyCode();
+        if (x == getUpKey()) {
+            myInput.setInput(InputIndex.UP, flag);
+        }
+        if (x == getLeftKey()) {
+            myInput.setInput(InputIndex.LEFT, flag);
+        }
+        if (x == getDownKey()) {
+            myInput.setInput(InputIndex.DOWN, flag);
+        }
+        if (x == getRightKey()) {
+            myInput.setInput(InputIndex.RIGHT, flag);
+        }
+    }
+    
+    public void turnMovementOff(){
+        myIsMovementAllowed = false;
+        getInput().setMovementOff();
+    }
+    
+    public void turnMovementOn(){
+        myIsMovementAllowed = true;
+    }
+    
+    protected int getUpKey () {
+        return KeyEvent.VK_UP;
     }
 
+    protected int getDownKey () {
+        return KeyEvent.VK_DOWN;
+    }
+
+    protected int getLeftKey () {
+        return KeyEvent.VK_LEFT;
+    }
+
+    protected int getRightKey () {
+        return KeyEvent.VK_RIGHT;
+    }
+    
+    protected int getInteractKey(){
+        return KeyEvent.VK_Z;
+    }
+    
+    protected int getBackKey(){
+        return KeyEvent.VK_X;
+    }
+    
+    protected int getMenuKey(){
+        return KeyEvent.VK_SPACE;
+    }
+    
     //TODO: Comment methods below
 
     public void addDynamicState (AbstractState state) {
         myStates.add(state);
     }
 
-    public void removeDynamicState (AbstractState st) {
-        myStates.remove(st);
+    public void clearDynamicStates () {
+        myStates = new ConcurrentLinkedQueue<AbstractState>();
     }
 
     protected void paintDynamicStates() {
@@ -199,5 +244,9 @@ public abstract class AbstractMode extends KeyAdapter {
                             Constants.HEIGHT);
         myGraphics.fillRect(Constants.WIDTH - Constants.BORDER_THICKNESS, 0,
                             Constants.WIDTH, Constants.HEIGHT);
+    }
+    
+    private boolean isMovementAllowed(){
+        return myIsMovementAllowed;
     }
 }

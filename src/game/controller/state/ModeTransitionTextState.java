@@ -20,6 +20,7 @@ public class ModeTransitionTextState extends TextState {
 
     @Override
     protected void onBack() {
+        super.onBack();
         getMode().getController().setMode(myModeToEnter);
     }
 }
