@@ -20,26 +20,30 @@ public class AuthorView extends JFrame {
     public static final String LAUNCH_WIZARD = "Launch Wizard";
 
     public AuthorView () {
-
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle(TITLE);
-        this.setPreferredSize(Constants.FRAME_SIZE);
-        this.setLocationRelativeTo(null);
-        this.setLayout(new FlowLayout());
-
+        initialize();
         makeMenuBar();
+        initializeMainView();
+        pack();
+        this.setVisible(true);
+    }
+
+	private void initializeMainView() {
+		JPanel mainView = new JPanel();
         
-        JPanel mainView = new JPanel();
         mainView.setPreferredSize(Constants.FRAME_SIZE);
-        
         mainView.add(new MapCreationView());
         mainView.add(new SidebarPanel());
         
         this.add(mainView);
+	}
 
-        pack();
-        this.setVisible(true);
-    }
+	private void initialize() {
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle(TITLE);
+        this.setPreferredSize(Constants.FRAME_SIZE);
+        this.setLocationRelativeTo(null);
+        this.setLayout(new FlowLayout());
+	}
 
     public void makeMenuBar () {
         JMenuBar menuBar = new JMenuBar();
