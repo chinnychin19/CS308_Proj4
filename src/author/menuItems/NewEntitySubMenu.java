@@ -1,4 +1,4 @@
-package author;
+package author.menuItems;
 
 import java.io.FileReader;
 import java.util.Set;

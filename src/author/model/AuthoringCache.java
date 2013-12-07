@@ -30,7 +30,7 @@ public class AuthoringCache {
 	public void add (String category, JSONObject data) {
         JSONArray cache = (JSONArray) myJSON.get(category);
         cache.add(data);
-        myView.update();
+        // TODO: Wes was getting an error on this line myView.update();
     }
 
     public void delete (String category, String name) {

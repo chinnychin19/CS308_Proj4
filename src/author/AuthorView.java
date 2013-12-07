@@ -4,7 +4,6 @@ package author;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -12,19 +11,21 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import author.listeners.OutputJSONListener;
 import author.mapCreation.MapCreationView;
+import author.menuItems.AuthorViewEditMenu;
+import author.menuItems.AuthorViewFileMenu;
+import author.menuItems.AuthorViewViewMenu;
+import author.menuItems.EditEntitySubMenu;
+import author.menuItems.NewEntitySubMenu;
 import author.listeners.WriteJSONOutputListener;
 import author.model.AuthoringCache;
-import author.wizardState.AbstractWizardState;
 import constants.Constants;
 
 
 @SuppressWarnings("serial")
 public class AuthorView extends JFrame {
-    private List<AbstractWizardState> myWizardStates;
+    //private AuthorViewFileMenu data = new AuthorViewFileMenu(this);
 
-    private AuthorView av = this;
-
-    public static final String TITLE = "Authoring View";
+	public static final String TITLE = "Authoring View";
     public static final String LAUNCH_WIZARD = "Launch Wizard";
 
     public AuthorView () {
@@ -51,16 +52,11 @@ public class AuthorView extends JFrame {
 
     public void makeMenuBar () {
         JMenuBar menuBar = new JMenuBar();
-
         AuthoringCache ac = new AuthoringCache(this);
 
-        JMenu fileMenu = createFileMenu(ac);
-        JMenu editMenu = createEditMenu(ac);
-        JMenu viewMenu = createViewMenu(ac);
-
-        menuBar.add(fileMenu);
-        menuBar.add(editMenu);
-        menuBar.add(viewMenu);
+        menuBar.add(new AuthorViewFileMenu(ac));
+        menuBar.add(new AuthorViewEditMenu(ac));
+        menuBar.add(new AuthorViewViewMenu(ac));
 
         // Set the menu bar to the frame.
         this.setJMenuBar(menuBar);
@@ -146,22 +142,5 @@ public class AuthorView extends JFrame {
         });
         fileMenu.add(chooseAltTemplateItem);
 	}
-
-    public List<AbstractWizardState> getWizardStates () {
-        return myWizardStates;
-    }
-
-    public AuthorView getAuthorView () {
-        if (av == null) {
-            return new AuthorView();
-        }
-        else {
-            return av;
-        }
-    }
-
-    public void update () {
-        ((EditEntitySubMenu) av.getJMenuBar().getMenu(1).getItem(0)).refreshMenu();
-    }
 
 }
