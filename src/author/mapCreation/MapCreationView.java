@@ -3,7 +3,6 @@ package author.mapCreation;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -21,7 +20,6 @@ public class MapCreationView extends JPanel {
 
     public MapCreationView () {
         setFocusable(true);
-        //myImage = new BufferedImage(Constants.WIDTH, Constants.HEIGHT, BufferedImage.TYPE_INT_RGB);
         this.setPreferredSize(Constants.MAP_CREATOR_SIZE);
         myBackground = new ImageIcon(Constants.SHORTGRASS_PNG_FILEPATH).getImage();
         myTileManager = new CanvasTileManager(); // 15, 9
@@ -53,7 +51,6 @@ public class MapCreationView extends JPanel {
         g.drawRect((int) topLeftX, (int) topLeftY, (int) myTileManager.getTileWidth(), (int) myTileManager.getTileHeight());
         g.setColor(Color.RED);
         g.fillRect((int) topLeftX, (int) topLeftY, (int) myTileManager.getTileWidth(), (int) myTileManager.getTileHeight());
-        //g.drawImage(myBackground, (int) myTileManager.getTileAnchorX(x), (int) myTileManager.getTileAnchorY(y), (int) myTileManager.getTileWidth(), (int) myTileManager.getTileHeight(), io);
     }
 
     public Image getBackgroundImage () {

@@ -1,8 +1,5 @@
 package author.menuItems;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -16,24 +13,11 @@ public class AuthorViewFileMenu extends JMenu {
 		super(Constants.FILE_MENU);
 		
 		addNewEntitySubMenu(ac);
-		addCreateNewMap();
-		addLoadExistingGame();
-		addChooseAltTemplate();
-	}
-	
-	// Called when 'Load Existing Game' is clicked
-	private void handleLoadExistingGame() {
-		System.out.println("Clicked 'Load Existing Game'");
-	}
-	
-	// Called when 'Create New Map' is clicked
-	private void handleCreateNewMap() {
-		System.out.println("Clicked 'Create New Map'");
-	}
-	
-	// Called when 'Choose Alternate Template' is clicked
-	private void handleChooseAltTemplate() {
-		System.out.println("Clicked 'Choose Alternate Template'");
+		
+		this.add(new CreateMapMenuItem());
+		this.add(new LoadGameMenuItem());
+		this.add(new ChooseTemplateMenuItem());
+		
 	}
 
 	private void addNewEntitySubMenu(AuthoringCache ac) {
@@ -41,9 +25,11 @@ public class AuthorViewFileMenu extends JMenu {
         this.add(newEntitySubMenu);
 	}
 
-    
+    /*
 	private void addCreateNewMap() {
 		JMenuItem createNewMapItem = new JMenuItem(Constants.CREATE_NEW_MAP);
+		
+		
         addCreateNewMapItemListener(createNewMapItem);
         this.add(createNewMapItem);
 	}
@@ -85,5 +71,5 @@ public class AuthorViewFileMenu extends JMenu {
 				handleChooseAltTemplate();
 			}
         });
-	}
+	}*/
 }
