@@ -19,9 +19,7 @@ public class NewEntitySubMenu extends JMenu {
 
     @SuppressWarnings("unchecked")
 	public NewEntitySubMenu (String title, AuthoringCache cache) {
-
         super(title);
-
         myCache = cache;
 
         JSONObject template = getJSON(Constants.PLAYER_JSON);
