@@ -14,7 +14,7 @@ import constants.Constants;
 @SuppressWarnings("serial")
 public class MapCreationView extends JPanel {
 
-    private WorldTiles myWorld;
+    private WorldCreationMap myWorld;
     private Image myBackground;
     private CanvasTileManager myTileManager;
 
@@ -27,7 +27,7 @@ public class MapCreationView extends JPanel {
         
     }
 
-    public WorldTiles getMyWorld () {
+    public WorldCreationMap getMyWorld () {
         return myWorld;
     }
 

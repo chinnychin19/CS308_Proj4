@@ -10,6 +10,14 @@ import constants.Constants;
 import author.listeners.LaunchWizardListener;
 import author.model.AuthoringCache;
 
+/**
+ * EditEntitySubMenu extends AbstractMenu and allows the user to create a
+ * new type of entity on the map, which can then be added or edited.
+ * 
+ * @author weskpga
+ *
+ */
+
 
 @SuppressWarnings("serial")
 public class NewEntitySubMenu extends AbstractMenu {

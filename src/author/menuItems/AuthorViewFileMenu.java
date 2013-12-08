@@ -6,6 +6,14 @@ import javax.swing.JMenuItem;
 import author.model.AuthoringCache;
 import constants.Constants;
 
+/**
+ * AuthorViewFileMenu extends JMenu and contains all of the MenuItems
+ * that can be clicked under the 'File' menu within our AuthorView.
+ * 
+ * @author weskpga
+ *
+ */
+
 @SuppressWarnings("serial")
 public class AuthorViewFileMenu extends JMenu {
 	
