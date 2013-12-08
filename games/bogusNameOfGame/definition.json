@@ -196,5 +196,23 @@
     "HealItem": [{
         "name": "heal1",
         "image": "images/items/healPokeBall.png"
-    }]
+    }],
+     "Item": [
+                {
+                    "name": "potion",
+                    "consciousness": "alive",
+                    "statisticEffect": {
+                        "statName": "hp",
+                        "change": "20"
+                    }
+                },
+                {
+                    "name": "revive",
+                    "consciousness" : "dead",
+                    "statisticEffect": {
+                        "statName": "hp",
+                        "change": "-1" 
+                    }
+                }
+            ]
 }
