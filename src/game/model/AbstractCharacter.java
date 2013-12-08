@@ -94,7 +94,7 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
     @Override
     protected void readWorld(SmartJsonObject objInWorld) throws SmartJsonException {
         super.readWorld(objInWorld);
-        myDirection = Direction.LEFT;//Direction.constructFromString(objInWorld.getString(Constants.JSON_ORIENTATION));
+        myDirection = Direction.constructFromString(objInWorld.getString(Constants.JSON_ORIENTATION));
     }
     
     @Override

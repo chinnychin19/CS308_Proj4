@@ -81,6 +81,7 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
             List<Item> items = new ArrayList<Item>();
             JSONArray playerItems = objInWorld.getJSONArray("items"); //TODO
             for (Object o : playerItems) {
+            	System.out.println(o.toString());
                 items.add(new Item(getModel(), getModel().getDefinitionCache().getInstance("Item", (String)o)));
             }
             setItems(items);
@@ -178,6 +179,7 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
     @Override
     public JSONObject getSavedJson () {
         JSONObject toSave = super.getSavedJson();       
+        toSave.put("items", getItemsToSave());
         toSave.put(Constants.JSON_KEYITEMS, getKeyItemsToSave());
         toSave.put(Constants.JSON_MONSTERS, getMonstersToSave());
         return toSave;
@@ -186,6 +188,14 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
     private JSONArray getKeyItemsToSave(){
         JSONArray array = new JSONArray();
         for(KeyItem item : myKeyItems){
+            array.add(item.getName());
+        }
+        return array;
+    }
+    
+    private JSONArray getItemsToSave(){
+        JSONArray array = new JSONArray();
+        for(Item item : myItems){
             array.add(item.getName());
         }
         return array;
