@@ -4,11 +4,8 @@ import game.controller.AbstractBattleMode;
 import game.controller.AbstractMode;
 import game.controller.MainMenuMode;
 import game.controller.state.Listable;
-import game.model.statisticeffect.AbstractStatisticEffect;
-import game.model.statisticeffect.StatisticEffectFactory;
-
+import game.model.statisticeffect.StatisticEffect;
 import org.json.simple.JSONObject;
-
 import constants.Constants;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
@@ -23,7 +20,7 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
 public class Item extends AbstractModelObject {
 
         private String myConsciousness;
-        private AbstractStatisticEffect myEffect;
+        private StatisticEffect myEffect;
 
     public Item (GameModel model, SmartJsonObject definition) {
         super(model, definition);
@@ -33,7 +30,7 @@ public class Item extends AbstractModelObject {
     public void readDefinition (SmartJsonObject definition) throws SmartJsonException {
     	super.readDefinition(definition);
         myConsciousness = definition.getString(Constants.CONSCIOUSNESS);
-        myEffect = new StatisticEffectFactory().produceStatisticEffect(definition.getSmartJsonObject("statisticEffect"));
+        myEffect = new StatisticEffect(definition.getSmartJsonObject("statisticEffect"));
     }
     
     public void applyEffect(Monster m){

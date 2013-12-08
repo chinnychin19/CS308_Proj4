@@ -1,16 +1,15 @@
 package game.model.statisticeffect;
 
 import game.model.Monster;
-import constants.Constants;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
+import constants.Constants;
 
-public abstract class AbstractStatisticEffect {
-
+public class StatisticEffect {
     private String myStatisticName;
     private int myChange;
 
-    public AbstractStatisticEffect (SmartJsonObject object) {
+    public StatisticEffect (SmartJsonObject object) {
         try {
             
             myStatisticName = object.getString("statName");
@@ -20,13 +19,8 @@ public abstract class AbstractStatisticEffect {
             e.printStackTrace();
         }
     }
-    
-    public String getStatisticName(){
-    	return myStatisticName;
+
+    public void apply(Monster m) {
+        m.changeStat(myStatisticName, myChange);
     }
-    public int getChange(){
-    	return myChange;
-    }
-    
-    public abstract void apply(Monster monster);
 }

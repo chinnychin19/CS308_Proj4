@@ -5,9 +5,7 @@ import java.util.Collection;
 import game.model.AbstractModelObject;
 import game.model.GameModel;
 import game.model.Monster;
-import game.model.statisticeffect.AbstractStatisticEffect;
-import game.model.statisticeffect.StatisticEffectFactory;
-
+import game.model.statisticeffect.StatisticEffect;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import constants.Constants;
@@ -25,12 +23,12 @@ public class Attack extends AbstractModelObject {
 
     private int myPower;
     private double myAccuracy;
-    Collection<AbstractStatisticEffect> myStatisticEffects;
+    Collection<StatisticEffect> myStatisticEffects;
     Collection<StatusEffect> myStatusEffects;
 
     public Attack (GameModel model, SmartJsonObject definition) {
         super(model, definition);
-        myStatisticEffects = new ArrayList<AbstractStatisticEffect>();
+        myStatisticEffects = new ArrayList<StatisticEffect>();
         myStatusEffects = new ArrayList<Attack.StatusEffect>();
 
         try {
@@ -39,9 +37,9 @@ public class Attack extends AbstractModelObject {
             myAccuracy = definition.getDouble(JSON_ACCURACY);
             JSONArray statisticsArray = definition.getJSONArray(JSON_STATISTIC_EFFECT);
             for (Object statObject : statisticsArray) {
-                SmartJsonObject json = new SmartJsonObject((JSONObject) statObject);
+                SmartJsonObject statisticJSON = new SmartJsonObject((JSONObject) statObject);
                 
-                myStatisticEffects.add(new StatisticEffectFactory().produceStatisticEffect(json));
+                myStatisticEffects.add(new StatisticEffect(statisticJSON));
 
             }
             JSONArray statusArray = definition.getJSONArray(JSON_STATUS_EFFECT);
