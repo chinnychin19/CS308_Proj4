@@ -46,7 +46,7 @@ public class WildMonsterParty extends AbstractBattleParty {
      */
     public double getCatchProbability () {
         
-        int playerMonsterLevel = getBattle().getPlayerParty().getCurrentMonster().getLevel();
+        int playerMonsterLevel = getBattle().getPlayerParty().getCurrentMonster().getLevel().intValue();
         double healthFactor = (double) getCurrentMonster().getCurHP() / (double) getCurrentMonster().getMaxHP();
         double levelFactor = playerMonsterLevel / getCurrentMonster().getLevel();
         return getCurrentMonster().getCatchRate() * levelFactor / healthFactor;

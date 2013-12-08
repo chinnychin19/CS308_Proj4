@@ -52,19 +52,17 @@ public class Attack extends AbstractModelObject {
 
     public double doAttack (Monster attacker, Monster defender) {
         //TODO: consider accuracy
-        int attack = attacker.getAttack();
-        int defense = defender.getDefense();
+        int attack = attacker.getAttack().intValue();
+        int defense = defender.getDefense().intValue();
         double multiplier = getModel().getTypeMatrix().getDamageMultiplier(attacker.getType(),
                                                                            defender.getType());
-        double damage = damageFunction(attacker.getLevel(), attack, defense, myPower, multiplier);
+        double damage = damageFunction(attacker.getLevel().intValue(), attack, defense, myPower, multiplier);
         System.out.println("damage: "+damage);
         defender.changeHealth((int)(-damage));
-        for(StatisticEffect se : myStatisticEffects){
-            Monster receiver = (se.myTarget == Target.SELF) ? attacker : defender;
-            receiver.changeStatistic(se.myStatistic, se.myChange);
-            
-            
-        }
+//        for(StatisticEffect se : myStatisticEffects){
+//            Monster receiver = (se.myTarget == Target.SELF) ? attacker : defender;
+//            receiver.changeStatistic(se.myStatistic, se.myChange);            
+//        }
         return damage;
     }
     

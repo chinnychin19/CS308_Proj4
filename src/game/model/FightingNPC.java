@@ -1,7 +1,9 @@
 package game.model;
 
+import game.controller.AbstractMode;
 import game.controller.Input;
 import game.controller.TrainerBattleMode;
+import game.controller.state.TextState;
 import java.util.ArrayList;
 import java.util.List;
 import location.Direction;
@@ -142,21 +144,31 @@ public class FightingNPC extends NPC implements Fighter {
 
     @Override
     public void onInteract () {
+        
         facePlayer();
-        // TODO: Wrap Dialogue every 63 characters (the amount for one line)
-        // TODO: state changing will be refactored:
-        // AbstractMode mode = getModel().getController().getMode();
-        // mode.addDynamicState(new TextState(mode,
-        // Constants.BORDER_THICKNESS,
-        // Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT,
-        // Constants.WIDTH - 2*Constants.BORDER_THICKNESS,
-        // Constants.DIALOGUE_HEIGHT,
-        // getDialogue()));
-        if (!myIsDefeated) {
-            getModel().getController().setMode(new TrainerBattleMode(getModel(), getModel()
-                                                                     .getController().getView(), this));
-        } else {
+        
+        if(myIsDefeated) {           
             System.out.println(myPostDialogue);
+        }
+        else
+        {
+            // TODO: Wrap Dialogue every 63 characters (the amount for one line)
+            // TODO: state changing will be refactored:
+             
+            if (!myIsDefeated) {
+                
+                AbstractMode mode = getModel().getController().getMode();
+                mode.addDynamicState(new TextState(mode,
+                     Constants.BORDER_THICKNESS,
+                     Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT,
+                     Constants.WIDTH - 2*Constants.BORDER_THICKNESS,
+                     Constants.DIALOGUE_HEIGHT,
+                     getDialogue()));
+                
+                System.out.println(getDialogue());
+                getModel().getController().setMode(new TrainerBattleMode(getModel(), getModel()
+                                                                         .getController().getView(), this));
+            }          
         }
     }
 }

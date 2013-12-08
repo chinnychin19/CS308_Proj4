@@ -4,9 +4,12 @@ import game.controller.AbstractMode;
 
 public class TextState extends AbstractState {
 	private String myText;
+	private AbstractMode myMode;
+	
 	public TextState(AbstractMode mode, int x, int y, int w, int h, String text) {
 		super("", mode, x, y, w, h);
 		myText = text;
+		myMode = mode;
 	}
 
 	@Override
@@ -18,11 +21,11 @@ public class TextState extends AbstractState {
 	}
 	@Override
 	protected void onBack() {
-		//TODO: FIX //myMode.removeDynamicState(this);
+//	    myMode.removeDynamicState(this);
 	}
 
 	@Override
 	protected void onInteract() {
-
+//	    myMode.removeDynamicState(this);
 	}
 }
