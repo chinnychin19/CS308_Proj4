@@ -76,6 +76,14 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
                 keyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache().getInstance("KeyItem", (String)o)));
             }
             setKeyItems(keyItems);
+            
+            myItems = new ArrayList<Item>();
+            List<Item> items = new ArrayList<Item>();
+            JSONArray playerItems = objInWorld.getJSONArray("items"); //TODO
+            for (Object o : playerItems) {
+                items.add(new Item(getModel(), getModel().getDefinitionCache().getInstance("Item", (String)o)));
+            }
+            setItems(items);
     }  
     
     public void goToLastSavedLoc() {
@@ -100,6 +108,10 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
      */
     public void setKeyItems (List<KeyItem> keyItems) {
         myKeyItems = keyItems;
+    }
+    
+    public void setItems(List<Item> items){
+    	myItems = items;
     }
 
     /**

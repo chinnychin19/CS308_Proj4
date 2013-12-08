@@ -5,14 +5,14 @@ import game.model.battle.Battle;
 
 public class UserStateTransitionTextOptionState extends StateTransitionTextOptionState{
 
-    public UserStateTransitionTextOptionState (AbstractBattleMode mode, String text, Battle battle) {
-        super(mode, text, battle);
+    public UserStateTransitionTextOptionState (AbstractBattleMode mode, String text) {
+        super(mode, text);
     }
     
     @Override
     protected void onInteract () {
         myMode.removeHitMarkers();
         myMode.setOptionState(myMode.getAMainOptionState());
-        getBattle().handleMonsterDeaths();
+        myMode.getBattle().handleMonsterDeaths();
     }
 }

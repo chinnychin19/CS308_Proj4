@@ -47,7 +47,7 @@
         "accuracy": "0.95",
         "statisticEffect": [{
             "target": "enemy",
-            "statistic": "defend",
+            "statName": "defend",
             "change": "-10"
         }],
         "statusEffect": [{
@@ -60,7 +60,7 @@
         "accuracy": "0.99",
         "statisticEffect": [{
             "target": "enemy",
-            "statistic": "defend",
+            "statName": "defend",
             "change": "-15"
         }],
         "statusEffect": [{
@@ -73,7 +73,7 @@
         "accuracy": "0.78",
         "statisticEffect": [{
             "target": "enemy",
-            "statistic": "defend",
+            "statName": "defend",
             "change": "-20"
         }],
         "statusEffect": [{
@@ -86,7 +86,7 @@
         "accuracy": "0.99",
         "statisticEffect": [{
             "target": "enemy",
-            "statistic": "defend",
+            "statName": "defend",
             "change": "-30"
         }],
         "statusEffect": [{

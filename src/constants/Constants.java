@@ -143,7 +143,7 @@ public class Constants {
     
     //JSON Keywords for Item Stats
     public static final String MODE_KEYWORD = "mode";
-    public static final String RECIPIENT_ORIGINAL_STATUS = "recipientOriginalStatus";
+    public static final String CONSCIOUSNESS = "consciousness";
     public static final String STATISTIC_EFFECT = "statisticEffect";
     public static final String STAT_NAME = "statName";
     public static final String CHANGE = "change";
@@ -220,4 +220,6 @@ public class Constants {
     public final static String MAIN_MENU_EXIT = "EXIT";
     public static final int REVIVE_TO_FULL = -1;
 
+    
+    public static final int INT_ONE = 1;
 }

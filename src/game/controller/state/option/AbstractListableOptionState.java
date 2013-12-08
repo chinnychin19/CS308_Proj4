@@ -55,7 +55,6 @@ public abstract class AbstractListableOptionState extends AbstractOptionState {
                 throw new NotListableException();
             }
             Listable listable = (Listable)item;
-            
             myBuffer.drawString(listable.getName(), x, y + i % 3 * inc);
             if (i == mySelected) {
                 myBuffer.setColor(Color.black);

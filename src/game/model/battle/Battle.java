@@ -50,7 +50,7 @@ public class Battle {
         if (result.isHit()) {
             myMode.markEnemyMonsterHit();
         }
-        myMode.pushState(new StateTransitionTextOptionState(myMode, result.toString(), this));
+        myMode.pushState(new StateTransitionTextOptionState(myMode, result.toString()));
     }
 
     public void attackPlayer (Attack a) {
@@ -58,7 +58,7 @@ public class Battle {
         if (result.isHit()) {
             myMode.markPlayerMonsterHit();
         }
-        myMode.pushState(new UserStateTransitionTextOptionState(myMode, result.toString(),this));
+        myMode.pushState(new UserStateTransitionTextOptionState(myMode, result.toString()));
 
     }
     

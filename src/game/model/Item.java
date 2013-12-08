@@ -3,6 +3,7 @@ package game.model;
 import game.controller.AbstractBattleMode;
 import game.controller.AbstractMode;
 import game.controller.MainMenuMode;
+import game.controller.state.Listable;
 import game.model.statisticeffect.AbstractStatisticEffect;
 import game.model.statisticeffect.StatisticEffectFactory;
 
@@ -19,33 +20,24 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
  */
 
 
-public abstract class Item extends AbstractItem {
+public class Item extends AbstractModelObject {
 
         private String myConsciousness;
         private AbstractStatisticEffect myEffect;
 
     public Item (GameModel model, SmartJsonObject definition) {
         super(model, definition);
-        loadFromWorld(definition);
     }
     
-    public void loadFromWorld (SmartJsonObject definition) {
-        try {
-                myConsciousness = definition.getString(Constants.RECIPIENT_ORIGINAL_STATUS);
-                myEffect = new StatisticEffectFactory().produceStatisticEffect(definition);
-                		
-                		//new AbstractStatisticEffect(definition.getSmartJsonObject("statisticEffect"));
-        }
-        catch (SmartJsonException e) {
-
-        }
+    @Override
+    public void readDefinition (SmartJsonObject definition) throws SmartJsonException {
+    	super.readDefinition(definition);
+        myConsciousness = definition.getString(Constants.CONSCIOUSNESS);
+        myEffect = new StatisticEffectFactory().produceStatisticEffect(definition.getSmartJsonObject("statisticEffect"));
     }
     
-    private void canUse(Monster m){
-    	AbstractMode currentMode = getModel().getController().getMode();
-    	if(currentMode instanceof MainMenuMode || currentMode instanceof AbstractBattleMode){
-    		myEffect.apply(m);
-    	}
+    public void applyEffect(Monster m){
+		myEffect.apply(m);
     }
     
   

@@ -2,12 +2,14 @@ package game.controller.state.option;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
 import game.controller.AbstractBattleMode;
 import game.controller.Input;
 import game.controller.WildBattleMode;
 import game.controller.state.NotListableException;
 import game.model.Item;
+import game.model.Monster;
 import game.model.Player;
 import game.model.attack.Attack;
 
@@ -40,12 +42,12 @@ public class ItemOptionState extends AbstractListableOptionState {
 
     @Override
     protected void onInteract () {
-        // TODO Auto-generated method stub
+    	Item selected = getItems().get(mySelected);
+    	myMode.setOptionState(new SelectMonsterForItemOptionState(myMode, selected));
     }
 
     @Override
     protected void onBack () {
         myMode.setOptionState(myMode.getAMainOptionState());
     }
-
 }

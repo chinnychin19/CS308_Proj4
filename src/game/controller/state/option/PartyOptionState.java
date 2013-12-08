@@ -40,8 +40,8 @@ public class PartyOptionState extends AbstractListableOptionState{
         List<Monster> monsters = getMonsters();
         Monster selectedMonster = monsters.get(mySelected);
         myMode.getBattle().getPlayerParty().setCurrentMonster(selectedMonster);
-        myMode.setOptionState(myMode.getAMainOptionState());
-        myMode.getBattle().doNextTurn();
+        myMode.setOptionState(new StateTransitionTextOptionState(myMode, String.format("You switch to %s", selectedMonster.getName())));
+        //TODO: String constant
     }
     
     @Override
