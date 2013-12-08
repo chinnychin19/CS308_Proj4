@@ -40,15 +40,21 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
     	initialize(ac);
         initListModel();
         initSelectionList();
+    	finalizeSidebar();
     }
     
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
 		// TODO: Make this change what type of tile you are adding to the map
+		
 		if (arg0.getValueIsAdjusting()){ // to ensure this is only printed once
 			String str = mySelectionList.getSelectedValue().toString();
 			System.out.println(str + " selected.");
 		}
+	}
+	
+	public void updateList(){
+		// TODO: Need to implement this
 	}
 
 	private void initialize(AuthoringCache ac) {
@@ -64,16 +70,24 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
     	mySelectionList.setSelectedIndex(0);
     	mySelectionList.addListSelectionListener(this);
     	mySelectionList.setVisibleRowCount(20);
-    	JScrollPane listScrollPane = new JScrollPane(mySelectionList);
+    }
+
+	private void finalizeSidebar() {
+		JScrollPane listScrollPane = new JScrollPane(mySelectionList);
     	listScrollPane.setPreferredSize(Constants.SIDEBAR_JLIST_SIZE);
-    	JTextArea listText = new JTextArea(Constants.SIDEBAR_PROMPT_TEXT);
+    	JTextArea listText = createSidebarPrompt();
+    	this.add(listText);
+    	this.add(listScrollPane);
+	}
+
+	private JTextArea createSidebarPrompt() {
+		JTextArea listText = new JTextArea(Constants.SIDEBAR_PROMPT_TEXT);
     	listText.setLineWrap(true);
     	listText.setEditable(false);
     	listText.setPreferredSize(new Dimension(190, 70));
     	listText.setWrapStyleWord(true);
-    	this.add(listText);
-    	this.add(listScrollPane);
-    }
+		return listText;
+	}
     
 	@SuppressWarnings("unchecked")
     private void initListModel () {
