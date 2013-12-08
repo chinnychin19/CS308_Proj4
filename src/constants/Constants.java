@@ -202,7 +202,11 @@ public class Constants {
     public static final String TYPE_MATRIX_KEY = "matrix";
     
 
-   
+    //Battle Text
+    public final static String BATTLE_LEVEL_UP = "You Leveled Up!";
+    public final static String BATTLE_EVOLVE = "You Evolved!";
+    public final static String BATTLE_KILLED_ENEMY_MONSTER = "You Killed Da Monster!";
+
 
     //State Text Constants
     public final static int TEXT_START_X = 15;

@@ -84,29 +84,22 @@ public class Battle {
 
     //TODO: string constants
     private void handleEnemyMonsterDied () {
-        LevelChange change = myPlayerParty.getCurrentMonster().addExperience(myEnemyParty.getCurrentMonster().getRewardExperience());
+        LevelChange change =
+                myPlayerParty.getCurrentMonster().addExperience(myEnemyParty.getCurrentMonster()
+                                                                        .getRewardExperience());
         if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
             userWon();
-        } else {
+        }
+        else {
             myEnemyParty.chooseRandomNextMonster();
         }
-        switch(change){
-            case NONE:
-                break;
-            case LEVEL_UP:
-                myMode.pushState(new TextOptionState(myMode, "You Leveled Up!"));
-                break;
-            case EVOLUTION:
-                myMode.pushState(new TextOptionState(myMode, "You Evolved!"));
-                break;
-            case BOTH:
-                myMode.pushState(new TextOptionState(myMode, "You Evolved!"));
-                myMode.pushState(new TextOptionState(myMode, "You Leveled Up!"));
-                break;
-            default:
-                break;
+        if (change == LevelChange.BOTH || change == LevelChange.LEVEL_UP) {
+            myMode.pushState(new TextOptionState(myMode, Constants.BATTLE_LEVEL_UP));
         }
-        myMode.pushState(new TextOptionState(myMode, "You Killed Da Monster!"));
+        if (change == LevelChange.BOTH || change == LevelChange.EVOLUTION) {
+            myMode.pushState(new TextOptionState(myMode, Constants.BATTLE_EVOLVE));
+        }
+        myMode.pushState(new TextOptionState(myMode, Constants.BATTLE_KILLED_ENEMY_MONSTER));
         myIsUsersTurn = true;
     }
 
@@ -128,13 +121,12 @@ public class Battle {
     public boolean caughtWildMonster () {
         double randomFactor = CATCH_MIN + Math.random() * (CATCH_MAX - CATCH_MIN);
         double probability = ((WildMonsterParty) myEnemyParty).getCatchProbability() * randomFactor;
-        System.out.print(probability + " ---> This is the catch probability in Battle.java");
         return (Math.random() < probability);
     }
 
     public void doNextTurn () {
         toggleUsersTurn();
-        handleMonsterDeaths(); // sets myIsUsersTurn to true if enemy dies
+        handleMonsterDeaths();
         if(!myIsUsersTurn) {
             getEnemyParty().doTurn();
         }
