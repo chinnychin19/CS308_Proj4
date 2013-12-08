@@ -47,14 +47,16 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
     protected void readWorld (SmartJsonObject objInWorld) throws SmartJsonException{
             super.readWorld(objInWorld);
             // ADDING MONSTERS
+            
             myParty = new ArrayList<Monster>(); // TODO: populate
-            JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWWERCASE);
+            JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWERCASE);
             for (Object monsterObj : myMonstersJSON) {
                 SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
                 SmartJsonObject monsterDefinition =
                         getModel().getDefinitionCache()
                                 .getInstance(Constants.MONSTER_UPPERCASE,
                                              monsterInWorld.getString(Constants.JSON_NAME));
+               
                myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
             }
             int x = objInWorld.getInt(Constants.JSON_X);

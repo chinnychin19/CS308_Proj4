@@ -153,7 +153,7 @@ public class Constants {
     
     public static final String FILE_NOT_FOUND_ERROR = "Error: File not found.";
 
-    public static final String MONSTERS_LOWWERCASE = "monsters";
+    public static final String MONSTERS_LOWERCASE = "monsters";
     public static final String MONSTER_UPPERCASE = "Monster";
     
     public static final int NUM_OF_DIRECTIONS = 4;
@@ -196,17 +196,14 @@ public class Constants {
     //public final static int DIALOGUE_PADDING = 20;
 
     public static final int MAX_PARTY_SIZE = 6;
-
-    
+   
     //Type Matrix
     public static final String TYPE_MATRIX_KEY = "matrix";
     
-
     //Battle Text
     public final static String BATTLE_LEVEL_UP = "You Leveled Up!";
     public final static String BATTLE_EVOLVE = "You Evolved!";
     public final static String BATTLE_KILLED_ENEMY_MONSTER = "You Killed Da Monster!";
-
 
     //State Text Constants
     public final static int TEXT_START_X = 15;
@@ -226,10 +223,6 @@ public class Constants {
 
     public final static String MAIN_MENU_SAVE = "SAVE";
     public final static String MAIN_MENU_EXIT = "EXIT";
+    public static final int REVIVE_TO_FULL = -1;
 
-	public static final int REVIVE_TO_FULL = -1;
-
-    
-    
-    
 }

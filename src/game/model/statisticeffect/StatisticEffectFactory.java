@@ -13,8 +13,11 @@ public class StatisticEffectFactory {
 			if(myName.equals("hp")){
 				return new HPStatisticEffect(json);
 			} 
-			if(myName.equals("attack")){
+			else if(myName.equals("attack")){
 				return new AttackStatisticEffect(json);
+			}
+			else if(myName.equals("defense")){
+				return new DefenseStatisticEffect(json);
 			}
 			else{
 				return null;
