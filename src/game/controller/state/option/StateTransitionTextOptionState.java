@@ -12,7 +12,12 @@ public class StateTransitionTextOptionState extends TextOptionState {
     
     @Override
     protected void onInteract () {
+        myMode.removeHitMarkers();
         myMode.setOptionState(myMode.getAMainOptionState());
         myBattle.doNextTurn();
+    }
+    
+    protected Battle getBattle(){
+        return myBattle;
     }
 }

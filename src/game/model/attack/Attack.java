@@ -5,6 +5,9 @@ import java.util.Collection;
 import game.model.AbstractModelObject;
 import game.model.GameModel;
 import game.model.Monster;
+import game.model.statisticeffect.AbstractStatisticEffect;
+import game.model.statisticeffect.StatisticEffectFactory;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import util.Target;
@@ -20,12 +23,12 @@ public class Attack extends AbstractModelObject {
 
     private int myPower;
     private double myAccuracy;
-    Collection<StatisticEffect> myStatisticEffects;
+    Collection<AbstractStatisticEffect> myStatisticEffects;
     Collection<StatusEffect> myStatusEffects;
 
     public Attack (GameModel model, SmartJsonObject definition) {
         super(model, definition);
-        myStatisticEffects = new ArrayList<Attack.StatisticEffect>();
+        myStatisticEffects = new ArrayList<AbstractStatisticEffect>();
         myStatusEffects = new ArrayList<Attack.StatusEffect>();
 
         try {
@@ -35,7 +38,8 @@ public class Attack extends AbstractModelObject {
             JSONArray statisticsArray = definition.getJSONArray(JSON_STATISTIC_EFFECT);
             for (Object statObject : statisticsArray) {
                 SmartJsonObject json = new SmartJsonObject((JSONObject) statObject);
-                myStatisticEffects.add(new StatisticEffect(json));
+                
+                myStatisticEffects.add(new StatisticEffectFactory().produceStatisticEffect(json));
 
             }
             JSONArray statusArray = definition.getJSONArray(JSON_STATUS_EFFECT);
@@ -81,22 +85,7 @@ public class Attack extends AbstractModelObject {
                myStatusEffects.toString();
     }
 
-    private class StatisticEffect {
-        private Target myTarget;
-        private String myStatistic;
-        private int myChange;
-
-        public StatisticEffect (SmartJsonObject definition) {
-            try {
-                myTarget = Target.getTarget(definition.getString("target"));
-                myStatistic = definition.getString("statistic");
-                myChange = definition.getInt("change");
-            }
-            catch (SmartJsonException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+  
 
     private class StatusEffect {
         private String myStatus;

@@ -1,45 +1,41 @@
 package game.controller.state.mainmenu;
 
-import java.util.ArrayList;
 import java.util.List;
 import constants.Constants;
 import game.controller.MainMenuMode;
 import game.controller.state.NotListableException;
-import game.model.Item;
 import game.model.KeyItem;
 
-public class ItemMenuState extends AbstractListableState {
+public class KeyItemMenuState extends AbstractListableState {
 
-    public ItemMenuState (MainMenuMode mode) {
-        super(Constants.MAIN_MENU_ITEM, mode);
+    public KeyItemMenuState (MainMenuMode mode) {
+        super(Constants.MAIN_MENU_KEY_ITEM, mode);
     }
-    
+
     @Override
     public void paint(){
         super.paint();
         
         try {
-            paintList(getItemList());
+            paintList(getKeyItemList());
         }
         catch (NotListableException e) {
             e.printStackTrace();
         }
     }
-
+    
     @Override
     protected void onBack () {
-        // TODO Auto-generated method stub
-
+        getMode().setState(new MainMenuState(getMode()));
     }
 
     @Override
     protected void onInteract () {
-        // TODO Auto-generated method stub
 
     }
     
-    private List<Item> getItemList () {
-        return new ArrayList<Item>();
+    private List<KeyItem> getKeyItemList () {
+        return getMode().getModel().getPlayer().getKeyItems();
     }
 
 }

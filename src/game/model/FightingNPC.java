@@ -48,7 +48,7 @@ public class FightingNPC extends NPC implements Fighter {
             myBet = definition.getInt(Constants.JSON_BET);
             myLineOfSightDistance = definition.getInt(Constants.JSON_LINE_OF_SIGHT_DISTANCE);
             myParty = new ArrayList<Monster>();
-            JSONArray myMonstersJSON = definition.getJSONArray(Constants.MONSTERS_LOWWERCASE);
+            JSONArray myMonstersJSON = definition.getJSONArray(Constants.MONSTERS_LOWERCASE);
             for (Object monsterObj : myMonstersJSON) {
                 SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
                 SmartJsonObject monsterDefinition =
@@ -91,6 +91,11 @@ public class FightingNPC extends NPC implements Fighter {
         }
     }
 
+    
+    public List<KeyItem> getKeyItems(){
+        return myKeyItems;
+    }
+    
     /**
      * Check to see if the player is within the line of sight of the player
      * 
@@ -122,14 +127,8 @@ public class FightingNPC extends NPC implements Fighter {
         getModel().getPlayer().setDirection(oppositeDirection);
     }
 
-    /**
-     * Returns the NPC's key items. These are items that will help the main player get through
-     * obstacles and advance through the game.
-     * 
-     * @return myKeyItems
-     */
-    public List<KeyItem> getKeyItem () {
-        return myKeyItems;
+    public void giveKeyItemGifts(Player p) {
+        p.getKeyItems().addAll(myKeyItems);
     }
 
     /**
@@ -146,7 +145,6 @@ public class FightingNPC extends NPC implements Fighter {
     public void onInteract () {
         
         facePlayer();
-        // TODO: Wrap Dialogue every 63 characters (the amount for one line)
         // TODO: state changing will be refactored:
         // AbstractMode mode = getModel().getController().getMode();
         // mode.addDynamicState(new TextState(mode,

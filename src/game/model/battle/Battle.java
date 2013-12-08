@@ -8,6 +8,7 @@ import game.controller.optionState.UserLostWildBattleCompleteState;
 import game.controller.optionState.UserWonWildBattleCompleteState;
 import game.controller.state.option.TextOptionState;
 import game.controller.state.option.StateTransitionTextOptionState;
+import game.controller.state.option.UserStateTransitionTextOptionState;
 import game.model.FightingNPC;
 import game.model.LevelChange;
 import game.model.Monster;
@@ -46,16 +47,22 @@ public class Battle {
 
     public void attackEnemy (Attack a) {
         AttackResult result = a.doAttack(myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
+        if (result.isHit()) {
+            myMode.markEnemyMonsterHit();
+        }
         myMode.pushState(new StateTransitionTextOptionState(myMode, result.toString(), this));
     }
 
     public void attackPlayer (Attack a) {
         AttackResult result = a.doAttack(myEnemyParty.getCurrentMonster(), myPlayerParty.getCurrentMonster());
-        myMode.pushState(new TextOptionState(myMode, result.toString()));
+        if (result.isHit()) {
+            myMode.markPlayerMonsterHit();
+        }
+        myMode.pushState(new UserStateTransitionTextOptionState(myMode, result.toString(),this));
 
     }
     
-    private void handleMonsterDeaths () {
+    public void handleMonsterDeaths () {
         if (myPlayerParty.getCurrentMonster().isDead()) {
             handleUserMonsterDied();
         }
@@ -65,6 +72,7 @@ public class Battle {
     }
 
     private void handleUserMonsterDied () {
+        System.out.println("Handling user monster");
         if (myPlayerParty.getNumberOfAliveMonsters() == 0) {
             userLost();
         }
@@ -76,7 +84,6 @@ public class Battle {
 
     //TODO: string constants
     private void handleEnemyMonsterDied () {
-        myIsUsersTurn = true;
         LevelChange change = myPlayerParty.getCurrentMonster().addExperience(myEnemyParty.getCurrentMonster().getRewardExperience());
         if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
             userWon();
@@ -100,6 +107,7 @@ public class Battle {
                 break;
         }
         myMode.pushState(new TextOptionState(myMode, "You Killed Da Monster!"));
+        myIsUsersTurn = true;
     }
 
     private void userLost () {
