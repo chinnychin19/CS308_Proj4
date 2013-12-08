@@ -210,7 +210,9 @@ public class Constants {
     public final static int MAIN_MENU_WIDTH = WIDTH;
     public final static int MAIN_MENU_HEIGHT = HEIGHT;
     public final static String MAIN_MENU_PARTY = "PARTY";
-    public final static String MAIN_MENU_ITEM = "ITEM";
+    public final static String MAIN_MENU_ITEM = "ITEMS";
+    public final static String MAIN_MENU_KEY_ITEM = "KEY ITEMS";
+
     public final static String MAIN_MENU_SAVE = "SAVE";
     public final static String MAIN_MENU_EXIT = "EXIT";
 

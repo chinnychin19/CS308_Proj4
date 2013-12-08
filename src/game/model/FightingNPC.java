@@ -91,6 +91,11 @@ public class FightingNPC extends NPC implements Fighter {
         }
     }
 
+    
+    public List<KeyItem> getKeyItems(){
+        return myKeyItems;
+    }
+    
     /**
      * Check to see if the player is within the line of sight of the player
      * 
