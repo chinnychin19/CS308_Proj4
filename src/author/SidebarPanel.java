@@ -1,12 +1,18 @@
 package author;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,58 +24,85 @@ import constants.Constants;
 /**
  * GUI component class that manages the sidebar panel of pre-existing objects.
  * 
- * @author Michael Marion
+ * @author weskpga
  * 
  */
 
 @SuppressWarnings("serial")
-public class SidebarPanel extends JPanel {
+public class SidebarPanel extends JPanel implements ListSelectionListener {
 
 	private AuthoringCache myAuthoringCache;
-	private ButtonGroup myButtonGroup;
+	private DefaultListModel myListModel;
+	private JList mySelectionList;
+	private static int exampleNumber = 0;
 	
     public SidebarPanel(AuthoringCache ac) {
-    	myAuthoringCache = ac;
-    	myButtonGroup = new ButtonGroup();
+    	initialize(ac);
+        initListModel();
+        initSelectionList();
+    }
+    
+	@Override
+	public void valueChanged(ListSelectionEvent arg0) {
+		// TODO: Make this change what type of tile you are adding to the map
+		if (arg0.getValueIsAdjusting()){ // to ensure this is only printed once
+			String str = mySelectionList.getSelectedValue().toString();
+			System.out.println(str + " selected.");
+		}
+	}
+
+	private void initialize(AuthoringCache ac) {
+		myAuthoringCache = ac;
         this.setPreferredSize(Constants.SIDEBAR_SIZE);
         this.setBackground(Color.white);
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        initRadioButtons();
+	}
+    
+    private void initSelectionList(){
+    	mySelectionList = new JList(myListModel);
+    	mySelectionList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    	mySelectionList.setSelectedIndex(0);
+    	mySelectionList.addListSelectionListener(this);
+    	mySelectionList.setVisibleRowCount(20);
+    	JScrollPane listScrollPane = new JScrollPane(mySelectionList);
+    	listScrollPane.setPreferredSize(Constants.SIDEBAR_JLIST_SIZE);
+    	JTextArea listText = new JTextArea(Constants.SIDEBAR_PROMPT_TEXT);
+    	listText.setLineWrap(true);
+    	listText.setEditable(false);
+    	listText.setPreferredSize(new Dimension(190, 70));
+    	listText.setWrapStyleWord(true);
+    	this.add(listText);
+    	this.add(listScrollPane);
     }
     
 	@SuppressWarnings("unchecked")
-	public void initRadioButtons () {
+    private void initListModel () {
+		myListModel = new DefaultListModel();
         JSONObject template = myAuthoringCache.getRawJSON();
 		Set<String> keySet = template.keySet();
-        this.removeAll();
-        System.out.println("Menu Populated with " + keySet);
-        createRadioButtons(template, keySet);
-        //this.add(myButtonGroup);
+        createSelectionList(template, keySet);
     }
 
-	private void createRadioButtons(JSONObject template, Set<String> keySet) {
+	private void createSelectionList(JSONObject template, Set<String> keySet) {
 		for (Object s : keySet) {
             JSONArray locationArray = (JSONArray) template.get(s);
-        	createNewRadioButton("Example");
+        	createNewListItem("Example"); // TODO: Get rid of this when done testing
             for (Object con : locationArray) {
             	if (con != null){
-            		createNewRadioButton(con);
+            		createNewListItem(con);
             	}
             }
         }
 	}
 	
 	// For testing
-	private void createNewRadioButton(String s){
-		String temp = (String) s;
-		JRadioButton button = new JRadioButton(temp);
-		myButtonGroup.add(button);
-		this.add(button);
+	private void createNewListItem(String s){
+		myListModel.addElement(s + exampleNumber);
+		exampleNumber++;
 	}
 
-	private void createNewRadioButton(Object con) {
+	private void createNewListItem(Object con) {
 		String tempString = (String) ((JSONObject) con).get("name");
-		JRadioButton button = new JRadioButton(tempString);
-		this.add(button);
+		myListModel.addElement(tempString);
 	}
 }
