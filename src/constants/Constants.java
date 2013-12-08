@@ -128,16 +128,16 @@ public class Constants {
     public static final String FILENAME_SAVESTATE = "saveState.json";
     
     //JSON keywords for Monster stats
-    public static final String EXP = "exp";
-    public static final String EXP_TO_NEXT_LEVEL = "expToNextLevel";
-    public static final String MAX_HP = "maxHP";
-    public static final String CUR_HP = "curHP";
-    public static final String ATTACK_LOWERCASE = "attack";
-    public static final String DEFENSE = "defense";
-    public static final String TYPE = "type";
-    public static final String BASE_HP = "baseHP";
-    public static final String BASE_ATTACK = "baseAttack";
-    public static final String BASE_DEFENSE = "baseDefense";
+    public static final String STAT_EXP = "exp";
+    public static final String STAT_EXP_TO_NEXT_LEVEL = "expToNextLevel";
+    public static final String STAT_MAX_HP = "maxHP";
+    public static final String STAT_CUR_HP = "curHP";
+    public static final String STAT_ATTACK = "attack";
+    public static final String STAT_DEFENSE = "defense";
+    public static final String STAT_TYPE = "type";
+    public static final String STAT_BASE_HP = "baseHP";
+    public static final String STAT_BASE_ATTACK = "baseAttack";
+    public static final String STAT_BASE_DEFENSE = "baseDefense";
     public static final String NAME = "name";
     public static final String ATTACK_UPPERCASE = "Attack";
     

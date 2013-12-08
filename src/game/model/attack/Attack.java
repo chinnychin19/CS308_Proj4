@@ -7,6 +7,7 @@ import game.model.GameModel;
 import game.model.Monster;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import constants.Constants;
 import util.Target;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.NoIntValueJsonException;
@@ -52,14 +53,15 @@ public class Attack extends AbstractModelObject {
 
     public AttackResult doAttack (Monster attacker, Monster defender) {
         //TODO: consider accuracy
-        int attack = attacker.getAttack();
-        int defense = defender.getDefense();
+        int attack = attacker.getStat(Constants.STAT_ATTACK);
+        int defense = defender.getStat(Constants.STAT_DEFENSE);
         double multiplier = getModel().getTypeMatrix().getDamageMultiplier(attacker.getType(),
                                                                            defender.getType());
         if (Math.random() > myAccuracy) { //attack missed
             return new AttackResult(attacker.getName(), getName(), 0, multiplier, false);
         }
-        double damage = damageFunction(attacker.getLevel(), attack, defense, myPower, multiplier);
+        int attackerLevel = attacker.getStat(Constants.JSON_LEVEL);
+        double damage = damageFunction(attackerLevel, attack, defense, myPower, multiplier);
         defender.changeHealth((int)(-damage));
         return new AttackResult(attacker.getName(), getName(), damage, multiplier, true);
     }
