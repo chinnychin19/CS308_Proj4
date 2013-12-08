@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.List;
+import javax.swing.ImageIcon;
 import constants.Constants;
 import game.controller.optionState.AbstractBattleCompleteState;
 import game.controller.state.option.AbstractOptionState;
@@ -20,11 +21,13 @@ import game.view.GameView;
 public abstract class AbstractBattleMode extends AbstractMode {
     protected Battle myBattle;
     private Graphics myOptionsBuffer;
-    private Graphics myHealthBuffer;
-    private Graphics myMonsterBuffer;
-    private Graphics enemyHealthBuffer;
-    private Graphics enemyMonsterBuffer;
+    private Graphics myPlayerHealthBuffer;
+    private Graphics myPlayerMonsterBuffer;
+    private Graphics myEnemyHealthBuffer;
+    private Graphics myEnemyMonsterBuffer;
     private static final Color BEIGE = new Color(245, 245, 220);
+    private boolean myPlayerMonsterIsHit;
+    private boolean myEnemyMonsterIsHit;
 
     protected int mySelectedOption;
     protected int mySelectedAttack;
@@ -34,7 +37,18 @@ public abstract class AbstractBattleMode extends AbstractMode {
     public AbstractBattleMode (GameModel model, GameView view) {
         super(model, view);
         myOptionState = getAMainOptionState();
-        // TODO: separate wild battle options from trainer battle options
+        myPlayerMonsterIsHit = false;
+    }
+    
+    public void markPlayerMonsterHit() {
+        myPlayerMonsterIsHit = true;
+    }
+    public void markEnemyMonsterHit() {
+        myEnemyMonsterIsHit = true;
+    }
+    public void removeHitMarkers() {
+        myPlayerMonsterIsHit = false;
+        myEnemyMonsterIsHit = false;
 
     }
     
@@ -104,42 +118,42 @@ public abstract class AbstractBattleMode extends AbstractMode {
 
         int h1X = Constants.WIDTH / 2, h1Y = Constants.HEIGHT / 3, h1W = Constants.WIDTH / 2, h1H =
                 Constants.HEIGHT / 3;
-        myHealthBuffer = getGraphics().create(h1X, h1Y, h1W, h1H);
+        myPlayerHealthBuffer = getGraphics().create(h1X, h1Y, h1W, h1H);
 
         int m1X = 0, m1Y = Constants.HEIGHT / 3, m1W = Constants.WIDTH / 2, m1H =
                 Constants.HEIGHT / 3;
-        myMonsterBuffer = getGraphics().create(m1X, m1Y, m1W, m1H);
+        myPlayerMonsterBuffer = getGraphics().create(m1X, m1Y, m1W, m1H);
 
         int h2X = Constants.WIDTH / 2, h2Y = 0, h2W = Constants.WIDTH / 2, h2H =
                 Constants.HEIGHT / 3;
-        enemyHealthBuffer = getGraphics().create(h2X, h2Y, h2W, h2H);
+        myEnemyHealthBuffer = getGraphics().create(h2X, h2Y, h2W, h2H);
 
         int m2X = 0, m2Y = 0, m2W = Constants.WIDTH / 2, m2H = Constants.HEIGHT / 3;
-        enemyMonsterBuffer = getGraphics().create(m2X, m2Y, m2W, m2H);
+        myEnemyMonsterBuffer = getGraphics().create(m2X, m2Y, m2W, m2H);
     }
 
     private void closeBuffers () {
         myOptionsBuffer.dispose();
-        myHealthBuffer.dispose();
-        myMonsterBuffer.dispose();
-        enemyHealthBuffer.dispose();
-        enemyMonsterBuffer.dispose();
+        myPlayerHealthBuffer.dispose();
+        myPlayerMonsterBuffer.dispose();
+        myEnemyHealthBuffer.dispose();
+        myEnemyMonsterBuffer.dispose();
     }
 
     private void paintMyHealth () {
         // TODO Auto-generated method stub
-        myHealthBuffer.setColor(BEIGE);
-        myHealthBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
+        myPlayerHealthBuffer.setColor(BEIGE);
+        myPlayerHealthBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
                                 myOptionsBuffer.getClipBounds().height);
-        paintHealthBuffer(myHealthBuffer, myBattle.getPlayerParty().getCurrentMonster());
+        paintHealthBuffer(myPlayerHealthBuffer, myBattle.getPlayerParty().getCurrentMonster());
     }
 
     private void paintEnemyHealth () {
         // TODO Auto-generated method stub
-        enemyHealthBuffer.setColor(BEIGE);
-        enemyHealthBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
+        myEnemyHealthBuffer.setColor(BEIGE);
+        myEnemyHealthBuffer.fillRect(0, 0, myOptionsBuffer.getClipBounds().width,
                                    myOptionsBuffer.getClipBounds().height);
-        paintHealthBuffer(enemyHealthBuffer, myBattle.getEnemyParty().getCurrentMonster());
+        paintHealthBuffer(myEnemyHealthBuffer, myBattle.getEnemyParty().getCurrentMonster());
     }
 
     private void paintHealthBuffer (Graphics g, Monster m) {
@@ -162,19 +176,32 @@ public abstract class AbstractBattleMode extends AbstractMode {
         g.drawString(atkStr, x1, y1 + 2 * yInc);
         g.drawString(defStr, x2, y1 + 2 * yInc);
     }
+    
+    private void paintAMonster(Graphics monsterBuffer, Monster m, boolean isHit) {
+        monsterBuffer.drawImage(m.getImage(), 0, 0,
+                                monsterBuffer.getClipBounds().width,
+                                monsterBuffer.getClipBounds().height,
+                                null);
+        
+        if (isHit) {
+            ImageIcon boom = new ImageIcon("images/boom.png");
+            int width = monsterBuffer.getClipBounds().width;
+            int startX = width / 5;
+            width = width * 3 / 5;
+            monsterBuffer.drawImage(boom.getImage(), startX, 0,
+                                      width,
+                                      monsterBuffer.getClipBounds().height,
+                                      null);            
+        }
+    }
 
     private void paintMyMonster () {
         Monster monster = myBattle.getPlayerParty().getCurrentMonster();
-        myMonsterBuffer.drawImage(monster.getImage(), 0, 0,
-                                  enemyMonsterBuffer.getClipBounds().width,
-                                  enemyMonsterBuffer.getClipBounds().height,
-                                  null);
+        paintAMonster(myPlayerMonsterBuffer, monster, myPlayerMonsterIsHit);
     }
 
     private void paintEnemyMonster () {
-        enemyMonsterBuffer.drawImage(myBattle.getEnemyParty().getCurrentMonster().getImage(), 0, 0,
-                                     enemyMonsterBuffer.getClipBounds().width,
-                                     enemyMonsterBuffer.getClipBounds().height,
-                                     null);
+        Monster monster = myBattle.getEnemyParty().getCurrentMonster();
+        paintAMonster(myEnemyMonsterBuffer, monster, myEnemyMonsterIsHit);
     }
 }

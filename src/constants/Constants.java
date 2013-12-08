@@ -207,7 +207,7 @@ public class Constants {
     //State Text Constants
     public final static int TEXT_START_X = 15;
     public final static int TEXT_START_Y = 30;
-    public final static int TEXT_START_INC = 50;
+    public final static int TEXT_START_INC = 35;
     public static final int TEXT_CHARS_PER_LINE = 60;
 
     
@@ -217,7 +217,9 @@ public class Constants {
     public final static int MAIN_MENU_WIDTH = WIDTH;
     public final static int MAIN_MENU_HEIGHT = HEIGHT;
     public final static String MAIN_MENU_PARTY = "PARTY";
-    public final static String MAIN_MENU_ITEM = "ITEM";
+    public final static String MAIN_MENU_ITEM = "ITEMS";
+    public final static String MAIN_MENU_KEY_ITEM = "KEY ITEMS";
+
     public final static String MAIN_MENU_SAVE = "SAVE";
     public final static String MAIN_MENU_EXIT = "EXIT";
 
