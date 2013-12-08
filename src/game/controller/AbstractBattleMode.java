@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.util.List;
 import constants.Constants;
+import game.controller.optionState.AbstractBattleCompleteState;
 import game.controller.state.option.AbstractOptionState;
 import game.controller.state.option.AbstractMainOptionState;
 import game.controller.state.option.TextOptionState;
@@ -36,6 +37,8 @@ public abstract class AbstractBattleMode extends AbstractMode {
         // TODO: separate wild battle options from trainer battle options
 
     }
+    
+    public abstract AbstractBattleCompleteState getBattleCompleteState(boolean didWin);
     
     public abstract AbstractMainOptionState getAMainOptionState();
 

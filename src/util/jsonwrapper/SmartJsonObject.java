@@ -3,6 +3,7 @@ package util.jsonwrapper;
 import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import util.jsonwrapper.jsonexceptions.NoBooleanValueJsonException;
 import util.jsonwrapper.jsonexceptions.NoDoubleValueJsonException;
 import util.jsonwrapper.jsonexceptions.NoIntValueJsonException;
 import util.jsonwrapper.jsonexceptions.NoJSONArrayJsonException;
@@ -68,6 +69,21 @@ public class SmartJsonObject {
     }
     
     /**
+     * Finds a int value given a key
+     * @param key - key in the json object
+     * @return - The int value for the given key
+     * @throws NoIntValueJsonException
+     * @throws NoBooleanValueJsonException 
+     */
+    public boolean getBoolean(String key) throws NoBooleanValueJsonException{
+        try{
+            return Boolean.parseBoolean(myJson.get(key).toString());
+        } catch(Exception e){
+            throw new NoBooleanValueJsonException();
+        }
+    }
+    
+    /**
      * Finds a JsonObject for a given key
      * Turns it into a SmartJSON object
      * @param key - key in the json object
@@ -100,6 +116,10 @@ public class SmartJsonObject {
      */
     public Set<Object> keySet(){
         return myJson.keySet();
+    }
+    
+    public String toString(){
+        return myJson.toJSONString();
     }
 
 //    public boolean isNull () {

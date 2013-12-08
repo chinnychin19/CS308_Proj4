@@ -119,4 +119,11 @@ public class Input {
 	public void setInput(InputIndex input, boolean value){
 		myInputs.put(input, value);
 	}
+	
+	public void setMovementOff(){
+	    myInputs.put(InputIndex.UP, false);
+	    myInputs.put(InputIndex.DOWN, false);
+	    myInputs.put(InputIndex.LEFT, false);
+            myInputs.put(InputIndex.RIGHT, false);
+	}
 }

@@ -1,6 +1,9 @@
 package game.controller;
 
 import util.Sound;
+import game.controller.optionState.AbstractBattleCompleteState;
+import game.controller.optionState.UserLostWildBattleCompleteState;
+import game.controller.optionState.UserWonWildBattleCompleteState;
 import game.controller.state.option.AbstractMainOptionState;
 import game.controller.state.option.WildMainOptionState;
 import game.model.GameModel;
@@ -35,5 +38,11 @@ public class WildBattleMode extends AbstractBattleMode {
     @Override
     public AbstractMainOptionState getAMainOptionState () {
         return new WildMainOptionState(this);
+    }
+
+    @Override
+    public AbstractBattleCompleteState getBattleCompleteState (boolean didWin) {
+        return didWin ? new UserWonWildBattleCompleteState(this) : 
+            new UserLostWildBattleCompleteState(this);
     }
 }

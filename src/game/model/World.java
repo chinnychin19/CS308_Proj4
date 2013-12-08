@@ -34,10 +34,10 @@ public class World {
         myViewableObjects = new HashMap<Loc, AbstractViewableObject>();
         myGroundObjects = new HashMap<Loc, AbstractGround>();
         String worldJSONFilepath = Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
-                Constants.FILENAME_WORLD;
+                "saveState2.json";
         myModel = model;
         myWorldJSON = JSONReader.getJSON(worldJSONFilepath);
-        setUpWorld();
+        setUpWorld( myWorldJSON );
     }
     
     /**
@@ -95,14 +95,20 @@ public class World {
         return myPlayer.getLoc().adjacentLoc(myPlayer.getDirection());
     }
     
+    private void resetWorld() {
+        myViewableObjects.clear();
+        myGroundObjects.clear();
+    }
+    
     /**
      * Creates the world from JSON
      * Uses reflection to figure out which classes to instantiate
      * @throws Exception - if file not found
      */
-    protected void setUpWorld () throws Exception {
+    protected void setUpWorld (JSONObject worldJSON) throws Exception {
+        resetWorld();
         for (String viewableCategory : Constants.VIEWABLE_CATEGORIES) {
-            JSONArray objectArray = (JSONArray) myWorldJSON.get(viewableCategory);
+            JSONArray objectArray = (JSONArray) (worldJSON.get(viewableCategory));
 //            debug("Category: "+viewableCategory);
             for (Object obj : objectArray) {
                 SmartJsonObject objInWorld = new SmartJsonObject((JSONObject) obj);
@@ -111,14 +117,15 @@ public class World {
                         myModel.getDefinitionCache().
                                 getInstance(viewableCategory, objInWorld.getString(Constants.JSON_NAME));
                 String classPath = Constants.CLASSPATH_GAME_MODEL + "." + viewableCategory; 
-                AbstractViewable newViewable = 
-                        (AbstractViewable) Reflection.createInstance(classPath,
-                                                                           myModel, 
-                                                                           this,
-                                                                           definition,
-                                                                           objInWorld);
+                AbstractViewable newViewable =
+                        (AbstractViewable) Reflection.createInstance(classPath, myModel, this,
+                                                                     definition, objInWorld);
                 addViewable(newViewable);
                 if (viewableCategory.equals(Constants.JSON_PLAYER)) {
+                    if(myPlayer != null){
+                        myViewableObjects.remove(myPlayer.getLoc());
+                        addViewable((Player)newViewable);
+                    }
                     myPlayer = (Player) newViewable;
                 }
             }

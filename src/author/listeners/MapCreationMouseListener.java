@@ -1,16 +1,20 @@
 package author.listeners;
 
+//import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import author.mapCreation.CanvasTileManager;
+import author.mapCreation.MapCreationView;
 
 public class MapCreationMouseListener implements MouseListener {
 
 	private CanvasTileManager myTileManager;
+	private MapCreationView myMapCreationView;
+	//private Image myActiveImage;
 
-	public MapCreationMouseListener(CanvasTileManager tileManager){
+	public MapCreationMouseListener(MapCreationView mapCreation, CanvasTileManager tileManager){
 		myTileManager = tileManager;
+		myMapCreationView = mapCreation;
 	}
 
 
@@ -20,11 +24,18 @@ public class MapCreationMouseListener implements MouseListener {
 		
 		int x = arg0.getX();
 		int y = arg0.getY();
+		
+		int xTile = myTileManager.getHorizontalTileNum(x);
+		int yTile = myTileManager.getVerticalTileNum(y);
 
 		System.out.println("Mouse clicked at: " + x + ", " + y);
 		System.out.println("Click translates to tile " +
 				"column: " + myTileManager.getHorizontalTileNum(x) + 
 				", row: " + myTileManager.getVerticalTileNum(y));
+		
+		myTileManager.getTileClickLoc(xTile, yTile);
+		
+		myMapCreationView.paintTile(myMapCreationView.getGraphics(), xTile, yTile, null);	
 	}
 
 	@Override

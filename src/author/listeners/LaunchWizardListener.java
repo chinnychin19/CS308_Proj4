@@ -20,7 +20,7 @@ public class LaunchWizardListener implements ActionListener {
 	}
     @Override
     public void actionPerformed (ActionEvent e) {
-    	new WizardBuilder(myType,Constants.PLAYER_JSON, myCache);
-    	}
+    	new WizardBuilder(myType, Constants.PLAYER_JSON, myCache);
+    }
 
 }

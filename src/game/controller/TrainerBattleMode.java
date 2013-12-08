@@ -1,6 +1,10 @@
 package game.controller;
 
 import util.Sound;
+import game.controller.optionState.AbstractBattleCompleteState;
+import game.controller.optionState.UserLostTrainerBattleCompleteState;
+import game.controller.optionState.UserLostWildBattleCompleteState;
+import game.controller.optionState.UserWonTrainerBattleCompleteState;
 import game.controller.state.option.AbstractMainOptionState;
 import game.controller.state.option.TrainerMainOptionState;
 import game.model.FightingNPC;
@@ -29,5 +33,11 @@ public class TrainerBattleMode extends AbstractBattleMode {
     @Override
     public AbstractMainOptionState getAMainOptionState () {
         return new TrainerMainOptionState(this);
+    }
+
+    @Override
+    public AbstractBattleCompleteState getBattleCompleteState (boolean didWin) {
+        return didWin ? new UserWonTrainerBattleCompleteState(this) :
+            new UserLostTrainerBattleCompleteState(this);
     }
 }
