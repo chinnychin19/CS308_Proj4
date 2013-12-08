@@ -186,23 +186,19 @@ public class WizardBuilder {
 
     private JSONObject getJSON (String filepath) {
         JSONObject json;
-        //JSONObject json2;
         JSONParser parser = new JSONParser();
         try {
             json = (JSONObject) parser.parse(new FileReader(filepath));
             return json;
         }
         catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             System.out.println("File not found. Please try again.");
             e.printStackTrace();
         }
         catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;

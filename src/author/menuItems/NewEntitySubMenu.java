@@ -2,7 +2,6 @@ package author.menuItems;
 
 import java.io.FileReader;
 import java.util.Set;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,7 +12,7 @@ import author.model.AuthoringCache;
 
 
 @SuppressWarnings("serial")
-public class NewEntitySubMenu extends JMenu {
+public class NewEntitySubMenu extends AbstractMenu {
 
     private AuthoringCache myAuthoringCache;
 

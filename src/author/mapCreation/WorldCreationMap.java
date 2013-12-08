@@ -2,7 +2,6 @@ package author.mapCreation;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import location.Loc;
 
 public class WorldCreationMap {
@@ -13,7 +12,7 @@ public class WorldCreationMap {
 		myTileMap = new HashMap<Loc, GenericTileWrapper>();
 	}
 	
-	public void set(Loc location, GenericTileWrapper tile){
+	public void put(Loc location, GenericTileWrapper tile){
 		myTileMap.put(location, tile);
 	}
 	
