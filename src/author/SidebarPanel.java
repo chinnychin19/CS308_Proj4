@@ -14,6 +14,14 @@ import org.json.simple.JSONObject;
 import author.model.AuthoringCache;
 import constants.Constants;
 
+
+/**
+ * GUI component class that manages the sidebar panel of pre-existing objects.
+ * 
+ * @author Michael Marion
+ * 
+ */
+
 @SuppressWarnings("serial")
 public class SidebarPanel extends JPanel {
 
@@ -64,5 +72,4 @@ public class SidebarPanel extends JPanel {
 		JRadioButton button = new JRadioButton(tempString);
 		this.add(button);
 	}
-    
 }

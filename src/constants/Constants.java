@@ -4,6 +4,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 
+/**
+ * Defines global constants for both the game engine
+ * and the authoring environment.
+ *
+ * @author Team Rocket
+ *
+ */
+
 public class Constants {
     public static final int WIDTH = 800, HEIGHT = 500;
 
@@ -190,13 +198,9 @@ public class Constants {
 
     public static final int MAX_PARTY_SIZE = 6;
 
-    
     //Type Matrix
     public static final String TYPE_MATRIX_KEY = "matrix";
     
-
-   
-
     //State Text Constants
     public final static int TEXT_START_X = 15;
     public final static int TEXT_START_Y = 30;
@@ -212,9 +216,5 @@ public class Constants {
     public final static String MAIN_MENU_PARTY = "PARTY";
     public final static String MAIN_MENU_ITEM = "ITEM";
     public final static String MAIN_MENU_SAVE = "SAVE";
-    public final static String MAIN_MENU_EXIT = "EXIT";
-
-    
-    
-    
+    public final static String MAIN_MENU_EXIT = "EXIT";    
 }
