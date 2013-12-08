@@ -28,7 +28,7 @@ import location.Loc;
 public class Player extends AbstractCharacter implements Fighter, Saveable {
     private List<Monster> myParty;
     private List<Item> myItems;
-    private Collection<KeyItem> myKeyItems;
+    private List<KeyItem> myKeyItems;
     private int myLastSavedX, myLastSavedY;
 
     public Player (GameModel model,
@@ -47,14 +47,16 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
     protected void readWorld (SmartJsonObject objInWorld) throws SmartJsonException{
             super.readWorld(objInWorld);
             // ADDING MONSTERS
+            
             myParty = new ArrayList<Monster>(); // TODO: populate
-            JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWWERCASE);
+            JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWERCASE);
             for (Object monsterObj : myMonstersJSON) {
                 SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
                 SmartJsonObject monsterDefinition =
                         getModel().getDefinitionCache()
                                 .getInstance(Constants.MONSTER_UPPERCASE,
                                              monsterInWorld.getString(Constants.JSON_NAME));
+               
                myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
             }
             int x = objInWorld.getInt(Constants.JSON_X);
@@ -67,9 +69,9 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
             setDirection(Direction.constructFromString(directionStr));
 
             // ADDING KEY ITEMS
-            myKeyItems = new HashSet<KeyItem>();
+            myKeyItems = new ArrayList<KeyItem>();
             JSONArray playerKeyItems = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
-            Collection<KeyItem> keyItems = new ArrayList<KeyItem>();
+            List<KeyItem> keyItems = new ArrayList<KeyItem>();
             for (Object o : playerKeyItems) {
                 keyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache().getInstance("KeyItem", (String)o)));
             }
@@ -96,7 +98,7 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
      * 
      * @param keyItems
      */
-    public void setKeyItems (Collection<KeyItem> keyItems) {
+    public void setKeyItems (List<KeyItem> keyItems) {
         myKeyItems = keyItems;
     }
 
@@ -104,7 +106,7 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
      * 
      * @return - Key Items of the Player
      */
-    public Collection<KeyItem> getKeyItems () {
+    public List<KeyItem> getKeyItems () {
         return myKeyItems;
     }
 

@@ -48,7 +48,7 @@ public class FightingNPC extends NPC implements Fighter {
             myBet = definition.getInt(Constants.JSON_BET);
             myLineOfSightDistance = definition.getInt(Constants.JSON_LINE_OF_SIGHT_DISTANCE);
             myParty = new ArrayList<Monster>();
-            JSONArray myMonstersJSON = definition.getJSONArray(Constants.MONSTERS_LOWWERCASE);
+            JSONArray myMonstersJSON = definition.getJSONArray(Constants.MONSTERS_LOWERCASE);
             for (Object monsterObj : myMonstersJSON) {
                 SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
                 SmartJsonObject monsterDefinition =
@@ -91,6 +91,11 @@ public class FightingNPC extends NPC implements Fighter {
         }
     }
 
+    
+    public List<KeyItem> getKeyItems(){
+        return myKeyItems;
+    }
+    
     /**
      * Check to see if the player is within the line of sight of the player
      * 

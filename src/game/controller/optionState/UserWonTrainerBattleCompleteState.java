@@ -8,7 +8,7 @@ import game.model.battle.Battle;
 public class UserWonTrainerBattleCompleteState extends AbstractBattleCompleteState {
 
     public UserWonTrainerBattleCompleteState (AbstractBattleMode mode) {
-        super(mode, "You won :)");
+        super(mode, "You won :)"+ ((numKeyItemsToGive(mode)!=0) ? "\tYou recieved "+numKeyItemsToGive(mode)+ " key items" : ""));
     }
 
     @Override
@@ -22,5 +22,9 @@ public class UserWonTrainerBattleCompleteState extends AbstractBattleCompleteSta
         
         //TODO: post dialogue
         myMode.getController().setWanderingMode();
+    }
+    
+    private static int numKeyItemsToGive(AbstractBattleMode mode){
+        return ((FightingNPC) mode.getBattle().getEnemyParty().getFighter()).getKeyItems().size();
     }
 }

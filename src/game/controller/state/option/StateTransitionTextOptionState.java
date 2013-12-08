@@ -16,4 +16,8 @@ public class StateTransitionTextOptionState extends TextOptionState {
         myMode.setOptionState(myMode.getAMainOptionState());
         myBattle.doNextTurn();
     }
+    
+    protected Battle getBattle(){
+        return myBattle;
+    }
 }

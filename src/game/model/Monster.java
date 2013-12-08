@@ -24,8 +24,8 @@ public class Monster extends AbstractModelObject implements Saveable {
     private double myCatchRate;
     private Type myType;
     private List<AttackWrapper> myAttacks;
-    private AbstractEvolution myEvolution;
     private Map<String, Integer> myStatistics;
+    private AbstractEvolution myEvolution;
 
     /**
      * To be called for an NPC's monsters or wild monster
@@ -60,6 +60,10 @@ public class Monster extends AbstractModelObject implements Saveable {
      */
     public Image getImage () {
         return myImage;
+    }
+    
+    private void setLevel (int level) {
+        myStatistics.put(Constants.JSON_LEVEL, level);       
     }
 
     /**
@@ -204,7 +208,6 @@ public class Monster extends AbstractModelObject implements Saveable {
             Attack attack = new Attack(getModel(), a);
             int unlockLevel = attackJson.getInt(Constants.JSON_ATTACK_UNLOCK_LEVEL);
             myAttacks.add(new AttackWrapper(attack, unlockLevel));
-            // TODO: Implement myEvolution
         }
         myEvolution = readEvolution(definition);
     }
@@ -263,6 +266,14 @@ public class Monster extends AbstractModelObject implements Saveable {
     private void levelUp () {
         myStatistics.put(Constants.JSON_LEVEL, 1 + myStatistics.get(Constants.JSON_LEVEL));
         // TODO: update stats
+        myStatistics.put(Constants.STAT_ATTACK, myStatistics.get(Constants.STAT_ATTACK) + getFudgeFactor());
+        myStatistics.put(Constants.STAT_DEFENSE, myStatistics.get(Constants.STAT_DEFENSE) + getFudgeFactor());
+        myStatistics.put(Constants.STAT_MAX_HP, myStatistics.get(Constants.STAT_MAX_HP) + getFudgeFactor());
+        myStatistics.put(Constants.STAT_EXP_TO_NEXT_LEVEL, myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL) + getFudgeFactor());
+    }
+    
+    private int getFudgeFactor(){
+        return (int) Math.round(.8 + Math.random()*.4)*myStatistics.get(Constants.JSON_LEVEL);
     }
 
     private AbstractEvolution readEvolution (SmartJsonObject definition) {
@@ -281,7 +292,6 @@ public class Monster extends AbstractModelObject implements Saveable {
         setAttacks(myEvolution.getAttacks());
         setEvolution(myEvolution.getNextEvolution());
         
-        // TODO: update stats
     }
 
     @SuppressWarnings("unchecked")
@@ -297,4 +307,14 @@ public class Monster extends AbstractModelObject implements Saveable {
         toSave.put(Constants.STAT_DEFENSE, ""+myStatistics.get(Constants.STAT_DEFENSE));
         return toSave;
     }
+    
+    /*public void changeAttack(int value){
+    	myAttack += value;
+    	if(myAttack <=1){
+    		myAttack = 1
+    	}
+    }
+    public void changeDefense(int value){
+    	myDefense += value;
+    }*/
 }
