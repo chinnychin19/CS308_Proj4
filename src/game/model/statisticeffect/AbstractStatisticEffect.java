@@ -14,7 +14,7 @@ public abstract class AbstractStatisticEffect {
         try {
             
             myStatisticName = object.getString("statName");
-            myChange = object.getInt("change");
+            myChange = object.getInt(Constants.CHANGE);
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
