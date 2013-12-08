@@ -5,17 +5,19 @@ import java.awt.event.ActionListener;
 import javax.swing.JRadioButton;
 import author.panels.RadioButtonsPanel;
 
-public class RadioButtonListener implements ActionListener {
-    
-    private static RadioButtonListener instance;
-    
-    private RadioButtonListener(){}
 
-    public static synchronized RadioButtonListener getInstance()
+public class RadioButtonListener implements ActionListener {
+
+    private static RadioButtonListener instance;
+
+    private RadioButtonListener () {
+    }
+
+    public static synchronized RadioButtonListener getInstance ()
     {
-            if (instance == null)
-                    instance = new RadioButtonListener();
-            return instance;
+        if (instance == null)
+            instance = new RadioButtonListener();
+        return instance;
     }
 
     @Override
@@ -23,8 +25,9 @@ public class RadioButtonListener implements ActionListener {
         try {
             JRadioButton rb = (JRadioButton) ae.getSource();
             ((RadioButtonsPanel) rb.getParent()).updateSelectionState(ae);
-        } 
-        catch (ClassCastException e) {}
+        }
+        catch (ClassCastException e) {
+        }
     }
 
 }

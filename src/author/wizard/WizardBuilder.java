@@ -25,7 +25,14 @@ import author.model.AuthoringCache;
 import author.panels.ContainerPanel;
 import author.panels.FinishPanel;
 
-
+/**
+ * This class provides methods to dynamically 
+ * generate a Wizard based on data given in the
+ * JSON template provided by the user.
+ * 
+ * @author Michael Marion and Robert Ansel
+ *
+ */
 public class WizardBuilder {
 
     public static final Map<String, String> KEYWORD_TO_PANEL_TYPE;
@@ -208,19 +215,15 @@ public class WizardBuilder {
     /**
      * Get a file path from a file chooser dialog.
      * 
-     * @return
+     * @return file path of selected file.
      */
     public String getFilePath () {
         // Create a new file chooser.
         JFileChooser fileChooser = new JFileChooser();
         int returnVal = fileChooser.showOpenDialog(null);
+        
         String path = null;
 
-        // If a file is approved, get the name.
-        //if (returnVal == FileChooser.APPROVE_OPTION) {
-        
-        // TODO: Changed this so there wouldn't be a warning.  If it fails,
-        //		 use the commented line above
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File f = fileChooser.getSelectedFile();
             path = f.getAbsolutePath();
