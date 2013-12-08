@@ -12,7 +12,6 @@ public class UserLostTrainerBattleCompleteState extends AbstractBattleCompleteSt
 
     @Override
     protected void onInteract () {
-        //TODO: lose money
         myMode.getController().getModel().getPlayer().healAllMonsters();
         myMode.getController().getModel().getPlayer().goToLastSavedLoc();
         myMode.getController().setWanderingMode();

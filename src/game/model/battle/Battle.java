@@ -46,11 +46,17 @@ public class Battle {
 
     public void attackEnemy (Attack a) {
         AttackResult result = a.doAttack(myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
+        if (result.isHit()) {
+            myMode.markEnemyMonsterHit();
+        }
         myMode.pushState(new StateTransitionTextOptionState(myMode, result.toString(), this));
     }
 
     public void attackPlayer (Attack a) {
         AttackResult result = a.doAttack(myEnemyParty.getCurrentMonster(), myPlayerParty.getCurrentMonster());
+        if (result.isHit()) {
+            myMode.markPlayerMonsterHit();
+        }
         myMode.pushState(new TextOptionState(myMode, result.toString()));
 
     }
