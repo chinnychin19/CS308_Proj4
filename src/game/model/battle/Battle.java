@@ -12,6 +12,7 @@ import game.model.FightingNPC;
 import game.model.LevelChange;
 import game.model.Monster;
 import game.model.attack.Attack;
+import game.model.attack.AttackResult;
 
 
 public class Battle {
@@ -44,14 +45,13 @@ public class Battle {
     }
 
     public void attackEnemy (Attack a) {
-        double damage = a.doAttack(myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
-        myMode.pushState(new StateTransitionTextOptionState(myMode, String.format("Your %s did %f damage", myPlayerParty.getCurrentMonster().getName(), damage), this));
+        AttackResult result = a.doAttack(myPlayerParty.getCurrentMonster(), myEnemyParty.getCurrentMonster());
+        myMode.pushState(new StateTransitionTextOptionState(myMode, result.toString(), this));
     }
 
     public void attackPlayer (Attack a) {
-        double damage = a.doAttack(myEnemyParty.getCurrentMonster(), myPlayerParty.getCurrentMonster());
-        myMode.pushState(new TextOptionState(myMode, String
-                .format("%s did %f damage", myEnemyParty.getCurrentMonster().getName(), damage)));
+        AttackResult result = a.doAttack(myEnemyParty.getCurrentMonster(), myPlayerParty.getCurrentMonster());
+        myMode.pushState(new TextOptionState(myMode, result.toString()));
 
     }
     
@@ -103,18 +103,14 @@ public class Battle {
     }
 
     private void userLost () {
-        // Heal enemy's monsters for the next time you battle
-        for (Monster m: myEnemyParty.getMonsters()) {
-            m.heal();
-        }
-        myMode.setOptionState(new UserLostWildBattleCompleteState(myMode));
+        myMode.setOptionState(myMode.getBattleCompleteState(false));
     }
 
     private void userWon () {
         if (myMode instanceof TrainerBattleMode) {
             ((FightingNPC) myEnemyParty.getFighter()).setDefeated(true);
         }
-        myMode.setOptionState(new UserWonWildBattleCompleteState(myMode));
+        myMode.setOptionState(myMode.getBattleCompleteState(true));
     }
 
     public boolean isOver () {

@@ -1,13 +1,18 @@
 package game.model.evolution;
 
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
+import org.json.simple.JSONObject;
 import constants.Constants;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.NoStringValueJsonException;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
+import game.model.AttackWrapper;
 import game.model.GameModel;
 import game.model.Monster;
+import game.model.attack.Attack;
 
 public class Evolution extends AbstractEvolution {
 
@@ -64,5 +69,29 @@ public class Evolution extends AbstractEvolution {
     
     private SmartJsonObject getJsonMonster() throws SmartJsonException{
         return getModel().getDefinitionCache().getInstance(Constants.MONSTER_UPPERCASE, getName());
+    }
+
+    @Override
+    public List<AttackWrapper> getAttacks () {
+        try {
+            SmartJsonObject jsonMonster = getJsonMonster();
+            List<AttackWrapper> attacks = new ArrayList<AttackWrapper>();
+
+            for (Object obj : jsonMonster.getJSONArray(Constants.JSON_MONSTER_ALL_ATTACKS)) {
+                SmartJsonObject attackJson = new SmartJsonObject((JSONObject) obj);
+                String name = attackJson.getString(Constants.NAME);
+                SmartJsonObject a =
+                        getModel().getDefinitionCache().getInstance(Constants.ATTACK_UPPERCASE,
+                                                                    name);
+                Attack attack = new Attack(getModel(), a);
+                int unlockLevel = attackJson.getInt(Constants.JSON_ATTACK_UNLOCK_LEVEL);
+                attacks.add(new AttackWrapper(attack, unlockLevel));
+            }
+            return attacks;
+        }
+        catch (SmartJsonException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

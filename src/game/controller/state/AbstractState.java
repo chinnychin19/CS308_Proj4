@@ -11,6 +11,7 @@ import java.awt.Graphics;
 public abstract class AbstractState implements State, Listable {
     protected Graphics myBuffer;
     protected String myName;
+
     public AbstractState (String name, AbstractMode mode, int x, int y, int w, int h) {
         myBuffer = mode.getGraphics().create(x, y, w, h);
         myName = name;
@@ -35,11 +36,11 @@ public abstract class AbstractState implements State, Listable {
             onBack();
         }
     }
-    
-    public String getName() {
+
+    public String getName () {
         return myName;
     }
-    
+
     protected abstract void onBack ();
 
     protected abstract void onInteract ();

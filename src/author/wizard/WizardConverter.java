@@ -93,9 +93,7 @@ public class WizardConverter {
         JSONObject outputJSONObject = new JSONObject();
 
         for (Component c : panel.getComponents()) {
-
             if (c instanceof AbstractWizardPanel) {
-
                 // outputJSONObject.putAll(((AbstractWizardPanel) c).getUserInput());
                 smartJSONObjectAdd(outputJSONObject, ((AbstractWizardPanel) c).getUserInput());
             }

@@ -6,12 +6,15 @@ import java.awt.event.KeyListener;
 import constants.Constants;
 
 import author.mapCreation.CanvasTileManager;
+import author.mapCreation.MapCreationView;
 
 public class MapCreationKeyListener implements KeyListener {
 
+	private MapCreationView myView;
 	private CanvasTileManager myTileManager;
 
-	public MapCreationKeyListener(CanvasTileManager tileManager) {
+	public MapCreationKeyListener(MapCreationView view, CanvasTileManager tileManager) {
+		myView = view;
 		myTileManager = tileManager;
 	}
 
@@ -21,26 +24,32 @@ public class MapCreationKeyListener implements KeyListener {
 		
 		if (key == Constants.ZOOM_IN_KEY){ // 'Z' == Zoom In
 			myTileManager.contractView();
+			myView.repaint();
 		}
 		
 		if (key == Constants.ZOOM_OUT_KEY){ // 'X' == Zoom Out
 			myTileManager.expandView();
+			myView.repaint();
 		}
 		
 		if (key == Constants.DOWN_ARROW_KEY){ // Move View Down
 			myTileManager.increaseVerticalOffset();
+			myView.repaint();
 		}
 		
 		if (key == Constants.UP_ARROW_KEY){ // Move View Up
 			myTileManager.decreaseVerticalOffset();
+			myView.repaint();
 		}
 		
 		if (key == Constants.LEFT_ARROW_KEY){ // Move View Left
 			myTileManager.decreaseHorizontalOffset();
+			myView.repaint();
 		}
 		
 		if (key == Constants.RIGHT_ARROW_KEY){ // Move View Right
 			myTileManager.increaseHorizontalOffset();
+			myView.repaint();
 		}
 		
 	}
@@ -52,6 +61,7 @@ public class MapCreationKeyListener implements KeyListener {
 		if (key == Constants.ZOOM_IN_KEY || key == Constants.ZOOM_OUT_KEY) {
 			// Finished changing window size
 			printViewExpandInfo();
+			// myView.repaint();
 		}
 
 		if (	   key == Constants.UP_ARROW_KEY
@@ -60,6 +70,7 @@ public class MapCreationKeyListener implements KeyListener {
 				|| key == Constants.RIGHT_ARROW_KEY) { 
 			// Finished changing window
 			printViewShiftInfo();
+			// myView.repaint();
 		}
 	}
 

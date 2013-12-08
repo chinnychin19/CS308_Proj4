@@ -2,6 +2,7 @@ package game.controller.state.mainmenu;
 
 import constants.Constants;
 import game.controller.MainMenuMode;
+import game.model.StateSaver;
 
 public class SaveMenuState extends AbstractImmediateActMenuState{
 
@@ -12,6 +13,7 @@ public class SaveMenuState extends AbstractImmediateActMenuState{
     @Override
     protected void action () {
         //TODO: Implement
+        getMode().getModel().saveState();
         getMode().setState(new MainMenuState(getMode()));
     }
 
