@@ -378,4 +378,14 @@ public class Monster extends AbstractModelObject implements Saveable {
         toSave.put(Constants.DEFENSE, ""+getDefense());
         return toSave;
     }
+    
+    /*public void changeAttack(int value){
+    	myAttack += value;
+    	if(myAttack <=1){
+    		myAttack = 1
+    	}
+    }
+    public void changeDefense(int value){
+    	myDefense += value;
+    }*/
 }
