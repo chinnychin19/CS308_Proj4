@@ -2,6 +2,8 @@ package game.controller.optionState;
 
 import game.controller.AbstractBattleMode;
 import game.model.FightingNPC;
+import game.model.Player;
+import game.model.battle.Battle;
 
 public class UserWonTrainerBattleCompleteState extends AbstractBattleCompleteState {
 
@@ -11,8 +13,13 @@ public class UserWonTrainerBattleCompleteState extends AbstractBattleCompleteSta
 
     @Override
     protected void onInteract () {
-        ((FightingNPC) myMode.getBattle().getEnemyParty().getFighter()).setDefeated(true);
-        //TODO: gifts
+        Battle battle = myMode.getBattle();
+        FightingNPC enemy = ((FightingNPC) battle.getEnemyParty().getFighter());
+        Player player = ((Player) battle.getPlayerParty().getFighter());
+        enemy.setDefeated(true);
+        enemy.giveKeyItemGifts(player);
+        //TODO: gift dialogue
+        
         //TODO: money
         //TODO: post dialogue
         myMode.getController().setWanderingMode();

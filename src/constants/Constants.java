@@ -200,7 +200,7 @@ public class Constants {
     //State Text Constants
     public final static int TEXT_START_X = 15;
     public final static int TEXT_START_Y = 30;
-    public final static int TEXT_START_INC = 50;
+    public final static int TEXT_START_INC = 35;
     public static final int TEXT_CHARS_PER_LINE = 60;
 
     

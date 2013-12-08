@@ -122,14 +122,8 @@ public class FightingNPC extends NPC implements Fighter {
         getModel().getPlayer().setDirection(oppositeDirection);
     }
 
-    /**
-     * Returns the NPC's key items. These are items that will help the main player get through
-     * obstacles and advance through the game.
-     * 
-     * @return myKeyItems
-     */
-    public List<KeyItem> getKeyItem () {
-        return myKeyItems;
+    public void giveKeyItemGifts(Player p) {
+        p.getKeyItems().addAll(myKeyItems);
     }
 
     /**
