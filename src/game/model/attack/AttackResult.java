@@ -16,6 +16,10 @@ public class AttackResult {
         myIsHit = isHit;
     }
     
+    public boolean isHit() {
+        return myIsHit;
+    }
+    
     @Override
     public String toString() {
         String ret = "";

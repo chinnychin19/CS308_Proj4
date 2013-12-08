@@ -138,10 +138,31 @@
         }],
         "bet": "25",
         "postDialogue": "thank you come again.",
+        "keyItems": []
+    }, {
+        "name": "fighter2",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "5",
+        "dialogue": "Let's be real. You're probably gonna beat me. And if you do you'll win a razor!",
+        "monsters": [{
+            "name": "tyler",
+            "level": "5",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "10",
+            "curHP": "10",
+            "attack": "35",
+            "defense": "60"
+        }],
+        "bet": "25",
+        "postDialogue": "Enjoy your razor!",
         "keyItems": [
             "razor"
         ]
-    }],
+      }],
     "TypeMatrix": [{
         "name": "matrix",
         "matrix": {
@@ -175,5 +196,23 @@
     "HealItem": [{
         "name": "heal1",
         "image": "images/items/healPokeBall.png"
-    }]
+    }],
+     "Item": [
+                {
+                    "name": "potion",
+                    "consciousness": "alive",
+                    "statisticEffect": {
+                        "statName": "hp",
+                        "change": "20"
+                    }
+                },
+                {
+                    "name": "revive",
+                    "consciousness" : "dead",
+                    "statisticEffect": {
+                        "statName": "hp",
+                        "change": "-1" 
+                    }
+                }
+            ]
 }

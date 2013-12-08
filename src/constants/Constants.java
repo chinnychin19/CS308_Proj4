@@ -141,6 +141,13 @@ public class Constants {
     public static final String NAME = "name";
     public static final String ATTACK_UPPERCASE = "Attack";
     
+    //JSON Keywords for Item Stats
+    public static final String MODE_KEYWORD = "mode";
+    public static final String RECIPIENT_ORIGINAL_STATUS = "recipientOriginalStatus";
+    public static final String STATISTIC_EFFECT = "statisticEffect";
+    public static final String STAT_NAME = "statName";
+    public static final String CHANGE = "change";
+    
     public static final String SAVE_FILE_NOT_FOUND = "Save file not found";
     public static final String UNCHECKED = "unchecked";
     
@@ -196,7 +203,7 @@ public class Constants {
     //State Text Constants
     public final static int TEXT_START_X = 15;
     public final static int TEXT_START_Y = 30;
-    public final static int TEXT_START_INC = 50;
+    public final static int TEXT_START_INC = 35;
     public static final int TEXT_CHARS_PER_LINE = 60;
 
     
@@ -206,8 +213,11 @@ public class Constants {
     public final static int MAIN_MENU_WIDTH = WIDTH;
     public final static int MAIN_MENU_HEIGHT = HEIGHT;
     public final static String MAIN_MENU_PARTY = "PARTY";
-    public final static String MAIN_MENU_ITEM = "ITEM";
+    public final static String MAIN_MENU_ITEM = "ITEMS";
+    public final static String MAIN_MENU_KEY_ITEM = "KEY ITEMS";
+
     public final static String MAIN_MENU_SAVE = "SAVE";
     public final static String MAIN_MENU_EXIT = "EXIT";
-   
+    public static final int REVIVE_TO_FULL = -1;
+
 }
