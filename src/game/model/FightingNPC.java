@@ -139,7 +139,6 @@ public class FightingNPC extends NPC implements Fighter {
     @Override
     public void onInteract () {
         facePlayer();
-        // TODO: Wrap Dialogue every 63 characters (the amount for one line)
         // TODO: state changing will be refactored:
         // AbstractMode mode = getModel().getController().getMode();
         // mode.addDynamicState(new TextState(mode,

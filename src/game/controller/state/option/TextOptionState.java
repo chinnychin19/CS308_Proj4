@@ -59,6 +59,7 @@ public class TextOptionState extends AbstractOptionState {
     @Override
     protected void onInteract () {
         myMode.setOptionState(myNextState);
+        myMode.removeHitMarkers();
     }
 
     @Override

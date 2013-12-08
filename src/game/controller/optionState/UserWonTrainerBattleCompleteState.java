@@ -20,7 +20,6 @@ public class UserWonTrainerBattleCompleteState extends AbstractBattleCompleteSta
         enemy.giveKeyItemGifts(player);
         //TODO: gift dialogue
         
-        //TODO: money
         //TODO: post dialogue
         myMode.getController().setWanderingMode();
     }
