@@ -12,11 +12,8 @@ import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 
 /**
- * 
  * @author rtoussaint
- *
  */
-
 
 public abstract class Item extends AbstractItem {
 
