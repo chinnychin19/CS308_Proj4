@@ -1,7 +1,9 @@
 package jsoncache;
 
+import constants.Constants;
+
 public class JSONException extends Exception {
     public JSONException() {
-        super("There was an error with your JSON!");
+        super(Constants.ERROR_WITH_JSON);
     }
 }

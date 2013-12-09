@@ -81,8 +81,6 @@ public class Battle {
                                                       new LivingPartyOptionState(myMode, false)));
         }
     }
-
-    //TODO: string constants
     private void handleEnemyMonsterDied () {
         myIsUsersTurn = true;
         LevelChange change =
