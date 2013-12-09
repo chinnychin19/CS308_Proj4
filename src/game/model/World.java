@@ -37,7 +37,7 @@ public class World {
                 "saveState2.json";
         myModel = model;
         myWorldJSON = JSONReader.getJSON(worldJSONFilepath);
-        setUpWorld( myWorldJSON );
+        setUpWorld(myWorldJSON);
     }
     
     /**
