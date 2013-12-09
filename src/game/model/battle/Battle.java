@@ -1,5 +1,9 @@
 package game.model.battle;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import constants.Constants;
 import game.controller.AbstractBattleMode;
 import game.controller.TrainerBattleMode;
@@ -23,7 +27,7 @@ public class Battle {
     private static final double CATCH_MIN = 0.80;
     private static final double CATCH_MAX = 0.99;
     private boolean myIsUsersTurn;
-
+    private Map<Monster, TemporaryStatistics> myTemporaryStatistics;
     public Battle (AbstractBattleParty playerParty,
                    AbstractBattleParty enemyParty,
                    AbstractBattleMode mode) {
@@ -31,6 +35,13 @@ public class Battle {
         myEnemyParty = enemyParty;
         myMode = mode;
         myIsUsersTurn = true;
+        myTemporaryStatistics = new HashMap<Monster, TemporaryStatistics>();
+        for(Monster m : myPlayerParty.getMonsters()){
+            myTemporaryStatistics.put(m,new TemporaryStatistics(m));
+        }
+        for(Monster m : myEnemyParty.getMonsters()){
+            myTemporaryStatistics.put(m,new TemporaryStatistics(m));
+        }
     }
 
     public AbstractBattleParty getOtherParty (AbstractBattleParty self) {
@@ -85,7 +96,7 @@ public class Battle {
         myIsUsersTurn = true;
         LevelChange change =
                 myPlayerParty.getCurrentMonster().addExperience(myEnemyParty.getCurrentMonster()
-                                                                        .getRewardExperience());
+                                                                        .getRewardExperience(), myTemporaryStatistics.get(myPlayerParty.getCurrentMonster()));
         if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
             userWon();
         }
@@ -103,6 +114,7 @@ public class Battle {
     }
 
     private void userLost () {
+        reapplyStatistics();
         myMode.setOptionState(myMode.getBattleCompleteState(false));
     }
 
@@ -110,6 +122,7 @@ public class Battle {
         if (myMode instanceof TrainerBattleMode) {
             ((FightingNPC) myEnemyParty.getFighter()).setDefeated(true);
         }
+        reapplyStatistics();
         myMode.setOptionState(myMode.getBattleCompleteState(true));
     }
 
@@ -140,5 +153,12 @@ public class Battle {
 
     private void toggleUsersTurn () {
         myIsUsersTurn = !myIsUsersTurn;
+    }
+    
+    public void reapplyStatistics(){
+        System.out.println("reapplying statistics");
+        for(TemporaryStatistics temp : myTemporaryStatistics.values()){
+            temp.reapply();
+        }
     }
 }

@@ -14,6 +14,7 @@ public class UserWonTrainerBattleCompleteState extends AbstractBattleCompleteSta
 
     @Override
     protected void onInteract () {
+        super.onInteract();
         Battle battle = myMode.getBattle();
         FightingNPC enemy = ((FightingNPC) battle.getEnemyParty().getFighter());
         Player player = ((Player) battle.getPlayerParty().getFighter());

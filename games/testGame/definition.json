@@ -211,7 +211,7 @@
                     "consciousness" : "dead",
                     "statisticEffect": {
                         "statName": "curHP",
-                        "change": "-1" 
+                        "change": "1000" 
                     }
                 }
             ]

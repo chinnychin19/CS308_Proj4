@@ -1,6 +1,7 @@
 package game.model;
 
 import game.model.attack.Attack;
+import game.model.battle.TemporaryStatistics;
 import game.model.evolution.AbstractEvolution;
 import game.model.evolution.Evolution;
 import game.model.evolution.NullEvolution;
@@ -267,7 +268,7 @@ public class Monster extends AbstractModelObject implements Saveable {
         return ret;
     }
 
-    public LevelChange addExperience (int exp) {
+    public LevelChange addExperience (int exp, TemporaryStatistics temp) {
         boolean didLevelUp = false, didEvolve = false;
 //        System.out.println("cur exp: "+myStatistics.get(Constants.STAT_EXP));
 //        System.out.println("exp to next level: " + myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL));
@@ -276,7 +277,7 @@ public class Monster extends AbstractModelObject implements Saveable {
         int newExp = exp + myStatistics.get(Constants.STAT_EXP);
         myStatistics.put(Constants.STAT_EXP, newExp);
         while (myStatistics.get(Constants.STAT_EXP) >= myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL)) {
-            levelUp();
+            levelUp(temp);
             didLevelUp = true;
             System.out.println("exp to next level: "+myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL));
             changeStat(Constants.STAT_EXP, -myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL));
@@ -288,12 +289,18 @@ public class Monster extends AbstractModelObject implements Saveable {
         return LevelChange.getStateChange(didLevelUp, didEvolve);
     }
 
-    private void levelUp () {
+    private void levelUp (TemporaryStatistics temp) {
+        int hpBoost = getAStatisticIncremement();
+        int attackBoost = getAStatisticIncremement();
+        int defenseBoost = getAStatisticIncremement();
+        temp.boostHP(hpBoost);
+        temp.boostAttack(attackBoost);
+        temp.boostDefense(defenseBoost);
         System.out.println("leveling up");
         changeStat(Constants.JSON_LEVEL, 1);
-        changeStat(Constants.STAT_ATTACK, getAStatisticIncremement());
-        changeStat(Constants.STAT_DEFENSE, getAStatisticIncremement());
-        changeStat(Constants.STAT_MAX_HP, getAStatisticIncremement());
+        changeStat(Constants.STAT_ATTACK, attackBoost);
+        changeStat(Constants.STAT_DEFENSE, defenseBoost);
+        changeStat(Constants.STAT_MAX_HP, hpBoost);
         changeStat(Constants.STAT_EXP_TO_NEXT_LEVEL, 10 * getAStatisticIncremement());
     }
     
