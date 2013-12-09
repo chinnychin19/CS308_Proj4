@@ -72,7 +72,7 @@ public class Battle {
     }
 
     private void handleUserMonsterDied () {
-        System.out.println("Handling user monster");
+        System.out.println(Constants.TEXT_HANDLING_USER_MOSNTER);
         if (myPlayerParty.getNumberOfAliveMonsters() == 0) {
             userLost();
         }

@@ -1,5 +1,6 @@
 package game.controller.optionState;
 
+import constants.Constants;
 import location.Loc;
 import game.controller.AbstractBattleMode;
 import game.model.World;
@@ -7,7 +8,7 @@ import game.model.World;
 public class UserLostTrainerBattleCompleteState extends AbstractBattleCompleteState {
 
     public UserLostTrainerBattleCompleteState (AbstractBattleMode mode) {
-        super(mode, "You Lost :(");
+        super(mode, Constants.YOU_LOST);
     }
 
     @Override

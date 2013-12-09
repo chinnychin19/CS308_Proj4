@@ -2,6 +2,8 @@ package game.controller;
 
 import java.awt.Graphics;
 import javax.swing.JOptionPane;
+
+import constants.Constants;
 import game.model.GameModel;
 import game.model.Monster;
 import game.view.GameView;
@@ -26,7 +28,7 @@ public class GameController {
         }
         catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error loading game data.");
+            JOptionPane.showMessageDialog(null, Constants.ERROR_LOADING_GAME);
             System.exit(1);
         }
         initModes();
@@ -36,6 +38,9 @@ public class GameController {
         myCurrentMode.mySound.start();
     }
     
+    /**
+     * Turn music on if it is off.  Turn music off if it is on.
+     */
     public void toggleMusic() {
         myIsVolumeOn = !myIsVolumeOn;
         if (myIsVolumeOn) {
@@ -45,14 +50,23 @@ public class GameController {
         }
     }
     
+    /**
+     * 
+     * @return boolean value for music currently playing
+     */
     public boolean isMusicOn() {
         return myIsVolumeOn;
     }
-        
+    
+    /**
+     * 
+     * @return model for the current game
+     */
     public GameModel getModel() {
         return myModel;
     }
     
+   
     public GameView getView(){
         return myView;
     }
@@ -74,6 +88,10 @@ public class GameController {
         myCurrentMode.paint(); // paints changes caused by loading the save state
     }
 
+    /**
+     * Set the mode based on the input argument
+     * @param m mode to be set
+     */
     public void setMode (AbstractMode m) {
         myCurrentMode.turnOff();
         myCurrentMode = m;

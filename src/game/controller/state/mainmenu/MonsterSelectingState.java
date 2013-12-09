@@ -18,6 +18,7 @@ public class MonsterSelectingState extends AbstractListableState {
         super("", mode);
         myChosen = chosen;
         //myBuffer.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT);
+        //TODO: Should this line above be taken out????
     }
 
     @Override
@@ -48,7 +49,7 @@ public class MonsterSelectingState extends AbstractListableState {
     
     @Override
     public void act(Input input) {
-        if (input.isKeyUpPressed() && getSelected() > 0) {
+        if (input.isKeyUpPressed() && getSelected() > Constants.ZERO) {
             decrementSelected();
         }
         else if (input.isKeyDownPressed() && getSelected() < getMonsterList().size()) {
@@ -72,8 +73,8 @@ public class MonsterSelectingState extends AbstractListableState {
     
     @Override
     protected void onInteract () {
-        System.out.println(getSelected());
-        System.out.println(myChosen);
+        System.out.println(getSelected()); //TODO: Take out print statement
+        System.out.println(myChosen); //TODO: take out print statement
         swapMonsters(getMonsterList(), getSelected(), myChosen);
         getMode().setState(new MonsterSelecterState(getMode()));
     }

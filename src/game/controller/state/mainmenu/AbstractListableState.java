@@ -13,7 +13,7 @@ public abstract class AbstractListableState extends AbstractMenuState {
     private int mySelected;
     public AbstractListableState (String name, MainMenuMode mode) {
         super(name, mode);
-        mySelected = 0;
+        mySelected = Constants.ZERO;
     }
    
     protected int getSelected(){
@@ -52,11 +52,11 @@ public abstract class AbstractListableState extends AbstractMenuState {
     
     protected <S> void actList (Input input, List<S> list) {
         if (input.isKeyUpPressed()) {
-            if(mySelected == 0) mySelected = list.size()-1;
+            if(mySelected == Constants.ZERO) mySelected = list.size()-1;
             else decrementSelected();
         }
         else if (input.isKeyDownPressed()) {
-            if(mySelected == list.size()-1) mySelected = 0;
+            if(mySelected == list.size()-1) mySelected = Constants.ZERO;
             else incrementSelected();
         }
 

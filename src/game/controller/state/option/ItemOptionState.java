@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
+
+import constants.Constants;
 import game.controller.AbstractBattleMode;
 import game.controller.Input;
 import game.controller.WildBattleMode;
@@ -16,7 +18,7 @@ import game.model.attack.Attack;
 public class ItemOptionState extends AbstractListableOptionState {
 
     public ItemOptionState (AbstractBattleMode mode) {
-        super(mode, "ITEMS");
+        super(mode, Constants.TEXT_ITEMS);
     }
 
     @Override

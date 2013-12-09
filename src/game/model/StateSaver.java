@@ -36,7 +36,7 @@ public class StateSaver {
     public World load () throws Exception {
         String worldJSONFilepath =
                 Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
-                       "saveState2.json";// Constants.FILENAME_SAVESTATE;
+                       Constants.FILENAME_SAVESTATE;
         myJSON = JSONReader.getJSON(worldJSONFilepath);
         if (myJSON == null) { throw new Exception(Constants.SAVE_FILE_NOT_FOUND); }
         try {
@@ -67,7 +67,7 @@ public class StateSaver {
         System.out.println(state.toString());
         String outFile =
                 Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
-                        "saveState2.json";
+                        Constants.FILENAME_SAVESTATE;
         Writer out = new PrintWriter(new File(outFile));
         JSONValue.writeJSONString(state, out);
         out.close();
