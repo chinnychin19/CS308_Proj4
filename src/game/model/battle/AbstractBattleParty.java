@@ -52,7 +52,7 @@ public abstract class AbstractBattleParty {
         }
         return null;
     }
-
+    
     public void doTurn(){
         myBattle.doNextTurn();
     }

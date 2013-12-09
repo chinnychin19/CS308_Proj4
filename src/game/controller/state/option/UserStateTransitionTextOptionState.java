@@ -13,6 +13,6 @@ public class UserStateTransitionTextOptionState extends StateTransitionTextOptio
     protected void onInteract () {
         myMode.removeHitMarkers();
         myMode.setOptionState(myMode.getAMainOptionState());
-        myMode.getBattle().handleMonsterDeaths();
+        myMode.getBattle().doNextTurn();
     }
 }
