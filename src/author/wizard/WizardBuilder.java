@@ -1,6 +1,7 @@
 package author.wizard;
 
 import java.awt.Component;
+import java.io.BufferedReader;
 //import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,6 +20,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.NoJSONArrayJsonException;
+import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
 //import constants.Constants;
 //import author.listeners.FinishListener;
 import author.model.AuthoringCache;
@@ -159,6 +164,7 @@ public class WizardBuilder {
         String basicFieldType = (fields[0].equals("list")) ? fields[1] : fields[0];
         String limitedFieldType = (fields[0].equals("list")) ? fieldType.substring(5) : fieldType;
         String outputString = "";
+
         /**
          * We need this to be changed because it doens't work on a Mac
          * 
@@ -183,46 +189,67 @@ public class WizardBuilder {
         Class<?> classToInstantiate =
                 Class.forName("author.panels." + KEYWORD_TO_PANEL_TYPE.get(basicFieldType));
         Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
+
+        
+        Component output = (Component) ctr.newInstance(fieldName + outputString); 
+        
+        if (fields[0].equals("list")) {
+        	
+        }
+        
         System.out.println(fieldName + outputString);
-        return (Component) ctr.newInstance(fieldName + outputString);
+        
+        return output;
+        
+
     }
 
     public void addPanelsFromFile (String filePath) {
 
         JPanel currentPanel = myWizard.getCardPanel();
 
-        JSONObject json = getJSON(filePath);
-        JSONArray majorArray = (JSONArray) json.get(myCategory);
+        
+        SmartJsonObject json = getJSON(filePath);
+        
+		try {
 
-        for (Object con : majorArray) {
-            if (con instanceof JSONObject) {
-                iterateOverJSONObject((JSONObject) con, currentPanel);
-            }
-        }
-        FinishPanel finish = new FinishPanel(myCache);
-        currentPanel.add(finish);
-        finish.init();
+			JSONArray majorArray;
+			majorArray = json.getJSONArray(myCategory);
+
+	        for (Object con : majorArray) {
+	            if (con instanceof JSONObject) {
+	                iterateOverJSONObject((JSONObject) con, currentPanel);
+	            }
+	        }
+	        FinishPanel finish = new FinishPanel(myCache);
+	        currentPanel.add(finish);
+	        finish.init();
+		} catch (NoJSONArrayJsonException e) {
+			System.out.println("Category of '" + myCategory + "' not found.");
+			e.printStackTrace();
+		}
     }
 
-    private JSONObject getJSON (String filepath) {
-        JSONObject json;
-        JSONParser parser = new JSONParser();
+    private SmartJsonObject getJSON (String filepath) {
         try {
-            json = (JSONObject) parser.parse(new FileReader(filepath));
-            return json;
-        }
-        catch (FileNotFoundException e) {
+	        BufferedReader reader = new BufferedReader(new FileReader(filepath));
+	        String line, results = "";
+	        while( ( line = reader.readLine() ) != null) {
+	            results += line;
+	        }
+	        reader.close();
+	        return new SmartJsonObject(results);
+        } catch (FileNotFoundException e) {
             System.out.println("File not found. Please try again.");
             e.printStackTrace();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
+        } catch (NoJSONObjectJsonException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Malformed JSON String");
+		}
         return null;
-
     }
 
     /**

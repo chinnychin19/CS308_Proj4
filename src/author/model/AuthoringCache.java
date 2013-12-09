@@ -24,13 +24,14 @@ public class AuthoringCache {
         for (String category : Constants.CATEGORIES) {
             myJSON.put(category, new JSONArray());
         }
+        //myJSON.put("TestThing", new JSONArray());
     }
 
     @SuppressWarnings("unchecked")
 	public void add (String category, JSONObject data) {
         JSONArray cache = (JSONArray) myJSON.get(category);
         cache.add(data);
-        // TODO: Add this implementation to the JMenus myView.update();
+        myView.updateMenu();
     }
 
     public void delete (String category, String name) {

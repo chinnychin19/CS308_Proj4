@@ -12,6 +12,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import author.model.AuthoringCache;
 import author.panels.AbstractWizardPanel;
+import author.panels.CheckBoxPanel;
 import author.panels.ContainerPanel;
 
 
@@ -123,7 +124,17 @@ public class WizardConverter {
 	private JSONArray panelToJSONArray (JPanel panel) {
         JSONArray outputJSONArray = new JSONArray();
         for (Component c : panel.getComponents()) {
-            if (c instanceof AbstractWizardPanel) {
+        	if (c instanceof CheckBoxPanel) {
+            	Map<String,String> initialData = ((AbstractWizardPanel) c).getUserInput();
+            	Map<String,String> invertedData = new HashMap<String,String>();
+            	Set<String> values = initialData.keySet();
+            	for (String value : values) {
+            		invertedData.put(initialData.get(value), value);
+            		smartJSONArrayAdd(outputJSONArray,invertedData);
+            		invertedData.clear();            		
+            	}
+            }
+            else if (c instanceof AbstractWizardPanel) {
                 smartJSONArrayAdd(outputJSONArray, ((AbstractWizardPanel) c).getUserInput());
             }
             else if (c instanceof ContainerPanel) {
