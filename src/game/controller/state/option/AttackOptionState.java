@@ -3,6 +3,8 @@ package game.controller.state.option;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
+
+import constants.Constants;
 import game.controller.AbstractBattleMode;
 import game.controller.Input;
 import game.controller.WildBattleMode;
@@ -13,7 +15,7 @@ import game.model.attack.Attack;
 public class AttackOptionState extends AbstractListableOptionState {
     
     public AttackOptionState (AbstractBattleMode mode) {
-        super(mode, "ATTACK");
+        super(mode, Constants.TEXT_ATTACK);
     }
 
     @Override

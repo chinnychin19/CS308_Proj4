@@ -15,7 +15,7 @@ public class MonsterSelecterState extends AbstractListableState{
     private int mySelected;
     public MonsterSelecterState (MainMenuMode mode) {
         super(Constants.MAIN_MENU_PARTY, mode);
-        mySelected = 0;
+        mySelected = Constants.ZERO;
     }
 
     @Override

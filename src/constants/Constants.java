@@ -246,4 +246,17 @@ public class Constants {
     public static final String BLANK_STRING = "";
     public static final String SPACE_STRING = " ";
     public static final String SPLIT_SLASH_S = "\\s+";
+    public static final String TOGGLE_MUSIC = "TOGGLE MUSIC";
+    public static final String MAIN_TEXT = "MAIN";
+	public static final int ZERO = 0;
+
+	public static final String TEXT_ATTACK = "ATTACK";
+	public static final String TEXT_ITEMS = "ITEMS";
+	public static final String TEXT_PARTY = "PARTY";
+	public static final String TEXT_DIALOGUE = "DIALOGUE";
+	
+	public static final String TEXT_SWITCH_TO = "You switch to %s";
+	public static final String TEXT_YOU_USED_ON_BLANK = "You used %s on %s";
+	
+	
 }

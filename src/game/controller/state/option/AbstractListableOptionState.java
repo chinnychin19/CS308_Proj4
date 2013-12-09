@@ -23,7 +23,7 @@ public abstract class AbstractListableOptionState extends AbstractOptionState {
     
     public AbstractListableOptionState (AbstractBattleMode mode, String name, boolean canGoBack) {
         super(mode, name, canGoBack);
-        mySelected = 0;
+        mySelected = Constants.ZERO;
     }
    
     protected int getSelected(){
@@ -33,12 +33,12 @@ public abstract class AbstractListableOptionState extends AbstractOptionState {
     protected <S> void paintList(List<S> list) throws NotListableException {
         
         myBuffer.setColor(Color.cyan);
-        myBuffer.fillRect(0, 0, myBuffer.getClipBounds().width,
+        myBuffer.fillRect(Constants.ZERO,Constants.ZERO, myBuffer.getClipBounds().width,
                                  myBuffer.getClipBounds().height);
         myBuffer.setColor(Color.black);
         myBuffer.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         
-        int x = 15;
+        int x = 15; //TODO: Magic Numbers for Chinmay
         int y = 30;
         int inc = 50;
         for (int i = 0; i < list.size(); i++) {
