@@ -64,8 +64,9 @@ public class Attack extends AbstractModelObject {
             return new AttackResult(attacker.getName(), getName(), 0, multiplier, false);
         }
         int attackerLevel = attacker.getStat(Constants.JSON_LEVEL);
-        double damage = damageFunction(attackerLevel, attack, defense, myPower, multiplier);
-        defender.changeHealth((int)(-damage));
+        int damage = (int) Math.round(damageFunction(attackerLevel, attack, defense, myPower, multiplier));
+        damage = Math.min(damage, defender.getStat(Constants.STAT_CUR_HP));
+        defender.changeHealth(-damage);
         
         for(StatisticEffectWrapper effectWrap : myStatisticEffects){
             if(effectWrap.targetIsSelf()){
