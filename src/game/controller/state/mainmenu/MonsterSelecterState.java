@@ -42,7 +42,7 @@ public class MonsterSelecterState extends AbstractListableState{
         getMode().setState(new MonsterSelectingState(getMode(), mySelected));
     }
     
-    private List<Monster> getMonsterList(){
+    protected List<Monster> getMonsterList(){
         return getMode().getModel().getPlayer().getParty();
     }
 }
