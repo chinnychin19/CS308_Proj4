@@ -310,5 +310,4 @@ public class Constants {
 
     public static final String ALIVE_STRING = "alive";
     public static final String DEAD_STRING = "dead";
-
 }
