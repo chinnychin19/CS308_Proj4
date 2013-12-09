@@ -1,18 +1,19 @@
 package author.mapCreation;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 public class GenericTileWrapper {
 
-	private Image myImage;
+	private BufferedImage myImage;
 	private String myName;
 	
-	public GenericTileWrapper(String name, Image image){
+	public GenericTileWrapper(String name, BufferedImage image){
 		myName = name;
 		myImage = image;
 	}
 	
-	public Image getImage() {
+	public BufferedImage getImage() {
 		return myImage;
 	}
 	
