@@ -227,4 +227,17 @@ public class Constants {
 
     
     public static final int INT_ONE = 1;
+    
+    public static final String BOGUS_NAME_GAME = "bogusNameOfGame";
+    
+    //AuthorView Constants
+    public static final String AUTHOR_TITLE = "Authoring View";
+    public static final String AUTHOR_LAUNCH_WIZARD = "Launch Wizard";
+    public static final String ERROR_LOADING_GAME = "Error loading game data.";
+    
+    //Music
+    public static final String GAME_MUSIC = "music/nfl.wav";
+    
+    //Post Battle Mode
+    public static final String YOU_LOST = "You Lost :(";
 }

@@ -39,7 +39,7 @@ public class AuthorView extends JFrame {
 
 	private void initialize() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle(TITLE);
+        this.setTitle(Constants.AUTHOR_TITLE);
         this.setPreferredSize(Constants.FRAME_SIZE);
         this.setLocationRelativeTo(null);
         this.setLayout(new FlowLayout());
