@@ -37,7 +37,7 @@ public class World {
                 Constants.FILENAME_SAVESTATE;
         myModel = model;
         myWorldJSON = JSONReader.getJSON(worldJSONFilepath);
-        setUpWorld( myWorldJSON );
+        setUpWorld(myWorldJSON);
     }
     
     /**
