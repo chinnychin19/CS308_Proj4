@@ -2,7 +2,6 @@ package author.menuItems;
 
 import java.io.FileReader;
 import java.util.Set;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -11,9 +10,17 @@ import constants.Constants;
 import author.listeners.LaunchWizardListener;
 import author.model.AuthoringCache;
 
+/**
+ * EditEntitySubMenu extends AbstractMenu and allows the user to create a
+ * new type of entity on the map, which can then be added or edited.
+ * 
+ * @author weskpga
+ *
+ */
+
 
 @SuppressWarnings("serial")
-public class NewEntitySubMenu extends JMenu {
+public class NewEntitySubMenu extends AbstractMenu {
 
     private AuthoringCache myAuthoringCache;
 
