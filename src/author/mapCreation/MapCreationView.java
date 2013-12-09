@@ -35,7 +35,7 @@ public class MapCreationView extends JPanel {
 
         // Try to get the image of the specified background.
         try {
-            myBackground = ImageIO.read(new File(Constants.TEST_SHORTGRASS_PNG_FILEPATH));
+            myBackground = ImageIO.read(new File(Constants.TEST_FILE));
         }
         catch (IOException e) {
             // TODO Auto-generated catch block
@@ -90,7 +90,6 @@ public class MapCreationView extends JPanel {
                                                              (int) myTileManager.getTileWidth(),
                                                              (int) myTileManager.getTileHeight()));
 
-        //super.paintComponent(g);
         g.setPaint(tp);
         g.fillRect((int) topLeftX, (int) topLeftY, (int) myTileManager.getTileWidth(),
                    (int) myTileManager.getTileHeight());
