@@ -5,7 +5,7 @@ import constants.Constants;
 
 public class CanvasTileManager {
 	
-	private WorldTiles myWorld;
+	private WorldCreationMap myWorld;
 	
 	private int myGCD;
 
@@ -25,7 +25,7 @@ public class CanvasTileManager {
 	private double tileHeight;
 
 	public CanvasTileManager(){
-		myWorld = new WorldTiles();
+		myWorld = new WorldCreationMap();
 		horizontalOffset = Constants.MIN_X_COORD;
 		verticalOffset = Constants.MIN_Y_COORD;
 
@@ -73,7 +73,7 @@ public class CanvasTileManager {
 	}
 	
 	public void getTileClickLoc(int x, int y){
-		myWorld.addToMap(new Loc(x, y), new GenericTileWrapper("blah", null/*new Image()*/));
+		myWorld.put(new Loc(x, y), new GenericTileWrapper("blah", null/*new Image()*/));
 	}
 
 	public void expandView(){
@@ -157,7 +157,7 @@ public class CanvasTileManager {
 		return middleHorizontalTile;
 	}
 	
-	public WorldTiles getWorld(){
+	public WorldCreationMap getWorld(){
 		return myWorld;
 	}
 

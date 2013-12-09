@@ -113,6 +113,7 @@ public class Constants {
     public static final Dimension BUTTON_SIZE = new Dimension(198,28);
     public static final Dimension TEXT_AREA_SIZE = new Dimension(400, 32);
     public static final Dimension SIDEBAR_SIZE = new Dimension(200,600);
+    public static final Dimension SIDEBAR_JLIST_SIZE = new Dimension(150, 500);
     public static final Dimension MAP_CREATOR_SIZE = new Dimension(800,600);
       
     // Authoring JMenu Options Constants
@@ -189,6 +190,11 @@ public class Constants {
     public final static String PROMPT_MONSTERS_HEALED =  "All Monsters Healed";
     public final static String PROMPT_MISSING_ITEM = "MISSING ITEM: ";
     public final static String PROMPT_AQUIRE_MISSING_ITEM = ".  Acquire this item and try again";
+    
+    //Author Message Strings
+    public final static String SIDEBAR_PROMPT_TEXT = 
+    		"Please select the elements you would like to " +
+    		"add to your map, and then click on the map to add:";
     
     //Fighting NPC intro speech
     public final static String PROMPT_FIGHTING_NPC_BEFORE_BATTLE = "Hey you, let's battle! Come here.";

@@ -2,11 +2,17 @@ package author.menuItems;
 
 import javax.swing.JMenu;
 
+/**
+ * This class is currently no different from the native JMenu class, but it
+ * was created just in case we do need to add features to our menus within
+ * the AuthorView.
+ * 
+ * @author weskpga
+ *
+ */
+
 @SuppressWarnings("serial")
 public abstract class AbstractMenu extends JMenu /*implements ActionListener*/ {
-
-	// This class currently serves no purpose, but may prove useful
-	// when refactoring the other JMenus.
 	
 	public AbstractMenu(String myText){
 		super(myText);

@@ -27,6 +27,7 @@ public class MapCreationView extends JPanel {
     //private WorldTiles myWorld;
     private WorldCreationMap myWorldCreationMap;
     private BufferedImage myBackground;
+    private WorldCreationMap myWorld;
     private CanvasTileManager myTileManager;
 
     public MapCreationView () {
@@ -46,8 +47,8 @@ public class MapCreationView extends JPanel {
         myWorldCreationMap = new WorldCreationMap();
         initListeners(); 
     }
-
-    /*public WorldTiles getMyWorld () {
+    
+    /*public WorldCreationMap getMyWorld () {
         return myWorld;
     }*/
 

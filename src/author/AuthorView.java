@@ -21,8 +21,9 @@ import constants.Constants;
  */
 @SuppressWarnings("serial")
 public class AuthorView extends JFrame {
-
-    private AuthorView av = this;
+	
+	private AuthorView av = this;
+	private AuthoringCache ac;
     public static final String TITLE = "Game Editor";
     public static final String LAUNCH_WIZARD = "Launch Wizard";
 
@@ -31,15 +32,25 @@ public class AuthorView extends JFrame {
      */
     public AuthorView () {
         initialize();
+        
         makeMenuBar();
-
-        this.add(new MapCreationView());
-        this.add(new SidebarPanel());
+        
+        initializeMainView();
 
         // Pack and set GUI to true
         pack();
         this.setVisible(true);
     }
+
+	private void initializeMainView() {
+		JPanel mainView = new JPanel();
+        
+        mainView.setPreferredSize(Constants.FRAME_SIZE);
+        mainView.add(new MapCreationView());
+        mainView.add(new SidebarPanel(ac));
+        
+        this.add(mainView);
+	}
 
     /**
      * Initialize JFrame attributes.
@@ -57,7 +68,7 @@ public class AuthorView extends JFrame {
      */
     public void makeMenuBar () {
         JMenuBar menuBar = new JMenuBar();
-        AuthoringCache ac = new AuthoringCache(this);
+        ac = new AuthoringCache(this);
 
         menuBar.add(new AuthorViewFileMenu(ac)); // File
         menuBar.add(new AuthorViewEditMenu(ac)); // Edit

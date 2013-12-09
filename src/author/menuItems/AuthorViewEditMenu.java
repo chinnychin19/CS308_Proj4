@@ -6,6 +6,14 @@ import author.model.AuthoringCache;
 
 import constants.Constants;
 
+/**
+ * AuthorViewEditMenu extends JMenu and contains all of the MenuItems
+ * that can be clicked under the 'Edit' menu within our AuthorView.
+ * 
+ * @author weskpga
+ *
+ */
+
 @SuppressWarnings("serial")
 public class AuthorViewEditMenu extends JMenu {
 

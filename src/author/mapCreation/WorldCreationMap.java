@@ -4,6 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 import location.Loc;
 
+/**
+ * WorldCreationMap is a class that contains a HashMap of Loc's to
+ * GenericTileWrapper's, and a method that allows the user to only get the
+ * tiles within a certain range, which helps with the scalability of our
+ * world size.
+ * 
+ * @author weskpga
+ *
+ */
+
 public class WorldCreationMap {
 
         

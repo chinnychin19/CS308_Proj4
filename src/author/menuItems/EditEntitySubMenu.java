@@ -9,6 +9,14 @@ import constants.Constants;
 import author.listeners.LaunchWizardListener;
 import author.model.AuthoringCache;
 
+/**
+ * EditEntitySubMenu extends AbstractMenu and contains all of the entities
+ * that have already have templates created for them.
+ * 
+ * @author weskpga
+ *
+ */
+
 @SuppressWarnings("serial")
 public class EditEntitySubMenu extends AbstractMenu {
 
