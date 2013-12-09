@@ -4,6 +4,7 @@ import util.Sound;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.List;
 import javax.swing.ImageIcon;
 import constants.Constants;
@@ -158,8 +159,8 @@ public abstract class AbstractBattleMode extends AbstractMode {
 
     private void paintHealthBuffer (Graphics g, Monster m) {
         g.setColor(Color.black);
-        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-
+        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));        
+        paintHealthBar(g, m, Color.black);
         String nameStr = String.format("Name: %s\tStatus: %s", m.getName(),m.getStatus().toString());
         String hpStr = String.format("HP: %d/%d", m.getStat(Constants.STAT_CUR_HP), m.getStat(Constants.STAT_MAX_HP));
         String lvlStr = String.format("Level: %d", m.getStat(Constants.JSON_LEVEL));
@@ -167,8 +168,8 @@ public abstract class AbstractBattleMode extends AbstractMode {
         String defStr = String.format("Defense: %d", m.getStat(Constants.STAT_DEFENSE));
 
         int x1 = 15, x2 = 165;
-        int y1 = 30;
-        int yInc = 50;
+        int y1 = 60;
+        int yInc = Constants.TEXT_START_INC-5;
 
         g.drawString(nameStr, x1, y1 + 0 * yInc);
         g.drawString(hpStr, x1, y1 + 1 * yInc);
@@ -203,5 +204,16 @@ public abstract class AbstractBattleMode extends AbstractMode {
     private void paintEnemyMonster () {
         Monster monster = myBattle.getEnemyParty().getCurrentMonster();
         paintAMonster(myEnemyMonsterBuffer, monster, myEnemyMonsterIsHit);
+    }
+    
+    private void paintHealthBar(Graphics g, Monster m, Color previousColor){
+        g.setColor(Color.red);
+        int currentHealth = m.getStat(Constants.STAT_CUR_HP);
+        int maxHealth = m.getStat(Constants.STAT_MAX_HP);
+        double ratio = ((double)currentHealth)/maxHealth;
+        int toFillIn = (int)Math.round(ratio*Constants.HEALTH_BAR_WIDTH);
+        g.drawRect(Constants.HEALTH_BAR_X, Constants.HEALTH_BAR_Y, Constants.HEALTH_BAR_WIDTH, Constants.HEALTH_BAR_HEIGHT);
+        g.fillRect(Constants.HEALTH_BAR_X, Constants.HEALTH_BAR_Y, toFillIn, Constants.HEALTH_BAR_HEIGHT);
+        g.setColor(previousColor);
     }
 }

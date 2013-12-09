@@ -239,6 +239,12 @@ public class Constants {
     public final static int TEXT_START_Y = 30;
     public final static int TEXT_START_INC = 35;
     public static final int TEXT_CHARS_PER_LINE = 60;
+    
+    //BattleMode Graphics
+    public final static int HEALTH_BAR_X = 15;
+    public final static int HEALTH_BAR_Y = 15;
+    public final static int HEALTH_BAR_WIDTH = 150;
+    public final static int HEALTH_BAR_HEIGHT = 20;
 
     // Main Menu
     public final static int MAIN_MENU_X = 0;
