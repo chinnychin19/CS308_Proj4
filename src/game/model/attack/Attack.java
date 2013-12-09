@@ -28,32 +28,29 @@ public class Attack extends AbstractModelObject {
     //TODO: move to readDefinition
     public Attack (GameModel model, SmartJsonObject definition) {
         super(model, definition);
-        myStatisticEffects = new ArrayList<StatisticEffectWrapper>();
-        myStatusEffects = new ArrayList<Attack.StatusEffect>();
-
-        try {
-            myPower = definition.getInt(JSON_POWER);
-
-            myAccuracy = definition.getDouble(JSON_ACCURACY);
-            JSONArray statisticsArray = definition.getJSONArray(JSON_STATISTIC_EFFECT);
-            for (Object statObject : statisticsArray) {
-                SmartJsonObject statisticJSON = new SmartJsonObject((JSONObject) statObject);
-                String target = statisticJSON.getString("target");
-                StatisticEffect effect = new StatisticEffect(statisticJSON);
-                myStatisticEffects.add(new StatisticEffectWrapper(target, effect));
-
-            }
-            JSONArray statusArray = definition.getJSONArray(JSON_STATUS_EFFECT);
-            for (Object statusObject : statusArray) {
-                SmartJsonObject json = new SmartJsonObject((JSONObject) statusObject);
-                myStatusEffects.add(new StatusEffect(json));
-            }
-        }
-        catch (SmartJsonException e) {
-            e.printStackTrace();
-        }
     }
 
+    @Override
+    protected void readDefinition (SmartJsonObject definition) throws SmartJsonException {
+        super.readDefinition(definition);
+        myPower = definition.getInt(JSON_POWER);
+        myAccuracy = definition.getDouble(JSON_ACCURACY);
+        myStatisticEffects = new ArrayList<StatisticEffectWrapper>();
+        myStatusEffects = new ArrayList<Attack.StatusEffect>();
+        JSONArray statisticsArray = definition.getJSONArray(JSON_STATISTIC_EFFECT);
+        for (Object statObject : statisticsArray) {
+            SmartJsonObject statisticJSON = new SmartJsonObject((JSONObject) statObject);
+            String target = statisticJSON.getString("target");
+            StatisticEffect effect = new StatisticEffect(statisticJSON);
+            myStatisticEffects.add(new StatisticEffectWrapper(target, effect));
+
+        }
+        JSONArray statusArray = definition.getJSONArray(JSON_STATUS_EFFECT);
+        for (Object statusObject : statusArray) {
+            SmartJsonObject json = new SmartJsonObject((JSONObject) statusObject);
+            myStatusEffects.add(new StatusEffect(json));
+        }
+    }
     public AttackResult doAttack (Monster attacker, Monster defender) {
         //TODO: consider accuracy
         int attack = attacker.getStat(Constants.STAT_ATTACK);

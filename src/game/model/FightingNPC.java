@@ -38,28 +38,27 @@ public class FightingNPC extends NPC implements Fighter {
                         SmartJsonObject definition,
                         SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
-        try {
-            myPostDialogue = definition.getString(Constants.JSON_POST_DIALOGUE);
-            myKeyItems = new ArrayList<KeyItem>();
-            for (Object obj : definition.getJSONArray(Constants.JSON_KEYITEMS)) {
-                myKeyItems.add(new KeyItem(model, getModel().getDefinitionCache()
-                        .getInstance(Constants.JSON_KEYITEM, obj.toString())));
-            }
-            myBet = definition.getInt(Constants.JSON_BET);
-            myLineOfSightDistance = definition.getInt(Constants.JSON_LINE_OF_SIGHT_DISTANCE);
-            myParty = new ArrayList<Monster>();
-            JSONArray myMonstersJSON = definition.getJSONArray(Constants.MONSTERS_LOWERCASE);
-            for (Object monsterObj : myMonstersJSON) {
-                SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
-                SmartJsonObject monsterDefinition =
-                        getModel().getDefinitionCache()
-                                .getInstance(Constants.MONSTER_UPPERCASE,
-                                             monsterInWorld.getString(Constants.JSON_NAME));
-                myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
-            }
+    }
+
+    protected void readDefinition (SmartJsonObject definition) throws SmartJsonException {
+        super.readDefinition(definition);
+        myPostDialogue = definition.getString(Constants.JSON_POST_DIALOGUE);
+        myKeyItems = new ArrayList<KeyItem>();
+        for (Object obj : definition.getJSONArray(Constants.JSON_KEYITEMS)) {
+            myKeyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache()
+                    .getInstance(Constants.JSON_KEYITEM, obj.toString())));
         }
-        catch (SmartJsonException e) {
-            e.printStackTrace();
+        myBet = definition.getInt(Constants.JSON_BET);
+        myLineOfSightDistance = definition.getInt(Constants.JSON_LINE_OF_SIGHT_DISTANCE);
+        myParty = new ArrayList<Monster>();
+        JSONArray myMonstersJSON = definition.getJSONArray(Constants.MONSTERS_LOWERCASE);
+        for (Object monsterObj : myMonstersJSON) {
+            SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
+            SmartJsonObject monsterDefinition =
+                    getModel().getDefinitionCache()
+                            .getInstance(Constants.MONSTER_UPPERCASE,
+                                         monsterInWorld.getString(Constants.JSON_NAME));
+            myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
         }
     }
     
@@ -105,6 +104,7 @@ public class FightingNPC extends NPC implements Fighter {
         if (myIsDefeated) {
             return false;
         }
+        System.out.println("here");
         int sight = 0;
         Loc tempLoc = getLoc();
         while (sight <= myLineOfSightDistance) {

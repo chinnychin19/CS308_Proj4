@@ -20,6 +20,7 @@ public class AbstractModelTest extends TestCase {
     protected GameView myView;
     protected JSONObject myWorldJSON;
     protected final static String GAME_NAME = "testGame";
+    protected Player myPlayer;
     @Override
     protected void setUp () {
         try {
@@ -32,6 +33,12 @@ public class AbstractModelTest extends TestCase {
             myWorldJSON =
                     JSONReader.getJSON(Constants.FOLDERPATH_GAMES + "/" + GAME_NAME + "/" +
                                        "saveState2.json");
+            SmartJsonObject playerJSON =
+                    new SmartJsonObject((JSONObject) ((JSONArray) myWorldJSON.get(Constants.JSON_PLAYER)).get(0));
+            myPlayer = myModel.getPlayer();
+                   // new Player(myModel, myWorld, myModel.getDefinitionCache().getInstance("Player",
+                           //                                                               "hero"),
+                             //  playerJSON);
         }
         catch (Exception e) {
             e.printStackTrace();
