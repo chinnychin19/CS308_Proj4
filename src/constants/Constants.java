@@ -281,4 +281,8 @@ public class Constants {
 	
 	public static final String ERROR_WITH_JSON = "There was an error with your JSON!";
 	
+	public static final String ALIVE_STRING = "alive";
+	public static final String DEAD_STRING = "dead";
+
+
 }

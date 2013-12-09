@@ -19,7 +19,7 @@ public class StatisticEffect {
             e.printStackTrace();
         }
     }
-
+    
     public void apply(Monster m) {
         m.changeStat(myStatisticName, myChange);
     }

@@ -13,7 +13,7 @@ import jsoncache.JSONReader;
 import junit.framework.TestCase;
 
 
-public class AbstractModelTest extends TestCase {
+public abstract class AbstractModelTest extends TestCase {
     protected GameModel myModel;
     protected World myWorld;
     protected GameController myController;
