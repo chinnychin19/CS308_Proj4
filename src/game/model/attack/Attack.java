@@ -23,12 +23,12 @@ public class Attack extends AbstractModelObject {
 
     private int myPower;
     private double myAccuracy;
-    Collection<StatisticEffect> myStatisticEffects;
+    Collection<StatisticEffectWrapper> myStatisticEffects;
     Collection<StatusEffect> myStatusEffects;
-
+    //TODO: move to readDefinition
     public Attack (GameModel model, SmartJsonObject definition) {
         super(model, definition);
-        myStatisticEffects = new ArrayList<StatisticEffect>();
+        myStatisticEffects = new ArrayList<StatisticEffectWrapper>();
         myStatusEffects = new ArrayList<Attack.StatusEffect>();
 
         try {
@@ -38,8 +38,9 @@ public class Attack extends AbstractModelObject {
             JSONArray statisticsArray = definition.getJSONArray(JSON_STATISTIC_EFFECT);
             for (Object statObject : statisticsArray) {
                 SmartJsonObject statisticJSON = new SmartJsonObject((JSONObject) statObject);
-                
-                myStatisticEffects.add(new StatisticEffect(statisticJSON));
+                String target = statisticJSON.getString("target");
+                StatisticEffect effect = new StatisticEffect(statisticJSON);
+                myStatisticEffects.add(new StatisticEffectWrapper(target, effect));
 
             }
             JSONArray statusArray = definition.getJSONArray(JSON_STATUS_EFFECT);
@@ -65,6 +66,15 @@ public class Attack extends AbstractModelObject {
         int attackerLevel = attacker.getStat(Constants.JSON_LEVEL);
         double damage = damageFunction(attackerLevel, attack, defense, myPower, multiplier);
         defender.changeHealth((int)(-damage));
+        
+        for(StatisticEffectWrapper effectWrap : myStatisticEffects){
+            if(effectWrap.targetIsSelf()){
+                effectWrap.apply(attacker);
+            } else{
+                effectWrap.apply(defender);
+            }
+        }
+        
         return new AttackResult(attacker.getName(), getName(), damage, multiplier, true);
     }
     
@@ -79,7 +89,23 @@ public class Attack extends AbstractModelObject {
     }
 
   
-
+    private class StatisticEffectWrapper{
+        private Target myTarget;
+        private StatisticEffect myEffect;
+        public StatisticEffectWrapper(String target, StatisticEffect effect){
+            myTarget = Target.getTarget(target);
+            myEffect = effect;
+        }
+        
+        public boolean targetIsSelf(){
+            return myTarget==Target.SELF;
+        }
+        
+        public void apply(Monster m){
+            myEffect.apply(m);
+        }
+    }
+    
     private class StatusEffect {
         private String myStatus;
         private Target myTarget;
