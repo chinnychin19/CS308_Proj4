@@ -26,10 +26,11 @@ public class Status extends AbstractModelObject {
     
     @Override
     public void readDefinition (SmartJsonObject definition) throws SmartJsonException {
+        super.readDefinition(definition);
         myStatisticEffects = new ArrayList<StatisticEffect>();
         for (Object o : definition.getJSONArray(Constants.STATISTIC_EFFECTS)) {
             SmartJsonObject effectJSON = new SmartJsonObject((JSONObject) o);
-            myStatisticEffects.add(new StatisticEffect(effectJSON));
+            myStatisticEffects.add(new StatisticEffect(getModel(), effectJSON));
         }
     }
     
