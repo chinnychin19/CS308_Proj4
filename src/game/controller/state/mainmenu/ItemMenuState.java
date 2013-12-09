@@ -3,6 +3,7 @@ package game.controller.state.mainmenu;
 import java.util.ArrayList;
 import java.util.List;
 import constants.Constants;
+import game.controller.Input;
 import game.controller.MainMenuMode;
 import game.controller.state.NotListableException;
 import game.model.Item;
@@ -25,7 +26,11 @@ public class ItemMenuState extends AbstractListableState {
             e.printStackTrace();
         }
     }
-
+    
+    @Override
+    public void act(Input i){
+        actList(i, getItemList());
+    }
     @Override
     protected void onInteract () {
         Item selectedItem = getItemList().get(getSelected());
