@@ -53,8 +53,9 @@ public class MapCreationMouseListener implements MouseListener {
 
         myTileManager.getTileClickLoc(xTile, yTile);
 
-        myMapCreationView.paintTile((Graphics2D) myMapCreationView.getGraphics(), xTile, yTile);
-        System.out.println(myMapCreationView.getWorldCreationMap().toString());
+        myMapCreationView.paintAndRecordTile((Graphics2D) myMapCreationView.getGraphics(), xTile, yTile);
+        
+        System.out.println(myMapCreationView.getWorldCreationMap().getWorldTileMap().toString());
     }
 
     @Override

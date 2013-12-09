@@ -24,7 +24,7 @@ import constants.Constants;
 public class MapCreationView extends JPanel {
 
     private MapCreationView mcv = this;
-    //private WorldTiles myWorld;
+    // private WorldTiles myWorld;
     private WorldCreationMap myWorldCreationMap;
     private BufferedImage myBackground;
     private WorldCreationMap myWorld;
@@ -33,8 +33,8 @@ public class MapCreationView extends JPanel {
     public MapCreationView () {
         setFocusable(true);
         this.setPreferredSize(Constants.MAP_CREATOR_SIZE);
-        
-        //Try to get the image of the specified background.
+
+        // Try to get the image of the specified background.
         try {
             myBackground = ImageIO.read(new File(Constants.TEST_SHORTGRASS_PNG_FILEPATH));
         }
@@ -42,15 +42,17 @@ public class MapCreationView extends JPanel {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
+
         myTileManager = new CanvasTileManager(); // 15, 9
-        myWorldCreationMap = new WorldCreationMap();
-        initListeners(); 
+        myWorldCreationMap = myTileManager.getWorld();
+        initListeners();
     }
-    
-    /*public WorldCreationMap getMyWorld () {
-        return myWorld;
-    }*/
+
+    /*
+     * public WorldCreationMap getMyWorld () {
+     * return myWorld;
+     * }
+     */
 
     private void initListeners () {
         this.addKeyListener(new MapCreationKeyListener(this, myTileManager));
@@ -65,59 +67,61 @@ public class MapCreationView extends JPanel {
         g.drawImage(myBackground, 0, 0, getWidth(), getHeight(), null);
     }
 
-    public void paintTile (Graphics2D g, int x, int y) {
+    public void paintAndRecordTile (Graphics2D g, int x, int y) {
         double topLeftX = myTileManager.getTileAnchorX(x);
         double topLeftY = myTileManager.getTileAnchorY(y);
-        TexturePaint tp = new TexturePaint(myBackground, new Rectangle(0, 0, (int) myTileManager.getTileWidth(), (int) myTileManager.getTileHeight()));        
+
+        TexturePaint tp =
+                new TexturePaint(myBackground, new Rectangle(0, 0,
+                                                             (int) myTileManager.getTileWidth(),
+                                                             (int) myTileManager.getTileHeight()));
+
         super.paintComponent(g);
         g.setPaint(tp);
-        g.fillRect((int) topLeftX, (int) topLeftY, (int) myTileManager.getTileWidth(), (int) myTileManager.getTileHeight());
+        g.fillRect((int) topLeftX, (int) topLeftY, (int) myTileManager.getTileWidth(),
+                   (int) myTileManager.getTileHeight());
+        
+        myWorldCreationMap.put(new Loc((int) topLeftX, (int) topLeftY),
+                               new GenericTileWrapper("tileName", myBackground));
+        
+        repaint();
     }
     
-    public void paintTile (Graphics2D g, BufferedImage img, int x, int y) {
+    public void paintTile(Graphics2D g, int x, int y) {
         double topLeftX = myTileManager.getTileAnchorX(x);
         double topLeftY = myTileManager.getTileAnchorY(y);
-        
-        TexturePaint tp = new TexturePaint(img, new Rectangle(0, 0, (int) myTileManager.getTileWidth(), (int) myTileManager.getTileHeight()));        
+
+        TexturePaint tp =
+                new TexturePaint(myBackground, new Rectangle(0, 0,
+                                                             (int) myTileManager.getTileWidth(),
+                                                             (int) myTileManager.getTileHeight()));
+
         super.paintComponent(g);
         g.setPaint(tp);
-        g.fillRect((int) topLeftX, (int) topLeftY, (int) myTileManager.getTileWidth(), (int) myTileManager.getTileHeight());
-        
-        myWorldCreationMap.put(new Loc((int) topLeftX, (int) topLeftY), new GenericTileWrapper("tileName", img));
-        repaint();
+        g.fillRect((int) topLeftX, (int) topLeftY, (int) myTileManager.getTileWidth(),
+                   (int) myTileManager.getTileHeight());
     }
 
     public BufferedImage getBackgroundImage () {
         return myBackground;
     }
-    
-    public void setBackgroundImage(String filePath) {
-        BufferedImage newBG = null;
-        try {
-            newBG = ImageIO.read(new File(filePath));
-        }
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        if (newBG != null) {
-            myBackground = newBG; 
-        }
-        else {
-            System.out.println("Background tile failed to reset. Did you properly choose a file?");
-        }
+
+    public void setBackgroundImage (GenericTileWrapper gtw) {
+        myBackground = gtw.getImage();
     }
-    
+
     @Override
-    public void repaint() {
-        if(myWorldCreationMap != null) {
-            for (Map.Entry<Loc, GenericTileWrapper> tile : myWorldCreationMap.getWorldTileMap().entrySet()) {
-                paintTile((Graphics2D) this.getGraphics(), tile.getValue().getImage(), tile.getKey().getX(), tile.getKey().getY());
+    public void repaint () {
+        if (myWorldCreationMap != null) {
+            for (Map.Entry<Loc, GenericTileWrapper> tile : myWorldCreationMap.getWorldTileMap()
+                    .entrySet()) {
+                paintTile((Graphics2D) this.getGraphics(),
+                                   tile.getKey().getX(), tile.getKey().getY());
             }
         }
     }
-    
-    public WorldCreationMap getWorldCreationMap() {
+
+    public WorldCreationMap getWorldCreationMap () {
         return myWorldCreationMap;
     }
 }
