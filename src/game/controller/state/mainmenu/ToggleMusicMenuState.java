@@ -10,7 +10,7 @@ public class ToggleMusicMenuState extends AbstractImmediateActMenuState {
 
     @Override
     protected void action () {
-        getMode().getController().toggleVolume();
+        getMode().getController().toggleMusic();
         getMode().setState(new MainMenuState(getMode()));
     }
 

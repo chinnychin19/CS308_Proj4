@@ -31,10 +31,10 @@ public class Sound {
         }
     }
     
-    public void setVolume(boolean muted) {
-        FloatControl volume = (FloatControl) sourceLine.getControl(FloatControl.Type.MASTER_GAIN);
-        volume.setValue(muted ? 0 : volume.getMinimum()); // 0 is default value
-    }
+//    public void setVolume(boolean muted) {
+//        FloatControl volume = (FloatControl) sourceLine.getControl(FloatControl.Type.MASTER_GAIN);
+//        volume.setValue(muted ? 0 : volume.getMinimum()); // 0 is default value
+//    }
     
     private Thread getALoopingThread() {
         return new Thread(){
@@ -103,10 +103,11 @@ public class Sound {
     }
     
     public void start() {
+        if (!myController.isMusicOn()) {
+            return;
+        }
         myThread = getALoopingThread();
         myThread.start();
-        setVolume(myController.isVolumeOn());
-        
     }
     
     public void stop() {

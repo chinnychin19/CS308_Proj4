@@ -32,15 +32,20 @@ public class GameController {
         initModes();
         myCurrentMode.paint();
         myView.addKeyListener(myCurrentMode);
-        myIsVolumeOn = true;
+        myIsVolumeOn = false;
+        myCurrentMode.mySound.start();
     }
     
-    public void toggleVolume() {
+    public void toggleMusic() {
         myIsVolumeOn = !myIsVolumeOn;
-        getMode().mySound.setVolume(myIsVolumeOn);
+        if (myIsVolumeOn) {
+            getMode().mySound.start();
+        } else {
+            getMode().mySound.stop();
+        }
     }
     
-    public boolean isVolumeOn() {
+    public boolean isMusicOn() {
         return myIsVolumeOn;
     }
         
@@ -78,7 +83,6 @@ public class GameController {
     private void initModes () {
         myMainMode = new WanderingMode(myModel, myView);
         myCurrentMode = myMainMode;
-        myCurrentMode.startMusic();
     }
 
 }
