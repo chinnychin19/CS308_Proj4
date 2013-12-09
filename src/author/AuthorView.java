@@ -21,9 +21,11 @@ import constants.Constants;
  */
 @SuppressWarnings("serial")
 public class AuthorView extends JFrame {
-	
-	private AuthorView av = this;
-	private AuthoringCache ac;
+
+    private AuthorView av = this;
+    private AuthoringCache ac;
+    private MapCreationView mapCreationView;
+    private SidebarPanel sidebarPanel;
     public static final String TITLE = "Game Editor";
     public static final String LAUNCH_WIZARD = "Launch Wizard";
 
@@ -31,31 +33,32 @@ public class AuthorView extends JFrame {
      * Main constructor.
      */
     public AuthorView () {
-        initialize();
-        
+        setFrameAttributes();
         makeMenuBar();
-        
         initializeMainView();
-
         // Pack and set GUI to true
         pack();
         this.setVisible(true);
     }
 
-	private void initializeMainView() {
-		JPanel mainView = new JPanel();
-        
+    private void initializeMainView () {
+        JPanel mainView = new JPanel();
+
         mainView.setPreferredSize(Constants.FRAME_SIZE);
-        mainView.add(new MapCreationView());
-        mainView.add(new SidebarPanel(ac));
         
+        mapCreationView = new MapCreationView();
+        mainView.add(mapCreationView);
+        
+        sidebarPanel = new SidebarPanel(ac);
+        mainView.add(sidebarPanel);
+
         this.add(mainView);
-	}
+    }
 
     /**
      * Initialize JFrame attributes.
      */
-    private void initialize () {
+    private void setFrameAttributes () {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle(TITLE);
         this.setPreferredSize(Constants.FRAME_SIZE);
@@ -80,6 +83,7 @@ public class AuthorView extends JFrame {
 
     /**
      * Returns a singleton instance of this author view.
+     * 
      * @return the AuthorView
      */
     public AuthorView getAuthorView () {
