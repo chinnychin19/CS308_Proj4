@@ -160,7 +160,7 @@ public abstract class AbstractBattleMode extends AbstractMode {
         g.setColor(Color.black);
         g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 
-        String nameStr = String.format("Name: %s", m.getName());
+        String nameStr = String.format("Name: %s\tStatus: %s", m.getName(),m.getStatus().toString());
         String hpStr = String.format("HP: %d/%d", m.getStat(Constants.STAT_CUR_HP), m.getStat(Constants.STAT_MAX_HP));
         String lvlStr = String.format("Level: %d", m.getStat(Constants.JSON_LEVEL));
         String atkStr = String.format("Attack: %d", m.getStat(Constants.STAT_ATTACK));
