@@ -46,13 +46,13 @@ public abstract class AbstractBattleParty {
     
     protected Monster getFirstAliveMonster () {
         for (Monster m : myMonsters) {
-            if (m.getCurHP() > 0) {
+            if (!m.isDead()) {
                 return m;
             }
         }
         return null;
     }
-
+    
     public void doTurn(){
         myBattle.doNextTurn();
     }
@@ -68,7 +68,7 @@ public abstract class AbstractBattleParty {
     public List<Monster> getAliveMonsters() {
         List<Monster> aliveMonsters = new ArrayList<Monster>();
         for(Monster mon : getMonsters()){
-            if(mon.getCurHP() > 0){
+            if(!mon.isDead()){
                 aliveMonsters.add(mon);
             }
         }

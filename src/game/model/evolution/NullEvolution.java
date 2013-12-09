@@ -2,6 +2,8 @@ package game.model.evolution;
 
 import java.awt.Image;
 import java.util.List;
+
+import constants.Constants;
 import game.model.AttackWrapper;
 import game.model.GameModel;
 
@@ -18,7 +20,7 @@ public class NullEvolution extends AbstractEvolution {
 
     @Override
     public String getName () {
-        return "";
+        return Constants.BLANK_STRING;
     }
 
     @Override

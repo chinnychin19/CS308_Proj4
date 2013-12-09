@@ -120,6 +120,9 @@ public class Input {
 		myInputs.put(input, value);
 	}
 	
+	/**
+	 * Turn all movement directions off
+	 */
 	public void setMovementOff(){
 	    myInputs.put(InputIndex.UP, false);
 	    myInputs.put(InputIndex.DOWN, false);

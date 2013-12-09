@@ -1,11 +1,17 @@
 package game.controller.optionState;
 
+import constants.Constants;
 import game.controller.AbstractBattleMode;
 
+/**
+ * State presented after the player loses a wild region battle
+ * @author Team Rocket
+ *
+ */
 public class UserLostWildBattleCompleteState extends AbstractWildBattleCompleteState {
 
     public UserLostWildBattleCompleteState (AbstractBattleMode mode) {
-        super(mode, "YOU LOST :(");
+        super(mode, Constants.YOU_LOST);
     }
 
     @Override

@@ -1,0 +1,218 @@
+{
+    "Player": [{
+        "name": "hero",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png"
+    }],
+    "Monster": [{
+        "name": "tyler",
+        "image": "images/monsters/tyler.png",
+        "catchRate": ".4",
+        "type": "water",
+        "baseHP": "8",
+        "baseAttack": "3",
+        "baseDefense": "5",
+        "attacks": [{
+            "name": "vine whip",
+            "unlockLevel": "4"
+        }, {
+            "name": "pusha slap",
+            "unlockLevel": "3"
+        }],
+        "evolution": {
+            "name": "ryan",
+            "level": "9"
+        }
+    }, {
+        "name": "ryan",
+        "image": "images/monsters/ryan.jpg",
+        "catchRate": ".4",
+        "type": "electric",
+        "baseHP": "10",
+        "baseAttack": "10",
+        "baseDefense": "8",
+        "attacks": [{
+            "name": "sql injection",
+            "unlockLevel": "2"
+        }, {
+            "name": "slash",
+            "unlockLevel": "5"
+        }],
+    }],
+    "Attack": [{
+        "name": "vine whip",
+        "power": "165",
+        "accuracy": "0.95",
+        "statisticEffect": [{
+            "target": "enemy",
+            "statName": "defense",
+            "change": "-10"
+        }],
+        "statusEffect": [{
+            "status": "poison",
+            "target": "enemy"
+        }]
+    }, {
+        "name": "pusha slap",
+        "power": "200",
+        "accuracy": "0.99",
+        "statisticEffect": [{
+            "target": "enemy",
+            "statName": "defense",
+            "change": "-15"
+        }],
+        "statusEffect": [{
+            "status": "poison",
+            "target": "enemy"
+        }]
+    }, {
+        "name": "sql injection",
+        "power": "200",
+        "accuracy": "0.78",
+        "statisticEffect": [{
+            "target": "enemy",
+            "statName": "defense",
+            "change": "-20"
+        }],
+        "statusEffect": [{
+            "status": "poison",
+            "target": "enemy"
+        }]
+    }, {
+        "name": "slash",
+        "power": "210",
+        "accuracy": "0.99",
+        "statisticEffect": [{
+            "target": "enemy",
+            "statName": "defense",
+            "change": "-30"
+        }],
+        "statusEffect": [{
+            "status": "poison",
+            "target": "enemy"
+        }]
+    }],
+    "Obstacle": [{
+        "name": "flower",
+        "image": "images/obstacles/flower.png"
+    }],
+    "KeyItem": [{
+        "name": "razor"
+    }],
+    "NPC": [{
+        "name": "walker1",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "dialogue": "You go to the dialogue -- Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit."
+    }],
+    "FightingNPC": [{
+        "name": "fighter1",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "5",
+        "dialogue": "It is time. I WILL NOT LOSE!",
+        "monsters": [{
+            "name": "tyler",
+            "level": "5",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "100",
+            "curHP": "100",
+            "attack": "35",
+            "defense": "60"
+        }, {
+            "name": "ryan",
+            "level": "5",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "400",
+            "curHP": "400",
+            "attack": "40",
+            "defense": "50"
+        }],
+        "bet": "25",
+        "postDialogue": "thank you come again.",
+        "keyItems": []
+    }, {
+        "name": "fighter2",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "5",
+        "dialogue": "Let's be real. You're probably gonna beat me. And if you do you'll win a razor!",
+        "monsters": [{
+            "name": "tyler",
+            "level": "5",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "10",
+            "curHP": "10",
+            "attack": "35",
+            "defense": "60"
+        }],
+        "bet": "25",
+        "postDialogue": "Enjoy your razor!",
+        "keyItems": [
+            "razor"
+        ]
+      }],
+    "TypeMatrix": [{
+        "name": "matrix",
+        "matrix": {
+            "electric": {
+                "water": "2",
+                "rock": "0.1",
+                "electric": "1"
+            },
+            "rock": {
+                "water": "0.1",
+                "rock": "1",
+                "electric": "1.5"
+            },
+            "water": {
+                "water": "1",
+                "rock": "2.0",
+                "electric": "0.5"
+            }
+        }
+    }],
+    "WildRegion": [{
+        "name": "grass1",
+        "image": "images/ground/wildGrass.png",
+        "probability": ".05",
+        "monsters": [{
+            "name": "tyler",
+            "level": "4",
+            "probability": "1.0"
+        }]
+    }],
+    "HealItem": [{
+        "name": "heal1",
+        "image": "images/items/healPokeBall.png"
+    }],
+     "Item": [
+                {
+                    "name": "potion",
+                    "consciousness": "alive",
+                    "statisticEffect": {
+                        "statName": "curHP",
+                        "change": "20"
+                    }
+                },
+                {
+                    "name": "revive",
+                    "consciousness" : "dead",
+                    "statisticEffect": {
+                        "statName": "curHP",
+                        "change": "1000" 
+                    }
+                }
+            ]
+}

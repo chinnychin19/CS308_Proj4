@@ -5,10 +5,14 @@ import game.controller.Input;
 import game.controller.WildBattleMode;
 import game.controller.state.NotListableException;
 import game.model.Monster;
+import game.model.MonsterInfo;
 import game.model.attack.Attack;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
+
+import constants.Constants;
 
 public class PartyOptionState extends AbstractListableOptionState{
     public PartyOptionState (AbstractBattleMode mode) {
@@ -16,13 +20,13 @@ public class PartyOptionState extends AbstractListableOptionState{
     }
     
     public PartyOptionState (AbstractBattleMode mode, boolean canGoBack){
-        super(mode,"PARTY",canGoBack);
+        super(mode, Constants.TEXT_PARTY,canGoBack);
     }
     
     @Override
     public void paint () {
         try { 
-            paintList(getMonsters()); 
+            paintList(getMonsterInfoList()); 
         }
         catch (NotListableException e) {
             e.printStackTrace();
@@ -40,8 +44,7 @@ public class PartyOptionState extends AbstractListableOptionState{
         List<Monster> monsters = getMonsters();
         Monster selectedMonster = monsters.get(mySelected);
         myMode.getBattle().getPlayerParty().setCurrentMonster(selectedMonster);
-        myMode.setOptionState(myMode.getAMainOptionState());
-        myMode.getBattle().doNextTurn();
+        myMode.setOptionState(new StateTransitionTextOptionState(myMode, String.format(Constants.TEXT_SWITCH_TO, selectedMonster.getName())));
     }
     
     @Override
@@ -53,5 +56,13 @@ public class PartyOptionState extends AbstractListableOptionState{
 
     protected List<Monster> getMonsters(){
         return myMode.getBattle().getPlayerParty().getMonsters();
+    }
+    
+    protected List<MonsterInfo> getMonsterInfoList(){
+        List<MonsterInfo> monsterInfoList = new ArrayList<MonsterInfo>();
+        for(Monster m : getMonsters()){
+            monsterInfoList.add(new MonsterInfo(m));
+        }
+        return monsterInfoList;
     }
 }

@@ -18,7 +18,6 @@ import game.controller.state.option.ItemOptionState;
 
 public class MainMenuState extends AbstractListableState {
     private List<AbstractState> myOptions;
-
     public MainMenuState(MainMenuMode mode){
         this(mode, Constants.MAIN_MENU_X, Constants.MAIN_MENU_Y, Constants.WIDTH, Constants.HEIGHT);
     }
@@ -28,9 +27,10 @@ public class MainMenuState extends AbstractListableState {
         myOptions = new ArrayList<AbstractState>();
         myOptions.add(new MonsterSelecterState(getMode()));
         myOptions.add(new ItemMenuState(getMode()));
+        myOptions.add(new KeyItemMenuState(getMode()));
         myOptions.add(new SaveMenuState(getMode()));
+        myOptions.add(new ToggleMusicMenuState(getMode()));
         myOptions.add(new ExitMenuState(getMode()));
-
     }
     
     @Override

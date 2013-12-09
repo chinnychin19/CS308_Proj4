@@ -18,7 +18,7 @@ public class AbstractModelObject implements Listable, Saveable{
    
     public AbstractModelObject(GameModel model){
         myModel = model;
-        myName = "";
+        myName = Constants.BLANK_STRING;
     }
     
     public AbstractModelObject (GameModel model, SmartJsonObject definition) {
