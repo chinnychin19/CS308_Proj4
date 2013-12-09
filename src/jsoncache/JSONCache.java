@@ -3,6 +3,8 @@ package jsoncache;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+
+import constants.Constants;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
@@ -88,7 +90,7 @@ public class JSONCache {
         JSONArray cache = (JSONArray) myJSON.get(category);
         for (int i = 0; i < cache.size(); i++) {
             JSONObject jobject = (JSONObject) cache.get(i);
-            if (jobject.get("name").equals(name)) {
+            if (jobject.get(Constants.NAME_LOWERCASE).equals(name)) {
                 cache.remove(i);
                 return;
             }
@@ -112,7 +114,7 @@ public class JSONCache {
         JSONArray cache = (JSONArray) myJSON.get(category);
         for (Object object : cache) {
             JSONObject jObject = (JSONObject) object;
-            if (jObject.get("name").equals(name)) { return new SmartJsonObject(jObject); }
+            if (jObject.get(Constants.NAME_LOWERCASE).equals(name)) { return new SmartJsonObject(jObject); }
         }
         throw new NoJSONObjectJsonException();
     }
@@ -147,7 +149,7 @@ public class JSONCache {
         JSONArray cache = (JSONArray) myJSON.get(category);
         for (Object object : cache) {
             JSONObject jobject = (JSONObject) object;
-            if (jobject.get("name").equals(name)) { return true; }
+            if (jobject.get(Constants.NAME_LOWERCASE).equals(name)) { return true; }
         }
         return false;
     }
@@ -161,7 +163,7 @@ public class JSONCache {
      * @throws JSONException Throws an exception if the object is not found.
      */
     public void update (String category, JSONObject data) throws JSONException {
-        delete(category, (String) data.get("name"));
+        delete(category, (String) data.get(Constants.NAME_LOWERCASE));
         add(category, data);
     }
 }

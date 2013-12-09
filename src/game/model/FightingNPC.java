@@ -38,28 +38,27 @@ public class FightingNPC extends NPC implements Fighter {
                         SmartJsonObject definition,
                         SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
-        try {
-            myPostDialogue = definition.getString(Constants.JSON_POST_DIALOGUE);
-            myKeyItems = new ArrayList<KeyItem>();
-            for (Object obj : definition.getJSONArray(Constants.JSON_KEYITEMS)) {
-                myKeyItems.add(new KeyItem(model, getModel().getDefinitionCache()
-                        .getInstance(Constants.JSON_KEYITEM, obj.toString())));
-            }
-            myBet = definition.getInt(Constants.JSON_BET);
-            myLineOfSightDistance = definition.getInt(Constants.JSON_LINE_OF_SIGHT_DISTANCE);
-            myParty = new ArrayList<Monster>();
-            JSONArray myMonstersJSON = definition.getJSONArray(Constants.MONSTERS_LOWWERCASE);
-            for (Object monsterObj : myMonstersJSON) {
-                SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
-                SmartJsonObject monsterDefinition =
-                        getModel().getDefinitionCache()
-                                .getInstance(Constants.MONSTER_UPPERCASE,
-                                             monsterInWorld.getString(Constants.JSON_NAME));
-                myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
-            }
+    }
+
+    protected void readDefinition (SmartJsonObject definition) throws SmartJsonException {
+        super.readDefinition(definition);
+        myPostDialogue = definition.getString(Constants.JSON_POST_DIALOGUE);
+        myKeyItems = new ArrayList<KeyItem>();
+        for (Object obj : definition.getJSONArray(Constants.JSON_KEYITEMS)) {
+            myKeyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache()
+                    .getInstance(Constants.JSON_KEYITEM, obj.toString())));
         }
-        catch (SmartJsonException e) {
-            e.printStackTrace();
+        myBet = definition.getInt(Constants.JSON_BET);
+        myLineOfSightDistance = definition.getInt(Constants.JSON_LINE_OF_SIGHT_DISTANCE);
+        myParty = new ArrayList<Monster>();
+        JSONArray myMonstersJSON = definition.getJSONArray(Constants.MONSTERS_LOWERCASE);
+        for (Object monsterObj : myMonstersJSON) {
+            SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
+            SmartJsonObject monsterDefinition =
+                    getModel().getDefinitionCache()
+                            .getInstance(Constants.MONSTER_UPPERCASE,
+                                         monsterInWorld.getString(Constants.JSON_NAME));
+            myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
         }
     }
     
@@ -91,6 +90,11 @@ public class FightingNPC extends NPC implements Fighter {
         }
     }
 
+    
+    public List<KeyItem> getKeyItems(){
+        return myKeyItems;
+    }
+    
     /**
      * Check to see if the player is within the line of sight of the player
      * 
@@ -102,7 +106,7 @@ public class FightingNPC extends NPC implements Fighter {
         }
         int sight = 0;
         Loc tempLoc = getLoc();
-        while (sight <= myLineOfSightDistance) {
+        while (sight < myLineOfSightDistance) {
             if (tempLoc.equals(getModel().getPlayer().getLoc())) { return true; }
             tempLoc = tempLoc.adjacentLoc(getDirection());
             sight++;
@@ -114,7 +118,7 @@ public class FightingNPC extends NPC implements Fighter {
      * move towards the player when it is within the NPC's line of sight
      */
     private void moveTowardsPlayer () {
-        // /TODO: freeze player keyboard for movement/animation
+        // TODO: freeze player keyboard for movement/animation
         Direction oppositeDirection = Direction.opposite(getDirection());
         while (!getLoc().equals(getModel().getPlayer().getLoc().adjacentLoc(oppositeDirection))) {
             setLoc(getLoc().adjacentLoc(getDirection()), getWorld());
@@ -122,14 +126,8 @@ public class FightingNPC extends NPC implements Fighter {
         getModel().getPlayer().setDirection(oppositeDirection);
     }
 
-    /**
-     * Returns the NPC's key items. These are items that will help the main player get through
-     * obstacles and advance through the game.
-     * 
-     * @return myKeyItems
-     */
-    public List<KeyItem> getKeyItem () {
-        return myKeyItems;
+    public void giveKeyItemGifts(Player p) {
+        p.getKeyItems().addAll(myKeyItems);
     }
 
     /**
@@ -145,7 +143,6 @@ public class FightingNPC extends NPC implements Fighter {
     @Override
     public void onInteract () {
         facePlayer();
-        // TODO: Wrap Dialogue every 63 characters (the amount for one line)
         // TODO: state changing will be refactored:
         // AbstractMode mode = getModel().getController().getMode();
         // mode.addDynamicState(new TextState(mode,
@@ -182,13 +179,13 @@ public class FightingNPC extends NPC implements Fighter {
     @Override
     public JSONObject getSavedJson(){
         JSONObject toSave = super.getSavedJson();
-        toSave.put("defeated", myIsDefeated);
+        toSave.put(Constants.TEXT_DEFEATED, myIsDefeated);
         return toSave;
     }
     
     @Override
     protected void readWorld(SmartJsonObject objInWorld) throws SmartJsonException {
         super.readWorld(objInWorld);
-        myIsDefeated = objInWorld.getBoolean("defeated");
+        myIsDefeated = objInWorld.getBoolean(Constants.TEXT_DEFEATED);
     }
 }

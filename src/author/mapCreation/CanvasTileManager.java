@@ -1,5 +1,6 @@
 package author.mapCreation;
 
+import java.util.Map;
 import location.Loc;
 import constants.Constants;
 
@@ -160,5 +161,9 @@ public class CanvasTileManager {
 	public WorldCreationMap getWorld(){
 		return myWorld;
 	}
+	
+	public Map<Loc, GenericTileWrapper> getWorldTiles(){
+            return myWorld.getWorldTileMap();
+    }
 
 }

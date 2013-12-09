@@ -26,7 +26,7 @@ public class CatchOptionState extends AbstractOptionState {
     public void paint () {
         super.paint();
 
-        int x = 15;
+        int x = 15; //TODO: Chinmay change these numbers
         int y = 30;
         myBuffer.drawString(Constants.PROMPT_PRESS_TO_CATCH, x, y);
 

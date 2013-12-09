@@ -23,12 +23,11 @@ import constants.Constants;
 @SuppressWarnings("serial")
 public class MapCreationView extends JPanel {
 
-    private MapCreationView mcv = this;
     // private WorldTiles myWorld;
-    private WorldCreationMap myWorldCreationMap;
     private BufferedImage myBackground;
-    private WorldCreationMap myWorld;
     private CanvasTileManager myTileManager;
+    private WorldCreationMap myWorld;
+    private Map<Loc, GenericTileWrapper> myWorldTiles;
 
     public MapCreationView () {
         setFocusable(true);
@@ -44,15 +43,10 @@ public class MapCreationView extends JPanel {
         }
 
         myTileManager = new CanvasTileManager(); // 15, 9
-        myWorldCreationMap = myTileManager.getWorld();
+        myWorld = myTileManager.getWorld();
+        myWorldTiles = myWorld.getWorldTileMap();
         initListeners();
     }
-
-    /*
-     * public WorldCreationMap getMyWorld () {
-     * return myWorld;
-     * }
-     */
 
     private void initListeners () {
         this.addKeyListener(new MapCreationKeyListener(this, myTileManager));
@@ -80,14 +74,14 @@ public class MapCreationView extends JPanel {
         g.setPaint(tp);
         g.fillRect((int) topLeftX, (int) topLeftY, (int) myTileManager.getTileWidth(),
                    (int) myTileManager.getTileHeight());
-        
-        myWorldCreationMap.put(new Loc((int) topLeftX, (int) topLeftY),
-                               new GenericTileWrapper("tileName", myBackground));
-        
+
+        myWorld.getWorldTileMap().put(new Loc((int) topLeftX, (int) topLeftY),
+                                      new GenericTileWrapper("tileName", myBackground));
+
         repaint();
     }
-    
-    public void paintTile(Graphics2D g, int x, int y) {
+
+    public void paintTile (Graphics2D g, int x, int y) {
         double topLeftX = myTileManager.getTileAnchorX(x);
         double topLeftY = myTileManager.getTileAnchorY(y);
 
@@ -96,7 +90,7 @@ public class MapCreationView extends JPanel {
                                                              (int) myTileManager.getTileWidth(),
                                                              (int) myTileManager.getTileHeight()));
 
-        super.paintComponent(g);
+        //super.paintComponent(g);
         g.setPaint(tp);
         g.fillRect((int) topLeftX, (int) topLeftY, (int) myTileManager.getTileWidth(),
                    (int) myTileManager.getTileHeight());
@@ -112,16 +106,16 @@ public class MapCreationView extends JPanel {
 
     @Override
     public void repaint () {
-        if (myWorldCreationMap != null) {
-            for (Map.Entry<Loc, GenericTileWrapper> tile : myWorldCreationMap.getWorldTileMap()
-                    .entrySet()) {
+        if (myWorldTiles != null) {
+            for (Map.Entry<Loc, GenericTileWrapper> tile : myWorldTiles.entrySet()) {
                 paintTile((Graphics2D) this.getGraphics(),
-                                   tile.getKey().getX(), tile.getKey().getY());
-            }
+                          tile.getKey().getX(), tile.getKey().getY());
+            } 
         }
     }
 
-    public WorldCreationMap getWorldCreationMap () {
-        return myWorldCreationMap;
+    public Map<Loc, GenericTileWrapper> getMyWorldTiles () {
+        return myWorldTiles;
     }
+
 }

@@ -13,7 +13,7 @@ import constants.Constants;
 
 public abstract class AbstractOptionState extends AbstractState{
     protected AbstractBattleMode myMode;
-    protected int mySelected = 0;
+    protected int mySelected = Constants.ZERO;
     private boolean myCanGoBack;
 
 
@@ -26,9 +26,9 @@ public abstract class AbstractOptionState extends AbstractState{
     }
 
     public AbstractOptionState (AbstractBattleMode mode,  String name, boolean canGoBack) {
-        super(name, mode, 0, Constants.HEIGHT*2/3, Constants.WIDTH, Constants.HEIGHT/3);
+        super(name, mode, Constants.ZERO, Constants.HEIGHT*2/3, Constants.WIDTH, Constants.HEIGHT/3);
         myMode = mode;
-        mySelected = 0;
+        mySelected = Constants.ZERO;
         myName = name;
         myCanGoBack = canGoBack;
     }

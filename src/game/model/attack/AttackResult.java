@@ -1,5 +1,7 @@
 package game.model.attack;
 
+import constants.Constants;
+
 public class AttackResult {
     private String myMonsterName;
     private String myAttackName;
@@ -16,21 +18,25 @@ public class AttackResult {
         myIsHit = isHit;
     }
     
+    public boolean isHit() {
+        return myIsHit;
+    }
+    
     @Override
     public String toString() {
-        String ret = "";
+        String ret = Constants.BLANK_STRING;
         ret += String.format("%s used %s. ", myMonsterName, myAttackName);
         if (myIsHit) {
             if (Math.abs(myEffectiveness - 1) > 0.001) { // multiplier != 1
                 if (myEffectiveness > 1) {
-                    ret += "The matchup is super effective! ";
+                    ret += Constants.MATCHUP_EFFECTIVE;
                 } else {
-                    ret += "The matchup is not very effective. ";
+                    ret += Constants.MATCHUP_NOT_EFFECTIVE;
                 }
             }
-            ret += String.format("The attack did %.0f damage. ", myDamage);
+            ret += String.format(Constants.PROMPT_ATTACK_DAMAGE_DID, myDamage);
         } else {
-            ret += "The attack missed! ";
+            ret += Constants.PROMPT_ATTACK_MISSED;
         }
         return ret;
     }

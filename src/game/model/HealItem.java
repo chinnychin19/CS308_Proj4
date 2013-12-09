@@ -17,7 +17,7 @@ public class HealItem extends AbstractViewableObject {
                      SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
 
-        myImage = new ImageIcon("images/items/healPokeBall.png").getImage();
+        myImage = new ImageIcon(Constants.HEAL_ITEM_IMAGE).getImage();
     }
 
     @Override

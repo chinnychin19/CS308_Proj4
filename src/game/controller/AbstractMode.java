@@ -55,10 +55,15 @@ public abstract class AbstractMode extends KeyAdapter {
        return myModel.getController();
     }
     
+    /**
+     * Called by actAndPaint method
+     */
     public abstract void paint ();
-
-    public abstract void act (); // TODO: take some sort of input object as parameter? or is this
-                                 // the input object?
+    
+    /**
+     * Called by actAndPaint method
+     */
+    public abstract void act (); 
     
     //super should be called in sub classes
     public void turnOff() {
@@ -67,6 +72,10 @@ public abstract class AbstractMode extends KeyAdapter {
         stopMusic();
     }
     
+    /**
+     * Initializes the key listeners appropriately and removes existing key listeners.  Also starts music for the current
+     * mode
+     */
     public void turnOn() {
         removeAllKeyListeners();
         getInput().resetAllInputs();
@@ -74,24 +83,42 @@ public abstract class AbstractMode extends KeyAdapter {
         startMusic();
     }
     
+    /**
+     * Removes all key listeners
+     */
     private void removeAllKeyListeners() {
         for (KeyListener k : getView().getKeyListeners()) {
             getView().removeKeyListener(k);
         }
+        //TODO: should we call stop music
     }
     
+    /**
+     * Start the music for the current mode
+     */
     protected void startMusic() {
         mySound.start();
     }
     
+    /**
+     * Stop the music for the current mode
+     */
     protected void stopMusic() {
         mySound.stop();
     }
 
+    /**
+     * 
+     * @return an input object
+     */
     public Input getInput(){
     	return myInput;
     }
 
+    /**
+     * 
+     * @return a view
+     */
     protected GameView getView () {
         return myView;
     }
@@ -157,6 +184,11 @@ public abstract class AbstractMode extends KeyAdapter {
         }
     }
     
+    /**
+     * Update the player based on the movement keys entered by the user
+     * @param e KeyEvent pressed on keyboard/controller
+     * @param flag boolean value to set keyEvent as 
+     */
     private void updateMovementInputs(KeyEvent e, boolean flag){
         int x = e.getKeyCode();
         if (x == getUpKey()) {
@@ -173,53 +205,95 @@ public abstract class AbstractMode extends KeyAdapter {
         }
     }
     
+    /**
+     * Disable the direction keys
+     */
     public void turnMovementOff(){
         myIsMovementAllowed = false;
         getInput().setMovementOff();
     }
     
+    /**
+     * Enable the direction keys
+     */
     public void turnMovementOn(){
         myIsMovementAllowed = true;
     }
     
+    /**
+     * 
+     * @return An integer code representing the up key
+     */
     protected int getUpKey () {
         return KeyEvent.VK_UP;
     }
 
+    /**
+     * 
+     * @return An integer code representing the down key
+     */
     protected int getDownKey () {
         return KeyEvent.VK_DOWN;
     }
-
+    
+    /**
+     * 
+     * @return An integer code representing the Left key
+     */
     protected int getLeftKey () {
         return KeyEvent.VK_LEFT;
     }
 
+    /**
+     * 
+     * @return An integer code representing the right key
+     */
     protected int getRightKey () {
         return KeyEvent.VK_RIGHT;
     }
     
+    /**
+     * 
+     * @return An integer code representing the interact key
+     */
     protected int getInteractKey(){
         return KeyEvent.VK_Z;
     }
     
+    /**
+     * 
+     * @return An integer code representing the back key
+     */
     protected int getBackKey(){
         return KeyEvent.VK_X;
     }
     
+    /**
+     * 
+     * @return An integer code representing the menu key
+     */
     protected int getMenuKey(){
         return KeyEvent.VK_SPACE;
     }
-    
-    //TODO: Comment methods below
 
+    /**
+     * Put text on Wandering mode display
+     * @param state Text state
+     */
     public void addDynamicState (AbstractState state) {
         myStates.add(state);
     }
 
+    /**
+     * Clear all text on the screen
+     */
     public void clearDynamicStates () {
         myStates = new ConcurrentLinkedQueue<AbstractState>();
     }
 
+    /**
+     * Paint the display view
+     */
     protected void paintDynamicStates() {
 		for(AbstractState state : myStates){
 			state.paint();
@@ -246,6 +320,10 @@ public abstract class AbstractMode extends KeyAdapter {
                             Constants.WIDTH, Constants.HEIGHT);
     }
     
+    /**
+     * Check to see if movement is enabled for the current state
+     * @return
+     */
     private boolean isMovementAllowed(){
         return myIsMovementAllowed;
     }

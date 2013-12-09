@@ -22,7 +22,7 @@ import game.view.GameView;
 public class WanderingMode extends AbstractMode {
     public WanderingMode (GameModel model, GameView view) {
         super(model, view);
-        mySound = new Sound("music/nfl.wav");
+        mySound = new Sound(Constants.GAME_MUSIC, getController());
     }
 
     /**

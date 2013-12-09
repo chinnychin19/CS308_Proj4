@@ -1,5 +1,6 @@
 package game.controller;
 
+import constants.Constants;
 import util.Sound;
 import game.controller.optionState.AbstractBattleCompleteState;
 import game.controller.optionState.UserLostTrainerBattleCompleteState;
@@ -27,7 +28,7 @@ public class TrainerBattleMode extends AbstractBattleMode {
         defender.setBattle(myBattle);
         mySelectedOption = 0;
         mySelectedAttack = 0;
-        mySound = new Sound("music/nfl.wav");
+        mySound = new Sound(Constants.GAME_MUSIC, getController());
     }
     
     @Override

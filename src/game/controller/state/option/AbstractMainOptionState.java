@@ -6,13 +6,15 @@ import game.controller.state.NotListableException;
 import java.util.ArrayList;
 import java.util.List;
 
+import constants.Constants;
+
 
 public abstract class AbstractMainOptionState extends AbstractListableOptionState {
 
     private List<AbstractOptionState> myOptions;
     
     public AbstractMainOptionState (AbstractBattleMode mode) {
-        super(mode, "MAIN");
+        super(mode, Constants.MAIN_TEXT);
         myOptions = new ArrayList<AbstractOptionState>();
     }
     

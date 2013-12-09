@@ -16,7 +16,7 @@ public class TextOptionState extends AbstractOptionState {
     }
     
      public TextOptionState (AbstractBattleMode mode, String text, AbstractOptionState nextState) {
-         super(mode, "DIALOGUE");
+         super(mode, Constants.TEXT_DIALOGUE);
          myText = text;
          myNextState = nextState;
      }
@@ -32,17 +32,17 @@ public class TextOptionState extends AbstractOptionState {
         int y = Constants.TEXT_START_Y;
         int offset = Constants.TEXT_START_INC;
         int charsPerLine = Constants.TEXT_CHARS_PER_LINE;
-        String[] words = myText.split("\\s+");
-        int curLineNumber = 0;
-        int curWordIndex = 0;
+        String[] words = myText.split(Constants.SPLIT_SLASH_S);
+        int curLineNumber = Constants.ZERO;
+        int curWordIndex = Constants.ZERO;
         while (true) {
-            String curLine = "";
+            String curLine = Constants.BLANK_STRING;
             while (true) {
                 if (curWordIndex == words.length) {
                     break;
                 }
                 if (curLine.length() + words[curWordIndex].length() <= charsPerLine) {
-                    curLine += words[curWordIndex] + " ";
+                    curLine += words[curWordIndex] + Constants.SPACE_STRING;
                     curWordIndex++;
                 } else {
                     break;
@@ -59,6 +59,7 @@ public class TextOptionState extends AbstractOptionState {
     @Override
     protected void onInteract () {
         myMode.setOptionState(myNextState);
+        myMode.removeHitMarkers();
     }
 
     @Override
