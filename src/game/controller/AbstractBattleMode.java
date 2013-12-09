@@ -167,9 +167,9 @@ public abstract class AbstractBattleMode extends AbstractMode {
         String atkStr = String.format("Attack: %d", m.getStat(Constants.STAT_ATTACK));
         String defStr = String.format("Defense: %d", m.getStat(Constants.STAT_DEFENSE));
 
-        int x1 = 15, x2 = 165;
-        int y1 = 60;
-        int yInc = Constants.TEXT_START_INC-5;
+        int x1 = Constants.MONSTER_ROW1_X, x2 = Constants.MONSTER_ROW2_X;
+        int y1 = Constants.MONSTER_ROW1_Y;
+        int yInc = Constants.MONSTER_INC;
 
         g.drawString(nameStr, x1, y1 + 0 * yInc);
         g.drawString(hpStr, x1, y1 + 1 * yInc);

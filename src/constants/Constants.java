@@ -245,6 +245,10 @@ public class Constants {
     public final static int HEALTH_BAR_Y = 15;
     public final static int HEALTH_BAR_WIDTH = 150;
     public final static int HEALTH_BAR_HEIGHT = 20;
+    public final static int MONSTER_ROW1_X = 15;
+    public final static int MONSTER_ROW2_X = 165;
+    public final static int MONSTER_ROW1_Y = 60;
+    public final static int MONSTER_INC = 30;
 
     // Main Menu
     public final static int MAIN_MENU_X = 0;
