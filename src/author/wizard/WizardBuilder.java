@@ -159,6 +159,18 @@ public class WizardBuilder {
         String basicFieldType = (fields[0].equals("list")) ? fields[1] : fields[0];
         String limitedFieldType = (fields[0].equals("list")) ? fieldType.substring(5) : fieldType;
         String outputString = "";
+        /**
+         * We need this to be changed because it doens't work on a Mac
+         * 
+         * The parsing with the filepath strings isn't working.
+         * 
+         * Java has built in classes for building filepaths and file locations
+         * 		- We should use those so we don't get any bugs.
+         * 
+         * We shouldn't be parsing JSON in this class.
+         * 		- Should try to use util.jsonwrapper
+         * 		- Or use native Java methods (?)
+         */
         if (limitedFieldType.split("_").length > 1 && limitedFieldType.indexOf(":") == -1) {
             String[] locKeyPair = limitedFieldType.split("_")[1].split("\\.");
             JSONArray locationArray = (JSONArray) myCache.getRawJSON().get(locKeyPair[0]);
@@ -171,6 +183,7 @@ public class WizardBuilder {
         Class<?> classToInstantiate =
                 Class.forName("author.panels." + KEYWORD_TO_PANEL_TYPE.get(basicFieldType));
         Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
+        System.out.println(fieldName + outputString);
         return (Component) ctr.newInstance(fieldName + outputString);
     }
 
