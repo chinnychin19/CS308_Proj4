@@ -6,6 +6,7 @@ import location.Loc;
 
 public class WorldCreationMap {
 
+        
 	private Map<Loc, GenericTileWrapper> myTileMap;
 	
 	public WorldCreationMap() {
@@ -31,6 +32,10 @@ public class WorldCreationMap {
 			}
 		}
 		return currentWindowMap;
+	}
+	
+	public Map<Loc, GenericTileWrapper> getWorldTileMap() {
+	    return myTileMap;
 	}
 	
 }

@@ -1,6 +1,7 @@
 package author.listeners;
 
 // import java.awt.Image;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import author.mapCreation.CanvasTileManager;
@@ -52,7 +53,8 @@ public class MapCreationMouseListener implements MouseListener {
 
         myTileManager.getTileClickLoc(xTile, yTile);
 
-        myMapCreationView.paintTile(myMapCreationView.getGraphics(), xTile, yTile, null);
+        myMapCreationView.paintTile((Graphics2D) myMapCreationView.getGraphics(), xTile, yTile);
+        System.out.println(myMapCreationView.getWorldCreationMap().toString());
     }
 
     @Override
