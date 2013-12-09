@@ -240,4 +240,10 @@ public class Constants {
     
     //Post Battle Mode
     public static final String YOU_LOST = "You Lost :(";
+    public static final String YOU_WON = "You won :)";
+    public static final String YOU_RECEIVED = "\tYou recieved ";
+    public static final String DIALOGUE_KEY_ITEMS = " key items";
+    public static final String BLANK_STRING = "";
+    public static final String SPACE_STRING = " ";
+    public static final String SPLIT_SLASH_S = "\\s+";
 }
