@@ -104,10 +104,9 @@ public class FightingNPC extends NPC implements Fighter {
         if (myIsDefeated) {
             return false;
         }
-        System.out.println("here");
         int sight = 0;
         Loc tempLoc = getLoc();
-        while (sight <= myLineOfSightDistance) {
+        while (sight < myLineOfSightDistance) {
             if (tempLoc.equals(getModel().getPlayer().getLoc())) { return true; }
             tempLoc = tempLoc.adjacentLoc(getDirection());
             sight++;
