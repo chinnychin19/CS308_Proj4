@@ -18,6 +18,7 @@ public class GameController {
     private GameModel myModel;
     private AbstractMode myCurrentMode;
     private WanderingMode myMainMode;
+    private boolean myIsVolumeOn;
     public GameController (String nameOfGame, GameView view) {
         myView = view;
         try {
@@ -31,8 +32,17 @@ public class GameController {
         initModes();
         myCurrentMode.paint();
         myView.addKeyListener(myCurrentMode);
+        myIsVolumeOn = true;
     }
     
+    public void toggleVolume() {
+        myIsVolumeOn = !myIsVolumeOn;
+    }
+    
+    public boolean isVolumeOn() {
+        return myIsVolumeOn;
+    }
+        
     public GameModel getModel() {
         return myModel;
     }

@@ -1,10 +1,12 @@
 package util;
+import game.controller.GameController;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
@@ -16,8 +18,9 @@ public class Sound {
     private AudioFormat audioFormat;
     private SourceDataLine sourceLine;
     private Thread myThread;
+    private GameController myController;
 
-    public Sound(String filename) {
+    public Sound(String filename, GameController controller) {
         try {
             soundFile = new File(filename);
         }
@@ -27,7 +30,13 @@ public class Sound {
         }
     }
     
-    private Thread getAThread() {
+    public void toggleVolume() {
+        FloatControl volume = (FloatControl) sourceLine.getControl(FloatControl.Type.MASTER_GAIN);
+        System.out.println(volume.getValue());
+        
+    }
+    
+    private Thread getALoopingThread() {
         return new Thread(){
             @Override
             public void run() {
@@ -94,7 +103,7 @@ public class Sound {
     }
     
     public void start() {
-        myThread = getAThread();
+        myThread = getALoopingThread();
         myThread.start();
     }
     
