@@ -12,6 +12,7 @@ public class RunAwayOptionState extends AbstractOptionState {
 
     @Override
     protected void onInteract () {
+        myMode.getBattle().reapplyStatistics();
         myMode.getController().setWanderingMode();
     }
 

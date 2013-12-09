@@ -29,6 +29,11 @@ public abstract class AbstractBattleCompleteState extends AbstractOptionState {
     }
 
     @Override
+    protected void onInteract(){
+        myMode.getBattle().reapplyStatistics();
+    }
+    
+    @Override
     protected void onBack () {
         onInteract();
     }
