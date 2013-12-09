@@ -125,7 +125,7 @@ public class Constants {
     public static final String FOLDERPATH_GAMES = "games";
     public static final String FILENAME_DEFINITION = "definition.json";
     public static final String FILENAME_WORLD = "world.json";
-    public static final String FILENAME_SAVESTATE = "saveState.json";
+    public static final String FILENAME_SAVESTATE = "saveState2.json";
     
     //JSON keywords for Monster stats
     public static final String STAT_EXP = "exp";
@@ -258,5 +258,20 @@ public class Constants {
 	public static final String TEXT_SWITCH_TO = "You switch to %s";
 	public static final String TEXT_YOU_USED_ON_BLANK = "You used %s on %s";
 	
+	public static final String TEXT_DEFEATED = "defeated";
+	
+	public static final String HEAL_ITEM_IMAGE = "images/items/healPokeBall.png";
+	
+	public static final String TEXT_STAT_EFFECT = "statisticEffect";
+
+	public static final String TEXT_KEY_ITEM = "KeyItem";
+	public static final String TEXT_ITEMS_LOWERCASE = "items";
+	public static final String TEXT_ITEM = "Item";
+	
+	public static final String MATCHUP_EFFECTIVE = "The matchup is super effective! ";
+	public static final String MATCHUP_NOT_EFFECTIVE = "The matchup is not very effective. ";
+	public static final String PROMPT_ATTACK_DAMAGE_DID = "The attack did %.0f damage. ";
+	public static final String PROMPT_ATTACK_MISSED = "The attack missed! ";
+	public static final String TEXT_HANDLING_USER_MOSNTER = "Handling user monster";
 	
 }

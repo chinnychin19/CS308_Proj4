@@ -34,7 +34,7 @@ public class World {
         myViewableObjects = new HashMap<Loc, AbstractViewableObject>();
         myGroundObjects = new HashMap<Loc, AbstractGround>();
         String worldJSONFilepath = Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
-                "saveState2.json";
+                Constants.FILENAME_SAVESTATE;
         myModel = model;
         myWorldJSON = JSONReader.getJSON(worldJSONFilepath);
         setUpWorld( myWorldJSON );

@@ -111,7 +111,7 @@ public class WildRegion extends AbstractGround {
         public Monster getMonster () {
             try {
                 return new Monster(getModel(), getModel().getDefinitionCache()
-                        .getInstance("Monster", myName), myLevel);
+                        .getInstance(Constants.MONSTER_UPPERCASE, myName), myLevel);
             }
             catch (SmartJsonException e) {
                 e.printStackTrace();

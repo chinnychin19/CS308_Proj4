@@ -180,13 +180,13 @@ public class FightingNPC extends NPC implements Fighter {
     @Override
     public JSONObject getSavedJson(){
         JSONObject toSave = super.getSavedJson();
-        toSave.put("defeated", myIsDefeated);
+        toSave.put(Constants.TEXT_DEFEATED, myIsDefeated);
         return toSave;
     }
     
     @Override
     protected void readWorld(SmartJsonObject objInWorld) throws SmartJsonException {
         super.readWorld(objInWorld);
-        myIsDefeated = objInWorld.getBoolean("defeated");
+        myIsDefeated = objInWorld.getBoolean(Constants.TEXT_DEFEATED);
     }
 }

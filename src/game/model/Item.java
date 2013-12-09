@@ -30,7 +30,7 @@ public class Item extends AbstractModelObject {
     public void readDefinition (SmartJsonObject definition) throws SmartJsonException {
     	super.readDefinition(definition);
         myConsciousness = definition.getString(Constants.CONSCIOUSNESS);
-        myEffect = new StatisticEffect(definition.getSmartJsonObject("statisticEffect"));
+        myEffect = new StatisticEffect(definition.getSmartJsonObject(Constants.TEXT_STAT_EFFECT));
     }
     
     public void applyEffect(Monster m){
