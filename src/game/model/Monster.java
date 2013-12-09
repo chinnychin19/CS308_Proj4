@@ -4,6 +4,8 @@ import game.model.attack.Attack;
 import game.model.evolution.AbstractEvolution;
 import game.model.evolution.Evolution;
 import game.model.evolution.NullEvolution;
+import game.model.status.Status;
+import game.model.status.StatusOkay;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,6 +29,7 @@ public class Monster extends AbstractModelObject implements Saveable {
     private List<AttackWrapper> myAttacks;
     private Map<String, Integer> myStatistics;
     private AbstractEvolution myEvolution;
+    private Status myStatus;
 
     /**
      * To be called for an NPC's monsters or wild monster
@@ -40,6 +43,7 @@ public class Monster extends AbstractModelObject implements Saveable {
         super(model, definition);
         myStatistics.put(Constants.JSON_LEVEL, level);
         generateStats();
+        myStatus = new StatusOkay(getModel());
     }
 
     /**
@@ -51,7 +55,7 @@ public class Monster extends AbstractModelObject implements Saveable {
      */
     public Monster (GameModel model, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(model, definition);
-        readStats(objInWorld);
+        readFields(objInWorld);
     }
 
     /**
@@ -84,11 +88,19 @@ public class Monster extends AbstractModelObject implements Saveable {
     public Type getType () {
         return myType;
     }
+    
+    public Status getStatus() {
+        return myStatus;
+    }
 
     public void heal () {
         int maxHP = myStatistics.get(Constants.STAT_MAX_HP);
         myStatistics.put(Constants.STAT_CUR_HP, maxHP);
-        // TODO: set status to okay
+        myStatus = new StatusOkay(getModel());
+    }
+    
+    public void setStatus(Status status) {
+        myStatus = status;
     }
 
     /**
@@ -162,7 +174,7 @@ public class Monster extends AbstractModelObject implements Saveable {
      * 
      * @param objInWorld object containing the monster's stats
      */
-    private void readStats (SmartJsonObject objInWorld) {
+    private void readFields (SmartJsonObject objInWorld) {
         try {
             myStatistics.put(Constants.JSON_LEVEL, objInWorld.getInt(Constants.JSON_LEVEL));
             myStatistics.put(Constants.STAT_EXP, objInWorld.getInt(Constants.STAT_EXP));
@@ -174,6 +186,14 @@ public class Monster extends AbstractModelObject implements Saveable {
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
+        }
+        
+        // Read status
+        try {
+            SmartJsonObject statusDefinition = objInWorld.getSmartJsonObject(Constants.JSON_STATUS_LOWERCASE);
+            myStatus = new Status(getModel(), statusDefinition);
+        } catch (Exception e) {
+            myStatus = new StatusOkay(getModel());
         }
     }
 
@@ -203,10 +223,10 @@ public class Monster extends AbstractModelObject implements Saveable {
         for (Object obj : definition.getJSONArray(Constants.JSON_MONSTER_ALL_ATTACKS)) {
             SmartJsonObject attackJson = new SmartJsonObject((JSONObject) obj);
             String name = attackJson.getString(Constants.NAME);
-            SmartJsonObject a =
+            SmartJsonObject attackDefinition =
                     getModel().getDefinitionCache().getInstance(Constants.ATTACK_UPPERCASE,
                                                                 name);
-            Attack attack = new Attack(getModel(), a);
+            Attack attack = new Attack(getModel(), attackDefinition);
             int unlockLevel = attackJson.getInt(Constants.JSON_ATTACK_UNLOCK_LEVEL);
             myAttacks.add(new AttackWrapper(attack, unlockLevel));
         }

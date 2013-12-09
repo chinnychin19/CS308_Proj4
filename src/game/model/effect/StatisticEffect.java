@@ -1,4 +1,4 @@
-package game.model.statisticeffect;
+package game.model.effect;
 
 import game.model.Monster;
 import util.jsonwrapper.SmartJsonObject;
@@ -12,7 +12,7 @@ public class StatisticEffect {
     public StatisticEffect (SmartJsonObject object) {
         try {
             
-            myStatisticName = object.getString(Constants.TEXT_STAT_NAME);
+            myStatisticName = object.getString(Constants.JSON_NAME);
             myChange = object.getInt(Constants.CHANGE);
         }
         catch (SmartJsonException e) {

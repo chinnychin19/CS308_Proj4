@@ -5,27 +5,26 @@ import java.util.Collection;
 import game.model.AbstractModelObject;
 import game.model.GameModel;
 import game.model.Monster;
-import game.model.statisticeffect.StatisticEffect;
+import game.model.effect.AbstractStatusEffect;
+import game.model.effect.NullStatusEffect;
+import game.model.effect.StatisticEffect;
+import game.model.effect.StatusEffect;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import constants.Constants;
 import util.Target;
 import util.jsonwrapper.SmartJsonObject;
-import util.jsonwrapper.jsonexceptions.NoIntValueJsonException;
+import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 
 
 public class Attack extends AbstractModelObject {
-    private static final String JSON_POWER = "power";
-    private static final String JSON_ACCURACY = "accuracy";
-    private static final String JSON_STATISTIC_EFFECT = "statisticEffect";
-    private static final String JSON_STATUS_EFFECT = "statusEffect";
 
     private int myPower;
     private double myAccuracy;
-    Collection<StatisticEffectWrapper> myStatisticEffects;
-    Collection<StatusEffect> myStatusEffects;
-    //TODO: move to readDefinition
+    private Collection<StatisticEffectWrapper> myStatisticEffects;
+    private AbstractStatusEffect myStatusEffect;
+    
     public Attack (GameModel model, SmartJsonObject definition) {
         super(model, definition);
     }
@@ -33,26 +32,31 @@ public class Attack extends AbstractModelObject {
     @Override
     protected void readDefinition (SmartJsonObject definition) throws SmartJsonException {
         super.readDefinition(definition);
-        myPower = definition.getInt(JSON_POWER);
-        myAccuracy = definition.getDouble(JSON_ACCURACY);
+        myPower = definition.getInt(Constants.JSON_POWER);
+        myAccuracy = definition.getDouble(Constants.JSON_ACCURACY);
         myStatisticEffects = new ArrayList<StatisticEffectWrapper>();
-        myStatusEffects = new ArrayList<Attack.StatusEffect>();
-        JSONArray statisticsArray = definition.getJSONArray(JSON_STATISTIC_EFFECT);
-        for (Object statObject : statisticsArray) {
-            SmartJsonObject statisticJSON = new SmartJsonObject((JSONObject) statObject);
-            String target = statisticJSON.getString("target");
-            StatisticEffect effect = new StatisticEffect(statisticJSON);
-            myStatisticEffects.add(new StatisticEffectWrapper(target, effect));
+        try {
+            JSONArray statisticsArray = definition.getJSONArray(Constants.STATISTIC_EFFECTS);
+            for (Object statObject : statisticsArray) {
+                SmartJsonObject statisticJSON = new SmartJsonObject((JSONObject) statObject);
+                String target = statisticJSON.getString(Constants.JSON_TARGET);
+                StatisticEffect effect = new StatisticEffect(statisticJSON);
+                myStatisticEffects.add(new StatisticEffectWrapper(target, effect));
 
+            }
         }
-        JSONArray statusArray = definition.getJSONArray(JSON_STATUS_EFFECT);
-        for (Object statusObject : statusArray) {
-            SmartJsonObject json = new SmartJsonObject((JSONObject) statusObject);
-            myStatusEffects.add(new StatusEffect(json));
+        catch (SmartJsonException e) {
+            // nothing. statistic effects remains an empty list
+        }
+        try {
+            SmartJsonObject statusJSON = definition.getSmartJsonObject(Constants.JSON_STATUS_EFFECT);
+            myStatusEffect = new StatusEffect(getModel(), statusJSON);
+        }
+        catch (NoJSONObjectJsonException e) {
+            myStatusEffect = new NullStatusEffect(getModel());
         }
     }
     public AttackResult doAttack (Monster attacker, Monster defender) {
-        //TODO: consider accuracy
         int attack = attacker.getStat(Constants.STAT_ATTACK);
         int defense = defender.getStat(Constants.STAT_DEFENSE);
         double multiplier = getModel().getTypeMatrix().getDamageMultiplier(attacker.getType(),
@@ -73,6 +77,13 @@ public class Attack extends AbstractModelObject {
             }
         }
         
+        System.out.println("My status effect: "+myStatusEffect);
+        if(myStatusEffect.targetIsSelf()) {
+            myStatusEffect.apply(attacker);
+        } else{
+            myStatusEffect.apply(defender);
+        }
+        
         return new AttackResult(attacker.getName(), getName(), damage, multiplier, true);
     }
     
@@ -83,7 +94,7 @@ public class Attack extends AbstractModelObject {
     @Override
     public String toString () {
         return "" + myPower + "\t" + myAccuracy + "\t" + myStatisticEffects.toString() +
-               myStatusEffects.toString();
+               myStatusEffect.toString();
     }
 
   
@@ -101,21 +112,6 @@ public class Attack extends AbstractModelObject {
         
         public void apply(Monster m){
             myEffect.apply(m);
-        }
-    }
-    
-    private class StatusEffect {
-        private String myStatus;
-        private Target myTarget;
-
-        public StatusEffect (SmartJsonObject definition) {
-            try {
-                myTarget = Target.getTarget(definition.getString("target"));
-                myStatus = definition.getString("status");
-            }
-            catch (SmartJsonException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

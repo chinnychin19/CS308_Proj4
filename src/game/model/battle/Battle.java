@@ -124,10 +124,17 @@ public class Battle {
     }
 
     public void doNextTurn () {
+        if (myIsUsersTurn) {
+            Monster playerMonster = myPlayerParty.getCurrentMonster();
+            playerMonster.getStatus().doStatus(playerMonster);
+            System.out.println("Status: "+ playerMonster.getStatus());            
+        }
         toggleUsersTurn();
         handleMonsterDeaths();
         if(!myIsUsersTurn){
             getEnemyParty().doTurn();
+            Monster enemyMonster = getEnemyParty().getCurrentMonster(); 
+            enemyMonster.getStatus().doStatus(enemyMonster);
         }
     }
 

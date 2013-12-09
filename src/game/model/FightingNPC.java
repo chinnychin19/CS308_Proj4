@@ -118,7 +118,7 @@ public class FightingNPC extends NPC implements Fighter {
      * move towards the player when it is within the NPC's line of sight
      */
     private void moveTowardsPlayer () {
-        // /TODO: freeze player keyboard for movement/animation
+        // TODO: freeze player keyboard for movement/animation
         Direction oppositeDirection = Direction.opposite(getDirection());
         while (!getLoc().equals(getModel().getPlayer().getLoc().adjacentLoc(oppositeDirection))) {
             setLoc(getLoc().adjacentLoc(getDirection()), getWorld());

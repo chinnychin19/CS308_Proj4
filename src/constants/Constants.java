@@ -38,7 +38,9 @@ public class Constants {
     
     //JSON keywords
     public static final String JSON_PLAYER = "Player";
-    public static String JSON_KEYITEM = "KeyItem";
+    public static final String JSON_KEYITEM = "KeyItem";
+    public static final String JSON_STATUS = "Status";
+    public static final String JSON_STATUS_LOWERCASE = "status";    
     
     public static final String JSON_IMAGE = "image";
     public static final String JSON_IMAGE_UP = "image-up";
@@ -52,6 +54,12 @@ public class Constants {
     public static final String JSON_POST_DIALOGUE = "postDialogue";
     public static final String JSON_FIGHT = "fight";
     public static final String JSON_BET = "bet";
+    
+    public static final String JSON_POWER = "power";
+    public static final String JSON_ACCURACY = "accuracy";
+    public static final String JSON_STATISTIC_EFFECT = "statisticEffect";
+    public static final String JSON_STATUS_EFFECT = "statusEffect";
+    public static final String JSON_TARGET = "target";
     
     public static final String JSON_FREQ = "frequency";
     public static final String JSON_MONSTERS = "monsters";
@@ -77,6 +85,8 @@ public class Constants {
     public static final String JSON_OBSTACLE = "Obstacle";
     public static final String JSON_HEAL_ITEM = "HealItem";
     public static final String JSON_WILD_REGION = "WildRegion";
+    
+    public static final String STATUS_OKAY = "OK";
 
     //Panel Type Names
     public static final String LIST_PANEL = "List";
@@ -145,6 +155,7 @@ public class Constants {
     public static final String MODE_KEYWORD = "mode";
     public static final String CONSCIOUSNESS = "consciousness";
     public static final String STATISTIC_EFFECT = "statisticEffect";
+    public static final String STATISTIC_EFFECTS = "statisticEffects";
     public static final String STAT_NAME = "statName";
     public static final String CHANGE = "change";
     

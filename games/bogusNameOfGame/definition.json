@@ -45,54 +45,42 @@
         "name": "vine whip",
         "power": "165",
         "accuracy": "0.95",
-        "statisticEffect": [{
+        "statisticEffects": [{
             "target": "enemy",
-            "statName": "defense",
+            "name": "defense",
             "change": "-10"
         }],
-        "statusEffect": [{
-            "status": "poison",
+        "statusEffect": {
+            "name": "poisoned",
             "target": "enemy"
-        }]
+        },
     }, {
         "name": "pusha slap",
         "power": "200",
         "accuracy": "0.99",
-        "statisticEffect": [{
+        "statisticEffects": [{
             "target": "enemy",
-            "statName": "defense",
+            "name": "defense",
             "change": "-15"
         }],
-        "statusEffect": [{
-            "status": "poison",
-            "target": "enemy"
-        }]
     }, {
         "name": "sql injection",
         "power": "200",
         "accuracy": "0.78",
-        "statisticEffect": [{
+        "statisticEffects": [{
             "target": "enemy",
-            "statName": "defense",
+            "name": "defense",
             "change": "-20"
         }],
-        "statusEffect": [{
-            "status": "poison",
-            "target": "enemy"
-        }]
     }, {
         "name": "slash",
         "power": "210",
         "accuracy": "0.99",
-        "statisticEffect": [{
+        "statisticEffects": [{
             "target": "enemy",
-            "statName": "defense",
+            "name": "defense",
             "change": "-30"
         }],
-        "statusEffect": [{
-            "status": "poison",
-            "target": "enemy"
-        }]
     }],
     "Obstacle": [{
         "name": "flower",
@@ -202,7 +190,7 @@
                     "name": "potion",
                     "consciousness": "alive",
                     "statisticEffect": {
-                        "statName": "curHP",
+                        "name": "curHP",
                         "change": "20"
                     }
                 },
@@ -210,9 +198,19 @@
                     "name": "revive",
                     "consciousness" : "dead",
                     "statisticEffect": {
-                        "statName": "curHP",
+                        "name": "curHP",
                         "change": "-1" 
                     }
                 }
-            ]
+            ],
+      "Status": [
+        {
+          "name" : "poisoned",
+          "statisticEffects" : [
+            {
+              "name": "curHP",
+              "change": "-5",
+            }],
+        },
+      ],
 }

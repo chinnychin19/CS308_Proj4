@@ -4,7 +4,7 @@ import game.controller.AbstractBattleMode;
 import game.controller.AbstractMode;
 import game.controller.MainMenuMode;
 import game.controller.state.Listable;
-import game.model.statisticeffect.StatisticEffect;
+import game.model.effect.StatisticEffect;
 import org.json.simple.JSONObject;
 import constants.Constants;
 import util.jsonwrapper.SmartJsonObject;

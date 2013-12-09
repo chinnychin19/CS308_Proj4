@@ -48,7 +48,7 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
             super.readWorld(objInWorld);
             // ADDING MONSTERS
             
-            myParty = new ArrayList<Monster>(); // TODO: populate
+            myParty = new ArrayList<Monster>();
             JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWERCASE);
             for (Object monsterObj : myMonstersJSON) {
                 SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
@@ -56,8 +56,8 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
                         getModel().getDefinitionCache()
                                 .getInstance(Constants.MONSTER_UPPERCASE,
                                              monsterInWorld.getString(Constants.JSON_NAME));
-               
-               myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
+               Monster monster = new Monster(getModel(), monsterDefinition, monsterInWorld);
+               myParty.add(monster);
             }
             int x = objInWorld.getInt(Constants.JSON_X);
             int y = objInWorld.getInt(Constants.JSON_Y);
