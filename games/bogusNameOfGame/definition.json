@@ -73,7 +73,7 @@
         "accuracy": "0.78",
         "statisticEffect": [{
             "target": "enemy",
-            "statName": "defend",
+            "statName": "defense",
             "change": "-20"
         }],
         "statusEffect": [{
@@ -86,7 +86,7 @@
         "accuracy": "0.99",
         "statisticEffect": [{
             "target": "enemy",
-            "statName": "defend",
+            "statName": "defense",
             "change": "-30"
         }],
         "statusEffect": [{

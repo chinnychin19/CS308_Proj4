@@ -50,7 +50,7 @@ public class Battle {
         if (result.isHit()) {
             myMode.markEnemyMonsterHit();
         }
-        myMode.pushState(new StateTransitionTextOptionState(myMode, result.toString()));
+        myMode.setOptionState(new StateTransitionTextOptionState(myMode, result.toString()));
     }
 
     public void attackPlayer (Attack a) {
@@ -84,6 +84,7 @@ public class Battle {
 
     //TODO: string constants
     private void handleEnemyMonsterDied () {
+        myIsUsersTurn = true;
         LevelChange change =
                 myPlayerParty.getCurrentMonster().addExperience(myEnemyParty.getCurrentMonster()
                                                                         .getRewardExperience());
@@ -127,7 +128,7 @@ public class Battle {
     public void doNextTurn () {
         toggleUsersTurn();
         handleMonsterDeaths();
-        if(!myIsUsersTurn) {
+        if(!myIsUsersTurn){
             getEnemyParty().doTurn();
         }
     }

@@ -19,7 +19,8 @@ public abstract class AbstractEnemyParty extends AbstractBattleParty {
     public void doTurn () {
         Attack attack = getAttack();
         getBattle().attackPlayer(attack);
-        super.doTurn();
+        getBattle().handleMonsterDeaths();
+        //super.doTurn();
     }
 
     private Attack getAttack () {

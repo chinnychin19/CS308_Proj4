@@ -37,7 +37,6 @@ public class AttackOptionState extends AbstractListableOptionState {
         List<Attack> attacks = getAttacks();
         Attack chosen = attacks.get(mySelected);
         myMode.getBattle().attackEnemy(chosen);
-
     }
 
     @Override
