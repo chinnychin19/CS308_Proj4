@@ -81,7 +81,7 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
             List<Item> items = new ArrayList<Item>();
             JSONArray playerItems = objInWorld.getJSONArray("items"); //TODO
             for (Object o : playerItems) {
-            	System.out.println(o.toString());
+//            	System.out.println(o.toString());
                 items.add(new Item(getModel(), getModel().getDefinitionCache().getInstance("Item", (String)o)));
             }
             setItems(items);
