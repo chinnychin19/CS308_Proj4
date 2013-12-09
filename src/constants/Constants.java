@@ -273,5 +273,12 @@ public class Constants {
 	public static final String PROMPT_ATTACK_DAMAGE_DID = "The attack did %.0f damage. ";
 	public static final String PROMPT_ATTACK_MISSED = "The attack missed! ";
 	public static final String TEXT_HANDLING_USER_MOSNTER = "Handling user monster";
+	public static final String TEXT_STAT_NAME = "statName";
+	
+	public static final String FILE_NAME_SHORT_GRASS = "images/ground/shortGrass.png";
+	
+	public static final String NAME_LOWERCASE = "name";
+	
+	public static final String ERROR_WITH_JSON = "There was an error with your JSON!";
 	
 }
