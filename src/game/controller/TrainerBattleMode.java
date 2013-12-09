@@ -27,7 +27,7 @@ public class TrainerBattleMode extends AbstractBattleMode {
         defender.setBattle(myBattle);
         mySelectedOption = 0;
         mySelectedAttack = 0;
-        mySound = new Sound("music/nfl.wav");
+        mySound = new Sound("music/nfl.wav", getController());
     }
     
     @Override

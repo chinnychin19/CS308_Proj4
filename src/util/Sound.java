@@ -21,6 +21,7 @@ public class Sound {
     private GameController myController;
 
     public Sound(String filename, GameController controller) {
+        myController = controller;
         try {
             soundFile = new File(filename);
         }
@@ -30,10 +31,9 @@ public class Sound {
         }
     }
     
-    public void toggleVolume() {
+    public void setVolume(boolean muted) {
         FloatControl volume = (FloatControl) sourceLine.getControl(FloatControl.Type.MASTER_GAIN);
-        System.out.println(volume.getValue());
-        
+        volume.setValue(muted ? 0 : volume.getMinimum()); // 0 is default value
     }
     
     private Thread getALoopingThread() {
@@ -105,6 +105,8 @@ public class Sound {
     public void start() {
         myThread = getALoopingThread();
         myThread.start();
+        setVolume(myController.isVolumeOn());
+        
     }
     
     public void stop() {

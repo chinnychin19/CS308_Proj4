@@ -27,20 +27,13 @@ public class ItemMenuState extends AbstractListableState {
     }
 
     @Override
-    protected void onBack () {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     protected void onInteract () {
-        // TODO Auto-generated method stub
-
+        Item selectedItem = getItemList().get(getSelected());
+        getMode().setState(new SelectMonsterForItemMenuState(getMode(), selectedItem));
     }
     
     private List<Item> getItemList () {
-    	//TOO: Implement
-        return new ArrayList<Item>();
+        return getMode().getModel().getPlayer().getItems();
     }
 
 }

@@ -29,6 +29,7 @@ public class MainMenuState extends AbstractListableState {
         myOptions.add(new ItemMenuState(getMode()));
         myOptions.add(new KeyItemMenuState(getMode()));
         myOptions.add(new SaveMenuState(getMode()));
+        myOptions.add(new ToggleMusicMenuState(getMode()));
         myOptions.add(new ExitMenuState(getMode()));
     }
     

@@ -37,6 +37,7 @@ public class GameController {
     
     public void toggleVolume() {
         myIsVolumeOn = !myIsVolumeOn;
+        getMode().mySound.setVolume(myIsVolumeOn);
     }
     
     public boolean isVolumeOn() {
