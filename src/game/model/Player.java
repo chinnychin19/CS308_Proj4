@@ -155,7 +155,7 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
             }
         }
     }
-
+    
     // TODO: this method should be in the inputs object
     private Direction getMoveDirection (Input input) {
         if (input.isKeyUpPressed()) { return Direction.UP; }

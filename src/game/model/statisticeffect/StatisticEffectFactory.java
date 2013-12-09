@@ -8,7 +8,6 @@ public class StatisticEffectFactory {
 	
 	public AbstractStatisticEffect produceStatisticEffect(SmartJsonObject json){
 		try {
-			System.out.println(json.toString());
 			String myName = json.getString(Constants.STAT_NAME);
 			
 			if(myName.equals("hp")){

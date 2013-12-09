@@ -1,6 +1,7 @@
 package game.controller.state.mainmenu;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import constants.Constants;
 import game.controller.AbstractMode;
@@ -8,6 +9,7 @@ import game.controller.Input;
 import game.controller.MainMenuMode;
 import game.controller.state.NotListableException;
 import game.model.Monster;
+import game.model.MonsterInfo;
 
 public class MonsterSelecterState extends AbstractListableState{
     private int mySelected;
@@ -21,7 +23,7 @@ public class MonsterSelecterState extends AbstractListableState{
         super.paint();
         
         try {
-            paintList(getMonsterList());
+            paintList(getMonsterInfoList());
         }
         catch (NotListableException e) {
             e.printStackTrace();
@@ -45,4 +47,13 @@ public class MonsterSelecterState extends AbstractListableState{
     protected List<Monster> getMonsterList(){
         return getMode().getModel().getPlayer().getParty();
     }
+    
+    protected List<MonsterInfo> getMonsterInfoList(){
+        List<MonsterInfo> monsterList = new ArrayList<MonsterInfo>();
+        for(Monster m : getMonsterList()){
+            monsterList.add(new MonsterInfo(m));
+        }
+        return monsterList;
+    }
+    
 }

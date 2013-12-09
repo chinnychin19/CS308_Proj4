@@ -314,6 +314,7 @@ public class Monster extends AbstractModelObject implements Saveable {
     		myStatistics.put(Constants.ATTACK_LOWERCASE, Constants.INT_ONE);
     	}
     }
+    
     public void changeDefense(int value){
     	myStatistics.put(Constants.DEFENSE, getDefense() + value);
     	if(getDefense() <= 1){

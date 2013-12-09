@@ -23,11 +23,6 @@ public class KeyItemMenuState extends AbstractListableState {
             e.printStackTrace();
         }
     }
-    
-    @Override
-    protected void onBack () {
-        getMode().setState(new MainMenuState(getMode()));
-    }
 
     @Override
     protected void onInteract () {

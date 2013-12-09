@@ -15,4 +15,9 @@ public abstract class AbstractMenuState extends AbstractState {
     protected MainMenuMode getMode(){
         return myMode;
     }
+    
+    @Override
+    protected void onBack () {
+        getMode().setState(new MainMenuState(getMode()));
+    }
 }

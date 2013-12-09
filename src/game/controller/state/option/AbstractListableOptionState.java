@@ -44,7 +44,7 @@ public abstract class AbstractListableOptionState extends AbstractOptionState {
         for (int i = 0; i < list.size(); i++) {
             
             if (i % 3 == 0 && i != 0) {
-                x = x + 3 * inc;
+                x = x + 8 * inc;
                 y = 30;
             }
             if (i == mySelected) {
