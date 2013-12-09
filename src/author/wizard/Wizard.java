@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -13,6 +12,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
+/**
+ * Class that defines a generic Wizard object. These
+ * are dynamically created via a user-defined JSON template
+ * that they may load in.
+ * 
+ * The Wizard uses a CardLayout to present each JSON
+ * object requiring definition as a separate set of panels. The
+ * user may define these attributes in a JSON template file.
+ * 
+ * These Wizards are actually constructed by the WizardBuilder
+ * class.
+ * 
+ * @author Michael Marion
+ * 
+ */
 @SuppressWarnings("serial")
 public class Wizard extends JDialog {
 
@@ -22,9 +36,9 @@ public class Wizard extends JDialog {
 
     JButton myNextButton;
     JButton myBackButton;
-    
-    //private String myTitle;
-    private String myObjectName; 
+
+    // private String myTitle;
+    private String myObjectName;
 
     private final static String NEXT = "Next";
     private final static String PREVIOUS = "Back";
@@ -37,9 +51,8 @@ public class Wizard extends JDialog {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setName("wizard");
-        
-        myObjectName = type;
 
+        myObjectName = type;
 
         init();
         addButtons();
@@ -95,9 +108,9 @@ public class Wizard extends JDialog {
     public JPanel getCardPanel () {
         return myCardPanel;
     }
-    
-    public String getObjectName() {
-    	return myObjectName;
+
+    public String getObjectName () {
+        return myObjectName;
     }
 
 }

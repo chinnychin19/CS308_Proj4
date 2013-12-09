@@ -7,7 +7,7 @@ public abstract class Item extends AbstractItem {
 
     public Item (GameModel model, SmartJsonObject definition) {
         super(model, definition);
-        // TODO Auto-generated constructor stub
+        
     }
 
 }

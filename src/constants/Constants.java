@@ -4,6 +4,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 
+/**
+ * Defines global constants for both the game engine
+ * and the authoring environment.
+ *
+ * @author Team Rocket
+ *
+ */
+
 public class Constants {
     public static final int WIDTH = 800, HEIGHT = 500;
 
@@ -17,23 +25,19 @@ public class Constants {
     public static final double TILE_WIDTH = (double) WIDTH / NUM_TILES_HORIZONTAL;
     public static final double TILE_HEIGHT = (double) HEIGHT / NUM_TILES_VERTICAL;
 
-    public static final int REFRESH_RATE = 10;
-    public static final int MOVE_FRAMES = 15; // number of frames in one move
-
+    public static final long KEY_DELAY_MILLISECONDS = 100;
+    
     public static final int BORDER_THICKNESS = 15;
     public static final Color BORDER_COLOR = Color.black;
 
     // Order matters because certain things depend on other things already being known. e.g. Attacks
     // need to be known before Monsters are created
     public static final String[] CATEGORIES =
-    { "TypeMatrix", 
-      "Status", "Attack", "Monster", "KeyItem", "Item", "FightingNPC", "Obstacle",  
-      "NPC",
-     "WildRegion",
-     "Player", };
+    { "TypeMatrix", "Status", "Attack", "Monster", "KeyItem", "Item", "FightingNPC", "Obstacle",  
+      "NPC", "WildRegion", "Player", "HealItem" };
     
     public static final String[] VIEWABLE_CATEGORIES =
-        { "NPC", "Obstacle", "WildRegion", "Player", "FightingNPC" };
+        { "NPC", "Obstacle", "WildRegion", "Player", "FightingNPC", "HealItem" };
     
     public static final String UP = "up";
     public static final String DOWN = "down";
@@ -42,6 +46,7 @@ public class Constants {
     
     //JSON keywords
     public static final String JSON_PLAYER = "Player";
+    public static String JSON_KEYITEM = "KeyItem";
     
     public static final String JSON_IMAGE = "image";
     public static final String JSON_IMAGE_UP = "image-up";
@@ -71,8 +76,15 @@ public class Constants {
     public static final String JSON_MONSTER_ALL_ATTACKS = "attacks";
     public static final String JSON_MONSTER_ATTACK = "attack";
     public static final String JSON_ATTACK_UNLOCK_LEVEL = "unlockLevel";
-    
+    public static final String JSON_EVOLUTION = "evolution";
+
     public static final String JSON_DEFEATEDNPCS = "defeatedNPCs";
+
+    public static final String JSON_NPC = "NPC";
+    public static final String JSON_FIGHTING_NPC = "FightingNPC";
+    public static final String JSON_OBSTACLE = "Obstacle";
+    public static final String JSON_HEAL_ITEM = "HealItem";
+    public static final String JSON_WILD_REGION = "WildRegion";
 
     //Panel Type Names
     public static final String LIST_PANEL = "List";
@@ -101,6 +113,7 @@ public class Constants {
     public static final Dimension BUTTON_SIZE = new Dimension(198,28);
     public static final Dimension TEXT_AREA_SIZE = new Dimension(400, 32);
     public static final Dimension SIDEBAR_SIZE = new Dimension(200,600);
+    public static final Dimension SIDEBAR_JLIST_SIZE = new Dimension(150, 500);
     public static final Dimension MAP_CREATOR_SIZE = new Dimension(800,600);
       
     // Authoring JMenu Options Constants
@@ -154,6 +167,61 @@ public class Constants {
     public final static String IMG_FOLDER_FILEPATH = "./images";
     
     public final static String SHORTGRASS_PNG_FILEPATH = "images/background/shortGrass.png";
+    public final static String TEST_SHORTGRASS_PNG_FILEPATH = "images/ground/shortGrass.png";
     
     public final static String EMPTY_STRING = "";
+    
+    //MODE STRINGS
+    public final static String MODE_CATCH = "CATCH";
+    public static final String MODE_RUN_AWAY = "RUN AWAY";
+    public final static String MODE_DEFAULT = "";
+    public final static String MODE_BATTLE_OVER = "BATTLE OVER!";
+    public final static String MODE_MONSTER_CAUGHT = "You caught the monster!";
+    public final static String MODE_MONSTER_NOT_CAUGHT = "You failed to catch the wild monster!";
+    public final static String MODE_PARTY_FULL = "Your party is full.  Choose a monster to release.";
+    public static final String MODE_MONSTER_RELEASE_1 = "Goodbye ";
+    public static final String MODE_MONSTER_RELEASE_2 = "!  We had some great memories together.";
+    
+    //Dialogue Strings
+    public final static String PROMPT_INVALID_KEYITEM = "";
+    public final static String PROMPT_MONSTER_DEAD = "Monster Died.  Choose a new Monster";
+    public final static String PROMPT_PRESS_TO_CATCH = "Press interact to attempt to catch";
+    public static final String PROMPT_PRESS_TO_RUN = "Press interact to run away from this battle";
+    public final static String PROMPT_MONSTERS_HEALED =  "All Monsters Healed";
+    public final static String PROMPT_MISSING_ITEM = "MISSING ITEM: ";
+    public final static String PROMPT_AQUIRE_MISSING_ITEM = ".  Acquire this item and try again";
+    
+    //Author Message Strings
+    public final static String SIDEBAR_PROMPT_TEXT = 
+    		"Please select the elements you would like to " +
+    		"add to your map, and then click on the map to add:";
+    
+    //Fighting NPC intro speech
+    public final static String PROMPT_FIGHTING_NPC_BEFORE_BATTLE = "Hey you, let's battle! Come here.";
+    
+    //Dialogue Box Placement
+    public final static int DIALOGUE_HEIGHT = 80;
+    //public final static int DIALOGUE_PADDING = 20;
+
+    public static final int MAX_PARTY_SIZE = 6;
+
+    //Type Matrix
+    public static final String TYPE_MATRIX_KEY = "matrix";
+    
+    //State Text Constants
+    public final static int TEXT_START_X = 15;
+    public final static int TEXT_START_Y = 30;
+    public final static int TEXT_START_INC = 50;
+    public static final int TEXT_CHARS_PER_LINE = 60;
+
+    
+    //Main Menu 
+    public final static int MAIN_MENU_X = 0;
+    public final static int MAIN_MENU_Y = 0;
+    public final static int MAIN_MENU_WIDTH = WIDTH;
+    public final static int MAIN_MENU_HEIGHT = HEIGHT;
+    public final static String MAIN_MENU_PARTY = "PARTY";
+    public final static String MAIN_MENU_ITEM = "ITEM";
+    public final static String MAIN_MENU_SAVE = "SAVE";
+    public final static String MAIN_MENU_EXIT = "EXIT";    
 }

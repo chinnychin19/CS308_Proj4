@@ -21,20 +21,7 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
     private Image myImageUp, myImageDown, myImageRight, myImageLeft;
 
     public AbstractCharacter (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
-        super(model, world, definition, objInWorld);
-        try{
-            myDirection = Direction.constructFromString(objInWorld.getString(Constants.JSON_ORIENTATION));
-            String imageUpURL = definition.getString(Constants.JSON_IMAGE_UP);
-            String imageDownURL = definition.getString(Constants.JSON_IMAGE_DOWN);
-            String imageLeftURL = definition.getString(Constants.JSON_IMAGE_LEFT);
-            String imageRightURL = definition.getString(Constants.JSON_IMAGE_RIGHT);
-            myImageUp = new ImageIcon(imageUpURL).getImage();
-            myImageLeft = new ImageIcon(imageLeftURL).getImage();
-            myImageDown = new ImageIcon(imageDownURL).getImage();
-            myImageRight = new ImageIcon(imageRightURL).getImage();
-        }catch(SmartJsonException e){
-            e.printStackTrace();
-        }   
+        super(model, world, definition, objInWorld); 
     }
 
     /**
@@ -80,5 +67,40 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
      */
     public void setDirection (Direction d) {
         myDirection = d;
+    }
+    
+    @Override
+    protected void onInteract() {
+        facePlayer();
+    }
+    
+    protected void facePlayer() {
+        setDirection(Direction.opposite(getWorld().getPlayer().getDirection()));
+    }
+    
+    @Override
+    protected void readDefinition (SmartJsonObject definition) throws SmartJsonException {
+        super.readDefinition(definition);
+        String imageUpURL = definition.getString(Constants.JSON_IMAGE_UP);
+        String imageDownURL = definition.getString(Constants.JSON_IMAGE_DOWN);
+        String imageLeftURL = definition.getString(Constants.JSON_IMAGE_LEFT);
+        String imageRightURL = definition.getString(Constants.JSON_IMAGE_RIGHT);
+        myImageUp = new ImageIcon(imageUpURL).getImage();
+        myImageLeft = new ImageIcon(imageLeftURL).getImage();
+        myImageDown = new ImageIcon(imageDownURL).getImage();
+        myImageRight = new ImageIcon(imageRightURL).getImage();
+    }
+    
+    @Override
+    protected void readWorld(SmartJsonObject objInWorld) throws SmartJsonException {
+        super.readWorld(objInWorld);
+        myDirection = Direction.LEFT;//Direction.constructFromString(objInWorld.getString(Constants.JSON_ORIENTATION));
+    }
+    
+    @Override
+    public JSONObject getSavedJson(){
+        JSONObject toSave = super.getSavedJson();
+        toSave.put(Constants.JSON_ORIENTATION, Direction.getString(getDirection()));
+        return toSave;
     }
 }

@@ -21,7 +21,6 @@ import location.Loc;
  */
 public class GameModel {
     private GameController myController;
-    private Player myPlayer;
     private World myWorld;
     private StateSaver myStateSaver;
     private JSONCache myDefinitionCache;
@@ -35,7 +34,6 @@ public class GameModel {
         myDefinitionCache = new JSONCache(JSONReader.getJSON(definitionJSONFilepath));
         loadTypeMatrix();
         myWorld = new World(nameOfGame, this);
-        myPlayer = myWorld.getPlayer();
         myStateSaver = new StateSaver(this, myWorld, nameOfGame);
     }
     
@@ -79,14 +77,14 @@ public class GameModel {
      * @return the player
      */
     public Player getPlayer () {
-        return myPlayer;
+        return myWorld.getPlayer();
     }
     /**
      * load the state of the game
      */
     public void loadState() {
         try {
-            myStateSaver.load();
+            myWorld = myStateSaver.load();
         }
         catch (Exception e) {
         	//TODO: handle exception

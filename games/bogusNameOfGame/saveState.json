@@ -3,7 +3,7 @@
 		"x" : "-2", 
 		"y" : "-4", 
 		"orientation" : "down",
-		"keyItems" : ["razor"],
+		"keyItems" : [],
         "monsters" : [ {
           "name" : "tyler",
           "level" : "8",
@@ -26,4 +26,6 @@
           }
         ]
 	},
+	"Defeated" : [
+	],
 }

@@ -22,7 +22,6 @@ public abstract class AbstractBattleParty {
     private Battle myBattle;
     
     public AbstractBattleParty(GameController controller, Fighter fighter) {
-        myMonsters = new ArrayList<Monster>();
         myController = controller;
         myFighter = fighter;
         myMonsters = fighter.getParty();
@@ -30,11 +29,10 @@ public abstract class AbstractBattleParty {
     }
     
     public AbstractBattleParty(GameController controller, Monster monster) {
-        myMonsters = new ArrayList<Monster>();
         myController = controller;
-        myCurrentMonster = monster;
         myMonsters = new ArrayList<Monster>();
         myMonsters.add(monster);
+        myCurrentMonster = monster;
         myFighter = null;
     }
     
@@ -46,7 +44,7 @@ public abstract class AbstractBattleParty {
         return myBattle;
     }
     
-    private Monster getFirstAliveMonster () {
+    protected Monster getFirstAliveMonster () {
         for (Monster m : myMonsters) {
             if (m.getCurHP() > 0) {
                 return m;
@@ -55,7 +53,9 @@ public abstract class AbstractBattleParty {
         return null;
     }
 
-    public abstract void doTurn();
+    public void doTurn(){
+        myBattle.doNextTurn();
+    }
     
     public Fighter getFighter() {
         return myFighter;
@@ -88,5 +88,15 @@ public abstract class AbstractBattleParty {
     
     public void setCurrentMonster(Monster m){
         myCurrentMonster = m;
+    }
+
+    public void addMonster (Monster currentMonster) {
+        myMonsters.add(currentMonster);
+    }
+
+    public void chooseRandomNextMonster () {
+        List<Monster> possNext = getAliveMonsters();
+        int index = (int)(Math.random() * possNext.size());
+        myCurrentMonster = possNext.get(index);
     }
 }

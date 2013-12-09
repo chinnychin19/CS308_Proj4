@@ -62,12 +62,12 @@ public class Input {
 	}
 	
 	/**
-         * Checks to see if the menu key is pressed
-         * @return position of key
-         */
-        public boolean isKeyBackPressed(){
-                return myInputs.get(InputIndex.BACK);
-        }
+	 * Checks to see if the menu key is pressed
+     * @return position of key
+     */
+    public boolean isKeyBackPressed(){
+         return myInputs.get(InputIndex.BACK);
+    }
 	/**
 	 * Checks to see if any of the direction keys are pressed
 	 * @return true if a direction is pressed
@@ -118,5 +118,12 @@ public class Input {
 	
 	public void setInput(InputIndex input, boolean value){
 		myInputs.put(input, value);
+	}
+	
+	public void setMovementOff(){
+	    myInputs.put(InputIndex.UP, false);
+	    myInputs.put(InputIndex.DOWN, false);
+	    myInputs.put(InputIndex.LEFT, false);
+            myInputs.put(InputIndex.RIGHT, false);
 	}
 }

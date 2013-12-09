@@ -22,8 +22,8 @@
           "expToNextLevel" : "300",
           "maxHP" : "130",
           "curHP" : "130",
-          "attack" : "60",
-          "defense" : "70"
+          "attack" : "80",
+          "defense" : "95"
           }
         ]
     }],
@@ -35,7 +35,13 @@
         "orientation": "right"
     }],
 
-    "FightingNPC": [],
+    "FightingNPC": [{
+        "name": "fighter1",
+        "x": "0",
+        "y": "6",
+        "orientation": "left",
+        "defeated": "false",
+      }],
 
     "Obstacle": [{
         "name": "flower",
@@ -64,5 +70,15 @@
         "name": "grass1",
         "x": "3",
         "y": "0"
-    }, ]
+    }, ],
+
+    "HealItem": [{
+        "name": "heal1",
+        "x": "6",
+        "y": "0"
+        },{
+        "name": "heal1",
+        "x": "8",
+        "y": "2"
+    }]
 }

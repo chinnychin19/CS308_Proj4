@@ -33,6 +33,9 @@ public class GameController {
         myView.addKeyListener(myCurrentMode);
     }
     
+    public GameModel getModel() {
+        return myModel;
+    }
     
     public GameView getView(){
         return myView;
@@ -64,6 +67,7 @@ public class GameController {
     private void initModes () {
         myMainMode = new WanderingMode(myModel, myView);
         myCurrentMode = myMainMode;
+        myCurrentMode.startMusic();
     }
 
 }

@@ -2,18 +2,27 @@ package author.mapCreation;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import location.Loc;
 
-public class WorldCreationMap {
+/**
+ * WorldCreationMap is a class that contains a HashMap of Loc's to
+ * GenericTileWrapper's, and a method that allows the user to only get the
+ * tiles within a certain range, which helps with the scalability of our
+ * world size.
+ * 
+ * @author weskpga
+ *
+ */
 
+public class WorldCreationMap {
+        
 	private Map<Loc, GenericTileWrapper> myTileMap;
 	
 	public WorldCreationMap() {
 		myTileMap = new HashMap<Loc, GenericTileWrapper>();
 	}
 	
-	public void set(Loc location, GenericTileWrapper tile){
+	public void put(Loc location, GenericTileWrapper tile){
 		myTileMap.put(location, tile);
 	}
 	
@@ -32,6 +41,10 @@ public class WorldCreationMap {
 			}
 		}
 		return currentWindowMap;
+	}
+	
+	public Map<Loc, GenericTileWrapper> getWorldTileMap() {
+	    return myTileMap;
 	}
 	
 }

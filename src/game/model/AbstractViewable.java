@@ -3,8 +3,10 @@ package game.model;
 import game.controller.Input;
 
 import java.awt.Image;
+import org.json.simple.JSONObject;
 import location.Loc;
 import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.NoIntValueJsonException;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
@@ -18,14 +20,12 @@ import constants.Constants;
 public abstract class AbstractViewable extends AbstractModelObject {
     private Loc myLoc;
     private World myWorld;
-    
+
     public AbstractViewable (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(model, definition);
         myWorld = world;
         try {
-            int x = objInWorld.getInt(Constants.JSON_X);
-            int y = objInWorld.getInt(Constants.JSON_Y);
-            myLoc = new Loc(x, y);
+            readWorld(objInWorld);
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
@@ -83,4 +83,18 @@ public abstract class AbstractViewable extends AbstractModelObject {
     protected void destroy() {
         myWorld.removeObject(myLoc);
     }
+    
+    protected void readWorld(SmartJsonObject objInWorld) throws SmartJsonException{
+        int x = objInWorld.getInt(Constants.JSON_X);
+        int y = objInWorld.getInt(Constants.JSON_Y);
+        myLoc = new Loc(x, y);
+    }
+    
+    @Override
+    public JSONObject getSavedJson() {
+        JSONObject toSave = super.getSavedJson();
+        toSave.put(Constants.JSON_X, ""+getLoc().getX());
+        toSave.put(Constants.JSON_Y, ""+getLoc().getY());
+        return toSave;
+   }
 }

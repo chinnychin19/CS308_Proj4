@@ -1,6 +1,8 @@
 package game.model;
 
 import game.controller.GameController;
+import game.controller.Input;
+
 import java.awt.Image;
 import location.Loc;
 import org.json.simple.JSONObject;
@@ -27,4 +29,20 @@ public abstract class AbstractViewableObject extends AbstractViewable {
     public boolean canStepOn() {
         return false;
     }
+    
+    @Override
+    public void doFrame(World w, Input input) {
+    	if (input.isKeyInteractPressed() && getLoc().equals(getWorld().locInFrontOfPlayer())) {
+            onInteract();
+        }
+
+        if (input.isKeyBackPressed() && getLoc().equals(getWorld().locInFrontOfPlayer())) {
+            onBack();
+        }
+    }
+    
+    protected abstract void onInteract();
+    
+    protected abstract void onBack();
+
 }

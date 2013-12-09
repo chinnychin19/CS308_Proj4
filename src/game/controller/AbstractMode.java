@@ -3,7 +3,17 @@ package game.controller;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import util.Sound;
 import constants.Constants;
+import game.controller.state.AbstractState;
 import game.model.GameModel;
 import game.view.GameView;
 
@@ -22,12 +32,18 @@ public abstract class AbstractMode extends KeyAdapter {
     private GameView myView;
     private Graphics myGraphics;
     private Input myInput;
-
+    protected Sound mySound;
+    private long myLastKeyPressTime;
+    private Queue<AbstractState> myStates;
+    private boolean myIsMovementAllowed;
     public AbstractMode (GameModel model, GameView view) {
         myModel = model;
         myView = view;
         myGraphics = view.getBuffer();
         myInput = new Input();
+        myStates = new ConcurrentLinkedQueue<AbstractState>();
+        myLastKeyPressTime = 0;
+        myIsMovementAllowed = true;
     }
     
     public GameModel getModel () {
@@ -44,9 +60,33 @@ public abstract class AbstractMode extends KeyAdapter {
     public abstract void act (); // TODO: take some sort of input object as parameter? or is this
                                  // the input object?
     
-    public abstract void turnOff();
+    //super should be called in sub classes
+    public void turnOff() {
+        removeAllKeyListeners();
+        getInput().resetAllInputs();
+        stopMusic();
+    }
     
-    public abstract void turnOn();
+    public void turnOn() {
+        removeAllKeyListeners();
+        getInput().resetAllInputs();
+        getView().addKeyListener(this);
+        startMusic();
+    }
+    
+    private void removeAllKeyListeners() {
+        for (KeyListener k : getView().getKeyListeners()) {
+            getView().removeKeyListener(k);
+        }
+    }
+    
+    protected void startMusic() {
+        mySound.start();
+    }
+    
+    protected void stopMusic() {
+        mySound.stop();
+    }
 
     public Input getInput(){
     	return myInput;
@@ -70,6 +110,9 @@ public abstract class AbstractMode extends KeyAdapter {
      */
     @Override
     public void keyPressed (KeyEvent e) {
+        long timeSinceKeyPress = System.currentTimeMillis() - myLastKeyPressTime;
+        if (timeSinceKeyPress < Constants.KEY_DELAY_MILLISECONDS) { return; }
+        myLastKeyPressTime = System.currentTimeMillis();
         updateInputs(e, true);
         actAndPaint();
     }
@@ -100,29 +143,95 @@ public abstract class AbstractMode extends KeyAdapter {
      */
     private void updateInputs (KeyEvent e, boolean flag) {
         int x = e.getKeyCode();
-       if (x == KeyEvent.VK_UP) {
-    	   myInput.setInput(InputIndex.UP, flag);
+        if (x == getInteractKey()) {
+            myInput.setInput(InputIndex.INTERACT, flag);
         }
-        if (x == KeyEvent.VK_LEFT) {
-        	myInput.setInput(InputIndex.LEFT, flag);
+        if (x == getMenuKey()) {
+            myInput.setInput(InputIndex.MENU, flag);
         }
-        if (x == KeyEvent.VK_DOWN) {
-        	myInput.setInput(InputIndex.DOWN, flag);
-        }
-        if (x == KeyEvent.VK_RIGHT) {
-        	myInput.setInput(InputIndex.RIGHT, flag);
-        }
-        if (x == KeyEvent.VK_Z) {
-        	myInput.setInput(InputIndex.INTERACT, flag);
-        }
-        if (x == KeyEvent.VK_SPACE) {
-        	myInput.setInput(InputIndex.MENU, flag);
-        }
-        if (x == KeyEvent.VK_B) {
+        if (x == getBackKey()) {
             myInput.setInput(InputIndex.BACK, flag);
+        }
+        if(isMovementAllowed()){
+            updateMovementInputs(e, flag);
+        }
     }
+    
+    private void updateMovementInputs(KeyEvent e, boolean flag){
+        int x = e.getKeyCode();
+        if (x == getUpKey()) {
+            myInput.setInput(InputIndex.UP, flag);
+        }
+        if (x == getLeftKey()) {
+            myInput.setInput(InputIndex.LEFT, flag);
+        }
+        if (x == getDownKey()) {
+            myInput.setInput(InputIndex.DOWN, flag);
+        }
+        if (x == getRightKey()) {
+            myInput.setInput(InputIndex.RIGHT, flag);
+        }
+    }
+    
+    public void turnMovementOff(){
+        myIsMovementAllowed = false;
+        getInput().setMovementOff();
+    }
+    
+    public void turnMovementOn(){
+        myIsMovementAllowed = true;
+    }
+    
+    protected int getUpKey () {
+        return KeyEvent.VK_UP;
     }
 
+    protected int getDownKey () {
+        return KeyEvent.VK_DOWN;
+    }
+
+    protected int getLeftKey () {
+        return KeyEvent.VK_LEFT;
+    }
+
+    protected int getRightKey () {
+        return KeyEvent.VK_RIGHT;
+    }
+    
+    protected int getInteractKey(){
+        return KeyEvent.VK_Z;
+    }
+    
+    protected int getBackKey(){
+        return KeyEvent.VK_X;
+    }
+    
+    protected int getMenuKey(){
+        return KeyEvent.VK_SPACE;
+    }
+    
+    //TODO: Comment methods below
+
+    public void addDynamicState (AbstractState state) {
+        myStates.add(state);
+    }
+
+    public void clearDynamicStates () {
+        myStates = new ConcurrentLinkedQueue<AbstractState>();
+    }
+
+    protected void paintDynamicStates() {
+		for(AbstractState state : myStates){
+			state.paint();
+		}
+	}
+    
+    protected void actDynamicStates() {
+    	for(AbstractState state : myStates){
+			state.act(getInput());
+		}
+    }
+    
     /**
      * Paints a border around the edge of the screen.
      */
@@ -135,5 +244,9 @@ public abstract class AbstractMode extends KeyAdapter {
                             Constants.HEIGHT);
         myGraphics.fillRect(Constants.WIDTH - Constants.BORDER_THICKNESS, 0,
                             Constants.WIDTH, Constants.HEIGHT);
+    }
+    
+    private boolean isMovementAllowed(){
+        return myIsMovementAllowed;
     }
 }
