@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.DebugGraphics;
 import javax.swing.ImageIcon;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -145,7 +146,7 @@ public class Monster extends AbstractModelObject implements Saveable {
     private void generateStats () {
         double factor = 1 + Math.log(35);
         myStatistics.put(Constants.STAT_EXP, 0);
-        myStatistics.put(Constants.STAT_EXP_TO_NEXT_LEVEL, Integer.MAX_VALUE); // TODO: wild pokemon
+        myStatistics.put(Constants.STAT_EXP_TO_NEXT_LEVEL, Integer.MAX_VALUE);
         int level = myStatistics.get(Constants.JSON_LEVEL);
         int baseHP = myStatistics.get(Constants.STAT_BASE_HP);
         int baseAttack = myStatistics.get(Constants.STAT_BASE_ATTACK);
@@ -239,23 +240,27 @@ public class Monster extends AbstractModelObject implements Saveable {
     }
 
     public int getRewardExperience () {
-        return 300; // TODO: Actually implement
+        int ret = 0;
+        ret += myStatistics.get(Constants.STAT_ATTACK);
+        ret += myStatistics.get(Constants.STAT_DEFENSE);
+        ret += myStatistics.get(Constants.STAT_MAX_HP);
+        return ret;
     }
 
     public LevelChange addExperience (int exp) {
         boolean didLevelUp = false, didEvolve = false;
-
-//        System.out.printf("Adding experience: %d exp to next: %d curr exp: %d \n", exp,
-//                          myExpToNextLevel, myExp);
+//        System.out.println("cur exp: "+myStatistics.get(Constants.STAT_EXP));
+//        System.out.println("exp to next level: " + myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL));
+//        System.out.println("Adding experience: " + exp);
+                          
         int newExp = exp + myStatistics.get(Constants.STAT_EXP);
         myStatistics.put(Constants.STAT_EXP, newExp);
         while (myStatistics.get(Constants.STAT_EXP) >= myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL)) {
             levelUp();
             didLevelUp = true;
-            newExp = myStatistics.get(Constants.STAT_EXP) - myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL);
-            myStatistics.put(Constants.STAT_EXP, newExp);
+            System.out.println("exp to next level: "+myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL));
+            changeStat(Constants.STAT_EXP, -myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL));
             if (myEvolution.exists() && myEvolution.shouldEvolve(myStatistics.get(Constants.JSON_LEVEL))) {
-                System.out.println("Evolving!!!");
                 didEvolve = true;
                 evolve();
             }
@@ -264,16 +269,20 @@ public class Monster extends AbstractModelObject implements Saveable {
     }
 
     private void levelUp () {
-        myStatistics.put(Constants.JSON_LEVEL, 1 + myStatistics.get(Constants.JSON_LEVEL));
-        // TODO: update stats
-        myStatistics.put(Constants.STAT_ATTACK, myStatistics.get(Constants.STAT_ATTACK) + getFudgeFactor());
-        myStatistics.put(Constants.STAT_DEFENSE, myStatistics.get(Constants.STAT_DEFENSE) + getFudgeFactor());
-        myStatistics.put(Constants.STAT_MAX_HP, myStatistics.get(Constants.STAT_MAX_HP) + getFudgeFactor());
-        myStatistics.put(Constants.STAT_EXP_TO_NEXT_LEVEL, myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL) + getFudgeFactor());
+        System.out.println("leveling up");
+        changeStat(Constants.JSON_LEVEL, 1);
+        changeStat(Constants.STAT_ATTACK, getAStatisticIncremement());
+        changeStat(Constants.STAT_DEFENSE, getAStatisticIncremement());
+        changeStat(Constants.STAT_MAX_HP, getAStatisticIncremement());
+        changeStat(Constants.STAT_EXP_TO_NEXT_LEVEL, 10 * getAStatisticIncremement());
     }
     
-    private int getFudgeFactor(){
-        return (int) Math.round(.8 + Math.random()*.4)*myStatistics.get(Constants.JSON_LEVEL);
+    private int getAStatisticIncremement(){
+        double wigglePercentage = .25;
+        int level = myStatistics.get(Constants.JSON_LEVEL);
+        int signChange = Math.random() > 0.5 ? 1 : -1;
+        double factor = 1 + (signChange * wigglePercentage * Math.random());
+        return (int) Math.round(factor * level);
     }
 
     private AbstractEvolution readEvolution (SmartJsonObject definition) {

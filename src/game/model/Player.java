@@ -73,16 +73,17 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
             JSONArray playerKeyItems = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
             List<KeyItem> keyItems = new ArrayList<KeyItem>();
             for (Object o : playerKeyItems) {
-                keyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache().getInstance("KeyItem", (String)o)));
+                keyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache().getInstance(Constants.TEXT_KEY_ITEM, (String)o)));
             }
             setKeyItems(keyItems);
             
             myItems = new ArrayList<Item>();
             List<Item> items = new ArrayList<Item>();
-            JSONArray playerItems = objInWorld.getJSONArray("items"); //TODO
+            JSONArray playerItems = objInWorld.getJSONArray(Constants.TEXT_ITEMS_LOWERCASE); //TODO
             for (Object o : playerItems) {
 //            	System.out.println(o.toString());
-                items.add(new Item(getModel(), getModel().getDefinitionCache().getInstance("Item", (String)o)));
+            	//TODO: print statement take out
+                items.add(new Item(getModel(), getModel().getDefinitionCache().getInstance(Constants.TEXT_ITEM, (String)o)));
             }
             setItems(items);
     }  

@@ -12,13 +12,15 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
+import constants.Constants;
+
 public class PartyOptionState extends AbstractListableOptionState{
     public PartyOptionState (AbstractBattleMode mode) {
         this(mode, true);
     }
     
     public PartyOptionState (AbstractBattleMode mode, boolean canGoBack){
-        super(mode,"PARTY",canGoBack);
+        super(mode, Constants.TEXT_PARTY,canGoBack);
     }
     
     @Override
@@ -42,8 +44,7 @@ public class PartyOptionState extends AbstractListableOptionState{
         List<Monster> monsters = getMonsters();
         Monster selectedMonster = monsters.get(mySelected);
         myMode.getBattle().getPlayerParty().setCurrentMonster(selectedMonster);
-        myMode.setOptionState(new StateTransitionTextOptionState(myMode, String.format("You switch to %s", selectedMonster.getName())));
-        //TODO: String constant
+        myMode.setOptionState(new StateTransitionTextOptionState(myMode, String.format(Constants.TEXT_SWITCH_TO, selectedMonster.getName())));
     }
     
     @Override

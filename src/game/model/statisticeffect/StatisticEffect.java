@@ -12,7 +12,7 @@ public class StatisticEffect {
     public StatisticEffect (SmartJsonObject object) {
         try {
             
-            myStatisticName = object.getString("statName");
+            myStatisticName = object.getString(Constants.TEXT_STAT_NAME);
             myChange = object.getInt(Constants.CHANGE);
         }
         catch (SmartJsonException e) {
