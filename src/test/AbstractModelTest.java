@@ -25,7 +25,7 @@ public abstract class AbstractModelTest extends TestCase {
     protected void setUp () {
         try {
 
-            myView = new GameView(GAME_NAME);
+            myView = new GameView(GAME_NAME );
             myController = new GameController(GAME_NAME, myView);
 
             myModel = new GameModel(GAME_NAME, myController);
