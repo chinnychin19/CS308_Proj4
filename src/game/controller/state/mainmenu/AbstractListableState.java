@@ -23,7 +23,7 @@ public abstract class AbstractListableState extends AbstractMenuState {
     protected <S> void paintList(List<S> list) throws NotListableException{
         int x = Constants.TEXT_START_X;
         int y = Constants.TEXT_START_Y;
-        int inc = Constants.TEXT_START_INC;
+        int inc = Constants.TEXT_Y_INC;
         
         for (int i = 0; i < list.size(); i++) {
             if (i == mySelected) {

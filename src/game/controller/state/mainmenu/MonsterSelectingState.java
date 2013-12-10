@@ -26,7 +26,7 @@ public class MonsterSelectingState extends AbstractListableState {
         super.paint();
         int x = Constants.TEXT_START_X;
         int y = Constants.TEXT_START_Y;
-        int inc = Constants.TEXT_START_INC;
+        int inc = Constants.TEXT_Y_INC;
         for (int i = 0; i < getMonsterList().size(); i++) {
             
             if(i==getSelected()){

@@ -238,18 +238,14 @@ public class Constants {
     // State Text Constants
     public final static int TEXT_START_X = 15;
     public final static int TEXT_START_Y = 30;
-    public final static int TEXT_START_INC = 35;
+    public final static int TEXT_Y_INC = 35;
     public static final int TEXT_CHARS_PER_LINE = 60;
     
     //BattleMode Graphics
-    public final static int HEALTH_BAR_X = 15;
-    public final static int HEALTH_BAR_Y = 15;
-    public final static int HEALTH_BAR_WIDTH = 150;
+    public final static int BUFFER_START_X = 15;
+    public final static int BUFFER_START_Y = 30;
+    public final static int BUFFER_Y_INC = 30;
     public final static int HEALTH_BAR_HEIGHT = 20;
-    public final static int MONSTER_ROW1_X = 15;
-    public final static int MONSTER_ROW2_X = 165;
-    public final static int MONSTER_ROW1_Y = 60;
-    public final static int MONSTER_INC = 30;
 
     // Main Menu
     public final static int MAIN_MENU_X = 0;
