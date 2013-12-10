@@ -30,7 +30,7 @@ public class TextOptionState extends AbstractOptionState {
         super.paint();
         int x = Constants.TEXT_START_X;
         int y = Constants.TEXT_START_Y;
-        int offset = Constants.TEXT_START_INC;
+        int offset = Constants.TEXT_Y_INC;
         int charsPerLine = Constants.TEXT_CHARS_PER_LINE;
         String[] words = myText.split(Constants.SPLIT_SLASH_S);
         int curLineNumber = Constants.ZERO;
