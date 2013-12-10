@@ -2,12 +2,17 @@ package test.author;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.io.File;
 import javax.swing.JFrame;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import constants.Constants;
+import author.AuthorView;
 import author.ImageDisplayer;
 import author.ImagePicker;
+import author.model.AuthoringCache;
 import author.panels.*;
+import author.wizard.WizardBuilder;
 
 public class FakeMainForClassDemos {
 
@@ -20,7 +25,14 @@ public class FakeMainForClassDemos {
         //demoImagePanel();
         //demoCheckBoxes();
         //demoRadioButtons();
-        testRegexSplits();
+        //testRegexSplits();
+        demoWizardBuilder();
+    }
+
+    private static void demoWizardBuilder () {
+        //WizardBuilder wizBuild = new WizardBuilder("FightingNPC", Constants.PLAYER_JSON, new AuthoringCache(new AuthorView()));
+        //String filePath = System.getProperty("user.dir") + File.separator + "test-json"+ File.separator +"test_player.json";
+        //wizBuild.addPanelsFromFile(filePath);
     }
 
     private static void testRegexSplits () {

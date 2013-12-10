@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import jsoncache.JSONReader;
 //import javax.swing.SwingUtilities;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
@@ -24,6 +25,7 @@ import org.json.simple.parser.ParseException;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.NoJSONArrayJsonException;
 import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
+import author.FileChooserSingleton;
 //import constants.Constants;
 //import author.listeners.FinishListener;
 import author.model.AuthoringCache;
@@ -106,7 +108,7 @@ public class WizardBuilder {
                 System.out.println((String) s + " = JSONObject");
                 handleJSONObject((String) s, (JSONObject) tempObject.get(s), currentPanel);
             }
-            else if (tempObject.get(s) instanceof JSONArray) { //yes!
+            else if (tempObject.get(s) instanceof JSONArray) { //yes
                 System.out.println((String) s + " = JSONArray");
                 handleJSONArray((String) s, (JSONArray) tempObject.get(s), currentPanel);
             }
@@ -152,7 +154,7 @@ public class WizardBuilder {
         iterateOverJSONArray(arr, container, "");
     }
 
-    private Component createPanel (String fieldName, String fieldType)// "name", "list_radio_Monster.name"
+    private Component createPanel (String fieldName, String fieldType)//EXAMPLE: "name", "list_radio_Monster.name"
             throws ClassNotFoundException,
             NoSuchMethodException,
             SecurityException,
@@ -178,12 +180,7 @@ public class WizardBuilder {
          * 		- Or use native Java methods (?)
          */
         if (limitedFieldType.split("_").length > 1 && limitedFieldType.indexOf(":") == -1) { //EXAMPLE: "radio_Monster.name"
-            String[] locKeyPair = limitedFieldType.split("_")[1].split("\\."); //FIRST splits to "radio" "Monster.name", THEN splits "Monster.name" to "Monster" "Name"
-            JSONArray locationArray = (JSONArray) myCache.getRawJSON().get(locKeyPair[0]); //gets "Monster"'s array out of the cache
-            outputString = "~";
-            for (Object con : locationArray) {
-                outputString += (String) ((JSONObject) con).get(locKeyPair[1]) + "."; //End up with something like "~Bulbasaur.Squirtle.Charmander.Pidgey."
-            }
+            outputString = makePartOfRadioButtonsInputParameter(limitedFieldType);
         }
 
         Class<?> classToInstantiate =
@@ -204,12 +201,29 @@ public class WizardBuilder {
 
     }
 
+    private String makePartOfRadioButtonsInputParameter (String limitedFieldType) {
+        String[] locKeyPair = limitedFieldType.split("_")[1].split("\\."); //FIRST splits to "radio" "Monster.name", THEN splits "Monster.name" to "Monster" "Name"
+        JSONArray locationArray = (JSONArray) myCache.getRawJSON().get(locKeyPair[0]); //gets "Monster"'s array out of the cache
+        String outputString = "~";
+        for (Object con : locationArray) {
+            outputString += (String) ((JSONObject) con).get(locKeyPair[1]) + "."; //End up with something like "~Bulbasaur.Squirtle.Charmander.Pidgey."
+        } 
+        return outputString;
+    }
+    
+    /**
+     * Pulls JSON from a file, directs the builder to iterate over that JSON 
+     * (for the purpose of generating the wizard panels for the selected 
+     * category), then adds a finish panel.
+     * @param filepath The filepath of a .json file.
+     * @return void
+     */
     public void addPanelsFromFile (String filePath) {
 
         JPanel currentPanel = myWizard.getCardPanel();
 
 
-        SmartJsonObject json = getJSON(filePath);
+        SmartJsonObject json = getSmartJson(filePath);
 
         try {
 
@@ -230,22 +244,28 @@ public class WizardBuilder {
         }
     }
 
-    private SmartJsonObject getJSON (String filepath) {
+    /**
+     * Get JSON from the given file, returns as a SmartJsonObject.
+     * @param filepath The filepath of a .json file.
+     * @return SmartJsonObject
+     */
+    private SmartJsonObject getSmartJson (String filepath) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(filepath));
+        /*  BufferedReader reader = new BufferedReader(new FileReader(filepath));
             String line, results = "";
             while( ( line = reader.readLine() ) != null) {
                 results += line;
             }
             reader.close();
-            return new SmartJsonObject(results);
-        } catch (FileNotFoundException e) {
+            return new SmartJsonObject(results);        */
+            JSONObject obj = JSONReader.getJSON(filepath);
+            return new SmartJsonObject(obj);
+    /*  } catch (FileNotFoundException e) {
             System.out.println("File not found. Please try again.");
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace();        */
         } catch (NoJSONObjectJsonException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             System.out.println("Malformed JSON String");
         }
@@ -259,7 +279,7 @@ public class WizardBuilder {
      */
     public String getFilePath () {
         // Create a new file chooser.
-        JFileChooser fileChooser = new JFileChooser();
+        JFileChooser fileChooser = FileChooserSingleton.getInstance();
         int returnVal = fileChooser.showOpenDialog(null);
 
         String path = null;
