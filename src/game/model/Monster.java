@@ -1,15 +1,19 @@
 package game.model;
 
 import game.model.attack.Attack;
+import game.model.battle.TemporaryStatistics;
 import game.model.evolution.AbstractEvolution;
 import game.model.evolution.Evolution;
 import game.model.evolution.NullEvolution;
+import game.model.status.Status;
+import game.model.status.StatusOkay;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.DebugGraphics;
 import javax.swing.ImageIcon;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,13 +21,6 @@ import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.SmartJsonException;
 import constants.Constants;
 
-
-/**
- * Work in progress
- * 
- * @author rtoussaint
- * 
- */
 
 public class Monster extends AbstractModelObject implements Saveable {
 
@@ -33,6 +30,7 @@ public class Monster extends AbstractModelObject implements Saveable {
     private List<AttackWrapper> myAttacks;
     private Map<String, Integer> myStatistics;
     private AbstractEvolution myEvolution;
+    private Status myStatus;
 
     /**
      * To be called for an NPC's monsters or wild monster
@@ -46,6 +44,7 @@ public class Monster extends AbstractModelObject implements Saveable {
         super(model, definition);
         myStatistics.put(Constants.JSON_LEVEL, level);
         generateStats();
+        myStatus = new StatusOkay(getModel());
     }
 
     /**
@@ -57,7 +56,7 @@ public class Monster extends AbstractModelObject implements Saveable {
      */
     public Monster (GameModel model, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(model, definition);
-        readStats(objInWorld);
+        readFields(objInWorld);
     }
   
     /**
@@ -77,102 +76,19 @@ public class Monster extends AbstractModelObject implements Saveable {
     public Type getType () {
         return myType;
     }
-
-    /**
-     * Gets the base HP of the monster
-     * 
-     * @return base HP of the monster
-     */
-    public int getBaseHP () {
-        return myStatistics.get(Constants.BASE_HP);
-    }
-
-    /**
-     * Gets the base attack of the monster
-     * 
-     * @return base attack of the monster
-     */
-
-    public int getBaseAttack () {
-        return myStatistics.get(Constants.BASE_ATTACK);
-    }
-
-    /**
-     * Gets the base defense of the monster
-     * 
-     * @return base defense of the monster
-     */
-    public int getBaseDefense () {
-        return myStatistics.get(Constants.BASE_DEFENSE);
-    }
-
-    /**
-     * Gets the level of the monster
-     * 
-     * @return Monster's level
-     */
-    public int getLevel () {
-        return myStatistics.get(Constants.JSON_LEVEL);
-    }
-
-    /**
-     * Gets the experience of the monster
-     * 
-     * @return experience of the monster
-     */
-    public int getExp () {
-        return myStatistics.get(Constants.EXP);
-    }
-
-    /**
-     * Get the amount of experience that is needed to move onto the next level
-     * 
-     * @return amount to move onto the next level
-     */
-
-    public int getExpToNextLevel () {
-        return myStatistics.get(Constants.EXP_TO_NEXT_LEVEL);
-    }
-
-    /**
-     * Gets the max HP of the monster
-     * 
-     * @return Max hp of monster
-     */
-    public int getMaxHP () {
-        return myStatistics.get(Constants.MAX_HP);
-    }
-
-    /**
-     * Gets the current HP of the monster
-     * 
-     * @return the current HP
-     */
-    public int getCurHP () {
-        return myStatistics.get(Constants.CUR_HP);
-    }
-
-    /**
-     * Gets the attack value
-     * 
-     * @return attack value
-     */
-    public int getAttack () {
-        return myStatistics.get(Constants.ATTACK_LOWERCASE);
-    }
-
-    /**
-     * defense value of the monster
-     * 
-     * @return defense value
-     */
-
-    public int getDefense () {
-        return myStatistics.get(Constants.DEFENSE);
+    
+    public Status getStatus() {
+        return myStatus;
     }
 
     public void heal () {
-        changeHealth(getMaxHP());
+        int maxHP = myStatistics.get(Constants.STAT_MAX_HP);
+        myStatistics.put(Constants.STAT_CUR_HP, maxHP);
+        myStatus = new StatusOkay(getModel());
+    }
+    
+    public void setStatus(Status status) {
+        myStatus = status;
     }
 
     /**
@@ -183,6 +99,10 @@ public class Monster extends AbstractModelObject implements Saveable {
     public List<AttackWrapper> getMyAttacks () {
         return myAttacks;
     }
+    
+    public int getStat(String statName) {
+        return myStatistics.get(statName);
+    }
 
     /**
      * Change the health of the monster and see if the monster is at 0 health or max health
@@ -190,10 +110,14 @@ public class Monster extends AbstractModelObject implements Saveable {
      * @param amount the change in the monster's health
      */
     public void changeHealth (int amount) {
-        int maxHP = myStatistics.get(Constants.MAX_HP);
-        int oldHP = myStatistics.get(Constants.CUR_HP);
-        int newHP = Math.min(Math.max(0, oldHP + amount), maxHP);
-        myStatistics.put(Constants.CUR_HP, newHP);
+        String strCurHP = Constants.STAT_CUR_HP;
+        int maxHP = myStatistics.get(Constants.STAT_MAX_HP);
+        int oldHP = myStatistics.get(strCurHP);
+        int newHP = Math.max(0, oldHP + amount);
+        // guarantees newHP is at least 0
+        newHP = Math.min(newHP, maxHP);
+        // guarantees newHP is less than or equal to maxHP
+        myStatistics.put(strCurHP, newHP);
     }
 
     /**
@@ -202,7 +126,7 @@ public class Monster extends AbstractModelObject implements Saveable {
      * @return true if current HP is 0
      */
     public boolean isDead () {
-        return getCurHP() == 0;
+        return myStatistics.get(Constants.STAT_CUR_HP) == 0;
     }
 
     /**
@@ -212,12 +136,16 @@ public class Monster extends AbstractModelObject implements Saveable {
     private void generateStats(){
 
         double factor = 1 + Math.log(35);
-        myStatistics.put(Constants.EXP, 0);
-        myStatistics.put(Constants.EXP_TO_NEXT_LEVEL, Integer.MAX_VALUE);
-        myStatistics.put(Constants.MAX_HP, (int) (getBaseHP() * getLevel() * factor));
-        myStatistics.put(Constants.ATTACK_LOWERCASE, (int) (getBaseAttack() * getLevel() * factor));
-        myStatistics.put(Constants.DEFENSE, (int) (getBaseDefense() * getLevel() * factor));
-        myStatistics.put(Constants.CUR_HP, getMaxHP());
+        myStatistics.put(Constants.STAT_EXP, 0);
+        myStatistics.put(Constants.STAT_EXP_TO_NEXT_LEVEL, getRewardExperience()*5);
+        int level = myStatistics.get(Constants.JSON_LEVEL);
+        int baseHP = myStatistics.get(Constants.STAT_BASE_HP);
+        int baseAttack = myStatistics.get(Constants.STAT_BASE_ATTACK);
+        int baseDefense = myStatistics.get(Constants.STAT_BASE_DEFENSE);
+        myStatistics.put(Constants.STAT_MAX_HP, (int) (baseHP * level * factor));
+        myStatistics.put(Constants.STAT_CUR_HP, myStatistics.get(Constants.STAT_MAX_HP));
+        myStatistics.put(Constants.STAT_ATTACK, (int) (baseAttack * level * factor));
+        myStatistics.put(Constants.STAT_DEFENSE, (int) (baseDefense * level * factor));
     }
 
     /**
@@ -225,21 +153,30 @@ public class Monster extends AbstractModelObject implements Saveable {
      * 
      * @param objInWorld object containing the monster's stats
      */
-    private void readStats (SmartJsonObject objInWorld) {
+    private void readFields (SmartJsonObject objInWorld) {
         try {
             myStatistics.put(Constants.JSON_LEVEL, objInWorld.getInt(Constants.JSON_LEVEL));
-            myStatistics.put(Constants.EXP, objInWorld.getInt(Constants.EXP));
-            myStatistics.put(Constants.EXP_TO_NEXT_LEVEL,
-                             objInWorld.getInt(Constants.EXP_TO_NEXT_LEVEL));
-            myStatistics.put(Constants.MAX_HP, objInWorld.getInt(Constants.MAX_HP));
-            myStatistics.put(Constants.CUR_HP, getMaxHP());
-            myStatistics.put(Constants.ATTACK_LOWERCASE,
-                             objInWorld.getInt(Constants.ATTACK_LOWERCASE));
-            myStatistics.put(Constants.DEFENSE, objInWorld.getInt(Constants.DEFENSE));
+            myStatistics.put(Constants.STAT_EXP, objInWorld.getInt(Constants.STAT_EXP));
+            myStatistics.put(Constants.STAT_EXP_TO_NEXT_LEVEL, objInWorld.getInt(Constants.STAT_EXP_TO_NEXT_LEVEL));
+            myStatistics.put(Constants.STAT_MAX_HP, objInWorld.getInt(Constants.STAT_MAX_HP));
+            myStatistics.put(Constants.STAT_CUR_HP, objInWorld.getInt(Constants.STAT_CUR_HP));
+            myStatistics.put(Constants.STAT_ATTACK, objInWorld.getInt(Constants.STAT_ATTACK));
+            myStatistics.put(Constants.STAT_DEFENSE, objInWorld.getInt(Constants.STAT_DEFENSE));
+            
+
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
         }
+        
+        // Read status
+        try {
+            String statusName = objInWorld.getString(Constants.JSON_STATUS_LOWERCASE);
+            SmartJsonObject statusDefinition = getModel().getDefinitionCache().getInstance(Constants.JSON_STATUS, statusName);
+            myStatus = new Status(getModel(), statusDefinition);
+        } catch (Exception e) {
+            myStatus = new StatusOkay(getModel());
+        }        
     }
 
     /**
@@ -250,25 +187,28 @@ public class Monster extends AbstractModelObject implements Saveable {
     @Override
     protected void readDefinition (SmartJsonObject definition) throws SmartJsonException {
         super.readDefinition(definition);
+
         myStatistics = new HashMap<String, Integer>();
 
         String imageURL = definition.getString(Constants.JSON_IMAGE);
         myImage = new ImageIcon(imageURL).getImage();
         myCatchRate = definition.getDouble(Constants.JSON_MONSTER_CATCH_RATE);
-        myType = new Type(definition.getString(Constants.TYPE));
 
-        myStatistics.put(Constants.BASE_HP, definition.getInt(Constants.BASE_HP));
-        myStatistics.put(Constants.BASE_ATTACK, definition.getInt(Constants.BASE_ATTACK));
-        myStatistics.put(Constants.BASE_DEFENSE, definition.getInt(Constants.BASE_DEFENSE));
+        myType = new Type(definition.getString(Constants.STAT_TYPE));
+
+        myStatistics.put(Constants.STAT_BASE_HP, definition.getInt(Constants.STAT_BASE_HP));
+        myStatistics.put(Constants.STAT_BASE_ATTACK, definition.getInt(Constants.STAT_BASE_ATTACK));
+        myStatistics.put(Constants.STAT_BASE_DEFENSE, definition.getInt(Constants.STAT_BASE_DEFENSE));
+
         myAttacks = new ArrayList<AttackWrapper>();
 
         for (Object obj : definition.getJSONArray(Constants.JSON_MONSTER_ALL_ATTACKS)) {
             SmartJsonObject attackJson = new SmartJsonObject((JSONObject) obj);
             String name = attackJson.getString(Constants.NAME);
-            SmartJsonObject a =
+            SmartJsonObject attackDefinition =
                     getModel().getDefinitionCache().getInstance(Constants.ATTACK_UPPERCASE,
                                                                 name);
-            Attack attack = new Attack(getModel(), a);
+            Attack attack = new Attack(getModel(), attackDefinition);
             int unlockLevel = attackJson.getInt(Constants.JSON_ATTACK_UNLOCK_LEVEL);
             myAttacks.add(new AttackWrapper(attack, unlockLevel));
         }
@@ -278,7 +218,7 @@ public class Monster extends AbstractModelObject implements Saveable {
     public List<Attack> getAllAvailableAttacks () {
         List<Attack> attacks = new ArrayList<Attack>();
         for (AttackWrapper aw : myAttacks) {
-            if (aw.canUse(getLevel())) {
+            if (aw.canUse(myStatistics.get(Constants.JSON_LEVEL))) {
                 attacks.add(aw.getAttack());
             }
         }
@@ -302,20 +242,28 @@ public class Monster extends AbstractModelObject implements Saveable {
     }
 
     public int getRewardExperience () {
-        return 50 * getLevel();
+        int ret = 0;
+        ret += myStatistics.get(Constants.STAT_ATTACK);
+        ret += myStatistics.get(Constants.STAT_DEFENSE);
+        ret += myStatistics.get(Constants.STAT_MAX_HP);
+        return ret;
     }
 
-    public LevelChange addExperience (int exp) {
+    public LevelChange addExperience (int exp, TemporaryStatistics temp) {
         boolean didLevelUp = false, didEvolve = false;
-        System.out.printf("Adding experience: %d exp to next: %d curr exp: %d \n", exp,
-                          getExpToNextLevel(), getExp());
-        changeStat(Constants.EXP, exp);
-        while (getExp() >= getExpToNextLevel()) {
-            levelUp();
+
+//        System.out.println("cur exp: "+myStatistics.get(Constants.STAT_EXP));
+//        System.out.println("exp to next level: " + myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL));
+//        System.out.println("Adding experience: " + exp);
+                          
+        int newExp = exp + myStatistics.get(Constants.STAT_EXP);
+        myStatistics.put(Constants.STAT_EXP, newExp);
+        while (myStatistics.get(Constants.STAT_EXP) >= myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL)) {
+            levelUp(temp);
             didLevelUp = true;
-            changeStat(Constants.EXP, (-1)*getExpToNextLevel());
-            if (myEvolution.exists() && myEvolution.shouldEvolve(getLevel())) {
-                System.out.println("Evolving!!!");
+            System.out.println("exp to next level: "+myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL));
+            changeStat(Constants.STAT_EXP, -myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL));
+            if (myEvolution.exists() && myEvolution.shouldEvolve(myStatistics.get(Constants.JSON_LEVEL))) {
                 didEvolve = true;
                 evolve();
             }
@@ -323,16 +271,27 @@ public class Monster extends AbstractModelObject implements Saveable {
         return LevelChange.getStateChange(didLevelUp, didEvolve);
     }
 
-    private void levelUp () {
+    private void levelUp (TemporaryStatistics temp) {
+        int hpBoost = getAStatisticIncremement();
+        int attackBoost = getAStatisticIncremement();
+        int defenseBoost = getAStatisticIncremement();
+        temp.boostHP(hpBoost);
+        temp.boostAttack(attackBoost);
+        temp.boostDefense(defenseBoost);
+        System.out.println("leveling up");
         changeStat(Constants.JSON_LEVEL, 1);
-        changeStat(Constants.ATTACK_LOWERCASE, getFudgeAmount());
-        changeStat(Constants.DEFENSE, getFudgeAmount());
-        changeStat(Constants.MAX_HP, 2*getFudgeAmount());
-        changeStat(Constants.EXP_TO_NEXT_LEVEL, 10*getFudgeAmount());
+        changeStat(Constants.STAT_ATTACK, attackBoost);
+        changeStat(Constants.STAT_DEFENSE, defenseBoost);
+        changeStat(Constants.STAT_MAX_HP, hpBoost);
+        changeStat(Constants.STAT_EXP_TO_NEXT_LEVEL, 10 * getAStatisticIncremement());
     }
-
-    private int getFudgeAmount () {
-        return (int) Math.round(.8 + Math.random() * .4) * getLevel();
+    
+    private int getAStatisticIncremement(){
+        double wigglePercentage = .25;
+        int level = myStatistics.get(Constants.JSON_LEVEL);
+        int signChange = Math.random() > 0.5 ? 1 : -1;
+        double factor = 1 + (signChange * wigglePercentage * Math.random());
+        return (int) Math.round(factor * level);
     }
 
     private AbstractEvolution readEvolution (SmartJsonObject definition) {
@@ -346,7 +305,7 @@ public class Monster extends AbstractModelObject implements Saveable {
     }
     
     public void changeStat(String statName, int amount){
-        if(statName.equals(Constants.CUR_HP)){
+        if(statName.equals(Constants.STAT_CUR_HP)){
             changeHealth(amount);
         }
         else {
@@ -362,17 +321,19 @@ public class Monster extends AbstractModelObject implements Saveable {
         setEvolution(myEvolution.getNextEvolution());
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public JSONObject getSavedJson () {
         JSONObject toSave = super.getSavedJson();
-        toSave.put(Constants.JSON_LEVEL, "" + getLevel());
-        toSave.put(Constants.EXP, "" + getExp());
-        toSave.put(Constants.EXP_TO_NEXT_LEVEL, "" + getExpToNextLevel());
-        toSave.put(Constants.MAX_HP, "" + getMaxHP());
-        toSave.put(Constants.CUR_HP, "" + getCurHP());
-        toSave.put(Constants.ATTACK_LOWERCASE, "" + getAttack());
-        toSave.put(Constants.DEFENSE, "" + getDefense());
+        toSave.put(Constants.JSON_LEVEL, ""+myStatistics.get(Constants.JSON_LEVEL));
+        toSave.put(Constants.STAT_EXP, ""+myStatistics.get(Constants.STAT_EXP));
+        toSave.put(Constants.STAT_EXP_TO_NEXT_LEVEL, ""+myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL));
+        toSave.put(Constants.STAT_MAX_HP, ""+myStatistics.get(Constants.STAT_MAX_HP));
+        toSave.put(Constants.STAT_CUR_HP, ""+myStatistics.get(Constants.STAT_CUR_HP));
+        toSave.put(Constants.STAT_ATTACK, ""+myStatistics.get(Constants.STAT_ATTACK));
+        toSave.put(Constants.STAT_DEFENSE, ""+myStatistics.get(Constants.STAT_DEFENSE));
+        toSave.put(Constants.JSON_STATUS_LOWERCASE, myStatus.getName());
+
         return toSave;
     }
-
 }

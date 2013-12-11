@@ -14,7 +14,7 @@ public class BattleOverState extends AbstractOptionState {
     @Override
     public void paint () {
         super.paint();
-        int x = 15;
+        int x = 15; //TODO: Chinmay change these numbers
         int y = 30;
 
         myBuffer.drawString(myText, x, y);

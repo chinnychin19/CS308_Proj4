@@ -10,6 +10,7 @@ public abstract class AbstractWildBattleCompleteState extends AbstractBattleComp
 
     @Override
     protected void onInteract() {
+        super.onInteract();
         myMode.getController().setWanderingMode();
     }
 }

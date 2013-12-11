@@ -1,6 +1,7 @@
 package game.model.battle;
 
 import java.util.List;
+import constants.Constants;
 import game.controller.GameController;
 import game.model.Monster;
 import game.model.attack.Attack;
@@ -33,9 +34,11 @@ public class WildMonsterParty extends AbstractEnemyParty {
      */
     public double getCatchProbability () {
         
-        int playerMonsterLevel = getBattle().getPlayerParty().getCurrentMonster().getLevel().intValue();
-        double healthFactor = (double) getCurrentMonster().getCurHP() / (double) getCurrentMonster().getMaxHP();
-        double levelFactor = playerMonsterLevel / getCurrentMonster().getLevel();
+        int playerMonsterLevel = getBattle().getPlayerParty().getCurrentMonster().getStat(Constants.JSON_LEVEL);
+        int curHP = getCurrentMonster().getStat(Constants.STAT_CUR_HP);
+        int maxHP = getCurrentMonster().getStat(Constants.STAT_MAX_HP);
+        double healthFactor = (double) curHP / maxHP;
+        double levelFactor = (double) playerMonsterLevel / getCurrentMonster().getStat(Constants.JSON_LEVEL);
         return getCurrentMonster().getCatchRate() * levelFactor / healthFactor;
         
     }

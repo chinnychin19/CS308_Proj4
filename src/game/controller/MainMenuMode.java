@@ -14,7 +14,7 @@ public class MainMenuMode extends AbstractMode{
     public MainMenuMode (GameModel model, GameView view) {
         super(model, view);
         myState = new MainMenuState(this);
-        mySound = new Sound("music/nfl.wav");
+        mySound = new Sound("music/nfl.wav", getController());
     }
 
     @Override

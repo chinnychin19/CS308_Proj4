@@ -10,7 +10,6 @@ public class JSONReader {
         JSONObject json;
         JSONParser parser = new JSONParser();
         try {
-            System.out.println(filepath);
             json = (JSONObject) parser.parse(new FileReader(filepath));
             return json;
         }

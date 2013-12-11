@@ -14,6 +14,7 @@ public class CatchWildBattleCompleteState extends AbstractWildBattleCompleteStat
 
     @Override
     protected void onInteract () {
+        super.onInteract();
         if (myMode.getBattle().getPlayerParty().getMonsters().size() > Constants.MAX_PARTY_SIZE) {
             myMode.setOptionState(new TextOptionState(myMode, Constants.MODE_PARTY_FULL,
                                                       new PartyFullOptionState(myMode)));

@@ -25,7 +25,14 @@ import author.model.AuthoringCache;
 import author.panels.ContainerPanel;
 import author.panels.FinishPanel;
 
-
+/**
+ * This class provides methods to dynamically 
+ * generate a Wizard based on data given in the
+ * JSON template provided by the user.
+ * 
+ * @author Michael Marion and Robert Ansel
+ *
+ */
 public class WizardBuilder {
 
     public static final Map<String, String> KEYWORD_TO_PANEL_TYPE;
@@ -152,6 +159,18 @@ public class WizardBuilder {
         String basicFieldType = (fields[0].equals("list")) ? fields[1] : fields[0];
         String limitedFieldType = (fields[0].equals("list")) ? fieldType.substring(5) : fieldType;
         String outputString = "";
+        /**
+         * We need this to be changed because it doens't work on a Mac
+         * 
+         * The parsing with the filepath strings isn't working.
+         * 
+         * Java has built in classes for building filepaths and file locations
+         * 		- We should use those so we don't get any bugs.
+         * 
+         * We shouldn't be parsing JSON in this class.
+         * 		- Should try to use util.jsonwrapper
+         * 		- Or use native Java methods (?)
+         */
         if (limitedFieldType.split("_").length > 1 && limitedFieldType.indexOf(":") == -1) {
             String[] locKeyPair = limitedFieldType.split("_")[1].split("\\.");
             JSONArray locationArray = (JSONArray) myCache.getRawJSON().get(locKeyPair[0]);
@@ -164,6 +183,7 @@ public class WizardBuilder {
         Class<?> classToInstantiate =
                 Class.forName("author.panels." + KEYWORD_TO_PANEL_TYPE.get(basicFieldType));
         Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
+        System.out.println(fieldName + outputString);
         return (Component) ctr.newInstance(fieldName + outputString);
     }
 
@@ -186,23 +206,19 @@ public class WizardBuilder {
 
     private JSONObject getJSON (String filepath) {
         JSONObject json;
-        //JSONObject json2;
         JSONParser parser = new JSONParser();
         try {
             json = (JSONObject) parser.parse(new FileReader(filepath));
             return json;
         }
         catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             System.out.println("File not found. Please try again.");
             e.printStackTrace();
         }
         catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;
@@ -212,19 +228,15 @@ public class WizardBuilder {
     /**
      * Get a file path from a file chooser dialog.
      * 
-     * @return
+     * @return file path of selected file.
      */
     public String getFilePath () {
         // Create a new file chooser.
         JFileChooser fileChooser = new JFileChooser();
         int returnVal = fileChooser.showOpenDialog(null);
+        
         String path = null;
 
-        // If a file is approved, get the name.
-        //if (returnVal == FileChooser.APPROVE_OPTION) {
-        
-        // TODO: Changed this so there wouldn't be a warning.  If it fails,
-        //		 use the commented line above
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File f = fileChooser.getSelectedFile();
             path = f.getAbsolutePath();

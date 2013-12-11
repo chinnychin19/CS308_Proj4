@@ -9,6 +9,15 @@ import author.model.AuthoringCache;
 
 import constants.Constants;
 
+/**
+ * ShowOutputMenuItem extends AbstractMenuItem and is added to the View
+ * menu in our AuthorView.  When clicked, it allows the user to see the
+ * JSON output that their activity has created.
+ * 
+ * @author weskpga
+ *
+ */
+
 @SuppressWarnings("serial")
 public class ShowOutputMenuItem extends AbstractMenuItem {
 

@@ -4,6 +4,15 @@ import java.awt.event.ActionEvent;
 
 import constants.Constants;
 
+/**
+ * CreateMapMenuItem extends AbstractMenuItem and is added to the File
+ * menu in our AuthorView.  When clicked, it allows the user to load
+ * a previously created map, which can then be edited and re-saved.
+ * 
+ * @author weskpga
+ *
+ */
+
 @SuppressWarnings("serial")
 public class LoadGameMenuItem extends AbstractMenuItem {
 
