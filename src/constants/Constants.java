@@ -261,6 +261,7 @@ public class Constants {
 
     public static final int INT_ONE = 1;
 
+    public static final String TEST_GAME_AUSTIN = "testGame_Austin";
     public static final String BOGUS_NAME_GAME = "bogusNameOfGame";
 
     // AuthorView Constants

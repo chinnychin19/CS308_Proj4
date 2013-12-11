@@ -1,0 +1,286 @@
+{
+    "Player": [{
+        "name": "Coach K",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png"
+    }],
+    "Monster": [{
+        "name": "Freshman Jabari Parker",
+        "image": "images/monsters/JabariParker.png",
+        "catchRate": ".4",
+        "type": "forward",
+        "baseHP": "10",
+        "baseAttack": "8",
+        "baseDefense": "8",
+        "attacks": [{
+            "name": "3 pointer",
+            "unlockLevel": "4"
+        }, {
+            "name": "dunk",
+            "unlockLevel": "3"
+        }],
+    }, 
+        {
+        "name": "Freshman Tyler Thornton",
+        "image": "images/monsters/Thornton1.png",
+        "catchRate": ".9",
+        "type": "guard",
+        "baseHP": "4",
+        "baseAttack": "4",
+        "baseDefense": "4",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "5"
+        },  {
+            "name": "layup",
+            "unlockLevel": "2"
+        }],
+        "evolution": {
+            "name": "Sophomore Tyler Thornton",
+            "level": "6"
+        }
+    },
+        {
+        "name": "Sophomore Tyler Thornton",
+        "image": "images/monsters/Thornton2.png",
+        "catchRate": ".8",
+        "type": "guard",
+        "baseHP": "6",
+        "baseAttack": "6",
+        "baseDefense": "6",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "5"
+        },  {
+            "name": "layup",
+            "unlockLevel": "2"
+        },  {
+            "name": "3 point",
+            "unlockLevel": "6"
+        }],
+        "evolution": {
+            "name": "Junior Tyler Thornton",
+            "level": "7"
+        }
+    },
+        {
+        "name": "Junior Tyler Thornton",
+        "image": "images/monsters/Thornton3.png",
+        "catchRate": ".7",
+        "type": "guard",
+        "baseHP": "8",
+        "baseAttack": "8",
+        "baseDefense": "8",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "5"
+        },  {
+            "name": "layup",
+            "unlockLevel": "2"
+        },  {
+            "name": "3 point",
+            "unlockLevel": "6"
+        }],
+        "evolution": {
+            "name": "Senior Tyler Thornton",
+            "level": "8"
+        }
+
+    },
+        {
+        "name": "Senior Tyler Thornton",
+        "image": "images/monsters/Thornton4.png",
+        "catchRate": ".6",
+        "type": "guard",
+        "baseHP": "12",
+        "baseAttack": "12",
+        "baseDefense": "12",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "5"
+        },  {
+            "name": "layup",
+            "unlockLevel": "2"
+        },  {
+            "name": "3 point",
+            "unlockLevel": "6"
+        },  {
+            "name": "fadeaway",
+            "unlockLevel": "9"
+        }],
+    },
+        {
+        "name": "Junior Rodney Hood",
+        "image": "images/monsters/RodneyHood.png",
+        "catchRate": ".4",
+        "type": "forward",
+        "baseHP": "8",
+        "baseAttack": "7",
+        "baseDefense": "8",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "2"
+        },  {
+            "name": "layup",
+            "unlockLevel": "5"
+        }, {
+            "name": "3 pointer",
+            "unlockLevel": "10"
+        }],
+    }],
+    "Attack": [{
+        "name": "3 pointer",
+        "power": "240",
+        "accuracy": "0.6",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-10"
+        }],
+    }, {
+        "name": "dunk",
+        "power": "160",
+        "accuracy": "0.80",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-15"
+        }],
+            "statusEffect": {
+            "name": "shocked",
+            "target": "enemy"
+        },
+    }, {
+        "name": "layup",
+        "power": "120",
+        "accuracy": "0.99",
+    }, {
+        "name": "fade away",
+        "power": "300",
+        "accuracy": "0.2",
+    }],
+    "Obstacle": [{
+        "name": "stands",
+        "image": "images/obstacles/flower.png"
+    }],
+    "KeyItem": [{
+        "name": "medal"
+    }],
+    "NPC": [{
+        "name": "walker1",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "dialogue": "You go to the dialogue -- Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit."
+    }],
+    "FightingNPC": [{
+        "name": "fighter1",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "5",
+        "dialogue": "It is time. I WILL NOT LOSE!",
+        "monsters": [{
+            "name": "Freshman Jabari Parker",
+            "level": "5",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "100",
+            "curHP": "100",
+            "attack": "35",
+            "defense": "60"
+        }],
+        "bet": "25",
+        "postDialogue": "thank you come again.",
+        "keyItems": []
+    }, {
+        "name": "fighter2",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "5",
+        "dialogue": "Let's be real. You're probably gonna beat me. And if you do you'll win a razor!",
+        "monsters": [{
+            "name": "Junior Rodney Hood",
+            "level": "5",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "10",
+            "curHP": "10",
+            "attack": "35",
+            "defense": "60"
+        }],
+        "bet": "25",
+        "postDialogue": "Enjoy your medal!",
+        "keyItems": [
+            "medal"
+        ]
+      }],
+    "TypeMatrix": [{
+        "name": "matrix",
+        "matrix": {
+            "forward": {
+                "center": "1.5",
+                "guard": "3",
+                "forward": "1"
+            },
+            "guard": {
+                "guard": "1.5",
+                "forward": "2",
+                "center": ".5"
+            },
+            "center": {
+                "guard": "4",
+                "forward": "1",
+                "center": ".2"
+            }
+        }
+    }],
+    "WildRegion": [{
+        "name": "grass1",
+        "image": "images/ground/wildGrass.png",
+        "probability": ".05",
+        "monsters": [{
+            "name": "Junior Rodney Hood",
+            "level": "4",
+            "probability": "1.0"
+        }]
+    }],
+    "HealItem": [{
+        "name": "heal1",
+        "image": "images/items/healPokeBall.png"
+    }],
+     "Item": [
+                {
+                    "name": "potion",
+                    "consciousness": "alive",
+                    "statisticEffect": {
+                        "name": "curHP",
+                        "change": "20"
+                    }
+                },
+                {
+                    "name": "revive",
+                    "consciousness" : "dead",
+                    "statisticEffect": {
+                        "name": "curHP",
+                        "change": "-1" 
+                    }
+                }
+            ],
+      "Status": [
+        {
+          "name" : "shocked",
+          "statisticEffects" : [
+            {
+              "name": "curHP",
+              "change": "-5",
+            }],
+        },
+      ],
+}

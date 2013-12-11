@@ -38,8 +38,7 @@ public class WildMonsterParty extends AbstractEnemyParty {
         int curHP = getCurrentMonster().getStat(Constants.STAT_CUR_HP);
         int maxHP = getCurrentMonster().getStat(Constants.STAT_MAX_HP);
         double healthFactor = (double) curHP / maxHP;
-        double levelFactor = (double) playerMonsterLevel / getCurrentMonster().getStat(Constants.JSON_LEVEL);
-        
+        double levelFactor = (double) playerMonsterLevel / getCurrentMonster().getStat(Constants.JSON_LEVEL);        
         return getCurrentMonster().getCatchRate() * levelFactor / healthFactor;
         
     }
