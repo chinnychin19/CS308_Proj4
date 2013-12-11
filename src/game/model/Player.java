@@ -48,7 +48,7 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
             super.readWorld(objInWorld);
             // ADDING MONSTERS
             
-            myParty = new ArrayList<Monster>(); // TODO: populate
+            myParty = new ArrayList<Monster>();
             JSONArray myMonstersJSON = objInWorld.getJSONArray(Constants.MONSTERS_LOWERCASE);
             for (Object monsterObj : myMonstersJSON) {
                 SmartJsonObject monsterInWorld = new SmartJsonObject((JSONObject) monsterObj);
@@ -56,8 +56,8 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
                         getModel().getDefinitionCache()
                                 .getInstance(Constants.MONSTER_UPPERCASE,
                                              monsterInWorld.getString(Constants.JSON_NAME));
-               
-               myParty.add(new Monster(getModel(), monsterDefinition, monsterInWorld));
+               Monster monster = new Monster(getModel(), monsterDefinition, monsterInWorld);
+               myParty.add(monster);
             }
             int x = objInWorld.getInt(Constants.JSON_X);
             int y = objInWorld.getInt(Constants.JSON_Y);
@@ -73,9 +73,19 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
             JSONArray playerKeyItems = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
             List<KeyItem> keyItems = new ArrayList<KeyItem>();
             for (Object o : playerKeyItems) {
-                keyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache().getInstance("KeyItem", (String)o)));
+                keyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache().getInstance(Constants.TEXT_KEY_ITEM, (String)o)));
             }
             setKeyItems(keyItems);
+            
+            myItems = new ArrayList<Item>();
+            List<Item> items = new ArrayList<Item>();
+            JSONArray playerItems = objInWorld.getJSONArray(Constants.TEXT_ITEMS_LOWERCASE); //TODO
+            for (Object o : playerItems) {
+//            	System.out.println(o.toString());
+            	//TODO: print statement take out
+                items.add(new Item(getModel(), getModel().getDefinitionCache().getInstance(Constants.TEXT_ITEM, (String)o)));
+            }
+            setItems(items);
     }  
     
     public void goToLastSavedLoc() {
@@ -100,6 +110,10 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
      */
     public void setKeyItems (List<KeyItem> keyItems) {
         myKeyItems = keyItems;
+    }
+    
+    public void setItems(List<Item> items){
+    	myItems = items;
     }
 
     /**
@@ -142,7 +156,7 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
             }
         }
     }
-
+    
     // TODO: this method should be in the inputs object
     private Direction getMoveDirection (Input input) {
         if (input.isKeyUpPressed()) { return Direction.UP; }
@@ -166,6 +180,7 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
     @Override
     public JSONObject getSavedJson () {
         JSONObject toSave = super.getSavedJson();       
+        toSave.put("items", getItemsToSave());
         toSave.put(Constants.JSON_KEYITEMS, getKeyItemsToSave());
         toSave.put(Constants.JSON_MONSTERS, getMonstersToSave());
         return toSave;
@@ -174,6 +189,14 @@ public class Player extends AbstractCharacter implements Fighter, Saveable {
     private JSONArray getKeyItemsToSave(){
         JSONArray array = new JSONArray();
         for(KeyItem item : myKeyItems){
+            array.add(item.getName());
+        }
+        return array;
+    }
+    
+    private JSONArray getItemsToSave(){
+        JSONArray array = new JSONArray();
+        for(Item item : myItems){
             array.add(item.getName());
         }
         return array;

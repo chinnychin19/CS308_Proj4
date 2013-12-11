@@ -35,7 +35,7 @@ public class GameView extends JPanel {
         setFocusable(true);
         myImage = new BufferedImage(Constants.WIDTH, Constants.HEIGHT, BufferedImage.TYPE_INT_RGB);
         myGraphics = myImage.getGraphics();
-        myBackground = new ImageIcon("images/ground/shortGrass.png").getImage(); // TODO: no. not
+        myBackground = new ImageIcon(Constants.FILE_NAME_SHORT_GRASS).getImage(); // TODO: no. not
                                                                                  // this. Ground
                                                                                  // objects.
         myController = new GameController(nameOfGame, this);
@@ -55,6 +55,6 @@ public class GameView extends JPanel {
     }
 
     public void paintComponent (Graphics g) {
-        g.drawImage(myImage, 0, 0, getWidth(), getHeight(), null);
+        g.drawImage(myImage, Constants.ZERO, Constants.ZERO, getWidth(), getHeight(), null);
     }
 }

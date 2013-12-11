@@ -12,6 +12,7 @@ public class RunAwayOptionState extends AbstractOptionState {
 
     @Override
     protected void onInteract () {
+        myMode.getBattle().reapplyStatistics();
         myMode.getController().setWanderingMode();
     }
 
@@ -19,7 +20,7 @@ public class RunAwayOptionState extends AbstractOptionState {
     public void paint () {
         super.paint();
 
-        int x = 15;
+        int x = 15; //TODO: Chinmay magic numbers 
         int y = 30;
         myBuffer.drawString(Constants.PROMPT_PRESS_TO_RUN, x, y);
 

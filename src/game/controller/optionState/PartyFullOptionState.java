@@ -14,6 +14,11 @@ import java.awt.Font;
 import java.util.List;
 import constants.Constants;
 
+/**
+ * Too many monsters in the player's party, which causes this state to be thrown.
+ * @author Team Rocket
+ *
+ */
 
 public class PartyFullOptionState extends AbstractListableOptionState {
 

@@ -107,7 +107,7 @@ public class Obstacle extends AbstractViewableObject {
         JSONArray keyItemArray = objInWorld.getJSONArray(Constants.JSON_KEYITEMS);
         if (null != keyItemArray) {
             for (Object name : keyItemArray) {
-                myRequiredKeyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache().getInstance("KeyItem", name.toString())));
+                myRequiredKeyItems.add(new KeyItem(getModel(), getModel().getDefinitionCache().getInstance(Constants.TEXT_KEY_ITEM, name.toString())));
             }
         }
     }

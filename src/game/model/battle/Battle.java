@@ -1,5 +1,9 @@
 package game.model.battle;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import constants.Constants;
 import game.controller.AbstractBattleMode;
 import game.controller.TrainerBattleMode;
@@ -23,7 +27,7 @@ public class Battle {
     private static final double CATCH_MIN = 0.80;
     private static final double CATCH_MAX = 0.99;
     private boolean myIsUsersTurn;
-
+    private Map<Monster, TemporaryStatistics> myTemporaryStatistics;
     public Battle (AbstractBattleParty playerParty,
                    AbstractBattleParty enemyParty,
                    AbstractBattleMode mode) {
@@ -31,6 +35,13 @@ public class Battle {
         myEnemyParty = enemyParty;
         myMode = mode;
         myIsUsersTurn = true;
+        myTemporaryStatistics = new HashMap<Monster, TemporaryStatistics>();
+        for(Monster m : myPlayerParty.getMonsters()){
+            myTemporaryStatistics.put(m,new TemporaryStatistics(m));
+        }
+        for(Monster m : myEnemyParty.getMonsters()){
+            myTemporaryStatistics.put(m,new TemporaryStatistics(m));
+        }
     }
 
     public AbstractBattleParty getOtherParty (AbstractBattleParty self) {
@@ -50,7 +61,7 @@ public class Battle {
         if (result.isHit()) {
             myMode.markEnemyMonsterHit();
         }
-        myMode.pushState(new StateTransitionTextOptionState(myMode, result.toString(), this));
+        myMode.setOptionState(new StateTransitionTextOptionState(myMode, result.toString()));
     }
 
     public void attackPlayer (Attack a) {
@@ -58,7 +69,7 @@ public class Battle {
         if (result.isHit()) {
             myMode.markPlayerMonsterHit();
         }
-        myMode.pushState(new UserStateTransitionTextOptionState(myMode, result.toString(),this));
+        myMode.pushState(new UserStateTransitionTextOptionState(myMode, result.toString()));
 
     }
     
@@ -72,7 +83,7 @@ public class Battle {
     }
 
     private void handleUserMonsterDied () {
-        System.out.println("Handling user monster");
+        System.out.println(Constants.TEXT_HANDLING_USER_MOSNTER);
         if (myPlayerParty.getNumberOfAliveMonsters() == 0) {
             userLost();
         }
@@ -81,12 +92,11 @@ public class Battle {
                                                       new LivingPartyOptionState(myMode, false)));
         }
     }
-
-    //TODO: string constants
     private void handleEnemyMonsterDied () {
+        myIsUsersTurn = true;
         LevelChange change =
                 myPlayerParty.getCurrentMonster().addExperience(myEnemyParty.getCurrentMonster()
-                                                                        .getRewardExperience());
+                                                                        .getRewardExperience(), myTemporaryStatistics.get(myPlayerParty.getCurrentMonster()));
         if (myEnemyParty.getNumberOfAliveMonsters() == 0) {
             userWon();
         }
@@ -104,6 +114,7 @@ public class Battle {
     }
 
     private void userLost () {
+        reapplyStatistics();
         myMode.setOptionState(myMode.getBattleCompleteState(false));
     }
 
@@ -111,6 +122,7 @@ public class Battle {
         if (myMode instanceof TrainerBattleMode) {
             ((FightingNPC) myEnemyParty.getFighter()).setDefeated(true);
         }
+        reapplyStatistics();
         myMode.setOptionState(myMode.getBattleCompleteState(true));
     }
 
@@ -125,14 +137,28 @@ public class Battle {
     }
 
     public void doNextTurn () {
+        if (myIsUsersTurn) {
+            Monster playerMonster = myPlayerParty.getCurrentMonster();
+            playerMonster.getStatus().doStatus(playerMonster);
+            System.out.println("Status: "+ playerMonster.getStatus());            
+        }
         toggleUsersTurn();
         handleMonsterDeaths();
-        if(!myIsUsersTurn) {
+        if(!myIsUsersTurn){
             getEnemyParty().doTurn();
+            Monster enemyMonster = getEnemyParty().getCurrentMonster(); 
+            enemyMonster.getStatus().doStatus(enemyMonster);
         }
     }
 
     private void toggleUsersTurn () {
         myIsUsersTurn = !myIsUsersTurn;
+    }
+    
+    public void reapplyStatistics(){
+        System.out.println("reapplying statistics");
+        for(TemporaryStatistics temp : myTemporaryStatistics.values()){
+            temp.reapply();
+        }
     }
 }
