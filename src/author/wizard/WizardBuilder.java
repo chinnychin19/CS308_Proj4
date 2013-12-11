@@ -90,6 +90,15 @@ public class WizardBuilder {
         getConstructedWizard(); //As far as I can tell, this line does nothing, since its return value is not used.
     }
 
+    /**
+     * Iterates through all values in the key/value pairs within a JSONObject.
+     * If the value is a string, passes off key/value pair to createPanel().
+     * If the value is another JSONObject, passes pair off to handleJSONObject().
+     * If the value is a JSONArray, passes pair off to handleJSONArray
+     * @param obj the JSONObject containing one or more key/value pairs
+     * @param currentPanel The current panel.
+     * @return void
+     */
     private void iterateOverJSONObject (JSONObject obj, JPanel currentPanel) { //EXAMPLE: obj = {"monsters": [ {"name":"list_radio_Monster.name"} ] } --> obj = {"name":"list_radio_Monster.name"}
         JSONObject tempObject = (JSONObject) obj;
 
@@ -119,6 +128,16 @@ public class WizardBuilder {
         }
     }
 
+    /**
+     * Iterates through all values in a JSONArray.
+     * If the value is a string, passes off to createPanel().
+     * If the value is another JSONObject, passes off to handleJSONObject().
+     * If the value is a JSONArray, passes off to handleJSONArray.
+     * @param arr the JSONArray containing one or more values
+     * @param currentPanel The current panel.
+     * @param label
+     * @return void
+     */
     private void iterateOverJSONArray (JSONArray arr, JPanel currentPanel, String label) {//EXAMPLE: [{"name":"list_radio_Monster.name"}], container, ""
         JSONArray tempArray = ((JSONArray) arr);
         for (Object genericContainer : tempArray) {
@@ -145,18 +164,49 @@ public class WizardBuilder {
         }
     }
 
+    /**
+     * Creates a new ContainerPanel (of type "object") and adds it within the 
+     * current panel, then passes that new panel and the received JSONObject to 
+     * iterateOverJSONObject().
+     * @param panelLabel the label to give the new panel
+     * @param object the JSONObject
+     * @param currentPanel The current panel
+     * @return void
+     */
     private void handleJSONObject (String panelLabel, JSONObject object, JPanel currentPanel) { //EXAMPLE: "", {"name":"list_radio_Monster.name"}, currentPanel
         JPanel container = new ContainerPanel(panelLabel, Constants.OBJECT_STRING);
         currentPanel.add(container);
         iterateOverJSONObject(object, container);
     }
 
+    /**
+     * Creates a new ContainerPanel (of type "array") and adds it within the 
+     * current panel, then passes that new panel and the received JSONArray to 
+     * iterateOverJSONArray().
+     * @param panelLabel the label to give the new panel
+     * @param arr the JSONArray
+     * @param currentPanel The current panel
+     * @return void
+     */
     private void handleJSONArray (String panelLabel, JSONArray arr, JPanel currentPanel) { //EXAMPLE: "monsters", [ {"name":"list_radio_Monster.name"} ], currentPanel
         JPanel container = new ContainerPanel(panelLabel, Constants.ARRAY_STRING);
         currentPanel.add(container);
         iterateOverJSONArray(arr, container, Constants.EMPTY_STRING);
     }
 
+    /**
+     * Creates and returns a new panel of the indicated type via reflection. In 
+     * some cases this means retrieving previously-defined data from the 
+     * AuthorCache to populate a list in the new panel. The method figures out 
+     * if this is necessary by parsing custom-formatted strings (example: 
+     * "list_radio_Monster.name") that were stored as values in the original
+     * wizard-defining JSON file.
+     * @param fieldName Name of field to be filled/defined by user. 
+     * Examples: "name", "power"
+     * @param fieldType Type/format of field: word, number, radiobutton, etc. 
+     * Corresponds to a subclass of AbstractWizardPanel in author.panels
+     * @return Component
+     */
     private Component createPanel (String fieldName, String fieldType)
                                                                       throws ClassNotFoundException,
                                                                       NoSuchMethodException,
@@ -200,6 +250,17 @@ public class WizardBuilder {
         return output;
     }
 
+    /**
+     * Retrieves previously-defined values from AuthorCache and generates most 
+     * of the (rather idiosyncratic) parameter for constructing a 
+     * RadioButtonsPanel. That constructor takes a string of the form 
+     * "listLabel~listElement1.listElement2.listElement3.", of arbitrary length;
+     * this method returns "~listElement1.listElement2.listElement3."
+     * @param limitedFieldType String directing creation of the radio button 
+     * list from cache, of format 
+     * "radio_PreviouslyDefinedJSONObjectCategory.KeyWithinThatObject"
+     * @return String
+     */
     private String makePartOfRadioButtonsInputParameter (String limitedFieldType) {
         String[] locKeyPair = limitedFieldType.split("_")[1].split("\\."); //FIRST splits to "radio" "Monster.name", THEN splits "Monster.name" to "Monster" "Name"
         JSONArray locationArray = (JSONArray) myCache.getRawJSON().get(locKeyPair[0]); //gets "Monster"'s array out of the cache
