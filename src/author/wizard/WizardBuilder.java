@@ -19,8 +19,10 @@ import jsoncache.JSONReader;
 //import javax.swing.SwingUtilities;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+//import org.json.simple.parser.JSONParser;
+//import org.json.simple.parser.ParseException;
+
+import constants.Constants;
 
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.NoJSONArrayJsonException;
@@ -45,13 +47,13 @@ public class WizardBuilder {
     public static final Map<String, String> KEYWORD_TO_PANEL_TYPE;
     static {
         Map<String, String> aMap = new HashMap<String, String>();
-        aMap.put("text", "WordPanel");
-        aMap.put("number", "NumberPanel");
-        aMap.put("fileurl", "ImagePanel");
-        aMap.put("radio", "RadioButtonsPanel");
-        aMap.put("list", "ListPanel");
-        aMap.put("check", "CheckBoxPanel");
-        aMap.put("matrix", "MatrixPanel");
+        aMap.put(Constants.TEXT_KEYWORD, Constants.WORD_PANEL_CLASS);
+        aMap.put(Constants.NUMBER_KEYWORD, Constants.NUMBER_PANEL_CLASS);
+        aMap.put(Constants.FILE_URL_KEYWORD, Constants.IMAGE_PANEL_CLASS);
+        aMap.put(Constants.RADIO_KEYWORD, Constants.RADIOBUTTON_PANEL_CLASS);
+        aMap.put(Constants.LIST_KEYWORD, Constants.LIST_PANEL_CLASS);
+        aMap.put(Constants.CHECKBOX_KEYWORD, Constants.CHECKBOX_PANEL_CLASS);
+        aMap.put(Constants.MATRIX_KEYWORD, Constants.MATRIX_PANEL_CLASS);
         KEYWORD_TO_PANEL_TYPE = Collections.unmodifiableMap(aMap);
     }
 
@@ -90,83 +92,83 @@ public class WizardBuilder {
 
     private void iterateOverJSONObject (JSONObject obj, JPanel currentPanel) { //EXAMPLE: obj = {"monsters": [ {"name":"list_radio_Monster.name"} ] } --> obj = {"name":"list_radio_Monster.name"}
         JSONObject tempObject = (JSONObject) obj;
-        Set<?> keySet = tempObject.keySet();// ["monsters"] --> "name"
-        System.out.println("Opening: " + keySet);
+
+        Set<?> keySet = tempObject.keySet();
+        System.out.println(Constants.OPENING_MESSAGE + keySet);
         for (Object s : keySet) {
-            if (tempObject.get(s) instanceof String) { //no --> yes
-                System.out.println((String) s + " = string (" + tempObject.get(s) + ")"); 
+            if (tempObject.get(s) instanceof String) {
+                System.out.println((String) s + Constants.STRING_STATUS_MESSAGE + tempObject.get(s) + Constants.CLOSE_PARENTHESIS);
                 try {
                     currentPanel.add(createPanel((String) s, (String) tempObject.get(s)));
                 }
                 catch (Exception e) {
-                    System.out.println("Failed to create '" + (String) s + "'  field, of type '" +
-                            (String) tempObject.get(s) + "'.");
+                    System.out.println(Constants.FAILED_TO_CREATE_PT1 + (String) s + Constants.FAILED_TO_CREATE_PT2 +
+                                       (String) tempObject.get(s) + Constants.FAILED_TO_CREATE_PT3);
                     e.printStackTrace();
                 }
             }
-            else if (tempObject.get(s) instanceof JSONObject) { //no
-                System.out.println((String) s + " = JSONObject");
+            else if (tempObject.get(s) instanceof JSONObject) {
+                System.out.println((String) s + Constants.EQUALS_JSONOBJECT);
                 handleJSONObject((String) s, (JSONObject) tempObject.get(s), currentPanel);
             }
-            else if (tempObject.get(s) instanceof JSONArray) { //yes
-                System.out.println((String) s + " = JSONArray");
+            else if (tempObject.get(s) instanceof JSONArray) {
+                System.out.println((String) s + Constants.EQUALS_JSONARRAY);
                 handleJSONArray((String) s, (JSONArray) tempObject.get(s), currentPanel);
             }
 
         }
     }
 
-    private void iterateOverJSONArray (JSONArray arr, JPanel currentPanel, String label) {//[{"name":"list_radio_Monster.name"}], container, ""
+    private void iterateOverJSONArray (JSONArray arr, JPanel currentPanel, String label) {//EXAMPLE: [{"name":"list_radio_Monster.name"}], container, ""
         JSONArray tempArray = ((JSONArray) arr);
         for (Object genericContainer : tempArray) {
-            if (genericContainer instanceof String) { //no
-                System.out.println("string (" + genericContainer + ")");
+            if (genericContainer instanceof String) {
+                System.out.println(Constants.STRING_OPEN_PARENTHESIS + genericContainer + Constants.CLOSE_PARENTHESIS);
                 try {
                     currentPanel.add(createPanel("value", (String) genericContainer));
                 }
                 catch (Exception e) {
-                    System.out.println("Failed to create 'value' field, of type '" +
-                            (String) genericContainer + "'.");
+                    System.out.println(Constants.FAILED_TO_CREATE_VALUE +
+                                       (String) genericContainer + Constants.FAILED_TO_CREATE_PT3);
                     e.printStackTrace();
                 }
             }
-            else if (genericContainer instanceof JSONObject) { //yes
-                System.out.println("JSONObject");
+            else if (genericContainer instanceof JSONObject) {
+                System.out.println(Constants.JSONOBJECT_STRING);
                 handleJSONObject(label, (JSONObject) genericContainer, currentPanel);
             }
             else if (genericContainer instanceof JSONArray) {
-                System.out.println("JSONArray");
+                System.out.println(Constants.JSONARRAY_STRING);
                 handleJSONArray(label, (JSONArray) genericContainer, currentPanel);
             }
 
         }
     }
 
-    private void handleJSONObject (String panelLabel, JSONObject object, JPanel currentPanel) { //"", {"name":"list_radio_Monster.name"}, currentPanel
-        JPanel container = new ContainerPanel(panelLabel, "object");
+    private void handleJSONObject (String panelLabel, JSONObject object, JPanel currentPanel) { //EXAMPLE: "", {"name":"list_radio_Monster.name"}, currentPanel
+        JPanel container = new ContainerPanel(panelLabel, Constants.OBJECT_STRING);
         currentPanel.add(container);
         iterateOverJSONObject(object, container);
     }
 
-    private void handleJSONArray (String panelLabel, JSONArray arr, JPanel currentPanel) { //"monsters", [ {"name":"list_radio_Monster.name"} ], currentPanel
-        JPanel container = new ContainerPanel(panelLabel, "array");
+    private void handleJSONArray (String panelLabel, JSONArray arr, JPanel currentPanel) { //EXAMPLE: "monsters", [ {"name":"list_radio_Monster.name"} ], currentPanel
+        JPanel container = new ContainerPanel(panelLabel, Constants.ARRAY_STRING);
         currentPanel.add(container);
-        iterateOverJSONArray(arr, container, "");
+        iterateOverJSONArray(arr, container, Constants.EMPTY_STRING);
     }
 
-    private Component createPanel (String fieldName, String fieldType)//EXAMPLE: "name", "list_radio_Monster.name"
-            throws ClassNotFoundException,
-            NoSuchMethodException,
-            SecurityException,
-            InstantiationException,
-            IllegalAccessException,
-            IllegalArgumentException,
-            InvocationTargetException {
+    private Component createPanel (String fieldName, String fieldType)
+                                                                      throws ClassNotFoundException,
+                                                                      NoSuchMethodException,
+                                                                      SecurityException,
+                                                                      InstantiationException,
+                                                                      IllegalAccessException,
+                                                                      IllegalArgumentException,
+                                                                      InvocationTargetException {
         String[] fields = fieldType.split("_"); //EXAMPLE: fieldType="list_radio_Monster.name"
-        String basicFieldType = (fields[0].equals("list")) ? fields[1] : fields[0];
-        String limitedFieldType = (fields[0].equals("list")) ? fieldType.substring(5) : fieldType;
-        String outputString = "";
-
+        String basicFieldType = (fields[0].equals(Constants.LIST_KEYWORD)) ? fields[1] : fields[0];
+        String limitedFieldType = (fields[0].equals(Constants.LIST_KEYWORD)) ? fieldType.substring(5) : fieldType;
+        String outputString = Constants.EMPTY_STRING;
         /**
          * We need this to be changed because it doens't work on a Mac
          * 
@@ -184,21 +186,18 @@ public class WizardBuilder {
         }
 
         Class<?> classToInstantiate =
-                Class.forName("author.panels." + KEYWORD_TO_PANEL_TYPE.get(basicFieldType));//For fieldType="list_radio_Monster.name", class is "author.panels.RadioButtonsPanel"
+                Class.forName(Constants.AUTHOR_PANELS_PATH + KEYWORD_TO_PANEL_TYPE.get(basicFieldType)); //For fieldType="list_radio_Monster.name", class is "author.panels.RadioButtonsPanel"
         Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
-
-
-        Component output = (Component) ctr.newInstance(fieldName + outputString);//For fieldType="list_radio_Monster.name", Component output = (Component) RadioButtonsPanel("name~Bulbasaur.Squirtle.Charmander.Pidgey.")
-
-        if (fields[0].equals("list")) {
-
+        
+        Component output = (Component) ctr.newInstance(fieldName + outputString); //For fieldType="list_radio_Monster.name", Component output = (Component) RadioButtonsPanel("name~Bulbasaur.Squirtle.Charmander.Pidgey.") 
+        
+        if (fields[0].equals(Constants.LIST_KEYWORD)) {
+            
         }
 
         System.out.println(fieldName + outputString);
 
         return output;
-
-
     }
 
     private String makePartOfRadioButtonsInputParameter (String limitedFieldType) {
@@ -222,26 +221,25 @@ public class WizardBuilder {
 
         JPanel currentPanel = myWizard.getCardPanel();
 
-
         SmartJsonObject json = getSmartJson(filePath);
+        
+	try {
 
-        try {
+		JSONArray majorArray;
+		majorArray = json.getJSONArray(myCategory); //EXAMPLE: myCategory = "FightingNPC"
 
-            JSONArray majorArray;
-            majorArray = json.getJSONArray(myCategory);//EXAMPLE: myCategory = "FightingNPC"
-
-            for (Object con : majorArray) { //"con" means "contained by"
-                if (con instanceof JSONObject) {
-                    iterateOverJSONObject((JSONObject) con, currentPanel);
-                }
-            }
-            FinishPanel finish = new FinishPanel(myCache);
-            currentPanel.add(finish);
-            finish.init();
-        } catch (NoJSONArrayJsonException e) {
-            System.out.println("Category of '" + myCategory + "' not found.");
-            e.printStackTrace();
-        }
+	        for (Object con : majorArray) { //"con" means "contained by"
+	            if (con instanceof JSONObject) {
+	                iterateOverJSONObject((JSONObject) con, currentPanel);
+	            }
+	        }
+	        FinishPanel finish = new FinishPanel(myCache);
+	        currentPanel.add(finish);
+	        finish.init();
+	} catch (NoJSONArrayJsonException e) {
+		System.out.println(Constants.CATEGORY_NOT_FOUND_MESSAGE + myCategory + Constants.NOT_FOUND_MESSAGE);
+		e.printStackTrace();
+	}
     }
 
     /**
@@ -252,22 +250,22 @@ public class WizardBuilder {
     private SmartJsonObject getSmartJson (String filepath) {
         try {
         /*  BufferedReader reader = new BufferedReader(new FileReader(filepath));
-            String line, results = "";
+            String line, results = Constants.EMPTY_STRING;
             while( ( line = reader.readLine() ) != null) {
-                results += line;
+                 results += line;
             }
             reader.close();
             return new SmartJsonObject(results);        */
             JSONObject obj = JSONReader.getJSON(filepath);
             return new SmartJsonObject(obj);
     /*  } catch (FileNotFoundException e) {
-            System.out.println("File not found. Please try again.");
+            System.out.println(Constants.FILE_NOT_FOUND);          
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();        */
         } catch (NoJSONObjectJsonException e) {
             e.printStackTrace();
-            System.out.println("Malformed JSON String");
+            System.out.println(Constants.MALFORMED_JSON_MESSAGE);
         }
         return null;
     }

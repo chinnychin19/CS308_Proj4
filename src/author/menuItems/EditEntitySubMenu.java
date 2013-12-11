@@ -36,13 +36,13 @@ public class EditEntitySubMenu extends AbstractMenu {
         JSONObject template = myCache.getRawJSON();
 		Set<String> keySet = template.keySet();
         me.removeAll();
-        System.out.println("Menu Populated with " + keySet);
+        System.out.println(Constants.MENU_POPULATED_MESSAGE + keySet);
         for (Object s : keySet) {
             JMenu menu = new JMenu((String) s);
             this.add(menu);
             JSONArray locationArray = (JSONArray) template.get(s);
             for (Object con : locationArray) {
-                String tempString = (String) ((JSONObject) con).get("name");
+                String tempString = (String) ((JSONObject) con).get(Constants.NAME);
                 JMenuItem item = new JMenuItem(tempString);
                 item.addActionListener(new LaunchWizardListener((String) s,myCache));
                 menu.add(item);
