@@ -35,11 +35,13 @@ public class MapCreationKeyListener implements KeyListener {
 
         if (key == Constants.ZOOM_IN_KEY) { // 'Z' == Zoom In
             myTileManager.contractView();
+            System.out.println(myView.getMyWorldTiles().toString());
             myView.repaint();
         }
 
         if (key == Constants.ZOOM_OUT_KEY) { // 'X' == Zoom Out
             myTileManager.expandView();
+            System.out.println(myView.getMyWorldTiles().toString());
             myView.repaint();
         }
 
