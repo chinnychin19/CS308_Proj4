@@ -207,7 +207,8 @@ public class Constants {
     public static final String FILENAME_WORLD = "world.json";
     public static final String FILENAME_SAVESTATE = "saveState2.json";
     public static final String AUTHOR_PANELS_PATH = "author.panels.";
-
+    public static final String FILETYPE = ".json";
+    
     // JSON keywords for Monster stats
     public static final String STAT_EXP = "exp";
     public static final String STAT_EXP_TO_NEXT_LEVEL = "expToNextLevel";
@@ -298,8 +299,14 @@ public class Constants {
     // State Text Constants
     public final static int TEXT_START_X = 15;
     public final static int TEXT_START_Y = 30;
-    public final static int TEXT_START_INC = 35;
+    public final static int TEXT_Y_INC = 35;
     public static final int TEXT_CHARS_PER_LINE = 60;
+    
+    //BattleMode Graphics
+    public final static int BUFFER_START_X = 15;
+    public final static int BUFFER_START_Y = 30;
+    public final static int BUFFER_Y_INC = 30;
+    public final static int HEALTH_BAR_HEIGHT = 20;
 
     // Main Menu
     public final static int MAIN_MENU_X = 0;
@@ -371,5 +378,13 @@ public class Constants {
 
     public static final String ALIVE_STRING = "alive";
     public static final String DEAD_STRING = "dead";
+    
+    public static final String SESSION_SELECT_GAME_TEXT = "Please Select A Game to Play:\n";
+    public static final String SESSION_SELECT_SESSION_TEXT = "Please Select A Session to Play:\n";
+    public static final String SESSION_ENTER_NEW_SESSION_TEXT = "Please input the new sessions name\n";
+    public static final String SESSION_NEW_SESSION_KEY = "New Session";
+    public static final String SESSION_SESSION_START_KEY = "saveState_";
+
+
 
 }

@@ -21,10 +21,10 @@ public class GameController {
     private AbstractMode myCurrentMode;
     private WanderingMode myMainMode;
     private boolean myIsVolumeOn;
-    public GameController (String nameOfGame, GameView view) {
+    public GameController (String nameOfGame, String session, GameView view) {
         myView = view;
         try {
-            myModel = new GameModel(nameOfGame, this);
+            myModel = new GameModel(nameOfGame, session, this);
         }
         catch (Exception e) {
             e.printStackTrace();

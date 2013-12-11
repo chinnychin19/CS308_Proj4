@@ -40,7 +40,7 @@ public class Attack extends AbstractModelObject {
             for (Object statObject : statisticsArray) {
                 SmartJsonObject statisticJSON = new SmartJsonObject((JSONObject) statObject);
                 String target = statisticJSON.getString(Constants.JSON_TARGET);
-                StatisticEffect effect = new StatisticEffect(statisticJSON);
+                StatisticEffect effect = new StatisticEffect(getModel(), statisticJSON);
                 myStatisticEffects.add(new StatisticEffectWrapper(target, effect));
 
             }

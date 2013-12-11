@@ -22,11 +22,13 @@ import location.Loc;
 public class StateSaver {
     private GameModel myModel;
     private String myNameOfGame;
+    private String mySession;
     private JSONObject myJSON;
 
-    public StateSaver (GameModel model, World world, String nameOfGame) {
+    public StateSaver (GameModel model, String nameOfGame, String session) {
         myModel = model;
         myNameOfGame = nameOfGame;
+        mySession = session;
     }
 
     /**
@@ -36,11 +38,11 @@ public class StateSaver {
     public World load () throws Exception {
         String worldJSONFilepath =
                 Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
-                       Constants.FILENAME_SAVESTATE;
+                       mySession;
         myJSON = JSONReader.getJSON(worldJSONFilepath);
         if (myJSON == null) { throw new Exception(Constants.SAVE_FILE_NOT_FOUND); }
         try {
-            return new World(myNameOfGame, myModel);
+            return new World(myNameOfGame,mySession, myModel);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -67,7 +69,7 @@ public class StateSaver {
         System.out.println(state.toString());
         String outFile =
                 Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
-                        Constants.FILENAME_SAVESTATE;
+                        mySession;
         Writer out = new PrintWriter(new File(outFile));
         JSONValue.writeJSONString(state, out);
         out.close();
