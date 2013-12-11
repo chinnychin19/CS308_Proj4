@@ -1,6 +1,7 @@
 package test.author;
 
 import static org.junit.Assert.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,14 +17,14 @@ public class TestJson {
 
     @Test
     public void testSampleJson1 () {
-        String file = "json/test_json_1.json";
+        String file = System.getProperty("user.dir") + File.separator + "test-json"+ File.separator +"test_json_1.json";
         JSONObject json = getJSON(file);
         assertNotNull(json);
     }
 
     @Test
     public void testItem () {
-        String file = "json/test_json_1.json";
+        String file = System.getProperty("user.dir") + File.separator + "test-json"+ File.separator +"test_json_1.json";
         JSONObject json = getJSON(file);
         JSONArray items = (JSONArray) json.get("item");
         JSONObject item = (JSONObject) items.get(0);
@@ -41,7 +42,7 @@ public class TestJson {
      */
     @Test
     public void testAttackNumber () {
-        String file = "json/test_json_1.json";
+        String file = System.getProperty("user.dir") + File.separator + "test-json"+ File.separator +"test_json_1.json";
         JSONObject json = getJSON(file);
 
         JSONArray items = (JSONArray) json.get("item");
@@ -57,6 +58,7 @@ public class TestJson {
     }
 
     private JSONObject getJSON (String filepath) {
+        System.out.print("From filepath (" + filepath + ")... ");
         JSONObject json;
         JSONParser parser = new JSONParser();
         try {
@@ -64,6 +66,8 @@ public class TestJson {
             return json;
         }
         catch (Exception e) {
+            System.out.println("no JSONObject gotten!");
+            System.out.println("        " + e);
             return null;
         }
     }

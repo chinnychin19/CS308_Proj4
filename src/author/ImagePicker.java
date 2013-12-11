@@ -11,6 +11,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import constants.Constants;
+
 
 @SuppressWarnings("serial")
 public class ImagePicker extends JPanel implements ActionListener {
@@ -45,10 +47,14 @@ public class ImagePicker extends JPanel implements ActionListener {
         // TODO Auto-generated method stub
         myChooser = FileChooserSingleton.getInstance();
         myChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        myChooser.setFileFilter(new FileNameExtensionFilter("Image files (JPEG, GIF, PNG)", "jpg",
-                                                            "jpeg", "gif", "png"));
+        myChooser.setFileFilter(new FileNameExtensionFilter(
+        		Constants.IMAGE_FILE_TYPES, 
+        		Constants.JPG_EXTENSION,
+                Constants.JPEG_EXTENSION, 
+                Constants.GIF_EXTENTION, 
+                Constants.PNG_EXTENSION) );
 
-        myOpenButton = new JButton("Select image...");
+        myOpenButton = new JButton(Constants.SELECT_IMAGE_PROMPT);
         myOpenButton.addActionListener(this);
     }
 

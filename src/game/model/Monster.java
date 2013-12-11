@@ -184,6 +184,8 @@ public class Monster extends AbstractModelObject implements Saveable {
             myStatistics.put(Constants.STAT_CUR_HP, objInWorld.getInt(Constants.STAT_CUR_HP));
             myStatistics.put(Constants.STAT_ATTACK, objInWorld.getInt(Constants.STAT_ATTACK));
             myStatistics.put(Constants.STAT_DEFENSE, objInWorld.getInt(Constants.STAT_DEFENSE));
+            
+
         }
         catch (SmartJsonException e) {
             e.printStackTrace();
@@ -191,11 +193,12 @@ public class Monster extends AbstractModelObject implements Saveable {
         
         // Read status
         try {
-            SmartJsonObject statusDefinition = objInWorld.getSmartJsonObject(Constants.JSON_STATUS_LOWERCASE);
+            String statusName = objInWorld.getString(Constants.JSON_STATUS_LOWERCASE);
+            SmartJsonObject statusDefinition = getModel().getDefinitionCache().getInstance(Constants.JSON_STATUS, statusName);
             myStatus = new Status(getModel(), statusDefinition);
         } catch (Exception e) {
             myStatus = new StatusOkay(getModel());
-        }
+        }        
     }
 
     /**
@@ -341,6 +344,8 @@ public class Monster extends AbstractModelObject implements Saveable {
         toSave.put(Constants.STAT_CUR_HP, ""+myStatistics.get(Constants.STAT_CUR_HP));
         toSave.put(Constants.STAT_ATTACK, ""+myStatistics.get(Constants.STAT_ATTACK));
         toSave.put(Constants.STAT_DEFENSE, ""+myStatistics.get(Constants.STAT_DEFENSE));
+        toSave.put(Constants.JSON_STATUS_LOWERCASE, myStatus.getName());
+
         return toSave;
     }
 }

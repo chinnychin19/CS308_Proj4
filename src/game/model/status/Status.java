@@ -21,15 +21,16 @@ public class Status extends AbstractModelObject {
     
     public Status (GameModel model, SmartJsonObject definition) {
         super(model, definition);
+        
+    }
+    
+    @Override
+    public void readDefinition (SmartJsonObject definition) throws SmartJsonException {
+        super.readDefinition(definition);
         myStatisticEffects = new ArrayList<StatisticEffect>();
-        try {
-            for (Object o : definition.getJSONArray(Constants.STATISTIC_EFFECTS)) {
-                SmartJsonObject effectJSON = new SmartJsonObject((JSONObject) o);
-                myStatisticEffects.add(new StatisticEffect(effectJSON));
-            }
-        }
-        catch (SmartJsonException e) {
-            e.printStackTrace();
+        for (Object o : definition.getJSONArray(Constants.STATISTIC_EFFECTS)) {
+            SmartJsonObject effectJSON = new SmartJsonObject((JSONObject) o);
+            myStatisticEffects.add(new StatisticEffect(getModel(), effectJSON));
         }
     }
     

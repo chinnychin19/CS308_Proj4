@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import javax.swing.JFileChooser;
+
+import constants.Constants;
 import author.model.AuthoringCache;
 
 
@@ -24,7 +26,7 @@ public class WriteJSONOutputListener implements ActionListener {
         int retrival = chooser.showSaveDialog(null);
         if (retrival == JFileChooser.APPROVE_OPTION) {
             try {
-                FileWriter fw = new FileWriter(chooser.getSelectedFile() + ".json");
+                FileWriter fw = new FileWriter(chooser.getSelectedFile() + Constants.JSON_EXTENSION);
                 fw.write(sb);
                 fw.close();
             }

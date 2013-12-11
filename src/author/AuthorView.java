@@ -8,6 +8,7 @@ import author.mapCreation.MapCreationView;
 import author.menuItems.AuthorViewEditMenu;
 import author.menuItems.AuthorViewFileMenu;
 import author.menuItems.AuthorViewViewMenu;
+import author.menuItems.EditEntitySubMenu;
 import author.model.AuthoringCache;
 import constants.Constants;
 
@@ -93,6 +94,10 @@ public class AuthorView extends JFrame {
         else {
             return av;
         }
+    }
+    
+    public void updateMenu () {
+        ((EditEntitySubMenu) av.getJMenuBar().getMenu(1).getItem(0)).refreshMenu();
     }
 
 }

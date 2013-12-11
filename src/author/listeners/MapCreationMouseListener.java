@@ -4,6 +4,8 @@ package author.listeners;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import constants.Constants;
 import author.mapCreation.CanvasTileManager;
 import author.mapCreation.MapCreationView;
 
@@ -38,7 +40,6 @@ public class MapCreationMouseListener implements MouseListener {
 
     @Override
     public void mouseClicked (MouseEvent arg0) {
-        // TODO: Will need to make this do more stuff later
 
         int x = arg0.getX();
         int y = arg0.getY();
@@ -46,10 +47,10 @@ public class MapCreationMouseListener implements MouseListener {
         int xTile = myTileManager.getHorizontalTileNum(x);
         int yTile = myTileManager.getVerticalTileNum(y);
 
-        System.out.println("Mouse clicked at: " + x + ", " + y);
-        System.out.println("Click translates to tile " +
-                           "column: " + myTileManager.getHorizontalTileNum(x) +
-                           ", row: " + myTileManager.getVerticalTileNum(y));
+        System.out.println(Constants.MOUSE_CLICKED_MESSAGE + x + ", " + y);
+        System.out.println(Constants.CLICK_TILE_MESSAGE +
+        		Constants.COLUMN_MESSAGE + myTileManager.getHorizontalTileNum(x) +
+                Constants.ROW_MESSAGE + myTileManager.getVerticalTileNum(y));
 
         myTileManager.getTileClickLoc(xTile, yTile);
 
@@ -59,19 +60,15 @@ public class MapCreationMouseListener implements MouseListener {
     }
 
     @Override
-    public void mouseEntered (MouseEvent arg0) { /* do nothing... */
-    }
+    public void mouseEntered (MouseEvent arg0) { /* do nothing... */ }
 
     @Override
-    public void mouseExited (MouseEvent arg0) { /* do nothing... */
-    }
+    public void mouseExited (MouseEvent arg0) { /* do nothing... */ }
 
     @Override
-    public void mousePressed (MouseEvent arg0) { /* do nothing... */
-    }
+    public void mousePressed (MouseEvent arg0) { /* do nothing... */ }
 
     @Override
-    public void mouseReleased (MouseEvent arg0) { /* do nothing... */
-    }
+    public void mouseReleased (MouseEvent arg0) { /* do nothing... */ }
 
 }

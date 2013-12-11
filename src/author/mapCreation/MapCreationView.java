@@ -1,18 +1,14 @@
 package author.mapCreation;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.TexturePaint;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import location.Loc;
 import author.listeners.MapCreationKeyListener;
@@ -38,7 +34,6 @@ public class MapCreationView extends JPanel {
             myBackground = ImageIO.read(new File(Constants.TEST_FILE));
         }
         catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -76,7 +71,7 @@ public class MapCreationView extends JPanel {
                    (int) myTileManager.getTileHeight());
 
         myWorld.getWorldTileMap().put(new Loc((int) topLeftX, (int) topLeftY),
-                                      new GenericTileWrapper("tileName", myBackground));
+                                      new GenericTileWrapper(Constants.TILENAME, myBackground));
 
         repaint();
     }

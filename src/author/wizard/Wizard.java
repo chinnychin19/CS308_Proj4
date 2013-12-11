@@ -11,6 +11,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import constants.Constants;
+
 
 /**
  * Class that defines a generic Wizard object. These
@@ -50,7 +52,7 @@ public class Wizard extends JDialog {
         this.setPreferredSize(DIALOG_DIMENSION);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        this.setName("wizard");
+        this.setName(Constants.WIZARD_STRING);
 
         myObjectName = type;
 

@@ -26,15 +26,15 @@ public class GameModel {
     private JSONCache myDefinitionCache;
     private TypeMatrix myTypeMatrix;
 
-    public GameModel (String nameOfGame, GameController controller) throws Exception {
+    public GameModel (String nameOfGame, String session, GameController controller) throws Exception {
         myController = controller;
         String definitionJSONFilepath =
                 Constants.FOLDERPATH_GAMES + "/" + nameOfGame + "/" +
                         Constants.FILENAME_DEFINITION;
         myDefinitionCache = new JSONCache(JSONReader.getJSON(definitionJSONFilepath));
         loadTypeMatrix();
-        myWorld = new World(nameOfGame, this);
-        myStateSaver = new StateSaver(this, myWorld, nameOfGame);
+        myWorld = new World(nameOfGame, session, this);
+        myStateSaver = new StateSaver(this, nameOfGame, session);
     }
     
     /**

@@ -2,10 +2,17 @@ package test.author;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.io.File;
 import javax.swing.JFrame;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import constants.Constants;
+import author.AuthorView;
 import author.ImageDisplayer;
 import author.ImagePicker;
+import author.model.AuthoringCache;
 import author.panels.*;
+import author.wizard.WizardBuilder;
 
 public class FakeMainForClassDemos {
 
@@ -15,9 +22,51 @@ public class FakeMainForClassDemos {
     public static void main (String[] args) {
         //demoImageDisplayer();
         //demoImagePicker();
-        demoImagePanel();
+        //demoImagePanel();
         //demoCheckBoxes();
         //demoRadioButtons();
+        //testRegexSplits();
+        demoWizardBuilder();
+    }
+
+    private static void demoWizardBuilder () {
+        //WizardBuilder wizBuild = new WizardBuilder("FightingNPC", Constants.PLAYER_JSON, new AuthoringCache(new AuthorView()));
+        //String filePath = System.getProperty("user.dir") + File.separator + "test-json"+ File.separator +"test_player.json";
+        //wizBuild.addPanelsFromFile(filePath);
+    }
+
+    private static void testRegexSplits () {
+        String fieldType = "list_radio_Monster.name";        
+        String[] fields = fieldType.split("_");
+        String basicFieldType = (fields[0].equals("list")) ? fields[1] : fields[0];
+        System.out.println("BASIC FIELD TYPE: " + basicFieldType);
+        String limitedFieldType = (fields[0].equals("list")) ? fieldType.substring(5) : fieldType;
+        System.out.println("LIMITED FIELD TYPE: " + limitedFieldType);
+        String outputString = "";
+
+        /**
+         * We need this to be changed because it doens't work on a Mac
+         * 
+         * The parsing with the filepath strings isn't working.
+         * 
+         * Java has built in classes for building filepaths and file locations
+         *              - We should use those so we don't get any bugs.
+         * 
+         * We shouldn't be parsing JSON in this class.
+         *              - Should try to use util.jsonwrapper
+         *              - Or use native Java methods (?)
+         */
+        if (limitedFieldType.split("_").length > 1 && limitedFieldType.indexOf(":") == -1) { //true EXAMPLE: "radio_Monster.name"
+            String[] locKeyPair = limitedFieldType.split("_")[1].split("\\."); //FIRST splits to "radio" "Monster.name", then SUPPOSED to split "Monster.name" to "Monster" "Name"
+            System.out.println("CONCEPT NEEDING ATTRIBUTE: " + locKeyPair[0]);
+            System.out.println("ATTRIBUTE NEEDED: " + locKeyPair[1]);
+            /*JSONArray locationArray = (JSONArray) myCache.getRawJSON().get(locKeyPair[0]);
+            outputString = "~";
+            for (Object con : locationArray) {
+                outputString += (String) ((JSONObject) con).get(locKeyPair[1]) + ".";
+            }   */
+        }
+        
     }
 
     private static void demoRadioButtons () {
