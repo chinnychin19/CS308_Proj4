@@ -21,6 +21,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import constants.Constants;
+
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.NoJSONArrayJsonException;
 import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
@@ -43,13 +45,13 @@ public class WizardBuilder {
     public static final Map<String, String> KEYWORD_TO_PANEL_TYPE;
     static {
         Map<String, String> aMap = new HashMap<String, String>();
-        aMap.put("text", "WordPanel");
-        aMap.put("number", "NumberPanel");
-        aMap.put("fileurl", "ImagePanel");
-        aMap.put("radio", "RadioButtonsPanel");
-        aMap.put("list", "ListPanel");
-        aMap.put("check", "CheckBoxPanel");
-        aMap.put("matrix", "MatrixPanel");
+        aMap.put(Constants.TEXT_KEYWORD, Constants.WORD_PANEL_CLASS);
+        aMap.put(Constants.NUMBER_KEYWORD, Constants.NUMBER_PANEL_CLASS);
+        aMap.put(Constants.FILE_URL_KEYWORD, Constants.IMAGE_PANEL_CLASS);
+        aMap.put(Constants.RADIO_KEYWORD, Constants.RADIOBUTTON_PANEL_CLASS);
+        aMap.put(Constants.LIST_KEYWORD, Constants.LIST_PANEL_CLASS);
+        aMap.put(Constants.CHECKBOX_KEYWORD, Constants.CHECKBOX_PANEL_CLASS);
+        aMap.put(Constants.MATRIX_KEYWORD, Constants.MATRIX_PANEL_CLASS);
         KEYWORD_TO_PANEL_TYPE = Collections.unmodifiableMap(aMap);
     }
 

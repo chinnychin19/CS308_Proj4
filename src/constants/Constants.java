@@ -16,6 +16,23 @@ import java.awt.event.KeyEvent;
 public class Constants {
     public static final int WIDTH = 800, HEIGHT = 500;
 
+    // WizardBuilder.java Reflection Strings
+    public static final String TEXT_KEYWORD = "text";
+    public static final String NUMBER_KEYWORD = "number";
+    public static final String FILE_URL_KEYWORD = "fileurl";
+    public static final String RADIO_KEYWORD = "radio";
+    public static final String LIST_KEYWORD = "list";
+    public static final String CHECKBOX_KEYWORD = "check";
+    public static final String MATRIX_KEYWORD = "matrix";
+    public static final String WORD_PANEL_CLASS = "WordPanel";
+    public static final String CHECKBOX_PANEL_CLASS = "CheckBoxPanel";
+    public static final String NUMBER_PANEL_CLASS = "NumberPanel";
+    public static final String IMAGE_PANEL_CLASS = "ImagePanel";
+    public static final String RADIOBUTTON_PANEL_CLASS = "RadioButtonsPanel";
+    public static final String LIST_PANEL_CLASS = "ListPanel";
+    public static final String MATRIX_PANEL_CLASS = "MatrixPanel";
+    
+    
     // These both must be odd numbers
     public static final int NUM_TILES_HORIZONTAL = 15;
     public static final int NUM_TILES_VERTICAL = 9;
