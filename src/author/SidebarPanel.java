@@ -130,7 +130,6 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 
     private void createNewListItem(Object con) {
         String tempString = (String) ((JSONObject) con).get(Constants.NAME);
-        if (tempstring)
         myListModel.addElement(tempString);
     }
 }
