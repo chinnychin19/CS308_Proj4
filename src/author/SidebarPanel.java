@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
@@ -21,6 +22,7 @@ import org.json.simple.JSONObject;
 
 import author.model.AuthoringCache;
 import constants.Constants;
+import util.TwoStrings;
 
 
 /**
@@ -36,6 +38,8 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
     private AuthoringCache myAuthoringCache;
     private DefaultListModel myListModel;
     private JList mySelectionList;
+    private Set<String[]> myNamesAndCategories = new HashSet<String[]>();
+    private String[] myCurrentSelection;
     private static int exampleNumber = 0;
 
     public SidebarPanel(AuthoringCache ac) {
@@ -56,15 +60,29 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
     }
 
     public void updateList(){
-        myListModel.clear();
+        //myListModel.clear();
+        myNamesAndCategories.clear();
         //myAuthoringCache.mjrTest();   -DO NOT USE AGAIN-       
         JSONObject template = myAuthoringCache.getRawJSON();
         //Set<String> keySet = template.keySet();   -OLD METHOD-         
         Set<String> keySet = new HashSet<String>(); //TESTED 
         keySet.addAll(Arrays.asList(Constants.VIEWABLE_CATEGORIES)); //TESTED
         
-        createSelectionList(template, keySet);
+        populateInternalList(template, keySet);
+        
+        updateListModel();
     }
+
+   private void updateListModel () {
+        // TODO Auto-generated method stub
+        myListModel.clear();
+        for (String[] sArr : myNamesAndCategories){
+            //myListModel.addElement(sArr);//[0] + " (" + sArr[1] + ")");
+            //System.out.println("added that");
+            myListModel.addElement(new TwoStrings(sArr[0], sArr[1]));
+        }
+        
+    }   
 
     private void initialize(AuthoringCache ac) {
         myAuthoringCache = ac;
@@ -105,7 +123,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
         
     }
 
-    private void createSelectionList(JSONObject template, Set<String> keySet) {
+    private void populateInternalList(JSONObject template, Set<String> keySet) {
         for (Object s : keySet) {
             JSONArray locationArray = (JSONArray) template.get(s);
             //createNewListItem("Example"); // TODO: Get rid of this when done testing
@@ -116,20 +134,27 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
             
             for (Object con : locationArray) {
                 if (con != null){
-                    createNewListItem(con);
+                    String[] namecat = new String[2];
+                    namecat[0] = (String) ((JSONObject) con).get(Constants.NAME); 
+                    namecat[1] = (String) s;
+                    myNamesAndCategories.add(namecat);
                 }
             }
         }
     }
 
+    /*
     // For testing
     private void createNewListItem(String s){
         myListModel.addElement(s + exampleNumber);
         exampleNumber++;
     }
 
-    private void createNewListItem(Object con) {
+    private void createNewListItem(Object con, String category) {
         String tempString = (String) ((JSONObject) con).get(Constants.NAME);
+        tempString += " (" + category + ")";
         myListModel.addElement(tempString);
     }
+    */
+
 }

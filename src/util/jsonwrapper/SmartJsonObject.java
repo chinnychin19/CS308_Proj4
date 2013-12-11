@@ -105,6 +105,21 @@ public class SmartJsonObject {
     }
     
     /**
+     * Finds a JSONObject (value) for a given key
+     * Does NOT return myJson
+     * @param key - key in the json object
+     * @return - a JSONObject for the key
+     * @throws NoJSONObjectJsonException
+     */
+    public JSONObject getJSONObject(String key) throws NoJSONObjectJsonException{
+        try{
+            return (JSONObject) myJson.get(key);
+        } catch(Exception e){
+            throw new NoJSONObjectJsonException();
+        }
+    }
+    
+    /**
      * Finds a JsonObject for a given key
      * Turns it into a SmartJSON object
      * @param key - key in the json object

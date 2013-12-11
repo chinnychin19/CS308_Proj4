@@ -142,9 +142,9 @@ public class FakeMainForClassDemos {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-        this.add("NPC", J1);
-        this.add("NPC", J2);
-        this.add("NPC", J3);
+        //this.add("NPC", J1);
+        //this.add("NPC", J2);
+        //this.add("NPC", J3);
         //end test section
     }
 }
