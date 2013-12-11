@@ -16,6 +16,26 @@ import java.awt.event.KeyEvent;
 public class Constants {
     public static final int WIDTH = 800, HEIGHT = 500;
 
+    // WizardBuilder.java status messages
+    public static final String OPENING_MESSAGE = "Opening: ";
+    public static final String STRING_STATUS_MESSAGE = " = string (";
+    public static final String CLOSE_PARENTHESIS = ")";
+    public static final String FAILED_TO_CREATE_PT1 = "Failed to create '";
+    public static final String FAILED_TO_CREATE_PT2 = "'  field, of type '";
+    public static final String FAILED_TO_CREATE_PT3 = "'.";
+    public static final String CATEGORY_NOT_FOUND_MESSAGE = "Category of '";
+    public static final String NOT_FOUND_MESSAGE = "' not found.";
+    public static final String EQUALS_JSONOBJECT = " = JSONObject";
+    public static final String JSONOBJECT_STRING = "JSONObject";
+    public static final String EQUALS_JSONARRAY = " = JSONArray";
+    public static final String JSONARRAY_STRING = "JSONArray";
+    public static final String OBJECT_STRING = "object";
+    public static final String ARRAY_STRING = "array";
+    public static final String STRING_OPEN_PARENTHESIS = "string (";
+    public static final String FAILED_TO_CREATE_VALUE = "Failed to create 'value' field, of type '";
+    public static final String FILE_NOT_FOUND = "File not found. Please try again.";
+    public static final String MALFORMED_JSON_MESSAGE = "Malformed JSON String";
+    
     // WizardBuilder.java Reflection Strings
     public static final String TEXT_KEYWORD = "text";
     public static final String NUMBER_KEYWORD = "number";
@@ -163,6 +183,7 @@ public class Constants {
     public static final String FILENAME_DEFINITION = "definition.json";
     public static final String FILENAME_WORLD = "world.json";
     public static final String FILENAME_SAVESTATE = "saveState2.json";
+    public static final String AUTHOR_PANELS_PATH = "author.panels.";
 
     // JSON keywords for Monster stats
     public static final String STAT_EXP = "exp";
