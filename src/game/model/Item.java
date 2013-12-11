@@ -4,6 +4,7 @@ import game.controller.AbstractBattleMode;
 import game.controller.AbstractMode;
 import game.controller.MainMenuMode;
 import game.model.statisticeffect.AbstractStatisticEffect;
+import game.model.statisticeffect.StatisticEffectFactory;
 
 import org.json.simple.JSONObject;
 
@@ -20,18 +21,17 @@ public abstract class Item extends AbstractItem {
         private String myConsciousness;
         private AbstractStatisticEffect myEffect;
 
-
-        
     public Item (GameModel model, SmartJsonObject definition) {
         super(model, definition);
-        
         loadFromWorld(definition);
     }
     
     public void loadFromWorld (SmartJsonObject definition) {
         try {
                 myConsciousness = definition.getString(Constants.RECIPIENT_ORIGINAL_STATUS);
-                myEffect = new AbstractStatisticEffect(definition.getSmartJsonObject("statisticEffect"));
+                myEffect = new StatisticEffectFactory().produceStatisticEffect(definition);
+                		
+                		//new AbstractStatisticEffect(definition.getSmartJsonObject("statisticEffect"));
         }
         catch (SmartJsonException e) {
 

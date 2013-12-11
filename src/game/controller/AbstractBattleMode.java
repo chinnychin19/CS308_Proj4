@@ -161,10 +161,10 @@ public abstract class AbstractBattleMode extends AbstractMode {
         g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 
         String nameStr = String.format("Name: %s", m.getName());
-        String hpStr = String.format("HP: %d/%d", m.getCurHP(), m.getMaxHP());
-        String lvlStr = String.format("Level: %d", m.getLevel());
-        String atkStr = String.format("Attack: %d", m.getAttack());
-        String defStr = String.format("Defense: %d", m.getDefense());
+        String hpStr = String.format("HP: %d/%d", m.getStat(Constants.STAT_CUR_HP), m.getStat(Constants.STAT_MAX_HP));
+        String lvlStr = String.format("Level: %d", m.getStat(Constants.JSON_LEVEL));
+        String atkStr = String.format("Attack: %d", m.getStat(Constants.STAT_ATTACK));
+        String defStr = String.format("Defense: %d", m.getStat(Constants.STAT_DEFENSE));
 
         int x1 = 15, x2 = 165;
         int y1 = 30;
