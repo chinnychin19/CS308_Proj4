@@ -14,7 +14,6 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
 
 
 /**
- * 
  * @author rtoussaint
  * 
  */

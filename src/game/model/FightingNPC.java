@@ -24,7 +24,6 @@ import constants.Constants;
  * @author rtoussaint
  * 
  */
-//TODO: Use readDefinition 
 public class FightingNPC extends NPC implements Fighter {
     private List<Monster> myParty;
     private String myPostDialogue;
@@ -143,14 +142,6 @@ public class FightingNPC extends NPC implements Fighter {
     @Override
     public void onInteract () {
         facePlayer();
-        // TODO: state changing will be refactored:
-        // AbstractMode mode = getModel().getController().getMode();
-        // mode.addDynamicState(new TextState(mode,
-        // Constants.BORDER_THICKNESS,
-        // Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT,
-        // Constants.WIDTH - 2*Constants.BORDER_THICKNESS,
-        // Constants.DIALOGUE_HEIGHT,
-        // getDialogue()));
         if (!myIsDefeated) {
             
             AbstractMode trainerBattleMode = new TrainerBattleMode(getModel(), getModel()
@@ -172,7 +163,6 @@ public class FightingNPC extends NPC implements Fighter {
                                                Constants.WIDTH - 2 * Constants.BORDER_THICKNESS,
                                                Constants.DIALOGUE_HEIGHT,
                                                myPostDialogue));
-            System.out.println(myPostDialogue);
         }
     }
     
