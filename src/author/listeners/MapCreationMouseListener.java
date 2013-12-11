@@ -24,8 +24,6 @@ public class MapCreationMouseListener implements MouseListener {
     private CanvasTileManager myTileManager;
     private MapCreationView myMapCreationView;
 
-    // private Image myActiveImage;
-
     public MapCreationMouseListener (MapCreationView mapCreation, CanvasTileManager tileManager) {
         myTileManager = tileManager;
         myMapCreationView = mapCreation;
@@ -48,11 +46,11 @@ public class MapCreationMouseListener implements MouseListener {
         int yTile = myTileManager.getVerticalTileNum(y);
 
         System.out.println(Constants.MOUSE_CLICKED_MESSAGE + x + ", " + y);
-        System.out.println(Constants.CLICK_TILE_MESSAGE +
-        		Constants.COLUMN_MESSAGE + myTileManager.getHorizontalTileNum(x) +
-                Constants.ROW_MESSAGE + myTileManager.getVerticalTileNum(y));
+        System.out.println(Constants.CLICK_TILE_MESSAGE + 
+                           Constants.COLUMN_MESSAGE + myTileManager.getHorizontalTileNum(x) + 
+                           Constants.ROW_MESSAGE + myTileManager.getVerticalTileNum(y));
 
-        myTileManager.getTileClickLoc(xTile, yTile);
+        //myTileManager.getTileClickLoc(xTile, yTile);
 
         myMapCreationView.paintAndRecordTile((Graphics2D) myMapCreationView.getGraphics(), xTile, yTile);
         

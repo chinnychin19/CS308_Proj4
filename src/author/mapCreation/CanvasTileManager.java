@@ -73,9 +73,9 @@ public class CanvasTileManager {
 		return a;
 	}
 	
-	public void getTileClickLoc(int x, int y){
-		myWorld.put(new Loc(x, y), new GenericTileWrapper("blah", null/*new Image()*/));
-	}
+	/*public void getTileClickLoc(int x, int y){
+		myWorld.put(new Loc(x, y), new GenericTileWrapper("blah", nullnew Image()));
+	}*/
 
 	public void expandView(){
 		if (	horizontalOffset + getTotalHorizontalTiles() + widthRatio > Constants.MAX_X_COORD

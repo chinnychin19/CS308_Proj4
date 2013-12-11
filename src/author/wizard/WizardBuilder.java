@@ -108,7 +108,7 @@ public class WizardBuilder {
             if (tempObject.get(s) instanceof String) {
                 System.out.println((String) s + Constants.STRING_STATUS_MESSAGE + tempObject.get(s) + Constants.CLOSE_PARENTHESIS);
                 try {
-                    currentPanel.add(createPanel((String) s, (String) tempObject.get(s)));
+                    currentPanel.add(createPanel((String) s, (String) tempObject.get(s)), " ");
                 }
                 catch (Exception e) {
                     System.out.println(Constants.FAILED_TO_CREATE_PT1 + (String) s + Constants.FAILED_TO_CREATE_PT2 +

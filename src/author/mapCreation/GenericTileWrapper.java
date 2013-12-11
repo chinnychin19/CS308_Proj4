@@ -19,4 +19,14 @@ public class GenericTileWrapper {
 	public String getName(){
 		return myName;
 	}
+	
+	@Override
+	public String toString() {
+            if(myImage instanceof BufferedImage && myImage != null) {
+                return myName + " " + "ImageAttached";
+            }
+            else {
+                return myName + " " + "No image!";
+            }
+	}
 }
