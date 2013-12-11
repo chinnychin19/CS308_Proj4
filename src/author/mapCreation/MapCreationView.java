@@ -20,7 +20,7 @@ import constants.Constants;
 public class MapCreationView extends JPanel {
 
     // private WorldTiles myWorld;
-    private BufferedImage myBackground;
+    private BufferedImage myCurrentTileImage;
     private CanvasTileManager myTileManager;
     private WorldCreationMap myWorld;
     private Map<Loc, GenericTileWrapper> myWorldTiles;
@@ -31,7 +31,7 @@ public class MapCreationView extends JPanel {
 
         // Try to get the image of the specified background.
         try {
-            myBackground = ImageIO.read(new File(Constants.TEST_FILE));
+            myCurrentTileImage = ImageIO.read(new File(Constants.TEST_FILE));
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -53,27 +53,22 @@ public class MapCreationView extends JPanel {
     }
 
     public void paintComponent (Graphics g) {
-        g.drawImage(myBackground, 0, 0, getWidth(), getHeight(), null);
+        super.paintComponent(g);
+        if (myWorldTiles != null) {
+            for (Map.Entry<Loc, GenericTileWrapper> tile : myWorldTiles.entrySet()) {
+                paintTile((Graphics2D) this.getGraphics(),
+                          tile.getKey().getX(), tile.getKey().getY());
+            } 
+        }
     }
 
     public void paintAndRecordTile (Graphics2D g, int x, int y) {
+        paintTile(g, x, y);
+        
         double topLeftX = myTileManager.getTileAnchorX(x);
         double topLeftY = myTileManager.getTileAnchorY(y);
-
-        TexturePaint tp =
-                new TexturePaint(myBackground, new Rectangle(0, 0,
-                                                             (int) myTileManager.getTileWidth(),
-                                                             (int) myTileManager.getTileHeight()));
-
-        super.paintComponent(g);
-        g.setPaint(tp);
-        g.fillRect((int) topLeftX, (int) topLeftY, (int) myTileManager.getTileWidth(),
-                   (int) myTileManager.getTileHeight());
-
         myWorld.getWorldTileMap().put(new Loc((int) topLeftX, (int) topLeftY),
-                                      new GenericTileWrapper(Constants.TILENAME, myBackground));
-
-        repaint();
+                                      new GenericTileWrapper(Constants.TILENAME, myCurrentTileImage));
     }
 
     public void paintTile (Graphics2D g, int x, int y) {
@@ -81,7 +76,7 @@ public class MapCreationView extends JPanel {
         double topLeftY = myTileManager.getTileAnchorY(y);
 
         TexturePaint tp =
-                new TexturePaint(myBackground, new Rectangle(0, 0,
+                new TexturePaint(myCurrentTileImage, new Rectangle(0, 0,
                                                              (int) myTileManager.getTileWidth(),
                                                              (int) myTileManager.getTileHeight()));
 
@@ -91,21 +86,15 @@ public class MapCreationView extends JPanel {
     }
 
     public BufferedImage getBackgroundImage () {
-        return myBackground;
+        return myCurrentTileImage;
     }
 
     public void setBackgroundImage (GenericTileWrapper gtw) {
-        myBackground = gtw.getImage();
+        myCurrentTileImage = gtw.getImage();
     }
 
-    @Override
-    public void repaint () {
-        if (myWorldTiles != null) {
-            for (Map.Entry<Loc, GenericTileWrapper> tile : myWorldTiles.entrySet()) {
-                paintTile((Graphics2D) this.getGraphics(),
-                          tile.getKey().getX(), tile.getKey().getY());
-            } 
-        }
+    public void repaint (Graphics g) {
+        paintComponent(g);
     }
 
     public Map<Loc, GenericTileWrapper> getMyWorldTiles () {
