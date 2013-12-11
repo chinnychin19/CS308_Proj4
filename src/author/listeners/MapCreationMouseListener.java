@@ -4,7 +4,7 @@ package author.listeners;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import javax.swing.JPanel;
 import constants.Constants;
 import author.mapCreation.CanvasTileManager;
 import author.mapCreation.MapCreationView;
@@ -38,6 +38,9 @@ public class MapCreationMouseListener implements MouseListener {
 
     @Override
     public void mouseClicked (MouseEvent arg0) {
+        
+        JPanel parentPanel = (JPanel) arg0.getSource();
+        parentPanel.requestFocus();
 
         int x = arg0.getX();
         int y = arg0.getY();

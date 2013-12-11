@@ -180,7 +180,7 @@ public class Constants {
     public static final int LEFT_ARROW_KEY = KeyEvent.VK_LEFT;
 
     // GUI Sizing Constants
-    public static final Dimension FRAME_SIZE = new Dimension(1024, 620);
+    public static final Dimension FRAME_SIZE = new Dimension(1024, 680);
     public static final Dimension BUTTON_SIZE = new Dimension(198, 28);
     public static final Dimension TEXT_AREA_SIZE = new Dimension(400, 32);
     public static final Dimension SIDEBAR_SIZE = new Dimension(200, 600);
