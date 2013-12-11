@@ -23,7 +23,6 @@ public class PlaceableObjectsListListener implements ListSelectionListener {
         boolean selectionEmpty = lsm.isSelectionEmpty();
 
         if (!isAdjusting && !selectionEmpty) {
-
             myPlaceableObjectsList.chooseListElement(firstIndex);
         }
     }

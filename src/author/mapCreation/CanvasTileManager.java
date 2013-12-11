@@ -115,11 +115,11 @@ public class CanvasTileManager {
 	}
 	
 	public double getTileAnchorX(int x) {
-	    return x * tileWidth;
+	    return (x + horizontalOffset) * tileWidth;
 	}
 	
 	public double getTileAnchorY(int y) {
-	    return y * tileHeight;
+	    return (y + verticalOffset) * tileHeight;
 	}
 
 	public void increaseHorizontalOffset(){
