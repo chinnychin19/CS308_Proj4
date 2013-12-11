@@ -28,13 +28,14 @@ public class World {
     private GameModel myModel;
     private JSONObject myWorldJSON;
     private String myNameOfGame;
-
-    public World (String nameOfGame, GameModel model) throws Exception {
+    private String mySession;
+    public World (String nameOfGame, String session, GameModel model) throws Exception {
         myNameOfGame = nameOfGame;
+        mySession = session;
         myViewableObjects = new HashMap<Loc, AbstractViewableObject>();
         myGroundObjects = new HashMap<Loc, AbstractGround>();
         String worldJSONFilepath = Constants.FOLDERPATH_GAMES + "/" + myNameOfGame + "/" +
-                Constants.FILENAME_SAVESTATE;
+                mySession;
         myModel = model;
         myWorldJSON = JSONReader.getJSON(worldJSONFilepath);
         setUpWorld(myWorldJSON);

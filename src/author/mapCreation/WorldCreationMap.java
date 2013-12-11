@@ -15,7 +15,6 @@ import location.Loc;
  */
 
 public class WorldCreationMap {
-
         
 	private Map<Loc, GenericTileWrapper> myTileMap;
 	

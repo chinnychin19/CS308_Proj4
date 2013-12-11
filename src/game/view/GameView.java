@@ -31,14 +31,14 @@ public class GameView extends JPanel {
     private Graphics myGraphics;
     private GameController myController;
 
-    public GameView (String nameOfGame) {
+    public GameView (String nameOfGame, String session) {
         setFocusable(true);
         myImage = new BufferedImage(Constants.WIDTH, Constants.HEIGHT, BufferedImage.TYPE_INT_RGB);
         myGraphics = myImage.getGraphics();
         myBackground = new ImageIcon(Constants.FILE_NAME_SHORT_GRASS).getImage(); // TODO: no. not
                                                                                  // this. Ground
                                                                                  // objects.
-        myController = new GameController(nameOfGame, this);
+        myController = new GameController(nameOfGame, session,this);
         myController.loadState(); // ought to be called by a user input
     }
     
