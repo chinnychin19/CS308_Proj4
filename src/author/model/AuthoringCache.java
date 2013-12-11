@@ -24,7 +24,6 @@ public class AuthoringCache {
         for (String category : Constants.CATEGORIES) {
             myJSON.put(category, new JSONArray());
         }
-        //myJSON.put("TestThing", new JSONArray());
     }
 
     @SuppressWarnings("unchecked")
@@ -38,7 +37,7 @@ public class AuthoringCache {
         JSONArray cache = (JSONArray) myJSON.get(category);
         for (int i = 0; i < cache.size(); i++) {
             JSONObject jobject = (JSONObject) cache.get(i);
-            if (jobject.get("name").equals(name)) {
+            if (jobject.get(Constants.NAME).equals(name)) {
                 cache.remove(i);
                 break;
             }
@@ -49,7 +48,7 @@ public class AuthoringCache {
         JSONArray cache = (JSONArray) myJSON.get(category);
         for (Object object : cache) {
             JSONObject jObject = (JSONObject) object;
-            if (jObject.get("name").equals(name)) { return copy(jObject); }
+            if (jObject.get(Constants.NAME).equals(name)) { return copy(jObject); }
         }
         return null;
     }
@@ -63,13 +62,13 @@ public class AuthoringCache {
         JSONArray cache = (JSONArray) myJSON.get(category);
         for (Object object : cache) {
             JSONObject jobject = (JSONObject) object;
-            if (jobject.get("name").equals(name)) { return true; }
+            if (jobject.get(Constants.NAME).equals(name)) { return true; }
         }
         return false;
     }
 
     public void update (String category, JSONObject data) {
-        delete(category, (String) data.get("name"));
+        delete(category, (String) data.get(Constants.NAME));
         add(category, data);
     }
     

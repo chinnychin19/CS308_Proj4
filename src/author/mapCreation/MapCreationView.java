@@ -34,7 +34,6 @@ public class MapCreationView extends JPanel {
             myBackground = ImageIO.read(new File(Constants.TEST_SHORTGRASS_PNG_FILEPATH));
         }
         catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -72,7 +71,7 @@ public class MapCreationView extends JPanel {
                    (int) myTileManager.getTileHeight());
 
         myWorld.getWorldTileMap().put(new Loc((int) topLeftX, (int) topLeftY),
-                                      new GenericTileWrapper("tileName", myBackground));
+                                      new GenericTileWrapper(Constants.TILENAME, myBackground));
 
         repaint();
     }

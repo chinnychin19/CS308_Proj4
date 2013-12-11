@@ -17,6 +17,7 @@ public class Constants {
     public static final int WIDTH = 800, HEIGHT = 500;
 
     // WizardBuilder.java status messages
+    public static final String WIZARD_STRING = "wizard";
     public static final String OPENING_MESSAGE = "Opening: ";
     public static final String STRING_STATUS_MESSAGE = " = string (";
     public static final String CLOSE_PARENTHESIS = ")";
@@ -36,6 +37,13 @@ public class Constants {
     public static final String FILE_NOT_FOUND = "File not found. Please try again.";
     public static final String MALFORMED_JSON_MESSAGE = "Malformed JSON String";
     
+    // Other status messages
+    public static final String SELECTED_MESSAGE = " selected.";
+    public static final String MENU_POPULATED_MESSAGE = "Menu Populated with ";
+    public static final String CLICKED_ALT_TEMPLATE = "Clicked 'Choose Alternate Template'";
+    public static final String CLICKED_NEW_MAP = "Clicked 'Create New Map'";
+    public static final String CLICKED_LOAD_GAME = "Clicked 'Load Existing Game'";
+    
     // WizardBuilder.java Reflection Strings
     public static final String TEXT_KEYWORD = "text";
     public static final String NUMBER_KEYWORD = "number";
@@ -52,6 +60,13 @@ public class Constants {
     public static final String LIST_PANEL_CLASS = "ListPanel";
     public static final String MATRIX_PANEL_CLASS = "MatrixPanel";
     
+    // Image selection constante
+    public static final String SELECT_IMAGE_PROMPT = "Select image...";
+    public static final String IMAGE_FILE_TYPES = "Image files (JPEG, GIF, PNG)";
+    public static final String JPG_EXTENSION = "jpg";
+    public static final String JPEG_EXTENSION = "jpeg";
+    public static final String GIF_EXTENTION = "gif";
+    public static final String PNG_EXTENSION = "png";
     
     // These both must be odd numbers
     public static final int NUM_TILES_HORIZONTAL = 15;
@@ -82,7 +97,15 @@ public class Constants {
     public static final String RIGHT = "right";
     public static final String LEFT = "left";
 
+    // Listener Keywords
+    public static final String MOUSE_CLICKED_MESSAGE = "Mouse clicked at: ";
+    public static final String CLICK_TILE_MESSAGE = "Click translates to tile ";
+    public static final String COLUMN_MESSAGE = "column: ";
+    public static final String ROW_MESSAGE = ", row: ";
+    public static final String TILENAME = "tileName";
+    
     // JSON keywords
+    public static final String JSON_EXTENSION = ".json";
     public static final String JSON_PLAYER = "Player";
     public static final String JSON_KEYITEM = "KeyItem";
     public static final String JSON_STATUS = "Status";

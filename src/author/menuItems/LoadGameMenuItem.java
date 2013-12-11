@@ -26,7 +26,7 @@ public class LoadGameMenuItem extends AbstractMenuItem {
 	}
 
 	private void handleLoadExistingGame(){
-		System.out.println("Clicked 'Load Existing Game'");
+		System.out.println(Constants.CLICKED_LOAD_GAME);
 	}
 	
 	
