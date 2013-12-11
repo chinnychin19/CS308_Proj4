@@ -1,9 +1,16 @@
 package author.model;
 
 //import java.io.StringWriter;
+import java.util.LinkedList;
+import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.NoJSONArrayJsonException;
+import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
 
 import author.AuthorView;
 import constants.Constants;
@@ -17,20 +24,23 @@ public class AuthoringCache {
         myJSON = new JSONObject();
         myView = av;
         initCategories();
+        //mjrTest();
     }
 
+
+
     @SuppressWarnings("unchecked")
-	private void initCategories () {
+    private void initCategories () {
         for (String category : Constants.CATEGORIES) {
             myJSON.put(category, new JSONArray());
         }
     }
 
     @SuppressWarnings("unchecked")
-	public void add (String category, JSONObject data) {
+    public void add (String category, JSONObject data) {
         JSONArray cache = (JSONArray) myJSON.get(category);
         cache.add(data);
-        myView.updateMenu();
+        myView.updateMenuAndSidebar();
     }
 
     public void delete (String category, String name) {
@@ -53,6 +63,16 @@ public class AuthoringCache {
         return null;
     }
 
+    public List<String> getAllInstanceNamesInCategory(String category){
+        List<String> allNames = new LinkedList<String>();
+        JSONArray cache = (JSONArray) myJSON.get(category);        
+        for (Object object : cache) {
+            JSONObject jObject = (JSONObject) object;
+            allNames.add((String) jObject.get(Constants.NAME));
+        }
+        return allNames;
+    }
+
     private JSONObject copy (JSONObject object) {
         String asString = JSONValue.toJSONString(object); // get string representation
         return (JSONObject) JSONValue.parse(asString); // return a new json object with same data
@@ -71,8 +91,10 @@ public class AuthoringCache {
         delete(category, (String) data.get(Constants.NAME));
         add(category, data);
     }
-    
+
     public JSONObject getRawJSON() {
-    	return myJSON;
+        return myJSON;
     }
+
+    
 }

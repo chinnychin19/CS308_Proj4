@@ -6,6 +6,8 @@ import java.io.File;
 import javax.swing.JFrame;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import constants.Constants;
 import author.AuthorView;
 import author.ImageDisplayer;
@@ -122,5 +124,27 @@ public class FakeMainForClassDemos {
         frame.getContentPane().add(imgPicker, BorderLayout.CENTER);
         frame.pack();
         frame.setVisible(true);        
+    }
+    
+    public void mjrTest () {
+        // TODO Auto-generated method stub
+        //for testing
+        JSONObject J1 = null;
+        JSONObject J2 = null;
+        JSONObject J3 = null;
+        JSONParser parser = new JSONParser();
+        try {
+            J1 = (JSONObject) parser.parse("{\"name\":\"thing1\"}");
+            J2 = (JSONObject) parser.parse("{\"name\":\"thing2\"}");
+            J3 = (JSONObject) parser.parse("{\"name\":\"thing3\"}");
+        }
+        catch (ParseException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        this.add("NPC", J1);
+        this.add("NPC", J2);
+        this.add("NPC", J3);
+        //end test section
     }
 }

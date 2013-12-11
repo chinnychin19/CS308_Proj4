@@ -96,8 +96,9 @@ public class AuthorView extends JFrame {
         }
     }
     
-    public void updateMenu () {
+    public void updateMenuAndSidebar () {
         ((EditEntitySubMenu) av.getJMenuBar().getMenu(1).getItem(0)).refreshMenu();
+        sidebarPanel.updateList();
     }
 
 }
