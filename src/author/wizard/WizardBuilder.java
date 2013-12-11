@@ -151,7 +151,7 @@ public class WizardBuilder {
     private void handleJSONArray (String panelLabel, JSONArray arr, JPanel currentPanel) {
         JPanel container = new ContainerPanel(panelLabel, Constants.ARRAY_STRING);
         currentPanel.add(container);
-        iterateOverJSONArray(arr, container, "");
+        iterateOverJSONArray(arr, container, Constants.EMPTY_STRING);
     }
 
     private Component createPanel (String fieldName, String fieldType)
@@ -165,7 +165,7 @@ public class WizardBuilder {
         String[] fields = fieldType.split("_");
         String basicFieldType = (fields[0].equals(Constants.LIST_KEYWORD)) ? fields[1] : fields[0];
         String limitedFieldType = (fields[0].equals(Constants.LIST_KEYWORD)) ? fieldType.substring(5) : fieldType;
-        String outputString = "";
+        String outputString = Constants.EMPTY_STRING;
 
         /**
          * We need this to be changed because it doens't work on a Mac
@@ -235,7 +235,7 @@ public class WizardBuilder {
     private SmartJsonObject getJSON (String filepath) {
         try {
 	        BufferedReader reader = new BufferedReader(new FileReader(filepath));
-	        String line, results = "";
+	        String line, results = Constants.EMPTY_STRING;
 	        while( ( line = reader.readLine() ) != null) {
 	            results += line;
 	        }
