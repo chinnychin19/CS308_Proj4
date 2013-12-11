@@ -8,7 +8,14 @@ import javax.swing.ImageIcon;
 import constants.Constants;
 import util.jsonwrapper.SmartJsonObject;
 
-
+/**
+ * A Viewable Object that is placed on the world.  It is an item used to heal all monster's in a Player's party, 
+ * when the player chooses to interact with the healItem.  After interacting, all monsters have their curHP changed 
+ * to maxHP
+ * 
+ * @author rtoussaint
+ *
+ */
 public class HealItem extends AbstractViewableObject {
 
     private Image myImage;
