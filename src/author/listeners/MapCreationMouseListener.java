@@ -53,8 +53,6 @@ public class MapCreationMouseListener implements MouseListener {
                            Constants.COLUMN_MESSAGE + myTileManager.getHorizontalTileNum(x) + 
                            Constants.ROW_MESSAGE + myTileManager.getVerticalTileNum(y));
 
-        //myTileManager.getTileClickLoc(xTile, yTile);
-
         myMapCreationView.paintAndRecordTile((Graphics2D) myMapCreationView.getGraphics(), xTile, yTile);
         
         System.out.println(myMapCreationView.getMyWorldTiles().toString());

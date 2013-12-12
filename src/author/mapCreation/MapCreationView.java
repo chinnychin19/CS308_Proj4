@@ -55,6 +55,7 @@ public class MapCreationView extends JPanel {
         initListeners();
         
         singleton = this;
+        this.setVisible(true);
     }
 
     /**

@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -54,30 +55,31 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 
     @Override
     public void valueChanged (ListSelectionEvent arg0) {
-        // TODO: Make this change what type of tile you are adding to the map
 
-        System.out.println("Selected");
-        
-        if (arg0.getValueIsAdjusting()) { // to ensure this is only printed once
-            String str = mySelectionList.getSelectedValue().toString();
-            System.out.println(str + Constants.SELECTED_MESSAGE);
+        String s = JOptionPane.showInputDialog("Any additional information?");
+
+        if (mySelectionList.getSelectedValue() != null) {
+            
+            GenericTileWrapper gtw = (GenericTileWrapper) mySelectionList.getSelectedValue();
+            
+            if (s.length() > 0 && s != null) {
+                gtw.setMyAdditionalInformation(s);
+            }
+
+            myMapCreationView.setCurrentTileImage(gtw);
+            myMapCreationView.setCurrentTileName(gtw);
+            myMapCreationView.setCurrentTileType(gtw);
         }
-        
-        GenericTileWrapper gtw = (GenericTileWrapper) mySelectionList.getSelectedValue();
-        myMapCreationView.setCurrentTileImage(gtw);
-        myMapCreationView.setCurrentTileName(gtw);
-        myMapCreationView.setCurrentTileType(gtw);
-
     }
 
     public void updateList () {
-        
+
         // myListModel.clear();
         myObjectAttributes.clear();
-        
+
         // myAuthoringCache.mjrTest(); -DO NOT USE AGAIN-
         JSONObject template = myAuthoringCache.getRawJSON();
-        
+
         // Set<String> keySet = template.keySet(); -OLD METHOD-
         Set<String> keySet = new HashSet<String>(); // TESTED
         keySet.addAll(Arrays.asList(Constants.VIEWABLE_CATEGORIES)); // TESTED
@@ -119,6 +121,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
         JTextArea listText = createSidebarPrompt();
         this.add(listText);
         this.add(listScrollPane);
+        this.setVisible(true);
     }
 
     private JTextArea createSidebarPrompt () {
@@ -154,7 +157,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 
                     attributes[0] = (String) ((JSONObject) con).get(Constants.NAME);
                     attributes[1] = (String) s;
-                    
+
                     System.out.println("attribute2: " + attributes[0]);
                     System.out.println("attribute1: " + attributes[1]);
 
@@ -177,7 +180,8 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
-                    System.out.println("NEW ATTRIBUTES: " + "[" + attributes[0] + " " + attributes[1] + " " + attributes[2]);
+                    System.out.println("NEW ATTRIBUTES: " + "[" + attributes[0] + " " +
+                                       attributes[1] + " " + attributes[2]);
                     myObjectAttributes.add(attributes);
                 }
             }
