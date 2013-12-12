@@ -18,10 +18,11 @@ import constants.Constants;
  * 
  */
 
-@SuppressWarnings("serial")
+
 public class WriteJSONOutputMenuItem extends AbstractMenuItem {
 
-    private AuthoringCache myAuthoringCache;
+	private static final long serialVersionUID = 2257496413171118641L;
+	private AuthoringCache myAuthoringCache;
 
     public WriteJSONOutputMenuItem (AuthoringCache ac) {
         super(Constants.WRITE_JSON_TO_FILE);

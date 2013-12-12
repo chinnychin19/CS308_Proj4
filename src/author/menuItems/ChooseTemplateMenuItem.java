@@ -14,8 +14,9 @@ import constants.Constants;
  *
  */
 
-@SuppressWarnings("serial")
 public class ChooseTemplateMenuItem extends AbstractMenuItem {
+
+	private static final long serialVersionUID = 2425169190310186621L;
 
 	public ChooseTemplateMenuItem() {
 		super(Constants.CHOOSE_ALTERNATE_TEMPLATE);
@@ -27,8 +28,6 @@ public class ChooseTemplateMenuItem extends AbstractMenuItem {
 	}
 
 	private void handleChooseAltTemplate(){
-		
-		
 		System.out.println(Constants.CLICKED_ALT_TEMPLATE);
 	}
 	

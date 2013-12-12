@@ -14,8 +14,9 @@ import constants.Constants;
  *
  */
 
-@SuppressWarnings("serial")
 public class AuthorViewListMenu extends JMenu {
+
+	private static final long serialVersionUID = 7761261408475568495L;
 
 	public AuthorViewListMenu(AuthoringCache ac){
 		super(Constants.LIST_MENU);

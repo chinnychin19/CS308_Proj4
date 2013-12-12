@@ -25,10 +25,10 @@ import constants.Constants;
  *
  */
 
-@SuppressWarnings("serial")
 public class LoadGameMenuItem extends AbstractMenuItem {
 
-    private AuthoringCache myAuthoringCache;
+	private static final long serialVersionUID = -3848391690817727706L;
+	private AuthoringCache myAuthoringCache;
     
 	public LoadGameMenuItem(AuthoringCache cache) {
 		super(Constants.LOAD_EXISTING_GAME);
@@ -43,7 +43,7 @@ public class LoadGameMenuItem extends AbstractMenuItem {
 	private void handleLoadExistingGame(){
 		System.out.println(Constants.CLICKED_LOAD_GAME);
 		JFileChooser chooser = FileChooserSingleton.getInstance();
-		chooser.setFileFilter(new FileNameExtensionFilter("JSON files", "json"));
+		chooser.setFileFilter(new FileNameExtensionFilter(Constants.JSON_FILES_STRING, Constants.JSON_STRING));
 		int returnVal = chooser.showOpenDialog(this);
 		
 		boolean userOk = 

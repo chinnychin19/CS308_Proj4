@@ -110,6 +110,8 @@ public class Constants {
     public static final String JSON_KEYITEM = "KeyItem";
     public static final String JSON_STATUS = "Status";
     public static final String JSON_STATUS_LOWERCASE = "status";
+    public static final String JSON_FILES_STRING = "JSON files";
+    public static final String JSON_STRING = "json";
 
     public static final String JSON_IMAGE = "image";
     public static final String JSON_IMAGE_UP = "image-up";

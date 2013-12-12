@@ -12,8 +12,9 @@ import constants.Constants;
  *
  */
 
-@SuppressWarnings("serial")
 public class CreateMapMenuItem extends AbstractMenuItem {
+
+	private static final long serialVersionUID = 5591367851561514783L;
 
 	public CreateMapMenuItem() {
 		super(Constants.CREATE_NEW_MAP);
