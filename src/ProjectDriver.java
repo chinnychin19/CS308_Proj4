@@ -1,4 +1,3 @@
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -6,7 +5,9 @@ import javax.swing.JPanel;
 
 public class ProjectDriver extends JFrame {
     
-    private JPanel myJPanel;
+	private static final long serialVersionUID = 4899616470290834243L;
+	
+	private JPanel myJPanel;
     private JButton gameDriverButton;
     private JButton authorDriverButton;
     private String AUTHOR_DRIVER_STRING = "Create a world";
