@@ -8,7 +8,7 @@ import author.mapCreation.MapCreationView;
 import author.menuItems.AuthorViewListMenu;
 import author.menuItems.AuthorViewFileMenu;
 import author.menuItems.AuthorViewViewMenu;
-import author.menuItems.ViewEntitySubMenu;
+import author.menuItems.ListEntitySubMenu;
 import author.model.AuthoringCache;
 import constants.Constants;
 
@@ -107,7 +107,7 @@ public class AuthorView extends JFrame {
      * on new game objects added to the authoring cache.
      */
     public void updateMenuAndSidebar () {
-        ((ViewEntitySubMenu) av.getJMenuBar().getMenu(1).getItem(0)).refreshMenu();
+        ((ListEntitySubMenu) av.getJMenuBar().getMenu(1).getItem(0)).refreshMenu();
         sidebarPanel.updateList();
     }
 

@@ -18,12 +18,12 @@ import author.model.AuthoringCache;
  */
 
 @SuppressWarnings("serial")
-public class ViewEntitySubMenu extends AbstractMenu {
+public class ListEntitySubMenu extends AbstractMenu {
 
     private AuthoringCache myCache;
     private JMenu me = this;
 
-    public ViewEntitySubMenu (AuthoringCache cache) {
+    public ListEntitySubMenu (AuthoringCache cache) {
         super(Constants.LIST_ENTITY_SUBMENU);
 
         myCache = cache;
@@ -44,7 +44,7 @@ public class ViewEntitySubMenu extends AbstractMenu {
             for (Object con : locationArray) {
                 String tempString = (String) ((JSONObject) con).get(Constants.NAME);
                 JMenuItem item = new JMenuItem(tempString);
-                item.addActionListener(new LaunchWizardListener((String) s,myCache));
+                //item.addActionListener(new LaunchWizardListener((String) s,myCache));
                 menu.add(item);
             }
 

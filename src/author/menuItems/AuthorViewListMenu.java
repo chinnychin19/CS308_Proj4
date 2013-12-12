@@ -23,7 +23,7 @@ public class AuthorViewListMenu extends JMenu {
 	}
 	
 	private void addEditEntitySubMenu(AuthoringCache ac){
-		ViewEntitySubMenu item = new ViewEntitySubMenu(ac);
+		ListEntitySubMenu item = new ListEntitySubMenu(ac);
 		this.add(item);
 	}
 	
