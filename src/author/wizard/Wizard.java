@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import constants.Constants;
 
@@ -71,8 +72,10 @@ public class Wizard extends JDialog {
 
         myCardLayout = new CardLayout();
         myCardPanel = new JPanel();
+        JScrollPane jsp = new JScrollPane(myCardPanel);
+        
 
-        this.add(myCardPanel);
+        this.add(jsp);
 
         myCardPanel.setLayout(myCardLayout);
     }
