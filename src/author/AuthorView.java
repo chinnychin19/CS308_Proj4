@@ -5,10 +5,10 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import author.mapCreation.MapCreationView;
-import author.menuItems.AuthorViewEditMenu;
+import author.menuItems.AuthorViewListMenu;
 import author.menuItems.AuthorViewFileMenu;
 import author.menuItems.AuthorViewViewMenu;
-import author.menuItems.EditEntitySubMenu;
+import author.menuItems.ViewEntitySubMenu;
 import author.model.AuthoringCache;
 import constants.Constants;
 
@@ -81,7 +81,7 @@ public class AuthorView extends JFrame {
         ac = new AuthoringCache(this);
 
         menuBar.add(new AuthorViewFileMenu(ac)); // File
-        menuBar.add(new AuthorViewEditMenu(ac)); // Edit
+        menuBar.add(new AuthorViewListMenu(ac)); // Edit
         menuBar.add(new AuthorViewViewMenu(ac)); // View
 
         // Set the menu bar to the frame.
@@ -107,7 +107,7 @@ public class AuthorView extends JFrame {
      * on new game objects added to the authoring cache.
      */
     public void updateMenuAndSidebar () {
-        ((EditEntitySubMenu) av.getJMenuBar().getMenu(1).getItem(0)).refreshMenu();
+        ((ViewEntitySubMenu) av.getJMenuBar().getMenu(1).getItem(0)).refreshMenu();
         sidebarPanel.updateList();
     }
 

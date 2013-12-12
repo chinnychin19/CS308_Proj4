@@ -15,15 +15,15 @@ import constants.Constants;
  */
 
 @SuppressWarnings("serial")
-public class AuthorViewEditMenu extends JMenu {
+public class AuthorViewListMenu extends JMenu {
 
-	public AuthorViewEditMenu(AuthoringCache ac){
-		super(Constants.EDIT_MENU);
+	public AuthorViewListMenu(AuthoringCache ac){
+		super(Constants.LIST_MENU);
 		this.addEditEntitySubMenu(ac);
 	}
 	
 	private void addEditEntitySubMenu(AuthoringCache ac){
-		EditEntitySubMenu item = new EditEntitySubMenu(ac);
+		ViewEntitySubMenu item = new ViewEntitySubMenu(ac);
 		this.add(item);
 	}
 	

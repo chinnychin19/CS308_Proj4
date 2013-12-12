@@ -189,10 +189,10 @@ public class Constants {
 
     // Authoring JMenu Options Constants
     public static final String FILE_MENU = "File";
-    public static final String EDIT_MENU = "Edit";
+    public static final String LIST_MENU = "List";
     public static final String VIEW_MENU = "View";
     public static final String NEW_ENTITY_SUBMENU = "New Entity";
-    public static final String EDIT_ENTITY_SUBMENU = "Edit Existing Entity";
+    public static final String LIST_ENTITY_SUBMENU = "List Existing Entities";
     public static final String CHOOSE_ALTERNATE_TEMPLATE = "Choose Alternate Template (JSON)";
     public static final String LOAD_EXISTING_GAME = "Load Existing Game (JSON)";
     public static final String CREATE_NEW_MAP = "Create New Map";

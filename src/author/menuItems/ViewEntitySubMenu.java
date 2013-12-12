@@ -18,13 +18,13 @@ import author.model.AuthoringCache;
  */
 
 @SuppressWarnings("serial")
-public class EditEntitySubMenu extends AbstractMenu {
+public class ViewEntitySubMenu extends AbstractMenu {
 
     private AuthoringCache myCache;
     private JMenu me = this;
 
-    public EditEntitySubMenu (AuthoringCache cache) {
-        super(Constants.EDIT_ENTITY_SUBMENU);
+    public ViewEntitySubMenu (AuthoringCache cache) {
+        super(Constants.LIST_ENTITY_SUBMENU);
 
         myCache = cache;
         refreshMenu();
