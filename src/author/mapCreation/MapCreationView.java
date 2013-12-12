@@ -42,7 +42,7 @@ public class MapCreationView extends JPanel {
 		// Set JPanel attributes
 		setFocusable(true);
 		this.setPreferredSize(Constants.MAP_CREATOR_SIZE);
-		this.setBackground(Color.BLACK);
+		this.setBackground(Constants.MAP_CREATOR_BACKGROUND_COLOR);
 
 		myCurrentTileImage = null;
 		myCurrentTileName = null;
