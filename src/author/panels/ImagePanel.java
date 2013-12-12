@@ -5,6 +5,10 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 //import java.io.FileNotFoundException;
 //import java.io.FileOutputStream;
 //import java.io.IOException;
@@ -17,6 +21,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import util.FileChooserSingleton;
+import util.FilepathReformatter;
 import author.ImageDisplayer;
 
 @SuppressWarnings("serial")
@@ -65,7 +70,7 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
                 File file = myChooser.getSelectedFile();
                 myFile = file;
                 myImageDisplayer.setImageAndCaption(myFile);
-                copyFileAndSelectCopy();
+                //copyFileAndSelectCopy(); //it's better off in the getUserInput method
             }
         }
         
@@ -74,37 +79,31 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
     @Override
     public Map<String, String> getUserInput () {
         Map<String, String> map = new HashMap<String, String>();
+        
         copyFileAndSelectCopy();
-        String label = myLabel.getText(); 
-        String localFilepath = getFilepathRootedAtFolder(myFile.getAbsolutePath(), "images");
-        localFilepath = makeUnixSafe(localFilepath);
-        map.put(label.substring(0, label.length()-1), localFilepath);
+        
+        String label = myLabel.getText();         
+        FilepathReformatter fr = FilepathReformatter.getInstance();
+        String localFilepath = fr.getFilepathRootedAtFolder(myFile.getAbsolutePath(), "images");
+        String localFilepathUnix  = fr.formatForUnix(localFilepath);
+        
+        map.put(label.substring(0, label.length()-1), localFilepathUnix);
         //map.put(label.substring(0, label.length()-1), "");
+        System.out.println(label + " --> " + localFilepathUnix);
         return map;
-    }
-
-    private String getFilepathRootedAtFolder(String filepath, String folder) {
-        int i = filepath.lastIndexOf(File.separator + "images");
-        String truncatedFilepath = filepath.substring(i+1);
-        return truncatedFilepath;
-    }
-    
-    private String makeUnixSafe (String filepath) {
-        if (File.separator != "/"){
-            filepath.replace(File.separator, "/");
-        }
-        return filepath;
     }
 
     public void copyFileAndSelectCopy(){
         System.out.println("Parent folder: " + myFile.getParent());
         System.out.println("Project's images folder: " + (new File(IMG_FOLDER_FILEPATH)).getAbsolutePath());
-        if ( !myFile.getParentFile().equals(new File(IMG_FOLDER_FILEPATH)) ){
-            File newFile = new File(IMG_FOLDER_FILEPATH + "/" + myFile.getName());
+        Path currentFilePath = myFile.toPath();
+        if ( !currentFilePath.startsWith(IMG_FOLDER_FILEPATH) ){
+            File newFile = new File(IMG_FOLDER_FILEPATH + File.separator + myFile.getName());
+            System.out.println("Target newfile: " + newFile.getAbsolutePath());
             try {
             	// TODO: Commented this all out because it was giving an error
                 newFile.createNewFile();
-                //(myFile.toPath(), new FileOutputStream(newFile));
+                Files.copy(myFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (Exception e){
             	
             }
