@@ -100,5 +100,9 @@ public class AuthorView extends JFrame {
         ((EditEntitySubMenu) av.getJMenuBar().getMenu(1).getItem(0)).refreshMenu();
         sidebarPanel.updateList();
     }
+    
+    public MapCreationView getMapCreationView() {
+        return mapCreationView;
+    }
 
 }

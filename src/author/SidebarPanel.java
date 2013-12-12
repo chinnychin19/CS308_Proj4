@@ -18,6 +18,7 @@ import javax.swing.event.ListSelectionListener;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import author.mapCreation.GenericTileWrapper;
+import author.mapCreation.MapCreationView;
 import author.model.AuthoringCache;
 import constants.Constants;
 import util.jsonwrapper.SmartJsonObject;
@@ -36,9 +37,10 @@ import util.jsonwrapper.jsonexceptions.NoStringValueJsonException;
 public class SidebarPanel extends JPanel implements ListSelectionListener {
 
     private AuthoringCache myAuthoringCache;
+    private MapCreationView myMapCreationView;
     private DefaultListModel myListModel;
     private JList mySelectionList;
-    private Set<String[]> myNamesAndCategories = new HashSet<String[]>();
+    private Set<String[]> myObjectAttributes = new HashSet<String[]>();
     private String[] myCurrentSelection;
     private static int exampleNumber = 0;
 
@@ -47,24 +49,35 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
         initListModel();
         initSelectionList();
         finalizeSidebar();
+        myMapCreationView = ac.getAuthorView().getMapCreationView();
     }
 
     @Override
     public void valueChanged (ListSelectionEvent arg0) {
         // TODO: Make this change what type of tile you are adding to the map
 
+        System.out.println("Selected");
+        
         if (arg0.getValueIsAdjusting()) { // to ensure this is only printed once
             String str = mySelectionList.getSelectedValue().toString();
             System.out.println(str + Constants.SELECTED_MESSAGE);
         }
+        
+        GenericTileWrapper gtw = (GenericTileWrapper) mySelectionList.getSelectedValue();
+        myMapCreationView.setCurrentTileImage(gtw);
+        myMapCreationView.setCurrentTileName(gtw);
+        myMapCreationView.setCurrentTileType(gtw);
 
     }
 
     public void updateList () {
+        
         // myListModel.clear();
-        myNamesAndCategories.clear();
+        myObjectAttributes.clear();
+        
         // myAuthoringCache.mjrTest(); -DO NOT USE AGAIN-
         JSONObject template = myAuthoringCache.getRawJSON();
+        
         // Set<String> keySet = template.keySet(); -OLD METHOD-
         Set<String> keySet = new HashSet<String>(); // TESTED
         keySet.addAll(Arrays.asList(Constants.VIEWABLE_CATEGORIES)); // TESTED
@@ -77,7 +90,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
     private void updateListModel () {
         // TODO Auto-generated method stub
         myListModel.clear();
-        for (String[] sArr : myNamesAndCategories) {
+        for (String[] sArr : myObjectAttributes) {
             // myListModel.addElement(sArr);//[0] + " (" + sArr[1] + ")");
             // System.out.println("added that");
             myListModel.addElement(new GenericTileWrapper(sArr[0], sArr[1], sArr[2]));
@@ -137,26 +150,26 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 
             for (Object con : locationArray) {
                 if (con != null) {
-                    String[] namecat = new String[3];
+                    String[] attributes = new String[3];
 
-                    namecat[0] = (String) ((JSONObject) con).get(Constants.NAME);
-                    namecat[1] = (String) s;
+                    attributes[0] = (String) ((JSONObject) con).get(Constants.NAME);
+                    attributes[1] = (String) s;
                     
-                    System.out.println("namecat0: " + namecat[0]);
-                    System.out.println("namecat1: " + namecat[1]);
+                    System.out.println("attribute2: " + attributes[0]);
+                    System.out.println("attribute1: " + attributes[1]);
 
-                    JSONObject json = myAuthoringCache.getInstance(namecat[1], namecat[0]);
+                    JSONObject json = myAuthoringCache.getInstance(attributes[1], attributes[0]);
                     SmartJsonObject smartJSON;
                     try {
                         smartJSON = new SmartJsonObject(json);
 
                         Set<Object> JSONKeySet = smartJSON.keySet();
 
-                        namecat[2] = "";
+                        attributes[2] = "";
 
                         for (Object o : JSONKeySet) {
                             if (((String) o).contains("image")) {
-                                namecat[2] = smartJSON.getString(((String) o));
+                                attributes[2] = smartJSON.getString(((String) o));
                             }
                         }
                     }
@@ -164,8 +177,8 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
-
-                    myNamesAndCategories.add(namecat);
+                    System.out.println("NEW ATTRIBUTES: " + "[" + attributes[0] + " " + attributes[1] + " " + attributes[2]);
+                    myObjectAttributes.add(attributes);
                 }
             }
         }

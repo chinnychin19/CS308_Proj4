@@ -95,6 +95,10 @@ public class AuthoringCache {
     public JSONObject getRawJSON() {
         return myJSON;
     }
+    
+    public AuthorView getAuthorView() {
+        return myView;
+    }
 
     
 }

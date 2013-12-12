@@ -27,6 +27,8 @@ import constants.Constants;
 
 @SuppressWarnings("serial")
 public class MapCreationView extends JPanel {
+    
+    private MapCreationView singleton;
 
     private BufferedImage myCurrentTileImage;
     private String myCurrentTileName;
@@ -55,6 +57,8 @@ public class MapCreationView extends JPanel {
         myWorldCreationMap = myTileManager.getWorld();
 
         initListeners();
+        
+        singleton = this;
     }
 
     /**
@@ -153,6 +157,14 @@ public class MapCreationView extends JPanel {
     public void setCurrentTileImage (GenericTileWrapper gtw) {
         myCurrentTileImage = gtw.getImage();
     }
+    
+    public void setCurrentTileName (GenericTileWrapper gtw) {
+        myCurrentTileName = gtw.getName();
+    }
+    
+    public void setCurrentTileType (GenericTileWrapper gtw) {
+        myCurrentTileType = gtw.getType();
+    }
 
     public Map<Loc, GenericTileWrapper> getMyWorldTiles () {
         return myWorldCreationMap.getWorldTileMap();
@@ -162,4 +174,13 @@ public class MapCreationView extends JPanel {
         return myTileManager;
     }
 
+    public MapCreationView getMapCreationView() {
+        if (singleton == null) {
+            return new MapCreationView();
+        }
+        else {
+            return singleton;
+        }
+    }
+    
 }

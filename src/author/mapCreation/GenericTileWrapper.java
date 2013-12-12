@@ -21,10 +21,9 @@ public class GenericTileWrapper {
 	public GenericTileWrapper(String name, String type, String imagePath){
             myName = name;
             myType = type;
-            System.out.println(imagePath);
             
             try {
-                myImage = ImageIO.read(new File(JSONObject.escape(imagePath)));
+                myImage = ImageIO.read(new File(imagePath));
             }
             catch (IOException e) {
                 // TODO Auto-generated catch block
