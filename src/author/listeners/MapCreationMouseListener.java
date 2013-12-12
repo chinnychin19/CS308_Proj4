@@ -18,7 +18,7 @@ import author.mapCreation.MapCreationView;
  * coordinates into a game tile depending on the user's current
  * view.
  * 
- * @author Michael Marion
+ * @author Michael Marion, weskpga
  * 
  */
 public class MapCreationMouseListener implements MouseMotionListener, MouseListener {
@@ -63,6 +63,12 @@ public class MapCreationMouseListener implements MouseMotionListener, MouseListe
     @Override
     public void mouseMoved (MouseEvent e) { /* do nothing... */ }
 
+    /**
+     * Handles a mouse click event, which can include a click on a JList
+     * item in the object panel on the right, or a click on the map, in
+     * which case the map will create/delete a tile.
+     * 
+     */
     @Override
     public void mouseClicked (MouseEvent e) {
         
@@ -96,27 +102,15 @@ public class MapCreationMouseListener implements MouseMotionListener, MouseListe
     }
 
     @Override
-    public void mousePressed (MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void mousePressed (MouseEvent e) { /* do nothing */}
 
     @Override
-    public void mouseReleased (MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void mouseReleased (MouseEvent e) { /* do nothing */}
 
     @Override
-    public void mouseEntered (MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void mouseEntered (MouseEvent e) { /* do nothing */}
 
     @Override
-    public void mouseExited (MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void mouseExited (MouseEvent e) { /* do nothing */}
 
 }

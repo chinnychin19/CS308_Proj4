@@ -6,6 +6,13 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
+/**
+ * Listener for the MatrixPanel.  Mostly used to add or subtract
+ * columns from the matrix that you are writing to.
+ * 
+ * @author weskpga
+ *
+ */
 
 public class AddMatrixEntryListener implements ActionListener {
 

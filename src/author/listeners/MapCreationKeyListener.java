@@ -68,50 +68,7 @@ public class MapCreationKeyListener implements KeyListener {
     }
 
     @Override
-    public void keyReleased (KeyEvent e) {
-        int key = e.getKeyCode();
-
-        if (key == Constants.ZOOM_IN_KEY || key == Constants.ZOOM_OUT_KEY) {
-            // Finished changing window size
-            printViewExpandInfo();
-            // myView.repaint();
-        }
-
-        if (key == Constants.UP_ARROW_KEY
-            || key == Constants.DOWN_ARROW_KEY
-            || key == Constants.LEFT_ARROW_KEY
-            || key == Constants.RIGHT_ARROW_KEY) {
-            // Finished changing window
-            printViewShiftInfo();
-            // myView.repaint();
-        }
-    }
-
-    private void printViewExpandInfo () {
-        System.out.println("View size changed to " +
-                           myTileManager.getTotalHorizontalTiles() + " x " +
-                           myTileManager.getTotalVerticalTiles() + " tiles"
-                );
-    }
-
-    private void printViewShiftInfo () {
-        System.out.println("Window moved.  Showing "
-                           +
-                           "columns " +
-                           myTileManager.getHorizontalTileNum(0)
-                           +
-                           " through " +
-                           (myTileManager.getHorizontalTileNum(0) + myTileManager
-                                   .getTotalHorizontalTiles())
-                           +
-                           " and rows " +
-                           myTileManager.getVerticalTileNum(0)
-                           +
-                           " through " +
-                           (myTileManager.getVerticalTileNum(0) + myTileManager
-                                   .getTotalVerticalTiles())
-                );
-    }
+    public void keyReleased (KeyEvent e) { /* do nothing */ }
 
     @Override
     public void keyTyped (KeyEvent e) { /* do nothing... */ }
