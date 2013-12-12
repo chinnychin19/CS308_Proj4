@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import util.OptionPaneSingleton;
 
 import author.AuthorView;
 import constants.Constants;
@@ -19,14 +20,12 @@ public class AuthoringCache {
         myJSON = new JSONObject();
         myView = av;
         initCategories();
-        //mjrTest();
     }
     
     public AuthoringCache () {
         myJSON = new JSONObject();
         myView = null;
         initCategories();
-        //mjrTest();
     }
 
 
@@ -94,6 +93,11 @@ public class AuthoringCache {
     public void update (String category, JSONObject data) {
         delete(category, (String) data.get(Constants.NAME));
         add(category, data);
+    }
+    
+    public void reset() {
+        myJSON = new JSONObject();
+        initCategories();
     }
 
     public JSONObject getRawJSON() {

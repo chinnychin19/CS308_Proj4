@@ -385,6 +385,9 @@ public class Constants {
     public static final String SESSION_NEW_SESSION_KEY = "New Session";
     public static final String SESSION_SESSION_START_KEY = "saveState_";
 
-
+    //Warning messages
+    public static final String RESET_AUTHOR_CACHE_WARNING = "Warning! This will clear the author cache\n" +
+    		"and erase any unsaved worlds.\n" +
+    		"Do you wish to proceed?";
 
 }

@@ -23,7 +23,7 @@ public class AuthorViewFileMenu extends JMenu {
 		addNewEntitySubMenu(ac);
 		
 		this.add(new CreateMapMenuItem());
-		this.add(new LoadGameMenuItem());
+		this.add(new LoadGameMenuItem(ac));
 		this.add(new ChooseTemplateMenuItem());
 		
 	}

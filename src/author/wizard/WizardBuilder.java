@@ -16,10 +16,10 @@ import org.json.simple.JSONArray;
 
 import constants.Constants;
 
+import util.FileChooserSingleton;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.NoJSONArrayJsonException;
 import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
-import author.FileChooserSingleton;
 import author.model.AuthoringCache;
 import author.panels.ContainerPanel;
 import author.panels.FinishPanel;
