@@ -66,6 +66,18 @@ public class Constants {
     public static final String MATRIX_PANEL_CLASS = "MatrixPanel";
     public static final String FINISH_STRING = "Finish";
     
+    // WorldCreationMap Constants
+    public static final String NEW_LIST_MADE_FOR_TYPE = "New list made for type ";
+    public static final String NAME_COLON = "name: ";
+    public static final String Y_COLON = "  y: ";
+    public static final String X_COLON = "  x: ";
+    public static final String AND_FOR_COMPARISON = " and for comparison ";
+    public static final String LIST_STRING = " list";
+	public static final String VALUE_ADDED_TO = "Value added to ";
+	public static final String ADDITIONAL = "additional";
+	public static final String MAP_Y_STRING = "y";
+	public static final String MAP_X_STRING = "x";
+	public static final String MAP_NAME = "name";
     
     // Image selection constants
     public static final String SELECT_IMAGE_PROMPT = "Select image...";

@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -36,191 +35,173 @@ import util.jsonwrapper.jsonexceptions.NoStringValueJsonException;
  * 
  */
 
-@SuppressWarnings("serial")
+@SuppressWarnings("rawtypes")
 public class SidebarPanel extends JPanel implements ListSelectionListener {
 
-    private AuthoringCache myAuthoringCache;
-    private MapCreationView myMapCreationView;
-    private DefaultListModel myListModel;
-    private JList mySelectionList;
-    private Set<String[]> myObjectAttributes = new HashSet<String[]>();
-    private String[] myCurrentSelection;
-    private static int exampleNumber = 0;
+	private static final String NEW_ATTRIBUTES = "NEW ATTRIBUTES: [";
 
-    public SidebarPanel (AuthoringCache ac) {
-        initialize(ac);
-        initListModel();
-        initSelectionList();
-        finalizeSidebar();
-        myMapCreationView = ac.getAuthorView().getMapCreationView();
-    }
+	private static final String ATTRIBUTE1 = "attribute1: ";
 
-    /**
-     * Event listener that listens for a change in the selected value
-     * in the list in the SidebarPanel. Each time this value changes,
-     * a check is first performed to ensure that the new value is not
-     * null, meaning that no new item was selected.
-     * 
-     * The listener then displays a popup asking for any additional
-     * JSON information before pulling the GenericTileWrapper object
-     * from the list and populating the MapCreationView's state with
-     * its data.
-     */
-    @Override
-    public void valueChanged (ListSelectionEvent arg0) {
-        
-        String s = JOptionPane.showInputDialog("Any additional information?");
+	private static final String ATTRIBUTE2 = "attribute2: ";
 
-        if (mySelectionList.getSelectedValue() != null) {
+	private static final long serialVersionUID = 93626670420635935L;
 
-            GenericTileWrapper gtw = (GenericTileWrapper) mySelectionList.getSelectedValue();
+	private AuthoringCache myAuthoringCache;
+	private MapCreationView myMapCreationView;
+	private DefaultListModel myListModel;
+	private JList mySelectionList;
+	private Set<String[]> myObjectAttributes = new HashSet<String[]>();
 
-            if (s != null && s.length() > 0) {
-                gtw.setMyAdditionalInformation(s);
-            }
+	public SidebarPanel (AuthoringCache ac) {
+		initialize(ac);
+		initListModel();
+		initSelectionList();
+		finalizeSidebar();
+		myMapCreationView = ac.getAuthorView().getMapCreationView();
+	}
 
-            myMapCreationView.setCurrentTileImage(gtw);
-            myMapCreationView.setCurrentTileName(gtw);
-            myMapCreationView.setCurrentTileType(gtw);
-        }
-    }
+	/**
+	 * Event listener that listens for a change in the selected value
+	 * in the list in the SidebarPanel. Each time this value changes,
+	 * a check is first performed to ensure that the new value is not
+	 * null, meaning that no new item was selected.
+	 * 
+	 * The listener then displays a popup asking for any additional
+	 * JSON information before pulling the GenericTileWrapper object
+	 * from the list and populating the MapCreationView's state with
+	 * its data.
+	 */
+	@Override
+	public void valueChanged (ListSelectionEvent arg0) {
 
-    public void updateList () {
+		String s = JOptionPane.showInputDialog("Any additional information?");
 
-        // myListModel.clear();
-        myObjectAttributes.clear();
+		if (mySelectionList.getSelectedValue() != null) {
 
-        // myAuthoringCache.mjrTest(); -DO NOT USE AGAIN-
-        JSONObject template = myAuthoringCache.getRawJSON();
+			GenericTileWrapper gtw = (GenericTileWrapper) mySelectionList.getSelectedValue();
 
-        // Set<String> keySet = template.keySet(); -OLD METHOD-
-        Set<String> keySet = new HashSet<String>(); // TESTED
-        keySet.addAll(Arrays.asList(Constants.VIEWABLE_CATEGORIES)); // TESTED
+			if (s != null && s.length() > 0) {
+				gtw.setMyAdditionalInformation(s);
+			}
 
-        populateInternalList(template, keySet);
+			myMapCreationView.setCurrentTileImage(gtw);
+			myMapCreationView.setCurrentTileName(gtw);
+			myMapCreationView.setCurrentTileType(gtw);
+		}
+	}
 
-        updateListModel();
-    }
+	public void updateList () {
 
-    private void updateListModel () {
-        // TODO Auto-generated method stub
-        myListModel.clear();
-        for (String[] sArr : myObjectAttributes) {
-            // myListModel.addElement(sArr);//[0] + " (" + sArr[1] + ")");
-            // System.out.println("added that");
-            myListModel.addElement(new GenericTileWrapper(sArr[0], sArr[1], sArr[2]));
-        }
+		myObjectAttributes.clear();
 
-    }
+		JSONObject template = myAuthoringCache.getRawJSON();
 
-    private void initialize (AuthoringCache ac) {
-        myAuthoringCache = ac;
-        this.setPreferredSize(Constants.SIDEBAR_SIZE);
-        this.setBackground(Color.white);
-        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-    }
+		Set<String> keySet = new HashSet<String>();
 
-    private void initSelectionList () {
-        mySelectionList = new JList(myListModel);
-        mySelectionList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        mySelectionList.setSelectedIndex(0);
-        mySelectionList.addListSelectionListener(this);
-        mySelectionList.setVisibleRowCount(20);
-    }
+		keySet.addAll(Arrays.asList(Constants.VIEWABLE_CATEGORIES));
 
-    private void finalizeSidebar () {
-        JScrollPane listScrollPane = new JScrollPane(mySelectionList);
-        listScrollPane.setPreferredSize(Constants.SIDEBAR_JLIST_SIZE);
-        JTextArea listText = createSidebarPrompt();
-        this.add(listText);
-        this.add(listScrollPane);
-        this.setVisible(true);
-    }
+		populateInternalList(template, keySet);
 
-    private JTextArea createSidebarPrompt () {
-        JTextArea listText = new JTextArea(Constants.SIDEBAR_PROMPT_TEXT);
-        listText.setLineWrap(true);
-        listText.setEditable(false);
-        listText.setPreferredSize(new Dimension(190, 70));
-        listText.setWrapStyleWord(true);
-        return listText;
-    }
+		updateListModel();
+	}
 
-    @SuppressWarnings("unchecked")
-    private void initListModel () {
-        myListModel = new DefaultListModel();
-        this.updateList();
+	@SuppressWarnings("unchecked")
+	private void updateListModel () {
+		myListModel.clear();
+		for (String[] sArr : myObjectAttributes) {
+			myListModel.addElement(new GenericTileWrapper(sArr[0], sArr[1], sArr[2]));
+		}
 
-    }
+	}
 
-    private void populateInternalList (JSONObject template, Set<String> keySet) {
-        for (Object s : keySet) {
-            JSONArray locationArray = (JSONArray) template.get(s);
-            // createNewListItem("Example"); // TODO: Get rid of this when done testing
+	private void initialize (AuthoringCache ac) {
+		myAuthoringCache = ac;
+		this.setPreferredSize(Constants.SIDEBAR_SIZE);
+		this.setBackground(Color.white);
+		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	}
 
-            /*
-             * for (String str : myAuthoringCache.getAllInstanceNamesInCategory("Things")){
-             * createNewListItem(str);
-             * } TEST COMPLETE
-             */
+	@SuppressWarnings("unchecked")
+	private void initSelectionList () {
+		mySelectionList = new JList(myListModel);
+		mySelectionList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		mySelectionList.setSelectedIndex(0);
+		mySelectionList.addListSelectionListener(this);
+		mySelectionList.setVisibleRowCount(20);
+	}
 
-            for (Object con : locationArray) {
-                if (con != null) {
-                    String[] attributes = new String[3];
+	private void finalizeSidebar () {
+		JScrollPane listScrollPane = new JScrollPane(mySelectionList);
+		listScrollPane.setPreferredSize(Constants.SIDEBAR_JLIST_SIZE);
+		JTextArea listText = createSidebarPrompt();
+		this.add(listText);
+		this.add(listScrollPane);
+		this.setVisible(true);
+	}
 
-                    attributes[0] = (String) ((JSONObject) con).get(Constants.NAME);
-                    attributes[1] = (String) s;
+	private JTextArea createSidebarPrompt () {
+		JTextArea listText = new JTextArea(Constants.SIDEBAR_PROMPT_TEXT);
+		listText.setLineWrap(true);
+		listText.setEditable(false);
+		listText.setPreferredSize(new Dimension(190, 70));
+		listText.setWrapStyleWord(true);
+		return listText;
+	}
 
-                    System.out.println("attribute2: " + attributes[0]);
-                    System.out.println("attribute1: " + attributes[1]);
+	private void initListModel () {
+		myListModel = new DefaultListModel();
+		this.updateList();
 
-                    JSONObject json = myAuthoringCache.getInstance(attributes[1], attributes[0]);
-                    SmartJsonObject smartJSON;
-                    try {
-                        smartJSON = new SmartJsonObject(json);
+	}
 
-                        Set<Object> JSONKeySet = smartJSON.keySet();
+	private void populateInternalList (JSONObject template, Set<String> keySet) {
+		for (Object s : keySet) {
+			JSONArray locationArray = (JSONArray) template.get(s);
 
-                        attributes[2] = "";
+			for (Object con : locationArray) {
+				if (con != null) {
+					String[] attributes = new String[3];
 
-                        for (Object o : JSONKeySet) {
-                            if (((String) o).contains("image")) {
-                                String unixStyleTruncatedFilepath = smartJSON.getString(((String) o));
-                                attributes[2] = convertToFullFunctionalFilepath(unixStyleTruncatedFilepath);//smartJSON.getString(((String) o));
-                            }
-                        }
-                    }
-                    catch (NoJSONObjectJsonException | NoStringValueJsonException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                    }
-                    System.out.println("NEW ATTRIBUTES: " + "[" + attributes[0] + " " +
-                                       attributes[1] + " " + attributes[2]);
-                    myObjectAttributes.add(attributes);
-                }
-            }
-        }
-    }
+					attributes[0] = (String) ((JSONObject) con).get(Constants.NAME);
+					attributes[1] = (String) s;
 
-    private String convertToFullFunctionalFilepath (String unixStyleTruncatedFilepath) {
-        // TODO Auto-generated method stub
-        FilepathReformatter fr = FilepathReformatter.getInstance();
-        String correctedSeparators = fr.formatForCurrentSystem(unixStyleTruncatedFilepath);
-        return System.getProperty("user.dir") + File.separator + correctedSeparators;
-    }
+					System.out.println(ATTRIBUTE2 + attributes[0]);
+					System.out.println(ATTRIBUTE1 + attributes[1]);
 
-    /*
-     * // For testing
-     * private void createNewListItem(String s){
-     * myListModel.addElement(s + exampleNumber);
-     * exampleNumber++;
-     * }
-     * 
-     * private void createNewListItem(Object con, String category) {
-     * String tempString = (String) ((JSONObject) con).get(Constants.NAME);
-     * tempString += " (" + category + ")";
-     * myListModel.addElement(tempString);
-     * }
-     */
+					JSONObject json = myAuthoringCache.getInstance(attributes[1], attributes[0]);
+					SmartJsonObject smartJSON;
+					try {
+						smartJSON = new SmartJsonObject(json);
+
+						Set<Object> JSONKeySet = smartJSON.keySet();
+
+						attributes[2] = "";
+
+						for (Object o : JSONKeySet) {
+							if (((String) o).contains(Constants.IMAGE.toLowerCase())) {
+								String unixStyleTruncatedFilepath = smartJSON.getString(((String) o));
+								attributes[2] = convertToFullFunctionalFilepath(unixStyleTruncatedFilepath);
+							}
+						}
+					}
+					catch (NoJSONObjectJsonException | NoStringValueJsonException e1) {
+						e1.printStackTrace();
+					}
+					System.out.println(NEW_ATTRIBUTES + attributes[0] + " " +
+							attributes[1] + " " + attributes[2]);
+					myObjectAttributes.add(attributes);
+				}
+			}
+		}
+	}
+
+	private String convertToFullFunctionalFilepath (String unixStyleTruncatedFilepath) {
+
+		FilepathReformatter fr = FilepathReformatter.getInstance();
+		String correctedSeparators = fr.formatForCurrentSystem(unixStyleTruncatedFilepath);
+		return System.getProperty(Constants.USER_DIR) + File.separator + correctedSeparators;
+
+	}
+
 
 }

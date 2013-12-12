@@ -9,15 +9,18 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import author.listeners.PlaceableObjectsListListener;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("rawtypes")
 public class PlaceableObjectsList extends JPanel {
-    
-    private JList myList;
-    private DefaultListModel myListModel;
+
+	private static final long serialVersionUID = -7538274029501697781L;
+
+	private JList myList;
+	private DefaultListModel myListModel;
     private JScrollPane myListScroller;
     private AbstractViewableObject myCurrentPlaceableObject;
     
-    public PlaceableObjectsList() {
+	@SuppressWarnings("unchecked")
+	public PlaceableObjectsList() {
         myListModel = new DefaultListModel();
         addListElements();
         myList = new JList(myListModel);
