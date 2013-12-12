@@ -113,7 +113,7 @@ public class World {
 //            debug("Category: "+viewableCategory);
             for (Object obj : objectArray) {
                 SmartJsonObject objInWorld = new SmartJsonObject((JSONObject) obj);
-//                debug("Name: " + objInWorld.get(Constants.JSON_NAME));
+                debug("Name: " + objInWorld.getString(Constants.JSON_NAME));
                 SmartJsonObject definition =
                         myModel.getDefinitionCache().
                                 getInstance(viewableCategory, objInWorld.getString(Constants.JSON_NAME));
