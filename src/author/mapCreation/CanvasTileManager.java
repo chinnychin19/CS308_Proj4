@@ -56,8 +56,6 @@ public class CanvasTileManager {
     }
 
     public void configureTiles (int horizontal, int vertical) {
-        // Scales no matter what, but this could cause errors
-        // TODO: Come up with way to check that the parameters will work
         myGCD = GCD(horizontal, vertical);
         widthRatio = horizontal / myGCD;
         heightRatio = vertical / myGCD;
@@ -72,8 +70,8 @@ public class CanvasTileManager {
         middleHorizontalTile = (myGCD * widthRatio) / 2;
         middleVerticalTile = (myGCD * heightRatio) / 2;
 
-        tileWidth = (double) Constants.WIDTH / (getTotalHorizontalTiles());
-        tileHeight = (double) Constants.HEIGHT / (getTotalVerticalTiles());
+        tileWidth = (double) Constants.MAP_CREATOR_SIZE.width / (getTotalHorizontalTiles());
+        tileHeight = (double) Constants.MAP_CREATOR_SIZE.height / (getTotalVerticalTiles());
 
     }
 
@@ -85,12 +83,6 @@ public class CanvasTileManager {
         }
         return a;
     }
-
-    /*
-     * public void getTileClickLoc(int x, int y){
-     * myWorld.put(new Loc(x, y), new GenericTileWrapper("blah", nullnew Image()));
-     * }
-     */
 
     public void expandView () {
         if (horizontalOffset + getTotalHorizontalTiles() + widthRatio > Constants.MAX_X_COORD
