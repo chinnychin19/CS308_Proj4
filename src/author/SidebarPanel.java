@@ -2,6 +2,7 @@ package author;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +23,7 @@ import author.mapCreation.GenericTileWrapper;
 import author.mapCreation.MapCreationView;
 import author.model.AuthoringCache;
 import constants.Constants;
+import util.FilepathReformatter;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
 import util.jsonwrapper.jsonexceptions.NoStringValueJsonException;
@@ -73,7 +75,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 
             GenericTileWrapper gtw = (GenericTileWrapper) mySelectionList.getSelectedValue();
 
-            if (s.length() > 0 && s != null) {
+            if (s != null && s.length() > 0) {
                 gtw.setMyAdditionalInformation(s);
             }
 
@@ -183,7 +185,8 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 
                         for (Object o : JSONKeySet) {
                             if (((String) o).contains("image")) {
-                                attributes[2] = smartJSON.getString(((String) o));
+                                String unixStyleTruncatedFilepath = smartJSON.getString(((String) o));
+                                attributes[2] = convertToFullFunctionalFilepath(unixStyleTruncatedFilepath);//smartJSON.getString(((String) o));
                             }
                         }
                     }
@@ -197,6 +200,13 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
                 }
             }
         }
+    }
+
+    private String convertToFullFunctionalFilepath (String unixStyleTruncatedFilepath) {
+        // TODO Auto-generated method stub
+        FilepathReformatter fr = FilepathReformatter.getInstance();
+        String correctedSeparators = fr.formatForCurrentSystem(unixStyleTruncatedFilepath);
+        return System.getProperty("user.dir") + File.separator + correctedSeparators;
     }
 
     /*

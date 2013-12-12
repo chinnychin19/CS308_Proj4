@@ -40,6 +40,7 @@ public class AuthoringCache {
     @SuppressWarnings("unchecked")
     public void add (String category, JSONObject data) {
         JSONArray cache = (JSONArray) myJSON.get(category);
+        System.out.println("adding " + cache.toString());
         cache.add(data);
         if (myView != null) {
         	myView.updateMenuAndSidebar();

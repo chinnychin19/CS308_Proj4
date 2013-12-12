@@ -67,8 +67,8 @@ public class LoadGameMenuItem extends AbstractMenuItem {
             for (Object s : smartObj.keySet()){
                 JSONArray jArr = smartObj.getJSONArray((String) s);
                 for (Object j : jArr){
-                    myAuthoringCache.add((String) s, (JSONObject) j);                }
-                
+                    myAuthoringCache.add((String) s, (JSONObject) j);                
+                }
             }
         }
         catch (NoJSONObjectJsonException e) {
