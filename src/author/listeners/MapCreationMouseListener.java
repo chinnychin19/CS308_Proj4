@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import constants.Constants;
 import author.mapCreation.CanvasTileManager;
 import author.mapCreation.MapCreationView;
@@ -64,6 +65,7 @@ public class MapCreationMouseListener implements MouseMotionListener, MouseListe
 
     @Override
     public void mouseClicked (MouseEvent e) {
+        
         JPanel parentPanel = (JPanel) e.getSource();
         parentPanel.requestFocus();
 
@@ -73,15 +75,24 @@ public class MapCreationMouseListener implements MouseMotionListener, MouseListe
         int xTile = myTileManager.getHorizontalTileNum(x);
         int yTile = myTileManager.getVerticalTileNum(y);
 
-        System.out.println(Constants.MOUSE_CLICKED_MESSAGE + x + ", " + y);
-        System.out.println(Constants.CLICK_TILE_MESSAGE +
-                           Constants.COLUMN_MESSAGE + myTileManager.getHorizontalTileNum(x) +
-                           Constants.ROW_MESSAGE + myTileManager.getVerticalTileNum(y));
+        
+        if(SwingUtilities.isLeftMouseButton(e)) {
+            System.out.println(Constants.MOUSE_CLICKED_MESSAGE + x + ", " + y);
+            System.out.println(Constants.CLICK_TILE_MESSAGE +
+                               Constants.COLUMN_MESSAGE + myTileManager.getHorizontalTileNum(x) +
+                               Constants.ROW_MESSAGE + myTileManager.getVerticalTileNum(y));
 
-        myMapCreationView.paintAndRecordTile((Graphics2D) myMapCreationView.getGraphics(), xTile,
-                                             yTile);
+            myMapCreationView.paintAndRecordTile((Graphics2D) myMapCreationView.getGraphics(), xTile,
+                                                 yTile);
 
-        System.out.println(myMapCreationView.getMyWorldTiles().toString());
+            System.out.println(myMapCreationView.getMyWorldTiles().toString());
+        }
+        
+        else if (SwingUtilities.isRightMouseButton(e)) {
+            myMapCreationView.removeTileFromMap((Graphics2D) myMapCreationView.getGraphics(), xTile, yTile);
+            myMapCreationView.repaint();
+        }
+        
     }
 
     @Override

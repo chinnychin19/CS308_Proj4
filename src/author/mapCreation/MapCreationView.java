@@ -154,6 +154,12 @@ public class MapCreationView extends JPanel {
                    (int) myTileManager.getTileWidth(),
                    (int) myTileManager.getTileHeight());
     }
+    
+    public void removeTileFromMap(Graphics g, int xTile, int yTile) {
+        Loc location = new Loc(xTile, yTile);
+        myWorldCreationMap.remove(location);
+        super.paintComponent(g);
+    }
 
     /**
      * A boolean check to ensure that the state of the
