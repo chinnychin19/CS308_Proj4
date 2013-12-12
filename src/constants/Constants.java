@@ -185,7 +185,7 @@ public class Constants {
     public static final Dimension TEXT_AREA_SIZE = new Dimension(400, 32);
     public static final Dimension SIDEBAR_SIZE = new Dimension(200, 600);
     public static final Dimension SIDEBAR_JLIST_SIZE = new Dimension(150, 500);
-    public static final Dimension MAP_CREATOR_SIZE = new Dimension(800, 600);
+    public static final Dimension MAP_CREATOR_SIZE = new Dimension(795, 594);
 
     // Authoring JMenu Options Constants
     public static final String FILE_MENU = "File";
@@ -389,5 +389,7 @@ public class Constants {
     public static final String RESET_AUTHOR_CACHE_WARNING = "Warning! This will clear the author cache\n" +
     		"and erase any unsaved worlds.\n" +
     		"Do you wish to proceed?";
+
+	public static final int MAP_BUFFER = 5;
 
 }

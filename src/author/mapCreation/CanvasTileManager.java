@@ -102,6 +102,7 @@ public class CanvasTileManager {
             heightFactor += 1;
             calcNewTileValues();
         }
+        getBorderTiles();
     }
 
     public void contractView () {
@@ -110,6 +111,7 @@ public class CanvasTileManager {
             heightFactor -= 1;
             calcNewTileValues();
         }
+        getBorderTiles();
         // do nothing otherwise
     }
 
@@ -118,7 +120,28 @@ public class CanvasTileManager {
     }
 
     public int getTotalVerticalTiles () {
+    	System.out.println("Vertical Tile numbers here: " + (heightRatio * heightFactor));
         return heightRatio * heightFactor;
+    }
+    
+    public int getFurthestLeftTile(){
+    	System.out.println("Left most tile is: " + horizontalOffset);
+    	return horizontalOffset;
+    }
+    
+    public int getTopTile(){
+    	System.out.println("Top tile is: " + verticalOffset);
+    	return horizontalOffset;
+    }
+    
+    public int getBottomTile(){
+    	System.out.println("Bottom tile is: " + (getTotalVerticalTiles() + verticalOffset));
+    	return getTotalVerticalTiles() + verticalOffset;
+    }
+    
+    public int getFurthestRightTile(){
+    	System.out.println("Right most tile is: " + (horizontalOffset + getTotalHorizontalTiles()));
+    	return horizontalOffset + getTotalHorizontalTiles();
     }
 
     public int getHorizontalTileNum (int xValue) {
@@ -141,13 +164,22 @@ public class CanvasTileManager {
         if (horizontalOffset + getTotalHorizontalTiles() < Constants.MAX_X_COORD) {
             horizontalOffset += 1;
         }
+        getBorderTiles();
         // otherwise do nothing
+    }
+    
+    private void getBorderTiles(){
+    	getFurthestLeftTile();
+    	getFurthestRightTile();
+    	getTopTile();
+    	getBottomTile();
     }
 
     public void decreaseHorizontalOffset () {
         if (horizontalOffset > Constants.MIN_X_COORD) {
             horizontalOffset -= 1;
         }
+        getBorderTiles();
         // otherwise do nothing
     }
 
@@ -155,6 +187,7 @@ public class CanvasTileManager {
         if (verticalOffset + getTotalVerticalTiles() < Constants.MAX_Y_COORD) {
             verticalOffset += 1;
         }
+        getBorderTiles();
         // otherwise do nothing
     }
 
@@ -162,6 +195,7 @@ public class CanvasTileManager {
         if (verticalOffset > Constants.MIN_Y_COORD) {
             verticalOffset -= 1;
         }
+        getBorderTiles();
         // otherwise do nothing
     }
 
