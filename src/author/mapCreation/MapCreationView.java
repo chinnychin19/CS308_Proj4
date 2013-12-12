@@ -29,6 +29,9 @@ import constants.Constants;
 public class MapCreationView extends JPanel {
 
     private BufferedImage myCurrentTileImage;
+    private String myCurrentTileName;
+    private String myCurrentTileType;
+    
     private CanvasTileManager myTileManager;
     private WorldCreationMap myWorldCreationMap;
 
@@ -90,7 +93,7 @@ public class MapCreationView extends JPanel {
      */
     public void paintAndRecordTile (Graphics2D g, int x, int y) {
         paintTile(g, x, y);
-        myWorldCreationMap.put(new Loc(x,y),new GenericTileWrapper(Constants.TILENAME, myCurrentTileImage));
+        myWorldCreationMap.put(new Loc(x,y),new GenericTileWrapper(myCurrentTileName, myCurrentTileType, myCurrentTileImage));
     }
 
     /**

@@ -88,8 +88,8 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
             File newFile = new File(IMG_FOLDER_FILEPATH + "/" + myFile.getName());
             try {
             	// TODO: Commented this all out because it was giving an error
-            	
-                //Files.copy(myFile.toPath(), new FileOutputStream(newFile));
+                newFile.createNewFile();
+                //(myFile.toPath(), new FileOutputStream(newFile));
             } catch (Exception e){
             	
             }
