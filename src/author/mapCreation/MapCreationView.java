@@ -43,14 +43,10 @@ public class MapCreationView extends JPanel {
         setFocusable(true);
         this.setPreferredSize(Constants.MAP_CREATOR_SIZE);
         this.setBackground(Color.BLACK);
-
-        // Get the image of the specified background.
-        try {
-            myCurrentTileImage = ImageIO.read(new File(Constants.TEST_FILE));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        
+        myCurrentTileImage = null;
+        myCurrentTileName = null;
+        myCurrentTileType = null;
 
         // Instantiate the tile manager and world creation map.
         myTileManager = new CanvasTileManager(); // 15, 9
@@ -97,7 +93,9 @@ public class MapCreationView extends JPanel {
      */
     public void paintAndRecordTile (Graphics2D g, int x, int y) {
         paintTile(g, x, y);
-        myWorldCreationMap.put(new Loc(x,y),new GenericTileWrapper(myCurrentTileName, myCurrentTileType, myCurrentTileImage));
+        if(isValueSelected()) {
+            myWorldCreationMap.put(new Loc(x,y),new GenericTileWrapper(myCurrentTileName, myCurrentTileType, myCurrentTileImage));  
+        }       
     }
 
     /**
@@ -109,18 +107,21 @@ public class MapCreationView extends JPanel {
      * @param y
      */
     public void paintTile (Graphics2D g, int x, int y) {
-        TexturePaint tp =
-                new TexturePaint(myCurrentTileImage,
-                                 new Rectangle(0,
-                                               0,
-                                               (int) myTileManager.getTileWidth(),
-                                               (int) myTileManager.getTileHeight()));
+        if(isValueSelected()) {
+            TexturePaint tp =
+                    new TexturePaint(myCurrentTileImage,
+                                     new Rectangle(0,
+                                                   0,
+                                                   (int) myTileManager.getTileWidth(),
+                                                   (int) myTileManager.getTileHeight()));
 
-        g.setPaint(tp);
-        g.fillRect((int) myTileManager.getTileAnchorX(x),
-                   (int) myTileManager.getTileAnchorY(y),
-                   (int) myTileManager.getTileWidth(),
-                   (int) myTileManager.getTileHeight());
+            g.setPaint(tp);
+            g.fillRect((int) myTileManager.getTileAnchorX(x),
+                       (int) myTileManager.getTileAnchorY(y),
+                       (int) myTileManager.getTileWidth(),
+                       (int) myTileManager.getTileHeight());
+        }
+        
     }
     
     /**
@@ -144,6 +145,10 @@ public class MapCreationView extends JPanel {
                    (int) myTileManager.getTileAnchorY(y),
                    (int) myTileManager.getTileWidth(),
                    (int) myTileManager.getTileHeight());
+    }
+    
+    public boolean isValueSelected() {
+        return (myCurrentTileImage != null && myCurrentTileName !=null && myCurrentTileType != null);
     }
 
     /*
