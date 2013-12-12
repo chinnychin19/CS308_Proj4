@@ -384,12 +384,18 @@ public class Constants {
     public static final String SESSION_ENTER_NEW_SESSION_TEXT = "Please input the new sessions name\n";
     public static final String SESSION_NEW_SESSION_KEY = "New Session";
     public static final String SESSION_SESSION_START_KEY = "saveState_";
+    
+    // GUI Colors
+    public static final int RGB_RED = 112;
+    public static final int RGB_GREEN = 192;
+    public static final int RGB_BLUE = 160;
+    public static final Color MAP_CREATOR_BACKGROUND_COLOR = new Color(RGB_RED, RGB_GREEN, RGB_BLUE);
 
     //Warning messages
     public static final String RESET_AUTHOR_CACHE_WARNING = "Warning! This will clear the author cache\n" +
     		"and erase any unsaved worlds.\n" +
     		"Do you wish to proceed?";
 
-	public static final int MAP_BUFFER = 5;
+    public static final int MAP_BUFFER = 5;
 
 }
