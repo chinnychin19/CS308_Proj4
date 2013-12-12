@@ -1,19 +1,18 @@
 package author.model;
 
-//import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import util.OptionPaneSingleton;
 
 import author.AuthorView;
 import constants.Constants;
 
 
 public class AuthoringCache {
-    private JSONObject myJSON;
+	
+	private JSONObject myJSON;
     private AuthorView myView;
 
     public AuthoringCache (AuthorView av) {
@@ -40,7 +39,7 @@ public class AuthoringCache {
     @SuppressWarnings("unchecked")
     public void add (String category, JSONObject data) {
         JSONArray cache = (JSONArray) myJSON.get(category);
-        System.out.println("adding " + cache.toString());
+        System.out.println(Constants.ADDING + cache.toString());
         cache.add(data);
         if (myView != null) {
         	myView.updateMenuAndSidebar();
@@ -78,8 +77,11 @@ public class AuthoringCache {
     }
 
     private JSONObject copy (JSONObject object) {
-        String asString = JSONValue.toJSONString(object); // get string representation
-        return (JSONObject) JSONValue.parse(asString); // return a new json object with same data
+    	// get string representation
+        String asString = JSONValue.toJSONString(object);
+        
+     // return a new json object with same data
+        return (JSONObject) JSONValue.parse(asString);
     }
 
     public boolean contains (String category, String name) {

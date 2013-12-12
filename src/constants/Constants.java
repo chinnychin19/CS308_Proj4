@@ -43,6 +43,7 @@ public class Constants {
     public static final String CLICKED_ALT_TEMPLATE = "Clicked 'Choose Alternate Template'";
     public static final String CLICKED_NEW_MAP = "Clicked 'Create New Map'";
     public static final String CLICKED_LOAD_GAME = "Clicked 'Load Existing Game'";
+    public static final String ADDING = "adding ";
     
     // WizardBuilder.java Reflection Strings
     public static final String TEXT_KEYWORD = "text";
