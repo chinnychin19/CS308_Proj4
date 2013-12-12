@@ -21,97 +21,7 @@
             "name": "dunk",
             "unlockLevel": "3"
         }],
-    }, 
-        {
-        "name": "Freshman Tyler Thornton",
-        "image": "images/monsters/Thornton1.png",
-        "catchRate": ".9",
-        "type": "guard",
-        "baseHP": "4",
-        "baseAttack": "4",
-        "baseDefense": "4",
-        "attacks": [{
-            "name": "dunk",
-            "unlockLevel": "5"
-        },  {
-            "name": "layup",
-            "unlockLevel": "2"
-        }],
-        "evolution": {
-            "name": "Sophomore Tyler Thornton",
-            "level": "6"
-        }
-    },
-        {
-        "name": "Sophomore Tyler Thornton",
-        "image": "images/monsters/Thornton2.png",
-        "catchRate": ".8",
-        "type": "guard",
-        "baseHP": "6",
-        "baseAttack": "6",
-        "baseDefense": "6",
-        "attacks": [{
-            "name": "dunk",
-            "unlockLevel": "5"
-        },  {
-            "name": "layup",
-            "unlockLevel": "2"
-        },  {
-            "name": "3 point",
-            "unlockLevel": "6"
-        }],
-        "evolution": {
-            "name": "Junior Tyler Thornton",
-            "level": "7"
-        }
-    },
-        {
-        "name": "Junior Tyler Thornton",
-        "image": "images/monsters/Thornton3.png",
-        "catchRate": ".7",
-        "type": "guard",
-        "baseHP": "8",
-        "baseAttack": "8",
-        "baseDefense": "8",
-        "attacks": [{
-            "name": "dunk",
-            "unlockLevel": "5"
-        },  {
-            "name": "layup",
-            "unlockLevel": "2"
-        },  {
-            "name": "3 point",
-            "unlockLevel": "6"
-        }],
-        "evolution": {
-            "name": "Senior Tyler Thornton",
-            "level": "8"
-        }
-
-    },
-        {
-        "name": "Senior Tyler Thornton",
-        "image": "images/monsters/Thornton4.png",
-        "catchRate": ".6",
-        "type": "guard",
-        "baseHP": "12",
-        "baseAttack": "12",
-        "baseDefense": "12",
-        "attacks": [{
-            "name": "dunk",
-            "unlockLevel": "5"
-        },  {
-            "name": "layup",
-            "unlockLevel": "2"
-        },  {
-            "name": "3 point",
-            "unlockLevel": "6"
-        },  {
-            "name": "fadeaway",
-            "unlockLevel": "9"
-        }],
-    },
-        {
+    }, {
         "name": "Junior Rodney Hood",
         "image": "images/monsters/RodneyHood.png",
         "catchRate": ".4",
@@ -143,12 +53,8 @@
         "name": "dunk",
         "power": "160",
         "accuracy": "0.80",
-        "statisticEffects": [{
-            "target": "enemy",
-            "name": "defense",
-            "change": "-15"
-        }],
-            "statusEffect": {
+        "statisticEffects": [{}],
+        "statusEffect": {
             "name": "shocked",
             "target": "enemy"
         },
@@ -156,17 +62,19 @@
         "name": "layup",
         "power": "120",
         "accuracy": "0.99",
+        "statisticEffects": [{}],
     }, {
         "name": "fade away",
         "power": "300",
         "accuracy": "0.2",
+        "statisticEffects": [{}],
     }],
     "Obstacle": [{
-        "name": "stands",
+        "name": "flower",
         "image": "images/obstacles/flower.png"
     }],
     "KeyItem": [{
-        "name": "medal"
+        "name": "razor"
     }],
     "NPC": [{
         "name": "walker1",
@@ -185,6 +93,15 @@
         "lineOfSightDistance": "5",
         "dialogue": "It is time. I WILL NOT LOSE!",
         "monsters": [{
+            "name": "Freshman Jabari Parker",
+            "level": "5",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "100",
+            "curHP": "100",
+            "attack": "35",
+            "defense": "60"
+        }, {
             "name": "Freshman Jabari Parker",
             "level": "5",
             "exp": "0",
