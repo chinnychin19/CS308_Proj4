@@ -37,20 +37,24 @@ public class AuthorView extends JFrame {
         setFrameAttributes();
         makeMenuBar();
         initializeMainView();
-       
-        // Pack and set GUI to true
         pack();
         this.setVisible(true);
     }
 
+    /**
+     * Instantiates a mainView JPanel that functions
+     * as a container for other components. The method
+     * instantiates the MapCreationView JPanel and the
+     * SidebarPanel and adds them to the container panel.
+     */
     private void initializeMainView () {
         JPanel mainView = new JPanel();
 
         mainView.setPreferredSize(Constants.FRAME_SIZE);
-        
+
         mapCreationView = new MapCreationView();
         mainView.add(mapCreationView);
-        
+
         sidebarPanel = new SidebarPanel(ac);
         mainView.add(sidebarPanel);
 
@@ -58,7 +62,7 @@ public class AuthorView extends JFrame {
     }
 
     /**
-     * Initialize JFrame attributes.
+     * Initializes JFrame attributes.
      */
     private void setFrameAttributes () {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,7 +73,8 @@ public class AuthorView extends JFrame {
     }
 
     /**
-     * Make the menu bar.
+     * Dynamically creates a MenuBar from a template
+     * provided to the authoring cache.
      */
     public void makeMenuBar () {
         JMenuBar menuBar = new JMenuBar();
@@ -96,13 +101,17 @@ public class AuthorView extends JFrame {
             return av;
         }
     }
-    
+
+    /**
+     * Allows for the dynamic refresh of file menus based
+     * on new game objects added to the authoring cache.
+     */
     public void updateMenuAndSidebar () {
         ((EditEntitySubMenu) av.getJMenuBar().getMenu(1).getItem(0)).refreshMenu();
         sidebarPanel.updateList();
     }
-    
-    public MapCreationView getMapCreationView() {
+
+    public MapCreationView getMapCreationView () {
         return mapCreationView;
     }
 

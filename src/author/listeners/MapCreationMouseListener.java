@@ -4,6 +4,7 @@ package author.listeners;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 import constants.Constants;
 import author.mapCreation.CanvasTileManager;
@@ -19,7 +20,7 @@ import author.mapCreation.MapCreationView;
  * @author Michael Marion
  * 
  */
-public class MapCreationMouseListener implements MouseListener {
+public class MapCreationMouseListener implements MouseMotionListener {
 
     private CanvasTileManager myTileManager;
     private MapCreationView myMapCreationView;
@@ -37,37 +38,31 @@ public class MapCreationMouseListener implements MouseListener {
      */
 
     @Override
-    public void mouseClicked (MouseEvent arg0) {
-        
-        JPanel parentPanel = (JPanel) arg0.getSource();
+    public void mouseDragged (MouseEvent e) {
+        JPanel parentPanel = (JPanel) e.getSource();
         parentPanel.requestFocus();
 
-        int x = arg0.getX();
-        int y = arg0.getY();
+        int x = e.getX();
+        int y = e.getY();
 
         int xTile = myTileManager.getHorizontalTileNum(x);
         int yTile = myTileManager.getVerticalTileNum(y);
 
         System.out.println(Constants.MOUSE_CLICKED_MESSAGE + x + ", " + y);
-        System.out.println(Constants.CLICK_TILE_MESSAGE + 
-                           Constants.COLUMN_MESSAGE + myTileManager.getHorizontalTileNum(x) + 
+        System.out.println(Constants.CLICK_TILE_MESSAGE +
+                           Constants.COLUMN_MESSAGE + myTileManager.getHorizontalTileNum(x) +
                            Constants.ROW_MESSAGE + myTileManager.getVerticalTileNum(y));
 
-        myMapCreationView.paintAndRecordTile((Graphics2D) myMapCreationView.getGraphics(), xTile, yTile);
-        
+        myMapCreationView.paintAndRecordTile((Graphics2D) myMapCreationView.getGraphics(), xTile,
+                                             yTile);
+
         System.out.println(myMapCreationView.getMyWorldTiles().toString());
     }
 
     @Override
-    public void mouseEntered (MouseEvent arg0) { /* do nothing... */ }
+    public void mouseMoved (MouseEvent e) {
+        // TODO Auto-generated method stub
 
-    @Override
-    public void mouseExited (MouseEvent arg0) { /* do nothing... */ }
-
-    @Override
-    public void mousePressed (MouseEvent arg0) { /* do nothing... */ }
-
-    @Override
-    public void mouseReleased (MouseEvent arg0) { /* do nothing... */ }
+    }
 
 }
