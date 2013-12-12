@@ -50,12 +50,12 @@ public class LoadGameMenuItem extends AbstractMenuItem {
 	                OptionPaneSingleton.getInstance().getOk(Constants.RESET_AUTHOR_CACHE_WARNING);
 
 	        if (returnVal == JFileChooser.APPROVE_OPTION && userOk) {
-	            //System.out.println("Chose one");
+
 	            AuthorView currentView = myAuthoringCache.getAuthorView();
 	            myAuthoringCache.reset();
 	            parseFileIntoCache(chooser.getSelectedFile().getAbsolutePath());
 	            currentView.updateMenuAndSidebar();
-	            //currentView.
+
 	        }
 	}
 
