@@ -37,7 +37,7 @@
     }],
 
     "FightingNPC": [{
-        "name": "Bob Knight",
+        "name": "fighter1",
         "x": "11",
         "y": "-4",
         "orientation": "down",
@@ -606,7 +606,6 @@
         "y": "4",
     }, {
         "name": "door",
-        "keyItems" : ["IU Bragging Rights"],
         "x": "15",
         "y": "2",
     }, {
@@ -645,7 +644,6 @@
         "name": "door",
         "x": "25",
         "y": "-2",
-        "keyItems": ["UNC Bragging Rights"],
     }, {
         "name": "cone",
         "x": "25",
@@ -682,17 +680,14 @@
         "name": "door",
         "x": "35",
         "y": "-1",
-        "keyItems": ["KU Bragging Rights"],
     }, {
         "name": "door",
         "x": "35",
         "y": "0",
-        "keyItems": ["KU Bragging Rights"],
     }, {
         "name": "door",
         "x": "35",
         "y": "1",
-        "keyItems": ["KU Bragging Rights"],
     }, {
         "name": "cone",
         "x": "35",
@@ -721,12 +716,10 @@
         "name": "door",
         "x": "45",
         "y": "-3",
-        "keyItems": ["Ultimate Bragging Rights"],
     }, {
         "name": "door",
         "x": "45",
         "y": "3", 
-        "keyItems": ["Ultimate Bragging Rights"],
     }, {
         "name": "cone",
         "x": "45",
@@ -861,78 +854,6 @@
         "name": "tent1",
         "x": "4",
         "y": "-3"
-    }, {
-        "name": "tent2",
-        "x": "-4",
-        "y": "4"
-    }, {
-        "name": "tent2",
-        "x": "-3",
-        "y": "4"
-    }, {
-        "name": "tent2",
-        "x": "-2",
-        "y": "4"
-    }, {
-        "name": "tent2",
-        "x": "-1",
-        "y": "4"
-    }, {
-        "name": "tent2",
-        "x": "0",
-        "y": "4"
-    }, {
-        "name": "tent2",
-        "x": "1",
-        "y": "4"
-    }, {
-        "name": "tent2",
-        "x": "2",
-        "y": "4"
-    }, {
-        "name": "tent2",
-        "x": "3",
-        "y": "4"
-    }, {
-        "name": "tent2",
-        "x": "4",
-        "y": "4"
-    }, {
-        "name": "tent2",
-        "x": "-4",
-        "y": "3"
-    }, {
-        "name": "tent2",
-        "x": "-3",
-        "y": "3"
-    }, {
-        "name": "tent2",
-        "x": "-2",
-        "y": "3"
-    }, {
-        "name": "tent2",
-        "x": "-1",
-        "y": "3"
-    }, {
-        "name": "tent2",
-        "x": "0",
-        "y": "3"
-    }, {
-        "name": "tent2",
-        "x": "1",
-        "y": "3"
-    }, {
-        "name": "tent2",
-        "x": "2",
-        "y": "3"
-    }, {
-        "name": "tent2",
-        "x": "3",
-        "y": "3"
-    }, {
-        "name": "tent2",
-        "x": "4",
-        "y": "3"   
     }, ],
 
     "HealItem": [{

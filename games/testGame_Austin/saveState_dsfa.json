@@ -645,7 +645,6 @@
         "name": "door",
         "x": "25",
         "y": "-2",
-        "keyItems": ["UNC Bragging Rights"],
     }, {
         "name": "cone",
         "x": "25",
@@ -682,17 +681,14 @@
         "name": "door",
         "x": "35",
         "y": "-1",
-        "keyItems": ["KU Bragging Rights"],
     }, {
         "name": "door",
         "x": "35",
         "y": "0",
-        "keyItems": ["KU Bragging Rights"],
     }, {
         "name": "door",
         "x": "35",
         "y": "1",
-        "keyItems": ["KU Bragging Rights"],
     }, {
         "name": "cone",
         "x": "35",
@@ -721,12 +717,10 @@
         "name": "door",
         "x": "45",
         "y": "-3",
-        "keyItems": ["Ultimate Bragging Rights"],
     }, {
         "name": "door",
         "x": "45",
         "y": "3", 
-        "keyItems": ["Ultimate Bragging Rights"],
     }, {
         "name": "cone",
         "x": "45",

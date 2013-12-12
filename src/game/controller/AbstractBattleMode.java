@@ -81,11 +81,16 @@ public abstract class AbstractBattleMode extends AbstractMode {
      */
     @Override
     public void paint () {
+        paintBackground();
         paintMyMonster();
         paintMyHealth();
         paintEnemyMonster();
         paintEnemyHealth();
         myOptionState.paint();
+    }
+    
+    private void paintBackground() {
+        getView().getBuffer().fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT);
     }
 
     /**
