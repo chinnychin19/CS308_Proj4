@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import util.OptionPaneSingleton;
 import constants.Constants;
 import author.AuthorView;
 import author.ImageDisplayer;
@@ -28,7 +29,16 @@ public class FakeMainForClassDemos {
         //demoCheckBoxes();
         //demoRadioButtons();
         //testRegexSplits();
-        demoWizardBuilder();
+        //demoWizardBuilder();
+        demoOptionPanelSingleton();
+    }
+
+    private static void demoOptionPanelSingleton () {
+        // TODO Auto-generated method stub
+        boolean b = OptionPaneSingleton.getInstance().getOk("Do it?");
+        System.out.println(b);    
+        boolean c = OptionPaneSingleton.getInstance().getOk("Do it again?");
+        System.out.println(c);  
     }
 
     private static void demoWizardBuilder () {

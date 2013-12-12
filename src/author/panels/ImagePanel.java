@@ -16,7 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import author.FileChooserSingleton;
+import util.FileChooserSingleton;
 import author.ImageDisplayer;
 
 @SuppressWarnings("serial")
@@ -76,11 +76,26 @@ public class ImagePanel extends AbstractWizardPanel implements ActionListener {
         Map<String, String> map = new HashMap<String, String>();
         copyFileAndSelectCopy();
         String label = myLabel.getText(); 
-        map.put(label.substring(0, label.length()-1), myFile.getPath());
+        String localFilepath = getFilepathRootedAtFolder(myFile.getAbsolutePath(), "images");
+        localFilepath = makeUnixSafe(localFilepath);
+        map.put(label.substring(0, label.length()-1), localFilepath);
         //map.put(label.substring(0, label.length()-1), "");
         return map;
     }
+
+    private String getFilepathRootedAtFolder(String filepath, String folder) {
+        int i = filepath.lastIndexOf(File.separator + "images");
+        String truncatedFilepath = filepath.substring(i+1);
+        return truncatedFilepath;
+    }
     
+    private String makeUnixSafe (String filepath) {
+        if (File.separator != "/"){
+            filepath.replace(File.separator, "/");
+        }
+        return filepath;
+    }
+
     public void copyFileAndSelectCopy(){
         System.out.println("Parent folder: " + myFile.getParent());
         System.out.println("Project's images folder: " + (new File(IMG_FOLDER_FILEPATH)).getAbsolutePath());

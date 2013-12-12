@@ -1,4 +1,4 @@
-package author;
+package util;
 
 import javax.swing.JFileChooser;
 
