@@ -38,7 +38,7 @@ public class WriteJSONOutputMenuItem extends AbstractMenuItem {
         int retrival = chooser.showSaveDialog(null);
         if (retrival == JFileChooser.APPROVE_OPTION) {
             try {
-                FileWriter fw = new FileWriter(chooser.getSelectedFile() + ".json");
+                FileWriter fw = new FileWriter(chooser.getSelectedFile() + Constants.JSON_EXTENSION);
                 fw.write(sb);
                 fw.close();
             }

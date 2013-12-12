@@ -137,7 +137,6 @@ public class Monster extends AbstractModelObject implements Saveable {
 
         double factor = 1 + Math.log(35);
         myStatistics.put(Constants.STAT_EXP, 0);
-        myStatistics.put(Constants.STAT_EXP_TO_NEXT_LEVEL, getRewardExperience()*5);
         int level = myStatistics.get(Constants.JSON_LEVEL);
         int baseHP = myStatistics.get(Constants.STAT_BASE_HP);
         int baseAttack = myStatistics.get(Constants.STAT_BASE_ATTACK);
@@ -146,6 +145,7 @@ public class Monster extends AbstractModelObject implements Saveable {
         myStatistics.put(Constants.STAT_CUR_HP, myStatistics.get(Constants.STAT_MAX_HP));
         myStatistics.put(Constants.STAT_ATTACK, (int) (baseAttack * level * factor));
         myStatistics.put(Constants.STAT_DEFENSE, (int) (baseDefense * level * factor));
+        myStatistics.put(Constants.STAT_EXP_TO_NEXT_LEVEL, getRewardExperience()*5);
     }
 
     /**

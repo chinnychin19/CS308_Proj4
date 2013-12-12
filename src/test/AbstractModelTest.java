@@ -14,18 +14,18 @@ import junit.framework.TestCase;
 
 
 public abstract class AbstractModelTest extends TestCase {
-    protected GameModel myModel;
-    protected World myWorld;
-    protected GameController myController;
-    protected GameView myView;
-    protected JSONObject myWorldJSON;
-    protected final static String GAME_NAME = "testGame";
-    protected Player myPlayer;
-    @Override
-    protected void setUp () {
-        try {
-
-            myView = new GameView(GAME_NAME);
+	protected GameModel myModel;
+	protected World myWorld;
+	protected GameController myController;
+	protected GameView myView;
+	protected JSONObject myWorldJSON;
+	protected final static String GAME_NAME = "testGame";
+	protected Player myPlayer;
+	@Override
+	protected void setUp () {
+		try {
+			/*
+            myView = new GameView(GAME_NAME );
             myController = new GameController(GAME_NAME, myView);
 
             myModel = new GameModel(GAME_NAME, myController);
@@ -39,9 +39,10 @@ public abstract class AbstractModelTest extends TestCase {
                    // new Player(myModel, myWorld, myModel.getDefinitionCache().getInstance("Player",
                            //                                                               "hero"),
                              //  playerJSON);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+			 */
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

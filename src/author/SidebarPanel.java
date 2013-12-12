@@ -49,7 +49,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 		
 		if (arg0.getValueIsAdjusting()){ // to ensure this is only printed once
 			String str = mySelectionList.getSelectedValue().toString();
-			System.out.println(str + " selected.");
+			System.out.println(str + Constants.SELECTED_MESSAGE);
 		}
 	}
 	
@@ -116,7 +116,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 	}
 
 	private void createNewListItem(Object con) {
-		String tempString = (String) ((JSONObject) con).get("name");
+		String tempString = (String) ((JSONObject) con).get(Constants.NAME);
 		myListModel.addElement(tempString);
 	}
 }

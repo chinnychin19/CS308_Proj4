@@ -31,7 +31,8 @@ public class NewEntitySubMenu extends AbstractMenu {
 
         JSONObject template = getJSON(Constants.PLAYER_JSON);
         Set<String> keySet = template.keySet();
-        System.out.println("Menu Populated with " + keySet);
+        System.out.println(Constants.MENU_POPULATED_MESSAGE + keySet);
+        
         for (String s : keySet) {
             JMenuItem item = new JMenuItem(s);
             item.addActionListener(new LaunchWizardListener(s, myAuthoringCache));
