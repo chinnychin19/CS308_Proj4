@@ -4,166 +4,189 @@ import java.util.Map;
 import location.Loc;
 import constants.Constants;
 
+
+/**
+ * Handles the management, arrangement, and sizing
+ * of the visual tile system in the MapCreationView.
+ * Holds the methods and state necessary to calculate
+ * the current dimension, in tiles, of the MapCreationView.
+ * Converts point-and-click coordinates into gameplay tiles
+ * for easy object placement.
+ * 
+ * @author Michael Marion and Wes Koorbusch
+ * 
+ */
+
 public class CanvasTileManager {
-	
-	private WorldCreationMap myWorld;
-	
-	private int myGCD;
 
-	private int widthRatio;
-	private int heightRatio;
+    private WorldCreationMap myWorld;
 
-	private int horizontalOffset;
-	private int verticalOffset;
+    private int myGCD;
 
-	private int widthFactor;
-	private int heightFactor;
+    private int widthRatio;
+    private int heightRatio;
 
-	private int middleHorizontalTile;
-	private int middleVerticalTile;
+    private int horizontalOffset;
+    private int verticalOffset;
 
-	private double tileWidth;
-	private double tileHeight;
+    private int widthFactor;
+    private int heightFactor;
 
-	public CanvasTileManager(){
-		myWorld = new WorldCreationMap();
-		horizontalOffset = Constants.MIN_X_COORD;
-		verticalOffset = Constants.MIN_Y_COORD;
+    private int middleHorizontalTile;
+    private int middleVerticalTile;
 
-		// default width and height are 15 and 9 respectively
-		configureTiles(Constants.NUM_TILES_HORIZONTAL, Constants.NUM_TILES_VERTICAL);
-	}
+    private double tileWidth;
+    private double tileHeight;
 
-	public CanvasTileManager(int horizontalTiles, int verticalTiles){
-		horizontalOffset = 0;
-		verticalOffset = 0;
+    public CanvasTileManager () {
+        myWorld = new WorldCreationMap();
+        horizontalOffset = Constants.MIN_X_COORD;
+        verticalOffset = Constants.MIN_Y_COORD;
 
-		// custom number of tiles
-		configureTiles(horizontalTiles, verticalTiles);
-	}
+        // default width and height are 15 and 9 respectively
+        configureTiles(Constants.NUM_TILES_HORIZONTAL, Constants.NUM_TILES_VERTICAL);
+    }
 
-	public void configureTiles (int horizontal, int vertical) {
-		// Scales no matter what, but this could cause errors
-		// TODO: Come up with way to check that the parameters will work
-		myGCD = GCD(horizontal, vertical);
-		widthRatio = horizontal/myGCD;
-		heightRatio = vertical/myGCD;
+    public CanvasTileManager (int horizontalTiles, int verticalTiles) {
+        horizontalOffset = 0;
+        verticalOffset = 0;
 
-		widthFactor = horizontal/widthRatio;
-		heightFactor = vertical/heightRatio;
+        // custom number of tiles
+        configureTiles(horizontalTiles, verticalTiles);
+    }
 
-		calcNewTileValues();
-	}
+    public void configureTiles (int horizontal, int vertical) {
+        // Scales no matter what, but this could cause errors
+        // TODO: Come up with way to check that the parameters will work
+        myGCD = GCD(horizontal, vertical);
+        widthRatio = horizontal / myGCD;
+        heightRatio = vertical / myGCD;
 
-	private void calcNewTileValues() {
-		middleHorizontalTile = (myGCD * widthRatio) / 2;
-		middleVerticalTile = (myGCD * heightRatio) / 2;
+        widthFactor = horizontal / widthRatio;
+        heightFactor = vertical / heightRatio;
 
-		tileWidth = (double) Constants.WIDTH / (getTotalHorizontalTiles());
-		tileHeight = (double) Constants.HEIGHT / (getTotalVerticalTiles());
-		
-	}
+        calcNewTileValues();
+    }
 
-	private int GCD(int a, int b){
-		while (b > 0){
-			int temp = b;
-			b = a % b;
-			a = temp;
-		}
-		return a;
-	}
-	
-	/*public void getTileClickLoc(int x, int y){
-		myWorld.put(new Loc(x, y), new GenericTileWrapper("blah", nullnew Image()));
-	}*/
+    private void calcNewTileValues () {
+        middleHorizontalTile = (myGCD * widthRatio) / 2;
+        middleVerticalTile = (myGCD * heightRatio) / 2;
 
-	public void expandView(){
-		if (	horizontalOffset + getTotalHorizontalTiles() + widthRatio > Constants.MAX_X_COORD
-				|| verticalOffset + getTotalVerticalTiles() + heightRatio > Constants.MAX_Y_COORD){
-			// do nothing because view will expand beyond boundaries
-		}
-		else{ // good to expand view
-			widthFactor += 1;
-			heightFactor += 1;
-			calcNewTileValues();
-		}
-	}
+        tileWidth = (double) Constants.WIDTH / (getTotalHorizontalTiles());
+        tileHeight = (double) Constants.HEIGHT / (getTotalVerticalTiles());
 
-	public void contractView(){
-		if (widthFactor > 1 && heightFactor > 1){
-			widthFactor -= 1;
-			heightFactor -= 1;
-			calcNewTileValues();
-		}
-		// do nothing otherwise
-	}
+    }
 
-	public int getTotalHorizontalTiles(){
-		return widthRatio * widthFactor;
-	}
+    private int GCD (int a, int b) {
+        while (b > 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
 
-	public int getTotalVerticalTiles(){
-		return heightRatio * heightFactor;
-	}
+    /*
+     * public void getTileClickLoc(int x, int y){
+     * myWorld.put(new Loc(x, y), new GenericTileWrapper("blah", nullnew Image()));
+     * }
+     */
 
-	public int getHorizontalTileNum(int xValue){
-		return (int) ((xValue/tileWidth) + horizontalOffset);
-	}
+    public void expandView () {
+        if (horizontalOffset + getTotalHorizontalTiles() + widthRatio > Constants.MAX_X_COORD
+            || verticalOffset + getTotalVerticalTiles() + heightRatio > Constants.MAX_Y_COORD) {
+            // do nothing because view will expand beyond boundaries
+        }
+        else { // good to expand view
+            widthFactor += 1;
+            heightFactor += 1;
+            calcNewTileValues();
+        }
+    }
 
-	public int getVerticalTileNum(int yValue){
-		return (int) ((yValue/tileHeight) + verticalOffset);
-	}
-	
-	public double getTileAnchorX(int x) {
-	    return (x - horizontalOffset) * tileWidth;
-	}
-	
-	public double getTileAnchorY(int y) {
-	    return (y - verticalOffset) * tileHeight;
-	}
+    public void contractView () {
+        if (widthFactor > 1 && heightFactor > 1) {
+            widthFactor -= 1;
+            heightFactor -= 1;
+            calcNewTileValues();
+        }
+        // do nothing otherwise
+    }
 
-	public void increaseHorizontalOffset(){
-		if (horizontalOffset + getTotalHorizontalTiles() < Constants.MAX_X_COORD) { horizontalOffset += 1; }
-		// otherwise do nothing
-	}
+    public int getTotalHorizontalTiles () {
+        return widthRatio * widthFactor;
+    }
 
-	public void decreaseHorizontalOffset(){
-		if (horizontalOffset > Constants.MIN_X_COORD) { horizontalOffset -= 1; }
-		// otherwise do nothing
-	}
+    public int getTotalVerticalTiles () {
+        return heightRatio * heightFactor;
+    }
 
-	public void increaseVerticalOffset(){
-		if (verticalOffset + getTotalVerticalTiles() < Constants.MAX_Y_COORD) { verticalOffset += 1; }
-		// otherwise do nothing
-	}
+    public int getHorizontalTileNum (int xValue) {
+        return (int) ((xValue / tileWidth) + horizontalOffset);
+    }
 
-	public void decreaseVerticalOffset(){
-		if (verticalOffset > Constants.MIN_Y_COORD) { verticalOffset -= 1; }
-		// otherwise do nothing
-	}
+    public int getVerticalTileNum (int yValue) {
+        return (int) ((yValue / tileHeight) + verticalOffset);
+    }
 
-	public double getTileWidth(){
-		return tileWidth;
-	}
+    public double getTileAnchorX (int x) {
+        return (x - horizontalOffset) * tileWidth;
+    }
 
-	public double getTileHeight(){
-		return tileHeight;
-	}
+    public double getTileAnchorY (int y) {
+        return (y - verticalOffset) * tileHeight;
+    }
 
-	public int getMiddleVerticalTile(){
-		return middleVerticalTile;
-	}
+    public void increaseHorizontalOffset () {
+        if (horizontalOffset + getTotalHorizontalTiles() < Constants.MAX_X_COORD) {
+            horizontalOffset += 1;
+        }
+        // otherwise do nothing
+    }
 
-	public int getMiddleHorizontalTile(){
-		return middleHorizontalTile;
-	}
-	
-	public WorldCreationMap getWorld(){
-		return myWorld;
-	}
-	
-	public Map<Loc, GenericTileWrapper> getWorldTiles(){
-            return myWorld.getWorldTileMap();
+    public void decreaseHorizontalOffset () {
+        if (horizontalOffset > Constants.MIN_X_COORD) {
+            horizontalOffset -= 1;
+        }
+        // otherwise do nothing
+    }
+
+    public void increaseVerticalOffset () {
+        if (verticalOffset + getTotalVerticalTiles() < Constants.MAX_Y_COORD) {
+            verticalOffset += 1;
+        }
+        // otherwise do nothing
+    }
+
+    public void decreaseVerticalOffset () {
+        if (verticalOffset > Constants.MIN_Y_COORD) {
+            verticalOffset -= 1;
+        }
+        // otherwise do nothing
+    }
+
+    public double getTileWidth () {
+        return tileWidth;
+    }
+
+    public double getTileHeight () {
+        return tileHeight;
+    }
+
+    public int getMiddleVerticalTile () {
+        return middleVerticalTile;
+    }
+
+    public int getMiddleHorizontalTile () {
+        return middleHorizontalTile;
+    }
+
+    public WorldCreationMap getWorld () {
+        return myWorld;
+    }
+
+    public Map<Loc, GenericTileWrapper> getWorldTiles () {
+        return myWorld.getWorldTileMap();
     }
 
 }

@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
 import constants.Constants;
 
 
@@ -62,9 +61,7 @@ public class ImageDisplayer extends JLabel {
     }
 
     private void setIcon (String filepath) throws FileNotFoundException {
-        if (!new File(filepath).isFile()) {
-            throw new FileNotFoundException();
-        }
+        if (!new File(filepath).isFile()) { throw new FileNotFoundException(); }
         myIcon = new ImageIcon(filepath);
         return;
     }

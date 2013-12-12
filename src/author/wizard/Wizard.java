@@ -63,6 +63,9 @@ public class Wizard extends JDialog {
         this.setVisible(true);
     }
 
+    /**
+     * I
+     */
     public void init () {
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
 
@@ -74,6 +77,14 @@ public class Wizard extends JDialog {
         myCardPanel.setLayout(myCardLayout);
     }
 
+    /**
+     * Add a "next" and "back" button to the
+     * wizard, allowing the user to transition
+     * between CardPanels. Specifically, this
+     * method adds the two buttons to a JPanel,
+     * and then adds the JPanel to each 
+     * wizard CardPanel.
+     */
     public void addButtons () {
 
         myButtonPanel = new JPanel(new FlowLayout());

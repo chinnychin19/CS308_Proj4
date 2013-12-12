@@ -53,15 +53,26 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
         myMapCreationView = ac.getAuthorView().getMapCreationView();
     }
 
+    /**
+     * Event listener that listens for a change in the selected value
+     * in the list in the SidebarPanel. Each time this value changes,
+     * a check is first performed to ensure that the new value is not
+     * null, meaning that no new item was selected.
+     * 
+     * The listener then displays a popup asking for any additional
+     * JSON information before pulling the GenericTileWrapper object
+     * from the list and populating the MapCreationView's state with
+     * its data.
+     */
     @Override
     public void valueChanged (ListSelectionEvent arg0) {
-
+        
         String s = JOptionPane.showInputDialog("Any additional information?");
 
         if (mySelectionList.getSelectedValue() != null) {
-            
+
             GenericTileWrapper gtw = (GenericTileWrapper) mySelectionList.getSelectedValue();
-            
+
             if (s.length() > 0 && s != null) {
                 gtw.setMyAdditionalInformation(s);
             }

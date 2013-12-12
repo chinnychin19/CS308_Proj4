@@ -24,13 +24,13 @@ import constants.Constants;
 
 @SuppressWarnings("serial")
 public class MapCreationView extends JPanel {
-    
+
     private MapCreationView singleton;
 
     private BufferedImage myCurrentTileImage;
     private String myCurrentTileName;
     private String myCurrentTileType;
-    
+
     private CanvasTileManager myTileManager;
     private WorldCreationMap myWorldCreationMap;
 
@@ -40,7 +40,7 @@ public class MapCreationView extends JPanel {
         setFocusable(true);
         this.setPreferredSize(Constants.MAP_CREATOR_SIZE);
         this.setBackground(Color.BLACK);
-        
+
         myCurrentTileImage = null;
         myCurrentTileName = null;
         myCurrentTileType = null;
@@ -50,7 +50,7 @@ public class MapCreationView extends JPanel {
         myWorldCreationMap = myTileManager.getWorld();
 
         initListeners();
-        
+
         singleton = this;
         this.setVisible(true);
     }
@@ -61,7 +61,7 @@ public class MapCreationView extends JPanel {
      */
     private void initListeners () {
         this.addKeyListener(new MapCreationKeyListener(this, myTileManager));
-        this.addMouseListener(new MapCreationMouseListener(this, myTileManager));
+        this.addMouseMotionListener(new MapCreationMouseListener(this, myTileManager));
     }
 
     /**
@@ -72,7 +72,8 @@ public class MapCreationView extends JPanel {
     public void paintComponent (Graphics g) {
         super.paintComponent(g);
         if (myWorldCreationMap.getWorldTileMap() != null) {
-            for (Map.Entry<Loc, GenericTileWrapper> tile : myWorldCreationMap.getWorldTileMap().entrySet()) {
+            for (Map.Entry<Loc, GenericTileWrapper> tile : myWorldCreationMap.getWorldTileMap()
+                    .entrySet()) {
                 paintTile((Graphics2D) g,
                           tile.getKey().getX(),
                           tile.getKey().getY(),
@@ -91,21 +92,25 @@ public class MapCreationView extends JPanel {
      */
     public void paintAndRecordTile (Graphics2D g, int x, int y) {
         paintTile(g, x, y);
-        if(isValueSelected()) {
-            myWorldCreationMap.put(new Loc(x,y),new GenericTileWrapper(myCurrentTileName, myCurrentTileType, myCurrentTileImage));  
-        }       
+        if (isValueSelected()) {
+            myWorldCreationMap.put(new Loc(x, y), new GenericTileWrapper(myCurrentTileName,
+                                                                         myCurrentTileType,
+                                                                         myCurrentTileImage));
+        }
     }
 
     /**
      * Paints a tile in the view at the given x-
-     * and y-coordinates
+     * and y-coordinates. Called by the mouse listener
+     * which handles the point-and-click painting of
+     * tiles on the part of the user.
      * 
      * @param g
      * @param x
      * @param y
      */
     public void paintTile (Graphics2D g, int x, int y) {
-        if(isValueSelected()) {
+        if (isValueSelected()) {
             TexturePaint tp =
                     new TexturePaint(myCurrentTileImage,
                                      new Rectangle(0,
@@ -119,12 +124,14 @@ public class MapCreationView extends JPanel {
                        (int) myTileManager.getTileWidth(),
                        (int) myTileManager.getTileHeight());
         }
-        
+
     }
-    
+
     /**
      * Paints a tile in the view at the given x-
-     * and y-coordinates
+     * and y-coordinates. Called by the paintComponent
+     * method, which handles the painting of all tiles
+     * from the tile map.
      * 
      * @param g
      * @param x
@@ -144,14 +151,19 @@ public class MapCreationView extends JPanel {
                    (int) myTileManager.getTileWidth(),
                    (int) myTileManager.getTileHeight());
     }
-    
-    public boolean isValueSelected() {
-        return (myCurrentTileImage != null && myCurrentTileName !=null && myCurrentTileType != null);
-    }
 
-    /*
-     * Getter and setter methods below
+    /**
+     * A boolean check to ensure that the state of the
+     * MapCreationView class is not null before attempting
+     * to draw and place tiles in the MapCreationView
+     * 
+     * @return a boolean check to ensure that myCurrentTileImage
+     *         is not null, myCurrentTileName is not null, and myCurrentTileType
+     *         is not null.
      */
+    public boolean isValueSelected () {
+        return (myCurrentTileImage != null && myCurrentTileName != null && myCurrentTileType != null);
+    }
 
     public BufferedImage getCurrentTileImage () {
         return myCurrentTileImage;
@@ -160,11 +172,11 @@ public class MapCreationView extends JPanel {
     public void setCurrentTileImage (GenericTileWrapper gtw) {
         myCurrentTileImage = gtw.getImage();
     }
-    
+
     public void setCurrentTileName (GenericTileWrapper gtw) {
         myCurrentTileName = gtw.getName();
     }
-    
+
     public void setCurrentTileType (GenericTileWrapper gtw) {
         myCurrentTileType = gtw.getType();
     }
@@ -177,7 +189,13 @@ public class MapCreationView extends JPanel {
         return myTileManager;
     }
 
-    public MapCreationView getMapCreationView() {
+    /**
+     * Returns a singleton instance of this map
+     * creation view.
+     * 
+     * @return singleton instance of map creation view
+     */
+    public MapCreationView getMapCreationView () {
         if (singleton == null) {
             return new MapCreationView();
         }
@@ -185,5 +203,5 @@ public class MapCreationView extends JPanel {
             return singleton;
         }
     }
-    
+
 }
