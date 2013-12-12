@@ -3,7 +3,6 @@ package author.listeners;
 // import java.awt.Image;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 import constants.Constants;
@@ -60,9 +59,6 @@ public class MapCreationMouseListener implements MouseMotionListener {
     }
 
     @Override
-    public void mouseMoved (MouseEvent e) {
-        // TODO Auto-generated method stub
-
-    }
+    public void mouseMoved (MouseEvent e) { /* do nothing... */ }
 
 }

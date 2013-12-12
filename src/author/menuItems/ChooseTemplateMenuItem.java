@@ -27,6 +27,8 @@ public class ChooseTemplateMenuItem extends AbstractMenuItem {
 	}
 
 	private void handleChooseAltTemplate(){
+		
+		
 		System.out.println(Constants.CLICKED_ALT_TEMPLATE);
 	}
 	
