@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import util.FilepathReformatter;
 import util.OptionPaneSingleton;
 import constants.Constants;
 import author.AuthorView;
@@ -25,12 +26,37 @@ public class FakeMainForClassDemos {
     public static void main (String[] args) {
         //demoImageDisplayer();
         //demoImagePicker();
-        //demoImagePanel();
+        demoImagePanel();
         //demoCheckBoxes();
         //demoRadioButtons();
         //testRegexSplits();
         //demoWizardBuilder();
-        demoOptionPanelSingleton();
+        //demoOptionPanelSingleton();
+        //demoFilepathReformatter();
+    }
+
+    private static void demoFilepathReformatter () {
+        FilepathReformatter fr = FilepathReformatter.getInstance();
+        String str0 = "C:\\Docs\\images\\fun\\pic.jpg";
+
+        String str1 = fr.formatForUnix(str0);
+        String str2 = fr.formatForWindows(str1);
+        String str3 = fr.formatForCurrentSystem(str0);
+        String str4 = fr.formatForCurrentSystem(str1);
+        
+        String str5 = fr.getFilepathRootedAtFolder(str1, "images");
+        String str6 = fr.getFilepathRootedAtFolder(str2, "images");
+        
+        System.out.println(str0);
+        System.out.println(File.separator);
+        System.out.println(File.separator.equals("/"));
+        System.out.println();
+        System.out.println(str1);
+        System.out.println(str2);
+        System.out.println(str3);
+        System.out.println(str4);
+        System.out.println(str5);
+        System.out.println(str6);
     }
 
     private static void demoOptionPanelSingleton () {
