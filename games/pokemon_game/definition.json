@@ -1,0 +1,668 @@
+{
+    "Player": [{
+        "name": "ash",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png"
+    }],
+      "Monster": [{
+        "name": "pikachu",
+        "image": "images/pokemon_images/monsters/pikachu.png",
+        "catchRate": ".3",
+        "type": "electric",
+        "baseHP": "8",
+        "baseAttack": "3",
+        "baseDefense": "5",
+        "attacks": [{
+            "name": "electric shock",
+            "unlockLevel": "4"
+        }, {
+            "name": "thunderbolt",
+            "unlockLevel": "3"
+        }],
+        "evolution": {
+            "name": "zapdos",
+            "level": "9"
+        }
+    },{
+        "name": "zapdos",
+        "image": "images/pokemon_images/monsters/zapdos.png",
+        "catchRate": ".6",
+        "type": "electric",
+        "baseHP": "18",
+        "baseAttack": "12",
+        "baseDefense": "8",
+        "attacks": [{
+            "name": "wing slash",
+            "unlockLevel": "3"
+        }, {
+            "name": "atomic wind",
+            "unlockLevel": "6"
+        }],
+    },{
+        "name": "bulbasaur",
+        "image": "images/pokemon_images/monsters/balbasaur.png",
+        "catchRate": ".35",
+        "type": "leaf",
+        "baseHP": "6",
+        "baseAttack": "6",
+        "baseDefense": "5",
+        "attacks": [{
+            "name": "vine whip",
+            "unlockLevel": "3"
+        }, {
+            "name": "razor",
+            "unlockLevel": "5"
+        }],
+        "evolution": {
+            "name": "ivysaur",
+            "level": "7"
+        }
+    },{
+        "name": "ivysaur",
+        "image": "images/pokemon_images/monsters/ivysaur.png",
+        "catchRate": ".55",
+        "type": "leaf",
+        "baseHP": "9",
+        "baseAttack": "12",
+        "baseDefense": "9",
+        "attacks": [{
+            "name": "razor claw",
+            "unlockLevel": "5"
+        }, {
+            "name": "poison ivy",
+            "unlockLevel": "7"
+        }],
+        "evolution": {
+            "name": "venusaur",
+            "level": "7"
+        }
+    },{
+        "name": "venusaur",
+        "image": "images/pokemon_images/monsters/venusar.jpg",
+        "catchRate": ".65",
+        "type": "leaf",
+        "baseHP": "22",
+        "baseAttack": "15",
+        "baseDefense": "13",
+        "attacks": [{
+            "name": "stomp",
+            "unlockLevel": "6"
+        }, {
+            "name": "razor leaf",
+            "unlockLevel": "8"
+        }],
+    },{
+        "name": "alakazam",
+        "image": "images/pokemon_images/monsters/alakazam.gif",
+        "catchRate": ".4",
+        "type": "magic",
+        "baseHP": "12",
+        "baseAttack": "11",
+        "baseDefense": "15",
+        "attacks": [{
+            "name": "distract",
+            "unlockLevel": "6"
+        }, {
+            "name": "magical hat",
+            "unlockLevel": "10"
+        }],
+    },{
+        "name": "snorlax",
+        "image": "images/pokemon_images/monsters/snorlax.png",
+        "catchRate": ".52",
+        "type": "ground",
+        "baseHP": "12",
+        "baseAttack": "11",
+        "baseDefense": "15",
+        "attacks": [{
+            "name": "sleeping air",
+            "unlockLevel": "6"
+        }, {
+            "name": "body slam",
+            "unlockLevel": "10"
+        }],
+    },{
+        "name": "mew",
+        "image": "images/pokemon_images/monsters/mew.png",
+        "catchRate": ".52",
+        "type": "magic",
+        "baseHP": "18",
+        "baseAttack": "14",
+        "baseDefense": "16",
+        "attacks": [{
+            "name": "fly",
+            "unlockLevel": "4"
+        }, {
+            "name": "stare",
+            "unlockLevel": "8"
+        }],
+    },{
+        "name": "mewtwo",
+        "image": "images/pokemon_images/monsters/mewtwo.png",
+        "catchRate": ".65",
+        "type": "magic",
+        "baseHP": "20",
+        "baseAttack": "16",
+        "baseDefense": "18",
+        "attacks": [{
+            "name": "magic double dose",
+            "unlockLevel": "7"
+        },{
+            "name": "sonic boom",
+            "unlockLevel": "15"
+        }],
+    },{
+        "name": "squirtle",
+        "image": "images/pokemon_images/monsters/squirtle.gif",
+        "catchRate": ".2",
+        "type": "water",
+        "baseHP": "6",
+        "baseAttack": "8",
+        "baseDefense": "7",
+        "attacks": [{
+            "name": "water gun",
+            "unlockLevel": "5"
+        }, {
+            "name": "water slide",
+            "unlockLevel": "7"
+        }],
+        "evolution": {
+            "name": "wartortle",
+            "level": "7"
+        }
+    },{
+        "name": "wartortle",
+        "image": "images/pokemon_images/monsters/wartortle.gif",
+        "catchRate": ".35",
+        "type": "water",
+        "baseHP": "12",
+        "baseAttack": "15",
+        "baseDefense": "4",
+        "attacks": [{
+            "name": "water cannon",
+            "unlockLevel": "5"
+        }, {
+            "name": "swift",
+            "unlockLevel": "7"
+        }],
+        "evolution": {
+            "name": "blastoise",
+            "level": "7"
+        }
+    },{
+        "name": "blastoise",
+        "image": "images/pokemon_images/monsters/blastoise.gif",
+        "catchRate": ".7",
+        "type": "water",
+        "baseHP": "35",
+        "baseAttack": "20",
+        "baseDefense": "45",
+        "attacks": [{
+            "name": "water boom",
+            "unlockLevel": "14"
+        }, {
+            "name": "flooded bay",
+            "unlockLevel": "2"
+        }]
+    },{
+        "name": "psyduck",
+        "image": "images/pokemon_images/monsters/psyduck.gif",
+        "catchRate": ".9",
+        "type": "water",
+        "baseHP": "12",
+        "baseAttack": "20",
+        "baseDefense": "45",
+        "attacks": [{
+            "name": "surf",
+            "unlockLevel": "14"
+        }, {
+            "name": "stranded",
+            "unlockLevel": "2"
+        }]
+    }],
+
+
+    "Attack": [{
+        "name": "electric shock",
+        "power": "40",
+        "accuracy": "0.7",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-10"
+        }]
+    }, {
+        "name": "thunderbolt",
+        "power": "200",
+        "accuracy": "0.99",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-15"
+        }],
+    }, {
+        "name": "wing slash",
+        "power": "200",
+        "accuracy": "0.78",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-20"
+        }],
+      
+    }, {
+        "name": "atomic wind",
+        "power": "210",
+        "accuracy": "0.99",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-30"
+        }],
+    },{
+        "name": "vine whip",
+        "power": "140",
+        "accuracy": "0.6",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-12"
+        }],
+        "statusEffect": {
+            "name": "poisoned",
+            "target": "enemy"
+        },
+    },{
+        "name": "razor",
+        "power": "140",
+        "accuracy": "0.5",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-10"
+        }],
+        "statusEffect": {
+            "name": "poisoned",
+            "target": "enemy"
+        },
+    },
+    {
+        "name": "razor claw",
+        "power": "160",
+        "accuracy": "0.55",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-18"
+        }],
+    },{
+        "name": "poison ivy",
+        "power": "180",
+        "accuracy": "0.78",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-20"
+        }],
+        "statusEffect": {
+            "name": "poisoned",
+            "target": "enemy"
+        },
+    },{
+        "name": "stomp",
+        "power": "190",
+        "accuracy": "0.88",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-25"
+        }],
+        "statusEffect": {
+            "name": "confused",
+            "target": "enemy"
+        },
+    },{
+        "name": "razor leaf",
+        "power": "200",
+        "accuracy": "0.96",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-30"
+        }],
+    },{
+        "name": "distract",
+        "power": "180",
+        "accuracy": "0.95",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-20"
+        }],
+    },{
+        "name": "magical hat",
+        "power": "210",
+        "accuracy": "0.99",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-20"
+        }],
+        "statusEffect": {
+            "name": "confused",
+            "target": "enemy"
+        },
+    },{
+        "name": "sleeping air",
+        "power": "160",
+        "accuracy": "0.92",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-20"
+        }]
+    },{
+        "name": "body slam",
+        "power": "190",
+        "accuracy": "0.95",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-30"
+        }],
+        "statusEffect": {
+            "name": "confused",
+            "target": "enemy"
+        },
+    },{
+        "name": "fly",
+        "power": "160",
+        "accuracy": "0.94",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-35"
+        }]
+    },{
+        "name": "stare",
+        "power": "178",
+        "accuracy": "0.94",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-32"
+        }]
+    },{
+        "name": "magic double dose",
+        "power": "190",
+        "accuracy": "0.88",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-28"
+        }]
+    },{
+        "name": "sonic boom",
+        "power": "170",
+        "accuracy": "0.94",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-35"
+        }]
+    },{
+        "name": "water gun",
+        "power": "220",
+        "accuracy": "0.97",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-15"
+        }]
+    },{
+        "name": "water slide",
+        "power": "210",
+        "accuracy": "0.98",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-30"
+        }]
+    },{
+        "name": "water cannon",
+        "power": "220",
+        "accuracy": "0.94",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-40"
+        }]
+    },{
+        "name": "swift",
+        "power": "220",
+        "accuracy": "0.88",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-30"
+        }]
+    },{
+        "name": "water boom",
+        "power": "223",
+        "accuracy": "0.98",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-26"
+        }]
+    },{
+        "name": "stranded",
+        "power": "800",
+        "accuracy": "0.98",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-200"
+        }]
+    }],
+    "Obstacle": [{
+        "name": "flower",
+        "image": "images/obstacles/flower.png"
+    }],
+    "KeyItem": [{
+        "name": "razor",
+        "name": "boat",
+        "name": "flute"
+    }],
+    "NPC": [{
+        "name": "walker1",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "dialogue": "You serve the world greatly, young one."
+    }],
+    "FightingNPC": [{
+        "name": "fighter1",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "6",
+        "dialogue": "It is time. I WILL NOT LOSE!",
+        "monsters": [{
+            "name": "squirtle",
+            "level": "5",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "100",
+            "curHP": "100",
+            "attack": "35",
+            "defense": "60"
+        }, {
+            "name": "mew",
+            "level": "10",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "400",
+            "curHP": "400",
+            "attack": "40",
+            "defense": "50"
+        }],
+        "bet": "25",
+        "postDialogue": "We'll see who wins next time.",
+        "keyItems": ["razor"]
+    },
+    {
+        "name": "fighter2",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "6",
+        "dialogue": "You there, come here.  Ah haha ah haha -- it's GAME TIME",
+        "monsters": [{
+            "name": "psyduck",
+            "level": "8",
+            "exp": "100",
+            "expToNextLevel": "300",
+            "maxHP": "100",
+            "curHP": "100",
+            "attack": "35",
+            "defense": "60"
+        }, {
+            "name": "snorlax",
+            "level": "10",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "400",
+            "curHP": "400",
+            "attack": "40",
+            "defense": "50"
+        }],
+        "bet": "50",
+        "postDialogue": "Although I left, I wish you only the best.",
+        "keyItems": []
+    },{
+        "name": "fighter3",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "8",
+        "dialogue": "Let's be real. You're probably gonna beat me. And if you do you'll win a razor!",
+        "monsters": [{
+            "name": "wartortle",
+            "level": "5",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "10",
+            "curHP": "10",
+            "attack": "35",
+            "defense": "60"
+        }],
+        "bet": "5",
+        "postDialogue": "Enjoy your boat!",
+        "keyItems": [
+            "boat"
+        ]
+      }],
+      "TypeMatrix": [{
+        "name": "matrix",
+        "matrix": {
+            "electric": {
+                "water": "2",
+                "ground": "0.4",
+                "fire": "1.6",
+                "leaf": "1.8",
+                "magic": "1"
+            },
+            "ground": {
+                "water": ".1",
+                "electric": "1.5",
+                "fire": "1.6",
+                "leaf": "1.3",
+                "magic": "0.8"
+            },
+            "water": {
+                "electric": "0.4",
+                "ground": "1.8",
+                "fire": "3",
+                "leaf": "2.1",
+                "magic": "1"
+            },
+            "fire": {
+                "water": ".6",
+                "electric": "1.6",
+                "ground": "2.5",
+                "leaf": "2.2",
+                "magic": "2.4"
+            },
+            "leaf": {
+                "water": "2.6",
+                "electric": "0.7",
+                "ground": "1.0",
+                "fire": "0.9",
+                "magic": "3"
+            },
+            "magic": {
+                "water": "2",
+                "electric": "1.3",
+                "ground": "0.5",
+                "fire": "2.3",
+                "leaf": "0.5"
+            },
+        }
+    }],
+    "WildRegion": [{
+        "name": "grass1",
+        "image": "images/ground/wildGrass.png",
+        "probability": ".15",
+        "monsters": [{
+            "name": "zapdos",
+            "level": "8",
+            "probability": "0.3"
+        },{
+            "name": "squirtle",
+            "level": "4",
+            "probability": "0.1"
+        },{
+            "name": "pikachu",
+            "level": "6",
+            "probability": "0.6"
+        }]
+    },{
+        "name": "grass2",
+        "image": "images/pokemon_images/terrain/grass2.png",
+        "probability": ".30",
+        "monsters": [{
+            "name": "snorlax",
+            "level": "8",
+            "probability": "0.5"
+        },{
+            "name": "ivysaur",
+            "level": "6",
+            "probability": "0.5"
+        }]
+    }],
+    "HealItem": [{
+        "name": "heal1",
+        "image": "images/items/healPokeBall.png"
+    }],
+
+
+
+
+    ],
+
+
+
+  
+
+
+
+
+
+}
