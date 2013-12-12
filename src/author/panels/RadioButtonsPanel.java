@@ -40,7 +40,9 @@ public class RadioButtonsPanel extends AbstractToggleButtonPanel {
         	String[] buttons = input[1].split("\\.");
         	for (String s : buttons) {
         		addButtons(s);
-            }
+                }
+        } else {
+            this.add(new JLabel("None created!"));
         }
         
     }

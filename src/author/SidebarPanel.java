@@ -55,6 +55,8 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
     @Override
     public void valueChanged (ListSelectionEvent arg0) {
         // TODO: Make this change what type of tile you are adding to the map
+        
+        this.requestFocus();
 
         System.out.println("Selected");
         
@@ -119,6 +121,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
         JTextArea listText = createSidebarPrompt();
         this.add(listText);
         this.add(listScrollPane);
+        this.setVisible(true);
     }
 
     private JTextArea createSidebarPrompt () {
