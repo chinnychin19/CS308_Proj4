@@ -248,7 +248,7 @@ public class Constants {
     public final static String IMG_FOLDER_FILEPATH = "./images";
 
     public final static String SHORTGRASS_PNG_FILEPATH = "images/background/shortGrass.png";
-    public final static String TEST_FILE = "images/ground/wildGrass.png";
+    //public final static String TEST_FILE = "images/ground/wildGrass.png";
 
     public final static String EMPTY_STRING = "";
 

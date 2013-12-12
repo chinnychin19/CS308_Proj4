@@ -61,7 +61,10 @@ public class MapCreationView extends JPanel {
      */
     private void initListeners () {
         this.addKeyListener(new MapCreationKeyListener(this, myTileManager));
-        this.addMouseMotionListener(new MapCreationMouseListener(this, myTileManager));
+        
+        MapCreationMouseListener mouseListener = new MapCreationMouseListener(this,myTileManager);
+        this.addMouseMotionListener(mouseListener);
+        this.addMouseListener(mouseListener);
     }
 
     /**
