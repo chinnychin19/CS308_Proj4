@@ -99,6 +99,5 @@ public class AuthoringCache {
     public AuthorView getAuthorView() {
         return myView;
     }
-
     
 }

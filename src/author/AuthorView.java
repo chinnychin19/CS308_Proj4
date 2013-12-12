@@ -15,7 +15,7 @@ import constants.Constants;
 
 /***
  * GUI superclass that handles the majority of the activity
- * in the authoring engine. Consists of a
+ * in the authoring engine.
  * 
  * @author Michael Marion, Wes Koorbusch, Robert Ansel
  * 
@@ -37,6 +37,7 @@ public class AuthorView extends JFrame {
         setFrameAttributes();
         makeMenuBar();
         initializeMainView();
+       
         // Pack and set GUI to true
         pack();
         this.setVisible(true);

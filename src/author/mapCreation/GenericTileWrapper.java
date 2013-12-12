@@ -11,6 +11,7 @@ public class GenericTileWrapper {
 	private BufferedImage myImage;
 	private String myName;
 	private String myType;
+	private String myAdditionalInformation;
 	
 	public GenericTileWrapper(String name, String type, BufferedImage image){
 		myName = name;
@@ -47,10 +48,25 @@ public class GenericTileWrapper {
 	@Override
 	public String toString() {
             if(myImage instanceof BufferedImage && myImage != null) {
-                return myName + " " + "ImageAttached";
+                return myName + " (" + myType + ")";
             }
             else {
-                return myName + " " + "No image!";
+                return myName + " " + "!!!";
             }
 	}
+
+    public String getMyAdditionalInformation () {
+        if(myAdditionalInformation != null && myAdditionalInformation.length() > 0) {
+            return myAdditionalInformation;
+        }
+        else {
+            return "";
+        }
+    }
+
+    public void setMyAdditionalInformation (String myAdditionalInformation) {
+        this.myAdditionalInformation = myAdditionalInformation;
+    }
+	
+	
 }
