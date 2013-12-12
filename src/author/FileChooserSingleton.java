@@ -18,7 +18,7 @@ public class FileChooserSingleton extends JFileChooser {
             instance = new FileChooserSingleton();
 
         resetSelectionSettings();
-        
+
         return instance;
     }
 
@@ -26,6 +26,5 @@ public class FileChooserSingleton extends JFileChooser {
         instance.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         instance.setMultiSelectionEnabled(false);
         instance.resetChoosableFileFilters();
-        //System.out.println("reset");
     }
 }
