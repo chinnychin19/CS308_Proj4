@@ -15,10 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-@SuppressWarnings("serial")
 public abstract class AbstractWizardPanel extends JPanel {
 
-    protected UserInputDimension myDimensions;
+	private static final long serialVersionUID = -7974954435721491712L;
+	
+	protected UserInputDimension myDimensions;
     protected JLabel myTextLabel;
     private String myType;
 

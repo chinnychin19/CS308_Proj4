@@ -14,16 +14,15 @@ import javax.swing.JTextArea;
 import constants.Constants;
 
 
-@SuppressWarnings("serial")
 public class ListPanel extends AbstractTextPanel {
 
-    public ListPanel () {
+	private static final long serialVersionUID = 7313377313875680872L;
+
+	public ListPanel () {
         super(Constants.LIST_PANEL);
         myTextLabel = new JLabel(Constants.LIST_PANEL + ":");
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-
-        // TODO : Figure out how to prompt user for list length
 
         JTextArea myTextArea = new JTextArea();
         myTextArea.setPreferredSize(Constants.TEXT_AREA_SIZE);

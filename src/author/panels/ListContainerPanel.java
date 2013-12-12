@@ -11,9 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-@SuppressWarnings("serial")
 public class ListContainerPanel extends JPanel {
-    private JLabel myLabel;
+
+	private static final long serialVersionUID = 3693646897152050071L;
+	
+	private JLabel myLabel;
     private String myType;
 
     public ListContainerPanel () {

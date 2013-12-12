@@ -15,18 +15,21 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+
+import constants.Constants;
 import author.listeners.RadioButtonListener;
 
 
-@SuppressWarnings("serial")
 public class RadioButtonsPanel extends AbstractToggleButtonPanel {
 
-    private JLabel myRadioButtonsLabel;
+	private static final long serialVersionUID = 5998228945580381950L;
+	
+	private JLabel myRadioButtonsLabel;
     private ButtonGroup myButtonGroup;
     private String mySelectedButton;
 
     public RadioButtonsPanel (String label) {
-        super("RadioButtons", RadioButtonListener.getInstance());
+        super(Constants.RADIO_BUTTONS_KEYWORD, RadioButtonListener.getInstance());
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         
         String[] input = label.split("~");
@@ -42,7 +45,7 @@ public class RadioButtonsPanel extends AbstractToggleButtonPanel {
         		addButtons(s);
                 }
         } else {
-            this.add(new JLabel("None created!"));
+            this.add(new JLabel(Constants.NONE_CREATED));
         }
         
     }

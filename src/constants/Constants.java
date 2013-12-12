@@ -44,6 +44,9 @@ public class Constants {
     public static final String CLICKED_NEW_MAP = "Clicked 'Create New Map'";
     public static final String CLICKED_LOAD_GAME = "Clicked 'Load Existing Game'";
     public static final String ADDING = "adding ";
+    public static final String NONE_CREATED = "None created!";
+    public static final String FINISH_PROJECT_PROMPT = "Click 'finish' to create this object.";
+    
     
     // WizardBuilder.java Reflection Strings
     public static final String TEXT_KEYWORD = "text";
@@ -54,20 +57,31 @@ public class Constants {
     public static final String CHECKBOX_KEYWORD = "check";
     public static final String MATRIX_KEYWORD = "matrix";
     public static final String WORD_PANEL_CLASS = "WordPanel";
+    public static final String RADIO_BUTTONS_KEYWORD = "RadioButtons";
     public static final String CHECKBOX_PANEL_CLASS = "CheckBoxPanel";
     public static final String NUMBER_PANEL_CLASS = "NumberPanel";
     public static final String IMAGE_PANEL_CLASS = "ImagePanel";
     public static final String RADIOBUTTON_PANEL_CLASS = "RadioButtonsPanel";
     public static final String LIST_PANEL_CLASS = "ListPanel";
     public static final String MATRIX_PANEL_CLASS = "MatrixPanel";
+    public static final String FINISH_STRING = "Finish";
     
-    // Image selection constante
+    
+    // Image selection constants
     public static final String SELECT_IMAGE_PROMPT = "Select image...";
     public static final String IMAGE_FILE_TYPES = "Image files (JPEG, GIF, PNG)";
     public static final String JPG_EXTENSION = "jpg";
     public static final String JPEG_EXTENSION = "jpeg";
     public static final String GIF_EXTENTION = "gif";
     public static final String PNG_EXTENSION = "png";
+	public static final String ALREADY_IN_FOLDER = "Already in folder";
+	public static final String NOT_ALREADY_IN_FOLDER = "Not already in folder; copy made";
+	public static final String TARGET_NEWFILE = "Target newfile: ";
+	public static final String PROJECT_IMAGES_FOLDER = "Project's images folder: ";
+	public static final String PARENT_FOLDER = "Parent folder: ";
+	public static final String IMAGE = "Image";
+	public static final String IMAGES = "images";
+	public static final String USER_DIR = "user.dir";
     
     // These both must be odd numbers
     public static final int NUM_TILES_HORIZONTAL = 15;

@@ -20,10 +20,11 @@ import javax.swing.table.TableModel;
 import org.json.simple.JSONObject;
 import author.listeners.AddMatrixEntryListener;
 
-@SuppressWarnings("serial")
 public class MatrixPanel extends AbstractTextPanel {
 
-    private JPanel myButtonPanel;
+	private static final long serialVersionUID = 3642045862602047697L;
+	
+	private JPanel myButtonPanel;
     private JTable myMatrixTable;
     private TableModel myDataModel;
     private final String EXPAND_TEXT = "Add another entry";
@@ -38,7 +39,9 @@ public class MatrixPanel extends AbstractTextPanel {
         // Create grid
         TableModel myDataModel = new AbstractTableModel() {
 
-            private Object[][] data = new Object[STARTING_ROWS][STARTING_COLUMNS];
+			private static final long serialVersionUID = 3184414895276938043L;
+			
+			private Object[][] data = new Object[STARTING_ROWS][STARTING_COLUMNS];
 
             public int getColumnCount () {
                 return STARTING_COLUMNS;
@@ -118,9 +121,6 @@ public class MatrixPanel extends AbstractTextPanel {
             colRelationship.put(myMatrixTable.getModel().getValueAt(row, 0).toString(),
                                 myMatrixTable.getModel().getValueAt(row, col).toString());
         }
-
-        // We now have a map defining all of a column's relationships to its rows.
-
         JSONObject result = new JSONObject(colRelationship);
         return result;
     }

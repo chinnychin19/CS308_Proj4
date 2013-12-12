@@ -10,10 +10,11 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
-@SuppressWarnings("serial")
 public class ContainerPanel extends JPanel {
-    private JLabel myLabel;
+
+	private static final long serialVersionUID = 7553730168577820900L;
+	
+	private JLabel myLabel;
     private String myType;
 
     public ContainerPanel (String label, String type) {
