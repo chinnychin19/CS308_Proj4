@@ -67,7 +67,6 @@ public class WizardConverter {
                 JSONParser parser = new JSONParser();
                 try {
                     tempMap.put((String) s, parser.parse(data.get(s)));
-
                 }
                 catch (ParseException e) {
                     // TODO Auto-generated catch block

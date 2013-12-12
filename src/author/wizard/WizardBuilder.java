@@ -1,12 +1,7 @@
 package author.wizard;
 
 import java.awt.Component;
-import java.io.BufferedReader;
-//import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
@@ -16,11 +11,8 @@ import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import jsoncache.JSONReader;
-//import javax.swing.SwingUtilities;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
-//import org.json.simple.parser.JSONParser;
-//import org.json.simple.parser.ParseException;
 
 import constants.Constants;
 
@@ -28,8 +20,6 @@ import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.NoJSONArrayJsonException;
 import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
 import author.FileChooserSingleton;
-//import constants.Constants;
-//import author.listeners.FinishListener;
 import author.model.AuthoringCache;
 import author.panels.ContainerPanel;
 import author.panels.FinishPanel;
@@ -118,6 +108,13 @@ public class WizardBuilder {
             }
             else if (tempObject.get(s) instanceof JSONObject) {
                 System.out.println((String) s + Constants.EQUALS_JSONOBJECT);
+                if (((JSONObject) tempObject.get(s)).containsKey("name")) {
+	                if (((String)((JSONObject) tempObject.get(s)).get("name")).contains("list")) {
+	                	for (int i=0;i<5;i++) {
+	                		handleJSONObject((String) s, (JSONObject) tempObject.get(s), currentPanel);
+	                	}
+	                }
+                }
                 handleJSONObject((String) s, (JSONObject) tempObject.get(s), currentPanel);
             }
             else if (tempObject.get(s) instanceof JSONArray) {
@@ -154,6 +151,13 @@ public class WizardBuilder {
             }
             else if (genericContainer instanceof JSONObject) {
                 System.out.println(Constants.JSONOBJECT_STRING);
+                if (((JSONObject) genericContainer).containsKey("name")) {
+                	if (((String)((JSONObject) genericContainer).get("name")).contains("list")) {
+                    	for (int i=0;i<5;i++) {
+                    		handleJSONObject(label, (JSONObject) genericContainer, currentPanel);
+                    	}
+                    }
+                }
                 handleJSONObject(label, (JSONObject) genericContainer, currentPanel);
             }
             else if (genericContainer instanceof JSONArray) {
@@ -219,22 +223,10 @@ public class WizardBuilder {
         String basicFieldType = (fields[0].equals(Constants.LIST_KEYWORD)) ? fields[1] : fields[0];
         String limitedFieldType = (fields[0].equals(Constants.LIST_KEYWORD)) ? fieldType.substring(5) : fieldType;
         String outputString = Constants.EMPTY_STRING;
-        /**
-         * We need this to be changed because it doens't work on a Mac
-         * 
-         * The parsing with the filepath strings isn't working.
-         * 
-         * Java has built in classes for building filepaths and file locations
-         * 		- We should use those so we don't get any bugs.
-         * 
-         * We shouldn't be parsing JSON in this class.
-         * 		- Should try to use util.jsonwrapper
-         * 		- Or use native Java methods (?)
-         */
         if (limitedFieldType.split("_").length > 1 && limitedFieldType.indexOf(":") == -1) { //EXAMPLE: "radio_Monster.name"
             outputString = makePartOfRadioButtonsInputParameter(limitedFieldType);
         }
-
+        
         Class<?> classToInstantiate =
                 Class.forName(Constants.AUTHOR_PANELS_PATH + KEYWORD_TO_PANEL_TYPE.get(basicFieldType)); //For fieldType="list_radio_Monster.name", class is "author.panels.RadioButtonsPanel"
         Constructor<?> ctr = classToInstantiate.getConstructor(String.class);
@@ -242,9 +234,9 @@ public class WizardBuilder {
         Component output = (Component) ctr.newInstance(fieldName + outputString); //For fieldType="list_radio_Monster.name", Component output = (Component) RadioButtonsPanel("name~Bulbasaur.Squirtle.Charmander.Pidgey.") 
         
         if (fields[0].equals(Constants.LIST_KEYWORD)) {
-            
+        	
         }
-
+        
         System.out.println(fieldName + outputString);
 
         return output;
@@ -310,20 +302,8 @@ public class WizardBuilder {
      */
     private SmartJsonObject getSmartJson (String filepath) {
         try {
-        /*  BufferedReader reader = new BufferedReader(new FileReader(filepath));
-            String line, results = Constants.EMPTY_STRING;
-            while( ( line = reader.readLine() ) != null) {
-                 results += line;
-            }
-            reader.close();
-            return new SmartJsonObject(results);        */
             JSONObject obj = JSONReader.getJSON(filepath);
             return new SmartJsonObject(obj);
-    /*  } catch (FileNotFoundException e) {
-            System.out.println(Constants.FILE_NOT_FOUND);          
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();        */
         } catch (NoJSONObjectJsonException e) {
             e.printStackTrace();
             System.out.println(Constants.MALFORMED_JSON_MESSAGE);

@@ -6,11 +6,6 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import util.jsonwrapper.SmartJsonObject;
-import util.jsonwrapper.jsonexceptions.NoJSONArrayJsonException;
-import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
 
 import author.AuthorView;
 import constants.Constants;
@@ -23,6 +18,13 @@ public class AuthoringCache {
     public AuthoringCache (AuthorView av) {
         myJSON = new JSONObject();
         myView = av;
+        initCategories();
+        //mjrTest();
+    }
+    
+    public AuthoringCache () {
+        myJSON = new JSONObject();
+        myView = null;
         initCategories();
         //mjrTest();
     }
@@ -40,7 +42,9 @@ public class AuthoringCache {
     public void add (String category, JSONObject data) {
         JSONArray cache = (JSONArray) myJSON.get(category);
         cache.add(data);
-        myView.updateMenuAndSidebar();
+        if (myView != null) {
+        	myView.updateMenuAndSidebar();
+        }
     }
 
     public void delete (String category, String name) {
