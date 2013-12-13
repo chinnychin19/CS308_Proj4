@@ -65,10 +65,10 @@ public class NPC extends AbstractCharacter {
             //TODO: Wrap Dialogue every 63 characters (the amount for one line)
             mode.addDynamicState(new TextState(mode, 
             		Constants.BORDER_THICKNESS, 
-					Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT, 
-					Constants.WIDTH - 2*Constants.BORDER_THICKNESS, 
-					Constants.DIALOGUE_HEIGHT,  
-					myDialogue));
+			Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT, 
+			Constants.WIDTH - 2*Constants.BORDER_THICKNESS, 
+			Constants.DIALOGUE_HEIGHT,  
+			myDialogue));
 	}
 
     @Override

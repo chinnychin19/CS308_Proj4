@@ -267,7 +267,7 @@
             "baseDefense": "45",
             "attacks": [
                 {
-                    "name": "surf",
+                    "name": "stomp",
                     "unlockLevel": "14"
                 },
                 {
@@ -591,15 +591,18 @@
             ]
         }
     ],
-    "Obstacle": [
-        {
-            "name": "flower",
-            "image": "images/obstacles/flower.png"
-        }
-    ],
+    "Obstacle": [{
+        "name": "flower",
+        "image": "images/obstacles/flower.png"
+    }, {
+        "name": "door",
+        "image": "images/obstacles/door.png"
+    }],
     "KeyItem": [
         {
-            "name": "flute"
+            "name": "key"
+        }, {
+            "name": "saw"
         }
     ],
     "NPC": [
@@ -646,7 +649,7 @@
             "bet": "25",
             "postDialogue": "We'll see who wins next time.",
             "keyItems": [
-                "razor"
+                "saw"
             ]
         },
         {
@@ -690,7 +693,7 @@
             "image-left": "images/players/mainPLayer1/left.png",
             "image-right": "images/players/mainPLayer1/right.png",
             "lineOfSightDistance": "8",
-            "dialogue": "Let's be real. You're probably gonna beat me. And if you do you'll win a razor!",
+            "dialogue": "You'll never beat me!",
             "monsters": [
                 {
                     "name": "wartortle",
@@ -704,9 +707,9 @@
                 }
             ],
             "bet": "5",
-            "postDialogue": "Enjoy your boat!",
+            "postDialogue": "Can you give me back that key when you're done with it?",
             "keyItems": [
-                "boat"
+                "key"
             ]
         }
     ],
@@ -715,15 +718,17 @@
             "name": "matrix",
             "matrix": {
                 "electric": {
-                    "water": "2",
+                    "water": "2.0",
                     "ground": "0.4",
                     "fire": "1.6",
                     "leaf": "1.8",
-                    "magic": "1"
+                    "electric": "1.0",
+                    "magic": "1.0"
                 },
                 "ground": {
-                    "water": ".1",
+                    "water": "0.1",
                     "electric": "1.5",
+                    "ground": "1.0",
                     "fire": "1.6",
                     "leaf": "1.3",
                     "magic": "0.8"
@@ -731,15 +736,17 @@
                 "water": {
                     "electric": "0.4",
                     "ground": "1.8",
-                    "fire": "3",
+                    "water": "1.0",
+                    "fire": "3.0",
                     "leaf": "2.1",
-                    "magic": "1"
+                    "magic": "1.0"
                 },
                 "fire": {
-                    "water": ".6",
+                    "water": "0.6",
                     "electric": "1.6",
                     "ground": "2.5",
                     "leaf": "2.2",
+                    "fire": "1.0",
                     "magic": "2.4"
                 },
                 "leaf": {
@@ -747,14 +754,16 @@
                     "electric": "0.7",
                     "ground": "1.0",
                     "fire": "0.9",
-                    "magic": "3"
+                    "leaf": "1.0",
+                    "magic": "3.0"
                 },
                 "magic": {
-                    "water": "2",
+                    "water": "2.0",
                     "electric": "1.3",
                     "ground": "0.5",
                     "fire": "2.3",
-                    "leaf": "0.5"
+                    "leaf": "0.5",
+                    "magic": "1.0"
                 }
             }
         }
@@ -839,6 +848,14 @@
                 {
                     "name": "curHP",
                     "change": "-5"
+                }
+            ]
+        }, {
+            "name": "confused",
+            "statisticEffects": [
+                {
+                    "name": "curHP",
+                    "change": "-1"
                 }
             ]
         }
