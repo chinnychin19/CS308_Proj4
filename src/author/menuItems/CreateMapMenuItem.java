@@ -26,7 +26,7 @@ public class CreateMapMenuItem extends AbstractMenuItem {
 
 	// Called when 'Create New Map' is clicked
 	private void handleCreateNewMap(){
-		System.out.println("Clicked 'Create New Map'");
+		System.out.println(Constants.CLICKED_NEW_MAP);
 	}
 	
 	

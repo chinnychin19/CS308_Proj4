@@ -112,7 +112,6 @@ public class MapCreationKeyListener implements KeyListener {
     }
 
     @Override
-    public void keyTyped (KeyEvent e) { /* do nothing... */
-    }
+    public void keyTyped (KeyEvent e) { /* do nothing... */ }
 
 }

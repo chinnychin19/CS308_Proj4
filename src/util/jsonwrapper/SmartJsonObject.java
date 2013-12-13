@@ -1,8 +1,14 @@
 package util.jsonwrapper;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import util.jsonwrapper.jsonexceptions.NoBooleanValueJsonException;
 import util.jsonwrapper.jsonexceptions.NoDoubleValueJsonException;
 import util.jsonwrapper.jsonexceptions.NoIntValueJsonException;
@@ -24,6 +30,21 @@ public class SmartJsonObject {
             throw new NoJSONObjectJsonException();
         }
         myJson = obj;
+    }
+    
+    public SmartJsonObject(String objString) throws NoJSONObjectJsonException {
+        if (objString == null) {
+            throw new NoJSONObjectJsonException();
+        }
+        JSONObject json;
+        JSONParser parser = new JSONParser();
+        try {
+            json = (JSONObject) parser.parse(objString);
+            myJson = json;
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
     
    /**
