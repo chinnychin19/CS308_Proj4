@@ -1,5 +1,12 @@
 package author.listeners;
 
+/**
+ * Listener that is associated with the RadioButtonsPanel.  It updates
+ * the selection and allows the Panel to get the final selection.
+ * 
+ * @author weskpga, mray90
+ */
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JRadioButton;

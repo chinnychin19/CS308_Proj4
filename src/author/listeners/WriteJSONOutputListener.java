@@ -1,5 +1,13 @@
 package author.listeners;
 
+/**
+ * Class that finalizes a map creation and writes the relevant
+ * information to a JSON file that can later be loaded into a
+ * game, or loaded into the author again to be edited.
+ * 
+ * @author weskpga, ransel
+ */
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;

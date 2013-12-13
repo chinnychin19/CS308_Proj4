@@ -1,6 +1,18 @@
 package author.menuItems;
 
 import java.awt.event.ActionEvent;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import util.FileChooserSingleton;
+import util.OptionPaneSingleton;
+import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.NoJSONArrayJsonException;
+import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
+import jsoncache.JSONReader;
+import author.AuthorView;
+import author.model.AuthoringCache;
 
 import constants.Constants;
 
@@ -13,11 +25,14 @@ import constants.Constants;
  *
  */
 
-@SuppressWarnings("serial")
 public class LoadGameMenuItem extends AbstractMenuItem {
 
-	public LoadGameMenuItem() {
+	private static final long serialVersionUID = -3848391690817727706L;
+	private AuthoringCache myAuthoringCache;
+    
+	public LoadGameMenuItem(AuthoringCache cache) {
 		super(Constants.LOAD_EXISTING_GAME);
+		myAuthoringCache = cache;
 	}
 
 	@Override
@@ -27,7 +42,42 @@ public class LoadGameMenuItem extends AbstractMenuItem {
 
 	private void handleLoadExistingGame(){
 		System.out.println(Constants.CLICKED_LOAD_GAME);
+		JFileChooser chooser = FileChooserSingleton.getInstance();
+		chooser.setFileFilter(new FileNameExtensionFilter(Constants.JSON_FILES_STRING, Constants.JSON_STRING));
+		int returnVal = chooser.showOpenDialog(this);
+		
+		boolean userOk = 
+	                OptionPaneSingleton.getInstance().getOk(Constants.RESET_AUTHOR_CACHE_WARNING);
+
+	        if (returnVal == JFileChooser.APPROVE_OPTION && userOk) {
+
+	            AuthorView currentView = myAuthoringCache.getAuthorView();
+	            myAuthoringCache.reset();
+	            parseFileIntoCache(chooser.getSelectedFile().getAbsolutePath());
+	            currentView.updateMenuAndSidebar();
+
+	        }
 	}
+
+    private void parseFileIntoCache (String path) {
+        @SuppressWarnings("static-access")
+        JSONObject obj = new JSONReader().getJSON(path);
+        try {
+            SmartJsonObject smartObj = new SmartJsonObject(obj);
+            for (Object s : smartObj.keySet()){
+                JSONArray jArr = smartObj.getJSONArray((String) s);
+                for (Object j : jArr){
+                    myAuthoringCache.add((String) s, (JSONObject) j);                
+                }
+            }
+        }
+        catch (NoJSONObjectJsonException e) {
+            e.printStackTrace();
+        }
+        catch (NoJSONArrayJsonException e) {
+            e.printStackTrace();
+        }        
+    }
 	
 	
 }

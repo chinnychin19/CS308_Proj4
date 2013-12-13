@@ -15,10 +15,11 @@ import javax.swing.JTextField;
 import constants.Constants;
 
 
-@SuppressWarnings("serial")
 public class NumberPanel extends AbstractTextPanel {
 
-    JTextField myTextField;
+	private static final long serialVersionUID = -6079360021463269321L;
+	
+	JTextField myTextField;
 
     public NumberPanel (String label) {
         super(Constants.NUMBER_PANEL);

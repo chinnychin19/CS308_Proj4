@@ -10,16 +10,15 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class ContainerPanel extends JPanel {
 
-	private static final long serialVersionUID = 7553730168577820900L;
+public class ListContainerPanel extends JPanel {
+
+	private static final long serialVersionUID = 3693646897152050071L;
 	
 	private JLabel myLabel;
     private String myType;
 
-    public ContainerPanel (String label, String type) {
-        myLabel = new JLabel(label);
-        myType = type;
+    public ListContainerPanel () {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.add(myLabel);
     }

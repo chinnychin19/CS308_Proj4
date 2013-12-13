@@ -5,11 +5,9 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
-import game.controller.Input;
 import game.view.GameView;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import constants.Constants;
 
 
@@ -18,7 +16,7 @@ public abstract class GameDriver {
     public static void main (String[] args) {
         JFrame frame = new JFrame();
         frame.setSize(Constants.WIDTH, Constants.HEIGHT);
-        // frame.setLocation(200, 100);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         try {
             String[] games = getGameNames(getListOfGames());
@@ -33,8 +31,7 @@ public abstract class GameDriver {
             }
 
             frame.setContentPane(new GameView(gameName, session));
-            // frame.setContentPane(new GameView(Constants.BOGUS_NAME_GAME));
-            frame.setResizable(false);// won't accidentally change size
+            frame.setResizable(false); // won't accidentally change size
             frame.setVisible(true);
         }
         catch (IOException e) {
@@ -116,7 +113,8 @@ public abstract class GameDriver {
         return (String) JOptionPane.showInputDialog(Constants.SESSION_ENTER_NEW_SESSION_TEXT);
     }
 
-    private static String createNewSession (String gameName, String newSession) throws IOException {
+    @SuppressWarnings("resource")
+	private static String createNewSession (String gameName, String newSession) throws IOException {
         String newFileName =
                 Constants.SESSION_SESSION_START_KEY + newSession.trim().replaceAll("\\s+", "-") +
                         Constants.FILETYPE;

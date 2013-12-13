@@ -43,6 +43,10 @@ public class Constants {
     public static final String CLICKED_ALT_TEMPLATE = "Clicked 'Choose Alternate Template'";
     public static final String CLICKED_NEW_MAP = "Clicked 'Create New Map'";
     public static final String CLICKED_LOAD_GAME = "Clicked 'Load Existing Game'";
+    public static final String ADDING = "adding ";
+    public static final String NONE_CREATED = "None created!";
+    public static final String FINISH_PROJECT_PROMPT = "Click 'finish' to create this object.";
+    
     
     // WizardBuilder.java Reflection Strings
     public static final String TEXT_KEYWORD = "text";
@@ -53,20 +57,43 @@ public class Constants {
     public static final String CHECKBOX_KEYWORD = "check";
     public static final String MATRIX_KEYWORD = "matrix";
     public static final String WORD_PANEL_CLASS = "WordPanel";
+    public static final String RADIO_BUTTONS_KEYWORD = "RadioButtons";
     public static final String CHECKBOX_PANEL_CLASS = "CheckBoxPanel";
     public static final String NUMBER_PANEL_CLASS = "NumberPanel";
     public static final String IMAGE_PANEL_CLASS = "ImagePanel";
     public static final String RADIOBUTTON_PANEL_CLASS = "RadioButtonsPanel";
     public static final String LIST_PANEL_CLASS = "ListPanel";
     public static final String MATRIX_PANEL_CLASS = "MatrixPanel";
+    public static final String FINISH_STRING = "Finish";
     
-    // Image selection constante
+    // WorldCreationMap Constants
+    public static final String NEW_LIST_MADE_FOR_TYPE = "New list made for type ";
+    public static final String NAME_COLON = "name: ";
+    public static final String Y_COLON = "  y: ";
+    public static final String X_COLON = "  x: ";
+    public static final String AND_FOR_COMPARISON = " and for comparison ";
+    public static final String LIST_STRING = " list";
+	public static final String VALUE_ADDED_TO = "Value added to ";
+	public static final String ADDITIONAL = "additional";
+	public static final String MAP_Y_STRING = "y";
+	public static final String MAP_X_STRING = "x";
+	public static final String MAP_NAME = "name";
+    
+    // Image selection constants
     public static final String SELECT_IMAGE_PROMPT = "Select image...";
     public static final String IMAGE_FILE_TYPES = "Image files (JPEG, GIF, PNG)";
     public static final String JPG_EXTENSION = "jpg";
     public static final String JPEG_EXTENSION = "jpeg";
     public static final String GIF_EXTENTION = "gif";
     public static final String PNG_EXTENSION = "png";
+	public static final String ALREADY_IN_FOLDER = "Already in folder";
+	public static final String NOT_ALREADY_IN_FOLDER = "Not already in folder; copy made";
+	public static final String TARGET_NEWFILE = "Target newfile: ";
+	public static final String PROJECT_IMAGES_FOLDER = "Project's images folder: ";
+	public static final String PARENT_FOLDER = "Parent folder: ";
+	public static final String IMAGE = "Image";
+	public static final String IMAGES = "images";
+	public static final String USER_DIR = "user.dir";
     
     // These both must be odd numbers
     public static final int NUM_TILES_HORIZONTAL = 15;
@@ -110,6 +137,8 @@ public class Constants {
     public static final String JSON_KEYITEM = "KeyItem";
     public static final String JSON_STATUS = "Status";
     public static final String JSON_STATUS_LOWERCASE = "status";
+    public static final String JSON_FILES_STRING = "JSON files";
+    public static final String JSON_STRING = "json";
 
     public static final String JSON_IMAGE = "image";
     public static final String JSON_IMAGE_UP = "image-up";
@@ -180,19 +209,19 @@ public class Constants {
     public static final int LEFT_ARROW_KEY = KeyEvent.VK_LEFT;
 
     // GUI Sizing Constants
-    public static final Dimension FRAME_SIZE = new Dimension(1024, 620);
+    public static final Dimension FRAME_SIZE = new Dimension(1024, 680);
     public static final Dimension BUTTON_SIZE = new Dimension(198, 28);
     public static final Dimension TEXT_AREA_SIZE = new Dimension(400, 32);
     public static final Dimension SIDEBAR_SIZE = new Dimension(200, 600);
     public static final Dimension SIDEBAR_JLIST_SIZE = new Dimension(150, 500);
-    public static final Dimension MAP_CREATOR_SIZE = new Dimension(800, 600);
+    public static final Dimension MAP_CREATOR_SIZE = new Dimension(795, 594);
 
     // Authoring JMenu Options Constants
     public static final String FILE_MENU = "File";
-    public static final String EDIT_MENU = "Edit";
+    public static final String LIST_MENU = "List";
     public static final String VIEW_MENU = "View";
     public static final String NEW_ENTITY_SUBMENU = "New Entity";
-    public static final String EDIT_ENTITY_SUBMENU = "Edit Existing Entity";
+    public static final String LIST_ENTITY_SUBMENU = "List Existing Entities";
     public static final String CHOOSE_ALTERNATE_TEMPLATE = "Choose Alternate Template (JSON)";
     public static final String LOAD_EXISTING_GAME = "Load Existing Game (JSON)";
     public static final String CREATE_NEW_MAP = "Create New Map";
@@ -248,7 +277,7 @@ public class Constants {
     public final static String IMG_FOLDER_FILEPATH = "./images";
 
     public final static String SHORTGRASS_PNG_FILEPATH = "images/background/shortGrass.png";
-    public final static String TEST_SHORTGRASS_PNG_FILEPATH = "images/ground/shortGrass.png";
+    //public final static String TEST_FILE = "images/ground/wildGrass.png";
 
     public final static String EMPTY_STRING = "";
 
@@ -385,7 +414,18 @@ public class Constants {
     public static final String SESSION_ENTER_NEW_SESSION_TEXT = "Please input the new sessions name\n";
     public static final String SESSION_NEW_SESSION_KEY = "New Session";
     public static final String SESSION_SESSION_START_KEY = "saveState_";
+    
+    // GUI Colors
+    public static final int RGB_RED = 112;
+    public static final int RGB_GREEN = 192;
+    public static final int RGB_BLUE = 160;
+    public static final Color MAP_CREATOR_BACKGROUND_COLOR = new Color(RGB_RED, RGB_GREEN, RGB_BLUE);
 
+    //Warning messages
+    public static final String RESET_AUTHOR_CACHE_WARNING = "Warning! This will clear the author cache\n" +
+    		"and erase any unsaved worlds.\n" +
+    		"Do you wish to proceed?";
 
+    public static final int MAP_BUFFER = 5;
 
 }

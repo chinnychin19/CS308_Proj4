@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import constants.Constants;
 
@@ -63,17 +64,30 @@ public class Wizard extends JDialog {
         this.setVisible(true);
     }
 
+    /**
+     * I
+     */
     public void init () {
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
 
         myCardLayout = new CardLayout();
         myCardPanel = new JPanel();
+        JScrollPane jsp = new JScrollPane(myCardPanel);
+        
 
-        this.add(myCardPanel);
+        this.add(jsp);
 
         myCardPanel.setLayout(myCardLayout);
     }
 
+    /**
+     * Add a "next" and "back" button to the
+     * wizard, allowing the user to transition
+     * between CardPanels. Specifically, this
+     * method adds the two buttons to a JPanel,
+     * and then adds the JPanel to each 
+     * wizard CardPanel.
+     */
     public void addButtons () {
 
         myButtonPanel = new JPanel(new FlowLayout());

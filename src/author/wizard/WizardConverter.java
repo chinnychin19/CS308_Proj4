@@ -41,7 +41,10 @@ public class WizardConverter {
         Set<String> keys = data.keySet();
         Map<String, Object> tempMap = new HashMap<String, Object>();
         for (Object s : keys) {
-            if (data.get(s).length() > 0 && data.get(s).charAt(0) == '{') {
+        	if (data.get(s) == null || data.get(s).equals("")) {
+        		
+        	}
+        	else if (data.get(s).length() > 0 && data.get(s).charAt(0) == '{') {
                 JSONParser parser = new JSONParser();
                 try {
                     tempMap.put((String) s, parser.parse(data.get(s)));
@@ -52,10 +55,13 @@ public class WizardConverter {
                 }
             }
             else {
-                tempMap.put((String) s, data.get(s));
+            	tempMap.put((String) s, data.get(s));
             }
         }
-        parent.putAll(tempMap);
+        if (tempMap.size() > 0) {
+        	parent.putAll(tempMap);
+        }
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -63,11 +69,13 @@ public class WizardConverter {
         Set<String> keys = data.keySet();
         Map<String, Object> tempMap = new HashMap<String, Object>();
         for (Object s : keys) {
-            if (data.get(s).length() > 0 && data.get(s).charAt(0) == '{') {
+        	if (data.get(s) == null || data.get(s).equals("")) {
+        		
+        	}
+        	else if (data.get(s).length() > 0 && data.get(s).charAt(0) == '{') {
                 JSONParser parser = new JSONParser();
                 try {
                     tempMap.put((String) s, parser.parse(data.get(s)));
-
                 }
                 catch (ParseException e) {
                     // TODO Auto-generated catch block
@@ -78,7 +86,9 @@ public class WizardConverter {
                 tempMap.put((String) s, data.get(s));
             }
         }
-        parent.add(new JSONObject(tempMap));
+        if (tempMap.size() > 0) {
+        	parent.add(new JSONObject(tempMap));
+        }
     }
 
     @SuppressWarnings("unchecked")

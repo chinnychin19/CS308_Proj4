@@ -5,6 +5,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JCheckBox;
 import author.panels.CheckBoxPanel;
 
+/**
+ * Listener for the CheckBoxPanel.  Allows the user to choose either
+ * checked or unchecked.
+ * 
+ * @author weskpga
+ *
+ */
 
 public class CheckBoxListener implements ActionListener {
 

@@ -18,10 +18,16 @@ import javax.swing.JLabel;
 
 import author.listeners.CheckBoxListener;
 
-@SuppressWarnings("serial")
+
 public class CheckBoxPanel extends AbstractToggleButtonPanel{
 
-    private JLabel myCheckBoxLabel;
+	private static final String FALSE = "false";
+
+	private static final String TRUE = "true";
+
+	private static final long serialVersionUID = -257454601339596984L;
+	
+	private JLabel myCheckBoxLabel;
     private Map<String,String> myBoxStates;
         
     public CheckBoxPanel(String label){
@@ -48,13 +54,13 @@ public class CheckBoxPanel extends AbstractToggleButtonPanel{
         for (String s : boxLabels) {
             JCheckBox cb = new JCheckBox(s);
             cb.addActionListener((ActionListener) myEventListener);
-            myBoxStates.put(s, "false");
+            myBoxStates.put(s, FALSE);
             this.add(cb);
         }
     }
     
     public void updateSelectionState (AWTEvent e) {
-        String state = (myBoxStates.get(((JCheckBox) e.getSource()).getText()).equals("true")) ? "false" : "true";
+        String state = (myBoxStates.get(((JCheckBox) e.getSource()).getText()).equals(TRUE)) ? FALSE : TRUE;
         myBoxStates.put(((JCheckBox) e.getSource()).getText(), state);
     }
     
@@ -62,7 +68,7 @@ public class CheckBoxPanel extends AbstractToggleButtonPanel{
     public Map<String, String> getUserInput () {
         Map<String, String> result = new HashMap<String, String>();
         for (String s : myBoxStates.keySet()) {
-        	if (myBoxStates.get(s).equals("true")) {
+        	if (myBoxStates.get(s).equals(TRUE)) {
         		String label = myCheckBoxLabel.getText();
         		result.put(s,label.substring(0, label.length()-1));
         	}

@@ -1,4 +1,4 @@
-package author;
+package util;
 
 import javax.swing.JFileChooser;
 
@@ -9,7 +9,7 @@ public class FileChooserSingleton extends JFileChooser {
     private static FileChooserSingleton instance;
 
     private FileChooserSingleton () {
-        super("./");
+        super(System.getProperty("user.dir"));
     }
 
     public static synchronized FileChooserSingleton getInstance ()
@@ -17,6 +17,14 @@ public class FileChooserSingleton extends JFileChooser {
         if (instance == null)
             instance = new FileChooserSingleton();
 
+        resetSelectionSettings();
+
         return instance;
+    }
+
+    private static void resetSelectionSettings () {
+        instance.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        instance.setMultiSelectionEnabled(false);
+        instance.resetChoosableFileFilters();
     }
 }

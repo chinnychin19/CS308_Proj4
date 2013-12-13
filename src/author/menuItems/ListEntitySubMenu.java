@@ -6,7 +6,6 @@ import javax.swing.JMenuItem;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import constants.Constants;
-import author.listeners.LaunchWizardListener;
 import author.model.AuthoringCache;
 
 /**
@@ -17,14 +16,14 @@ import author.model.AuthoringCache;
  *
  */
 
-@SuppressWarnings("serial")
-public class EditEntitySubMenu extends AbstractMenu {
+public class ListEntitySubMenu extends JMenu {
 
-    private AuthoringCache myCache;
+	private static final long serialVersionUID = -1394146545730632997L;
+	private AuthoringCache myCache;
     private JMenu me = this;
 
-    public EditEntitySubMenu (AuthoringCache cache) {
-        super(Constants.EDIT_ENTITY_SUBMENU);
+    public ListEntitySubMenu (AuthoringCache cache) {
+        super(Constants.LIST_ENTITY_SUBMENU);
 
         myCache = cache;
         refreshMenu();
@@ -44,7 +43,6 @@ public class EditEntitySubMenu extends AbstractMenu {
             for (Object con : locationArray) {
                 String tempString = (String) ((JSONObject) con).get(Constants.NAME);
                 JMenuItem item = new JMenuItem(tempString);
-                item.addActionListener(new LaunchWizardListener((String) s,myCache));
                 menu.add(item);
             }
 

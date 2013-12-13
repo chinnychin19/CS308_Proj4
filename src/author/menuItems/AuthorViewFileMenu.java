@@ -14,16 +14,17 @@ import constants.Constants;
  *
  */
 
-@SuppressWarnings("serial")
 public class AuthorViewFileMenu extends JMenu {
 	
+	private static final long serialVersionUID = -3001299406612769184L;
+
 	public AuthorViewFileMenu(AuthoringCache ac){
 		super(Constants.FILE_MENU);
 		
 		addNewEntitySubMenu(ac);
 		
 		this.add(new CreateMapMenuItem());
-		this.add(new LoadGameMenuItem());
+		this.add(new LoadGameMenuItem(ac));
 		this.add(new ChooseTemplateMenuItem());
 		
 	}

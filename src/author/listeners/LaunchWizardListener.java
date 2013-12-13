@@ -14,6 +14,7 @@ import author.wizard.WizardBuilder;
  * @author Michael Marion
  * 
  */
+
 public class LaunchWizardListener implements ActionListener {
 
     private String myType;

@@ -10,10 +10,11 @@ package author.panels;
  */
 
 
-@SuppressWarnings("serial")
 public abstract class AbstractTextPanel extends AbstractWizardPanel {
 
-    public AbstractTextPanel (String type) {
+	private static final long serialVersionUID = -3885425924446582552L;
+
+	public AbstractTextPanel (String type) {
         // Default dimension size is 1x1
         super(type);
     }

@@ -12,10 +12,12 @@ package author.panels;
 import java.awt.AWTEvent;
 import java.util.EventListener;
 
-@SuppressWarnings("serial")
+
 public abstract class AbstractToggleButtonPanel extends AbstractWizardPanel {
 
-    protected EventListener myEventListener;
+	private static final long serialVersionUID = -2440277590050770853L;
+	
+	protected EventListener myEventListener;
 
     public AbstractToggleButtonPanel (String type, EventListener el) {
         super(type);

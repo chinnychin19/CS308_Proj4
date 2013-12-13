@@ -4,7 +4,9 @@ package author.listeners;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import java.awt.event.MouseMotionListener;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import constants.Constants;
 import author.mapCreation.CanvasTileManager;
 import author.mapCreation.MapCreationView;
@@ -16,15 +18,13 @@ import author.mapCreation.MapCreationView;
  * coordinates into a game tile depending on the user's current
  * view.
  * 
- * @author Michael Marion
+ * @author Michael Marion, weskpga
  * 
  */
-public class MapCreationMouseListener implements MouseListener {
+public class MapCreationMouseListener implements MouseMotionListener, MouseListener {
 
     private CanvasTileManager myTileManager;
     private MapCreationView myMapCreationView;
-
-    // private Image myActiveImage;
 
     public MapCreationMouseListener (MapCreationView mapCreation, CanvasTileManager tileManager) {
         myTileManager = tileManager;
@@ -39,36 +39,78 @@ public class MapCreationMouseListener implements MouseListener {
      */
 
     @Override
-    public void mouseClicked (MouseEvent arg0) {
+    public void mouseDragged (MouseEvent e) {
+        JPanel parentPanel = (JPanel) e.getSource();
+        parentPanel.requestFocus();
 
-        int x = arg0.getX();
-        int y = arg0.getY();
+        int x = e.getX();
+        int y = e.getY();
 
         int xTile = myTileManager.getHorizontalTileNum(x);
         int yTile = myTileManager.getVerticalTileNum(y);
 
         System.out.println(Constants.MOUSE_CLICKED_MESSAGE + x + ", " + y);
         System.out.println(Constants.CLICK_TILE_MESSAGE +
-        		Constants.COLUMN_MESSAGE + myTileManager.getHorizontalTileNum(x) +
-                Constants.ROW_MESSAGE + myTileManager.getVerticalTileNum(y));
+                           Constants.COLUMN_MESSAGE + myTileManager.getHorizontalTileNum(x) +
+                           Constants.ROW_MESSAGE + myTileManager.getVerticalTileNum(y));
 
-        myTileManager.getTileClickLoc(xTile, yTile);
+        myMapCreationView.paintAndRecordTile((Graphics2D) myMapCreationView.getGraphics(), xTile,
+                                             yTile);
 
-        myMapCreationView.paintAndRecordTile((Graphics2D) myMapCreationView.getGraphics(), xTile, yTile);
-        
         System.out.println(myMapCreationView.getMyWorldTiles().toString());
     }
 
     @Override
-    public void mouseEntered (MouseEvent arg0) { /* do nothing... */ }
+    public void mouseMoved (MouseEvent e) { /* do nothing... */ }
+
+    /**
+     * Handles a mouse click event, which can include a click on a JList
+     * item in the object panel on the right, or a click on the map, in
+     * which case the map will create/delete a tile.
+     * 
+     */
+    @Override
+    public void mouseClicked (MouseEvent e) {
+        
+        JPanel parentPanel = (JPanel) e.getSource();
+        parentPanel.requestFocus();
+
+        int x = e.getX();
+        int y = e.getY();
+
+        int xTile = myTileManager.getHorizontalTileNum(x);
+        int yTile = myTileManager.getVerticalTileNum(y);
+
+        
+        if(SwingUtilities.isLeftMouseButton(e)) {
+            System.out.println(Constants.MOUSE_CLICKED_MESSAGE + x + ", " + y);
+            System.out.println(Constants.CLICK_TILE_MESSAGE +
+                               Constants.COLUMN_MESSAGE + myTileManager.getHorizontalTileNum(x) +
+                               Constants.ROW_MESSAGE + myTileManager.getVerticalTileNum(y));
+
+            myMapCreationView.paintAndRecordTile((Graphics2D) myMapCreationView.getGraphics(), xTile,
+                                                 yTile);
+
+            System.out.println(myMapCreationView.getMyWorldTiles().toString());
+        }
+        
+        else if (SwingUtilities.isRightMouseButton(e)) {
+            myMapCreationView.removeTileFromMap((Graphics2D) myMapCreationView.getGraphics(), xTile, yTile);
+            myMapCreationView.repaint();
+        }
+        
+    }
 
     @Override
-    public void mouseExited (MouseEvent arg0) { /* do nothing... */ }
+    public void mousePressed (MouseEvent e) { /* do nothing */}
 
     @Override
-    public void mousePressed (MouseEvent arg0) { /* do nothing... */ }
+    public void mouseReleased (MouseEvent e) { /* do nothing */}
 
     @Override
-    public void mouseReleased (MouseEvent arg0) { /* do nothing... */ }
+    public void mouseEntered (MouseEvent e) { /* do nothing */}
+
+    @Override
+    public void mouseExited (MouseEvent e) { /* do nothing */}
 
 }

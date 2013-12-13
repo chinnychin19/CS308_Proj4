@@ -1,0 +1,113 @@
+{
+    "Player": [
+        {
+            "name": "text",
+            "image-up": "fileurl",
+            "image-down": "fileurl",
+            "image-left": "fileurl",
+            "image-right": "fileurl",
+        }
+    ],
+    "Monster": [
+        {
+            "name": "text",
+            "image": "fileurl",
+            "catchRate": "number_0:1",
+            "type": "text",
+            "baseHP": "number",
+            "baseAttack": "number",
+            "baseDefense": "number",
+            "attacks": [
+                {
+                    "name": "list_radio_Attack.name",
+                    "unlockLevel": "number",
+                },
+            ],
+            "evolution": {
+                "name": "text",
+                "level": "number",
+            }
+        }
+    ],
+    "Attack": [
+        {
+            "name": "text",
+            "power": "number",
+            "accuracy": "number_0:1",
+            "statisticEffect": [
+                {
+                    "target": "text",
+                    "statistic": "text",
+                    "change": "number",
+                }
+            ],
+            "statusEffect": [
+                {
+                    "status": "text",
+                    "target": "text",
+                }
+            ]
+        }
+    ],
+    "Obstacle": [
+        {
+            "name": "text",
+            "image": "fileurl",
+        }
+    ],
+    "KeyItem": [
+        {
+            "name": "text",
+        }
+    ],
+    "NPC": [
+        {
+            "name": "text",
+            "image-up": "fileurl",
+            "image-down": "fileurl",
+            "image-left": "fileurl",
+            "image-right": "fileurl",
+            "dialogue": "text",
+        }
+    ],
+    "FightingNPC": [
+        {
+            "name": "text",
+            "image-up": "fileurl",
+            "image-down": "fileurl",
+            "image-left": "fileurl",
+            "image-right": "fileurl",
+            "lineOfSightDistance": "number",
+            "dialogue": "text",
+            "monsters": [
+				{
+					"name":"list_radio_Monster.name"
+				}
+			],
+            "bet": "number",
+            "postDialogue": "text",
+            "keyItems": [
+                "check_KeyItem.name"
+            ]
+        }
+    ],
+    "TypeMatrix": [
+        {
+            "name": "matrix",
+        }
+    ],
+    "WildRegion": [
+        {
+            "name": "text",
+            "image": "fileurl",
+            "probability": "number_0:1",
+            "monsters": [
+                {
+                    "name": "list_radio_Monster.name", 
+                    "level": "number",
+                    "probability": "number_0:1",
+                }
+            ]
+        }
+    ]
+}

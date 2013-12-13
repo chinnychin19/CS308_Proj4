@@ -18,9 +18,9 @@ import constants.Constants;
  *
  */
 
-@SuppressWarnings("serial")
 public class ShowOutputMenuItem extends AbstractMenuItem {
 
+	private static final long serialVersionUID = 6849937681992471672L;
 	private AuthoringCache myAuthoringCache;
 	
 	public ShowOutputMenuItem(AuthoringCache ac) {

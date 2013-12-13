@@ -12,15 +12,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import constants.Constants;
+
 import author.listeners.FinishListener;
 import author.model.AuthoringCache;
 import author.wizard.Wizard;
 
-@SuppressWarnings("serial")
+
 public class FinishPanel extends JPanel {
 
-    private JLabel FINISH_TEXT = new JLabel("Click 'finish' to create this object.");
-    private JButton FINISH_BUTTON = new JButton("Finish");
+	private static final long serialVersionUID = -6488636969169881653L;
+	
+	private JLabel FINISH_TEXT = new JLabel(Constants.FINISH_PROJECT_PROMPT);
+    private JButton FINISH_BUTTON = new JButton(Constants.FINISH_STRING);
     private AuthoringCache myCache;
     
     public JButton getButton() {
@@ -33,7 +37,8 @@ public class FinishPanel extends JPanel {
     }
     
     private void initialize() {
-    	FINISH_BUTTON.addActionListener(new FinishListener((Wizard)SwingUtilities.getAncestorNamed("wizard",this),myCache));
+    	FINISH_BUTTON.addActionListener(
+    			new FinishListener((Wizard)SwingUtilities.getAncestorNamed(Constants.WIZARD_STRING,this),myCache));
         this.add(FINISH_BUTTON);
     }
     

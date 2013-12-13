@@ -1,5 +1,12 @@
 package author.listeners;
 
+/**
+ * Listener that can show what the JSON output from the current map
+ * creation session would look like.
+ * 
+ * @author weskpga, ransel
+ */
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;

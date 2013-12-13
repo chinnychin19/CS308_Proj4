@@ -1,5 +1,12 @@
 package author.listeners;
 
+/**
+ * Listener for the SidePanel that lists all available items that can
+ * be added to the map creator view.
+ * 
+ * @author weskpga
+ */
+
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -23,7 +30,6 @@ public class PlaceableObjectsListListener implements ListSelectionListener {
         boolean selectionEmpty = lsm.isSelectionEmpty();
 
         if (!isAdjusting && !selectionEmpty) {
-
             myPlaceableObjectsList.chooseListElement(firstIndex);
         }
     }

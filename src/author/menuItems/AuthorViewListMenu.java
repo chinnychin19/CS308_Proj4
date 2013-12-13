@@ -14,16 +14,17 @@ import constants.Constants;
  *
  */
 
-@SuppressWarnings("serial")
-public class AuthorViewEditMenu extends JMenu {
+public class AuthorViewListMenu extends JMenu {
 
-	public AuthorViewEditMenu(AuthoringCache ac){
-		super(Constants.EDIT_MENU);
+	private static final long serialVersionUID = 7761261408475568495L;
+
+	public AuthorViewListMenu(AuthoringCache ac){
+		super(Constants.LIST_MENU);
 		this.addEditEntitySubMenu(ac);
 	}
 	
 	private void addEditEntitySubMenu(AuthoringCache ac){
-		EditEntitySubMenu item = new EditEntitySubMenu(ac);
+		ListEntitySubMenu item = new ListEntitySubMenu(ac);
 		this.add(item);
 	}
 	
