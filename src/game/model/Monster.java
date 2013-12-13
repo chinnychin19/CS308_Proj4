@@ -67,10 +67,6 @@ public class Monster extends AbstractModelObject implements Saveable {
     public Image getImage () {
         return myImage;
     }
-    
-    private void setLevel (int level) {
-        myStatistics.put(Constants.JSON_LEVEL, level);       
-    }
 
     /**
      * Get the catch rate of the monster. A value of how difficult it is to catch this monster
@@ -132,17 +128,6 @@ public class Monster extends AbstractModelObject implements Saveable {
         // guarantees newHP is less than or equal to maxHP
         myStatistics.put(strCurHP, newHP);
     }
-    
-    public void changeStat(String statName, int amount) {
-        if (statName.equals(Constants.STAT_CUR_HP)) {
-            changeHealth(amount);
-        } else {
-            int oldVal = myStatistics.get(statName);
-            int newVal = Math.max(1, oldVal + amount);
-            // guarantees newVal is at least 1 to avoid DivideByZero
-            myStatistics.put(statName, newVal);
-        }
-    }
 
     /**
      * Determines if a pokemon is dead
@@ -159,7 +144,6 @@ public class Monster extends AbstractModelObject implements Saveable {
     private void generateStats () {
         double factor = 1 + Math.log(35);
         myStatistics.put(Constants.STAT_EXP, 0);
-        myStatistics.put(Constants.STAT_EXP_TO_NEXT_LEVEL, Integer.MAX_VALUE);
         int level = myStatistics.get(Constants.JSON_LEVEL);
         int baseHP = myStatistics.get(Constants.STAT_BASE_HP);
         int baseAttack = myStatistics.get(Constants.STAT_BASE_ATTACK);
@@ -168,6 +152,7 @@ public class Monster extends AbstractModelObject implements Saveable {
         myStatistics.put(Constants.STAT_CUR_HP, myStatistics.get(Constants.STAT_MAX_HP));
         myStatistics.put(Constants.STAT_ATTACK, (int) (baseAttack * level * factor));
         myStatistics.put(Constants.STAT_DEFENSE, (int) (baseDefense * level * factor));
+        myStatistics.put(Constants.STAT_EXP_TO_NEXT_LEVEL, getRewardExperience()*5);
     }
 
     /**
@@ -209,7 +194,7 @@ public class Monster extends AbstractModelObject implements Saveable {
     @Override
     protected void readDefinition (SmartJsonObject definition) throws SmartJsonException {
         super.readDefinition(definition);
-        
+
         myStatistics = new HashMap<String, Integer>();
 
         String imageURL = definition.getString(Constants.JSON_IMAGE);
@@ -258,7 +243,7 @@ public class Monster extends AbstractModelObject implements Saveable {
     public void setEvolution (AbstractEvolution ev) {
         myEvolution = ev;
     }
-    
+
     public void setAttacks (List<AttackWrapper> attacks) {
         myAttacks = attacks;
     }
@@ -324,13 +309,22 @@ public class Monster extends AbstractModelObject implements Saveable {
             return new NullEvolution(getModel());
         }
     }
+    
+    public void changeStat(String statName, int amount){
+        if(statName.equals(Constants.STAT_CUR_HP)){
+            changeHealth(amount);
+        }
+        else {
+            int value = myStatistics.get(statName) + amount;     
+            myStatistics.put(statName, Math.max(1, value));
+        }
+    }
 
     private void evolve () {
         setName(myEvolution.getName());
         setImage(myEvolution.getImage());
         setAttacks(myEvolution.getAttacks());
         setEvolution(myEvolution.getNextEvolution());
-        
     }
 
     @SuppressWarnings("unchecked")

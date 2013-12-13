@@ -1,0 +1,305 @@
+{
+    "Player": [{
+        "name": "hero",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png"
+    }],
+    "Monster": [{
+        "name": "Fr. Parker",
+        "image": "images/monsters/JabariParker.png",
+        "catchRate": ".4",
+        "type": "forward",
+        "baseHP": "10",
+        "baseAttack": "8",
+        "baseDefense": "8",
+        "attacks": [{
+            "name": "3 pointer",
+            "unlockLevel": "4"
+        }, {
+            "name": "dunk",
+            "unlockLevel": "3"
+        }],
+    }, {
+        "name": "Fr. Thornton",
+        "image": "images/monsters/Thornton1.png",
+        "catchRate": ".9",
+        "type": "guard",
+        "baseHP": "4",
+        "baseAttack": "4",
+        "baseDefense": "4",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "5"
+        },  {
+            "name": "layup",
+            "unlockLevel": "2"
+        }],
+        "evolution": {
+            "name": "So. Thornton",
+            "level": "6"
+        }
+    }, {
+        "name": "So. Thornton",
+        "image": "images/monsters/Thornton2.png",
+        "catchRate": ".8",
+        "type": "guard",
+        "baseHP": "6",
+        "baseAttack": "6",
+        "baseDefense": "6",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "5"
+        },  {
+            "name": "layup",
+            "unlockLevel": "2"
+        },  {
+            "name": "3 point",
+            "unlockLevel": "6"
+        }],
+        "evolution": {
+            "name": "Jr. Thornton",
+            "level": "7"
+        }
+    }, {
+        "name": "Jr. Thornton",
+        "image": "images/monsters/Thornton3.png",
+        "catchRate": ".7",
+        "type": "guard",
+        "baseHP": "8",
+        "baseAttack": "8",
+        "baseDefense": "8",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "5"
+        },  {
+            "name": "layup",
+            "unlockLevel": "2"
+        },  {
+            "name": "3 point",
+            "unlockLevel": "6"
+        }],
+        "evolution": {
+            "name": "Sr. Thornton",
+            "level": "8"
+        }
+    }, {
+        "name": "Sr. Thornton",
+        "image": "images/monsters/Thornton4.png",
+        "catchRate": ".6",
+        "type": "guard",
+        "baseHP": "12",
+        "baseAttack": "12",
+        "baseDefense": "12",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "5"
+        },  {
+            "name": "layup",
+            "unlockLevel": "2"
+        },  {
+            "name": "3 point",
+            "unlockLevel": "6"
+        },  {
+            "name": "fade away",
+            "unlockLevel": "9"
+        }],
+    }, {
+        "name": "Jr. Hood",
+        "image": "images/monsters/RodneyHood.png",
+        "catchRate": ".4",
+        "type": "forward",
+        "baseHP": "8",
+        "baseAttack": "7",
+        "baseDefense": "8",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "2"
+        },  {
+            "name": "layup",
+            "unlockLevel": "5"
+        }, {
+            "name": "3 pointer",
+            "unlockLevel": "10"
+        }],
+    }],
+    "Attack": [{
+        "name": "3 pointer",
+        "power": "240",
+        "accuracy": "0.6",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "defense",
+            "change": "-10"
+        }],
+    }, {
+        "name": "dunk",
+        "power": "200",
+        "accuracy": "0.80",
+        "statisticEffects": [{}],
+        "statusEffect": {
+            "name": "shocked",
+            "target": "enemy"
+        },
+    }, {
+        "name": "layup",
+        "power": "160",
+        "accuracy": "0.99",
+        "statisticEffects": [{}],
+    }, {
+        "name": "fade away",
+        "power": "300",
+        "accuracy": "0.4",
+        "statisticEffects": [{}],
+    }],
+    "Obstacle": [{
+        "name": "cone",
+        "image": "images/obstacles/cone2.png"
+    }, {
+        "name": "door",
+        "image": "images/obstacles/door.png"
+    }],
+    "KeyItem": [{
+        "name": "IU Bragging Rights"
+    } , {
+        "name": "UNC Bragging Rights"
+    } , {
+        "name": "KU Bragging Rights"
+    } , {
+        "name": "Ultimate Bragging Rights"
+    }],
+    "NPC": [{
+        "name": "walker1",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "dialogue": "You go to the dialogue -- Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit."
+    }],
+    "FightingNPC": [{
+        "name": "fighter1",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "5",
+        "dialogue": "It is time. I WILL NOT LOSE!",
+        "monsters": [{
+            "name": "Fr. Parker",
+            "level": "5",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "100",
+            "curHP": "100",
+            "attack": "35",
+            "defense": "60"
+        }, {
+            "name": "Fr. Parker",
+            "level": "5",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "100",
+            "curHP": "100",
+            "attack": "35",
+            "defense": "60"
+        }],
+        "bet": "25",
+        "postDialogue": "thank you come again.",
+        "keyItems": []
+    }, {
+        "name": "Bob Knight",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "5",
+        "dialogue": "Bob Knight: I'm going to be so angry if you beat my Indiana team!",
+        "monsters": [{
+            "name": "Jr. Hood",
+            "level": "5",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "10",
+            "curHP": "10",
+            "attack": "35",
+            "defense": "60"
+        }],
+        "bet": "25",
+        "postDialogue": "Damn! Can't believe you won the IU Bragging Rights!",
+        "keyItems": [
+            "IU Bragging Rights"
+        ]
+      }],
+    "TypeMatrix": [{
+        "name": "matrix",
+        "matrix": {
+            "center": {
+                "center": "0.2",
+                "forward": "1",
+                "guard": "4"
+            },
+            "forward": {
+                "center": "1.5",
+                "forward": "1",
+                "guard": "3"
+            },
+            "guard": {
+                "center": "0.5",
+                "forward": "2",
+                "guard": "1.5"
+            }
+        }
+    }],
+    "WildRegion": [{
+        "name": "tent1",
+        "image": "images/ground/tent.png",
+        "probability": ".05",
+        "monsters": [{
+            "name": "Fr. Thornton",
+            "level": "6",
+            "probability": "2.0"
+        }]
+    }, {
+        "name": "tent2",
+        "image": "images/ground/tent.png",
+        "probability": ".05",
+        "monsters": [{
+            "name": "Jr. Hood",
+            "level": "7",
+            "probability": "1.0"
+        }]
+    }],
+    "HealItem": [{
+        "name": "heal1",
+        "image": "images/items/healPokeBall.png"
+    }],
+     "Item": [
+                {
+                    "name": "potion",
+                    "consciousness": "alive",
+                    "statisticEffect": {
+                        "name": "curHP",
+                        "change": "20"
+                    }
+                },
+                {
+                    "name": "revive",
+                    "consciousness" : "dead",
+                    "statisticEffect": {
+                        "name": "curHP",
+                        "change": "-1" 
+                    }
+                }
+            ],
+      "Status": [
+        {
+          "name" : "shocked",
+          "statisticEffects" : [
+            {
+              "name": "curHP",
+              "change": "-5",
+            }],
+        },
+      ],
+}

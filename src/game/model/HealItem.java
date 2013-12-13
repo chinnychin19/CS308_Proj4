@@ -7,8 +7,17 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import constants.Constants;
 import util.jsonwrapper.SmartJsonObject;
+import util.jsonwrapper.jsonexceptions.NoStringValueJsonException;
+import util.jsonwrapper.jsonexceptions.SmartJsonException;
 
-
+/**
+ * A Viewable Object that is placed on the world.  It is an item used to heal all monster's in a Player's party, 
+ * when the player chooses to interact with the healItem.  After interacting, all monsters have their curHP changed 
+ * to maxHP
+ * 
+ * @author rtoussaint
+ *
+ */
 public class HealItem extends AbstractViewableObject {
 
     private Image myImage;
@@ -17,7 +26,6 @@ public class HealItem extends AbstractViewableObject {
                      SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
 
-        myImage = new ImageIcon(Constants.HEAL_ITEM_IMAGE).getImage();
     }
 
     @Override
@@ -25,7 +33,13 @@ public class HealItem extends AbstractViewableObject {
         return myImage;
         // TODO: consider moving this to abstract
     }
-
+    
+    @Override
+    public void readDefinition (SmartJsonObject definition) throws SmartJsonException {
+        super.readDefinition(definition);
+        myImage = new ImageIcon(definition.getString(Constants.JSON_IMAGE)).getImage();
+    }
+    
     @Override
     protected void onInteract () {
         for (Monster monster : getModel().getPlayer().getParty()) {
