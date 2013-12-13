@@ -114,6 +114,7 @@ public class Battle {
     }
 
     private void userLost () {
+        healEnemyParty();
         reapplyStatistics();
         myMode.setOptionState(myMode.getBattleCompleteState(false));
     }
@@ -159,6 +160,12 @@ public class Battle {
         System.out.println("reapplying statistics");
         for(TemporaryStatistics temp : myTemporaryStatistics.values()){
             temp.reapply();
+        }
+    }
+    
+    private void healEnemyParty(){
+        for(Monster m : myEnemyParty.getMonsters()){
+            m.heal();
         }
     }
 }
