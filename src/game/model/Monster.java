@@ -80,6 +80,10 @@ public class Monster extends AbstractModelObject implements Saveable {
     public Status getStatus() {
         return myStatus;
     }
+    
+    public double getCatchRate(){
+        return myCatchRate;
+    }
 
     public void heal () {
         int maxHP = myStatistics.get(Constants.STAT_MAX_HP);
