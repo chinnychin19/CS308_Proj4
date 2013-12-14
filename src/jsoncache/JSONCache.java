@@ -51,9 +51,18 @@ public class JSONCache {
 
     /**
      * Returns a JSON string representation of this giant JSON object.
+     * @return String in JSON format
      */
     public String toString () {
         return JSONValue.toJSONString(myJSON);
+    }
+    
+    /**
+     * Returns a JSONObject representation of this giant JSON object.
+     * @return JSONObject
+     */
+    public JSONObject toJSONObject(){
+        return (JSONObject) myJSON.clone();
     }
 
     /**

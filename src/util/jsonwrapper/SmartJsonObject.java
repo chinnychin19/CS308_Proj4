@@ -154,9 +154,23 @@ public class SmartJsonObject {
         return myJson.keySet();
     }
     
+    /**
+     * Returns a JSON string representation of this SmartJsonObject.
+     * @return String in JSON format
+     */
     public String toString(){
         return myJson.toJSONString();
     }
+    
+    /**
+     * Returns a JSONObject representation of this SmartJsonObject.
+     * @return JSONObject
+     */
+    public JSONObject toJSONObject(){
+        return (JSONObject) myJson.clone();
+    }
+    
+    
 
 //    public boolean isNull () {
 //        return myJson == null;
