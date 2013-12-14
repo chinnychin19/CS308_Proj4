@@ -36,7 +36,7 @@ public class GenericTileWrapperFactory {
         return results;
     }
 
-    private GenericTileWrapper convertToTile (SmartJsonObject smartObj, String category) {
+    public GenericTileWrapper convertToTile (SmartJsonObject smartObj, String category) {
         String name = "";
         String imgPath = "";
         try {

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import author.model.TileWrapper;
 
 import constants.Constants;
 import location.Loc;
@@ -12,7 +13,7 @@ import location.Loc;
 
 /**
  * WorldCreationMap is a class that contains a HashMap of Locs to
- * GenericTileWrappers, and a method that allows the user to only get the
+ * TileWrappers, and a method that allows the user to only get the
  * tiles within a certain range, which helps with the scalability of our
  * world size.
  * 
@@ -22,13 +23,13 @@ import location.Loc;
 
 public class WorldCreationMap {
 	
-	private Map<Loc, GenericTileWrapper> myTileMap;
+	private Map<Loc, TileWrapper> myTileMap;
 
     public WorldCreationMap () {
-        myTileMap = new HashMap<Loc, GenericTileWrapper>();
+        myTileMap = new HashMap<Loc, TileWrapper>();
     }
 
-    public void put (Loc location, GenericTileWrapper tile) {
+    public void put (Loc location, TileWrapper tile) {
         myTileMap.put(location, tile);
     }
 
@@ -43,7 +44,7 @@ public class WorldCreationMap {
         Map<String, List<Map<String, String>>> jsonFormattedMap =
                 new HashMap<String, List<Map<String, String>>>();
 
-        for (Entry<Loc, GenericTileWrapper> tile : myTileMap.entrySet()) {
+        for (Entry<Loc, TileWrapper> tile : myTileMap.entrySet()) {
 
             Map<String, String> fieldValueMap = new HashMap<String, String>();
             String type = tile.getValue().getType();
@@ -82,8 +83,8 @@ public class WorldCreationMap {
                         Constants.Y_COLON + fieldValueMap.get(Constants.MAP_Y_STRING) + Constants.AND_FOR_COMPARISON + y);
     }
 
-    public Map<Loc, GenericTileWrapper> getTilesInWindow (int x1, int x2, int y1, int y2) {
-        Map<Loc, GenericTileWrapper> currentWindowMap = new HashMap<Loc, GenericTileWrapper>();
+    public Map<Loc, TileWrapper> getTilesInWindow (int x1, int x2, int y1, int y2) {
+        Map<Loc, TileWrapper> currentWindowMap = new HashMap<Loc, TileWrapper>();
         for (int i = x1; i <= x2; i++) {
             for (int j = y1; j <= y2; j++) {
                 Loc currentLoc = new Loc(i, j);
@@ -95,7 +96,7 @@ public class WorldCreationMap {
         return currentWindowMap;
     }
 
-    public Map<Loc, GenericTileWrapper> getWorldTileMap () {
+    public Map<Loc, TileWrapper> getWorldTileMap () {
         return myTileMap;
     }
 }

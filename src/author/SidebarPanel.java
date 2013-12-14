@@ -18,10 +18,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import author.mapCreation.GenericTileWrapper;
 import author.mapCreation.MapCreationView;
 import author.model.AuthoringCache;
 import author.model.GenericTileWrapperFactory;
+import author.model.TileWrapper;
 import constants.Constants;
 import util.FilepathReformatter;
 import util.jsonwrapper.SmartJsonObject;
@@ -50,7 +50,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 
 	private AuthoringCache myAuthoringCache;
 	private MapCreationView myMapCreationView;
-	private DefaultListModel<GenericTileWrapper> myListModel;
+	private DefaultListModel<TileWrapper> myListModel;
 	private JList mySelectionList;
 	//private Set<String[]> myObjectAttributes = new HashSet<String[]>();
 
@@ -80,15 +80,15 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 
 		if (mySelectionList.getSelectedValue() != null) {
 
-			GenericTileWrapper gtw = (GenericTileWrapper) mySelectionList.getSelectedValue();
+			TileWrapper tile = (TileWrapper) mySelectionList.getSelectedValue();
 
 			if (s != null && s.length() > 0) {
-				gtw.setMyAdditionalInformation(s);
+				tile.setMyAdditionalInformation(s);
 			}
 
-			myMapCreationView.setCurrentTileImage(gtw);
-			myMapCreationView.setCurrentTileName(gtw);
-			myMapCreationView.setCurrentTileType(gtw);
+			myMapCreationView.setCurrentTileImage(tile);
+			myMapCreationView.setCurrentTileName(tile);
+			myMapCreationView.setCurrentTileType(tile);
 		}
 	}
 
@@ -107,8 +107,8 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 		updateListModel();    */
 	    myListModel.clear();
 	    GenericTileWrapperFactory factory = new GenericTileWrapperFactory();
-	    for (GenericTileWrapper gtw : factory.generateTiles(myAuthoringCache)) {
-	        myListModel.addElement(gtw);
+	    for (TileWrapper tile : factory.generateTiles(myAuthoringCache)) {
+	        myListModel.addElement(tile);
 	    }
 	}
 
@@ -156,7 +156,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 	}
 
 	private void initListModel () {
-		myListModel = new DefaultListModel<GenericTileWrapper>();
+		myListModel = new DefaultListModel<TileWrapper>();
 		this.updateList();
 
 	}

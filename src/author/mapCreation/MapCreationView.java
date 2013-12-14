@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import location.Loc;
 import author.listeners.MapCreationKeyListener;
 import author.listeners.MapCreationMouseListener;
+import author.model.TileWrapper;
 import constants.Constants;
 
 
@@ -82,7 +83,7 @@ public class MapCreationView extends JPanel {
 	public void paintComponent (Graphics g) {
 		super.paintComponent(g);
 		if (myWorldCreationMap.getWorldTileMap() != null) {
-			for (Map.Entry<Loc, GenericTileWrapper> tile : myWorldCreationMap.getWorldTileMap()
+			for (Map.Entry<Loc, TileWrapper> tile : myWorldCreationMap.getWorldTileMap()
 					.entrySet()) {
 				paintTile((Graphics2D) g,
 						tile.getKey().getX(),
@@ -148,7 +149,7 @@ public class MapCreationView extends JPanel {
 	 * @param x
 	 * @param y
 	 */
-	public void paintTile (Graphics2D g, int x, int y, GenericTileWrapper tile) {
+	public void paintTile (Graphics2D g, int x, int y, TileWrapper tile) {
 		TexturePaint tp =
 				new TexturePaint(tile.getImage(),
 						new Rectangle(0,
@@ -186,19 +187,19 @@ public class MapCreationView extends JPanel {
 		return myCurrentTileImage;
 	}
 
-	public void setCurrentTileImage (GenericTileWrapper gtw) {
+	public void setCurrentTileImage (TileWrapper gtw) {
 		myCurrentTileImage = gtw.getImage();
 	}
 
-	public void setCurrentTileName (GenericTileWrapper gtw) {
+	public void setCurrentTileName (TileWrapper gtw) {
 		myCurrentTileName = gtw.getName();
 	}
 
-	public void setCurrentTileType (GenericTileWrapper gtw) {
+	public void setCurrentTileType (TileWrapper gtw) {
 		myCurrentTileType = gtw.getType();
 	}
 
-	public Map<Loc, GenericTileWrapper> getMyWorldTiles () {
+	public Map<Loc, TileWrapper> getMyWorldTiles () {
 		return myWorldCreationMap.getWorldTileMap();
 	}
 
