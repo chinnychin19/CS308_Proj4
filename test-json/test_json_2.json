@@ -1,5 +1,5 @@
 {
-  "item" : [ {"name" : "item1", "mode":"both",
+  "Item" : [ {"name" : "item0", "mode":"both",
             "effect": {"type": "increment", "value": "20" },
             "recipient" : {"consciousness": "alive", "number" : "one"},
             "statusEffect" {"old" : "dead", "new":"alive"} }

@@ -156,11 +156,16 @@ public class JSONCache {
      */
     public boolean contains (String category, String name) {
         JSONArray cache = (JSONArray) myJSON.get(category);
-        for (Object object : cache) {
-            JSONObject jobject = (JSONObject) object;
-            if (jobject.get(Constants.NAME_LOWERCASE).equals(name)) { return true; }
+        try {
+            for (Object object : cache) {
+                JSONObject jobject = (JSONObject) object;
+                if (jobject.get(Constants.NAME_LOWERCASE).equals(name)) { return true; }
+            }
+            return false;
         }
-        return false;
+        catch (NullPointerException e) {
+            return false;
+        }        
     }
 
     /**
@@ -172,7 +177,7 @@ public class JSONCache {
      * @throws JSONException Throws an exception if the object is not found.
      */
     public void update (String category, JSONObject data) throws JSONException {
-        delete(category, (String) data.get(Constants.NAME_LOWERCASE));
+        delete(category, (String) data.get(Constants.NAME_LOWERCASE));        
         add(category, data);
     }
 }
