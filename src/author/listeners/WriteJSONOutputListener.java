@@ -28,7 +28,7 @@ public class WriteJSONOutputListener implements ActionListener {
 
     @Override
     public void actionPerformed (ActionEvent e) {
-        String sb = myAuthoringCache.getRawJSON().toString();
+        String sb = myAuthoringCache.toJSONObject().toString();
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File("/"));
         int retrival = chooser.showSaveDialog(null);

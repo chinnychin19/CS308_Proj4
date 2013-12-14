@@ -26,6 +26,7 @@ import util.FilepathReformatter;
 import util.jsonwrapper.SmartJsonObject;
 import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
 import util.jsonwrapper.jsonexceptions.NoStringValueJsonException;
+import util.jsonwrapper.jsonexceptions.SmartJsonException;
 
 
 /**
@@ -94,7 +95,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 
 		myObjectAttributes.clear();
 
-		JSONObject template = myAuthoringCache.getRawJSON();
+		JSONObject template = myAuthoringCache.toJSONObject();
 
 		Set<String> keySet = new HashSet<String>();
 
@@ -168,10 +169,11 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 					System.out.println(ATTRIBUTE2 + attributes[0]);
 					System.out.println(ATTRIBUTE1 + attributes[1]);
 
-					JSONObject json = myAuthoringCache.getInstance(attributes[1], attributes[0]);
-					SmartJsonObject smartJSON;
+					//JSONObject json = myAuthoringCache.getInstance(attributes[1], attributes[0]);
+					//SmartJsonObject smartJSON;
 					try {
-						smartJSON = new SmartJsonObject(json);
+						//smartJSON = new SmartJsonObject(json);
+					        SmartJsonObject smartJSON = myAuthoringCache.getInstance(attributes[1], attributes[0]);
 
 						Set<Object> JSONKeySet = smartJSON.keySet();
 
@@ -184,7 +186,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 							}
 						}
 					}
-					catch (NoJSONObjectJsonException | NoStringValueJsonException e1) {
+					catch (SmartJsonException e1) {
 						e1.printStackTrace();
 					}
 					System.out.println(NEW_ATTRIBUTES + attributes[0] + " " +

@@ -31,7 +31,7 @@ public class ShowOutputMenuItem extends AbstractMenuItem {
     @Override
     public void actionPerformed (ActionEvent arg0) {
         JFrame frame = new JFrame();
-        JTextField text = new JTextField(myAuthoringCache.getRawJSON().toString());
+        JTextField text = new JTextField(myAuthoringCache.toJSONObject().toString());
         text.setEditable(false);
         frame.add(text);
         frame.pack();

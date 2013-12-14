@@ -255,7 +255,7 @@ public class WizardBuilder {
      */
     private String makePartOfRadioButtonsInputParameter (String limitedFieldType) {
         String[] locKeyPair = limitedFieldType.split("_")[1].split("\\."); //FIRST splits to "radio" "Monster.name", THEN splits "Monster.name" to "Monster" "Name"
-        JSONArray locationArray = (JSONArray) myCache.getRawJSON().get(locKeyPair[0]); //gets "Monster"'s array out of the cache
+        JSONArray locationArray = (JSONArray) myCache.toJSONObject().get(locKeyPair[0]); //gets "Monster"'s array out of the cache
         String outputString = "~";
         for (Object con : locationArray) {
             outputString += (String) ((JSONObject) con).get(locKeyPair[1]) + "."; //End up with something like "~Bulbasaur.Squirtle.Charmander.Pidgey."

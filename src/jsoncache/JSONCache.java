@@ -26,7 +26,7 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
  * 
  */
 public class JSONCache {
-    private JSONObject myJSON;
+    protected JSONObject myJSON;
 
     /**
      * Initializes empty JSON arrays for the provided categories. Categories may NOT be added later.
@@ -70,7 +70,7 @@ public class JSONCache {
      * For example, if this cache will hold Weapons, Players, and Items, it will initialize each of
      * those categories at construction to be empty Arrays.
      */
-    private void initCategories (String[] categories) {
+    protected void initCategories (String[] categories) {
         for (String category : categories) {
             myJSON.put(category, new JSONArray());
         }
