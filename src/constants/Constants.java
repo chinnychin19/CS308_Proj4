@@ -425,6 +425,11 @@ public class Constants {
     public static final String RESET_AUTHOR_CACHE_WARNING = "Warning! This will clear the author cache\n" +
     		"and erase any unsaved worlds.\n" +
     		"Do you wish to proceed?";
+    public static final String TILE_FACTORY_WARNING_PRE = "JSON-to-tile conversion failure: " +
+                        "name and/or image not found for object ";
+    public static final String TILE_FACTORY_WARNING_POST = ". An empty tile was created instead.";
+    public static final String EMPTY_TILE_ADD_INFO_WARNING = "No information can be added to this tile.";
+    public static final String EMPTY_TILE_STRING = "ERROR: no tile";
 
     public static final int MAP_BUFFER = 5;
 

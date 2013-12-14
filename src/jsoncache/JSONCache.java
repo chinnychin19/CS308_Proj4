@@ -199,7 +199,7 @@ public class JSONCache {
      * @throws JSONException Throws an exception if the object is not found.
      */
     public void update (String category, JSONObject data) throws JSONException {
-        delete(category, (String) data.get(Constants.NAME_LOWERCASE));        
-        add(category, data);
+        this.delete(category, (String) data.get(Constants.NAME_LOWERCASE));        
+        this.add(category, data);
     }
 }

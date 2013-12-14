@@ -17,42 +17,50 @@ public class GenericTileWrapperFactory {
         
     }
     
-    public Collection<GenericTileWrapper> generateTiles(AuthoringCache ac){
-        Collection<GenericTileWrapper> results = new HashSet<GenericTileWrapper>();
+    public Collection<TileWrapper> generateTiles(AuthoringCache ac){
+        Collection<TileWrapper> results = new HashSet<TileWrapper>();
         for (String category : Constants.VIEWABLE_CATEGORIES){
+            Collection<SmartJsonObject> wholeCat = new HashSet<SmartJsonObject>();
             try {
-                Collection<SmartJsonObject> wholeCat = ac.getAllCategoryInstances(category);
-                for (SmartJsonObject smartObj : wholeCat){
-                    GenericTileWrapper gtw = this.convertToTile(smartObj, category);
-                    results.add(gtw);
-                }
+                wholeCat.addAll(ac.getAllCategoryInstances(category));
             }
             catch (SmartJsonException e) {
                 System.out.println("No objects found for category: " + category);
+                //e.printStackTrace();
             }
+            for (SmartJsonObject smartObj : wholeCat){
+                TileWrapper gtw = this.convertToTile(smartObj, category);
+                results.add(gtw);
+            }
+            
         }
         
         return results;
     }
 
-    public GenericTileWrapper convertToTile (SmartJsonObject smartObj, String category) {
+    public TileWrapper convertToTile (SmartJsonObject smartObj, String category) {
         String name = "";
         String imgPath = "";
         try {
             name = smartObj.getString(Constants.NAME_LOWERCASE);
-            
+          
             Set<Object> JSONKeySet = smartObj.keySet();
+            String key = "";
             for (Object o : JSONKeySet) {
                     if (((String) o).contains(Constants.IMAGE.toLowerCase())) {
-                            String unixStyleTruncatedFilepath = smartObj.getString(((String) o));
-                            imgPath = convertToFullFunctionalFilepath(unixStyleTruncatedFilepath);
+                        key = (String) o;
+                        break;                            
                     }
             }
+            String unixStyleTruncatedFilepath = smartObj.getString(key);
+            imgPath = convertToFullFunctionalFilepath(unixStyleTruncatedFilepath);
         }
         catch (NoStringValueJsonException e) {
-            System.out.println("JSON-to-tile conversion failure: " +
-            		"name and/or image not found for object " +
-            		smartObj.toString());
+            System.out.println(Constants.TILE_FACTORY_WARNING_PRE +
+            		smartObj.toString() + Constants.TILE_FACTORY_WARNING_POST);
+            //e.printStackTrace();
+            return new EmptyTileWrapper();
+            //return new GenericTileWrapper("default-blank", "obstacle", convertToFullFunctionalFilepath("images/test.gif"));
         }
         
         return new GenericTileWrapper(name, category, imgPath);
