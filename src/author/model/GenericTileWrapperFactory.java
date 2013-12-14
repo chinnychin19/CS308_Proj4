@@ -28,7 +28,6 @@ public class GenericTileWrapperFactory {
                 }
             }
             catch (SmartJsonException e) {
-                // TODO Auto-generated catch block
                 System.out.println("No objects found for category: " + category);
             }
         }
@@ -51,8 +50,9 @@ public class GenericTileWrapperFactory {
             }
         }
         catch (NoStringValueJsonException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            System.out.println("JSON-to-tile conversion failure: " +
+            		"name and/or image not found for object " +
+            		smartObj.toString());
         }
         
         return new GenericTileWrapper(name, category, imgPath);

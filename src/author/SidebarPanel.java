@@ -2,10 +2,6 @@ package author;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.io.File;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -16,18 +12,11 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import author.mapCreation.MapCreationView;
 import author.model.AuthoringCache;
 import author.model.GenericTileWrapperFactory;
 import author.model.TileWrapper;
 import constants.Constants;
-import util.FilepathReformatter;
-import util.jsonwrapper.SmartJsonObject;
-import util.jsonwrapper.jsonexceptions.NoJSONObjectJsonException;
-import util.jsonwrapper.jsonexceptions.NoStringValueJsonException;
-import util.jsonwrapper.jsonexceptions.SmartJsonException;
 
 
 /**
@@ -40,19 +29,11 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
 @SuppressWarnings("rawtypes")
 public class SidebarPanel extends JPanel implements ListSelectionListener {
 
-	//private static final String NEW_ATTRIBUTES = "NEW ATTRIBUTES: [";
-
-	//private static final String ATTRIBUTE1 = "attribute1: ";
-
-	//private static final String ATTRIBUTE2 = "attribute2: ";
-
-	
-
-	private AuthoringCache myAuthoringCache;
+    private static final long serialVersionUID = 3720178376864090021L;
+    private AuthoringCache myAuthoringCache;
 	private MapCreationView myMapCreationView;
 	private DefaultListModel<TileWrapper> myListModel;
 	private JList mySelectionList;
-	//private Set<String[]> myObjectAttributes = new HashSet<String[]>();
 
 	public SidebarPanel (AuthoringCache ac) {
 		initialize(ac);
@@ -86,40 +67,17 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 				tile.setMyAdditionalInformation(s);
 			}
 
-			myMapCreationView.setCurrentTileImage(tile);
-			myMapCreationView.setCurrentTileName(tile);
-			myMapCreationView.setCurrentTileType(tile);
+			myMapCreationView.setCurrentTile(tile);
 		}
 	}
 
 	public void updateList () {
-
-/*		myObjectAttributes.clear();
-
-		JSONObject template = myAuthoringCache.toJSONObject();
-
-		Set<String> keySet = new HashSet<String>();
-
-		keySet.addAll(Arrays.asList(Constants.VIEWABLE_CATEGORIES));
-
-		populateInternalList(template, keySet);
-
-		updateListModel();    */
 	    myListModel.clear();
 	    GenericTileWrapperFactory factory = new GenericTileWrapperFactory();
 	    for (TileWrapper tile : factory.generateTiles(myAuthoringCache)) {
 	        myListModel.addElement(tile);
 	    }
 	}
-
-	@SuppressWarnings("unchecked")
-/*	private void updateListModel () {
-		myListModel.clear();
-		for (String[] sArr : myObjectAttributes) {
-			myListModel.addElement(new GenericTileWrapper(sArr[0], sArr[1], sArr[2]));
-		}
-
-	}      */
 
 	private void initialize (AuthoringCache ac) {
 		myAuthoringCache = ac;
@@ -160,56 +118,5 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 		this.updateList();
 
 	}
-
-/*	private void populateInternalList (JSONObject template, Set<String> keySet) {
-		for (Object s : keySet) {
-			JSONArray locationArray = (JSONArray) template.get(s);
-
-			for (Object con : locationArray) {
-				if (con != null) {
-					String[] attributes = new String[3];
-
-					attributes[0] = (String) ((JSONObject) con).get(Constants.NAME);
-					attributes[1] = (String) s;
-
-					System.out.println(ATTRIBUTE2 + attributes[0]);
-					System.out.println(ATTRIBUTE1 + attributes[1]);
-
-					//JSONObject json = myAuthoringCache.getInstance(attributes[1], attributes[0]);
-					//SmartJsonObject smartJSON;
-					try {
-						//smartJSON = new SmartJsonObject(json);
-					        SmartJsonObject smartJSON = myAuthoringCache.getInstance(attributes[1], attributes[0]);
-
-						Set<Object> JSONKeySet = smartJSON.keySet();
-
-						attributes[2] = "";
-
-						for (Object o : JSONKeySet) {
-							if (((String) o).contains(Constants.IMAGE.toLowerCase())) {
-								String unixStyleTruncatedFilepath = smartJSON.getString(((String) o));
-								attributes[2] = convertToFullFunctionalFilepath(unixStyleTruncatedFilepath);
-							}
-						}
-					}
-					catch (SmartJsonException e1) {
-						e1.printStackTrace();
-					}
-					System.out.println(NEW_ATTRIBUTES + attributes[0] + " " +
-							attributes[1] + " " + attributes[2]);
-					myObjectAttributes.add(attributes);
-				}
-			}
-		}
-	}
-
-	private String convertToFullFunctionalFilepath (String unixStyleTruncatedFilepath) {
-
-		FilepathReformatter fr = FilepathReformatter.getInstance();
-		String correctedSeparators = fr.formatForCurrentSystem(unixStyleTruncatedFilepath);
-		return System.getProperty(Constants.USER_DIR) + File.separator + correctedSeparators;
-
-	}      */
-
 
 }

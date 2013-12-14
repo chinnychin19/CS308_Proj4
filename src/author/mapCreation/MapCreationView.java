@@ -28,9 +28,7 @@ public class MapCreationView extends JPanel {
 
 	private MapCreationView singleton;
 
-	private BufferedImage myCurrentTileImage;
-	private String myCurrentTileName;
-	private String myCurrentTileType;
+	private TileWrapper myCurrentTile;
 
 	private CanvasTileManager myTileManager;
 	private WorldCreationMap myWorldCreationMap;
@@ -44,9 +42,7 @@ public class MapCreationView extends JPanel {
 		this.setPreferredSize(Constants.MAP_CREATOR_SIZE);
 		this.setBackground(Constants.MAP_CREATOR_BACKGROUND_COLOR);
 
-		myCurrentTileImage = null;
-		myCurrentTileName = null;
-		myCurrentTileType = null;
+		myCurrentTile = null;
 		//try {
 		//	myBackgroundTile = ImageIO.read(new File(Constants.IMG_FOLDER_FILEPATH + File.separator + "shortGrass.png"));
 		//} catch (IOException e) {
@@ -105,9 +101,7 @@ public class MapCreationView extends JPanel {
 	public void paintAndRecordTile (Graphics2D g, int x, int y) {
 		paintTile(g, x, y);
 		if (isValueSelected()) {
-			myWorldCreationMap.put(new Loc(x, y), new GenericTileWrapper(myCurrentTileName,
-					myCurrentTileType,
-					myCurrentTileImage));
+			myWorldCreationMap.put(new Loc(x, y), myCurrentTile);
 		}
 	}
 
@@ -124,7 +118,7 @@ public class MapCreationView extends JPanel {
 	public void paintTile (Graphics2D g, int x, int y) {
 		if (isValueSelected()) {
 			TexturePaint tp =
-					new TexturePaint(myCurrentTileImage,
+					new TexturePaint(myCurrentTile.getImage(),
 							new Rectangle(0,
 									0,
 									(int) myTileManager.getTileWidth(),
@@ -175,28 +169,18 @@ public class MapCreationView extends JPanel {
 	 * MapCreationView class is not null before attempting
 	 * to draw and place tiles in the MapCreationView
 	 * 
-	 * @return a boolean check to ensure that myCurrentTileImage
-	 *         is not null, myCurrentTileName is not null, and myCurrentTileType
-	 *         is not null.
+	 * @return a boolean check to ensure that myCurrentTile is not null.
 	 */
 	public boolean isValueSelected () {
-		return (myCurrentTileImage != null && myCurrentTileName != null && myCurrentTileType != null);
+		return (myCurrentTile != null);
 	}
 
 	public BufferedImage getCurrentTileImage () {
-		return myCurrentTileImage;
+		return myCurrentTile.getImage();
 	}
 
-	public void setCurrentTileImage (TileWrapper gtw) {
-		myCurrentTileImage = gtw.getImage();
-	}
-
-	public void setCurrentTileName (TileWrapper gtw) {
-		myCurrentTileName = gtw.getName();
-	}
-
-	public void setCurrentTileType (TileWrapper gtw) {
-		myCurrentTileType = gtw.getType();
+	public void setCurrentTile (TileWrapper tile) {
+	        myCurrentTile = tile;
 	}
 
 	public Map<Loc, TileWrapper> getMyWorldTiles () {
@@ -221,5 +205,7 @@ public class MapCreationView extends JPanel {
 			return singleton;
 		}
 	}
+
+
 
 }
