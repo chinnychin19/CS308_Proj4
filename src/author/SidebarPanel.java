@@ -21,6 +21,7 @@ import org.json.simple.JSONObject;
 import author.mapCreation.GenericTileWrapper;
 import author.mapCreation.MapCreationView;
 import author.model.AuthoringCache;
+import author.model.GenericTileWrapperFactory;
 import constants.Constants;
 import util.FilepathReformatter;
 import util.jsonwrapper.SmartJsonObject;
@@ -39,19 +40,19 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
 @SuppressWarnings("rawtypes")
 public class SidebarPanel extends JPanel implements ListSelectionListener {
 
-	private static final String NEW_ATTRIBUTES = "NEW ATTRIBUTES: [";
+	//private static final String NEW_ATTRIBUTES = "NEW ATTRIBUTES: [";
 
-	private static final String ATTRIBUTE1 = "attribute1: ";
+	//private static final String ATTRIBUTE1 = "attribute1: ";
 
-	private static final String ATTRIBUTE2 = "attribute2: ";
+	//private static final String ATTRIBUTE2 = "attribute2: ";
 
-	private static final long serialVersionUID = 93626670420635935L;
+	
 
 	private AuthoringCache myAuthoringCache;
 	private MapCreationView myMapCreationView;
-	private DefaultListModel myListModel;
+	private DefaultListModel<GenericTileWrapper> myListModel;
 	private JList mySelectionList;
-	private Set<String[]> myObjectAttributes = new HashSet<String[]>();
+	//private Set<String[]> myObjectAttributes = new HashSet<String[]>();
 
 	public SidebarPanel (AuthoringCache ac) {
 		initialize(ac);
@@ -93,7 +94,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 
 	public void updateList () {
 
-		myObjectAttributes.clear();
+/*		myObjectAttributes.clear();
 
 		JSONObject template = myAuthoringCache.toJSONObject();
 
@@ -103,17 +104,22 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 
 		populateInternalList(template, keySet);
 
-		updateListModel();
+		updateListModel();    */
+	    myListModel.clear();
+	    GenericTileWrapperFactory factory = new GenericTileWrapperFactory();
+	    for (GenericTileWrapper gtw : factory.generateTiles(myAuthoringCache)) {
+	        myListModel.addElement(gtw);
+	    }
 	}
 
 	@SuppressWarnings("unchecked")
-	private void updateListModel () {
+/*	private void updateListModel () {
 		myListModel.clear();
 		for (String[] sArr : myObjectAttributes) {
 			myListModel.addElement(new GenericTileWrapper(sArr[0], sArr[1], sArr[2]));
 		}
 
-	}
+	}      */
 
 	private void initialize (AuthoringCache ac) {
 		myAuthoringCache = ac;
@@ -150,12 +156,12 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 	}
 
 	private void initListModel () {
-		myListModel = new DefaultListModel();
+		myListModel = new DefaultListModel<GenericTileWrapper>();
 		this.updateList();
 
 	}
 
-	private void populateInternalList (JSONObject template, Set<String> keySet) {
+/*	private void populateInternalList (JSONObject template, Set<String> keySet) {
 		for (Object s : keySet) {
 			JSONArray locationArray = (JSONArray) template.get(s);
 
@@ -203,7 +209,7 @@ public class SidebarPanel extends JPanel implements ListSelectionListener {
 		String correctedSeparators = fr.formatForCurrentSystem(unixStyleTruncatedFilepath);
 		return System.getProperty(Constants.USER_DIR) + File.separator + correctedSeparators;
 
-	}
+	}      */
 
 
 }

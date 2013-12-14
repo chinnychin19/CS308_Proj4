@@ -1,5 +1,7 @@
 package jsoncache;
 
+import java.util.Collection;
+import java.util.HashSet;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -126,6 +128,26 @@ public class JSONCache {
             if (jObject.get(Constants.NAME_LOWERCASE).equals(name)) { return new SmartJsonObject(jObject); }
         }
         throw new NoJSONObjectJsonException();
+    }
+    
+    /**
+     * Returns copies of all objects within the given category.
+     * 
+     * @param category
+     * @return Collection<SmartJsonObject>
+     * @throws JSONException Throws exception if object not found
+     */
+    public Collection<SmartJsonObject> getAllCategoryInstances (String category) throws SmartJsonException {
+        Collection<SmartJsonObject> results = new HashSet<SmartJsonObject>();
+        JSONArray cache = (JSONArray) myJSON.get(category);
+        for (Object object : cache) {
+            JSONObject jObject = (JSONObject) object;
+            results.add(new SmartJsonObject(jObject)); 
+        }
+        if (results.size() < 1){
+            throw new NoJSONObjectJsonException();
+        }
+        return results;
     }
 
     /**
