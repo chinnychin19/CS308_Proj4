@@ -25,8 +25,8 @@ import constants.Constants;
 public class Monster extends AbstractModelObject implements Saveable {
 
     private Image myImage;
-    private double myCatchRate;
     private Type myType;
+    private double myCatchRate;
     private List<AttackWrapper> myAttacks;
     private Map<String, Integer> myStatistics;
     private AbstractEvolution myEvolution;
@@ -58,7 +58,7 @@ public class Monster extends AbstractModelObject implements Saveable {
         super(model, definition);
         readFields(objInWorld);
     }
-
+  
     /**
      * Get the image of the monster
      * 
@@ -66,15 +66,6 @@ public class Monster extends AbstractModelObject implements Saveable {
      */
     public Image getImage () {
         return myImage;
-    }
-
-    /**
-     * Get the catch rate of the monster. A value of how difficult it is to catch this monster
-     * 
-     * @return monster's catch rate
-     */
-    public double getCatchRate () {
-        return myCatchRate;
     }
 
     /**
@@ -88,6 +79,10 @@ public class Monster extends AbstractModelObject implements Saveable {
     
     public Status getStatus() {
         return myStatus;
+    }
+    
+    public double getCatchRate(){
+        return myCatchRate;
     }
 
     public void heal () {
@@ -141,7 +136,9 @@ public class Monster extends AbstractModelObject implements Saveable {
     /**
      * Stats for the monster
      */
-    private void generateStats () {
+    
+    private void generateStats(){
+
         double factor = 1 + Math.log(35);
         myStatistics.put(Constants.STAT_EXP, 0);
         int level = myStatistics.get(Constants.JSON_LEVEL);
@@ -258,6 +255,7 @@ public class Monster extends AbstractModelObject implements Saveable {
 
     public LevelChange addExperience (int exp, TemporaryStatistics temp) {
         boolean didLevelUp = false, didEvolve = false;
+
 //        System.out.println("cur exp: "+myStatistics.get(Constants.STAT_EXP));
 //        System.out.println("exp to next level: " + myStatistics.get(Constants.STAT_EXP_TO_NEXT_LEVEL));
 //        System.out.println("Adding experience: " + exp);

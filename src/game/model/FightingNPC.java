@@ -141,6 +141,7 @@ public class FightingNPC extends NPC implements Fighter {
 
     @Override
     public void onInteract () {
+        
         facePlayer();
         if (!myIsDefeated) {
             

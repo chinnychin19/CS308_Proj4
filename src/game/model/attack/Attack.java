@@ -57,6 +57,7 @@ public class Attack extends AbstractModelObject {
         }
     }
     public AttackResult doAttack (Monster attacker, Monster defender) {
+
         int attack = attacker.getStat(Constants.STAT_ATTACK);
         int defense = defender.getStat(Constants.STAT_DEFENSE);
         double multiplier = getModel().getTypeMatrix().getDamageMultiplier(attacker.getType(),
@@ -64,6 +65,7 @@ public class Attack extends AbstractModelObject {
         if (Math.random() > myAccuracy) { //attack missed
             return new AttackResult(attacker.getName(), getName(), 0, multiplier, false);
         }
+
         int attackerLevel = attacker.getStat(Constants.JSON_LEVEL);
         int damage = (int) Math.round(damageFunction(attackerLevel, attack, defense, myPower, multiplier));
         damage = Math.min(damage, defender.getStat(Constants.STAT_CUR_HP));
@@ -85,6 +87,7 @@ public class Attack extends AbstractModelObject {
         }
         
         return new AttackResult(attacker.getName(), getName(), damage, multiplier, true);
+
     }
     
     private double damageFunction(int attackLevel, int attack, int defense, int power, double multiplier) {

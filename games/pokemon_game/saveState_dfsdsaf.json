@@ -1,993 +1,933 @@
 {
     "Player": [{
-        "name": "hero",
+        "name": "ash",
         "x": "0",
         "y": "0",
         "orientation": "down",
         "keyItems" : [],
         "items" : [],
         "monsters" : [ {
-          "name" : "Fr. Thornton",
+          "name" : "pikachu",
           "level" : "8",
           "exp" : "0",
           "expToNextLevel" : "300",
-          "maxHP" : "160",
-          "curHP" : "160",
+          "maxHP" : "90",
+          "curHP" : "90",
           "attack" : "85",
-          "defense" : "75"
+          "defense" : "45"
           },
           {
-          "name" : "Fr. J Hairston",
-          "level" : "6",
+          "name" : "venusaur",
+          "level" : "9",
           "exp" : "0",
           "expToNextLevel" : "300",
           "maxHP" : "130",
           "curHP" : "130",
           "attack" : "75",
           "defense" : "90"
+          },
+          {
+          "name" : "snorlax",
+          "level" : "7",
+          "exp" : "0",
+          "expToNextLevel" : "300",
+          "maxHP" : "100",
+          "curHP" : "100",
+          "attack" : "35",
+          "defense" : "90"
           }
         ]
     }],
 
     "NPC": [{
-        "name": "greeter",
-        "x": "3",
+        "name": "walker1",
+        "x": "20",
         "y": "0",
-        "orientation": "left"
-    }, {
-        "name": "Coach K",
-        "x": "54",
-        "y": "0",
-        "orientation": "left"  
+        "orientation": "left" 
     }],
 
     "FightingNPC": [{
-        "name": "Bob Knight",
+        "name": "fighter1",
         "x": "11",
         "y": "-4",
         "orientation": "down",
         "defeated": "false",
       }, {
-        "name": "Roy Williams",
+        "name": "fighter2",
         "x": "23",
         "y": "-3",
         "orientation": "down",
         "defeated": "false",
       }, {
-        "name": "John Calipari",
+        "name": "fighter3",
         "x": "30",
         "y": "4",
         "orientation": "up",
         "defeated": "false",
-      }, {
-        "name": "Dean Smith",
-        "x": "44",
-        "y": "0",
-        "orientation": "left",
-        "defeated": "false",
       }],
 
     "Obstacle": [{
-        "name": "cone",
+        "name": "flower",
         "x": "-5",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-4",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-3",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-2",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-1",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "0",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "1",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "2",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "3",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "4",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "5",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "6",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "7",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "8",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "9",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "10",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "11",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "12",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "13",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "14",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "15",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "16",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "17",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "18",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "19",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "20",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "21",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "22",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "23",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "24",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "25",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "26",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "27",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "28",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "29",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "30",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "31",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "32",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "33",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "34",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "35",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "36",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "37",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "38",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "39",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "40",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "41",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "42",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "43",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "44",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "45",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "46",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "47",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "48",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "49",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "50",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "51",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "52",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "53",
         "y": "5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "54",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "55",
         "y": "5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-5",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-4",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-3",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-2",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-1",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "0",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "1",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "2",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "3",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "4",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "5",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "6",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "7",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "8",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "9",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "10",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "11",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "12",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "13",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "14",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "15",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "16",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "17",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "18",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "19",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "20",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "21",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "22",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "23",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "24",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "25",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "26",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "27",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "28",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "29",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "30",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "31",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "32",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "33",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "34",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "35",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "36",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "37",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "38",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "39",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "40",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "41",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "42",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "43",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "44",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "45",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "46",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "47",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "48",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "49",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "50",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "51",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "52",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "53",
         "y": "-5"
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "54",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "55",
         "y": "-5",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "55",
         "y": "-4",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "55",
         "y": "-3",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "55",
         "y": "-2",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "55",
         "y": "-1",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "55",
         "y": "0",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "55",
         "y": "1",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "55",
         "y": "2",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "55",
         "y": "3",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "55",
         "y": "4",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-5",
         "y": "-4",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-5",
         "y": "-3",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-5",
         "y": "-2",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-5",
         "y": "-1",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-5",
         "y": "0",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-5",
         "y": "1",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-5",
         "y": "2",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-5",
         "y": "3",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "-5",
         "y": "4",
     }, {
-        "name": "door",
-        "keyItems" : ["IU Bragging Rights"],
-        "x": "15",
-        "y": "2",
-    }, {
-        "name": "cone",
+        "name": "flower",
         "x": "15",
         "y": "-4",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "15",
         "y": "-3",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "15",
         "y": "-1",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "15",
         "y": "0",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "15",
         "y": "1",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "15",
         "y": "-2",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "15",
         "y": "3",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "15",
         "y": "4",
     }, {
-        "name": "door",
-        "x": "25",
-        "y": "-2",
-        "keyItems": ["UNC Bragging Rights"],
-    }, {
-        "name": "cone",
+        "name": "flower",
         "x": "25",
         "y": "-4",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "25",
         "y": "-3",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "25",
         "y": "2",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "25",
         "y": "-1",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "25",
         "y": "0",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "25",
         "y": "1",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "25",
         "y": "3",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "25",
         "y": "4",
     }, {
-        "name": "door",
-        "x": "35",
-        "y": "-1",
-        "keyItems": ["KU Bragging Rights"],
-    }, {
-        "name": "door",
-        "x": "35",
-        "y": "0",
-        "keyItems": ["KU Bragging Rights"],
-    }, {
-        "name": "door",
-        "x": "35",
-        "y": "1",
-        "keyItems": ["KU Bragging Rights"],
-    }, {
-        "name": "cone",
+        "name": "flower",
         "x": "35",
         "y": "-4",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "35",
         "y": "-3",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "35",
         "y": "-2",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "35",
         "y": "2",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "35",
         "y": "3",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "35",
         "y": "4",
     }, {
-        "name": "door",
-        "x": "45",
-        "y": "-3",
-        "keyItems": ["Ultimate Bragging Rights"],
-    }, {
-        "name": "door",
-        "x": "45",
-        "y": "3", 
-        "keyItems": ["Ultimate Bragging Rights"],
-    }, {
-        "name": "cone",
+        "name": "flower",
         "x": "45",
         "y": "-4",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "45",
         "y": "-2",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "45",
         "y": "-1",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "45",
         "y": "0",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "45",
         "y": "1",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "45",
         "y": "2",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "45",
         "y": "4",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "5",
         "y": "-4",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "5",
         "y": "-3",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "5",
         "y": "4",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "5",
         "y": "3",    
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "14",
         "y": "-2",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "13",
         "y": "-2",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "12",
         "y": "-4",
     }, {
-        "name": "cone",
+        "name": "flower",
         "x": "12",
         "y": "-2",             
     }],
 
     "WildRegion": [{
-        "name": "tent1",
+        "name": "grass1",
         "x": "-4",
         "y": "-4"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "-3",
         "y": "-4"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "-2",
         "y": "-4"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "-1",
         "y": "-4"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "0",
         "y": "-4"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "1",
         "y": "-4"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "2",
         "y": "-4"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "3",
         "y": "-4"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "4",
         "y": "-4"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "-4",
         "y": "-3"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "-3",
         "y": "-3"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "-2",
         "y": "-3"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "-1",
         "y": "-3"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "0",
         "y": "-3"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "1",
         "y": "-3"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "2",
         "y": "-3"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "3",
         "y": "-3"
     }, {
-        "name": "tent1",
+        "name": "grass1",
         "x": "4",
         "y": "-3"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "-4",
         "y": "4"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "-3",
         "y": "4"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "-2",
         "y": "4"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "-1",
         "y": "4"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "0",
         "y": "4"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "1",
         "y": "4"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "2",
         "y": "4"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "3",
         "y": "4"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "4",
         "y": "4"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "-4",
         "y": "3"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "-3",
         "y": "3"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "-2",
         "y": "3"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "-1",
         "y": "3"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "0",
         "y": "3"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "1",
         "y": "3"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "2",
         "y": "3"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "3",
         "y": "3"
     }, {
-        "name": "tent2",
+        "name": "grass2",
         "x": "4",
-        "y": "3"
-    }, {
-        "name": "tent3",
-        "x": "6",
-        "y": "4"
-    }, {
-        "name": "tent3",
-        "x": "7",
-        "y": "4"
-    }, {
-        "name": "tent3",
-        "x": "6",
-        "y": "3"
-    }, {
-        "name": "tent3",
-        "x": "7",
-        "y": "3"
-    }, {
-        "name": "tent7",
-        "x": "53",
-        "y": "3"
-    }, {
-        "name": "tent7",
-        "x": "52",
-        "y": "3"
-    }],
+        "y": "3"   
+    }, ],
 
     "HealItem": [{
-        "name": "cross",
+        "name": "heal1",
         "x": "14",
         "y": "-4"
         },{
-        "name": "cross",
+        "name": "heal1",
         "x": "37",
         "y": "0"
     }]

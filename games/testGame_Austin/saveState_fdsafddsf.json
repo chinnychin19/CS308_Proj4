@@ -7,24 +7,24 @@
         "keyItems" : [],
         "items" : [],
         "monsters" : [ {
-          "name" : "Fr. Thornton",
-          "level" : "8",
+          "name" : "Fr. Parker",
+          "level" : "6",
           "exp" : "0",
           "expToNextLevel" : "300",
           "maxHP" : "160",
           "curHP" : "160",
-          "attack" : "85",
-          "defense" : "75"
+          "attack" : "57",
+          "defense" : "95"
           },
           {
-          "name" : "Fr. J Hairston",
-          "level" : "6",
+          "name" : "Jr. Hood",
+          "level" : "7",
           "exp" : "0",
           "expToNextLevel" : "300",
           "maxHP" : "130",
           "curHP" : "130",
-          "attack" : "75",
-          "defense" : "90"
+          "attack" : "80",
+          "defense" : "95"
           }
         ]
     }],
@@ -955,32 +955,8 @@
     }, {
         "name": "tent2",
         "x": "4",
-        "y": "3"
-    }, {
-        "name": "tent3",
-        "x": "6",
-        "y": "4"
-    }, {
-        "name": "tent3",
-        "x": "7",
-        "y": "4"
-    }, {
-        "name": "tent3",
-        "x": "6",
-        "y": "3"
-    }, {
-        "name": "tent3",
-        "x": "7",
-        "y": "3"
-    }, {
-        "name": "tent7",
-        "x": "53",
-        "y": "3"
-    }, {
-        "name": "tent7",
-        "x": "52",
-        "y": "3"
-    }],
+        "y": "3"   
+    }, ],
 
     "HealItem": [{
         "name": "cross",

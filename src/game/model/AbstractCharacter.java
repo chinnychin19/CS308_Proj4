@@ -103,4 +103,10 @@ public abstract class AbstractCharacter extends AbstractViewableObject {
         toSave.put(Constants.JSON_ORIENTATION, Direction.getString(getDirection()));
         return toSave;
     }
+    
+
+    @Override
+    protected void onBack () {
+        
+    }
 }

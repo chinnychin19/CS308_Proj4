@@ -7,33 +7,38 @@
         "keyItems" : [],
         "items" : [],
         "monsters" : [ {
-          "name" : "Fr. Parker",
-          "level" : "6",
+          "name" : "Fr. Thornton",
+          "level" : "8",
           "exp" : "0",
           "expToNextLevel" : "300",
           "maxHP" : "160",
           "curHP" : "160",
-          "attack" : "57",
-          "defense" : "95"
+          "attack" : "85",
+          "defense" : "75"
           },
           {
-          "name" : "Jr. Hood",
-          "level" : "7",
+          "name" : "Fr. J Hairston",
+          "level" : "6",
           "exp" : "0",
           "expToNextLevel" : "300",
           "maxHP" : "130",
           "curHP" : "130",
-          "attack" : "80",
-          "defense" : "95"
+          "attack" : "75",
+          "defense" : "90"
           }
         ]
     }],
 
     "NPC": [{
-        "name": "walker1",
-        "x": "4",
-        "y": "3",
-        "orientation": "right"
+        "name": "greeter",
+        "x": "3",
+        "y": "0",
+        "orientation": "left"
+    }, {
+        "name": "Coach K",
+        "x": "54",
+        "y": "0",
+        "orientation": "left"  
     }],
 
     "FightingNPC": [{
@@ -41,6 +46,24 @@
         "x": "11",
         "y": "-4",
         "orientation": "down",
+        "defeated": "false",
+      }, {
+        "name": "Roy Williams",
+        "x": "23",
+        "y": "-3",
+        "orientation": "down",
+        "defeated": "false",
+      }, {
+        "name": "John Calipari",
+        "x": "30",
+        "y": "4",
+        "orientation": "up",
+        "defeated": "false",
+      }, {
+        "name": "Dean Smith",
+        "x": "44",
+        "y": "0",
+        "orientation": "left",
         "defeated": "false",
       }],
 
@@ -932,16 +955,40 @@
     }, {
         "name": "tent2",
         "x": "4",
-        "y": "3"   
-    }, ],
+        "y": "3"
+    }, {
+        "name": "tent3",
+        "x": "6",
+        "y": "4"
+    }, {
+        "name": "tent3",
+        "x": "7",
+        "y": "4"
+    }, {
+        "name": "tent3",
+        "x": "6",
+        "y": "3"
+    }, {
+        "name": "tent3",
+        "x": "7",
+        "y": "3"
+    }, {
+        "name": "tent7",
+        "x": "53",
+        "y": "3"
+    }, {
+        "name": "tent7",
+        "x": "52",
+        "y": "3"
+    }],
 
     "HealItem": [{
-        "name": "heal1",
-        "x": "6",
-        "y": "0"
+        "name": "cross",
+        "x": "14",
+        "y": "-4"
         },{
-        "name": "heal1",
-        "x": "8",
-        "y": "2"
+        "name": "cross",
+        "x": "37",
+        "y": "0"
     }]
 }

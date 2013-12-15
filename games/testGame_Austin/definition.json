@@ -41,6 +41,102 @@
             "level": "6"
         }
     }, {
+        "name": "Fr. Sulaimon",
+        "image": "images/monsters/Sulaimon1.png",
+        "catchRate": ".5",
+        "type": "forward",
+        "baseHP": "4",
+        "baseAttack": "4",
+        "baseDefense": "3",
+        "attacks": [{
+            "name": "3 pointer",
+            "unlockLevel": "5"
+        },  {
+            "name": "and One",
+            "unlockLevel": "2"
+        }],
+    }, {
+        "name": "Fr. Jefferson",
+        "image": "images/monsters/Jefferson1.png",
+        "catchRate": ".7",
+        "type": "center",
+        "baseHP": "3",
+        "baseAttack": "2",
+        "baseDefense": "3",
+        "attacks": [{
+            "name": "finger wag",
+            "unlockLevel": "5"
+        },  {
+            "name": "dunk",
+            "unlockLevel": "2"
+        }],
+    }, {
+        "name": "Fr. J Hairston",
+        "image": "images/monsters/JHairston1.png",
+        "catchRate": ".9",
+        "type": "center",
+        "baseHP": "6",
+        "baseAttack": "7",
+        "baseDefense": "5",
+        "attacks": [{
+            "name": "layup",
+            "unlockLevel": "5"
+        },  {
+            "name": "floor slap",
+            "unlockLevel": "2"
+        },  {
+            "name": "jumpshot",
+            "unlockLevel": "2"
+        }],
+    }, {
+        "name": "Fr. Dawkins",
+        "image": "images/monsters/Dawkins1.png",
+        "catchRate": ".6",
+        "type": "guard",
+        "baseHP": "4",
+        "baseAttack": "8",
+        "baseDefense": "5",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "5"
+        },  {
+            "name": "3 pointer",
+            "unlockLevel": "2"
+        },  {
+            "name": "jumpshot",
+            "unlockLevel": "2"
+        }],
+    }, {
+        "name": "Sr. Laettner",
+        "image": "images/monsters/Laettner.png",
+        "catchRate": ".2",
+        "type": "forward",
+        "baseHP": "20",
+        "baseAttack": "20",
+        "baseDefense": "20",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "5"
+        },  {
+            "name": "fade away",
+            "unlockLevel": "2"
+        },  {
+            "name": "4 point play",
+            "unlockLevel": "2"
+        }],
+    }, {
+        "name": "Sr. Zafirovski",
+        "image": "images/monsters/Zafirovski.png",
+        "catchRate": ".99",
+        "type": "center",
+        "baseHP": "2",
+        "baseAttack": "2",
+        "baseDefense": "2",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "5"
+        }],
+    }, {
         "name": "So. Thornton",
         "image": "images/monsters/Thornton2.png",
         "catchRate": ".8",
@@ -50,13 +146,13 @@
         "baseDefense": "6",
         "attacks": [{
             "name": "dunk",
-            "unlockLevel": "5"
+            "unlockLevel": "1"
         },  {
             "name": "layup",
-            "unlockLevel": "2"
+            "unlockLevel": "1"
         },  {
-            "name": "3 point",
-            "unlockLevel": "6"
+            "name": "3 pointer",
+            "unlockLevel": "1"
         }],
         "evolution": {
             "name": "Jr. Thornton",
@@ -77,7 +173,7 @@
             "name": "layup",
             "unlockLevel": "2"
         },  {
-            "name": "3 point",
+            "name": "3 pointer",
             "unlockLevel": "6"
         }],
         "evolution": {
@@ -99,7 +195,7 @@
             "name": "layup",
             "unlockLevel": "2"
         },  {
-            "name": "3 point",
+            "name": "3 pointer",
             "unlockLevel": "6"
         },  {
             "name": "fade away",
@@ -122,6 +218,255 @@
         }, {
             "name": "3 pointer",
             "unlockLevel": "10"
+        }],
+    }, {
+        "name": "So. Zeller",
+        "image": "images/monsters/Zeller.png",
+        "catchRate": ".5",
+        "type": "center",
+        "baseHP": "5",
+        "baseAttack": "3",
+        "baseDefense": "4",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "1"
+        },  {
+            "name": "layup",
+            "unlockLevel": "1"
+        }, {
+            "name": "finger wag",
+            "unlockLevel": "1"
+        }],
+    }, {
+        "name": "Fr. Thomas",
+        "image": "images/monsters/Thomas.png",
+        "catchRate": ".5",
+        "type": "guard",
+        "baseHP": "5",
+        "baseAttack": "6",
+        "baseDefense": "8",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "1"
+        },  {
+            "name": "layup",
+            "unlockLevel": "1"
+        }, {
+            "name": "3 pointer",
+            "unlockLevel": "1"
+        }, {
+            "name": "jumpshot",
+            "unlockLevel": "1"
+        }],
+    }, {
+        "name": "Fr. Randle",
+        "image": "images/monsters/Randle.png",
+        "catchRate": ".5",
+        "type": "forward",
+        "baseHP": "9",
+        "baseAttack": "6",
+        "baseDefense": "5",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "1"
+        },  {
+            "name": "layup",
+            "unlockLevel": "1"
+        }, {
+            "name": "finger wag",
+            "unlockLevel": "1"
+        }],
+    }, {
+        "name": "Fr. Davis",
+        "image": "images/monsters/Davis.png",
+        "catchRate": ".5",
+        "type": "center",
+        "baseHP": "3",
+        "baseAttack": "4",
+        "baseDefense": "12",
+        "attacks": [{
+            "name": "and One",
+            "unlockLevel": "1"
+        },  {
+            "name": "layup",
+            "unlockLevel": "1"
+        },  {
+            "name": "finger wag",
+            "unlockLevel": "1"
+        },  {
+            "name": "floor slap",
+            "unlockLevel": "1"
+        }],
+    }, {
+        "name": "Fr. Wall",
+        "image": "images/monsters/Wall.png",
+        "catchRate": ".5",
+        "type": "guard",
+        "baseHP": "5",
+        "baseAttack": "6",
+        "baseDefense": "8",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "1"
+        }, {
+            "name": "and One",
+            "unlockLevel": "1"
+        }],
+    }, {
+        "name": "Fr. Cousins",
+        "image": "images/monsters/Cousins.png",
+        "catchRate": ".5",
+        "type": "forward",
+        "baseHP": "7",
+        "baseAttack": "9",
+        "baseDefense": "8",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "1"
+        },  {
+            "name": "finger wag",
+            "unlockLevel": "1"
+        }],
+    }, {
+        "name": "Fr. Jordan",
+        "image": "images/monsters/Jordan.png",
+        "catchRate": ".5",
+        "type": "guard",
+        "baseHP": "12",
+        "baseAttack": "15",
+        "baseDefense": "12",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "1"
+        },  {
+            "name": "and One",
+            "unlockLevel": "1"
+        },  {
+            "name": "4 point play",
+            "unlockLevel": "1"
+        },  {
+            "name": "fade away",
+            "unlockLevel": "1"
+        }],
+    }, {
+        "name": "So. Jamison",
+        "image": "images/monsters/Jamison.png",
+        "catchRate": ".5",
+        "type": "forward",
+        "baseHP": "8",
+        "baseAttack": "7",
+        "baseDefense": "8",
+        "attacks": [{
+            "name": "3 pointer",
+            "unlockLevel": "1"
+        },  {
+            "name": "layup",
+            "unlockLevel": "1"
+        },  {
+            "name": "jumpshot",
+            "unlockLevel": "1"
+        }],
+    }, {
+        "name": "Sr. Worthy",
+        "image": "images/monsters/Worthy.png",
+        "catchRate": ".5",
+        "type": "guard",
+        "baseHP": "7",
+        "baseAttack": "7",
+        "baseDefense": "7",
+        "attacks": [{
+            "name": "3 pointer",
+            "unlockLevel": "1"
+        },  {
+            "name": "layup",
+            "unlockLevel": "1"
+        },  {
+            "name": "jumpshot",
+            "unlockLevel": "1"
+        }],
+    }, {
+        "name": "Fr. Carter",
+        "image": "images/monsters/Carter.png",
+        "catchRate": ".5",
+        "type": "guard",
+        "baseHP": "5",
+        "baseAttack": "20",
+        "baseDefense": "3",
+        "attacks": [{
+            "name": "and One",
+            "unlockLevel": "1"
+        },  {
+            "name": "dunk",
+            "unlockLevel": "1"
+        },  {
+            "name": "jumpshot",
+            "unlockLevel": "1"
+        }],
+    }, {
+        "name": "Sr. Hansbrough",
+        "image": "images/monsters/Hansbrough.png",
+        "catchRate": ".5",
+        "type": "forward",
+        "baseHP": "3",
+        "baseAttack": "4",
+        "baseDefense": "12",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "1"
+        },  {
+            "name": "jumpshot",
+            "unlockLevel": "1"
+        },  {
+            "name": "floor slap",
+            "unlockLevel": "1"
+        }],
+    }, {
+        "name": "Fr. Hairston",
+        "image": "images/monsters/Hairston.png",
+        "catchRate": ".5",
+        "type": "forward",
+        "baseHP": "5",
+        "baseAttack": "5",
+        "baseDefense": "5",
+        "attacks": [{
+            "name": "3 pointer",
+            "unlockLevel": "1"
+        },  {
+            "name": "layup",
+            "unlockLevel": "1"
+        }],
+    }, {
+        "name": "So. McAdoo",
+        "image": "images/monsters/McAdoo.png",
+        "catchRate": ".5",
+        "type": "forward",
+        "baseHP": "6",
+        "baseAttack": "5",
+        "baseDefense": "8",
+        "attacks": [{
+            "name": "dunk",
+            "unlockLevel": "1"
+        },  {
+            "name": "layup",
+            "unlockLevel": "1"
+        }],
+    }, {
+        "name": "Fr. McDonald",
+        "image": "images/monsters/McDonald.png",
+        "catchRate": ".5",
+        "type": "guard",
+        "baseHP": "5",
+        "baseAttack": "7",
+        "baseDefense": "5",
+        "attacks": [{
+            "name": "3 pointer",
+            "unlockLevel": "1"
+        },  {
+            "name": "layup",
+            "unlockLevel": "1"
+        },  {
+            "name": "floor slap",
+            "unlockLevel": "1"
         }],
     }],
     "Attack": [{
@@ -149,9 +494,46 @@
         "statisticEffects": [{}],
     }, {
         "name": "fade away",
-        "power": "300",
-        "accuracy": "0.4",
+        "power": "500",
+        "accuracy": "0.3",
         "statisticEffects": [{}],
+    }, {
+        "name": "4 point play",
+        "power": "350",
+        "accuracy": "0.5",
+        "statisticEffects": [{}],
+    }, {
+        "name": "and One",
+        "power": "250",
+        "accuracy": "0.8",
+        "statisticEffects": [{}],
+    }, {
+        "name": "jumpshot",
+        "power": "160",
+        "accuracy": "0.7",
+        "statisticEffects": [{}],
+    }, {
+        "name": "floor slap",
+        "power": "0",
+        "accuracy": "0.99",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "attack",
+            "change": "-10"
+        }],
+    }, {
+        "name": "finger wag",
+        "power": "0",
+        "accuracy": "0.99",
+        "statisticEffects": [{
+            "target": "enemy",
+            "name": "attack",
+            "change": "-30"
+        }],
+        "statusEffect": {
+            "name": "shocked",
+            "target": "enemy"
+        },    
     }],
     "Obstacle": [{
         "name": "cone",
@@ -170,44 +552,21 @@
         "name": "Ultimate Bragging Rights"
     }],
     "NPC": [{
-        "name": "walker1",
+        "name": "greeter",
         "image-up": "images/players/mainPLayer1/up.png",
         "image-down": "images/players/mainPLayer1/down.png",
         "image-left": "images/players/mainPLayer1/left.png",
         "image-right": "images/players/mainPLayer1/right.png",
-        "dialogue": "You go to the dialogue -- Lorem ipsum dolor sit amet, in paulo regione eum, at his accumsan scripserit."
+        "dialogue": "Beat these great coaches with your basketball team to face the ultimate challenge!"
+    }, {
+        "name": "Coach K",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "dialogue": "Coach K: Congrats on winning the ultimate bragging rights!"
     }],
     "FightingNPC": [{
-        "name": "fighter1",
-        "image-up": "images/players/mainPLayer1/up.png",
-        "image-down": "images/players/mainPLayer1/down.png",
-        "image-left": "images/players/mainPLayer1/left.png",
-        "image-right": "images/players/mainPLayer1/right.png",
-        "lineOfSightDistance": "5",
-        "dialogue": "It is time. I WILL NOT LOSE!",
-        "monsters": [{
-            "name": "Fr. Parker",
-            "level": "5",
-            "exp": "0",
-            "expToNextLevel": "300",
-            "maxHP": "100",
-            "curHP": "100",
-            "attack": "35",
-            "defense": "60"
-        }, {
-            "name": "Fr. Parker",
-            "level": "5",
-            "exp": "0",
-            "expToNextLevel": "300",
-            "maxHP": "100",
-            "curHP": "100",
-            "attack": "35",
-            "defense": "60"
-        }],
-        "bet": "25",
-        "postDialogue": "thank you come again.",
-        "keyItems": []
-    }, {
         "name": "Bob Knight",
         "image-up": "images/players/mainPLayer1/up.png",
         "image-down": "images/players/mainPLayer1/down.png",
@@ -216,38 +575,191 @@
         "lineOfSightDistance": "5",
         "dialogue": "Bob Knight: I'm going to be so angry if you beat my Indiana team!",
         "monsters": [{
-            "name": "Jr. Hood",
+            "name": "Fr. Thomas",
             "level": "5",
             "exp": "0",
             "expToNextLevel": "300",
-            "maxHP": "10",
-            "curHP": "10",
-            "attack": "35",
+            "maxHP": "100",
+            "curHP": "100",
+            "attack": "40",
             "defense": "60"
+        }, {
+            "name": "So. Zeller",
+            "level": "5",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "100",
+            "curHP": "100",
+            "attack": "30",
+            "defense": "50"
         }],
         "bet": "25",
         "postDialogue": "Damn! Can't believe you won the IU Bragging Rights!",
         "keyItems": [
             "IU Bragging Rights"
         ]
+    }, {
+        "name": "Roy Williams",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "5",
+        "dialogue": "Roy Williams: No chance you can beat my team! The bragging rights are mine!",
+        "monsters": [{
+            "name": "Fr. Hairston",
+            "level": "7",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "150",
+            "curHP": "150",
+            "attack": "80",
+            "defense": "50"
+        }, {
+            "name": "Fr. McDonald",
+            "level": "6",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "100",
+            "curHP": "100",
+            "attack": "75",
+            "defense": "60"
+        }, {
+            "name": "So. McAdoo",
+            "level": "8",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "200",
+            "curHP": "200",
+            "attack": "75",
+            "defense": "75"
+        }],
+        "bet": "25",
+        "postDialogue": "I'm not that great of a coach anyway.",
+        "keyItems": ["UNC Bragging Rights"]
+    }, {
+        "name": "John Calipari",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "5",
+        "dialogue": "John Calipari: I cheat to get the best freshman on my team muahaha!!!",
+        "monsters": [{
+            "name": "Fr. Randle",
+            "level": "10",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "190",
+            "curHP": "190",
+            "attack": "90",
+            "defense": "70"
+        }, {
+            "name": "Fr. Davis",
+            "level": "11",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "200",
+            "curHP": "200",
+            "attack": "40",
+            "defense": "120"
+        }, {
+            "name": "Fr. Wall",
+            "level": "9",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "140",
+            "curHP": "140",
+            "attack": "90",
+            "defense": "50"
+        }, {
+            "name": "Fr. Cousins",
+            "level": "9",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "170",
+            "curHP": "170",
+            "attack": "90",
+            "defense": "60"
+        }],
+        "bet": "25",
+        "postDialogue": "You haven't seen the last of me!!!!!",
+        "keyItems": ["KU Bragging Rights"]
+    }, {
+        "name": "Dean Smith",
+        "image-up": "images/players/mainPLayer1/up.png",
+        "image-down": "images/players/mainPLayer1/down.png",
+        "image-left": "images/players/mainPLayer1/left.png",
+        "image-right": "images/players/mainPLayer1/right.png",
+        "lineOfSightDistance": "0",
+        "dialogue": "Dean Smith: Now you face your final test... a game against my best all time 5!",
+        "monsters": [{
+            "name": "Fr. Jordan",
+            "level": "15",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "300",
+            "curHP": "300",
+            "attack": "210",
+            "defense": "200"
+        }, {
+            "name": "So. Jamison",
+            "level": "10",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "190",
+            "curHP": "190",
+            "attack": "150",
+            "defense": "100"
+        }, {
+            "name": "Sr. Worthy",
+            "level": "12",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "180",
+            "curHP": "180",
+            "attack": "180",
+            "defense": "160"
+        }, {
+            "name": "Fr. Carter",
+            "level": "11",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "120",
+            "curHP": "120",
+            "attack": "200",
+            "defense": "40"
+        }, {
+            "name": "Sr. Hansbrough",
+            "level": "12",
+            "exp": "0",
+            "expToNextLevel": "300",
+            "maxHP": "230",
+            "curHP": "230",
+            "attack": "145",
+            "defense": "200"
+        }],
+        "bet": "25",
+        "postDialogue": "You deserved your victory.",
+        "keyItems": ["Ultimate Bragging Rights"]
       }],
     "TypeMatrix": [{
         "name": "matrix",
         "matrix": {
             "center": {
-                "center": "0.2",
+                "center": "0.7",
                 "forward": "1",
-                "guard": "4"
+                "guard": "2"
             },
             "forward": {
-                "center": "1.5",
+                "center": "1.2",
                 "forward": "1",
-                "guard": "3"
+                "guard": "1.5"
             },
             "guard": {
-                "center": "0.5",
-                "forward": "2",
-                "guard": "1.5"
+                "center": "0.9",
+                "forward": "3",
+                "guard": "1.1"
             }
         }
     }],
@@ -256,23 +768,80 @@
         "image": "images/ground/tent.png",
         "probability": ".05",
         "monsters": [{
-            "name": "Fr. Thornton",
-            "level": "6",
+            "name": "Fr. Sulaimon",
+            "level": "7",
             "probability": "2.0"
+        }, {
+            "name": "Fr. Dawkins",
+            "level": "7",
+            "probability": "1.0"
+        }, {
+            "name": "Sr. Zafirovski",
+            "level": "2",
+            "probability": "1.0"
         }]
     }, {
         "name": "tent2",
         "image": "images/ground/tent.png",
         "probability": ".05",
         "monsters": [{
+            "name": "Fr. Jefferson",
+            "level": "6",
+            "probability": "2.0"
+        }, {
+            "name": "Fr. Parker",
+            "level": "9",
+            "probability": "1.0"
+        }]
+    }, {
+        "name": "tent3",
+        "image": "images/ground/tent.png",
+        "probability": ".05",
+        "monsters": [{
             "name": "Jr. Hood",
+            "level": "8",
+            "probability": "1.0"
+        }]
+    }, {
+        "name": "tent4",
+        "image": "images/ground/tent.png",
+        "probability": ".05",
+        "monsters": [{
+            "name": "Fr. Parker",
+            "level": "9",
+            "probability": "1.0"
+        }]
+    }, {
+        "name": "tent5",
+        "image": "images/ground/tent.png",
+        "probability": ".05",
+        "monsters": [{
+            "name": "Fr. Dawkins",
             "level": "7",
+            "probability": "1.0"
+        }]
+    }, {
+        "name": "tent6",
+        "image": "images/ground/tent.png",
+        "probability": ".05",
+        "monsters": [{
+            "name": "Sr. Zafirovski",
+            "level": "2",
+            "probability": "10.0"
+        }]
+    }, {
+        "name": "tent7",
+        "image": "images/ground/tent.png",
+        "probability": ".05",
+        "monsters": [{
+            "name": "Sr. Laettner",
+            "level": "20",
             "probability": "1.0"
         }]
     }],
     "HealItem": [{
-        "name": "heal1",
-        "image": "images/items/healPokeBall.png"
+        "name": "cross",
+        "image": "images/items/RedCross.png"
     }],
      "Item": [
                 {
