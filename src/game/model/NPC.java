@@ -32,14 +32,14 @@ public class NPC extends AbstractCharacter {
 
     public NPC (GameModel model, World world, SmartJsonObject definition, SmartJsonObject objInWorld) {
         super(model, world, definition, objInWorld);
-        try {
-            myDialogue = definition.getString(Constants.JSON_DIALOGUE);
-        }
-        catch (SmartJsonException e) {
-            e.printStackTrace();
-        }
     }
-
+    
+    @Override
+    protected void readDefinition (SmartJsonObject definition) throws SmartJsonException{
+        super.readDefinition(definition);
+        myDialogue = definition.getString(Constants.JSON_DIALOGUE);
+    }
+    
     /**
      * Returns the dialogue of the NPC. This is the speech that is displayed when the main player
      * interacts with it
@@ -51,7 +51,13 @@ public class NPC extends AbstractCharacter {
     }
 
     public void paintDialogue () {
-
+        AbstractMode mode = getModel().getController().getMode();
+        mode.addDynamicState(new TextState(mode, 
+                                           Constants.BORDER_THICKNESS, 
+                                           Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT, 
+                                           Constants.WIDTH - 2*Constants.BORDER_THICKNESS, 
+                                           Constants.DIALOGUE_HEIGHT,  
+                                           myDialogue));
     }
 
     /**
@@ -61,19 +67,7 @@ public class NPC extends AbstractCharacter {
 	@Override
 	protected void onInteract() {
 	    facePlayer();
-            AbstractMode mode = getModel().getController().getMode();
-            //TODO: Wrap Dialogue every 63 characters (the amount for one line)
-            mode.addDynamicState(new TextState(mode, 
-            		Constants.BORDER_THICKNESS, 
-			Constants.HEIGHT - Constants.BORDER_THICKNESS - Constants.DIALOGUE_HEIGHT, 
-			Constants.WIDTH - 2*Constants.BORDER_THICKNESS, 
-			Constants.DIALOGUE_HEIGHT,  
-			myDialogue));
+	    paintDialogue();
 	}
-
-    @Override
-    protected void onBack () {
-
-    }
 
 }

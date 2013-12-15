@@ -19,27 +19,28 @@ public abstract class AbstractModelTest extends TestCase {
 	protected GameController myController;
 	protected GameView myView;
 	protected JSONObject myWorldJSON;
-	protected final static String GAME_NAME = "testGame";
+	protected final static String GAME_NAME = "bogusNameOfGame";
+	protected final static String SESSION  = "saveState_tyler.json";
 	protected Player myPlayer;
 	@Override
 	protected void setUp () {
 		try {
-			/*
-            myView = new GameView(GAME_NAME );
-            myController = new GameController(GAME_NAME, myView);
+		
+            myView = new GameView(GAME_NAME,SESSION );
+            myController = new GameController(GAME_NAME,SESSION, myView);
 
-            myModel = new GameModel(GAME_NAME, myController);
-            myWorld = new World(GAME_NAME, myModel);
+            myModel = new GameModel(GAME_NAME,SESSION, myController);
+            myWorld = new World(GAME_NAME, SESSION, myModel);
             myWorldJSON =
                     JSONReader.getJSON(Constants.FOLDERPATH_GAMES + "/" + GAME_NAME + "/" +
-                                       "saveState2.json");
+                                       SESSION);
             SmartJsonObject playerJSON =
                     new SmartJsonObject((JSONObject) ((JSONArray) myWorldJSON.get(Constants.JSON_PLAYER)).get(0));
             myPlayer = myModel.getPlayer();
                    // new Player(myModel, myWorld, myModel.getDefinitionCache().getInstance("Player",
                            //                                                               "hero"),
                              //  playerJSON);
-			 */
+			 
 		}
 		catch (Exception e) {
 			e.printStackTrace();
