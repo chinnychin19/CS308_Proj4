@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import author.model.TileWrapper;
 import constants.Constants;
 
 
@@ -16,7 +17,7 @@ import constants.Constants;
  * 
  */
 
-public class GenericTileWrapper {
+public class GenericTileWrapper implements TileWrapper{
 
     private BufferedImage myImage;
     private String myName;

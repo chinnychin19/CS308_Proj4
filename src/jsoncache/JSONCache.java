@@ -1,5 +1,7 @@
 package jsoncache;
 
+import java.util.Collection;
+import java.util.HashSet;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -26,7 +28,7 @@ import util.jsonwrapper.jsonexceptions.SmartJsonException;
  * 
  */
 public class JSONCache {
-    private JSONObject myJSON;
+    protected JSONObject myJSON;
 
     /**
      * Initializes empty JSON arrays for the provided categories. Categories may NOT be added later.
@@ -51,9 +53,18 @@ public class JSONCache {
 
     /**
      * Returns a JSON string representation of this giant JSON object.
+     * @return String in JSON format
      */
     public String toString () {
         return JSONValue.toJSONString(myJSON);
+    }
+    
+    /**
+     * Returns a JSONObject representation of this giant JSON object.
+     * @return JSONObject
+     */
+    public JSONObject toJSONObject(){
+        return (JSONObject) myJSON.clone();
     }
 
     /**
@@ -61,7 +72,7 @@ public class JSONCache {
      * For example, if this cache will hold Weapons, Players, and Items, it will initialize each of
      * those categories at construction to be empty Arrays.
      */
-    private void initCategories (String[] categories) {
+    protected void initCategories (String[] categories) {
         for (String category : categories) {
             myJSON.put(category, new JSONArray());
         }
@@ -118,6 +129,26 @@ public class JSONCache {
         }
         throw new NoJSONObjectJsonException();
     }
+    
+    /**
+     * Returns copies of all objects within the given category.
+     * 
+     * @param category
+     * @return Collection<SmartJsonObject>
+     * @throws JSONException Throws exception if object not found
+     */
+    public Collection<SmartJsonObject> getAllCategoryInstances (String category) throws SmartJsonException {
+        Collection<SmartJsonObject> results = new HashSet<SmartJsonObject>();
+        JSONArray cache = (JSONArray) myJSON.get(category);
+        for (Object object : cache) {
+            JSONObject jObject = (JSONObject) object;
+            results.add(new SmartJsonObject(jObject)); 
+        }
+        if (results.size() < 1){
+            throw new NoJSONObjectJsonException();
+        }
+        return results;
+    }
 
     /**
      * Private helper method to return a deep copy of a given JSON object by converting it to its
@@ -147,11 +178,16 @@ public class JSONCache {
      */
     public boolean contains (String category, String name) {
         JSONArray cache = (JSONArray) myJSON.get(category);
-        for (Object object : cache) {
-            JSONObject jobject = (JSONObject) object;
-            if (jobject.get(Constants.NAME_LOWERCASE).equals(name)) { return true; }
+        try {
+            for (Object object : cache) {
+                JSONObject jobject = (JSONObject) object;
+                if (jobject.get(Constants.NAME_LOWERCASE).equals(name)) { return true; }
+            }
+            return false;
         }
-        return false;
+        catch (NullPointerException e) {
+            return false;
+        }        
     }
 
     /**
@@ -163,7 +199,7 @@ public class JSONCache {
      * @throws JSONException Throws an exception if the object is not found.
      */
     public void update (String category, JSONObject data) throws JSONException {
-        delete(category, (String) data.get(Constants.NAME_LOWERCASE));
-        add(category, data);
+        this.delete(category, (String) data.get(Constants.NAME_LOWERCASE));        
+        this.add(category, data);
     }
 }

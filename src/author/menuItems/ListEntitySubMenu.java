@@ -32,7 +32,7 @@ public class ListEntitySubMenu extends JMenu {
 
     @SuppressWarnings("unchecked")
 	public void refreshMenu () {
-        JSONObject template = myCache.getRawJSON();
+        JSONObject template = myCache.toJSONObject();
 		Set<String> keySet = template.keySet();
         me.removeAll();
         System.out.println(Constants.MENU_POPULATED_MESSAGE + keySet);

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import location.Loc;
 import author.listeners.MapCreationKeyListener;
 import author.listeners.MapCreationMouseListener;
+import author.model.TileWrapper;
 import constants.Constants;
 
 
@@ -27,9 +28,7 @@ public class MapCreationView extends JPanel {
 
 	private MapCreationView singleton;
 
-	private BufferedImage myCurrentTileImage;
-	private String myCurrentTileName;
-	private String myCurrentTileType;
+	private TileWrapper myCurrentTile;
 
 	private CanvasTileManager myTileManager;
 	private WorldCreationMap myWorldCreationMap;
@@ -43,9 +42,7 @@ public class MapCreationView extends JPanel {
 		this.setPreferredSize(Constants.MAP_CREATOR_SIZE);
 		this.setBackground(Constants.MAP_CREATOR_BACKGROUND_COLOR);
 
-		myCurrentTileImage = null;
-		myCurrentTileName = null;
-		myCurrentTileType = null;
+		myCurrentTile = null;
 		//try {
 		//	myBackgroundTile = ImageIO.read(new File(Constants.IMG_FOLDER_FILEPATH + File.separator + "shortGrass.png"));
 		//} catch (IOException e) {
@@ -82,7 +79,7 @@ public class MapCreationView extends JPanel {
 	public void paintComponent (Graphics g) {
 		super.paintComponent(g);
 		if (myWorldCreationMap.getWorldTileMap() != null) {
-			for (Map.Entry<Loc, GenericTileWrapper> tile : myWorldCreationMap.getWorldTileMap()
+			for (Map.Entry<Loc, TileWrapper> tile : myWorldCreationMap.getWorldTileMap()
 					.entrySet()) {
 				paintTile((Graphics2D) g,
 						tile.getKey().getX(),
@@ -104,9 +101,7 @@ public class MapCreationView extends JPanel {
 	public void paintAndRecordTile (Graphics2D g, int x, int y) {
 		paintTile(g, x, y);
 		if (isValueSelected()) {
-			myWorldCreationMap.put(new Loc(x, y), new GenericTileWrapper(myCurrentTileName,
-					myCurrentTileType,
-					myCurrentTileImage));
+			myWorldCreationMap.put(new Loc(x, y), myCurrentTile);
 		}
 	}
 
@@ -123,7 +118,7 @@ public class MapCreationView extends JPanel {
 	public void paintTile (Graphics2D g, int x, int y) {
 		if (isValueSelected()) {
 			TexturePaint tp =
-					new TexturePaint(myCurrentTileImage,
+					new TexturePaint(myCurrentTile.getImage(),
 							new Rectangle(0,
 									0,
 									(int) myTileManager.getTileWidth(),
@@ -148,7 +143,7 @@ public class MapCreationView extends JPanel {
 	 * @param x
 	 * @param y
 	 */
-	public void paintTile (Graphics2D g, int x, int y, GenericTileWrapper tile) {
+	public void paintTile (Graphics2D g, int x, int y, TileWrapper tile) {
 		TexturePaint tp =
 				new TexturePaint(tile.getImage(),
 						new Rectangle(0,
@@ -174,31 +169,21 @@ public class MapCreationView extends JPanel {
 	 * MapCreationView class is not null before attempting
 	 * to draw and place tiles in the MapCreationView
 	 * 
-	 * @return a boolean check to ensure that myCurrentTileImage
-	 *         is not null, myCurrentTileName is not null, and myCurrentTileType
-	 *         is not null.
+	 * @return a boolean check to ensure that myCurrentTile is not null.
 	 */
 	public boolean isValueSelected () {
-		return (myCurrentTileImage != null && myCurrentTileName != null && myCurrentTileType != null);
+		return (myCurrentTile != null);
 	}
 
 	public BufferedImage getCurrentTileImage () {
-		return myCurrentTileImage;
+		return myCurrentTile.getImage();
 	}
 
-	public void setCurrentTileImage (GenericTileWrapper gtw) {
-		myCurrentTileImage = gtw.getImage();
+	public void setCurrentTile (TileWrapper tile) {
+	        myCurrentTile = tile;
 	}
 
-	public void setCurrentTileName (GenericTileWrapper gtw) {
-		myCurrentTileName = gtw.getName();
-	}
-
-	public void setCurrentTileType (GenericTileWrapper gtw) {
-		myCurrentTileType = gtw.getType();
-	}
-
-	public Map<Loc, GenericTileWrapper> getMyWorldTiles () {
+	public Map<Loc, TileWrapper> getMyWorldTiles () {
 		return myWorldCreationMap.getWorldTileMap();
 	}
 
@@ -220,5 +205,7 @@ public class MapCreationView extends JPanel {
 			return singleton;
 		}
 	}
+
+
 
 }
